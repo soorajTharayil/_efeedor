@@ -1,0 +1,116 @@
+Admission,ಅಡ್ಮಿಶನ್,,Admission time/procedure was too long,ಅಡ್ಮಿಶನ್ ಪ್ರಕ್ರಿಯೆಯು ತುಂಬಾ ಸಮಯ ತೆಗೆದುಕೊಂಡಿತು,,Admission duration
+Admission,ಅಡ್ಮಿಶನ್,,Unsatisfied with the admission staff response,ಪ್ರವೇಶ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Admission staff response
+Admission,ಅಡ್ಮಿಶನ್,,Proper information on wards/services not given,ವಾರ್ಡ್/ಸೇವೆಗಳ ಬಗ್ಗೆ ಸರಿಯಾದ ಮಾಹಿತಿಯನ್ನು ನೀಡಲಾಗಿಲ್ಲ,,Service information
+Admission,ಅಡ್ಮಿಶನ್,,Treatment cost & estimations were not explained,ಚಿಕಿತ್ಸೆಯ ವೆಚ್ಚ ಮತ್ತು ಅಂದಾಜುಗಳನ್ನು ವಿವರಿಸಲಾಗಿಲ್ಲ,,Cost explanation
+Admission,ಅಡ್ಮಿಶನ್,,Other admission issues,ಇತರ ಅಡ್ಮಿಶನ್ ಸಮಸ್ಯೆಗಳು,,Other admission issues
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Bad odour in the room,ಕೋಣೆಯಲ್ಲಿ ಕೆಟ್ಟ ವಾಸನೆ,,Bad odour in the room
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Bed not prepared/ need to be prepared,ಹಾಸಿಗೆಯನ್ನು ಸಿದ್ಧಪಡಿಸಲಾಗಿಲ್ಲ / ಸಿದ್ಧಪಡಿಸಬೇಕಾಗಿದೆ,,Bed not prepared
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Bedsheet is not clean/ need to be cleaned,ಬೆಡ್ಶೀಟ್ ಸ್ವಚ್ಛವಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Bedsheet is not clean
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Bathroom is not clean/ need to be cleaned,ಬಾತ್ರೂಮ್ ಸ್ವಚ್ಛವಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Bathroom is not clean
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Chairs are not clean/ need to be cleaned,ಕುರ್ಚಿಗಳು ಸ್ವಚ್ಛವಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Chairs are not clean
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Dust in the room,ಕೋಣೆಯಲ್ಲಿ ಧೂಳು,,Dust in the room
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Glass is not clean/ need to be cleaned,ಗಾಜು ಸ್ವಚ್ಛವಾಗಿಲ್ಲ/ ಶುಚಿಗೊಳಿಸಬೇಕಾಗಿದೆ,,Glass is not clean
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Cupboard is not clean/ need to be cleaned,ಬೀರು ಸ್ವಚ್ಛವಾಗಿಲ್ಲ/ ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Cupboard is not clean
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Lift is not cleaned/ need to be cleaned,ಲಿಫ್ಟ್ ಅನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಲಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Lift is not cleaned
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Floor is not cleaned/ need to be cleaned,ನೆಲವನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಲಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Floor is not cleaned
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Room is not cleaned/ need to be cleaned,ಕೊಠಡಿಯನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಲಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Room is not cleaned
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Ward is not cleaned/ need to be cleaned,ವಾರ್ಡ್ ಸ್ವಚ್ಛಗೊಳಿಸಿಲ್ಲ/ ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Ward is not cleaned
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Waste not removed from the dustbin,ಡಸ್ಟ್‌ಬಿನ್‌ನಿಂದ ತ್ಯಾಜ್ಯವನ್ನು ತೆಗೆಯಲಾಗಿಲ್ಲ,,Waste not removed
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Window is not cleaned/ need to be cleaned,ಕಿಟಕಿಯನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಲಾಗಿಲ್ಲ / ಸ್ವಚ್ಛಗೊಳಿಸಬೇಕಾಗಿದೆ,,Window is not cleaned
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Door mat required/needs to be changed,ಡೋರ್ ಮ್ಯಾಟ್ ಅಗತ್ಯವಿದೆ/ಬದಲಾಯಿಸಬೇಕಾಗಿದೆ,,Door mat required
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Unsatisfied with cleaning staff response,ಸ್ವಚ್ಛತಾ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Cleaning staff response
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Cleaning was not carried out properly,ಸ್ವಚ್ಛತೆ ಸರಿಯಾಗಿ ನಡೆದಿಲ್ಲ,,Improper cleaning
+Housekeeping,ಹೌಸ್ ಕೀಪಿಂಗ್,,Other housekeeping issues,ಇತರ ಸ್ವಚ್ಛತಾ ಸೇವೆಗಳ ಸಮಸ್ಯೆಗಳು,,Other housekeeping issues
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,AC is not working,ಎಸಿ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,AC complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,AC Remote not working,ಎಸಿ ರಿಮೋಟ್ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ,,AC remote complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Fan is not working,ಫ್ಯಾನ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Fan not working
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Bathroom door not closing,ಸ್ನಾನಗೃಹದ ಬಾಗಿಲು ಮುಚ್ಚುತ್ತಿಲ್ಲ,,Bathroom door complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Bathroom light not working,ಬಾತ್ ರೂಮ್ ಲೈಟ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Bathroom light complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Bedside lamp not working,ಬೆಡ್ ಸೈಡ್ ಲ್ಯಾಂಪ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Bedside lamp complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Bedside rails need fixing,ಬೆಡ್ಸೈಡ್ ಹಳಿಗಳನ್ನು ಸರಿಪಡಿಸುವ ಅಗತ್ಯವಿದೆ,,Bedside rails need fixing
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Ceiling light complaint/not working,ಸೀಲಿಂಗ್ ಲೈಟ್ ದೂರು/ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Ceiling light complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about call bell,ಕಾಲ್ ಬೆಲ್ ಬಗ್ಗೆ ದೂರು,,Call bell complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about cot,ಮಂಚದ ಬಗ್ಗೆ ದೂರು,,Cot complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about cupboard hinges,ಬೀರು ಕೀಲುಗಳ ಬಗ್ಗೆ ದೂರು,,Cupboard hinges complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about curtains,ಕರ್ಟೈನ್ಸ್ ಬಗ್ಗೆ ದೂರು,,Curtains complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,No curtains in the room,ಕೋಣೆಯಲ್ಲಿ ಯಾವುದೇ ಪರದೆಗಳಿಲ್ಲ,,No curtains in the room
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about door,ಬಾಗಿಲಿನ ಬಗ್ಗೆ ದೂರು,,Door complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about plug socket,ಪ್ಲಗ್ ಸಾಕೆಟ್ ಬಗ್ಗೆ ದೂರು,,Plug socket complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about switch board,ಸ್ವಿಚ್ ಬೋರ್ಡ್ ಬಗ್ಗೆ ದೂರು,,Switch board complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about wash basin mirror,ವಾಶ್ ಬೇಸಿನ್ ಮಿರರ್ ಬಗ್ಗೆ ದೂರು,,Wash basin mirror complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Complaint about water tap,ನೀರಿನ ನಲ್ಲಿಯ ಬಗ್ಗೆ ದೂರು,,Water tap complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Damage on floor tiles,ನೆಲದ ಅಂಚುಗಳ ಮೇಲೆ ಹಾನಿ,,Damage on floor tiles
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Fridge not working,ಫ್ರಿಡ್ಜ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Fridge not working
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Health faucet complaint,ಹೆಲ್ತ್ ಫಾಸೆಟ್ ದೂರು,,Health faucet complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Lights are not working,ದೀಪಗಳು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿಲ್ಲ,,Lights not working
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Phone not working,ಫೋನ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Phone not working
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Power failure,ವಿದ್ಯುತ್ ವೈಫಲ್ಯ,,Power failure
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Power failure in corridors,ಕಾರಿಡಾರ್‌ಗಳಲ್ಲಿ ವಿದ್ಯುತ್ ವೈಫಲ್ಯ,,Corridors power failure
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Hot water not available,ಬಿಸಿನೀರು ಲಭ್ಯವಿಲ್ಲ,,Hot water availability
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Shower not working,ಶವರ್ ಕೆಲಸ ಮಾಡುತ್ತಿಲ್ಲ,,Shower not working
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Toilet blockage,ಟಾಯ್ಲೆಟ್ ಬ್ಲಾಕ್,,Toilet blockage
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Toilet closet cover missing,ಟಾಯ್ಲೆಟ್ ಕ್ಲೋಸೆಟ್ ಕವರ್ ಕಾಣೆಯಾಗಿದೆ,,Closet cover missing
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Toilet flush tank complaint,ಟಾಯ್ಲೆಟ್ ಫ್ಲಶ್ ಟ್ಯಾಂಕ್ ದೂರು,,Flush tank complaint
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Wall tile damage,ವಾಲ್ ಟೈಲ್ ಹಾನಿ,,Wall tile damage
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Wash basin block,ವಾಶ್ ಬೇಸಿನ್ ಬ್ಲಾಕ್,,Wash basin block
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Wash basin leak,ವಾಶ್ ಬೇಸಿನ್ ಸೋರಿಕೆ,,Wash basin leak
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Water leakage from the ceiling,ಚಾವಣಿಯಿಂದ ನೀರು ಸೋರಿಕೆ,,Water leakage ceiling
+Maintenance,ಮೈಂಟೆನನ್ಸ್,,Other maintenance issues,ಇತರ ನಿರ್ವಹಣೆ ಸಮಸ್ಯೆಗಳು,,Other maintenance issues
+Nursing,ನರ್ಸಿಂಗ್,,Unsatisfied with the nursing staff response,ನರ್ಸಿಂಗ್ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Nurses response
+Nursing,ನರ್ಸಿಂಗ್,,Nursing staff did not respond to call bell,ಕಾಲ್ ಬೆಲ್ ಗೆ ನರ್ಸಿಂಗ್ ಸಿಬ್ಬಂದಿ ಸ್ಪಂದಿಸಲಿಲ್ಲ,,Call bell response
+Nursing,ನರ್ಸಿಂಗ್,,Medicines were not administered on time,ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ ಔಷಧ ನೀಡಲಾಗುತ್ತಿಲ್ಲ,,Timely medication
+Nursing,ನರ್ಸಿಂಗ್,,Unsatisfied with courtesy/compassion of nurses,ದಾದಿಯರ ಸೌಜನ್ಯ/ಕರುಣೆಯಿಂದ ಅತೃಪ್ತಿ,,Nurses courtesy
+Nursing,ನರ್ಸಿಂಗ್,,Unsatisfied with the knowledge/skills of staff,ಸಿಬ್ಬಂದಿಯ ಜ್ಞಾನ/ಕೌಶಲ್ಯದಿಂದ ಅತೃಪ್ತಿ,,Nurses knowledge
+Nursing,ನರ್ಸಿಂಗ್,,Unsatisfied with the hygiene standards,ನೈರ್ಮಲ್ಯ ಮಾನದಂಡಗಳ ಬಗ್ಗೆ ಅತೃಪ್ತಿ,,Nurses hygeine
+Nursing,ನರ್ಸಿಂಗ್,,Inefficient pain management,ಅಸಮರ್ಥ ನೋವು ನಿರ್ವಹಣೆ,,Nurses pain management
+Nursing,ನರ್ಸಿಂಗ್,,Other nursing issues,ಇತರ ಶುಶ್ರೂಷಾ ಸಮಸ್ಯೆಗಳು,,Other nursing issues
+Doctor,ವೈದ್ಯರು,,Unsatisfied with the doctor's response,ವೈದ್ಯರ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Doctors response
+Doctor,ವೈದ್ಯರು,,Doctor was not able to answer my queries,ನನ್ನ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ವೈದ್ಯರಿಗೆ ಸಾಧ್ಯವಾಗಲಿಲ್ಲ,,Doctors answer to queries
+Doctor,ವೈದ್ಯರು,,Doctor did not spend required time during rounds,ಸುತ್ತಿನ ಸಮಯದಲ್ಲಿ ವೈದ್ಯರು ಅಗತ್ಯ ಸಮಯವನ್ನು ಕಳೆಯಲಿಲ್ಲ,,Time spent on rounds
+Doctor,ವೈದ್ಯರು,,Doctor did not explain the reason for medication,ಔಷಧಿಯ ಕಾರಣವನ್ನು ವೈದ್ಯರು ವಿವರಿಸಲಿಲ್ಲ,,Medication explanation
+Doctor,ವೈದ್ಯರು,,Doctor did not explain the reason for procedures,ಕಾರ್ಯವಿಧಾನದ ಕಾರಣವನ್ನು ವೈದ್ಯರು ವಿವರಿಸಲಿಲ್ಲ,,Procedure explanation
+Doctor,ವೈದ್ಯರು,,Other doctor consultation issues,ಇತರ ವೈದ್ಯರ ಸಮಾಲೋಚನೆ ಸಮಸ್ಯೆಗಳು,,Other doctor consultation issues
+Canteen,ಕ್ಯಾಂಟೀನ್,,Unsatisfied with the quality & taste of food,ಆಹಾರದ ಗುಣಮಟ್ಟ ಮತ್ತು ರುಚಿಯಲ್ಲಿ ಅತೃಪ್ತಿ,,Food quality
+Canteen,ಕ್ಯಾಂಟೀನ್,,Unsatisfied with the timeliness of food service,ಆಹಾರ ಸೇವೆಯ ಸಮಯೋಚಿತತೆಯ ಬಗ್ಗೆ ಅತೃಪ್ತಿ,,Timeliness of service
+Canteen,ಕ್ಯಾಂಟೀನ್,,Unsatisfied with the temperature of food,ಆಹಾರದ ತಾಪಮಾನದಲ್ಲಿ ಅತೃಪ್ತಿ,,Food temperature
+Canteen,ಕ್ಯಾಂಟೀನ್,,Food not served according to the therapeutic restrictions,ಚಿಕಿತ್ಸಕ ನಿರ್ಬಂಧಗಳ ಪ್ರಕಾರ ಆಹಾರವನ್ನು ನೀಡಲಾಗುವುದಿಲ್ಲ,,Therapeutic restrictions
+Canteen,ಕ್ಯಾಂಟೀನ್,,Quantity of food was too less/more,ಆಹಾರದ ಪ್ರಮಾಣವು ತುಂಬಾ ಕಡಿಮೆ/ಹೆಚ್ಚು ಇತ್ತು,,Less/More quantity
+Canteen,ಕ್ಯಾಂಟೀನ್,,Unsatisfied with canteen staff's response,ಕ್ಯಾಂಟೀನ್ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Canteen staff response
+Canteen,ಕ್ಯಾಂಟೀನ್,,Unsatisfied with overall hygiene of food services,ಆಹಾರ ಸೇವೆಗಳ ಒಟ್ಟಾರೆ ನೈರ್ಮಲ್ಯದಿಂದ ಅತೃಪ್ತಿ,,Food service hygeine
+Canteen,ಕ್ಯಾಂಟೀನ್,,Other canteen issues,ಇತರ ಕ್ಯಾಂಟೀನ್ ಸಮಸ್ಯೆಗಳು,,Other canteen issues
+Dietician ,ಆಹಾರ ತಜ್ಞ,,Unsatisfied with counselling & guidance by the dietician,ಆಹಾರ ತಜ್ಞರ ಸಲಹೆ ಮತ್ತು ಮಾರ್ಗದರ್ಶನದಿಂದ ಅತೃಪ್ತಿ,,Dietician counselling
+Dietician ,ಆಹಾರ ತಜ್ಞ,,Unsatisfied with the dietician's response,ಆಹಾರ ತಜ್ಞರ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Dietician response
+Dietician ,ಆಹಾರ ತಜ್ಞ,,Other dietician issues,ಇತರ ಆಹಾರ ತಜ್ಞರ ಸಮಸ್ಯೆಗಳು,,Other dietician issues
+Radiology,ರೇಡಿಯಾಲಜಿ,,Unsatisfied with the waiting time in radiology,ರೇಡಿಯಾಲಜಿಯಲ್ಲಿ ಕಾಯುವ ಸಮಯದ ಬಗ್ಗೆ ಅತೃಪ್ತಿ,,Radiology wait time
+Radiology,ರೇಡಿಯಾಲಜಿ,,Unsatisfied with the radiology staff's response,ರೇಡಿಯಾಲಜಿ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Radiology staff response
+Radiology,ರೇಡಿಯಾಲಜಿ,,Did not receive the radiology reports on time,ರೇಡಿಯಾಲಜಿ ವರದಿಗಳನ್ನು ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ ಸ್ವೀಕರಿಸಲಿಲ್ಲ,,Timely radiology reports
+Radiology,ರೇಡಿಯಾಲಜಿ,,Unsatisfied with the skill of the radiology staffs,ರೇಡಿಯಾಲಜಿ ಸಿಬ್ಬಂದಿಗಳ ಕೌಶಲ್ಯದಿಂದ ಅತೃಪ್ತಿ,,Radiologist skill
+Radiology,ರೇಡಿಯಾಲಜಿ,,Other radiology issues,ಇತರ ರೇಡಿಯಾಲಜಿ ಸಮಸ್ಯೆಗಳು,,Other radiology issues
+Laboratory,ಪ್ರಯೋಗಾಲಯ,,Unsatisfied with the waiting time in laboratory,ಪ್ರಯೋಗಾಲಯದಲ್ಲಿ ಕಾಯುವ ಸಮಯದ ಬಗ್ಗೆ ಅತೃಪ್ತಿ,,Lab wait time
+Laboratory,ಪ್ರಯೋಗಾಲಯ,,Unsatisfied with the laboratory staff's response,ಪ್ರಯೋಗಾಲಯದ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ತೃಪ್ತರಾಗಲಿಲ್ಲ,,Lab staff response
+Laboratory,ಪ್ರಯೋಗಾಲಯ,,Did not receive the lab reports on time,ಸಮಯಕ್ಕೆ ಸರಿಯಾಗಿ ಲ್ಯಾಬ್ ವರದಿಗಳು ಬಂದಿಲ್ಲ,,Timely lab reports
+Laboratory,ಪ್ರಯೋಗಾಲಯ,,Unsatisfied with the skill of the laboratory staffs,ಪ್ರಯೋಗಾಲಯದ ಸಿಬ್ಬಂದಿಗಳ ಕೌಶಲ್ಯದಿಂದ ಅತೃಪ್ತರಾಗಿದ್ದಾರೆ,,Lab staffs skill
+Laboratory,ಪ್ರಯೋಗಾಲಯ,,Other laboratory issues,ಇತರ ಪ್ರಯೋಗಾಲಯ ಸಮಸ್ಯೆಗಳು,,Other lab issues
+Pharmacy,ಫಾರ್ಮಸಿ,,Unsatisfied with the pharmacy staff's response,ಫಾರ್ಮಸಿ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Pharma staff response
+Pharmacy,ಫಾರ್ಮಸಿ,,Waiting time in the queue was too lengthy,ಕ್ಯೂನಲ್ಲಿ ಕಾಯುವ ಸಮಯ ತುಂಬಾ ಉದ್ದವಾಗಿತ್ತು,,Pharmacy wait time
+Pharmacy,ಫಾರ್ಮಸಿ,,Prescribed medicines were not available,ಸೂಚಿಸಿದ ಔಷಧಗಳು ಲಭ್ಯವಿರಲಿಲ್ಲ,,Medicine availability
+Pharmacy,ಫಾರ್ಮಸಿ,,Explanation of medicines were not given,ಔಷಧಿಗಳ ವಿವರಣೆಯನ್ನು ನೀಡಲಾಗಿಲ್ಲ,,Explanation of medicines
+Pharmacy,ಫಾರ್ಮಸಿ,,Other pharmacy issues,ಇತರ ಔಷಧಾಲಯ ಸಮಸ್ಯೆಗಳು,,Other pharmacy issues
+Billing,ಬಿಲ್ಲಿಂಗ್,,Unsatisfied with the billing staff response,ಬಿಲ್ಲಿಂಗ್ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Billing staff response
+Billing,ಬಿಲ್ಲಿಂಗ್,,Billing queries were not satisfactorily addressed,ಬಿಲ್ಲಿಂಗ್ ಪ್ರಶ್ನೆಗಳನ್ನು ತೃಪ್ತಿಕರವಾಗಿ ಪರಿಹರಿಸಲಾಗಿಲ್ಲ,,Billing query not addressed
+Billing,ಬಿಲ್ಲಿಂಗ್,,Final bill is inaccurate,ಅಂತಿಮ ಬಿಲ್ ನಿಖರವಾಗಿಲ್ಲ,,Final bill accuracy
+Billing,ಬಿಲ್ಲಿಂಗ್,,Not updated on the status of the bill,ಬಿಲ್‌ನ ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಲಾಗಿಲ್ಲ,,Need bill status
+Billing,ಬಿಲ್ಲಿಂಗ್,,Other billing issues,ಇತರ ಬಿಲ್ಲಿಂಗ್ ಸಮಸ್ಯೆಗಳು,,Other billing issues
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮೆ,,Unsatisfied with the insurance staff's response,ಇನ್ಶೂರೆನ್ಸ್ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ಅತೃಪ್ತಿ,,Insurance staff response
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮೆ,,Time taken to process the insurance was too long,ಇನ್ಶೂರೆನ್ಸ್ ಪ್ರಕ್ರಿಯೆಗೆ ತೆಗೆದುಕೊಂಡ ಸಮಯ ತುಂಬಾ ಉದ್ದವಾಗಿದೆ,,Insurance process time
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮೆ,,Not updated on the insurance claim status,ಇನ್ಶೂರೆನ್ಸ್ ಕ್ಲೈಮ್ ಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಲಾಗಿಲ್ಲ,,Insurance claim status
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮೆ,,Other insurance issues,ಇತರ ಇನ್ಶೂರೆನ್ಸ್ ಸಮಸ್ಯೆಗಳು,,Other insurance issues
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Discharge delayed,ಡಿಸ್ಚಾರ್ಜ್ ವಿಳಂಬವಾಗಿದೆ,,Discharge delayed
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Not updated about the status of discharge,ಡಿಸ್ಚಾರ್ಜ್ ಸ್ಥಿತಿಯ ಕುರಿತು ನವೀಕರಿಸಲಾಗಿಲ್ಲ,,Need status of discharge
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Discharge summary was not explained,ಡಿಸ್ಚಾರ್ಜ್ ಸಾರಾಂಶವನ್ನು ವಿವರಿಸಲಾಗಿಲ್ಲ,,Discharge summary explanation
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Other discharge issues,ಇತರ ಡಿಸ್ಚಾರ್ಜ್ ಸಮಸ್ಯೆಗಳು,,Other discharge issues
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Unsatisfied with the security staff's response,ಸೆಕ್ಯೂರಿಟಿ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆಯಿಂದ ತೃಪ್ತರಾಗಲಿಲ್ಲ,,Security staff's response
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Unsatisfied with the security staff's assistance,ಸೆಕ್ಯೂರಿಟಿ ಸಿಬ್ಬಂದಿಯ ನೆರವಿನಿಂದ ತೃಪ್ತರಾಗಲಿಲ್ಲ,,Security staff's assistance
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Security staff was not courteous,ಸೆಕ್ಯೂರಿಟಿ ಸಿಬ್ಬಂದಿ ಸೌಜನ್ಯ ತೋರಲಿಲ್ಲ,,Security staff courteousness
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Other security issues,ಇತರ ಸೆಕ್ಯೂರಿಟಿ ಸಮಸ್ಯೆಗಳು,,Other security issues
+Other,ಇತರ,,Other patient related concerns,ಇತರ ರೋಗಿಗೆ ಸಂಬಂಧಿಸಿದ ಕಾಳಜಿಗಳು,,Other patient concerns

@@ -1,0 +1,77 @@
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,"Convenience of the admission process (Staff response, Time taken, Information etc.)","ಅಡ್ಮಿಶನ್ ಪ್ರಕ್ರಿಯೆಯ ಅನುಕೂಲತೆ (ಸಿಬ್ಬಂದಿ ವರ್ತನೆ, ತೆಗೆದುಕೊಂಡ ಸಮಯ, ಮಾಹಿತಿ ಇತ್ಯಾದಿ)",,Admission process
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,Time taken for admission,ಅಡ್ಮಿಶನ್ ಪ್ರಕ್ರಿಯೆಗೆ ತೆಗೆದುಕೊಂಡ ಸಮಯ,,Admission duration
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,Admission staff response,ಅಡ್ಮಿಶನ್ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Admission staff response
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,Proper information on wards/services,ವಾರ್ಡ್/ಸೇವೆಗಳ ಬಗ್ಗೆ ಸರಿಯಾದ ಮಾಹಿತಿ,,Services information
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,Clarity on treatment cost & estimations,ಚಿಕಿತ್ಸೆಯ ವೆಚ್ಚ ಮತ್ತು ಅಂದಾಜುಗಳ ಸ್ಪಷ್ಟತೆ,,Cost explanation
+Admission,ಅಡ್ಮಿಶನ್/ ಪ್ರವೇಶ,,Other admission issues,"ಇತರ ಅಡ್ಮಿಶನ್ ಸಮಸ್ಯೆಗಳು 
+",,Other admission issues
+Nursing,ನರ್ಸಿಂಗ್,,"Satisfaction with nursing services (Staff response, Timely medication, Skill, Hygiene etc.)","ನರ್ಸಿಂಗ್ ಸೇವೆಗಳಲ್ಲಿ ತೃಪ್ತಿ (ಸಿಬ್ಬಂದಿ ವರ್ತನೆ, ಪ್ರತಿಕ್ರಿಯೆ, ಸಕಾಲಿಕ ಔಷಧಿ, ಕೌಶಲ್ಯ, ನೈರ್ಮಲ್ಯ ಇತ್ಯಾದಿ)",,Nursing services
+Nursing,ನರ್ಸಿಂಗ್,,Courtesy and care of the nursing staff,ನರ್ಸಿಂಗ್ ಸಿಬ್ಬಂದಿಯ ಸೌಜನ್ಯ ಮತ್ತು ಕಾಳಜಿ,,Nurses courtesy
+Nursing,ನರ್ಸಿಂಗ್,,Competency in nursing care,ನರ್ಸಿಂಗ್ ಆರೈಕೆಯಲ್ಲಿ ಸಾಮರ್ಥ್ಯ,,Nursing competency
+Nursing,ನರ್ಸಿಂಗ್,,Communication regarding patient movement for procedures/tests,ಕಾರ್ಯವಿಧಾನಗಳು/ಪರೀಕ್ಷೆಗಳಿಗಾಗಿ ರೋಗಿಯ ಚಲನೆಯ ಬಗ್ಗೆ ಸಂವಹನ,,Nurses communication
+Nursing,ನರ್ಸಿಂಗ್,,Nursing staff response to call bell,ಕರೆ ಬೆಲ್‌ಗೆ ನರ್ಸಿಂಗ್ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Nurses response
+Nursing,ನರ್ಸಿಂಗ್,,Timely administration of medicines,ಔಷಧಿಗಳ ಸಮಯೋಚಿತ ಆಡಳಿತ,,Timely medicines
+Nursing,ನರ್ಸಿಂಗ್,,Efficiency in pain management,ನೋವು ನಿರ್ವಹಣೆಯಲ್ಲಿ ದಕ್ಷತೆ,,Pain management
+Nursing,ನರ್ಸಿಂಗ್,,Compliance with hygiene standards,ನೈರ್ಮಲ್ಯ ಮಾನದಂಡಗಳ ಅನುಸರಣೆ,,Nurses hygeine
+Nursing,ನರ್ಸಿಂಗ್,,Other nursing issues,ಇತರ ನರ್ಸಿಂಗ್ ಸಮಸ್ಯೆಗಳು,,Other nursing issues
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,"Quality of care provided by doctors (Doctor's response, Timely rounds, Communication etc.)","ವೈದ್ಯರು ಒದಗಿಸಿದ ಆರೈಕೆಯ ಗುಣಮಟ್ಟ (ವೈದ್ಯರ ಪ್ರತಿಕ್ರಿಯೆ, ಸಮಯೋಚಿತ ಸುತ್ತುಗಳು, ಸಂವಹನ ಇತ್ಯಾದಿ)",,Doctor experience
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,Doctor's response to queries,ಪ್ರಶ್ನೆಗಳಿಗೆ ವೈದ್ಯರ ಪ್ರತಿಕ್ರಿಯೆ,,Doctors response
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,Time spent by doctor during the rounds,ಸುತ್ತಿನ ಸಮಯದಲ್ಲಿ ವೈದ್ಯರು ಕಳೆದ ಸಮಯ,,Time spent on rounds
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,Privacy/confidentiality not maintained,ಗೌಪ್ಯತೆಯನ್ನು ಕಾಯ್ದುಕೊಳ್ಳಲಾಗಿಲ್ಲ,,Privacy and confidentiality
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,Discharge advice and post-care not explained properly,ಡಿಸ್ಚಾರ್ಜ್ ಸಲಹೆ ಮತ್ತು ನಂತರದ ಆರೈಕೆಯನ್ನು ಸರಿಯಾಗಿ ವಿವರಿಸಲಾಗಿಲ್ಲ,,Post-discharge care explanation
+Doctor Consultation,ವೈದ್ಯರ ಸಮಾಲೋಚನೆ,,Other doctor consultation issues,ಇತರ ವೈದ್ಯರ ಸಮಾಲೋಚನೆ ಸಮಸ್ಯೆಗಳು,,Other doctor consultation issues
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,"Housekeeping & cleaning services (Staff response, Cleaning frequency, Quality etc)","ಹೌಸ್ ಕೀಪಿಂಗ್ ಮತ್ತು ಸ್ವಚ್ಛತಾ ಸೇವೆಗಳು (ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ಶುಚಿಗೊಳಿಸುವ ಆವರ್ತನ, ಗುಣಮಟ್ಟ ಇತ್ಯಾದಿ)",,Housekeeping services
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,Housekeeping staff response,ಸ್ವಚ್ಛತಾ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Housekeeping staff response
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,Cleaning schedule and frequency,ಶುಚಿಗೊಳಿಸುವ ವೇಳಾಪಟ್ಟಿ ಮತ್ತು ಆವರ್ತನ,,Cleaning frequency
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,Quality of cleaning services,ಸ್ವಚ್ಛತಾ ಸೇವೆಗಳ ಗುಣಮಟ್ಟ,,Cleaning quality
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,"Unhappy with support for daily activities (bathing, toileting, changing clothes).","ದೈನಂದಿನ ಚಟುವಟಿಕೆಗಳಿಗೆ (ಸ್ನಾನ, ಶೌಚಾಲಯ, ಬಟ್ಟೆ ಬದಲಾಯಿಸುವುದು) ಬೆಂಬಲ ಸಿಗುವುದರಿಂದ ಅತೃಪ್ತಿ",,Support with daily activities
+Housekeeping/Cleanliness,ಹೌಸ್ ಕೀಪಿಂಗ್/ಶುಚಿತ್ವ,,Other housekeeping issues,ಇತರ ಸ್ವಚ್ಛತಾ ಸೇವೆಗಳ ಸಮಸ್ಯೆಗಳು,,Other housekeeping issues
+General Maintenance,ಸಾಮಾನ್ಯ ನಿರ್ವಹಣೆ,,"Functioning & maintenance of room fittings (Electrical equipment, Furniture, Bathroom/Toilet facilities etc.)","ಕೊಠಡಿಯ ಫಿಟ್ಟಿಂಗ್‌ಗಳ ಕಾರ್ಯನಿರ್ವಹಣೆ ಮತ್ತು ನಿರ್ವಹಣೆ (ವಿದ್ಯುತ್ ಉಪಕರಣಗಳು, ಪೀಠೋಪಕರಣಗಳು, ಸ್ನಾನಗೃಹ/ಶೌಚಾಲಯ ಸೌಲಭ್ಯಗಳು ಇತ್ಯಾದಿ)",,General maintenance
+General Maintenance,ಸಾಮಾನ್ಯ ನಿರ್ವಹಣೆ,,Functioning of electrical equipments,ವಿದ್ಯುತ್ ಉಪಕರಣಗಳ ಕಾರ್ಯನಿರ್ವಹಣೆ,,Electrical equipment function
+General Maintenance,ಸಾಮಾನ್ಯ ನಿರ್ವಹಣೆ,,Functioning of furniture & fixtures,ಪೀಠೋಪಕರಣಗಳು ಮತ್ತು ಇತರ ವಸ್ತುಗಳ ಕಾರ್ಯನಿರ್ವಹಣೆ,,Furnitures & fixtures function
+General Maintenance,ಸಾಮಾನ್ಯ ನಿರ್ವಹಣೆ,,Functioning of bathroom fittings,ಬಾತ್ರೂಮ್ ಫಿಟ್ಟಿಂಗ್‌ಗಳ ಕಾರ್ಯನಿರ್ವಹಣೆ,,Bathroom fittings function
+General Maintenance,ಸಾಮಾನ್ಯ ನಿರ್ವಹಣೆ,,Other maintenance issues,ಇತರ ನಿರ್ವಹಣೆ ಸಮಸ್ಯೆಗಳು,,Other maintenance issues
+Dietician Services,ಆಹಾರ ತಜ್ಞರ ಸೇವೆಗಳು,,"Dietician services (Dietician counselling, Courtesy etc.)","ಆಹಾರ ತಜ್ಞರ ಸೇವೆಗಳು (ಆಹಾರ ತಜ್ಞರ ಸಮಾಲೋಚನೆ, ಸೌಜನ್ಯ ಇತ್ಯಾದಿ)",,Dietician services
+Dietician Services,ಆಹಾರ ತಜ್ಞರ ಸೇವೆಗಳು,,Counselling & guidance by the dietician,ಆಹಾರ ತಜ್ಞರಿಂದ ಸಲಹೆ ಮತ್ತು ಮಾರ್ಗದರ್ಶನ,,Dietician counselling
+Dietician Services,ಆಹಾರ ತಜ್ಞರ ಸೇವೆಗಳು,,Courtesy and compassion of the dietician,ಆಹಾರ ತಜ್ಞರ ಸೌಜನ್ಯ ಮತ್ತು ಸಹಾನುಭೂತಿ,,Dietician courtesy
+Dietician Services,ಆಹಾರ ತಜ್ಞರ ಸೇವೆಗಳು,,Other dietician issues,ಇತರ ಆಹಾರ ತಜ್ಞರ ಸಮಸ್ಯೆಗಳು,,Other dietician issues
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,"Canteen services (Food quality, Staff response, Hygiene etc.)","ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು (ಆಹಾರದ ಗುಣಮಟ್ಟ, ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ನೈರ್ಮಲ್ಯ ಇತ್ಯಾದಿ)",,Canteen services
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Quality of food,ಆಹಾರದ ಗುಣಮಟ್ಟ,,Quality of food
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Timeliness of food delivery,ಆಹಾರ ವಿತರಣೆಯ ಸಮಯೋಚಿತತೆ,,Food delivery timeliness
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Quantity of food served,ಬಡಿಸಿದ ಆಹಾರದ ಪ್ರಮಾಣ,,Food quantity
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Food was not hot when served,ಬಡಿಸುವಾಗ ಆಹಾರ ಬಿಸಿಯಾಗಿರಲಿಲ್ಲ,,Food not served hot
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Canteen staff's response,ಕ್ಯಾಂಟೀನ್ ಸಿಬ್ಬಂದಿಯ ಪ್ರತಿಕ್ರಿಯೆ,,Canteen staff's response
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Hygiene standards were not upheld,ನೈರ್ಮಲ್ಯ ಮಾನದಂಡಗಳನ್ನು ಕಾಪಾಡಿಲ್ಲ,,Canteen hygiene
+Canteen Services,ಕ್ಯಾಂಟೀನ್ ಸೇವೆಗಳು,,Other canteen issues,ಇತರ ಕ್ಯಾಂಟೀನ್ ಸಮಸ್ಯೆಗಳು,,Other canteen issues
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,"Services in radiology: X-ray, CT, Ultrasound, etc (Staff response, Time taken etc.)","ರೇಡಿಯಾಲಜಿಯಲ್ಲಿನ ಸೇವೆಗಳು: ಎಕ್ಸ್-ರೇ, ಸಿ.ಟಿ, ಅಲ್ಟ್ರಾಸೌಂಡ್ (ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ತೆಗೆದುಕೊಂಡ ಸಮಯ ಇತ್ಯಾದಿ)",,Radiology services
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,Waiting time in radiology,ರೇಡಿಯಾಲಜಿಯಲ್ಲಿ ಕಾಯುವ ಸಮಯ,,Radiology wait time
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,Radiology staff response,ರೇಡಿಯಾಲಜಿ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Radiology staff response
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,Timely receipt of reports,ವರದಿಗಳ ಸಕಾಲಿಕ ಸ್ವೀಕೃತಿ,,Timely radiology reports
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,Dissatisfied with guidance before the procedure,ಕಾರ್ಯವಿಧಾನದ ಮೊದಲು ಮಾರ್ಗದರ್ಶನದಿಂದ ಅತೃಪ್ತಿ,,Pre-procedure instructions
+Radiology,ರೇಡಿಯಾಲಜಿ/ ವಿಕಿರಣಶಾಸ್ತ್ರ,,Other radiology issues,ಇತರ ರೇಡಿಯಾಲಜಿ ಸಮಸ್ಯೆಗಳು,,Other radiology issues
+Pharmacy,ಔಷಧಾಲಯ,,"Services in pharmacy (Staff response, Availability of medicines, Timely dispatch, Explanation etc.)","ಔಷಧಾಲಯದಲ್ಲಿನ ಸೇವೆಗಳು (ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ಔಷಧಿಗಳ ಲಭ್ಯತೆ, ಸಮಯೋಚಿತ ರವಾನೆ, ವಿವರಣೆ ಇತ್ಯಾದಿ)",,Pharmacy services
+Pharmacy,ಔಷಧಾಲಯ,,Pharmacy staff response,ಫಾರ್ಮಸಿ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Pharma staff response
+Pharmacy,ಔಷಧಾಲಯ,,Waiting time in queue,ಸರದಿಯಲ್ಲಿ ಕಾಯುವ ಸಮಯ,,Pharma queue wait time
+Pharmacy,ಔಷಧಾಲಯ,,Availability of prescribed medicines,ಸೂಚಿಸಲಾದ ಔಷಧಿಗಳ ಲಭ್ಯತೆ,,Medicine availability
+Pharmacy,ಔಷಧಾಲಯ,,Other pharmacy issues,ಇತರ ಫಾರ್ಮಸಿ ಸಮಸ್ಯೆಗಳು,,Other pharmacy issues
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Security services (Response and Helpfulness),ಸೆಕ್ಯೂರಿಟಿ ಸೇವೆಗಳು ( ಪ್ರತಿಕ್ರಿಯೆ ಮತ್ತು ಸಹಾಯ),,Security experience
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Security staff response,ಸೆಕ್ಯೂರಿಟಿ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Security staff response
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Helpfulness of security,ಸೆಕ್ಯೂರಿಟಿ ಸಹಾಯ,,Security helpfulness
+Security,ಸೆಕ್ಯೂರಿಟಿ,,Other security staff issues,ಇತರ ಸೆಕ್ಯೂರಿಟಿ ಸಿಬ್ಬಂದಿ ಸಮಸ್ಯೆಗಳು,,Other security staff issues
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,"Discharge process (Discharge speed, Summary etc.)","ಡಿಸ್ಚಾರ್ಜ್ ಪ್ರಕ್ರಿಯೆ (ಡಿಸ್ಚಾರ್ಜ್ ವೇಗ, ಸಾರಾಂಶ ಇತ್ಯಾದಿ)",,Discharge process
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Time taken for discharge,ಡಿಸ್ಚಾರ್ಜ್ಗೆ ತೆಗೆದುಕೊಂಡ ಸಮಯ,,Discharge time
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Discharge summary clarity and explanation,ಡಿಸ್ಚಾರ್ಜ್ ಸಾರಾಂಶ ಸ್ಪಷ್ಟತೆ ಮತ್ತು ವಿವರಣೆ,,Summary explanation
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,"Improper discharge counselling( Final bill, medication, reports, follow up instructions etc)","ಅನುಚಿತ ಡಿಸ್ಚಾರ್ಜ್ ಕೌನ್ಸೆಲಿಂಗ್ (ಅಂತಿಮ ಬಿಲ್, ಔಷಧಿ, ವರದಿಗಳು, ಅನುಸರಣಾ ಸೂಚನೆಗಳು ಇತ್ಯಾದಿ)",,Incomplete discharge counselling
+Discharge,ಡಿಸ್ಚಾರ್ಜ್,,Other discharge issues,ಇತರ ಡಿಸ್ಚಾರ್ಜ್ ಸಮಸ್ಯೆಗಳು,,Other discharge issues
+Billing,ಬಿಲ್ಲಿಂಗ್,,"Billing experience (Staff response, Communication, Bill accuracy etc.)","ಬಿಲ್ಲಿಂಗ್ ಅನುಭವ (ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ಸಂವಹನ, ಬಿಲ್ ನಿಖರತೆ, ಇತ್ಯಾದಿ)",,Billing experience
+Billing,ಬಿಲ್ಲಿಂಗ್,,Billing staff response,ಬಿಲ್ಲಿಂಗ್ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Billing staff response
+Billing,ಬಿಲ್ಲಿಂಗ್,,Answers and clarification for billing queries,ಬಿಲ್ಲಿಂಗ್ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಗಳು ಮತ್ತು ಸ್ಪಷ್ಟೀಕರಣ,,Billing clarification
+Billing,ಬಿಲ್ಲಿಂಗ್,,Accuracy of final bill,ಅಂತಿಮ ಬಿಲ್‌ನ ನಿಖರತೆ,,Final Bill accuracy
+Billing,ಬಿಲ್ಲಿಂಗ್,,Lack of daily communication on financial matters,ಹಣಕಾಸಿನ ವಿಷಯಗಳಲ್ಲಿ ದೈನಂದಿನ ಸಂವಹನದ ಕೊರತೆ,,Lack of financial updates
+Billing,ಬಿಲ್ಲಿಂಗ್,,Other billing issues,ಇತರ ಬಿಲ್ಲಿಂಗ್ ಸಮಸ್ಯೆಗಳು,,Other billing issues
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,"Insurance process (Staff response, Response, Time taken etc.)","ವಿಮಾ ಪ್ರಕ್ರಿಯೆ (ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ, ಪ್ರತಿಕ್ರಿಯೆ, ತೆಗೆದುಕೊಂಡ ಸಮಯ, ಇತ್ಯಾದಿ)",,Insurance process
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,Insurance staff response,ವಿಮಾ ಸಿಬ್ಬಂದಿ ಪ್ರತಿಕ್ರಿಯೆ,,Insurance staff response
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,"Unclear insurance details at admission (coverage, approval, exclusions).","ಪ್ರವೇಶದ ಸಮಯದಲ್ಲಿ ಅಸ್ಪಷ್ಟ ವಿಮಾ ವಿವರಗಳು (ವ್ಯಾಪ್ತಿ, ಅನುಮೋದನೆ, ಹೊರಗಿಡುವಿಕೆಗಳು)",,Info provided during admission
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,Time taken for processing insurance,ವಿಮೆಯನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲು ತೆಗೆದುಕೊಂಡ ಸಮಯ,,Insurance processing time
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,Lack of clarity on insurance status and delays.,ವಿಮಾ ಸ್ಥಿತಿ ಮತ್ತು ವಿಳಂಬದ ಬಗ್ಗೆ ಸ್ಪಷ್ಟತೆಯ ಕೊರತೆ,,Clarifty on status & delay
+Insurance,ಇನ್ಶೂರೆನ್ಸ್/ ವಿಮಾ,,Other insurance issues,ಇತರ ವಿಮಾ ಸಮಸ್ಯೆಗಳು,,Other insurance issues

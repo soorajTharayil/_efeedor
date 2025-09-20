@@ -1,0 +1,8 @@
+"SL No.","INCIDENT ID","REPORTED ON","REPORTED BY","EMPLOYEE ID","PHONE NUMBER",FLOOR/WARD,SITE,"INCIDENT TYPE",SEVERITY,INCIDENT,CATEGORY,ASSIGNEE,STATUS,"TRANSFERRED TO","LAST MODIFIED","TAGGED PATIENT TYPE","TAGGED PATIENT NAME","TAGGED PATIENT ID","PRIMARY CONSULTANT"
+1,"INC- 7","3:27 pm, 05-09-25",TESTING,9001231,9159612117,OTHERS,Others,No-harm,P4-Low,"Inproper admission procedure",Nursing,NA,Open,NA,"3:27 pm, 05-09-25",NA,NA,NA,NA
+2,"INC- 6","6:03 pm, 04-09-25",KURASHI,12366,9159612117,"SECOND FLOOR","St Thomas Ward",Adverse,P1-Critical,"Disrespect to patient/ bystander","Behavioural Issues",NA,Closed,NA,"2:54 pm, 05-09-25",NA,NA,NA,NA
+3,"INC- 5","3:43 pm, 01-09-25",TEST,78889,,"THIRD FLOOR ","St Anns Ward",Adverse,P1-Critical,"Machine out of calibration",Equipments,NA,Assigned,NA,"7:20 pm, 01-09-25",NA,NA,NA,NA
+4,"INC- 4","3:10 pm, 01-09-25",ANONYMOUS,anys8366,,"GROUND FLOOR"," Emergency Department (ER)",No-harm,P2-High,"Inadequate hand hygiene compliance","Infection Control",NA,Assigned,NA,"12:57 pm, 04-09-25",NA,Aswin,801001,NA
+5,"INC- 3","3:00 pm, 01-09-25",ANONYMOUS,,,Others,Others,,,"Not in capital letter","Medication Errors",NA,Assigned,NA,"6:56 pm, 04-09-25",NA,NA,NA,NA
+6,"INC- 2","2:55 pm, 01-09-25",TEST,90019,9159612117,"SECOND FLOOR","Post Operative Ward",Adverse,P3-Medium,"Patient fell in the hospital veranda","Patient Fall",NA,Closed,NA,"4:12 pm, 01-09-25",NA,Kumar,89930,NA
+7,"INC- 1","10:11 pm, 30-08-25",TEST,234,3454545455,Others,Others,"Near miss",P1-Critical,"Catheter-associated Urinary Tract Infections (CAUTI)","Infection Control",NA,Closed,NA,"4:06 pm, 05-09-25",NA,NA,NA,NA

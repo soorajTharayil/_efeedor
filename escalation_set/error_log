@@ -1,0 +1,815 @@
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[04-Sep-2025 16:42:37 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined array key "set3" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:08:39 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined array key "set1" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined array key "set3" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:12:51 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined array key "set1" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined array key "set3" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:195
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 12:40:09 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[06-Sep-2025 15:21:02 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[06-Sep-2025 15:21:49 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined array key "set1" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined array key "set3" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:195
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 15:52:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined array key "set1" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:198
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 198
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined array key "set3" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 159
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 238
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:195
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 195
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 56
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 62
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[06-Sep-2025 15:54:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:196
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 196
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 14:47:12 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 14:48:57 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 15:38:35 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 15:40:31 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 15:40:31 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 15:40:31 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 15:40:31 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Fatal error:  Uncaught TypeError: implode(): Argument #1 ($array) must be of type array, string given in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:48
+Stack trace:
+#0 /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php(48): implode(',', NULL)
+#1 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 48
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 15:40:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 16:10:07 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 16:47:22 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 16:47:23 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 17:37:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 15
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[12-Sep-2025 17:39:32 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined property: stdClass::$bedno in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 86
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 11:42:50 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 15:12:02 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 15:12:02 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 15:12:02 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[13-Sep-2025 15:12:02 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 312
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 15:12:03 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined array key "set2" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 16:40:20 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 56
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Deprecated:  json_decode(): Passing null to parameter #1 ($json) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 62
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined array key "set2" in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Deprecated:  explode(): Passing null to parameter #2 ($string) of type string is deprecated in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 159
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php:238
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/int_escalation.php on line 238
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php:316
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/ip_escalation.php on line 316
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php:312
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/op_escalation.php on line 312
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php:313
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/isr_escalation.php on line 313
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(/home/efeedor/globalconfig.php): Failed to open stream: No such file or directory in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  include(): Failed opening '/home/efeedor/globalconfig.php' for inclusion (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 5
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Warning:  Undefined variable $conn_g in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271
+[13-Sep-2025 17:01:21 Asia/Calcutta] PHP Fatal error:  Uncaught Error: Call to a member function close() on null in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php:271
+Stack trace:
+#0 {main}
+  thrown in /home/cpefeedor/public_html/SAAS/saasLive/escalation_set/inc_escalation.php on line 271

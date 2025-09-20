@@ -1,0 +1,1741 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Incident extends CI_Controller
+{
+    private $module;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+
+        if ($this->session->userdata('isLogIn') === false && $this->uri->segment(2) != 'track')
+            redirect('login');
+
+        $this->load->model(
+            array(
+                'dashboard_model',
+                'efeedor_model',
+                'ticketsincidents_model',
+                'incident_model',
+                'setting_model',
+                'departmenthead_model',
+            )
+        );
+        // $dates = get_from_to_date();
+        if (isset($_SESSION['from_date']) && isset($_SESSION['to_date'])) {
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+        } else {
+            $fdate = date('Y-m-d', time());
+            $tdate = date('Y-m-d', strtotime('-365 days'));
+            $_SESSION['from_date'] = $fdate;
+            $_SESSION['to_date'] = $tdate;
+        }
+        $this->module = 'incident_modules';
+
+        $this->session->set_userdata([
+            'active_menu' => array('inci_dashboard', 'inci_ticket', 'inci_reports', 'inci_patients', 'inci_settings'),
+        ]);
+
+        if (ismodule_active('INCIDENT') === false && $this->uri->segment(2) != 'track')
+            redirect('dashboard/noaccess');
+    }
+
+    // RESERVED FOR DEVELOPER OR COMPANY ACCESS
+    public function index()
+    {
+
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INCIDENTS MODULE CONFIGURATION';
+            $data['content'] = $this->load->view('incidentmodules/developer', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function alltickets_individual_user()
+    {
+        $userName = $this->session->userdata['fullname'];
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true) {
+            $dates = get_from_to_date();
+            $data['title'] = 'INC all incidents raised  by ' . $userName . '';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->alltickets_individual_user();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/alltickets_individual_user', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/alltickets_individual_user', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function assignedtickets_individual_user()
+    {
+        $userName = $this->session->userdata['fullname'];
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $dates = get_from_to_date();
+            $data['title'] = 'INC assigned incidents raised  by ' . $userName . '';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->assignedtickets_individual_user();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/assignedtickets_individual_user', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/assignedtickets_individual_user', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+            // redirect('tickets/');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function read_close_individual_user()
+    {
+        $userName = $this->session->userdata['fullname'];
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $dates = get_from_to_date();
+            $data['title'] = 'INC closed incidents raised  by ' . $userName . '';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->read_close_individual_user();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/read_close_individual_user', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/read_close_individual_user', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+            // redirect('tickets/');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function escalation_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $dates = get_from_to_date();
+            $data['title'] = 'ESCALATION REPORT-INCIDENTS';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->alltickets();
+
+            $data['content'] = $this->load->view('incidentmodules/escalation_report', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function read_individual_user()
+    {
+        $userName = $this->session->userdata['fullname'];
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+            $dates = get_from_to_date();
+
+            $data['title'] = 'INC open incidents raised  by ' . $userName . '';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->read_individual_user();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/read_individual_user', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/read_individual_user', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+            // redirect('tickets/');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    // SUPER ADMIN AND ADMIN LOGIN
+    public function ticket_dashboard()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $data['title'] = 'INC- INCIDENTS DASHBOARD';
+            #------------------------------#
+            $data['content'] = $this->load->view('incidentmodules/ticket_dashboard', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function download_capa_report_pdf()
+    {
+        if (ismodule_active('INCIDENT') === true) {
+
+            $logo = base_url('uploads/') . $this->session->userdata['logo'];
+            $title = array();
+            $title = $this->session->userdata['title'];
+
+            $users = $this->db->select('user.*')
+                ->get('user')
+                ->result();
+
+            $department_users = array();
+            foreach ($users as $user) {
+                $parameter = json_decode($user->department);
+                foreach ($parameter as $key => $rows) {
+                    foreach ($rows as $k => $row) {
+                        $slugs = explode(',', $row);
+                        foreach ($slugs as $r) {
+                            $department_users[$key][$k][$r][] = $user->firstname;
+                        }
+                    }
+                }
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+
+            $this->db->select("*");
+            $this->db->from('setup_incident');
+            $query = $this->db->get();
+            $reasons = $query->result();
+
+            foreach ($reasons as $row) {
+                $keys[$row->shortkey] = $row->shortkey;
+                $res[$row->shortkey] = $row->shortname;
+                $titles[$row->shortkey] = $row->title;
+            }
+
+            $dataexport = array();
+            $i = 0;
+            $departments = $this->ticketsincidents_model->read_close();
+
+            // echo '<pre>';
+            // print_r($departments);
+            // echo '</pre>';
+            // exit;
+
+
+
+            if (!empty($departments)) {
+                $sl = 1;
+                foreach ($departments as $department) {
+
+                    $rep = '';
+                    if ($department->departmentid_trasfered != 0) {
+                        $issue = NULL;
+                    } else {
+                        foreach ($department->feed->reason as $key => $value) {
+                            if ($key) {
+                                if ($titles[$key] == $department->department->description) {
+                                    if (in_array($key, $keys)) {
+                                        $issue = $res[$key];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    $root = [];
+                    $corrective = [];
+                    $resolution_note = [];
+                    $rootcause_describtion = [];
+                    $corrective_description = [];
+
+                    foreach ($department->replymessage as $r) {
+                        if ($r->rootcause != NULL) {
+                            $root[] = $r->rootcause;
+                        }
+
+                        if ($r->corrective != NULL) {
+                            $corrective[] = $r->corrective;
+                        }
+                        if ($r->rootcause_describtion != NULL) {
+                            $rootcause_describtion[] = $r->rootcause_describtion;
+                        }
+                        if ($r->corrective_description != NULL) {
+                            $corrective_description[] = $r->corrective_description;
+                        }
+
+                        if ($r->resolution_note != NULL) {
+                            $resolution_note[] = $r->resolution_note;
+                        }
+
+                        if ($r->ticket_status == 'Addressed' && $r->reply != NULL) {
+                            $rep = $r->reply;
+                        }
+                    }
+
+                    $createdOn = strtotime($department->created_on);
+                    $lastModified = strtotime($department->last_modified);
+                    $timeDifferenceInSeconds = $lastModified - $createdOn;
+
+                    $value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+                    $timetaken = '';
+                    if ($value['days'] != 0) {
+                        $timetaken .= $value['days'] . ' days, ';
+                    }
+
+                    if ($value['hours'] != 0) {
+                        $timetaken .= $value['hours'] . ' hrs, ';
+                    }
+
+                    if ($value['minutes'] != 0) {
+                        $timetaken .= $value['minutes'] . ' mins.';
+                    }
+
+                    if ($timeDifferenceInSeconds <= 60) {
+                        $timetaken .= 'less than a minute';
+                    }
+
+                    $assignee = $department->department->pname;
+                    $incidentHistory = $department->replymessage;
+                    $dataexport[] = array(
+                        // 'SL No.' => $sl,
+                        'TICKET ID' => 'INC- ' . $department->id,
+                        'TICKET DETAILS' =>
+                            '<strong>Incident Category:</strong> ' . ($department->department->description) . '<br>' .
+                            '<strong>Incident:</strong> ' . ($issue ? $issue : 'Ticket was transferred') . '<br>' .
+                            '<strong>Incident Description:</strong> ' . ($department->feed->other ? $department->feed->other : 'NA'),
+
+                        'PRIORITY' => $department->priority,
+                        'INCIDENT TYPE' => $department->incident_type,
+
+                        'PATIENT DETAILS' => ($department->feed->name ?? '') . (!empty($department->feed->patientid) ? ' (' . $department->feed->patientid . ')' : '') . '<br>' . (!empty($department->feed->contactnumber) ? '<i class="fa fa-phone"></i> ' . $department->feed->contactnumber . '<br>' : '') . (!empty($department->feed->email) ? '<i class="fa fa-envelope"></i> ' . $department->feed->email : ''),
+
+
+                        'FLOOR DETAILS' => '<strong>Floor/ Ward: </strong>' . ($department->feed->ward) . '<br>' .
+                            '<strong>Site:</strong> ' . ($department->feed->bedno ? $department->feed->bedno : 'NA'),
+
+                        'ASSIGNEE' => !empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])
+                            ? implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug])
+                            : 'NA',
+                        'CREATED ON' => date('g:i a, d-m-y', strtotime($department->created_on)),
+                        'RESOLVED ON' => date('g:i a, d-m-y', strtotime($department->last_modified)),
+                        // 'ADDRESSAL COMMENT' => $rep,
+                        'RCA/CAPA' => 'RCA: ' . (!empty($root) ? implode(", ", $root) : '') . '<br><br>' .
+                            'CAPA: ' . (!empty($corrective) ? implode(", ", $corrective) : '') . '<br><br>' .
+                            'Resolution Comment: ' . (!empty($resolution_note) ? implode(", ", $resolution_note) : 'NA'),
+                        'DESCRIPTION' => 'RCA FOR DESCRIPTION: ' . (!empty($rootcause_describtion) ? implode(", ", $rootcause_describtion) : '') . '<br><br>' .
+                            'CAPA FOR DESCRIPTION: ' . (!empty($corrective_description) ? implode(", ", $corrective_description) : '') . '<br><br>' .
+                            'DESCRIPTION: ' . (!empty($corrective_description) ? implode(", ", $resolution_note) : 'NA'),
+
+                        'TURN AROUND TIME' => $timetaken,
+                        'DATA' => $department->replymessage
+                    );
+
+                    $sl++;
+                }
+            }
+
+            $this->load->library('Pdf');
+            // Load PDF Library and initialize
+            $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Efeedor');
+            $pdf->SetTitle('INCIDENTS REPORT - ' . $tdate . ' to ' . $fdate);
+            $pdf->SetSubject('INCIDENTS REPORT - ' . $tdate . ' to ' . $fdate);
+
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            $pdf->SetPrintHeader(false);
+            $pdf->SetPrintFooter(false);
+
+            $pdf->SetFont('dejavusans', '', 10);
+            $pdf->AddPage();
+
+            $html = '';
+            $html .= '<span style="text-align:center;"><img src="' . $logo . '" style="height:30px; width:100px;margin-bottom:-3px;"></span>';
+            $html .= '<h2 style="text-align:center;">' . $title . '</h2>';
+            $html .= '<h2 style="text-align:center;">INCIDENT MANAGEMENT REPORT </h2>';
+            $html .= '<p><span style="text-align:left;">SHOWING DATA FROM ' . $tdate . ' TO ' . $fdate . '</span></p>';
+
+            // Loop through the dataexport array
+            foreach ($dataexport as $data) {
+                // Add space between tables
+                if ($data !== reset($dataexport)) {
+                    $html .= '<p style="margin: 30px 0;"></p>'; // Adding space between tables
+                }
+                // Open table for each ticket
+                $html .= '<table border="1" cellpadding="5" style="margin-bottom: 30px; width: 100%; border:1px solid #dadada; border-collapse: collapse; font-family: Arial, sans-serif;">';
+
+                // Ticket ID as a header for each ticket
+                $html .= '<tr style="background: #dadada;">
+    <td colspan="1" style="font-weight: bold; text-align: left; color: red; border: 1px solid #dadada;">
+        ' . $data['TICKET ID'] . '
+    </td>
+</tr>';
+
+                // Request Details
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Details</td>
+    <td style="border: 1px solid #dadada;">' . $data['TICKET DETAILS'] . '</td>
+</tr>';
+
+                // Priority
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Priority</td>
+    <td style="border: 1px solid #dadada;">' . $data['PRIORITY'] . '</td>
+</tr>';
+                // Priority
+                $html .= '<tr>
+             <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Type</td>
+             <td style="border: 1px solid #dadada;">' . $data['INCIDENT TYPE'] . '</td>
+         </tr>';
+
+                // Floor and Site Details
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Reported In</td>
+    <td style="border: 1px solid #dadada;">' . $data['FLOOR DETAILS'] . '</td>
+</tr>';
+
+                // Emp Details
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Reported By</td>
+    <td style="border: 1px solid #dadada;">' . $data['PATIENT DETAILS'] . '</td>
+</tr>';
+
+
+
+                // Created On
+                $html .= '<tr>
+    <td style="font-weight: bold; border: 1px solid #dadada;">Reported On</td>
+    <td style="border: 1px solid #dadada;">' . $data['CREATED ON'] . '</td>
+</tr>';
+
+                // Resolved On
+                $html .= '<tr>
+    <td style="font-weight: bold; border: 1px solid #dadada;">Closed On</td>
+    <td style="border: 1px solid #dadada;">' . $data['RESOLVED ON'] . '</td>
+</tr>';
+
+                // Turn Around Time
+                $html .= '<tr>
+    <td style="font-weight: bold; border: 1px solid #dadada;">Turn Around Time</td>
+    <td style="border: 1px solid #dadada;">' . $data['TURN AROUND TIME'] . '</td>
+</tr>';
+
+                // Incident History
+                $html .= '<tr>
+    <td style="font-weight: bold; border: 1px solid #dadada;">Incident Timeline & History</td>
+    <td style="border: 1px solid #dadada;">';
+
+                // Sort Incident History by created_on
+                usort($data['DATA'], function ($a, $b) {
+                    return strtotime($a->created_on) - strtotime($b->created_on);
+                });
+
+                foreach ($data['DATA'] as $r) {
+                    $html .= '<div style="margin-bottom:15px; border-bottom:1px dashed #ccc; padding-bottom:10px;">';
+                    $html .= '<strong>Date & Time :</strong> ' . date('d M, Y - g:i A', strtotime($r->created_on)) . '<br>';
+
+                    $html .= '<strong>Action :</strong> ' . $r->action . '<br>';
+                    if ($r->ticket_status == 'Assigned') {
+                        $html .= '<strong>Assigned by :</strong> ' . $r->message . '<br>';
+                    }
+                    if ($r->ticket_status == 'Re-assigned') {
+                        $html .= '<strong>Re-assigned by :</strong> ' . $r->message . '<br>';
+                    }
+                    if ($r->ticket_status == 'Described') {
+                        $html .= '<strong>RCA :</strong> ' . $r->rootcause_describtion . '<br>';
+                        $html .= '<strong>CAPA :</strong> ' . $r->corrective_description . '<br>';
+                        $html .= '<strong>Additional note :</strong> ' . $r->reply . '<br>';
+                    } elseif ($r->reply) {
+                        $html .= '<strong>Comment :</strong> ' . $r->reply . '<br>';
+                    }
+
+                    if ($r->ticket_status == 'Closed') {
+                        if ($r->rootcause)
+                            $html .= '<strong>Closure RCA :</strong> ' . $r->rootcause . '<br>';
+                        if ($r->corrective)
+                            $html .= '<strong>Closure CAPA :</strong> ' . $r->corrective . '<br>';
+                        if ($r->preventive)
+                            $html .= '<strong>Closure Remarks :</strong> ' . $r->preventive . '<br>';
+                        if ($r->resolution_note)
+                            $html .= '<strong>Additional note :</strong> ' . $r->resolution_note . '<br>';
+                    }
+
+                    $html .= '</div>';
+                }
+
+                $html .= '</td></tr>'; // End incident history row
+
+                // Close table
+                $html .= '</table>';
+            }
+        }
+
+
+
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        $fileName = 'EF- INCIDENT REPORT - ' . $tdate . ' to ' . $fdate . '.pdf';
+        $pdf->Output($fileName, 'D');
+    }
+
+    // END SUPER ADMIN AND ADMIN LOGIN
+
+
+    // DEPARTMENT HEAD LOGIN
+    public function department_tickets()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true) {
+
+
+            $data['title'] = 'INC- INCIDENTS DASHBOARD';
+            #------------------------------#
+            $data['content'] = $this->load->view('incidentmodules/department_tickets', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+            //used for department head login
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    // END DEPARTMENT HEAD LOGIN
+
+    //START TICKETS 
+    public function alltickets()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- ALL INCIDENTS';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->alltickets();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/alltickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/alltickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    //addressed ticket
+    public function addressedtickets()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- ADDRESSED INCIDENTS';
+            $data['departments'] = $this->ticketsincidents_model->addressedtickets();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/addressedtickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/addressedtickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('tickets/alltickets');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    // ticket tracking
+    public function track()
+    {
+        if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+            $this->session->set_userdata('referred_from', current_url());
+        } else {
+            $this->session->set_userdata('referred_from', NULL);
+        }
+
+        $data['title'] = 'INC- INCIDENTS DETAILS';
+        $data['departments'] = $this->ticketsincidents_model->read_by_id($this->uri->segment(3));
+        if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('incidentmodules/ticket_track', $data, true);
+        } else {
+            $data['content'] = $this->load->view('incidentmodules/dephead/ticket_track', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+
+    // open tickets
+    public function opentickets()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $data['title'] = 'INC- OPEN INCIDENTS';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->read();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/opentickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/opentickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+            // redirect('tickets/');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    // closed tickets
+
+    public function closedtickets()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+
+            $data['title'] = 'INC- CLOSED INCIDENTS';
+            $data['departments'] = $this->ticketsincidents_model->read_close();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/closedtickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/closedtickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('tickets/ticket_close');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    //END TICKETS 
+    public function rejecttickets()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- REJECTED INCIDENTS';
+            $data['departments'] = $this->ticketsincidents_model->rejecttickets();
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/rejecttickets', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/rejecttickets', $data, true);
+            }
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('tickets/alltickets');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    //  REPORTS
+
+    public function capa_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- INCIDENTS CLOSURE REPORT';
+            $data['departments'] = $this->ticketsincidents_model->read_close();
+            $data['content'] = $this->load->view('incidentmodules/capa_report', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+    public function complaints()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $data['title'] = 'INC- INCIDENTS EMPLOYEE' . "'" . 'S COMMENTS';
+            $data['content'] = $this->load->view('incidentmodules/recent_comments', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/int_recent_comments');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function employee_complaint()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- INCIDENTS ';
+            #------------------------------#
+            if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('incidentmodules/employee_complaint', $data, true);
+            } else {
+                $data['content'] = $this->load->view('incidentmodules/dephead/employee_complaint', $data, true);
+            }
+
+
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/int_patient_feedback');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function notifications()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- INCIDENT NOTIFICATIONS';
+            $data['content'] = $this->load->view('incidentmodules/recent_comments', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    //END REPORTS
+
+
+
+    public function downloadcomments()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $table_feedback = 'bf_feedback_incident';
+            $table_patients = 'bf_employees_incident';
+            $desc = 'desc';
+            $setup = 'setup_incident';
+
+            $feedbacktaken = $this->incident_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->incident_model->setup_result($setup);
+            $setarray = array();
+            $question = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+                $setarray[$r->shortkey] = $r->shortname;
+            }
+            foreach ($sresult as $r) {
+                $question[$r->shortkey] = $r->shortname;
+                $question[$r->type] = $r->title;
+            }
+
+
+
+            $header[0] = 'Date';
+            $header[1] = 'Employee Name';
+            $header[2] = 'Employee ID';
+            $header[3] = 'Floor/Ward';
+            $header[4] = 'Location';
+            $header[5] = 'Mobile Number';
+            $header[6] = 'Category';
+            $header[7] = 'Incident';
+            $header[8] = 'Description';
+            // $j = 9;
+            // foreach ($setarray as $r) {
+            //     $header[$j] = $r;
+
+            //     $j++;
+            // }
+            $dataexport = array();
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+                $dataexport[$i]['date'] = date('d-m-Y', strtotime($row->datetime));
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['patient_id'] = $data['patientid'];
+                $dataexport[$i]['ward'] = $data['ward'];
+                $dataexport[$i]['bedno'] = $data['bedno'];
+                $dataexport[$i]['mobile'] = $data['contactnumber'];
+                foreach ($data['comment'] as $key => $value) {
+                    $dataexport[$i]['Department'] = $setarray[$key];
+                }
+                foreach ($data['reason'] as $key => $value) {
+                    if ($value) {
+                        $dataexport[$i]['ticket'] = $question[$key];
+                    }
+                }
+                foreach ($data['comment'] as $key => $value) {
+                    if ($value) {
+                        $dataexport[$i]['comment'] = $value;
+                    }
+                }
+                $i++;
+            }
+            $newdataset = $dataexport;
+            // echo '<pre>';
+            // print_r($dataexport);
+            // exit;
+            ob_end_clean();
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+
+            $fileName = 'EF- INCIDENT REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function dep_tat()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'TAT SET';
+            $data['content'] = $this->load->view('incidentmodules/dep_tat', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+    public function dep_tat_edit()
+    {
+        if (ismodule_active('INCIDENT') === true) {
+
+            if ($_POST) {
+                $close_time = $this->input->post('tat');
+                $close_time_l1 = $close_time['close_time_l1'];
+                $close_time_l2 = $close_time['close_time_l2'];
+                $dept_level_escalation = $close_time['dept_level_escalation'];
+
+                foreach ($close_time_l1 as $key => $row) {
+                    $data = array('close_time' => $close_time_l1[$key], 'close_time_l2' => $close_time_l2[$key], 'dept_level_escalation' => $dept_level_escalation[$key]);
+                    $this->db->where('dprt_id', $key);
+                    $this->db->update('department', $data);
+                }
+            }
+
+
+
+            $data['title'] = 'INC-Manage Turn Around Time';
+
+            #------------------------------#
+
+            $data['content'] = $this->load->view('incidentmodules/dep_tat_edit', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        }
+    }
+
+    public function overall_department_excel()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $dataexport = array();
+            $i = 0;
+            $table_feedback = 'bf_feedback_incident';
+            $table_patients = 'bf_employees_incident';
+            $sorttime = 'asc';
+            $setup = 'setup_incident';
+            $asc = 'asc';
+            $desc = 'desc';
+            $table_tickets = 'tickets_incident';
+            $open = 'Open';
+            $closed = 'Closed';
+            $addressed = 'Addressed';
+            $type = 'incident';
+
+            $int_feedbacks_count = $this->incident_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
+
+            $int_tickets_count = $this->ticketsincidents_model->alltickets();
+            $int_open_tickets = $this->ticketsincidents_model->read();
+            $int_closed_tickets = $this->ticketsincidents_model->read_close();
+            $int_addressed_tickets = $this->ticketsincidents_model->addressedtickets();
+
+
+            $ticket_resolution_rate = $this->incident_model->ticket_resolution_rate($table_tickets, $closed, $table_feedback);
+
+            $header = 'INC INCIDENT REPORT';
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+
+            $dataexport[$i]['row1'] = 'INCIDENT REPORT';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            $dataexport[$i]['row1'] = 'FROM DATE';
+            $dataexport[$i]['row2'] = $tdate;
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+            $dataexport[$i]['row1'] = 'TO DATE';
+            $dataexport[$i]['row2'] = $fdate;
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            $dataexport[$i]['row1'] = '';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            $dataexport[$i]['row1'] = 'TOTAL INCIDENTS';
+            $dataexport[$i]['row2'] = count($int_tickets_count);
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = 'OPEN INCIDENTS';
+            $dataexport[$i]['row2'] = count($int_open_tickets);
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+            $dataexport[$i]['row1'] = 'ADDRESSED INCIDENTS';
+            $dataexport[$i]['row2'] = count($int_addressed_tickets);
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+            $dataexport[$i]['row1'] = 'CLOSED INCIDENTS';
+            $dataexport[$i]['row2'] = count($int_closed_tickets);
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            $dataexport[$i]['row1'] = 'INCIDENT RESOLUTION RATE';
+            $dataexport[$i]['row2'] = $ticket_resolution_rate . '%';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+
+            $dataexport[$i]['row1'] = '';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            $dataexport[$i]['row1'] = 'INCIDENT RECEIVED BY CATEGORY';
+            $dataexport[$i]['row2'] = 'PERCENTAGE';
+            $dataexport[$i]['row3'] = 'COUNT';
+            $dataexport[$i]['row4'] = 'OPEN';
+            $dataexport[$i]['row5'] = 'ADDRESSED';
+            $dataexport[$i]['row6'] = 'CLOSED';
+            $dataexport[$i]['row7'] = 'RESOLUTION RATE';
+            $dataexport[$i]['row8'] = '';
+            $i++;
+
+            $ticket = $this->incident_model->tickets_recived_by_department_interim($type, $table_feedback, $table_tickets);
+
+            foreach ($ticket as $ps) {
+                $dataexport[$i]['row1'] = $ps['department'];
+                $dataexport[$i]['row2'] = $ps['percentage'] . '%';
+                $dataexport[$i]['row3'] = $ps['total_count'];
+                $dataexport[$i]['row4'] = $ps['open_tickets'];
+                $dataexport[$i]['row5'] = $ps['addressed_tickets'];
+                $dataexport[$i]['row6'] = $ps['closed_tickets'];
+                $dataexport[$i]['row7'] = $ps['tr_rate'] . '%';
+                $dataexport[$i]['row8'] = '';
+                $i++;
+            }
+            $dataexport[$i]['row1'] = '';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+            $dataexport[$i]['row1'] = '';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+            $dataexport[$i]['row1'] = '';
+            $dataexport[$i]['row2'] = '';
+            $dataexport[$i]['row3'] = '';
+            $dataexport[$i]['row4'] = '';
+            $i++;
+
+
+            ob_end_clean();
+            $fileName = 'EF- INCIDENT CATEGORY WISE REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+
+                foreach ($dataexport as $values) {
+
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_pdf_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            redirect('pdfreport/incident_pdf_report?fdate=' . $tdate . '&tdate=' . $fdate);
+            // redirect('report/ip_capa_report');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function download_capa_report()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+
+            redirect('login');
+
+        if (ismodule_active('INCIDENT') === true) {
+
+
+
+            $fdate = $_SESSION['from_date'];
+
+            $tdate = $_SESSION['to_date'];
+
+            $this->db->select("*");
+
+            $this->db->from('setup_incident');
+
+            //$this->db->where('parent', 0);
+
+            $query = $this->db->get();
+
+            $reasons = $query->result();
+
+            foreach ($reasons as $row) {
+
+                $keys[$row->shortkey] = $row->shortkey;
+
+                $res[$row->shortkey] = $row->shortname;
+
+                $titles[$row->shortkey] = $row->title;
+            }
+
+
+
+            $dataexport = array();
+
+            $i = 0;
+
+            $departments = $this->ticketsincidents_model->read_close();
+
+
+
+            $dataexport[$i]['row1'] = 'SL No.';
+
+            $dataexport[$i]['row2'] = 'INCIDENT ID';
+
+            $dataexport[$i]['row3'] = 'REPORTED ON';
+
+            $dataexport[$i]['row4'] = 'REPORTED BY';
+
+            $dataexport[$i]['row5'] = 'REPORTED IN';
+
+            $dataexport[$i]['row6'] = 'INCIDENT';
+
+            $dataexport[$i]['row7'] = 'INCIDENT CATEGORY';
+
+            $dataexport[$i]['row8'] = 'INCIDENT DESCRIPTION';
+
+            $dataexport[$i]['row9'] = 'INCIDENT PRIORITY';
+
+            $dataexport[$i]['row10'] = 'INCIDENT TYPE';
+
+            // $dataexport[$i]['row7'] = 'DEPARTMENT TAT';
+
+            $dataexport[$i]['row11'] = 'INCIDENT TIMELINE & HISTORY';
+
+
+
+            $dataexport[$i]['row12'] = 'CLOSED ON';
+
+            $dataexport[$i]['row13'] = 'TURN AROUND TIME';
+
+            // $dataexport[$i]['row13'] = 'TAT STATUS';
+
+            $i++;
+
+
+
+            if (!empty($departments)) {
+
+                $sl = 1;
+
+                foreach ($departments as $department) {
+
+                    if ($department->status == 'Closed') {
+
+                        $this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
+
+                        $query = $this->db->get('ticket_incident_message');
+
+                        $ticket = $query->result();
+
+                        $rowmessage = $ticket[0]->message . ' Closed this ticket';
+
+                        $createdOn1 = strtotime($department->created_on);
+
+                        $lastModified1 = strtotime($department->last_modified);
+
+                        $closeddiff = $lastModified1 - $createdOn1;
+
+                        if ($department->department->close_time <= $closeddiff) {
+
+                            $close = 'Exceeded TAT';
+                        } else {
+
+                            $close = 'Within TAT';
+                        }
+
+                        if (strlen($rowmessage) > 60) {
+
+                            $rowmessage = substr($rowmessage, 0, 60) . '  ' . ' ... click status to view';
+                        }
+
+                        foreach ($department->feed->reason as $key => $value) {
+
+                            if ($titles[$key] == $department->department->description) {
+
+                                if (in_array($key, $keys)) {
+
+                                    $issue = $res[$key];
+                                }
+                            }
+                        }
+
+                        foreach ($department->replymessage as $r) {
+
+                            if ($r->rootcause != NULL) {
+
+                                $root = $r->rootcause;
+                            }
+                        }
+
+                        foreach ($department->replymessage as $r) {
+
+                            if ($r->corrective != NULL) {
+
+                                $corrective = $r->corrective;
+                            }
+                        }
+
+
+
+                        $value2 = $this->incident_model->convertSecondsToTime($department->department->close_time);
+
+                        $dep_tat = '';
+
+                        if ($value2['days'] != 0) {
+
+                            $dep_tat .= $value2['days'] . ' days, ';
+                        }
+
+                        if ($value2['hours'] != 0) {
+
+                            $dep_tat .= $value2['hours'] . ' hrs, ';
+                        }
+
+                        if ($value2['minutes'] != 0) {
+
+                            $dep_tat .= $value2['minutes'] . ' mins.';
+                        }
+
+
+
+                        $createdOn = strtotime($department->created_on);
+
+                        $lastModified = strtotime($department->last_modified);
+
+                        $timeDifferenceInSeconds = $lastModified - $createdOn;
+
+                        $value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+                        $timetaken = '';
+
+                        if ($value['days'] != 0) {
+
+                            $timetaken .= $value['days'] . ' days, ';
+                        }
+
+                        if ($value['hours'] != 0) {
+
+                            $timetaken .= $value['hours'] . ' hrs, ';
+                        }
+
+                        if ($value['minutes'] != 0) {
+
+                            $timetaken .= $value['minutes'] . ' mins.';
+                        }
+
+                        if ($timeDifferenceInSeconds <= 60) {
+
+                            $timetaken .= 'less than a minute';
+                        }
+
+
+
+                        $dataexport[$i]['row1'] = $sl;
+
+                        $dataexport[$i]['row2'] = 'INC- ' . $department->id;
+
+                        $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+
+                        $dataexport[$i]['row4'] = $department->feed->name . '(' . $department->feed->patientid . ')';
+                        $dataexport[$i]['row5'] = $department->feed->ward . '(' . $department->feed->bedno . ')';
+
+                        $dataexport[$i]['row6'] = $issue;
+
+                        $dataexport[$i]['row7'] = $department->department->description;
+                        $dataexport[$i]['row8'] = $department->feed->other;
+
+                        $dataexport[$i]['row9'] = $department->priority;
+
+                        $dataexport[$i]['row10'] = $department->incident_type;
+                        // $dataexport[$i]['row7'] = $dep_tat;
+
+                        // Sort the reply messages by created_on
+                        usort($department->replymessage, function ($a, $b) {
+                            return strtotime($a->created_on) - strtotime($b->created_on);
+                        });
+
+                        $reply_details = "";
+
+                        foreach ($department->replymessage as $r) {
+                            $reply_details .= "Date & Time : " . date('d M, Y - g:i A', strtotime($r->created_on)) . "\n";
+                            $reply_details .= "Action : " . strip_tags($r->action) . "\n";
+
+                            if ($r->ticket_status == 'Assigned') {
+                                $reply_details .= "Assigned by : " . strip_tags($r->message) . "\n";
+                            }
+
+                            if ($r->ticket_status == 'Re-assigned') {
+                                $reply_details .= "Re-assigned by : " . strip_tags($r->message) . "\n";
+                            }
+
+                            if ($r->ticket_status == 'Described') {
+                                $reply_details .= "RCA : " . strip_tags($r->rootcause_describtion) . "\n";
+                                $reply_details .= "CAPA : " . strip_tags($r->corrective_description) . "\n";
+                                $reply_details .= "Additional note : " . strip_tags($r->reply) . "\n";
+                            } elseif (!empty($r->reply)) {
+                                $reply_details .= "Comment : " . strip_tags($r->reply) . "\n";
+                            }
+
+                            if ($r->ticket_status == 'Closed') {
+                                if (!empty($r->rootcause))
+                                    $reply_details .= "Closure RCA : " . strip_tags($r->rootcause) . "\n";
+                                if (!empty($r->corrective))
+                                    $reply_details .= "Closure CAPA : " . strip_tags($r->corrective) . "\n";
+                                if (!empty($r->preventive))
+                                    $reply_details .= "Closure Remarks : " . strip_tags($r->preventive) . "\n";
+                                if (!empty($r->resolution_note))
+                                    $reply_details .= "Additional note : " . strip_tags($r->resolution_note) . "\n";
+                            }
+
+                            $reply_details .= "---------------------------------------\n";
+                        }
+
+                        $dataexport[$i]['row11'] = $reply_details;
+
+
+
+
+                        $dataexport[$i]['row12'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+
+                        $dataexport[$i]['row13'] = $timetaken;
+
+                        // $dataexport[$i]['row13'] = $close;
+
+                        $i++;
+
+                        $sl++;
+                    }
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'INCIDENT CLOSURE REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+               
+
+                foreach ($dataexport as $values) {
+
+                    if (empty($values) || !is_array($values)) {
+                        continue; // skip invalid rows
+                    }
+                   
+
+                    fputcsv($fp, (array)$values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function download_alltickets()
+    {
+
+        if (ismodule_active('INCIDENT') === true) {
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            $this->db->select("*");
+            $this->db->from('setup_incident');
+            $query = $this->db->get();
+            $reasons = $query->result();
+            foreach ($reasons as $row) {
+                $keys[$row->shortkey] = $row->shortkey;
+                $res[$row->shortkey] = $row->shortname;
+                $titles[$row->shortkey] = $row->title;
+            }
+            $dataexport = array();
+            $i = 0;
+            $departments = $this->ticketsincidents_model->alltickets();
+            $dataexport[$i]['row1'] = 'SL No.';
+            $dataexport[$i]['row2'] = 'INCIDENT ID';
+            $dataexport[$i]['row3'] = 'REPORTED ON';
+            $dataexport[$i]['row4'] = 'REPORTED BY';
+            $dataexport[$i]['row5'] = 'EMPLOYEE ID';
+            $dataexport[$i]['row6'] = 'PHONE NUMBER';
+            $dataexport[$i]['row7'] = 'FLOOR/WARD';
+            $dataexport[$i]['row8'] = 'SITE';
+            $dataexport[$i]['row9'] = 'INCIDENT TYPE';
+            $dataexport[$i]['row10'] = 'SEVERITY';
+            $dataexport[$i]['row11'] = 'INCIDENT';
+            $dataexport[$i]['row12'] = 'CATEGORY';
+            $dataexport[$i]['row13'] = 'ASSIGNEE';
+            $dataexport[$i]['row14'] = 'STATUS';
+            $dataexport[$i]['row15'] = 'TRANSFERRED TO';
+            $dataexport[$i]['row16'] = 'LAST MODIFIED';
+            $dataexport[$i]['row17'] = 'TAGGED PATIENT TYPE';
+            $dataexport[$i]['row18'] = 'TAGGED PATIENT NAME';
+            $dataexport[$i]['row19'] = 'TAGGED PATIENT ID';
+            $dataexport[$i]['row20'] = 'PRIMARY CONSULTANT';
+            $i++;
+            if (!empty($departments)) {
+                $sl = 1;
+                foreach ($departments as $department) {
+
+                    foreach ($department->feed->reason as $key => $value) {
+                        if ($titles[$key] == $department->department->description) {
+                            if (in_array($key, $keys)) {
+                                $issue = $res[$key];
+                            }
+                        }
+
+
+                        if ($department->departmentid_trasfered !== NULL && $department->departmentid_trasfered !== '') {
+                            $this->db->select("*");
+                            $this->db->from('department');
+                            $this->db->where('dprt_id', $department->departmentid_trasfered);
+                            $query = $this->db->get();
+                            $moved_to_arr = $query->result();
+                        }
+                        $transfer_dep_desc = $moved_to_arr[0]->description;
+                        if (!empty($department)) {
+                            $dataexport[$i]['row1'] = $sl;
+                            $dataexport[$i]['row2'] = 'INC- ' . $department->id;
+                            $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+                            $dataexport[$i]['row4'] = $department->feed->name;
+                            $dataexport[$i]['row5'] = $department->feed->patientid;
+                            $dataexport[$i]['row6'] = $department->feed->contactnumber;
+                            $dataexport[$i]['row7'] = $department->feed->ward;
+                            $dataexport[$i]['row8'] = $department->feed->bedno;
+                            $dataexport[$i]['row9'] = $department->feed->incident_type;
+                            $dataexport[$i]['row10'] = $department->feed->priority;
+                            $dataexport[$i]['row11'] = $issue;
+                            $dataexport[$i]['row12'] = $department->department->description;
+                            if ($department->department->pname != '' && $department->department->pname != NULL) {
+                                $dataexport[$i]['row13'] = $department->department->pname;
+                            } else {
+                                $dataexport[$i]['row13'] = 'NA';
+                            }
+                            $dataexport[$i]['row14'] = $department->status;
+                            if ($transfer_dep_desc) {
+
+                                $dataexport[$i]['row15'] = $transfer_dep_desc;
+                            } else {
+                                $dataexport[$i]['row15'] = 'NA';
+                            }
+                            $dataexport[$i]['row16'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+
+                            if ($department->feed->tag_patient_type != '' && $department->feed->tag_patient_type != NULL) {
+                                $dataexport[$i]['row17'] = $department->feed->tag_patient_type;
+                            } else {
+                                $dataexport[$i]['row17'] = 'NA';
+                            }
+                            if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
+                                $dataexport[$i]['row18'] = $department->feed->tag_name;
+                            } else {
+                                $dataexport[$i]['row18'] = 'NA';
+                            }
+                            if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
+                                $dataexport[$i]['row19'] = $department->feed->tag_patientid;
+                            } else {
+                                $dataexport[$i]['row19'] = 'NA';
+                            }
+                            if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
+                                $dataexport[$i]['row20'] = $department->feed->tag_consultant;
+                            } else {
+                                $dataexport[$i]['row20'] = 'NA';
+                            }
+                        }
+                    }
+                    $i++;
+                    $sl++;
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- INC ALL INCIDENTS REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+
+
+                foreach ($dataexport as $values) {
+
+
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function download_opentickets()
+    {
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $departments = $this->ticketsincidents_model->alltickets();
+            if (!empty($departments)) {
+
+                $fdate = $_SESSION['from_date'];
+                $tdate = $_SESSION['to_date'];
+                $this->db->select("*");
+                $this->db->from('setup_incident');
+                $query = $this->db->get();
+                $reasons = $query->result();
+                foreach ($reasons as $row) {
+                    $keys[$row->shortkey] = $row->shortkey;
+                    $res[$row->shortkey] = $row->shortname;
+                    $titles[$row->shortkey] = $row->title;
+                }
+                $dataexport = array();
+                $i = 0;
+
+                $dataexport[$i]['row1'] = 'SL No.';
+                $dataexport[$i]['row2'] = 'INCIDENT ID';
+                $dataexport[$i]['row3'] = 'REPORTED ON';
+                $dataexport[$i]['row4'] = 'REPORTED BY';
+                $dataexport[$i]['row5'] = 'EMPLOYEE ID';
+                $dataexport[$i]['row6'] = 'PHONE NUMBER';
+                $dataexport[$i]['row7'] = 'FLOOR/WARD';
+                $dataexport[$i]['row8'] = 'SITE';
+                $dataexport[$i]['row9'] = 'INCIDENT TYPE';
+                $dataexport[$i]['row10'] = 'SEVERITY';
+                $dataexport[$i]['row11'] = 'INCIDENT';
+                $dataexport[$i]['row12'] = 'CATEGORY';
+                $dataexport[$i]['row13'] = 'ASSIGNEE';
+                $dataexport[$i]['row14'] = 'STATUS';
+                $dataexport[$i]['row15'] = 'TRANSFERRED TO';
+                $dataexport[$i]['row16'] = 'LAST MODIFIED';
+                $dataexport[$i]['row17'] = 'TAGGED PATIENT TYPE';
+                $dataexport[$i]['row18'] = 'TAGGED PATIENT NAME';
+                $dataexport[$i]['row19'] = 'TAGGED PATIENT ID';
+                $dataexport[$i]['row20'] = 'PRIMARY CONSULTANT';
+                $i++;
+            }
+            if (!empty($departments)) {
+                $sl = 1;
+                foreach ($departments as $department) {
+                    if ($department->status != 'Closed') {
+                        foreach ($department->feed->reason as $key => $value) {
+                            if ($titles[$key] == $department->department->description) {
+                                if (in_array($key, $keys)) {
+                                    $issue = $res[$key];
+                                }
+                            }
+
+
+                            if ($department->departmentid_trasfered !== NULL && $department->departmentid_trasfered !== '') {
+                                $this->db->select("*");
+                                $this->db->from('department');
+                                $this->db->where('dprt_id', $department->departmentid_trasfered);
+                                $query = $this->db->get();
+                                $moved_to_arr = $query->result();
+                            }
+                            $transfer_dep_desc = $moved_to_arr[0]->description;
+                            if (!empty($department)) {
+                                $dataexport[$i]['row1'] = $sl;
+                                $dataexport[$i]['row2'] = 'INC- ' . $department->id;
+                                $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
+                                $dataexport[$i]['row4'] = $department->feed->name;
+                                $dataexport[$i]['row5'] = $department->feed->patientid;
+                                $dataexport[$i]['row6'] = $department->feed->contactnumber;
+                                $dataexport[$i]['row7'] = $department->feed->ward;
+                                $dataexport[$i]['row8'] = $department->feed->bedno;
+                                $dataexport[$i]['row9'] = $department->feed->incident_type;
+                                $dataexport[$i]['row10'] = $department->feed->priority;
+                                $dataexport[$i]['row11'] = $issue;
+                                $dataexport[$i]['row12'] = $department->department->description;
+                                if ($department->department->pname != '' && $department->department->pname != NULL) {
+                                    $dataexport[$i]['row13'] = $department->department->pname;
+                                } else {
+                                    $dataexport[$i]['row13'] = 'NA';
+                                }
+                                $dataexport[$i]['row14'] = $department->status;
+                                if ($transfer_dep_desc) {
+
+                                    $dataexport[$i]['row15'] = $transfer_dep_desc;
+                                } else {
+                                    $dataexport[$i]['row15'] = 'NA';
+                                }
+                                $dataexport[$i]['row16'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+
+                                if ($department->feed->tag_patient_type != '' && $department->feed->tag_patient_type != NULL) {
+                                    $dataexport[$i]['row17'] = $department->feed->tag_patient_type;
+                                } else {
+                                    $dataexport[$i]['row17'] = 'NA';
+                                }
+                                if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
+                                    $dataexport[$i]['row18'] = $department->feed->tag_name;
+                                } else {
+                                    $dataexport[$i]['row18'] = 'NA';
+                                }
+                                if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
+                                    $dataexport[$i]['row19'] = $department->feed->tag_patientid;
+                                } else {
+                                    $dataexport[$i]['row19'] = 'NA';
+                                }
+                                if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
+                                    $dataexport[$i]['row20'] = $department->feed->tag_consultant;
+                                } else {
+                                    $dataexport[$i]['row20'] = 'NA';
+                                }
+                            }
+                        }
+                        $i++;
+                        $sl++;
+                    }
+                }
+            }
+
+
+
+            ob_end_clean();
+
+            $fileName = 'EF- INC OPEN INCIDENTS REPORT - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            header('Pragma: public');
+
+            header('Expires: 0');
+
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+
+            header('Cache-Control: private', false);
+
+            header('Content-Type: text/csv');
+
+            header('Content-Disposition: attachment;filename=' . $fileName);
+
+            if (isset($dataexport[0])) {
+
+                $fp = fopen('php://output', 'w');
+
+
+
+                foreach ($dataexport as $values) {
+
+
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
+
+            ob_flush();
+
+            exit;
+        } else {
+
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+    public function ticket_resolution_rate()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+
+            $data['title'] = 'INC- INCIDENT RESOLUTION RATE';
+            #------------------------------#
+            $data['content'] = $this->load->view('incidentmodules/ticket_analisys_page', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+    public function average_resolution_time()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $data['title'] = 'INC- AVERAGE RESOLUTION TIME';
+            #------------------------------#
+            $data['content'] = $this->load->view('incidentmodules/ticket_analisys_page', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+}

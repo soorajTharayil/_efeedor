@@ -1,0 +1,35 @@
+"SL No.","INCIDENT ID","REPORTED ON","REPORTED BY","REPORTED IN",INCIDENT,"INCIDENT CATEGORY","INCIDENT DESCRIPTION","INCIDENT PRIORITY","INCIDENT TYPE","INCIDENT TIMELINE & HISTORY","CLOSED ON","TURN AROUND TIME"
+1,"INC- 8","12:55 pm, 05-06-25",DEVELOPER(12345),Others(Others),"Dispensing incorrect quantity","Medication Errors",,Medium,No-harm,"Date & Time : 05 Jun, 2025 - 1:13 PM
+Action : Incident Closed by Hemanth 
+Closure RCA :  Resolution Comment to Close the Incident
+Closure CAPA :  Resolution Comment to Close the Incident
+Preventive :  Resolution Comment to Close the Incident
+---------------------------------------
+","5:09 pm, 06-06-25","1 days, 4 hrs, 14 mins."
+2,"INC- 5","6:41 pm, 04-06-25",ANONYMOUS(anys3475),"TERRACE (New Block Terrace)","Dispensing incorrect quantity","Medication Errors","Dispensing incorrect quantity",High,No-harm,"Date & Time : 05 Jun, 2025 - 10:11 AM
+Action : RCA/ CAPA Verified  and Closed by Hemanth 
+Additional note : https://docs.google.com/spreadsheets/d/1mcWilnD9TEeqQkWOFMda2ixMAuA09bX09tO2WxbFpiI/edit?usp=sharing
+---------------------------------------
+","3:50 pm, 05-06-25","21 hrs, 8 mins."
+3,"INC- 1","5:21 pm, 20-05-25","ROHAN NAIR(41474)","SECOND FLOOR(St Antonys Ward)","Equipment malfunction",Equipments,"portable oxygen machine was left in the ICU corridor for over a night not in the designated area it's in near the L6 & L5 lift During this time, there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine, risk of equipment obstruction in high-traffic areas where the patient movements and transfers are high",High,Adverse,"Date & Time : 23 May, 2025 - 5:04 PM
+Action : Incident Assigned to Soumya Mohan,Rohan Nair
+Assigned by : Mr. Clevita D'Souza
+Comment : Describe the incident with RCA and CAPA
+---------------------------------------
+Date & Time : 05 Jun, 2025 - 12:11 PM
+Action : Incident Explained by Soumya Mohan
+RCA : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+CAPA : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+Additional note : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+---------------------------------------
+Date & Time : 05 Jun, 2025 - 12:12 PM
+Action : Incident Explained by Rohan Nair
+RCA : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+CAPA : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+Additional note : Testing there is a chance when nurses pushing a patient’s cot may accidentally brushed against the machine
+---------------------------------------
+Date & Time : 05 Jun, 2025 - 12:20 PM
+Action : RCA/ CAPA Verified  and Closed by Hemanth 
+Additional note : Testing to close the incident
+---------------------------------------
+","5:10 pm, 06-06-25","16 days, 23 hrs, 48 mins."

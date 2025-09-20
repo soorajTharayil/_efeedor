@@ -1,0 +1,132 @@
+<?php
+$i = 0;
+include('db.php');
+
+
+
+
+$sql = 'SELECT * FROM `setting` WHERE 1';
+$result = mysqli_query($con, $sql);
+$data['setting_data'] = mysqli_fetch_object($result);
+$path = '../uploads/' . $data['setting_data']->qr_code_image;
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$datap = file_get_contents($path);
+$data['setting_data']->qr_code_image = 'data:image/' . $type . ';base64,' . base64_encode($datap);
+
+
+$path = '../uploads/' . $data['setting_data']->logo;
+$type = pathinfo($path, PATHINFO_EXTENSION);
+$datap = file_get_contents($path);
+$data['setting_data']->logo = 'data:image/' . $type . ';base64,' . base64_encode($datap);
+
+
+$data['setting_data']->android_apk = 'https://' . $link . '/uploads/' . $data['setting_data']->android_apk;
+
+
+$ch = curl_init($baseurl . 'SetupEfeeder/questionsinc?s=INCIDENT');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+$output = curl_exec($ch);
+
+$data['question_set'] = json_decode($output);
+$x = count($data['question_set']);
+
+$sql = 'SELECT * FROM `bf_ward_esr` WHERE 1 order by orderd	 asc';
+$result = mysqli_query($con, $sql);
+$num1 = mysqli_num_rows($result);
+
+$j = 0;
+
+if ($num1 > 0) {
+	while ($row = mysqli_fetch_object($result)) {
+
+		$data['ward'][$j]['title'] = $row->title;
+		$data['ward'][$j]['guid'] = $row->guid;
+		$data['ward'][$j]['bedno'] = explode(',', $row->bed_no);
+		$i++;
+		$j++;
+	}
+}
+
+$sql = 'SELECT * FROM `user` WHERE 1 ';
+$result = mysqli_query($con, $sql);
+$num1 = mysqli_num_rows($result);
+$j = 0;
+if ($num1 > 0) {
+	while ($row = mysqli_fetch_object($result)) {
+
+		$data['user'][] = $row;
+	
+	}
+}
+
+$sql = 'SELECT * FROM `bf_roles` WHERE 1 order by title asc';
+$result = mysqli_query($con, $sql);
+$num2 = mysqli_num_rows($result);
+
+$j = 0;
+if ($num2 > 0) {
+	while ($row = mysqli_fetch_object($result)) {
+
+		$data['role'][$j]['title'] = $row->title;
+		$data['role'][$j]['guid'] = $row->guid;
+
+		$i++;
+		$j++;
+	}
+}
+
+$sql = 'SELECT * FROM `incident_type` WHERE 1 order by orderd asc';
+$result = mysqli_query($con, $sql);
+$num2 = mysqli_num_rows($result);
+
+$j = 0;
+if ($num2 > 0) {
+	while ($row = mysqli_fetch_object($result)) {
+
+		$data['incident_type'][$j]['title'] = $row->title;
+		$data['incident_type'][$j]['guid'] = $row->guid;
+
+		$i++;
+		$j++;
+	}
+}
+
+$sql = 'SELECT * FROM `priority` WHERE 1 order by orderd asc';
+$result = mysqli_query($con, $sql);
+$num2 = mysqli_num_rows($result);
+
+$j = 0;
+if ($num2 > 0) {
+	while ($row = mysqli_fetch_object($result)) {
+
+		$data['priority'][$j]['title'] = $row->title;
+		$data['priority'][$j]['guid'] = $row->guid;
+
+		$i++;
+		$j++;
+	}
+}
+
+
+$mobile = isset($_GET['mobile']) ? mysqli_real_escape_string($con, $_GET['mobile']) : '';
+
+if ($mobile !== '') {
+    $sql = 'SELECT * FROM `healthcare_employees` WHERE mobile="' . $mobile . '"';
+    $result = mysqli_query($con, $sql);
+    $data['pinfo'] = mysqli_fetch_object($result);
+} else {
+    $data['pinfo'] = null; // fallback if no mobile is passed
+}
+
+
+
+
+$data['baseurl'] = $baseurl;
+$domain_name = $config_set['DOMAIN_NAME'];
+$data['setup'] =  json_decode(file_get_contents('../config/'.$domain_name.'.json'),true);
+
+
+mysqli_close($con);
+echo json_encode($data);
+?>
