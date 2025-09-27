@@ -1140,6 +1140,27 @@ class Incident extends CI_Controller
         }
     }
 
+       public function escalation_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $dates = get_from_to_date();
+            $data['title'] = 'ESCALATION REPORT-INCIDENTS';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->alltickets();
+           
+                $data['content'] = $this->load->view('incidentmodules/escalation_report', $data, true);
+           
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
     public function overall_department_excel()
     {
         if ($this->session->userdata('isLogIn') == false)
