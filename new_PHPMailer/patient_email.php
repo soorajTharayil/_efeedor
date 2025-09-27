@@ -2,7 +2,7 @@
 
 
 include('../api/db.php');
-include('/home/cpefeedor/globalconfig.php');
+include('/home/efeedor/globalconfig.php');
 //welcome email to patient with interim link
 $welcome_message_query = 'SELECT * FROM patients_from_admission WHERE email_status = 0';
 $welcome_message_result = mysqli_query($con, $welcome_message_query);

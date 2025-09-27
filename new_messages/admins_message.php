@@ -9,7 +9,7 @@
 //L1 and L2 escalation message
 
 include('../api/db.php');
-include('/home/cpefeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 include('get_user.php');
 //message to admin  when they are created 
 
@@ -20,13 +20,13 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
     $number = $user_object->mobile;
     $name = $user_object->firstname;
-    $email = $user_object->firstname;
+    $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
 
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_superadmin_accountcreation', '" . json_encode([$name, $hospitalname, $link, $email, $password, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_superadmin_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -47,13 +47,13 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
     $number = $user_object->mobile;
     $name = $user_object->firstname;
-    $email = $user_object->firstname;
+    $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
 
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_admin_accountcreation', '" . json_encode([$name, $hospitalname, $link, $email, $password, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_admin_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -75,13 +75,13 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
     $number = $user_object->mobile;
     $name = $user_object->firstname;
-    $email = $user_object->firstname;
+    $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
 
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_departmenthead_account_creation', '" . json_encode([$name, $hospitalname, $link, $email, $password, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_departmenthead_account_creation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -101,13 +101,13 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
     $number = $user_object->mobile;
     $name = $user_object->firstname;
-    $email = $user_object->firstname;
+    $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
 
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_patientcoordinator_accountcreation', '" . json_encode([$name, $hospitalname, $email, $password, $link, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_patientcoordinator_accountcreation', '" . json_encode([$name, $hospitalname, "Your Email id or Mobile Number", $password, $link, $hospitalname]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -127,13 +127,13 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
     $number = $user_object->mobile;
     $name = $user_object->firstname;
-    $email = $user_object->firstname;
+    $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
 
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_employee_accountcreation', '" . json_encode([$name, $hospitalname, $link, $email, $password, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_employee_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -176,28 +176,6 @@ while ($user_object = mysqli_fetch_object($user_result)) {
 // for whatsapp user message 
 
 
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 3';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-
-
-    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_useraccountcreation', '" . json_encode([$name, $hospitalname, $link, $hospitalname]) . "', 
-    'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
-
-    // Execute the second query
-    if ($conn_g->query($insert_notification_query) === TRUE) {
-        echo "Data inserted into notifications table successfully.<br>";
-    } else {
-        echo "Error: " . $con->error . "<br>";
-    }
-
-    $query = 'UPDATE user SET `whatsapp_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
 
 
 function pdf_admins_tracking_link_UniqueId()
@@ -216,8 +194,8 @@ $feedback_pdf_query = 'SELECT * FROM  bf_feedback_pdf  WHERE admins_messagestatu
 $feedback_pdf_result = mysqli_query($con, $feedback_pdf_query);
 
 while ($feedback_pdf_object = mysqli_fetch_object($feedback_pdf_result)) {
-   
-    $TID = $feedback_pdf_object->id ;
+
+    $TID = $feedback_pdf_object->id;
     $parameter = json_decode($feedback_pdf_object->dataset);
 
     $patient_name = $parameter->name;
@@ -265,7 +243,6 @@ while ($feedback_pdf_object = mysqli_fetch_object($feedback_pdf_result)) {
         } else {
             echo "Error: " . $con->error . "<br>";
         }
-
     }
 
     $update_query = 'Update bf_feedback_pdf set admins_messagestatus = 1 WHERE id=' . $feedback_pdf_object->id;
@@ -323,9 +300,6 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
 
-        $Concern_Category = $department_object->description;
-        $Concern_Area = $department_object->name;
-
         // print_r($department_object);
         // exit;
         if ($department_rowcount > 1) {
@@ -334,14 +308,49 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
             $k = '';
         }
 
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+
+        $Concern_Category = $department_object->description;
+        //$Concern_Area = $department_object->name;
+
+        if ($department_rowcount == 1) {
+
+            $setup_query = "SELECT * FROM setup_int WHERE parent = 1 ";
+            $setup_result = mysqli_query($con, $setup_query);
+
+            while ($setup_object = mysqli_fetch_object($setup_result)) {
+                $keys[$setup_object->shortkey] = $setup_object->title;
+                $res[$setup_object->shortkey] = $setup_object->question;
+                $titles[$setup_object->title] = $setup_object->title;
+                $zz[$setup_object->type] = $setup_object->title;
+            }
+
+
+
+            if (!empty($parameter->reason)) {
+                $Concern_Area = ''; // Initialize
+                foreach ($parameter->reason as $key1 => $value) {
+                    if ($value) {
+                        $Concern_Area .= $res[$key1] . ', ';
+                    }
+                }
+                $Concern_Area = rtrim($Concern_Area, ', ');
+            }
+        }
+
+
+
         $TID = $department_object->id;
         $meta_data = array();
         $meta_data['config_set_url'] = $config_set['BASE_URL'];
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'pc/track/' . $TID;
         $uuid = int_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket for sending text sms
-        $admins_link_whatsapp = 's.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket for sending text sms
+        $admins_link_whatsapp = 'h.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
 
     }
 
@@ -449,14 +458,57 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
         $department_result = mysqli_query($con, $department_query);
         $department_rowcount = mysqli_num_rows($department_result);
         $department_object = mysqli_fetch_object($department_result);
+
+
         if ($department_rowcount > 1) {
             $k = 1;
         } else {
             $k = '';
         }
 
-        $Concern_Category = $department_object->description;
-        $Concern_Area = $department_object->name;
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+
+        //$Concern_Category = $department_object->description;
+        //$Concern_Area = $department_object->name;
+
+        if ($department_rowcount == 1) {
+
+            $setup_query = "SELECT * FROM setup WHERE parent = 0 ";
+            $setup_result = mysqli_query($con, $setup_query);
+
+            while ($setup_object = mysqli_fetch_object($setup_result)) {
+                $keys[$setup_object->shortkey] = $setup_object->title;
+                $res[$setup_object->shortkey] = $setup_object->question;
+                $titles[$setup_object->title] = $setup_object->title;
+                $zz[$setup_object->type] = $setup_object->title;
+            }
+
+            if (!empty($parameter->reasonSet)) {
+                $Concern_Category = '';
+                foreach ($parameter->reasonSet as $set => $items) {
+                    if ($items) {
+                        $Concern_Category .= $zz[$set] . ', ';
+                    }
+                }
+                $Concern_Category = rtrim($Concern_Category, ', ');
+            }
+
+            if (!empty($parameter->reason)) {
+                $Concern_Area = ''; // Initialize
+                foreach ($parameter->reason as $key1 => $value) {
+                    if ($value) {
+                        $Concern_Area .= $res[$key1] . ', ';
+                    }
+                }
+                $Concern_Area = rtrim($Concern_Area, ', ');
+            }
+        }
+
+
+
 
         $TID = $department_object->id;
         $meta_data = array();
@@ -464,8 +516,8 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'track/ipdf/' . $feedbackid;
         $uuid = ip_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = 's.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = 'h.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {
@@ -568,7 +620,7 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'track/admission/' . $feedbackid;
         $uuid = adf_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
 
     }
 
@@ -660,8 +712,46 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         }
 
 
-        $Concern_Category = $department_object->description;
-        $Concern_Area = $department_object->name;
+        $keys = array();
+        $res = array();
+        $titles = array();
+        $zz = array();
+
+        //$Concern_Category = $department_object->description;
+        //$Concern_Area = $department_object->name;
+
+        if ($department_rowcount == 1) {
+
+            $setup_query = "SELECT * FROM setupop WHERE parent = 0 ";
+            $setup_result = mysqli_query($con, $setup_query);
+
+            while ($setup_object = mysqli_fetch_object($setup_result)) {
+                $keys[$setup_object->shortkey] = $setup_object->title;
+                $res[$setup_object->shortkey] = $setup_object->question;
+                $titles[$setup_object->title] = $setup_object->title;
+                $zz[$setup_object->type] = $setup_object->title;
+            }
+
+            if (!empty($parameter->reasonSet)) {
+                $Concern_Category = '';
+                foreach ($parameter->reasonSet as $set => $items) {
+                    if ($items) {
+                        $Concern_Category .= $zz[$set] . ', ';
+                    }
+                }
+                $Concern_Category = rtrim($Concern_Category, ', ');
+            }
+
+            if (!empty($parameter->reason)) {
+                $Concern_Area = ''; // Initialize
+                foreach ($parameter->reason as $key1 => $value) {
+                    if ($value) {
+                        $Concern_Area .= $res[$key1] . ', ';
+                    }
+                }
+                $Concern_Area = rtrim($Concern_Area, ', ');
+            }
+        }
 
         $TID = $department_object->id;
         $meta_data = array();
@@ -669,8 +759,8 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'track/opf/' . $feedbackid;
         $uuid = op_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = 's.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = 'h.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {
@@ -693,11 +783,10 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         foreach ($users as $user_object) {
             $floor_wards = json_decode($user_object->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
-                $number = $user_object->mobile;
-                $message = str_replace('&', 'and', str_replace(' ', '%20', $messages));
-                $insert_query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`,`meta`,`uuid`) VALUES ("admins_message","' . $message . '",0,"' . $number . '","' . $TEMPIDALERTT . '","' . $HID . '","' . mysqli_real_escape_string($con, json_encode($meta_data)) . '","' . $uuid . '")';
-                $conn_g->query($insert_query);
-            
+            $number = $user_object->mobile;
+            $message = str_replace('&', 'and', str_replace(' ', '%20', $messages));
+            $insert_query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`,`meta`,`uuid`) VALUES ("admins_message","' . $message . '",0,"' . $number . '","' . $TEMPIDALERTT . '","' . $HID . '","' . mysqli_real_escape_string($con, json_encode($meta_data)) . '","' . $uuid . '")';
+            $conn_g->query($insert_query);
         }
 
         $users_whatsapp = get_user_by_sms_activity('OP-WHATSAPP', $con);
@@ -705,18 +794,17 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         foreach ($users_whatsapp as $users_whatsapp_object) {
             $floor_wards = json_decode($users_whatsapp_object->floor_ward, true);
             // Check if $patient_ward matches any value in $floor_wards
-                $number = $users_whatsapp_object->mobile;
-                $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            $number = $users_whatsapp_object->mobile;
+            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
              VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_negativeexperience_oppatients', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $Concern_Category, $Concern_Area, $admins_link_whatsapp, $hospitalname]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
-                // Execute the second query
-                if ($conn_g->query($insert_notification_query) === TRUE) {
-                    echo "Data inserted into notifications table successfully.<br>";
-                } else {
-                    echo "Error: " . $con->error . "<br>";
-                }
-            
+            // Execute the second query
+            if ($conn_g->query($insert_notification_query) === TRUE) {
+                echo "Data inserted into notifications table successfully.<br>";
+            } else {
+                echo "Error: " . $con->error . "<br>";
+            }
         }
     }
     $update_query = 'Update bf_outfeedback set admins_messagestatus = 1 WHERE id=' . $feedbackop_object->id;
@@ -783,8 +871,8 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'isr/track/' . $TID;
         $uuid = isr_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = 's.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = 'h.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {
@@ -824,7 +912,7 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
             if (is_null($floor_wards) || empty($floor_wards) || in_array($emp_ward, $floor_wards)) {
                 $number = $users_whatsapp_object->mobile;
                 $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_servicerequest', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp, $hospitalname]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_servicerequest', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, !empty($emp_contactnumber) ? $emp_contactnumber : 'NIL', $admins_link_whatsapp, $hospitalname]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                 // Execute the second query
@@ -862,11 +950,15 @@ $feedback_incident_result = mysqli_query($con, $feedback_incident_query);
 while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result)) {
     $parameter = json_decode($feedback_incident_object->dataset);
 
-    $emp_ward = $parameter->ward;
-    $emp_bed_no = $parameter->bedno;
-    $emp_name = $parameter->name;
-    $incident_type = $parameter->incident_type;
-    $emp_contactnumber = $parameter->contactnumber;
+    $emp_ward = !empty($parameter->ward) ? $parameter->ward : 'NIL';
+    $emp_bed_no = !empty($parameter->bedno) ? $parameter->bedno : 'NIL';
+    $emp_name = !empty($parameter->name) ? $parameter->name : 'NIL';
+    $emp_contactnumber = !empty($parameter->contactnumber) ? $parameter->contactnumber : 'NIL';
+    $incident_type = !empty($parameter->incident_type) ? $parameter->incident_type : 'Unassigned';
+    $priority = !empty($parameter->priority) ? $parameter->priority : 'Unassigned';
+    $risk_matrix = !empty($parameter->risk_matrix->level) ? $parameter->risk_matrix->level : 'Unassigned';
+
+
 
     $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
@@ -900,8 +992,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = 's.efeedor.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {
@@ -926,8 +1018,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             if (is_null($floor_wards) || empty($floor_wards) || in_array($emp_ward, $floor_wards)) {
                 $number = $user_object->mobile;
                 $message = str_replace('&', 'and', str_replace(' ', '%20', $messages));
-                $insert_query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`,`meta`,`uuid`) VALUES ("admins_message","' . $message . '",0,"' . $number . '","' . $TEMPIDALERTT . '","' . $HID . '","' . mysqli_real_escape_string($con, json_encode($meta_data)) . '","' . $uuid . '")';
-                $conn_g->query($insert_query);
+                // $insert_query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`,`meta`,`uuid`) VALUES ("admins_message","' . $message . '",0,"' . $number . '","' . $TEMPIDALERTT . '","' . $HID . '","' . mysqli_real_escape_string($con, json_encode($meta_data)) . '","' . $uuid . '")';
+                // $conn_g->query($insert_query);
                 //     }
                 // }
             }
@@ -940,7 +1032,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             if (is_null($floor_wards) || empty($floor_wards) || in_array($emp_ward, $floor_wards)) {
                 $number = $users_whatsapp_object->mobile;
                 $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_on_receivingincident', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp, $hospitalname]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_for_incident', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                 // Execute the second query
@@ -1010,7 +1102,7 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'grievance/track/' . $TID;
         $uuid = grievance_admins_tracking_link_UniqueId();
-        $admins_link = 's.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link = 'h.efeedor.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
 
     }
 

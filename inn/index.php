@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--NOTE TEST FEATURE FLOW-->
 <html lang="en">
 <!-- head part start -->
 <!-- Interim feedback -->
@@ -20,6 +19,175 @@
 	<script src="https://cdn.jsdelivr.net/npm/image-conversion@1.0.1/dist/browser.js"></script>
 
 	<script src="app_incident.js?<?php echo time(); ?>"></script>
+	<style>
+		/* Global placeholder styling */
+		::placeholder {
+			opacity: 0.3;
+			/* reduced visibility */
+			font-size: 14px;
+			/* default size */
+			color: #6c757d;
+			/* default gray */
+		}
+
+		/* Vendor prefixes for compatibility */
+		::-webkit-input-placeholder {
+			opacity: 0.3;
+			font-size: 14px;
+			color: #6c757d;
+		}
+
+		:-ms-input-placeholder {
+			opacity: 0.3;
+			font-size: 14px;
+			color: #6c757d;
+		}
+
+		::-ms-input-placeholder {
+			opacity: 0.3;
+			font-size: 14px;
+			color: #6c757d;
+		}
+
+		.priority-dropdown {
+			width: 95%;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			padding: 8px;
+			margin-left: -2px;
+			margin-bottom: 15px;
+			background: #fff;
+			cursor: pointer;
+		}
+
+		.priority-selected {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.priority-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			background: #fff;
+			border: 1px solid #ccc;
+			border-radius: 6px;
+			margin-top: 2px;
+			z-index: 1000;
+		}
+
+		.priority-item {
+			display: flex;
+			align-items: center;
+			padding: 6px 10px;
+			cursor: pointer;
+		}
+
+		.priority-item:hover {
+			background: #f5f5f5;
+		}
+
+		.priority-box {
+			display: inline-block;
+			/* <-- important */
+			width: 14px;
+			height: 14px;
+			border-radius: 3px;
+			/* margin-right: 7px; */
+			vertical-align: middle;
+		}
+
+		.p1 {
+			background: #ff4d4d;
+			margin-right: 7px;
+		}
+
+		/* Critical */
+		.p2 {
+			background: #ff9800;
+			margin-right: 7px;
+		}
+
+		/* High */
+		.p3 {
+			background: #fbc02d;
+			margin-right: 7px;
+		}
+
+		/* Medium */
+		.p4 {
+			background-color: #321acbff;
+			margin-right: 7px;
+		}
+
+		.p5 {
+			background-color: #08bf7cff;
+			margin-right: 7px;
+		}
+
+		.p6 {
+			background-color: #08bf7cff;
+			margin-right: 7px;
+		}
+
+		.priority-box.p1 {
+			background-color: #e74c3c;
+		}
+
+		/* Red */
+		.priority-box.p2 {
+			background-color: #e67e22;
+		}
+
+		/* Orange */
+		.priority-box.p3 {
+			background-color: #f1c40f;
+		}
+
+		/* Yellow */
+		.priority-box.p4 {
+			background-color: #3a42bdff;
+		}
+
+		.priority-box.p5 {
+			background-color: #19a259ff;
+		}
+
+		.priority-box.p6 {
+			background-color: #19a259ff;
+		}
+
+		/* Green */
+		/* Low */
+		.risk-box {
+			display: inline-block;
+			width: 14px;
+			height: 14px;
+			border-radius: 3px;
+			margin-right: 5px;
+			vertical-align: middle;
+		}
+
+		.p1 {
+			background: #e74c3c;
+		}
+
+		/* High - Red */
+		.p2 {
+			background: #f1c40f;
+		}
+
+		/* Medium - Yellow */
+		.p3 {
+			background: #19ca6eff;
+		}
+
+		/* Low - Green */
+
+		/* Low */
+	</style>
 
 </head>
 <!-- head part end -->
@@ -49,68 +217,90 @@
 	</nav>
 	<!-- top navbar end -->
 	<!-- Create a modal for language selection -->
-	<div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="languageModalLabel">Select Language</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-			
-				<div class="col-lg-12 col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
-					<div class="box box-primary profilepage">
-						<div class="box-body box-profile" style="display: inline-block;">
+	<div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="languageModalLabel">Select Language</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- Place your language selection options here -->
 
-							<!-- English -->
-							<div class="card" style="border: 2px solid #000;" 
-							     ng-if="GLOBALSETUP.languages.ENGLISH_LANG == true">
-								<div ng-click="language('english')" style="padding: 5px; height:100px; width:200px;" data-dismiss="modal">
-									<span style="margin-left: -133px; color: #4b4c4d;">English</span><br>
-									<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">A</span>
+
+
+					<div class=" col-lg-12 col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
+						<div class=" px-0 pt-2 pb-0">
+							<div class="left"
+								style="margin-left: 68vw; max-width: 100%; margin-top: 5px; margin-right: -10px;">
+								<a href="../">
+									<img src="./user.png" style="max-width: 100%; height: 45px;" alt="">
+								</a>
+							</div>
+							<div style="text-align: left; align-items: left; margin-left: 25px; margin-right: 25px;">
+							</div>
+							<div class="box box-primary profilepage">
+								<div class="box-body box-profile" style="display: inline-block;">
+
+									<div class="card" style=" border: 2px solid #000;">
+										<div class="" ng-click="language('english')"
+											style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+											<span style="margin-left: -133px; color: #4b4c4d;">
+												English
+											</span><br>
+											<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">
+												A
+											</span>
+										</div>
+									</div>
+									<br>
+
+									<!-- <div class="card" style=" border: 2px solid #000;">
+										<div class="" ng-click="language('lang2')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+											<span style="margin-left: -133px; color: #4b4c4d;">
+												ಕನ್ನಡ
+											</span><br>
+											<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">
+												ಕ
+											</span>
+										</div>
+									</div>
+									<br> -->
+
+									 <div class="card" style=" border: 2px solid #000;">
+										<div class="" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+											<span style="margin-left: -100px; color: #4b4c4d;">
+												മലയാളം
+											</span><br>
+											<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">
+												അ
+											</span>
+										</div>
+									</div>
+									<br>
+
+									<!--<div class="card" style=" border: 2px solid #000;">-->
+									<!--	<div class="" ng-click="language('lang3')"-->
+									<!--		style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">-->
+									<!--		<span style="margin-left: -100px; color: #4b4c4d;">-->
+									<!--			தமிழ்-->
+									<!--		</span><br>-->
+									<!--		<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">-->
+									<!--			த-->
+									<!--		</span>-->
+									<!--	</div>-->
+									<!--</div>-->
 								</div>
 							</div>
-							<br>
-
-							<!-- Kannada -->
-							<div class="card" style="border: 2px solid #000;" 
-							     ng-if="GLOBALSETUP.languages.KANNADA_LANG == true">
-								<div ng-click="language('kannada')" style="padding: 5px; height:100px; width:200px;" data-dismiss="modal">
-									<span style="margin-left: -133px; color: #4b4c4d;">ಕನ್ನಡ</span><br>
-									<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">ಕ</span>
-								</div>
-							</div>
-							<br>
-
-							<!-- Malayalam -->
-							<div class="card" style="border: 2px solid #000;" 
-							     ng-if="GLOBALSETUP.languages.MALAYALAM_LANG == true">
-								<div ng-click="language('malayalam')" style="padding: 5px; height:100px; width:200px;" data-dismiss="modal">
-									<span style="margin-left: -100px; color: #4b4c4d;">മലയാളം</span><br>
-									<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">അ</span>
-								</div>
-							</div>
-							<br>
-
-							<!-- Tamil -->
-							<div class="card" style="border: 2px solid #000;" 
-							     ng-if="GLOBALSETUP.languages.TAMIL_LANG == true">
-								<div ng-click="language('tamil')" style="padding: 5px; height:100px; width:200px;" data-dismiss="modal">
-									<span style="margin-left: -100px; color: #4b4c4d;">தமிழ்</span><br>
-									<span style="font-size: 34px; color: #4b4c4d; font-weight: bold;">த</span>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-</div>
 	<div class="container-fluid" id="grad1">
 		<div class="row justify-content-center mt-0" style="height:max-content;">
 			<div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
@@ -140,13 +330,13 @@
 
 												<input type="text" name="email" id="email" class="input-field"
 													placeholder="Enter email/ mobile no." ng-model="loginvar.userid"
-													style="padding: 12px;font-size: 16px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 25px; margin-bottom: 15px; width: 90%; box-sizing: border-box;color: #000; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+													style="padding: 12px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 25px; margin-bottom: 15px; width: 90%; box-sizing: border-box;color: #000; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
 
 												<div class="password-container">
 													<input type="password" name="password" id="password"
 														class="input-field" placeholder="Enter password"
 														ng-model="loginvar.password"
-														style="padding: 12px;font-size: 16px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 25px; margin-bottom: 15px; width: 90%; box-sizing: border-box;color: #000; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+														style="padding: 12px; border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 25px; margin-bottom: 15px; width: 90%; box-sizing: border-box;color: #000; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
 													<span style="color: rgba(0, 0, 0, 0.8);" class="password-toggle"
 														onclick="togglePassword()">
 														<i class="fa fa-eye-slash" aria-hidden="true"></i>
@@ -190,15 +380,16 @@
 											<div class="col-xs-12 col-sm-12 col-md-12">
 												<div class="form-group">
 													<span class="addon" style="    font-size: 16px;">
-														{{lang.employeename}}</span>
+														{{lang.employeename}} <sup
+															style="color:red">*</sup></span></span>
 													<span class="has-float-label">
-														<input class="form-control"
+														<input class="form-control" id="employee_name"
 															placeholder="{{lang.employee_name_placeholder}}"
 															oninput="restrictToAlphabets(event)" maxlength="25"
-															name="name" type="text" id="emailid"
+															name="name" type="text" 
 															ng-model="feedback.name"
 															onblur="this.value = this.value.toUpperCase();"
-															autocomplete="off" style=" padding-top:0px;" />
+															autocomplete="off" />
 														<label for="emailid"></label>
 													</span>
 												</div>
@@ -206,15 +397,14 @@
 											<!-- Patient UHID -->
 											<div class="col-xs-12 col-sm-12 col-md-12">
 												<div class="form-group">
-													<span class="addon"
-														style="    font-size: 16px;">{{lang.employeeid}}</span>
+													<span class="addon" style="    font-size: 16px;">{{lang.employeeid}}
+														<sup style="color:red">*</sup></span></span>
 													<span class="has-float-label">
-														<input class="form-control"
+														<input class="form-control" id="employee_id"
 															placeholder="{{lang.enter_placeholder}}" type="text"
-															maxlength="10" id="contactnumber" ng-required="true"
+															maxlength="10"  ng-required="true"
 															ng-model="feedback.patientid" autocomplete="off"
-															placeholder="Numerical digits only"
-															style="padding-top:0px;" />
+															placeholder="Numerical digits only" />
 														<label for="contactnumber"></label>
 													</span>
 												</div>
@@ -241,9 +431,8 @@
 													<span class="has-float-label">
 														<input class="form-control" type="tel" maxlength="10"
 															oninput="restrictToNumerals(event)" id="contactnumber"
-															ng-model="feedback.contactnumber" style="padding-top:0px;"
-															autocomplete="off" placeholder="{{lang.mobile_placeholder}}"
-															step="1" />
+															ng-model="feedback.contactnumber" autocomplete="off"
+															placeholder="{{lang.mobile_placeholder}}" step="1" />
 														<label for="contactnumber"></label>
 													</span>
 												</div>
@@ -255,8 +444,8 @@
 														style="    font-size: 16px;">{{lang.email}}</span>
 													<span class="has-float-label">
 														<input class="form-control" type="email" id="contactnumber"
-															ng-model="feedback.email" style="padding-top:0px;"
-															autocomplete="off" placeholder="{{lang.pa_email}}" />
+															ng-model="feedback.email" autocomplete="off"
+															placeholder="{{lang.pa_email}}" />
 														<label for="contactnumber"></label>
 													</span>
 												</div>
@@ -348,12 +537,14 @@
 
 									<br>
 									<h4 style="font-size: 18px; margin-bottom: 22px; padding-top: 10px;">
-										<b>{{lang.chooseCategory}}</b></h4>
+										<!-- <b>{{lang.chooseCategory}}</b> -->
+										<b>{{lang.select_incident}}</b>
+									</h4>
 									<div class="" style="width: 94%; margin: 0px auto;">
 										<div class="" style="width: 94%; margin: 0px auto;">
 											<!-- Clinical Incidents Section -->
 											<div class="row">
-												<h4 class="col-12" style="font-size :20px;">Clinical Incidents</h4>
+												<!-- <h4 class="col-12" style="font-size :20px;">Clinical Incidents</h4> -->
 												<div ng-repeat="q in questioset" class="col-6"
 													ng-show="q.category != 'Other' && q.type_of_incident == 'Clinical'">
 													<div class="card" ng-click="selectQuestion(q)">
@@ -380,12 +571,11 @@
 													</div>
 												</div>
 											</div>
-<br>
+											<br>
 											<!-- Non-Clinical Incidents Section -->
 											<div class="row">
-												<h4 class="col-12" style="font-size :20px;" >Non-Clinical Incidents</h4>
-												<div ng-repeat="q in questioset" class="col-6"
-													ng-show="q.category != 'Other' && q.type_of_incident == 'Non-Clinical'">
+												<!-- <h4 class="col-12" style="font-size :20px;">Non-Clinical Incidents</h4> -->
+												<div ng-repeat="q in questioset" class="col-6">
 													<div class="card" ng-click="selectQuestion(q)">
 														<div class="row">
 															<div class="col-12">
@@ -417,7 +607,7 @@
 
 										<div>
 											<input type="button" name="previous" style="font-size:small;"
-												class="previous action-button-previous" ng-click="activeStep('step1')"
+												class="previous action-button-previous" ng-click="refresh_back()"
 												value="{{lang.previous}}" />
 										</div>
 									</div>
@@ -430,6 +620,7 @@
 
 								<fieldset ng-show="step3 == true">
 									<div class="text-left">
+										<h3 class="sectiondivision" style="font-weight:bold;">{{lang.pagetitle}}</h3>
 
 
 										<!-- <span>{{searchTextmain}}</span> -->
@@ -445,7 +636,8 @@
 												ng-model="searchText" oninput="restrictToAlphabets(event)">
 											<i class="fa fa-search search-icon"></i>
 											<h4 style="font-size: 18px; margin-bottom: 22px;">
-												<br><b>{{lang.telluswrong}} {{category}}</b></h4>
+												<br><b>{{lang.telluswrong}} {{category}}</b>
+											</h4>
 
 											<div
 												ng-repeat="p in selectedQuestionObject.question | filter:filterFunction">
@@ -485,121 +677,417 @@
 								<!-- card click -->
 								<fieldset ng-show="step4 == true">
 									<div class="form-card" style="margin-top: 10px;">
+										<h3 class="sectiondivision" style="font-weight:bold;">{{lang.pagetitle}}</h3>
+
 										<div class="form-group" style="margin-left: 13px; margin-right:13px;"
 											ng-show="submit_as_concern == true">
 
-											<label for="comment">{{lang.u_select}} <br>
-												<b> {{lang.incident_category}}</b>{{selectedParameterObject.title}} <br>
-												<b> {{lang.incident_parameter}}</b>
+											<label for="comment"><b
+													style="font-size: 18px;margin-bottom:10px;">{{lang.u_select}}
+												</b><br>
+												<b> •{{lang.incident_category}}</b>{{selectedParameterObject.title}}
+												<br>
+												<b> •{{lang.incident_parameter}}</b>
 												{{selectedParameterObject.question}}</label>
+										</div>
+
+										<div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
+											<div class="form-group transparent-placeholder"
+												style="display: flex; flex-direction: column; position: relative;">
+
+												<label for="comment"><b
+														style="margin-left: -6px;">{{lang.incident_occurred}}</b><br></label>
+
+
+												<div
+													style="display: flex; flex-direction: row; align-items: center; width: 100%; margin-left: -6px; position: relative;">
+													<input class="form-control" ng-model="feedback.incident_occured_in"
+														type="datetime-local" id="incident_occured_in"
+														ng-required="true" autocomplete="off"
+														onclick="this.showPicker && this.showPicker()"
+														onfocus="this.showPicker && this.showPicker()" style="padding-top: 2px; padding-left: 6px; border: 1px solid
+													#ced4da; margin-top:9px; width: calc(100% - 20px);" />
+
+													<!-- Calendar icons (optional decoration) -->
+													<span class="calendar-icon-container"
+														style="position: absolute; right: 30px; top: 50%; transform: translateY(-50%);">
+														<svg class="calendar-icon" xmlns="http://www.w3.org/2000/svg"
+															width="16" height="16" fill="currentColor"
+															viewBox="0 0 16 16">
+															<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2
+					 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 
+					 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 5v9a1 1 0 
+					 0 0 1 1h12a1 1 0 0 0 1-1V5H1z" />
+														</svg>
+													</span>
+													<span
+														style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%);">
+														<i class="fa fa-calendar-alt"></i>
+													</span>
+												</div>
+
+											</div>
 										</div>
 
 
 										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
-											<h4 style="font-size: 18px; margin-bottom: 22px;">
-												<b>{{lang.add_details_to_incident}}</b></h4>
-											<label for="comment">{{lang.describe_incident}}<br></label>
+											<!-- <h4 style="font-size: 18px; margin-bottom: 22px;">
+												<b>{{lang.add_details_to_incident}}</b>
+											</h4> -->
+											<label for="comment"><b>{{lang.describe_incident}}</b><br></label>
 											<textarea placeholder="{{lang.describe_incident_placeholder}}"
 												style="border: 2px solid #ccc;margin-top:7px" class="form-control"
 												ng-model="feedback.other" rows="5" id="comment"></textarea>
 										</div>
+										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
 
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12">
-												<div class="form-group">
-													<span class="has-float-label">
-														<select class="form-control" ng-model="feedback.incident_type"
-															style=" width: 94%; margin: 0px auto; margin-top:20px;">
-															<option value="">{{lang.incident_Type}}</option>
-															<option ng-repeat="x in wardlist.incident_type"
-																value="{{x.title}}" required>{{x.title}}</option>
-														</select>
+											<label for="comment"><b>{{lang.what_went_wrong}}</b><br></label>
+											<textarea placeholder="{{lang.what_went_wrong_pla}}"
+												style="border: 2px solid #ccc;margin-top:7px" class="form-control"
+												ng-model="feedback.what_went_wrong" rows="5" id="comment"></textarea>
+										</div>
+										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
+
+											<label for="comment"><b>{{lang.action_taken}}</b><br></label>
+											<textarea placeholder="{{lang.action_taken_pla}}"
+												style="border: 2px solid #ccc;margin-top:7px" class="form-control"
+												ng-model="feedback.action_taken" rows="5" id="comment"></textarea>
+										</div>
+										<br>
+										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
+
+											<label for="comment"><b>{{lang.select_risk_matrix}}</b><br></label>
+
+											<div class="risk-matrix" style="margin-top:10px;">
+												<table class="risk-table">
+													<!-- Axis headers -->
+													<tr>
+														<th rowspan="5"
+															style="writing-mode: vertical-rl; transform: rotate(180deg);border:none;">
+															IMPACT
+														</th>
+													</tr>
+
+
+													<!-- High Impact row -->
+													<tr>
+														<th style="border:none;">High</th>
+														<td ng-click="setRisk('High','Low','Medium')"
+															ng-class="{'selected-cell': isSelected('High','Low')}"
+															class="risk-medium">Medium</td>
+														<td ng-click="setRisk('High','Medium','High')"
+															ng-class="{'selected-cell': isSelected('High','Medium')}"
+															class="risk-high">High</td>
+														<td ng-click="setRisk('High','High','High')"
+															ng-class="{'selected-cell': isSelected('High','High')}"
+															class="risk-high">High</td>
+
+													</tr>
+
+													<!-- Medium Impact row -->
+													<tr>
+														<th style="border:none;">Medium</th>
+														<td ng-click="setRisk('Medium','Low','Low')"
+															ng-class="{'selected-cell': isSelected('Medium','Low')}"
+															class="risk-low">Low</td>
+														<td ng-click="setRisk('Medium','Medium','Medium')"
+															ng-class="{'selected-cell': isSelected('Medium','Medium')}"
+															class="risk-medium">Medium</td>
+														<td ng-click="setRisk('Medium','High','High')"
+															ng-class="{'selected-cell': isSelected('Medium','High')}"
+															class="risk-high">High</td>
+
+													</tr>
+
+													<!-- Low Impact row -->
+													<tr>
+														<th style="border:none;">Low</th>
+														<td ng-click="setRisk('Low','Low','Low')"
+															ng-class="{'selected-cell': isSelected('Low','Low')}"
+															class="risk-low">Low</td>
+														<td ng-click="setRisk('Low','Medium','Low')"
+															ng-class="{'selected-cell': isSelected('Low','Medium')}"
+															class="risk-low">Low</td>
+														<td ng-click="setRisk('Low','High','Medium')"
+															ng-class="{'selected-cell': isSelected('Low','High')}"
+															class="risk-medium">Medium</td>
+
+													</tr>
+													<tr>
+														<th style="border:none;"></th>
+														<th style="border:none;">Low</th>
+														<th style="border:none;">Medium</th>
+														<th style="border:none;">High</th>
+													</tr>
+													<tr>
+														<th style="border:none;"></th>
+														<th style="border:none;"> </th>
+														<th style="border:none;" colspan="3">LIKELIHOOD</th>
+
+													</tr>
+
+												</table>
+
+												<p style="margin-top:15px;">
+													<b>Assigned Risk : </b>
+
+													<!-- Risk Level with color -->
+													<span class="risk-box" ng-class="{'p1': feedback.risk_matrix.level=='High',
+										'p2': feedback.risk_matrix.level=='Medium',
+										'p3': feedback.risk_matrix.level=='Low'}"></span>
+													<strong>{{feedback.risk_matrix.level}}</strong>
+
+													(
+													{{feedback.risk_matrix.impact}} Impact ×
+													{{feedback.risk_matrix.likelihood}} Likelihood )
 													</span>
+												</p>
+											</div>
+										</div>
+										<br>
+										<!-- Priority Dropdown -->
+										<div class="form-group"
+											style="margin-left: 13px; margin-right:13px; margin-top:-15px;">
+											<label for="comment"><b>{{lang.priority}}</b><br></label>
+
+											<div class="dropdown" ng-init="showMenu=false">
+												<!-- Selected item (closed state) -->
+												<div class="priority-dropdown" ng-click="showMenu=!showMenu">
+													<span ng-if="!feedback.priority">{{lang.select_priority}}</span>
+													<span ng-if="feedback.priority" class="priority-selected">
+														<span
+															class="priority-box {{priorityCode(feedback.priority)}}"></span>
+														{{feedback.priority}}
+													</span>
+												</div>
+
+												<!-- Dropdown options -->
+												<div class="dropdown-menu show" ng-if="showMenu" style="width:100%;">
+													<div class="priority-item" ng-click="setPriority('')">
+														<span class=""></span> Select Action Priority
+													</div>
+													<div class="priority-item" ng-click="setPriority('P1-Critical')">
+														<span class="priority-box p1"></span> P1 - Critical
+													</div>
+													<div class="priority-item" ng-click="setPriority('P2-High')">
+														<span class="priority-box p2"></span> P2 - High
+													</div>
+													<div class="priority-item" ng-click="setPriority('P3-Medium')">
+														<span class="priority-box p3"></span> P3 - Medium
+													</div>
+													<div class="priority-item" ng-click="setPriority('P4-Low')">
+														<span class="priority-box p6"></span> P4 - Low
+													</div>
 												</div>
 											</div>
 										</div>
 										<br>
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12">
-												<div class="form-group">
-													<span class="has-float-label">
-														<select class="form-control" ng-model="feedback.priority"
-															style=" width: 94%; margin: 0px auto;">
-															<option value="">{{lang.priority}}</option>
-															<option ng-repeat="x in wardlist.priority"
-																value="{{x.title}}" required>{{x.title}}</option>
-														</select>
-													</span>
-												</div>
-											</div>
-										</div>
-										<br />
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12">
-												<div class="form-group">
-													<span class="has-float-label">
-														<select class="form-control" ng-model="feedback.ward"
-															ng-change="change_ward()"
-															style=" width: 94%; margin: 0px auto;">
-															<option value="" disabled>{{lang.floor}}</option>
-															<option ng-repeat="x in wardlist.ward"
-																ng-show="x.title !== 'ALL' " value="{{x.title}}"
-																required>{{x.title}}</option>
 
-														</select>
+										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
+											<label for="comment"><b>{{lang.incident_Type}}</b><br></label>
+
+											<div class="dropdown" ng-init="showIncidentMenu=false">
+												<!-- Selected item -->
+												<div class="priority-dropdown"
+													ng-click="showIncidentMenu=!showIncidentMenu">
+													<span
+														ng-if="!feedback.incident_type">{{lang.select_incident_Type}}</span>
+													<span ng-if="feedback.incident_type" class="priority-selected">
+														<span
+															class="priority-box {{priorityCode(feedback.incident_type)}}"></span>
+														{{feedback.incident_type}}
 													</span>
+												</div>
+
+												<!-- Dropdown menu -->
+												<div class="dropdown-menu show" ng-if="showIncidentMenu"
+													style="width:100%;">
+													<div class="priority-item" ng-click="setIncidentType('')">
+														<span></span> Select Incident category
+													</div>
+													<div class="priority-item" ng-click="setIncidentType('Near miss')">
+														<span class="priority-box p5"></span> Near miss
+													</div>
+													<div class="priority-item" ng-click="setIncidentType('No-harm')">
+														<span class="priority-box p4"></span> No-harm
+													</div>
+													<div class="priority-item" ng-click="setIncidentType('Adverse')">
+														<span class="priority-box p3"></span> Adverse
+													</div>
+													<div class="priority-item"
+														ng-click="setIncidentType('Hazardous Condition')">
+														<span class="priority-box p2"></span> Hazardous Condition
+													</div>
+													<div class="priority-item" ng-click="setIncidentType('Sentinel')">
+														<span class="priority-box p1"></span> Sentinel
+													</div>
+												</div>
+											</div>
+										</div>
+
+
+
+										<br />
+										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
+											<label for="comment"><b>{{lang.floor}}</b><br></label>
+
+											<div class="row">
+												<div class="col-xs-12 col-sm-12 col-md-12">
+													<div class="form-group"
+														style="margin-left: 13px; margin-right:13px;">
+														<span class="has-float-label">
+															<select class="form-control" ng-model="feedback.ward"
+																ng-change="change_ward()"
+																style=" width: 100%; margin-left: -16px; ">
+																<option value="" disabled>{{lang.select_floor}}</option>
+																<option ng-repeat="x in wardlist.ward"
+																	ng-show="x.title !== 'ALL' " value="{{x.title}}"
+																	required>
+																	{{x.title}}</option>
+
+															</select>
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
 										<br />
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-md-12">
-												<div class="form-group">
-													<span class="has-float-label">
-														<select class="form-control" ng-model="feedback.bedno"
-															style=" width: 94%; margin: 0px auto;">
-															<option value="" disabled>{{lang.location}}</option>
-															<option ng-repeat="x in bed_no" value="{{x}}" required>{{x}}
-															</option>
-														</select>
-													</span>
+										<div class="form-group"
+											style="margin-left: 13px; margin-right:13px;margin-top:-15px;">
+											<label for="comment"><b>{{lang.location}}</b><br></label>
+
+											<div class="row">
+												<div class="col-xs-12 col-sm-12 col-md-12">
+													<div class="form-group"
+														style="margin-left: 13px; margin-right:13px;">
+														<span class="has-float-label">
+															<select class="form-control" ng-model="feedback.bedno"
+																style=" width: 100%;  margin-left: -16px; ">
+																<option value="" disabled>{{lang.select_location}}
+																</option>
+																<option ng-repeat="x in bed_no" value="{{x}}" required>
+																	{{x}}
+																</option>
+															</select>
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
 										<br>
-										<button type="button" class="btn btn-outline-dark" data-toggle="modal"
+										<!-- <button type="button" class="btn btn-outline-dark" data-toggle="modal"
 											data-target="#tagPatientModal" style="margin-left: 12px;">
 											<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;{{lang.tag_incident}}
-										</button>
+										</button> -->
 										<br>
+										<div class="form-group" style="margin-top:-30px;">
+
+											<label
+												style="margin-left: 12px; margin-bottom: 25px; font-weight: bold; display: inline-flex; align-items: center;"
+												for="imageInput" class="custom-file-upload">
+												{{lang.tag_incident}}
+											</label>
+											<br>
+											<div class="col-xs-12 col-sm-12 col-md-12">
+												<div class="form-group">
+													<span class="addon"
+														style="    font-size: 16px;">{{lang.tag_name}}</span>
+													<span class="has-float-label">
+														<input class="form-control" placeholder="{{lang.tag_name}}"
+															maxlength="25" name="name" type="text" id="emailid"
+															ng-model="feedback.tag_name"
+															onblur="this.value = this.value.toUpperCase();"
+															autocomplete="off" style=" padding-top:0px;" />
+														<label for="emailid"></label>
+													</span>
+												</div>
+											</div>
+											<div class="col-xs-12 col-sm-12 col-md-12">
+												<div class="form-group">
+													<span class="addon"
+														style="    font-size: 16px;">{{lang.tag_id}}</span>
+													<span class="has-float-label">
+														<input class="form-control" placeholder="{{lang.tag_id}}" type="text"
+															maxlength="10" id="contactnumber" ng-required="true"
+															ng-model="feedback.tag_patientid" autocomplete="off"
+															placeholder="Numerical digits only"
+															style="padding-top:0px;" />
+														<label for="contactnumber"></label>
+													</span>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group"
+											style="margin-left: 13px; margin-right:13px;margin-top:30px;">
+											<label for="imageInput" class="custom-file-upload"
+												style="font-weight: bold;">
+												{{lang.image}}
+											</label>
+											<input id="imageInput" style="border-bottom: 0px;" type="file"
+												accept="image/jpeg, image/png, image/gif" multiple
+												ng-model="feedback.images"
+												onchange="angular.element(this).scope().encodeImages(this)" />
+
+
+											<button type="button" class="btn btn-primary btn-sm"
+												ng-show="feedback.images && feedback.images.length > 0"
+												ng-click="triggerFileInput()" style="margin-left: 0px;margin-top:10px;">
+												<i class="fa fa-plus"></i> Add More
+											</button>
+											<br>
+											<div ng-repeat="image in feedback.images track by $index"
+												style="display: inline-block; margin-right: 10px; margin-top: 10px; position: relative;">
+												<img ng-src="{{image}}" alt="Encoded Image" ng-click="editImage($index)"
+													style="max-width: 100px; max-height: 100px; cursor: pointer; border: 1px solid #ccc;" />
+												<button type="button" class="btn btn-danger btn-xs"
+													ng-click="removeImage($index)"
+													style="position: absolute; top: 0; right: 0;">
+													<i class="fa fa-times"></i>
+												</button>
+											</div>
+											<!-- Modal for Image Editing -->
+											<div id="imageEditorModal"
+												style="display:none; position: fixed; top: 10%; left: 10%; background: white; border: 1px solid #ccc; padding: 10px; z-index: 9999;">
+												<canvas id="fabricCanvas"></canvas>
+												<div
+													style="position: absolute; top: 10px; right: 10px; z-index: 10000;">
+													<button class="btn btn-sm btn-warning" ng-click="undoLast()">⟲
+														Undo</button>
+													<button class="btn btn-sm btn-danger" ng-click="closeEditor()">✖
+														Close</button>
+												</div>
+											</div>
+
+
+										</div>
+
 										<div class="form-group"
 											style="margin-left: 13px; margin-right:13px;margin-top:30px;">
 
-											<label for="imageInput" class="custom-file-upload"
-												style="font-weight: bold;">
-												{{lang.attach_img}}
-											</label>
-											<input style="border-bottom: 0px;" type="file"
-												accept="image/jpeg, image/png, image/gif" ng-model="feedback.image"
-												onchange="angular.element(this).scope().encodeImage(this)" />
-											<br>
-											<img ng-src="{{feedback.image}}" alt="Encoded Image"
-												ng-show="feedback.image" />
-											<br>
-											<label for="imageInput" class="custom-file-upload"
-												style="font-weight: bold;">
-												Upload documents:
-											</label>
 											<label for="fileInput" class="custom-file-upload"
 												style="font-weight: bold;">
 												{{lang.attach_file}}
 											</label>
-											<!-- File Input for Document Upload (accept all files) -->
-											<input style="border-bottom: 0px; " type="file" accept="*"
-												onchange="angular.element(this).scope().encodeFile(this)" />
 
+											<!-- File Input for Document Upload -->
+											<input style="border-bottom: 0px;" type="file" accept="*" multiple
+												onchange="angular.element(this).scope().encodeFiles(this)" />
 											<br>
-											<p ng-show="feedback.file">{{feedback.fileName}}</p>
+
+											<!-- Display the list of uploaded files -->
+											<div ng-if="feedback.files_name && feedback.files_name.length > 0">
+												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}</h3>
+												<ul style="margin-left: 19px;">
+													<li ng-repeat="files_name in feedback.files_name track by $index"
+														style="display: flex; align-items: center;">
+														<a href="{{files_name.url}}" target="_blank"
+															style="margin-right: 8px;">{{files_name.name}}</a>
+														<span style="cursor: pointer; color: red; font-weight: bold;"
+															ng-click="removeFile($index)">&#10060;</span>
+													</li>
+												</ul>
+											</div>
 											<!-- Display file name after upload -->
 										</div>
 
@@ -623,6 +1111,7 @@
 
 								<fieldset ng-show="step5 == true">
 									<div class="form-card">
+										<h3 class="sectiondivision" style="font-weight:bold;">{{lang.pagetitle}}</h3>
 
 										<div class="text-left details-section" style="background: white;">
 											<label for="comment"><b
@@ -635,13 +1124,6 @@
 															style="font-size: 15px;">{{lang.detail}}</b></td>
 												</tr>
 
-												<tr>
-													<td class="details-label"
-														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showincident_type}}</td>
-													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.incident_type}}</td>
-												</tr>
 
 												<tr ng-show="submit_as_concern == true">
 													<td class="details-label"
@@ -671,46 +1153,120 @@
 															ng-show="typel == 'lang3'">{{selectedParameterObject.questionm}}</span>
 													</td>
 												</tr>
+												<tr ng-if="feedback.incident_occured_in">
+													<td class="details-label"
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.incident_occurred}}
+													</td>
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														{{feedback.incident_occured_in | date:'dd MMM, yyyy - h:mm a'}}
+													</td>
+												</tr>
 
 												<tr ng-show="description == true">
 													<td class="details-label"
-														style="border: 1px solid #dddddd; padding: 10px;">{{lang.descb}}
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.descb}}
 													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
 														{{feedback.other}}</td>
 												</tr>
-												<tr ng-show="image == true">
+												<tr ng-show="what_went_wrong == true">
 													<td class="details-label"
-														style="border: 1px solid #dddddd; padding: 10px;">{{lang.image}}
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.what_went_wrong}}
 													</td>
-													<td style="border: 1px solid #dddddd; padding: 10px;"> <img
-															ng-src="{{feedback.image}}" alt="Encoded Image"
-															ng-show="feedback.image" /> </td>
-
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														{{feedback.what_went_wrong}}</td>
 												</tr>
+												<tr ng-show="action_taken == true">
+													<td class="details-label"
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.action_taken}}
+													</td>
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														{{feedback.action_taken}}</td>
+												</tr>
+												<tr ng-show="feedback.images && feedback.images.length > 0">
+													<td class="details-label"
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.image}}
+													</td>
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														<div ng-repeat="image in feedback.images track by $index"
+															style="margin: 5px;">
+															<img ng-src="{{image}}" alt="Encoded Image"
+																style="max-width: 100px; max-height: 100px; border: 1px solid #ccc;" />
+														</div>
+													</td>
+												</tr>
+
 												<!-- Display Other Files (Excel, Word, PDF, etc.) -->
 												<!-- Display Other Files (Excel, Word, CSV, etc.) -->
-												<tr ng-show="feedback.file">
+												<tr ng-show="feedback.files_name && feedback.files_name.length > 0">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">{{lang.file}}
 													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														<a ng-href="{{feedback.file}}" download="{{feedback.fileName}}"
-															ng-show="feedback.file">
-															{{feedback.fileName}}
-														</a>
+														<ul style="padding-left: 15px; margin: 0;">
+															<li ng-repeat="file in feedback.files_name">
+																<a ng-href="{{file.url}}"
+																	download="{{file.name}}">{{file.name}}</a>
+															</li>
+														</ul>
 													</td>
 												</tr>
-
-
 
 												<tr>
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showpriority}}</td>
+														{{lang.risk_matrixed}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.priority}}</td>
+														<span ng-if="!feedback.risk_matrix.level">Unassigned</span>
+														<span ng-if="feedback.risk_matrix.level">
+															<span class="risk-box" ng-class="{'p1': feedback.risk_matrix.level=='High',
+										'p2': feedback.risk_matrix.level=='Medium',
+										'p3': feedback.risk_matrix.level=='Low'}"></span>
+															<strong>{{feedback.risk_matrix.level}}</strong>
+
+															(
+															{{feedback.risk_matrix.impact}} Impact ×
+															{{feedback.risk_matrix.likelihood}} Likelihood )
+														</span>
+													</td>
 												</tr>
+
+												<tr>
+													<td class="details-label"
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.showpriority}}
+													</td>
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														<span ng-if="!feedback.priority">Unassigned</span>
+														<span ng-if="feedback.priority"
+															class="priority-box {{priorityCode(feedback.priority)}}"></span>
+														<span ng-if="feedback.priority">{{feedback.priority}}</span>
+
+													</td>
+												</tr>
+												<tr>
+													<td class="details-label"
+														style="border: 1px solid #dddddd; padding: 10px;">
+														{{lang.showincident_type}}</td>
+													<td style="border: 1px solid #dddddd; padding: 10px;">
+														<span ng-if="!feedback.incident_type">Unassigned</span>
+														<span ng-if="feedback.incident_type"
+															class="priority-box {{priorityCode(feedback.incident_type)}}"></span>
+														<span
+															ng-if="feedback.incident_type">{{feedback.incident_type}}</span>
+
+													</td>
+
+												</tr>
+
+
+
 
 												<tr>
 													<td colspan="2" class="details-label" style="padding: 10px;"><b
@@ -766,19 +1322,19 @@
 												</tr>
 
 
-												<tr ng-show="tagpatient == true">
+												<tr ng-show="tag_name == true">
 													<td colspan="2" class="details-label" style="padding: 10px;"><b
 															style="font-size: 15px;">{{lang.tag_detail}}</b></td>
 												</tr>
 
-												<tr ng-show="tagpatient == true">
+												<tr ng-show="tag_name == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
 														{{lang.tag_name}}</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
 														{{feedback.tag_name}}</td>
 												</tr>
-												<tr ng-show="tagpatient == true">
+												<tr ng-show="tag_patientid == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
 														{{lang.tag_id}}</td>
@@ -830,7 +1386,8 @@
 											<div class="col-12 text-center">
 												<img src="dist/tick.png"> <br>
 												<p style="text-align:center; margin-top: 45px; font-weight: 300;"
-													class="lead">{{lang.thankyoumessage}}</p>
+													class="lead">
+													{{lang.thankyoumessage}}</p>
 												<br>
 
 											</div>
@@ -850,6 +1407,70 @@
 </body>
 <!-- body section end  -->
 
+<!-- CSS -->
+<style>
+	.risk-table {
+		border-collapse: collapse;
+		text-align: center;
+	}
+
+	.risk-table td,
+	.risk-table th {
+		border: 1px solid #ccc;
+		padding: 14px;
+		cursor: pointer;
+	}
+
+	.risk-low {
+		background: #28a745;
+		color: #fff;
+	}
+
+	/* green */
+	.risk-medium {
+		background: #ffc107;
+		color: #000;
+	}
+
+	/* yellow */
+	.risk-high {
+		background: #dc3545;
+		color: #fff;
+	}
+
+	/* red */
+	.selected-cell {
+		outline: 3px solid #000;
+		/* highlight box */
+	}
+
+	.calendar-icon-container {
+		display: none;
+	}
+
+	@media (max-width: 800px) {
+		.calendar-icon-container {
+			display: block;
+		}
+	}
+</style>
+
+<script>
+	function setMaxDateTime() {
+		const now = new Date();
+
+		// format: YYYY-MM-DDTHH:MM (what datetime-local needs)
+		const formatted = now.toISOString().slice(0, 16);
+
+		document.getElementById("incident_occured_in").setAttribute("max", formatted);
+	}
+
+	// set max once on load
+	setMaxDateTime();
+
+	// OPTIONAL: keep refreshing every minute so "now" moves forward
+	setInterval(setMaxDateTime, 60000);
+</script>
 <style>
 	img {
 		max-width: 100%;
@@ -862,6 +1483,35 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		max-width: 100%;
+	}
+
+	/* Default desktop/tablet view */
+	.risk-table th[rowspan="5"] {
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+		padding: 10px;
+		white-space: nowrap;
+	}
+
+	/* Mobile view adjustments */
+	@media (max-width: 768px) {
+		.risk-table th[rowspan="5"] {
+			writing-mode: horizontal-tb;
+			transform: none;
+			text-align: center;
+			white-space: normal;
+			font-size: 12px;
+			/* shrink text a bit */
+		}
+
+		.risk-table {
+			font-size: 12px;
+		}
+
+		.risk-table th,
+		.risk-table td {
+			padding: 5px;
+		}
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>

@@ -30,12 +30,22 @@
 							<div class="timeline-body">
 
 
-									<p><strong>Action:</strong> <?php echo $r->action; ?></p>
-									
+								<?php if ($r->ticket_status != 'Assigned'): ?>
+									<?php if ($r->ticket_status != 'Re-assigned'): ?>
+										<p><strong>Action:</strong> <?php echo $r->action; ?></p>
+									<?php endif; ?>
+								<?php endif; ?>
+
+								<?php if ($r->process_monitor_note) { ?>
+									<p><strong>Notes : </strong> <?php echo $r->process_monitor_note; ?></p>
+								<?php } ?>
+
+
+
 
 
 								<?php if ($r->ticket_status == 'Transfered'): ?>
-									<p><strong>Action:</strong> <?php echo $r->action; ?></p>
+									<p><strong>Action:</strong> <?php echo $r->action; ?><strong> (Team Leader)</strong></p>
 									<p><strong>Transferred by:</strong> <?php echo $r->message; ?></p>
 									<p style="overflow: clip; word-break: break-all;font-size: 14px;">
 										<strong>Comment:</strong> <?php echo $r->reply; ?>
@@ -43,93 +53,119 @@
 								<?php endif; ?>
 
 								<?php if ($r->ticket_status == 'Assigned'): ?>
+									<p><strong>Action:</strong> <?php echo $r->action; ?><strong>(Team Leader)</strong></p>
+
+									<p><strong>Process Monitor:</strong> <?php echo $r->action_for_process_monitor; ?></p>
 									<p><strong>Assigned by:</strong> <?php echo $r->message; ?></p>
 								<?php endif; ?>
 
 								<?php if ($r->ticket_status == 'Re-assigned'): ?>
+									<p><strong>Action:</strong> <?php echo $r->action; ?><strong>(Team Leader)</strong></p>
+									<p><strong>Process Monitor:</strong> <?php echo $r->reassign_action_for_process_monitor; ?>
+									</p>
 									<p><strong>Re-assigned by:</strong> <?php echo $r->message; ?></p>
 								<?php endif; ?>
-
 								<?php if ($r->ticket_status == 'Described') { ?>
-									<?php if ($r->reply) { ?>
-										<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
-											<b>RCA </b>:
-											<?php echo $r->rootcause_describtion; ?>
-											<br>
-											<b>CAPA </b>:
-											<?php echo $r->corrective_description; ?>
-											<br>
-											<b>Additional notes </b>:
-											<?php echo $r->reply; ?><br>
-										<p class="inbox-item-text" style="overflow: clip; word-break: break-all; font-size: 14px;">
-											<?php if ($r->describe_picture): ?>
-												<?php
+									<div class="card shadow-sm mb-3">
+										<?php if ($r->rca_tool_describe) { ?>
+											<div class="">
+												<strong>Root Cause Analysis (RCA)</strong>
+											</div>
+										<?php } ?>
+
+										<div class="card-body" style="font-size: 14px; line-height:1.6;">
+											<?php if ($r->rootcause_describe) { ?>
+												<p><b>RCA in brief : </b> <?php echo $r->rootcause_describe; ?></p>
+											<?php } ?>
+											<?php if ($r->rca_tool_describe) { ?>
+												<p><b>Tool Applied:</b> <?php echo $r->rca_tool_describe; ?></p>
+											<?php } ?>
+
+
+											<?php if ($r->rca_tool_describe == '5WHY') { ?>
+												<ul class="list-unstyled">
+													<li><b>WHY 1:</b> <?php echo $r->fivewhy_1_describe; ?></li>
+													<li><b>WHY 2:</b> <?php echo $r->fivewhy_2_describe; ?></li>
+													<li><b>WHY 3:</b> <?php echo $r->fivewhy_3_describe; ?></li>
+													<li><b>WHY 4:</b> <?php echo $r->fivewhy_4_describe; ?></li>
+													<li><b>WHY 5:</b> <?php echo $r->fivewhy_5_describe; ?></li>
+												</ul>
+											<?php } ?>
+
+											<?php if ($r->rca_tool_describe == '5W2H') { ?>
+												<dl>
+													<?php if ($r->fivewhy2h_1_describe) { ?>
+														<dt>What happened?</dt>
+														<dd><?php echo $r->fivewhy2h_1_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_2_describe) { ?>
+														<dt>Why did it happen?</dt>
+														<dd><?php echo $r->fivewhy2h_2_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_3_describe) { ?>
+														<dt>Where did it happen?</dt>
+														<dd><?php echo $r->fivewhy2h_3_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_4_describe) { ?>
+														<dt>When did it happen?</dt>
+														<dd><?php echo $r->fivewhy2h_4_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_5_describe) { ?>
+														<dt>Who was involved?</dt>
+														<dd><?php echo $r->fivewhy2h_5_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_6_describe) { ?>
+														<dt>How did it happen?</dt>
+														<dd><?php echo $r->fivewhy2h_6_describe; ?></dd><?php } ?>
+													<?php if ($r->fivewhy2h_7_describe) { ?>
+														<dt>How much/How many (impact/cost)?</dt>
+														<dd><?php echo $r->fivewhy2h_7_describe; ?></dd><?php } ?>
+												</dl>
+											<?php } ?>
+
+											<?php if ($r->corrective_describe) { ?>
+												<p><b>Corrective Action:</b> <?php echo $r->corrective_describe; ?></p>
+											<?php } ?>
+
+											<?php if ($r->preventive_describe) { ?>
+												<p><b>Preventive Action:</b> <?php echo $r->preventive_describe; ?></p>
+											<?php } ?>
+
+											<?php if ($r->verification_comment_describe) { ?>
+												<p><b>Lesson Learned :</b> <?php echo $r->verification_comment_describe; ?></p>
+											<?php } ?>
+
+											<?php if ($r->describe_picture):
 												$file_extension = pathinfo($r->describe_picture, PATHINFO_EXTENSION);
-												$file_url = base_url('assets/images/describeimage/' . $r->describe_picture); // Adjust path as per your setup
+												$file_url = base_url('assets/images/capaimage/' . $r->describe_picture);
 												?>
-
-												<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-													<!-- Display Image -->
-													<br>
-													<img style="width: 100px;" src="<?php echo $file_url; ?>"> <br>
-													<a style="margin:5px; font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-														Image</a>
-
-												<?php elseif ($file_extension === 'pdf'): ?>
-													<!-- Display PDF -->
-													<br>
-													<embed src="<?php echo $file_url; ?>" type="application/pdf" width="200"
-														height="200" /><br>
-													<a style="margin:5px; font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-														PDF</a>
-
-												<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
-													<!-- Display link for Excel and CSV files -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-														<?php echo strtoupper($file_extension); ?> File</a>
-
-												<?php elseif (in_array($file_extension, ['txt'])): ?>
-													<!-- Display link for text files -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Text
-														File</a>
-
-												<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
-													<!-- Display link for Word documents -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Word
-														Document</a>
-
-												<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
-													<!-- Display link for compressed files -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Compressed
-														File</a>
-
-												<?php elseif (in_array($file_extension, ['bmp', 'tiff'])): ?>
-													<!-- Display link for image files -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Image
-														File</a>
-
-												<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
-													<!-- Display link for video and audio files -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Media
-														File</a>
-
-												<?php else: ?>
-													<!-- Handle unsupported file types -->
-													<br>
-													<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download File</a>
-													<!-- Optional message for unsupported previews -->
-													<!-- File type not supported for preview -->
-												<?php endif; ?>
+												<div class="mt-3">
+													<b>Attached File:</b><br>
+													<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+														<img class="img-thumbnail mt-2" style="max-width:150px;"
+															src="<?php echo $file_url; ?>">
+														<br><a class="btn btn-sm btn-outline-primary mt-2"
+															href="<?php echo $file_url; ?>" download>Download Image</a>
+													<?php elseif ($file_extension === 'pdf'): ?>
+														<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
+															height="200" class="mt-2">
+														<br><a class="btn btn-sm btn-outline-danger mt-2"
+															href="<?php echo $file_url; ?>" download>Download PDF</a>
+													<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
+														<a class="btn btn-sm btn-outline-success mt-2" href="<?php echo $file_url; ?>"
+															download>Download <?php echo strtoupper($file_extension); ?> File</a>
+													<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
+														<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
+															download>Download Word Document</a>
+													<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
+														<a class="btn btn-sm btn-outline-secondary mt-2" href="<?php echo $file_url; ?>"
+															download>Download Compressed File</a>
+													<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
+														<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
+															download>Download Media File</a>
+													<?php else: ?>
+														<a class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
+															download>Download File</a>
+													<?php endif; ?>
+												</div>
 											<?php endif; ?>
-										</p>
-										</p>
-									<?php } ?>
+										</div>
+									</div>
 								<?php } ?>
 								<?php if ($r->reply && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') { ?>
 									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
@@ -137,106 +173,105 @@
 										<?php echo $r->reply; ?>
 									</p>
 								<?php } ?>
-								<?php if ($r->ticket_status == 'Closed') { ?>
-									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
-										<?php if ($r->rootcause) { ?>
-											<b>Closure RCA</b>:
-
-											<?php echo $r->rootcause; ?>
+								<div class="card shadow-sm mb-3">
+									<?php if ($r->rca_tool) { ?>
+										<div class="">
+											<strong>Root Cause Analysis (RCA) for Incident </strong>
+										</div>
+									<?php } ?>
+									<div class="card-body" style="font-size: 14px; line-height:1.6;">
+										<?php if ($r->rca_tool) { ?>
+											<p><b>Tool Applied:</b> <?php echo $r->rca_tool; ?></p>
 										<?php } ?>
-									</p>
-									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
+										<?php if ($r->rca_tool == 'DEFAULT') { ?>
+											<p><b> RCA:</b> <?php echo $r->rootcause; ?></p>
+										<?php } ?>
+
+										<?php if ($r->rca_tool == '5WHY') { ?>
+											<ul class="list-unstyled">
+												<li><b>WHY 1:</b> <?php echo $r->fivewhy_1; ?></li>
+												<li><b>WHY 2:</b> <?php echo $r->fivewhy_2; ?></li>
+												<li><b>WHY 3:</b> <?php echo $r->fivewhy_3; ?></li>
+												<li><b>WHY 4:</b> <?php echo $r->fivewhy_4; ?></li>
+												<li><b>WHY 5:</b> <?php echo $r->fivewhy_5; ?></li>
+											</ul>
+										<?php } ?>
+
+										<?php if ($r->rca_tool == '5W2H') { ?>
+											<dl>
+												<?php if ($r->fivewhy2h_1) { ?>
+													<dt>What happened?</dt>
+													<dd><?php echo $r->fivewhy2h_1; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_2) { ?>
+													<dt>Why did it happen?</dt>
+													<dd><?php echo $r->fivewhy2h_2; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_3) { ?>
+													<dt>Where did it happen?</dt>
+													<dd><?php echo $r->fivewhy2h_3; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_4) { ?>
+													<dt>When did it happen?</dt>
+													<dd><?php echo $r->fivewhy2h_4; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_5) { ?>
+													<dt>Who was involved?</dt>
+													<dd><?php echo $r->fivewhy2h_5; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_6) { ?>
+													<dt>How did it happen?</dt>
+													<dd><?php echo $r->fivewhy2h_6; ?></dd><?php } ?>
+												<?php if ($r->fivewhy2h_7) { ?>
+													<dt>How much/How many (impact/cost)?</dt>
+													<dd><?php echo $r->fivewhy2h_7; ?></dd><?php } ?>
+											</dl>
+										<?php } ?>
+
 										<?php if ($r->corrective) { ?>
-											<b>Closure CAPA</b>:
-
-											<?php echo $r->corrective; ?>
+											<p><b>Closure Corrective Action:</b> <?php echo $r->corrective; ?></p>
 										<?php } ?>
-									</p>
-									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
+
 										<?php if ($r->preventive) { ?>
-											<b>Preventive</b>:
-
-											<?php echo $r->preventive; ?>
+											<p><b>Closure Preventive Action:</b> <?php echo $r->preventive; ?></p>
 										<?php } ?>
-									</p>
-									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
-										<?php if ($r->resolution_note) { ?>
-											<b>RCA/ CAPA Verification Remark</b>:
 
-											<?php echo $r->resolution_note; ?>
+										<?php if ($r->verification_comment) { ?>
+											<p><b>Closure Verification Remark:</b> <?php echo $r->verification_comment; ?></p>
 										<?php } ?>
-									</p>
-									<p class="inbox-item-text" style="overflow: clip; word-break: break-all; font-size: 14px;">
-										<?php if ($r->picture): ?>
-											<?php
+
+										<?php if ($r->picture):
 											$file_extension = pathinfo($r->picture, PATHINFO_EXTENSION);
-											$file_url = base_url('assets/images/capaimage/' . $r->picture); // Adjust path as per your setup
+											$file_url = base_url('assets/images/capaimage/' . $r->picture);
 											?>
-
-											<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-												<!-- Display Image -->
-												<br>
-												<img style="width: 100px;" src="<?php echo $file_url; ?>"> <br>
-												<a style="margin:5px; font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-													Image</a>
-
-											<?php elseif ($file_extension === 'pdf'): ?>
-												<!-- Display PDF -->
-												<br>
-												<embed src="<?php echo $file_url; ?>" type="application/pdf" width="200"
-													height="200" /><br>
-												<a style="margin:5px; font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-													PDF</a>
-
-											<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
-												<!-- Display link for Excel and CSV files -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download
-													<?php echo strtoupper($file_extension); ?> File</a>
-
-											<?php elseif (in_array($file_extension, ['txt'])): ?>
-												<!-- Display link for text files -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Text
-													File</a>
-
-											<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
-												<!-- Display link for Word documents -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Word
-													Document</a>
-
-											<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
-												<!-- Display link for compressed files -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Compressed
-													File</a>
-
-											<?php elseif (in_array($file_extension, ['bmp', 'tiff'])): ?>
-												<!-- Display link for image files -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Image
-													File</a>
-
-											<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
-												<!-- Display link for video and audio files -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download Media
-													File</a>
-
-											<?php else: ?>
-												<!-- Handle unsupported file types -->
-												<br>
-												<a style="font-size:14px;" href="<?php echo $file_url; ?>" download>Download File</a>
-												<!-- Optional message for unsupported previews -->
-												<!-- File type not supported for preview -->
-											<?php endif; ?>
+											<div class="mt-3">
+												<b>Attached File:</b><br>
+												<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+													<img class="img-thumbnail mt-2" style="max-width:150px;"
+														src="<?php echo $file_url; ?>">
+													<br><a class="btn btn-sm btn-outline-primary mt-2"
+														href="<?php echo $file_url; ?>" download>Download Image</a>
+												<?php elseif ($file_extension === 'pdf'): ?>
+													<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
+														height="200" class="mt-2">
+													<br><a class="btn btn-sm btn-outline-danger mt-2"
+														href="<?php echo $file_url; ?>" download>Download PDF</a>
+												<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
+													<a class="btn btn-sm btn-outline-success mt-2" href="<?php echo $file_url; ?>"
+														download>Download <?php echo strtoupper($file_extension); ?> File</a>
+												<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
+													<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
+														download>Download Word Document</a>
+												<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
+													<a class="btn btn-sm btn-outline-secondary mt-2" href="<?php echo $file_url; ?>"
+														download>Download Compressed File</a>
+												<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
+													<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
+														download>Download Media File</a>
+												<?php else: ?>
+													<a class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
+														download>Download File</a>
+												<?php endif; ?>
+											</div>
 										<?php endif; ?>
-									</p>
+									</div>
+								</div>
 
-
-
-								<?php } ?>
 
 
 							</div>

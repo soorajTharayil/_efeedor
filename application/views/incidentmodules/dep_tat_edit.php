@@ -26,84 +26,79 @@
                 <div class="panel-body">
                     <?php echo form_open(); ?>
                     <tr>
-                        <td colspan="6">
-                            <div class="global-time-setter">
-                                <label for="global-day-dept">Set - ⁠Incident Explanation Escalation</label>
-                                <select id="global-day-dept" onchange="setGlobalTimedep('day-dept')"
-                                    style="margin-left: 32px;">
-                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-hour-dept" onchange="setGlobalTimedep('hour-dept')">
-                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-minute-dept" onchange="setGlobalTimedep('minute-dept')">
-                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
-                                            Minute(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <button type="button" onclick="applyGlobalTimedep()">Apply to All</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <div class="global-time-setter">
+                            <td colspan="6">
+                                <div class="global-time-setter">
+                                    <label for="global-day-dept">Set Level 1 - Dept. Escalation TAT</label>
+                                    <select id="global-day-dept" onchange="setGlobalTimedep('day-dept')" style="margin-left: 32px;">
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-hour-dept" onchange="setGlobalTimedep('hour-dept')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-minute-dept" onchange="setGlobalTimedep('minute-dept')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTimedep()">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="global-time-setter">
                                 <label for="global-day-dept">Set Level 2 - Admin Escalation TAT</label>
-                                <select id="global-l1-day" onchange="setGlobalTime('l1', 'day')"
-                                    style="margin-left: 24px;">
-                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-l1-hour" onchange="setGlobalTime('l1', 'hour')">
-                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-l1-minute" onchange="setGlobalTime('l1', 'minute')">
-                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
-                                            Minute(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <button type="button" onclick="applyGlobalTime('l1')">Apply to All</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <div class="global-time-setter">
+                                    <select id="global-l1-day" onchange="setGlobalTime('l1', 'day')" style="margin-left: 24px;">
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l1-hour" onchange="setGlobalTime('l1', 'hour')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l1-minute" onchange="setGlobalTime('l1', 'minute')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTime('l1')">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="global-time-setter">
                                 <label for="global-day-dept">Set Level 3 - Sr. Admin Escalation TAT</label>
-                                <select id="global-l2-day" onchange="setGlobalTime('l2', 'day')">
-                                    <?php for ($i = 0; $i <= 7; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-l2-hour" onchange="setGlobalTime('l2', 'hour')">
-                                    <?php for ($i = 0; $i <= 23; $i++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <select id="global-l2-minute" onchange="setGlobalTime('l2', 'minute')">
-                                    <?php for ($i = 0; $i <= 55; $i += 5) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
-                                            Minute(s)</option>
-                                    <?php } ?>
-                                </select>
-                                <button type="button" onclick="applyGlobalTime('l2')">Apply to All</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <br>
-                    </tr>
+                                    <select id="global-l2-day" onchange="setGlobalTime('l2', 'day')" >
+                                        <?php for ($i = 0; $i <= 7; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Day(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l2-hour" onchange="setGlobalTime('l2', 'hour')">
+                                        <?php for ($i = 0; $i <= 23; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo $i; ?> Hour(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <select id="global-l2-minute" onchange="setGlobalTime('l2', 'minute')">
+                                        <?php for ($i = 0; $i <= 55; $i += 5) { ?>
+                                            <option value="<?php echo $i; ?>"><?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?> Minute(s)</option>
+                                        <?php } ?>
+                                    </select>
+                                    <button type="button" onclick="applyGlobalTime('l2')">Apply to All</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <br>
+                        </tr>
                     <table class=" table table-striped table-bordered" cellspacing="0" width="100%">
-
+                        
                         <!-- table head start -->
                         <thead>
                             <tr>
@@ -112,14 +107,14 @@
                                 </th>
                                 <th><?php echo lang_loader('inc', 'inc_department'); ?></th>
                                 <th><?php echo lang_loader('inc', 'inc_parameter'); ?></th>
-                                <th>⁠Incident Explanation Escalation</th>
+                                <th>Level 1 - Dept. Escalation TAT</th>
                                 <th>Level 2 - Admin Escalation TAT</th>
                                 <th>Level 3 - Sr. Admin Escalation TAT</th>
                             </tr>
                         </thead>
                         <!-- table head end -->
                         <!-- Add a global time setter -->
-
+                       
 
 
                         <!-- table body start -->
@@ -149,8 +144,7 @@
                                     $hours_l2 = floor(($seconds_total_l2 % 86400) / 3600); // 3600 seconds in an hour
                                     $minutes_l2 = floor(($seconds_total_l2 % 3600) / 60);
                                     ?>
-                                    <tr class="<?php echo $sl & 1 ? "odd gradeX" : "even gradeC"; ?>"
-                                        id="dep_row<?php echo $department->dprt_id; ?>">
+                                    <tr class="<?php echo $sl & 1 ? "odd gradeX" : "even gradeC"; ?>" id="dep_row<?php echo $department->dprt_id; ?>">
                                         <td>
                                             <?php echo $sl; ?>
                                         </td>
@@ -164,48 +158,43 @@
                                         <!-- dept level escalation -->
                                         <td>
                                             <div class="dhm-picker">
-                                                <input type="hidden" value="<?php echo $department->dept_level_escalation; ?>"
-                                                    id="dept_level<?php echo $department->dprt_id; ?>"
-                                                    name="tat[dept_level_escalation][<?php echo $department->dprt_id; ?>]">
-                                                <select id="daydept_level<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+                                                <input type="hidden" value="<?php echo $department->dept_level_escalation; ?>" id="dept_level<?php echo $department->dprt_id; ?>" name="tat[dept_level_escalation][<?php echo $department->dprt_id; ?>]">
+                                                <select id="daydept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
 
                                                     <?php for ($i = 0; $i <= 7; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($days_dept_level == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Day</span>
 
-                                                <select id="hourdept_level<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+                                                <select id="hourdept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
                                                     <?php for ($i = 0; $i <= 23; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($hours_days_dept_level == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Hour</span>
-                                                <select id="minutedept_level<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
+                                                <select id="minutedept_level<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'dept_level')">
 
 
                                                     <?php for ($i = 0; $i <= 55; $i += 5) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($minutes_days_dept_level == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
                                                 </select>
                                                 <span class="separator">Min</span>
@@ -214,48 +203,43 @@
                                         </td>
                                         <td>
                                             <div class="dhm-picker">
-                                                <input type="hidden" value="<?php echo $department->close_time; ?>"
-                                                    id="l1<?php echo $department->dprt_id; ?>"
-                                                    name="tat[close_time_l1][<?php echo $department->dprt_id; ?>]">
-                                                <select id="dayl1<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+                                                <input type="hidden" value="<?php echo $department->close_time; ?>" id="l1<?php echo $department->dprt_id; ?>" name="tat[close_time_l1][<?php echo $department->dprt_id; ?>]">
+                                                <select id="dayl1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
 
                                                     <?php for ($i = 0; $i <= 7; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($days_l1 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Day</span>
 
-                                                <select id="hourl1<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+                                                <select id="hourl1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
                                                     <?php for ($i = 0; $i <= 23; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($hours_l1 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Hour</span>
-                                                <select id="minutel1<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
+                                                <select id="minutel1<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l1')">
 
 
                                                     <?php for ($i = 0; $i <= 55; $i += 5) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($minutes_l1 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
                                                 </select>
                                                 <span class="separator">Min</span>
@@ -265,48 +249,43 @@
                                         <td>
 
                                             <div class="dhm-picker">
-                                                <input type="hidden" value="<?php echo $department->close_time_l2; ?>"
-                                                    id="l2<?php echo $department->dprt_id; ?>"
-                                                    name='tat[close_time_l2][<?php echo $department->dprt_id; ?>]'>
-                                                <select id="dayl2<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+                                                <input type="hidden" value="<?php echo $department->close_time_l2; ?>" id="l2<?php echo $department->dprt_id; ?>" name='tat[close_time_l2][<?php echo $department->dprt_id; ?>]'>
+                                                <select id="dayl2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
 
                                                     <?php for ($i = 0; $i <= 7; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($days_l2 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Day</span>
 
-                                                <select id="hourl2<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+                                                <select id="hourl2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
                                                     <?php for ($i = 0; $i <= 23; $i++) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($hours_l2 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo $i; ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
 
                                                 </select>
                                                 <span class="separator">Hour</span>
-                                                <select id="minutel2<?php echo $department->dprt_id; ?>"
-                                                    onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
+                                                <select id="minutel2<?php echo $department->dprt_id; ?>" onchange="setValueField(<?php echo $department->dprt_id; ?>,'l2')">
 
 
                                                     <?php for ($i = 0; $i <= 55; $i += 5) { ?>
                                                         <option value="<?php echo $i; ?>" <?php if ($minutes_l2 == $i) {
-                                                               echo 'selected';
-                                                           } ?>>
+                                                                                                echo 'selected';
+                                                                                            } ?>>
                                                             <?php echo str_pad($i, 2, "0", STR_PAD_LEFT); ?>
                                                         </option>
-                                                        <?php
+                                                    <?php
                                                     } ?>
                                                 </select>
                                                 <span class="separator">Min</span>
@@ -321,9 +300,9 @@
                                     $sl++;
                                     $i++;
                                     ?>
-                                    <?php
-                                } ?>
                                 <?php
+                                } ?>
+                            <?php
                             } ?>
                         </tbody>
                         <!-- table body end -->
@@ -367,56 +346,48 @@
         margin: 0 5px;
         color: #888;
     }
-
     .global-time-setter {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 5px;
-        /* Space between elements */
-        padding: 10px 0;
-        /* Add some padding for better spacing */
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px; /* Space between elements */
+    padding: 10px 0; /* Add some padding for better spacing */
+}
 
-    .global-label {
-        flex: 2;
-        /* Allocate more space for the label */
-        text-align: left;
-        font-weight: bold;
-    }
+.global-label {
+    flex: 2; /* Allocate more space for the label */
+    text-align: left;
+    font-weight: bold;
+}
 
-    .global-dropdown {
-        flex: 1;
-        /* Equal space for each dropdown */
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+.global-dropdown {
+    flex: 1; /* Equal space for each dropdown */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-    .global-button {
-        flex: 1;
-        /* Equal space for the button */
-        padding: 7px 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.global-button {
+    flex: 1; /* Equal space for the button */
+    padding: 7px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    .global-button:hover {
-        background-color: #0056b3;
-        /* Darker blue on hover */
-    }
+.global-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
 
-    td {
-        padding: 5px;
-    }
+td {
+    padding: 5px;
+}
 
-    tr {
-        border-bottom: 1px solid #ddd;
-        /* Optional: Add a border between rows */
-    }
+tr {
+    border-bottom: 1px solid #ddd; /* Optional: Add a border between rows */
+}
 </style>
 <script>
     function modifyRowColor(id) {

@@ -31,14 +31,20 @@ Last updated on 05-03-23 -->
 		<!-- <span class="download_option" style="display: none; position:relative;" id="showdownload"> -->
 		<div class="row" style="position: relative;display: none;" id="showdownload">
 			<div class="p-l-30 p-r-30" style="float:right;margin-bottom: 20px;">
-				<a data-toggle="tooltip" title="Click here to download category wise incident report" target="_blank" href="<?php echo  $int_download_department_excel; ?>" style="float:right;margin:0px 0px;"><img src="<?php echo base_url(); ?>assets/icon/department.png" style="float: right;
-               width: 32px;
-               cursor: pointer;"></a>
-				<a data-toggle="tooltip" title="Click here to download incidents wise report" target="_blank" href="<?php echo $int_download_comments_excel; ?>" style="float:right;margin:0px 10px;"><img src="<?php echo base_url(); ?>assets/icon/download.png" style="float: right;
-               width: 32px;
-               cursor: pointer;">
+				<a data-toggle="tooltip" title="Click here to download category wise incident report" target="_blank"
+					href="<?php echo $int_download_department_excel; ?>" style="float:right;margin:0px 0px;"><img
+						src="<?php echo base_url(); ?>assets/icon/department.png" style="float: right;
+			   width: 32px;
+			   cursor: pointer;"></a>
+				<a data-toggle="tooltip" title="Click here to download incidents wise report" target="_blank"
+					href="<?php echo $int_download_comments_excel; ?>" style="float:right;margin:0px 10px;"><img
+						src="<?php echo base_url(); ?>assets/icon/download.png" style="float: right;
+			   width: 32px;
+			   cursor: pointer;">
 				</a>
-				<a data-toggle="tooltip" title="Download overall incident report in pdf format" target="_blank" href="<?php echo $int_download_overall_pdf; ?>" style="float:right;margin:0px 10px;"><img src="<?php echo base_url(); ?>assets/icon/pdfdownload.png" style="float: right;
+				<a data-toggle="tooltip" title="Download overall incident report in pdf format" target="_blank"
+					href="<?php echo $int_download_overall_pdf; ?>" style="float:right;margin:0px 10px;"><img
+						src="<?php echo base_url(); ?>assets/icon/pdfdownload.png" style="float: right;
 			   width: 32px;
 			   color: 	#62c52d;
 			   cursor: pointer;"></a>
@@ -54,102 +60,131 @@ Last updated on 05-03-23 -->
 
 		<!-- Close Download Buttons-->
 		<!-- Metric Boxes-->
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><span class="count-number"><?php echo $inc_department['alltickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small"><?php echo lang_loader('inc', 'inc_total_incidents'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><span class="count-number"><?php echo $inc_department['alltickets']; ?></span> <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small"><?php echo lang_loader('inc', 'inc_total_incidents'); ?> <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-ticket"></i>
 							</div>
-							<a href="<?php echo $int_link_alltickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+							<a href="<?php echo $int_link_alltickets; ?>"
+								style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('OPEN-INCIDENTS') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('OPEN-INCIDENTS') === true) { ?>
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><span class="count-number"><?php echo $inc_department['opentickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small"><?php echo lang_loader('inc', 'inc_open_incidents'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $opentickect_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><span class="count-number"><?php echo $inc_department['opentickets']; ?></span> <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small"><?php echo lang_loader('inc', 'inc_open_incidents'); ?> <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $opentickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-envelope-open-o"></i>
 							</div>
-							<a href="<?php echo $int_link_opentickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+							<a href="<?php echo $int_link_opentickets; ?>"
+								style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
 
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('IN-REJECTED-INCIDENTS') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-REJECTED-INCIDENTS') === true) { ?>
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><span class="count-number"><?php echo $inc_department['rejecttickets']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small">Rejected incident <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $addressedtickect_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><span class="count-number"><?php echo $inc_department['rejecttickets']; ?></span> <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small">Rejected incident <a href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $addressedtickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-reply"></i>
 							</div>
-							<a href="<?php echo $int_link_rejecttickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+							<a href="<?php echo $int_link_rejecttickets; ?>"
+								style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('CLOSED-INCIDENTS') === true) { ?>
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><span class="count-number"><?php echo $inc_department['closedticket']; ?></span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small"><?php echo lang_loader('inc', 'inc_closed_incidents'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $closetickect_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><span class="count-number"><?php echo $inc_department['closedticket']; ?></span> <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small"><?php echo lang_loader('inc', 'inc_closed_incidents'); ?> <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $closetickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-check-circle-o"></i>
 							</div>
-							<a href="<?php echo $int_link_closedtickets; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+							<a href="<?php echo $int_link_closedtickets; ?>"
+								style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><span class="count-number"><?php echo $ticket_resolution_rate; ?></span>% <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small"><?php echo lang_loader('inc', 'inc_incidents_resolution_rate'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $ticketresolutionrate_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><span class="count-number"><?php echo $ticket_resolution_rate; ?></span>% <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small"><?php echo lang_loader('inc', 'inc_incidents_resolution_rate'); ?> <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $ticketresolutionrate_info_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-clock-o"></i>
 							</div>
 						</div>
-						<a href="<?php echo $ip_link_ticket_resolution_rate; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+						<a href="<?php echo $ip_link_ticket_resolution_rate; ?>"
+							style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 
 					</div>
 				</div>
 			</div>
 		<?php } ?>
-		<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2><?php echo $ticket_close_rate; ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
-							<div class="small"><?php echo lang_loader('inc', 'inc_average_resolution_time'); ?> <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $averageresolutiontime_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2><?php echo $ticket_close_rate; ?>&nbsp;<span class="slight"><i
+										class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small"><?php echo lang_loader('inc', 'inc_average_resolution_time'); ?> <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $averageresolutiontime_info_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
 							<div class="icon">
 								<i class="fa fa-calendar-check-o"></i>
 							</div>
 						</div>
-						<a href="<?php echo $ip_link_average_resolution_time; ?>" style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+						<a href="<?php echo $ip_link_average_resolution_time; ?>"
+							style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
 
 					</div>
 				</div>
@@ -166,18 +201,22 @@ Last updated on 05-03-23 -->
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4><?php echo lang_loader('inc', 'inc_key_takeaways'); ?> <a href="javascript:void()" data-placement="bottom" data-toggle="tooltip" title="This section will give you a complete understanding of the performance of every parameters and department over the selected period of time."><i class="fa fa-info-circle" aria-hidden="true"></i></a></h4>
+						<h4><?php echo lang_loader('inc', 'inc_key_takeaways'); ?> <a href="javascript:void()"
+								data-placement="bottom" data-toggle="tooltip"
+								title="This section will give you a complete understanding of the performance of every parameters and department over the selected period of time."><i
+									class="fa fa-info-circle" aria-hidden="true"></i></a></h4>
 					</div>
 					<div class="p-l-30 p-r-30">
 						<div class="panel-body" style="height: 150px; display:inline;">
 							<div class="alert alert-warning">
 								<span style="font-size: 15px">
-									<?php echo lang_loader('inc', 'inc_you_have_received_most_incidents_in'); ?><strong><?php echo $highest_complain; ?></strong>
+								You have received the most incidents in <strong><?php echo $highest_complain; ?></strong>
 								</span>
 							</div>
 							<div class="alert alert-success ">
 								<span style="font-size: 15px">
-									<?php echo lang_loader('inc', 'inc_you_have_received_least_incidents_in'); ?> <strong><?php echo $lowest_complain; ?></strong>
+									<?php echo lang_loader('inc', 'inc_you_have_received_least_incidents_in'); ?>
+									<strong><?php echo $lowest_complain; ?></strong>
 								</span>
 							</div>
 						</div>
@@ -280,7 +319,10 @@ Last updated on 05-03-23 -->
 		<div class="col-lg-5">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3><?php echo lang_loader('inc', 'inc_recent_incidents'); ?> <a href="javascript:void()" data-placement="bottom" data-toggle="tooltip" title="<?php echo $recentpatientticket_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></a></h3>
+					<h3><?php echo lang_loader('inc', 'inc_recent_incidents'); ?> <a href="javascript:void()"
+							data-placement="bottom" data-toggle="tooltip"
+							title="<?php echo $recentpatientticket_tooltip; ?>"><i class="fa fa-info-circle"
+								aria-hidden="true"></i></a></h3>
 				</div>
 				<div class="panel-body" style="   height: 460px;      overflow: auto;">
 					<div class="message_inner">
@@ -292,7 +334,7 @@ Last updated on 05-03-23 -->
 						$this->db->from($setup);
 						// $this->db->where('parent', 0);
 						$query = $this->db->get();
-						$reasons  = $query->result();
+						$reasons = $query->result();
 						foreach ($reasons as $row) {
 							$keys[$row->shortkey] = $row->shortkey;
 							$res[$row->shortkey] = $row->shortname;
@@ -302,17 +344,18 @@ Last updated on 05-03-23 -->
 
 
 						foreach ($ticket_data as $ticketdata) {
-						?>
+							?>
 							<a href="<?php echo base_url($this->uri->segment(1)); ?>/track/<?php echo $ticketdata->id ?>">
 								<div class="inbox-item">
 									<p class="inbox-item-author">
 										<?php echo 'INC-' . $ticketdata->id ?>
 										<span style="float: right;font-size:10px;"><?php
-																					echo date('g:i A, d-m-y', strtotime($ticketdata->created_on)); ?></span>
+										echo date('g:i A, d-m-y', strtotime($ticketdata->created_on)); ?></span>
 									</p>
 
 									<p class="inbox-item-text">
-										<i class="fa fa-user-plus"></i> <?php echo $ticketdata->feed->name; ?> (<span style="color:#62c52d;"><?php echo $ticketdata->feed->patientid; ?></span>), from
+										<i class="fa fa-user-plus"></i> <?php echo $ticketdata->feed->name; ?> (<span
+											style="color:#62c52d;"><?php echo $ticketdata->feed->patientid; ?></span>), from
 										<?php
 										if ($ticketdata->feed->bedno) {
 											echo $ticketdata->feed->bedno;
@@ -322,7 +365,8 @@ Last updated on 05-03-23 -->
 										<?php echo $ticketdata->feed->ward . '.'; ?>
 									</p>
 									<p class="inbox-item-text">
-										<i class="fa fa-ticket"></i><b> <?php echo $ticketdata->department->description; ?></b>
+										<i class="fa fa-ticket"></i><b>
+											<?php echo $ticketdata->department->description; ?></b>
 									</p>
 
 									<?php if ($ticketdata->feed->reason == true) { ?>
@@ -334,11 +378,11 @@ Last updated on 05-03-23 -->
 														<i class="fa fa-frown-o" aria-hidden="true"></i>
 														<?php echo $res[$key]; ?>
 														<br>
-													<?php 	} ?>
-												<?php 	} ?>
-											<?php 	} ?>
+													<?php } ?>
+												<?php } ?>
+											<?php } ?>
 										</p>
-									<?php 	} ?>
+									<?php } ?>
 
 									<?php if ($ticketdata->feed->comment == true) { ?>
 
@@ -351,29 +395,33 @@ Last updated on 05-03-23 -->
 													$value = substr($value, 0, 60) . '  ' . ' ...';
 												} ?>
 												<?php if ($value) { ?>
-													<i class="fa fa-comment-o"></i> <?php echo lang_loader('inc', 'inc_description'); ?> :
+													<i class="fa fa-comment-o"></i> <?php echo lang_loader('inc', 'inc_description'); ?>
+													:
 													"<?php echo $value; ?>"
-												<?php 	} ?>
+												<?php } ?>
 
 											</p>
-										<?php 	} ?>
-									<?php 	} ?>
+										<?php } ?>
+									<?php } ?>
 
 
 
 									<p class="inbox-item-text" style="font-size:10px;">
 										<?php if ($ticketdata->status == 'Closed') { ?>
-											<span style="color:  #198754;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+											<span style="color:  #198754;font-weight: bold; display: inline-block;"><i
+													class="fa fa-circle" aria-hidden="true"></i></span>
 											<?php echo 'Closed'; ?>
 										<?php } ?>
 										<?php if ($ticketdata->status == 'Addressed') { ?>
-											<span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+											<span style="color:  #f0ad4e;font-weight: bold; display: inline-block;"><i
+													class="fa fa-circle" aria-hidden="true"></i></span>
 											<?php echo 'Addressed'; ?>
 										<?php } ?>
 										<?php if ($ticketdata->status == 'Open' || $ticketdata->status == 'Reopen' || $ticketdata->status == 'Transfered') { ?>
-											<span style="color: #d9534f;font-weight: bold; display: inline-block;"><i class="fa fa-circle" aria-hidden="true"></i></span>
+											<span style="color: #d9534f;font-weight: bold; display: inline-block;"><i
+													class="fa fa-circle" aria-hidden="true"></i></span>
 											<?php echo 'Open'; ?>
-										<?php }  ?>
+										<?php } ?>
 
 										<?php
 										echo date('g:i A, d-m-y', strtotime($ticketdata->last_modified)); ?>
@@ -381,10 +429,12 @@ Last updated on 05-03-23 -->
 								</div>
 							</a>
 						<?php } ?>
-						<?php  ?>
+						<?php ?>
 					</div>
 				</div>
-				<div style="padding: 20px;    background: #f5f5f5;"><a href="<?php echo base_url($this->uri->segment(1)); ?>/alltickets" style="float: right;    margin-top: -9px;">View All</a></div>
+				<div style="padding: 20px;    background: #f5f5f5;"><a
+						href="<?php echo base_url($this->uri->segment(1)); ?>/alltickets"
+						style="float: right;    margin-top: -9px;">View All</a></div>
 			</div>
 
 		</div>
@@ -463,7 +513,6 @@ Last updated on 05-03-23 -->
 		}
 	}
 </style>
-
 <script>
 	function printChart_tickets_recived_by_department() {
 		const canvas = document.getElementById('tickets_recived_by_department');

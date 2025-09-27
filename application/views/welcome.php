@@ -888,7 +888,7 @@ if($total_audits == 0){
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
 												title="Report incidents"
-												href="<?php echo  base_url() . '/imf?user_id=' . $this->session->userdata['user_id'] ?>"
+												href="<?php echo  base_url() . '/inn?user_id=' . $this->session->userdata['user_id'] ?>"
 												style="margin-right: 10px;">
 												Report incidents
 											</a>
@@ -1613,7 +1613,7 @@ if($total_audits == 0){
 
 	<!-- FOR DEPT HEAD -->
 
-	<?php if (ismodule_active('GLOBAL') === true && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true && ($this->session->userdata['user_role'] == 4)) {  ?>
+	<?php if (ismodule_active('GLOBAL') === true && isfeature_active('DEPARTMENT-HEAD-OVERALL-PAGE') === true && ($this->session->userdata['user_role'] >= 4)) {  ?>
 
 		<!-- if dephead has access to admission feedback tickets -->
 		<?php if (ismodule_active('ADF') === true  && isfeature_active('ADF-TICKETS-DASHBOARD') === true) { ?>
@@ -2221,11 +2221,11 @@ if($total_audits == 0){
 										<div style="float: right; margin-top: -26px">
 											<a class="btn btn-success btn-sm" target="_blank" style="margin-right: 10px; background: #62c52d; border-radius: 4px; border:none; font-size: 13px;" data-placement="bottom" data-toggle="tooltip"
 												title="Report incidents"
-												href="<?php echo  base_url()  . '/imf?user_id=' . $this->session->userdata['user_id'] ?>"
+												href="<?php echo  base_url()  . '/inn?user_id=' . $this->session->userdata['user_id']; ?>"
 												style="margin-right: 10px;">
 												Report incidents
 											</a>
-											<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>incident/department_tickets" style="float: right;margin-top: -27px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
+											<?php if (ismodule_active('INCIDENT') === true  && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?><a href="<?php echo base_url(); ?>incident/department_tickets" style="float: right;margin-top:0px; background: #8791a4; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; text-decoration: none;">Explore</a><?php } ?>
 										</div>
 									<?php } ?>
 								</span>

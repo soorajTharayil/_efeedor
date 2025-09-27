@@ -1,3 +1,23 @@
+<?php
+if (!function_exists('getRiskColor')) {
+	function getRiskColor($value)
+	{
+		switch ($value) {
+			case 'High':
+				return '#d9534f'; // red
+			case 'Medium':
+				return '#f0ad4e'; // orange
+			case 'Low':
+				return '#16ae6aff'; // blue
+			default:
+				return '#6c757d'; // gray
+		}
+	}
+}
+
+
+?>
+
 <div class="content">
 
 	<?php
@@ -41,12 +61,14 @@
 						<?php if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
 							<form>
 								<p>
+									<span style="font-size:16px;"><strong>Filter By : </strong></span>
+
 									<!-- <span style="font-size:15px; font-weight:bold;"><?php echo lang_loader('inc', 'inc_sort_incident_by'); ?></span> -->
 									<select name="dep" class="form-control" id="subsecid"
 										onchange="gotonextdepartment2(this.value)"
 										style="width:200px; margin:0px 0px 20px 20px;">
-										<option value="1" selected><?php echo lang_loader('inc', 'inc_select_category'); ?>
-										</option>
+										<option value="1" selected>Incident Short Name</option>
+
 										<?php
 										$this->db->group_by('description');
 										$this->db->where('type', 'incident');
@@ -100,15 +122,12 @@
 							<thead>
 								<tr>
 									<th><?php echo lang_loader('inc', 'inc_slno'); ?></th>
-									<!-- <th style="white-space: nowrap;"><?php echo lang_loader('inc', 'inc_incidents_id'); ?>
-									</th> -->
+
 									<th style="white-space: nowrap;">
 										Incident Details</th>
-									<!-- <th style="white-space: nowrap;">Incident Category</th> -->
+									<!-- <th style="white-space: nowrap;">Incident Incident Short Name</th> -->
 									<th style="white-space: nowrap;">Incident Timeline & History</th>
-									<!-- <th style="white-space: nowrap;">
-										<?php echo lang_loader('inc', 'inc_turn_around'); ?><br><?php echo lang_loader('inc', 'inc_tat'); ?>
-									</th> -->
+
 
 
 								</tr>
@@ -117,6 +136,12 @@
 								<?php if (!empty($departments)) { ?>
 									<?php $sl = 1; ?>
 									<?php foreach ($departments as $department) {
+
+										// echo '<pre>';
+										// print_r($department);
+										// echo '</pre>';
+										// exit;
+							
 
 										if ($department->status == 'Closed') {
 											$this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
@@ -154,95 +179,249 @@
 											data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
 											<td><?php echo $sl; ?></td>
 											<!-- <td><?php echo lang_loader('inc', 'inc_inc'); ?><?php echo $department->id; ?></td> -->
-											<td style="overflow-wrap: break-word; word-break: normal;">
-												<?php
-												   $rep = '';
-												   if ($department->departmentid_trasfered != 0) {
-													   $issue = NULL;
-												   } else {
-													   foreach ($department->feed->reason as $key => $value) {
-														   if ($key) {
-															   if ($titles[$key] == $department->department->description) {
-																   if (in_array($key, $keys)) {
-																	   $issue = $res[$key];
-																   }
-															   }
-														   }
-													   }
-												   }
-							   
-												   $root = [];
-												   $corrective = [];
-												   $resolution_note = [];
-												   $rootcause_describtion = [];
-												   $corrective_description = [];
-							   
-												   foreach ($department->replymessage as $r) {
-													   if ($r->rootcause != NULL) {
-														   $root[] = $r->rootcause;
-													   }
-							   
-													   if ($r->corrective != NULL) {
-														   $corrective[] = $r->corrective;
-													   }
-													   if ($r->rootcause_describtion != NULL) {
-														   $rootcause_describtion[] = $r->rootcause_describtion;
-													   }
-													   if ($r->corrective_description != NULL) {
-														   $corrective_description[] = $r->corrective_description;
-													   }
-							   
-													   if ($r->resolution_note != NULL) {
-														   $resolution_note[] = $r->resolution_note;
-													   }
-							   
-													   if ($r->ticket_status == 'Addressed' && $r->reply != NULL) {
-														   $rep = $r->reply;
-													   }
-												   }
-							   
-												   $createdOn = strtotime($department->created_on);
-												   $lastModified = strtotime($department->last_modified);
-												   $timeDifferenceInSeconds = $lastModified - $createdOn;
-							   
-												   $value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
-							   
-												   $timetaken = '';
-												   if ($value['days'] != 0) {
-													   $timetaken .= $value['days'] . ' days, ';
-												   }
-							   
-												   if ($value['hours'] != 0) {
-													   $timetaken .= $value['hours'] . ' hrs, ';
-												   }
-							   
-												   if ($value['minutes'] != 0) {
-													   $timetaken .= $value['minutes'] . ' mins.';
-												   }
-							   
-												   if ($timeDifferenceInSeconds <= 60) {
-													   $timetaken .= 'less than a minute';
-												   }
-							   
-												   $assignee = $department->department->pname;
-												   $incidentHistory = $department->replymessage;
+											<td
+												style="overflow-wrap: break-word; word-break: normal; font-size:14px; line-height:1.6;">
 
-												echo '<strong>Incident ID:</strong> ' . ($department->id) . '<br>' .
-													'<strong>Incident :</strong> ' . ($department->department->description) . '<br>' .
-													'<strong>Category:</strong> ' . ($issue ? $issue : 'Ticket was transferred') . '<br>' .
-													'<strong>Description:</strong> ' . ($department->feed->other ? $department->feed->other : 'NA') . '<br>',
-													'<strong>Reported By:</strong> ' . ($department->feed->name ?? '') . (!empty($department->feed->patientid) ? ' (' . $department->feed->patientid . ')' : '') . '<br>' .
-													'<strong>Reported On:</strong> ' . $department->created_on . '<br>' .
-													'<strong>Reported In:</strong> ' . ($department->feed->ward ?? '') . (!empty($department->feed->bedno) ? ' (' . $department->feed->bedno . ')' : '') . '<br>' .
-													'<strong>Incident Type:</strong> ' . ($department->incident_type). '<br>' .
-													'<strong>Priority:</strong> ' . ($department->priority) . '<br>' .
-													'<strong>Closed On:</strong> ' . $department->last_modified . '<br>' .
-													'<strong>Closed By:</strong> ' . $ticket[0]->message . '<br>' .
-													'<strong>TAT:</strong> ' .$timetaken. '<br>';
+												<?php
+												$rep = '';
+												if ($department->departmentid_trasfered != 0) {
+													$issue = NULL;
+												} else {
+													foreach ($department->feed->reason as $key => $value) {
+														if ($key) {
+															if ($titles[$key] == $department->department->description) {
+																if (in_array($key, $keys)) {
+																	$issue = $res[$key];
+																}
+															}
+														}
+													}
+												}
+
+
+												$createdOn = strtotime($department->created_on);
+												$lastModified = strtotime($department->last_modified);
+												$timeDifferenceInSeconds = $lastModified - $createdOn;
+
+												$value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+												$timetaken = '';
+												if ($value['days'] != 0) {
+													$timetaken .= $value['days'] . ' days, ';
+												}
+
+												if ($value['hours'] != 0) {
+													$timetaken .= $value['hours'] . ' hrs, ';
+												}
+
+												if ($value['minutes'] != 0) {
+													$timetaken .= $value['minutes'] . ' mins.';
+												}
+
+												if ($timeDifferenceInSeconds <= 60) {
+													$timetaken .= 'less than a minute';
+												}
+
 												?>
 
+												<?php
+												if (!empty($department->feed->risk_matrix)) {
+													$impact = $department->feed->risk_matrix->impact ?? 'NA';
+													$likelihood = $department->feed->risk_matrix->likelihood ?? 'NA';
+													$level = $department->feed->risk_matrix->level ?? 'NA';
+												}
+												?>
+
+												<?php
+
+												$userss = $this->db->select('user_id, firstname')
+													->where('user_id !=', 1)
+													->get('user')
+													->result();
+
+												$userMap = [];
+												foreach ($userss as $u) {
+													$userMap[$u->user_id] = $u->firstname;
+												}
+
+												// Step 2: Convert comma-separated IDs into arrays
+												$assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+													? explode(',', $department->assign_for_process_monitor)
+													: [];
+
+												$assign_to_ids = !empty($department->assign_to)
+													? explode(',', $department->assign_to)
+													: [];
+
+												// Step 3: Map IDs → names
+												$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+													return $userMap[$id] ?? $id;
+												}, $assign_for_process_monitor_ids);
+
+												$assign_to_names = array_map(function ($id) use ($userMap) {
+													return $userMap[$id] ?? $id;
+												}, $assign_to_ids);
+
+												// Step 4: Join into comma-separated strings
+												$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+												$names = implode(', ', $assign_to_names);
+
+												// Normalize and map color for Risk Priority
+												$priority = str_replace('–', '-', $department->priority);
+												switch ($priority) {
+													case 'P1-Critical':
+														$color = '#ff4d4d';
+														break;   // Red
+													case 'P2-High':
+														$color = '#ff9800';
+														break;   // Orange
+													case 'P3-Medium':
+														$color = '#fbc02d';
+														break;   // Yellow
+													case 'P4-Low':
+														$color = '#166cc7ff';
+														break;   // Blue
+													default:
+														$color = '#000';
+												}
+
+												echo '<div style="background:#fafafa;
+												border-left:4px solid #dadada;
+												padding:12px 15px;
+												border-radius:4px;
+												box-shadow:0 1px 3px rgba(0,0,0,0.05);
+                                                ">';
+
+												if (!empty($department->id)) {
+													echo '<div><strong>Incident ID : </strong> ' . htmlspecialchars($department->id) . '</div>';
+												}
+
+												if (isset($issue) && $issue !== '') {
+													echo '<div><strong>Incident : </strong> ' . htmlspecialchars($issue) . '</div>';
+												} else {
+													echo '<div><strong>Incident : </strong> Ticket was transferred</div>';
+												}
+
+												if (!empty($department->department->description)) {
+													echo '<div><strong>Incident Short Name : </strong> ' . htmlspecialchars($department->department->description) . '</div>';
+												}
+
 												
+
+												if (!empty($department->feed->other)) {
+													echo '<div><strong>Description : </strong> ' . htmlspecialchars($department->feed->other) . '</div>';
+												} else {
+													echo '<div><strong>Description : </strong> NA</div>';
+												}
+
+												if (!empty($department->feed->what_went_wrong)) {
+													echo '<div><strong>What went wrong : </strong> ' . htmlspecialchars($department->feed->what_went_wrong) . '</div>';
+												} else {
+													echo '<div><strong>What went wrong : </strong> NA</div>';
+												}
+
+												if (!empty($department->feed->action_taken)) {
+													echo '<div><strong>Immediate action taken : </strong> ' . htmlspecialchars($department->feed->action_taken) . '</div>';
+												} else {
+													echo '<div><strong>Immediate action taken : </strong> NA</div>';
+												}
+
+												if (!empty($department->feed->name) || !empty($department->feed->patientid)) {
+													echo '<div><strong>Reported By : </strong> '
+														. htmlspecialchars($department->feed->name ?? '')
+														. (!empty($department->feed->patientid) ? ' (' . htmlspecialchars($department->feed->patientid) . ')' : '')
+														. '</div>';
+												}
+												if (!empty($department->feed->incident_occured_in)) {
+													echo '<div><strong>Incident Occured On : </strong> ' . htmlspecialchars($department->incident_occured_in) . '</div>';
+												}
+
+												if (!empty($department->created_on)) {
+													echo '<div><strong>Reported On : </strong> ' 
+   . date('d M, Y - g:i A', strtotime($department->created_on)) 
+   . '</div>';
+
+												}
+
+												if (!empty($department->feed->ward) || !empty($department->feed->bedno)) {
+													echo '<div><strong>Reported In : </strong> '
+														. htmlspecialchars($department->feed->ward ?? '')
+														. (!empty($department->feed->bedno) ? ' (' . htmlspecialchars($department->feed->bedno) . ')' : '')
+														. '</div>';
+												}
+
+												
+
+												if (!empty($level) && !empty($impact) && !empty($likelihood)) {
+													echo '<div><strong>Assigned Risk : 
+        <span style="color:' . getRiskColor($level) . ';">' . htmlspecialchars($level) . '</span> </strong> 
+        ( <span >' . htmlspecialchars($impact) . '</span> Impact × 
+        <span>' . htmlspecialchars($likelihood) . '</span> Likelihood )
+    </div>';
+												}
+
+											
+
+												if (!empty($priority)) {
+													echo '<div><strong>Assigned Priority : </strong> <span style="color:'
+														. htmlspecialchars($color ?? 'black')
+														. '; font-weight:600;">'
+														. htmlspecialchars($priority) . '</span></div>';
+												}
+													if (!empty($department->incident_type)) {
+													$severity = $department->incident_type;
+
+													// Map severity levels to colors
+													$severityColors = [
+														'Near miss' => '#1cb23cff',   // Blue
+														'No-harm' => '#2138ccff',   // Yellow
+														'Adverse' => '#fbc02d',   // Orange
+														'Hazardous Condition' => '#ff9800',   // Red
+														'Sentinel' => '#ff4d4d',   // Red
+														'Unassigned' => '#6c757d'    // Gray fallback
+													];
+
+													$sevColor = $severityColors[$severity] ?? $severityColors['Unassigned'];
+
+													echo '<div><strong>Assigned Category : </strong> 
+            <span style="color:' . htmlspecialchars($sevColor) . '; font-weight:600;">'
+														. htmlspecialchars($severity) . '</span></div>';
+												}
+
+												if (!empty($department->feed->tag_name) || !empty($department->feed->tag_patientid)) {
+													echo '<div><strong>Patient details : </strong> '
+														. htmlspecialchars($department->feed->tag_name ?? '')
+														. (!empty($department->feed->tag_patientid) ? ' (' . htmlspecialchars($department->feed->tag_patientid) . ')' : '')
+														. '</div>';
+												}
+
+
+												if (!empty($names)) {
+													echo '<div><strong>Team Leader : </strong> <span >'
+														. htmlspecialchars($names) . '</span></div>';
+												}
+
+												if (!empty($actionText_process_monitor)) {
+													echo '<div><strong>Process Monitor : </strong> <span >'
+														. htmlspecialchars($actionText_process_monitor) . '</span></div>';
+												}
+
+
+
+												if (!empty($department->last_modified)) {
+													echo '<div><strong>Closed On : </strong> ' . htmlspecialchars($department->last_modified) . '</div>';
+												}
+
+												
+
+												if (!empty($timetaken)) {
+													echo '<div><strong>TAT : </strong> ' . htmlspecialchars($timetaken) . '</div>';
+												}
+
+												echo '</div>';
+												?>
 											</td>
+
 
 											<!-- <td style="overflow-wrap: break-word; word-break: normal;">
 
@@ -287,48 +466,164 @@
 
 
 
-											<td style="border: 1px solid #dadada; overflow: clip; word-break: break-word;">
+											<td
+												style="border: 1px solid #dadada; overflow: clip; word-break: break-word; font-size:14px;">
 
 												<?php
-												// Sort the reply messages by created_on if available
+												// Sort reply messages by created_on
 												usort($department->replymessage, function ($a, $b) {
 													return strtotime($a->created_on) - strtotime($b->created_on);
 												});
 
 												foreach ($department->replymessage as $r) {
-													echo '<div style="margin-bottom:15px; border-bottom:1px dashed #ccc; padding-bottom:10px;">';
+													// print_r($r);
+													echo '<div style="
+                margin-bottom:15px; 
+                padding:12px; 
+                border:1px solid #e0e0e0; 
+                border-radius:6px; 
+                background:#fafafa;
+                box-shadow:0 1px 2px rgba(0,0,0,0.05);
+                font-size:14px; line-height:1.5;">';
 
-													echo '<strong>Date & Time :</strong> ' . date('d M, Y - g:i A', strtotime($r->created_on)) . '<br>';
-													echo '<strong>Action :</strong> ' . htmlspecialchars($r->action) . '<br>';
+
+
+													echo '<strong>' . $r->ticket_status . '</strong>';
+													echo '<div style="margin-top:10px;"> <b>Date & Time:</b> ' . date('d M, Y - g:i A', strtotime($r->created_on)) . '</div>';
+
+													if ($r->ticket_status != 'Assigned') {
+														echo '<div><b>Action:</b> ' . htmlspecialchars($r->action) . '</div>';
+													}
+
+													if (!empty($r->process_monitor_note)) {
+														echo '<div><b>Notes:</b> ' . htmlspecialchars($r->process_monitor_note) . '</div>';
+													}
+
+													if ($r->ticket_status == 'Transfered') {
+														echo '<div><b>Action:</b> ' . htmlspecialchars($r->action) . ' <b>(Team Leader)</b></div>';
+														echo '<div><b>Transferred by:</b> ' . htmlspecialchars($r->message) . '</div>';
+														echo '<div><b>Comment:</b> ' . htmlspecialchars($r->reply) . '</div>';
+													}
 
 													if ($r->ticket_status == 'Assigned') {
-														echo '<strong>Assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
+														echo '<div><b>Action:</b> ' . htmlspecialchars($r->action) . ' <b>(Team Leader)</b></div>';
+														echo '<div><b>Process Monitor:</b> ' . htmlspecialchars($r->action_for_process_monitor) . '</div>';
+														echo '<div><b>Assigned by:</b> ' . htmlspecialchars($r->message) . '</div>';
 													}
 
 													if ($r->ticket_status == 'Re-assigned') {
-														echo '<strong>Re-assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
+														echo '<div><b>Process Monitor:</b> ' . htmlspecialchars($r->action_for_process_monitor) . '</div>';
+														echo '<div><b>Re-assigned by:</b> ' . htmlspecialchars($r->message) . '</div>';
 													}
 
 													if ($r->ticket_status == 'Described') {
-														echo '<strong>RCA :</strong> ' . htmlspecialchars($r->rootcause_describtion) . '<br>';
-														echo '<strong>CAPA :</strong> ' . htmlspecialchars($r->corrective_description) . '<br>';
-														echo '<strong>Additional note :</strong> ' . htmlspecialchars($r->reply) . '<br>';
-													} elseif (!empty($r->reply)) {
-														echo '<strong>Comment :</strong> ' . htmlspecialchars($r->reply) . '<br>';
+														if (!empty($r->rca_tool_describe)) {
+															echo '<div><b>Root Cause Analysis (RCA)</b></div>';
+															echo '<div><b>Tool Applied:</b> ' . htmlspecialchars($r->rca_tool_describe) . '</div>';
+														}
+
+														if ($r->rca_tool_describe == 'DEFAULT') {
+															echo '<div><b>Closure RCA:</b> ' . htmlspecialchars($r->rootcause_describe) . '</div>';
+														}
+
+														if ($r->rca_tool_describe == '5WHY') {
+															echo '<ul>';
+															echo '<li><b>WHY 1:</b> ' . htmlspecialchars($r->fivewhy_1_describe) . '</li>';
+															echo '<li><b>WHY 2:</b> ' . htmlspecialchars($r->fivewhy_2_describe) . '</li>';
+															echo '<li><b>WHY 3:</b> ' . htmlspecialchars($r->fivewhy_3_describe) . '</li>';
+															echo '<li><b>WHY 4:</b> ' . htmlspecialchars($r->fivewhy_4_describe) . '</li>';
+															echo '<li><b>WHY 5:</b> ' . htmlspecialchars($r->fivewhy_5_describe) . '</li>';
+															echo '</ul>';
+														}
+
+														if ($r->rca_tool_describe == '5W2H') {
+															echo '<dl>';
+															if (!empty($r->fivewhy2h_1_describe))
+																echo '<dt>What happened?</dt><dd>' . htmlspecialchars($r->fivewhy2h_1_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_2_describe))
+																echo '<dt>Why did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_2_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_3_describe))
+																echo '<dt>Where did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_3_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_4_describe))
+																echo '<dt>When did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_4_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_5_describe))
+																echo '<dt>Who was involved?</dt><dd>' . htmlspecialchars($r->fivewhy2h_5_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_6_describe))
+																echo '<dt>How did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_6_describe) . '</dd>';
+															if (!empty($r->fivewhy2h_7_describe))
+																echo '<dt>How much/How many (impact/cost)?</dt><dd>' . htmlspecialchars($r->fivewhy2h_7_describe) . '</dd>';
+															echo '</dl>';
+														}
+
+														if (!empty($r->corrective_describe)) {
+															echo '<div><b>Corrective Action:</b> ' . htmlspecialchars($r->corrective_describe) . '</div>';
+														}
+
+														if (!empty($r->preventive_describe)) {
+															echo '<div><b>Preventive Action:</b> ' . htmlspecialchars($r->preventive_describe) . '</div>';
+														}
+
+														if (!empty($r->verification_comment_describe)) {
+															echo '<div><b>Lesson Learned:</b> ' . htmlspecialchars($r->verification_comment_describe) . '</div>';
+														}
 													}
 
-													if ($r->ticket_status == 'Closed') {
-														if (!empty($r->rootcause))
-															echo '<strong>Closure RCA :</strong> ' . htmlspecialchars($r->rootcause) . '<br>';
-														if (!empty($r->corrective))
-															echo '<strong>Closure CAPA :</strong> ' . htmlspecialchars($r->corrective) . '<br>';
-														if (!empty($r->preventive))
-															echo '<strong>Preventive :</strong> ' . htmlspecialchars($r->preventive) . '<br>';
-														if (!empty($r->resolution_note))
-															echo '<strong>Additional note :</strong> ' . htmlspecialchars($r->resolution_note) . '<br>';
+													if (!empty($r->reply) && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') {
+														echo '<div><b>' . lang_loader('inc', 'inc_comment') . ':</b> ' . htmlspecialchars($r->reply) . '</div>';
 													}
 
-													echo '</div>';
+													if (!empty($r->rca_tool)) {
+														echo '<div><b>Root Cause Analysis (RCA) for Incident Closure</b></div>';
+														echo '<div><b>Tool Applied:</b> ' . htmlspecialchars($r->rca_tool) . '</div>';
+													}
+
+													if ($r->rca_tool == 'DEFAULT') {
+														echo '<div><b>Closure RCA:</b> ' . htmlspecialchars($r->rootcause) . '</div>';
+													}
+
+													if ($r->rca_tool == '5WHY') {
+														echo '<ul>';
+														echo '<li><b>WHY 1:</b> ' . htmlspecialchars($r->fivewhy_1) . '</li>';
+														echo '<li><b>WHY 2:</b> ' . htmlspecialchars($r->fivewhy_2) . '</li>';
+														echo '<li><b>WHY 3:</b> ' . htmlspecialchars($r->fivewhy_3) . '</li>';
+														echo '<li><b>WHY 4:</b> ' . htmlspecialchars($r->fivewhy_4) . '</li>';
+														echo '<li><b>WHY 5:</b> ' . htmlspecialchars($r->fivewhy_5) . '</li>';
+														echo '</ul>';
+													}
+
+													if ($r->rca_tool == '5W2H') {
+														echo '<dl>';
+														if (!empty($r->fivewhy2h_1))
+															echo '<dt>What happened?</dt><dd>' . htmlspecialchars($r->fivewhy2h_1) . '</dd>';
+														if (!empty($r->fivewhy2h_2))
+															echo '<dt>Why did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_2) . '</dd>';
+														if (!empty($r->fivewhy2h_3))
+															echo '<dt>Where did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_3) . '</dd>';
+														if (!empty($r->fivewhy2h_4))
+															echo '<dt>When did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_4) . '</dd>';
+														if (!empty($r->fivewhy2h_5))
+															echo '<dt>Who was involved?</dt><dd>' . htmlspecialchars($r->fivewhy2h_5) . '</dd>';
+														if (!empty($r->fivewhy2h_6))
+															echo '<dt>How did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_6) . '</dd>';
+														if (!empty($r->fivewhy2h_7))
+															echo '<dt>How much/How many (impact/cost)?</dt><dd>' . htmlspecialchars($r->fivewhy2h_7) . '</dd>';
+														echo '</dl>';
+													}
+
+													if (!empty($r->corrective)) {
+														echo '<div><b>Closure Corrective Action:</b> ' . htmlspecialchars($r->corrective) . '</div>';
+													}
+
+													if (!empty($r->preventive)) {
+														echo '<div><b>Closure Preventive Action:</b> ' . htmlspecialchars($r->preventive) . '</div>';
+													}
+
+													if (!empty($r->verification_comment)) {
+														echo '<div><b>Closure Verification Remark:</b> ' . htmlspecialchars($r->verification_comment) . '</div>';
+													}
+
+
+													echo '</div>'; // close card
 												}
 												?>
 											</td>

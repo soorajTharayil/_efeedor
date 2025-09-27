@@ -8,7 +8,7 @@
 
 
 include('../api/db.php');
-include('/home/cpefeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 include('get_user.php');
 
 //email to admin  when they are created 
@@ -597,28 +597,28 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
               <td colspan="2" style="text-align:center;"><b>Complaint reported on</b></td>
            </tr>
             <tr>
-              <td width="80%">Time & Date</td>
-              <td width="20%">' . $created_on . '</td>
+              <td width="40%">Time & Date</td>
+              <td width="60%">' . $created_on . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Complaint details</b></td>
             </tr>
            
             <tr>
-                <td width="80%">Category</td>
-                <td width="20%">' . $department . '</td>
+                <td width="40%">Category</td>
+                <td width="60%">' . $department . '</td>
             </tr>
             <tr>
-                <td width="80%">Complaint</td>
-                <td width="20%">' . $department_object->name . '</td>
+                <td width="40%">Complaint</td>
+                <td width="60%">' . $department_object->name . '</td>
             </tr>';
 
 
         if ($param_int->other) {
             $message1 .= '
             <tr>
-                <td width="80%">Description</td>
-                <td width="20%">' . $param_int->other . '</td>
+                <td width="40%">Description</td>
+                <td width="60%">' . $param_int->other . '</td>
             </tr>';
         }
 
@@ -627,36 +627,36 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
                 <td colspan="2" style="text-align:center;"><b>Complaint raised in </b></td>
             </tr>
             <tr>
-                <td width="80%">Floor/Ward</td>
-                <td width="20%">' . $feedback_int_object->ward . '</td>
+                <td width="40%">Floor/Ward</td>
+                <td width="60%">' . $feedback_int_object->ward . '</td>
             </tr>
             <tr>
-                <td width="80%">Site</td>
-                <td width="20%">' . $feedback_int_object->bed_no . '</td>
+                <td width="40%">Site</td>
+                <td width="60%">' . $feedback_int_object->bed_no . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Complaint raised by</b></td>
             </tr>
             <tr>
-                <td width="80%">Patient name</td>
-                <td width="20%">' . $param_int->name . '</td>
+                <td width="40%">Patient name</td>
+                <td width="60%">' . $param_int->name . '</td>
             </tr>
             <tr>
-                <td width="80%">Patient UHID</td>
-                <td width="20%">' . $param_int->patientid . '</td>
+                <td width="40%">Patient UHID</td>
+                <td width="60%">' . $param_int->patientid . '</td>
             </tr>
           
             <tr>
-                <td width="80%">Mobile number</td>
-                <td width="20%">' . $param_int->contactnumber . '</td>
+                <td width="40%">Mobile number</td>
+                <td width="60%">' . $param_int->contactnumber . '</td>
             </tr>
             <tr>
-                <td width="80%">Source</td>
-                <td width="20%">' . $feedback_int_object->source . '</td>
+                <td width="40%">Source</td>
+                <td width="60%">' . $feedback_int_object->source . '</td>
             </tr>
             <tr>
-                <td width="80%">Assigned to</td>
-                <td width="20%">' . $department_object->pname . '</td>
+                <td width="40%">Assigned to</td>
+                <td width="60%">' . $department_object->pname . '</td>
             </tr>';
 
 
@@ -746,31 +746,31 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
               <td colspan="2" style="text-align:center;"><b>Request reported on</b></td>
            </tr>
             <tr>
-              <td width="80%">Time & Date</td>
-              <td width="20%">' . $created_on . '</td>
+              <td width="40%">Time & Date</td>
+              <td width="60%">' . $created_on . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Service request details</b></td>
             </tr>
            
             <tr>
-                <td width="80%">Category</td>
-                <td width="20%">' . $department . '</td>
+                <td width="40%">Category</td>
+                <td width="60%">' . $department . '</td>
             </tr>
             <tr>
-                <td width="80%">Service request</td>
-                <td width="20%">' . $department_object->name . '</td>
+                <td width="40%">Service request</td>
+                <td width="60%">' . $department_object->name . '</td>
             </tr>
             <tr>
-                <td width="80%">Priority</td>
-                <td width="20%">' . $param_isr->priority . '</td>
+                <td width="40%">Priority</td>
+                <td width="60%">' . $param_isr->priority . '</td>
             </tr>';
 
         if ($param_isr->other) {
             $message1 .= '
             <tr>
-                <td width="80%">Description</td>
-                <td width="20%">' . $param_isr->other . '</td>
+                <td width="40%">Description</td>
+                <td width="60%">' . $param_isr->other . '</td>
             </tr>';
         }
 
@@ -779,43 +779,43 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
                 <td colspan="2" style="text-align:center;"><b>Request reported in</b></td>
             </tr>
             <tr>
-                <td width="80%">Floor/Ward</td>
-                <td width="20%">' . $feedback_isr_object->ward . '</td>
+                <td width="40%">Floor/Ward</td>
+                <td width="60%">' . $feedback_isr_object->ward . '</td>
             </tr>
             <tr>
-                <td width="80%">Site</td>
-                <td width="20%">' . $feedback_isr_object->bed_no . '</td>
+                <td width="40%">Site</td>
+                <td width="60%">' . $feedback_isr_object->bed_no . '</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align:center;"><b>Request reported by</b></td>
             </tr>
             <tr>
-                <td width="80%">Employee name</td>
-                <td width="20%">' . $param_isr->name . '</td>
+                <td width="40%">Employee name</td>
+                <td width="60%">' . $param_isr->name . '</td>
             </tr>
             <tr>
-                <td width="80%">Employee ID</td>
-                <td width="20%">' . $param_isr->patientid . '</td>
+                <td width="40%">Employee ID</td>
+                <td width="60%">' . $param_isr->patientid . '</td>
             </tr>
             <tr>
-                <td width="80%">Employee role</td>
-                <td width="20%">' . $param_isr->role . '</td>
+                <td width="40%">Employee role</td>
+                <td width="60%">' . $param_isr->role . '</td>
             </tr>
             <tr>
-                <td width="80%">Mobile number</td>
-                <td width="20%">' . $param_isr->contactnumber . '</td>
+                <td width="40%">Mobile number</td>
+                <td width="60%">' . $param_isr->contactnumber . '</td>
             </tr>
              <tr>
-                <td width="80%">Source</td>
-                <td width="20%">' . $feedback_isr_object->source . '</td>
+                <td width="40%">Source</td>
+                <td width="60%">' . $feedback_isr_object->source . '</td>
             </tr>
             <tr>
-                <td width="80%">Email ID</td>
-                <td width="20%">' . $param_isr->email . '</td>
+                <td width="40%">Email ID</td>
+                <td width="60%">' . $param_isr->email . '</td>
             </tr>
             <tr>
-                <td width="80%">Assigned to</td>
-                <td width="20%">' . $department_object->pname . '</td>
+                <td width="40%">Assigned to</td>
+                <td width="60%">' . $department_object->pname . '</td>
             </tr>';
 
 
@@ -903,79 +903,91 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                <td colspan="2" style="text-align:center;"><b>Incident reported on</b></td>
             </tr>
              <tr>
-               <td width="80%">Time & Date</td>
-               <td width="20%">' . $created_on . '</td>
+               <td width="40%">Time & Date</td>
+               <td width="60%">' . $created_on . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
              </tr>
-             <tr>
-                 <td width="80%">Incident type</td>
-                 <td width="20%">' . $param_incident->incident_type . '</td>
+              <tr>
+                 <td width="40%">Incident</td>
+                 <td width="60%">' . $department_object->name . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Incident Occured On</td>
+                 <td width="60%">' . $param_incident->incident_occured_in . '</td>
+             </tr>
+            
+              <tr>
+                 <td width="40%">Assigned Risk</td>
+                 <td width="60%">' . $param_incident->risk_matrix->level . '</td>
+             </tr>
+              <tr>
+                 <td width="40%">Assigned Priority</td>
+                 <td width="60%">' . $param_incident->priority . '</td>
              </tr>
              <tr>
-                 <td width="80%">Category</td>
-                 <td width="20%">' . $department . '</td>
+                 <td width="40%">Assigned Severity</td>
+                 <td width="60%">' . $param_incident->incident_type . '</td>
              </tr>
-             <tr>
-                 <td width="80%">Incident</td>
-                 <td width="20%">' . $department_object->name . '</td>
-             </tr>
-             <tr>
-                 <td width="80%">Priority</td>
-                 <td width="20%">' . $param_incident->priority . '</td>
-             </tr>';
+            
+            ';
 
         if ($param_incident->other) {
             $message1 .= '
              <tr>
-                 <td width="80%">Description</td>
-                 <td width="20%">' . $param_incident->other . '</td>
+                 <td width="40%">Description</td>
+                 <td width="60%">' . $param_incident->other . '</td>
              </tr>';
         }
+       
 
         $message1 .= '
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident reported in</b></td>
              </tr>
              <tr>
-                 <td width="80%">Floor/Ward</td>
-                 <td width="20%">' . $feedback_incident_object->ward . '</td>
+                 <td width="40%">Floor/Ward</td>
+                 <td width="60%">' . $feedback_incident_object->ward . '</td>
              </tr>
              <tr>
-                 <td width="80%">Site</td>
-                 <td width="20%">' . $feedback_incident_object->bed_no . '</td>
+                 <td width="40%">Site</td>
+                 <td width="60%">' . $feedback_incident_object->bed_no . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident reported by</b></td>
              </tr>
              <tr>
-                 <td width="80%">Employee name</td>
-                 <td width="20%">' . $param_incident->name . '</td>
+                 <td width="40%">Employee name</td>
+                 <td width="60%">' . $param_incident->name . '</td>
              </tr>
              <tr>
-                 <td width="80%">Employee ID</td>
-                 <td width="20%">' . $param_incident->patientid . '</td>
+                 <td width="40%">Employee ID</td>
+                 <td width="60%">' . $param_incident->patientid . '</td>
              </tr>
              <tr>
-                 <td width="80%">Employee role</td>
-                 <td width="20%">' . $param_incident->role . '</td>
+                 <td width="40%">Employee role</td>
+                 <td width="60%">' . $param_incident->role . '</td>
              </tr>
              <tr>
-                 <td width="80%">Mobile number</td>
-                 <td width="20%">' . $param_incident->contactnumber . '</td>
+                 <td width="40%">Mobile number</td>
+                 <td width="60%">' . $param_incident->contactnumber . '</td>
              </tr>
                <tr>
-                <td width="80%">Source</td>
-                <td width="20%">' . $feedback_incident_object->source . '</td>
+                <td width="40%">Source</td>
+                <td width="60%">' . $feedback_incident_object->source . '</td>
             </tr>
              <tr>
-                 <td width="80%">Email ID</td>
-                 <td width="20%">' . $param_incident->email . '</td>
+                 <td width="40%">Email ID</td>
+                 <td width="60%">' . $param_incident->email . '</td>
              </tr>
              <tr>
-                 <td width="80%">Assigned to</td>
-                 <td width="20%">' . $department_object->pname . '</td>
+                 <td width="40%">Assigned to</td>
+                 <td width="60%">' . $department_object->pname . '</td>
              </tr>';
 
         if ($param_incident->tag_name) {
@@ -984,21 +996,15 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td colspan="2" style="text-align:center;"><b>Patient Details</b></td>
              </tr>
              <tr>
-                 <td width="80%">Patient name</td>
-                 <td width="20%">' . $param_incident->tag_name . '</td>
+                 <td width="40%">Patient name</td>
+                 <td width="60%">' . $param_incident->tag_name . '</td>
              </tr>
              <tr>
-                 <td width="80%">Patient ID</td>
-                 <td width="20%">' . $param_incident->tag_patientid . '</td>
+                 <td width="40%">Patient ID</td>
+                 <td width="60%">' . $param_incident->tag_patientid . '</td>
              </tr>
-             <tr>
-                 <td width="80%">Patient type</td>
-                 <td width="20%">' . $param_incident->tag_patient_type . '</td>
-             </tr>
-             <tr>
-                 <td width="80%">Mobile number</td>
-                 <td width="20%">' . $param_incident->tag_consultant . '</td>
-             </tr>';
+            
+             ';
         }
 
         $message1 .= '</table>';
@@ -1084,28 +1090,28 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                <td colspan="2" style="text-align:center;"><b>Grievance reported on</b></td>
             </tr>
             <tr>
-                <td width="80%">Time & Date</td>
-                <td width="20%">' . $created_on . '</td>
+                <td width="40%">Time & Date</td>
+                <td width="60%">' . $created_on . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Grievance details</b></td>
              </tr>
          
              <tr>
-                 <td width="80%">Category</td>
-                 <td width="20%">' . $department . '</td>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
              </tr>
              <tr>
-                 <td width="80%">Grievance</td>
-                 <td width="20%">' . $department_object->name . '</td>
+                 <td width="40%">Grievance</td>
+                 <td width="60%">' . $department_object->name . '</td>
              </tr>';
 
 
         if ($param_grievance->other) {
             $message1 .= '
              <tr>
-                 <td width="80%">Description</td>
-                 <td width="20%">' . $param_grievance->other . '</td>
+                 <td width="40%">Description</td>
+                 <td width="60%">' . $param_grievance->other . '</td>
              </tr>';
         }
 
@@ -1114,40 +1120,40 @@ while ($feedback_grievance_object = mysqli_fetch_object($feedback_grievance_resu
                  <td colspan="2" style="text-align:center;"><b>Grievance reported in</b></td>
              </tr>
              <tr>
-                 <td width="80%">Floor/Ward</td>
-                 <td width="20%">' . $feedback_grievance_object->ward . '</td>
+                 <td width="40%">Floor/Ward</td>
+                 <td width="60%">' . $feedback_grievance_object->ward . '</td>
              </tr>
              <tr>
-                 <td width="80%">Site</td>
-                 <td width="20%">' . $feedback_grievance_object->bed_no . '</td>
+                 <td width="40%">Site</td>
+                 <td width="60%">' . $feedback_grievance_object->bed_no . '</td>
              </tr>
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Grievance reported by</b></td>
              </tr>
              <tr>
-                 <td width="80%">Employee name</td>
-                 <td width="20%">' . $param_grievance->name . '</td>
+                 <td width="40%">Employee name</td>
+                 <td width="60%">' . $param_grievance->name . '</td>
              </tr>
              <tr>
-                 <td width="80%">Employee ID</td>
-                 <td width="20%">' . $param_grievance->patientid . '</td>
+                 <td width="40%">Employee ID</td>
+                 <td width="60%">' . $param_grievance->patientid . '</td>
              </tr>
              <tr>
-                 <td width="80%">Employee role</td>
-                 <td width="20%">' . $param_grievance->role . '</td>
+                 <td width="40%">Employee role</td>
+                 <td width="60%">' . $param_grievance->role . '</td>
              </tr>
              <tr>
-                 <td width="80%">Mobile number</td>
-                 <td width="20%">' . $param_grievance->contactnumber . '</td>
+                 <td width="40%">Mobile number</td>
+                 <td width="60%">' . $param_grievance->contactnumber . '</td>
              </tr>
              
              <tr>
-                 <td width="80%">Email ID</td>
-                 <td width="20%">' . $param_grievance->email . '</td>
+                 <td width="40%">Email ID</td>
+                 <td width="60%">' . $param_grievance->email . '</td>
              </tr>
              <tr>
-                 <td width="80%">Assigned to</td>
-                 <td width="20%">' . $department_object->pname . '</td>
+                 <td width="40%">Assigned to</td>
+                 <td width="60%">' . $department_object->pname . '</td>
              </tr>';
 
 

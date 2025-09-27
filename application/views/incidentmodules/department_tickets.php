@@ -162,7 +162,7 @@
 			$row->slug = $slug2;
 			$slug = $patient[0]->id . preg_replace('/[^A-Za-z0-9-]+/', ' ', $department[0]->description);
 			$tickets[] = $row;
-			$ticketbydepartment[$slug2] = (int)$ticketbydepartment[$slug2] + 1;
+			$ticketbydepartment[$slug2] = $ticketbydepartment[$slug2] * 1 + 1;
 			$ticketbydepartmentname[$slug2] = $department[0]->description;
 		}
 

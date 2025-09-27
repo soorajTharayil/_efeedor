@@ -130,25 +130,7 @@ class Incident extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
-    public function escalation_report()
-    {
-        if ($this->session->userdata('isLogIn') == false)
-            redirect('login');
-        if (ismodule_active('INCIDENT') === true) {
 
-            $dates = get_from_to_date();
-            $data['title'] = 'ESCALATION REPORT-INCIDENTS';
-            #-------------------------------#
-            $data['departments'] = $this->ticketsincidents_model->alltickets();
-
-            $data['content'] = $this->load->view('incidentmodules/escalation_report', $data, true);
-
-            $this->load->view('layout/main_wrapper', $data);
-            $this->session->set_userdata('referred_from', NULL);
-        } else {
-            redirect('dashboard/noaccess');
-        }
-    }
     public function read_individual_user()
     {
         $userName = $this->session->userdata['fullname'];
@@ -261,6 +243,8 @@ class Incident extends CI_Controller
                         }
                     }
 
+
+
                     $root = [];
                     $corrective = [];
                     $resolution_note = [];
@@ -314,20 +298,76 @@ class Incident extends CI_Controller
                         $timetaken .= 'less than a minute';
                     }
 
+
+
+
+                    $userss = $this->db->select('user_id, firstname')
+                        ->where('user_id !=', 1)
+                        ->get('user')
+                        ->result();
+
+                    $userMap = [];
+                    foreach ($userss as $u) {
+                        $userMap[$u->user_id] = $u->firstname;
+                    }
+
+                    // Step 2: Convert comma-separated IDs into arrays
+                    $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+                        ? explode(',', $department->assign_for_process_monitor)
+                        : [];
+
+                    $assign_to_ids = !empty($department->assign_to)
+                        ? explode(',', $department->assign_to)
+                        : [];
+
+                    // Step 3: Map IDs → names
+                    $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+                        return $userMap[$id] ?? $id;
+                    }, $assign_for_process_monitor_ids);
+
+                    $assign_to_names = array_map(function ($id) use ($userMap) {
+                        return $userMap[$id] ?? $id;
+                    }, $assign_to_ids);
+
+                    // Step 4: Join into comma-separated strings
+                    $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+                    $names = implode(', ', $assign_to_names);
+
+
+
                     $assignee = $department->department->pname;
                     $incidentHistory = $department->replymessage;
                     $dataexport[] = array(
                         // 'SL No.' => $sl,
                         'TICKET ID' => 'INC- ' . $department->id,
+
                         'TICKET DETAILS' =>
-                            '<strong>Incident Category:</strong> ' . ($department->department->description) . '<br>' .
+                            '<strong>Incident Short Name:</strong> ' . ($department->department->description) . '<br>' .
                             '<strong>Incident:</strong> ' . ($issue ? $issue : 'Ticket was transferred') . '<br>' .
-                            '<strong>Incident Description:</strong> ' . ($department->feed->other ? $department->feed->other : 'NA'),
+                            '<strong>Incident Description:</strong> ' . ($department->feed->other ? $department->feed->other : 'NA') . '<br>' .
+                            '<strong>What went wrong:</strong> ' . ($department->feed->what_went_wrong) . '<br>' .
+                            '<strong>Immediate action taken:</strong> ' . ($department->feed->action_taken) . '<br>',
+
+                        'RISK' => '<strong>' .
+                            $department->feed->risk_matrix->level . '</strong> (' .
+                            $department->feed->risk_matrix->impact . ' Impact × ' .
+                            $department->feed->risk_matrix->likelihood . ' Likelihood)',
+
 
                         'PRIORITY' => $department->priority,
+                        'PROCESS MONITOR' => $actionText_process_monitor,
+                        'TEAM LEADER' => $names,
+                        'RISK_LEVEL' => $department->feed->risk_matrix->level,
+                        'RISK_IMPACT' => $department->feed->risk_matrix->impact,
+                        'RISK_LIKELIHOOD' => $department->feed->risk_matrix->likelihood,
+
                         'INCIDENT TYPE' => $department->incident_type,
 
                         'PATIENT DETAILS' => ($department->feed->name ?? '') . (!empty($department->feed->patientid) ? ' (' . $department->feed->patientid . ')' : '') . '<br>' . (!empty($department->feed->contactnumber) ? '<i class="fa fa-phone"></i> ' . $department->feed->contactnumber . '<br>' : '') . (!empty($department->feed->email) ? '<i class="fa fa-envelope"></i> ' . $department->feed->email : ''),
+
+                        'TAG PATIENT DETAILS' => ($department->feed->tag_name ?? '') .
+                            (!empty($department->feed->tag_patientid) ? ' (' . $department->feed->tag_patientid . ')' : ''),
+
 
 
                         'FLOOR DETAILS' => '<strong>Floor/ Ward: </strong>' . ($department->feed->ward) . '<br>' .
@@ -336,7 +376,9 @@ class Incident extends CI_Controller
                         'ASSIGNEE' => !empty($department_users[$department->department->type][$department->department->setkey][$department->department->slug])
                             ? implode(',', $department_users[$department->department->type][$department->department->setkey][$department->department->slug])
                             : 'NA',
-                        'CREATED ON' => date('g:i a, d-m-y', strtotime($department->created_on)),
+                        'CREATED ON' => date('d M, Y - g:i A', strtotime($department->created_on)),
+                        'OCCURED ON' => $department->incident_occured_in,
+                        'CLOSED BY' => $department->incident_occured_in,
                         'RESOLVED ON' => date('g:i a, d-m-y', strtotime($department->last_modified)),
                         // 'ADDRESSAL COMMENT' => $rep,
                         'RCA/CAPA' => 'RCA: ' . (!empty($root) ? implode(", ", $root) : '') . '<br><br>' .
@@ -382,36 +424,21 @@ class Incident extends CI_Controller
                     $html .= '<p style="margin: 30px 0;"></p>'; // Adding space between tables
                 }
                 // Open table for each ticket
-                $html .= '<table border="1" cellpadding="5" style="margin-bottom: 30px; width: 100%; border:1px solid #dadada; border-collapse: collapse; font-family: Arial, sans-serif;">';
+                $html .= '<table border="1" cellpadding="6" 
+    style="margin-top:40px; width: 100%; border:1px solid #ccc; 
+    border-collapse: collapse; font-family: Arial, sans-serif; font-size:12px; line-height:1.5;">';
 
                 // Ticket ID as a header for each ticket
-                $html .= '<tr style="background: #dadada;">
-    <td colspan="1" style="font-weight: bold; text-align: left; color: red; border: 1px solid #dadada;">
+                $html .= '<tr style="background:#f5f5f5;">
+    <td colspan="2" style="font-weight:bold; font-size:14px; color:#d9534f; padding:8px;">
         ' . $data['TICKET ID'] . '
     </td>
 </tr>';
 
-                // Request Details
-                $html .= '<tr>
-    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Details</td>
-    <td style="border: 1px solid #dadada;">' . $data['TICKET DETAILS'] . '</td>
-</tr>';
 
-                // Priority
                 $html .= '<tr>
-    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Priority</td>
-    <td style="border: 1px solid #dadada;">' . $data['PRIORITY'] . '</td>
-</tr>';
-                // Priority
-                $html .= '<tr>
-             <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Type</td>
-             <td style="border: 1px solid #dadada;">' . $data['INCIDENT TYPE'] . '</td>
-         </tr>';
-
-                // Floor and Site Details
-                $html .= '<tr>
-    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Reported In</td>
-    <td style="border: 1px solid #dadada;">' . $data['FLOOR DETAILS'] . '</td>
+    <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Incident Details</td>
+    <td style="width: 70%;  border:1px solid #ccc; padding:8px;">' . $data['TICKET DETAILS'] . '</td>
 </tr>';
 
                 // Emp Details
@@ -420,13 +447,126 @@ class Incident extends CI_Controller
     <td style="border: 1px solid #dadada;">' . $data['PATIENT DETAILS'] . '</td>
 </tr>';
 
-
+                // Emp Details
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Occured On</td>
+    <td style="border: 1px solid #dadada;">' . $data['OCCURED ON'] . '</td>
+</tr>';
 
                 // Created On
                 $html .= '<tr>
-    <td style="font-weight: bold; border: 1px solid #dadada;">Reported On</td>
+    <td style="font-weight: bold; border: 1px solid #dadada;">Incident Reported On</td>
     <td style="border: 1px solid #dadada;">' . $data['CREATED ON'] . '</td>
 </tr>';
+
+                // Floor and Site Details
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Incident Reported In</td>
+    <td style="border: 1px solid #dadada;">' . $data['FLOOR DETAILS'] . '</td>
+</tr>';
+                // Define colors for Risk
+                $riskColors = [
+                    'High' => '#d9534f',  // Red
+                    'Medium' => '#f0ad4e',  // Orange
+                    'Low' => '#16993bff',  // Blue
+                    'Unassigned' => '#6c757d'   // Gray
+                ];
+
+                // Get risk values
+                $level = $data['RISK_LEVEL'] ?? 'Unassigned';
+                $impact = $data['RISK_IMPACT'] ?? 'Unassigned';
+                $likelihood = $data['RISK_LIKELIHOOD'] ?? 'Unassigned';
+
+                // Pick color for level only
+                $riskColor = $riskColors[$level] ?? $riskColors['Unassigned'];
+
+                // Assigned Risk row inside PDF HTML
+                $html .= '<tr>
+    <td style="width:30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Risk</td>
+    <td style="border:1px solid #ccc; padding:8px;">
+        <font color="' . $riskColor . '"><b>' . htmlspecialchars($level) . '</b></font>
+        (' . htmlspecialchars($impact) . ' Impact × ' . htmlspecialchars($likelihood) . ' Likelihood)
+    </td>
+</tr>';
+
+                // ================= PRIORITY =================
+                $priorityRaw = trim($data['PRIORITY'] ?? '');
+                $priorityKey = str_replace(['–', '—'], '-', $priorityRaw); // normalize dashes
+                $priorityKey = preg_replace('/\s+/', ' ', $priorityKey);   // normalize spaces
+
+                $priorityColors = [
+                    'P1-Critical' => '#ff4d4d',
+                    'P2-High' => '#ff9800',
+                    'P3-Medium' => '#fbc02d',
+                    'P4-Low' => '#178b60ff',
+                    'Unassigned' => '#6c757d'
+                ];
+
+                if ($priorityKey === '' || !isset($priorityColors[$priorityKey])) {
+                    $priorityKey = 'Unassigned';
+                    $priorityRaw = 'Unassigned';
+                }
+                $priorityColor = $priorityColors[$priorityKey];
+
+                $html .= '<tr>
+    <td style="width:30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Priority</td>
+    <td style="border:1px solid #ccc; padding:8px;">
+        <span style="color:' . $priorityColor . '; font-weight:600;">' . htmlspecialchars($priorityRaw) . '</span>
+    </td>
+</tr>';
+
+
+                // ================= SEVERITY =================
+                $severityRaw = trim($data['INCIDENT TYPE'] ?? '');
+                $severityColors = [
+                    'Near miss' => '#1cb23cff',
+                    'No-harm' => '#2138ccff',
+                    'Adverse' => '#fbc02d',
+                    'Hazardous Condition' => '#ff9800',
+                    'Sentinel' => '#ff4d4d',
+                    'Unassigned' => '#6c757d'
+                ];
+
+                $severityKey = $severityRaw;
+                if ($severityKey === '' || !isset($severityColors[$severityKey])) {
+                    $severityKey = 'Unassigned';
+                    $severityRaw = 'Unassigned';
+                }
+                $severityColor = $severityColors[$severityKey];
+
+                $html .= '<tr>
+    <td style="width:30%; font-weight:bold; border:1px solid #dadada;">Assigned Category</td>
+    <td style="border:1px solid #dadada; padding:8px;">
+        <span style="color:' . $severityColor . '; font-weight:600;">' . htmlspecialchars($severityRaw) . '</span>
+    </td>
+</tr>';
+
+
+
+
+
+                $html .= '<tr>
+    <td style="width: 30%; font-weight: bold; border: 1px solid #dadada;">Patient Details</td>
+    <td style="border: 1px solid #dadada;">' . $data['TAG PATIENT DETAILS'] . '</td>
+</tr>';
+
+
+
+                $html .= '<tr>
+    <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Team Leader</td>
+    <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['TEAM LEADER'] . '</td>
+</tr>';
+                $html .= '<tr>
+    <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Process Monitor</td>
+    <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['PROCESS MONITOR'] . '</td>
+</tr>';
+
+
+
+
+
+
+
 
                 // Resolved On
                 $html .= '<tr>
@@ -442,8 +582,8 @@ class Incident extends CI_Controller
 
                 // Incident History
                 $html .= '<tr>
-    <td style="font-weight: bold; border: 1px solid #dadada;">Incident Timeline & History</td>
-    <td style="border: 1px solid #dadada;">';
+    <td style="font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Incident Timeline & History</td>
+    <td style="border:1px solid #ccc; padding:10px;">';
 
                 // Sort Incident History by created_on
                 usort($data['DATA'], function ($a, $b) {
@@ -451,34 +591,143 @@ class Incident extends CI_Controller
                 });
 
                 foreach ($data['DATA'] as $r) {
-                    $html .= '<div style="margin-bottom:15px; border-bottom:1px dashed #ccc; padding-bottom:10px;">';
-                    $html .= '<strong>Date & Time :</strong> ' . date('d M, Y - g:i A', strtotime($r->created_on)) . '<br>';
+                    $html .= '<strong style="color:blue;">' . $r->ticket_status . '</strong>';
 
-                    $html .= '<strong>Action :</strong> ' . $r->action . '<br>';
+                    $html .= '<div style="margin-bottom:15px; margin-top:15px; padding:10px; background:#f9f9f9; border:1px dashed #ddd; border-radius:5px;">';
+                    $html .= '<strong>Date & Time:</strong> ' . date('d M, Y - g:i A', strtotime($r->created_on)) . '<br>';
+
+                    if ($r->ticket_status != 'Assigned') {
+                        $html .= '<strong>Action :</strong> ' . htmlspecialchars($r->action) . '<br>';
+                    }
+
+                    if (!empty($r->process_monitor_note)) {
+                        $html .= '<strong>Notes :</strong> ' . htmlspecialchars($r->process_monitor_note) . '<br>';
+                    }
+
+                    if ($r->ticket_status == 'Transfered') {
+                        $html .= '<strong>Action :</strong> ' . htmlspecialchars($r->action) . ' (Team Leader)<br>';
+                        $html .= '<strong>Transferred by :</strong> ' . htmlspecialchars($r->message) . '<br>';
+                        $html .= '<strong>Comment :</strong> ' . htmlspecialchars($r->reply) . '<br>';
+                    }
+
                     if ($r->ticket_status == 'Assigned') {
-                        $html .= '<strong>Assigned by :</strong> ' . $r->message . '<br>';
-                    }
-                    if ($r->ticket_status == 'Re-assigned') {
-                        $html .= '<strong>Re-assigned by :</strong> ' . $r->message . '<br>';
-                    }
-                    if ($r->ticket_status == 'Described') {
-                        $html .= '<strong>RCA :</strong> ' . $r->rootcause_describtion . '<br>';
-                        $html .= '<strong>CAPA :</strong> ' . $r->corrective_description . '<br>';
-                        $html .= '<strong>Additional note :</strong> ' . $r->reply . '<br>';
-                    } elseif ($r->reply) {
-                        $html .= '<strong>Comment :</strong> ' . $r->reply . '<br>';
+                        $html .= '<strong>Action :</strong> ' . htmlspecialchars($r->action) . ' (Team Leader)<br>';
+                        $html .= '<strong>Process Monitor :</strong> ' . htmlspecialchars($r->action_for_process_monitor) . '<br>';
+                        $html .= '<strong>Assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
                     }
 
-                    if ($r->ticket_status == 'Closed') {
-                        if ($r->rootcause)
-                            $html .= '<strong>Closure RCA :</strong> ' . $r->rootcause . '<br>';
-                        if ($r->corrective)
-                            $html .= '<strong>Closure CAPA :</strong> ' . $r->corrective . '<br>';
-                        if ($r->preventive)
-                            $html .= '<strong>Closure Remarks :</strong> ' . $r->preventive . '<br>';
-                        if ($r->resolution_note)
-                            $html .= '<strong>Additional note :</strong> ' . $r->resolution_note . '<br>';
+                    if ($r->ticket_status == 'Re-assigned') {
+                        $html .= '<strong>Process Monitor :</strong> ' . htmlspecialchars($r->action_for_process_monitor) . '<br>';
+                        $html .= '<strong>Re-assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
                     }
+
+                    if ($r->ticket_status == 'Described') {
+                        if (!empty($r->rca_tool_describe)) {
+                            $html .= '<strong>Root Cause Analysis (RCA)</strong><br>';
+                            $html .= '<strong>Tool Applied :</strong> ' . htmlspecialchars($r->rca_tool_describe) . '<br>';
+                        }
+
+                        if ($r->rca_tool_describe == 'DEFAULT') {
+                            $html .= '<strong>Closure RCA :</strong> ' . htmlspecialchars($r->rootcause_describe) . '<br>';
+                        }
+
+                        if ($r->rca_tool_describe == '5WHY') {
+                            $html .= '<ul>';
+                            $html .= '<li><b><strong>WHY 1:</strong></b> ' . htmlspecialchars($r->fivewhy_1_describe) . '</li>';
+                            $html .= '<li><b><strong>WHY 2:</strong></b> ' . htmlspecialchars($r->fivewhy_2_describe) . '</li>';
+                            $html .= '<li><b><strong>WHY 3:</strong></b> ' . htmlspecialchars($r->fivewhy_3_describe) . '</li>';
+                            $html .= '<li><b><strong>WHY 4:</strong></b> ' . htmlspecialchars($r->fivewhy_4_describe) . '</li>';
+                            $html .= '<li><b><strong>WHY 5:</strong></b> ' . htmlspecialchars($r->fivewhy_5_describe) . '</li>';
+                            $html .= '</ul>';
+                        }
+
+                        if ($r->rca_tool_describe == '5W2H') {
+                            $html .= '<dl>';
+                            if (!empty($r->fivewhy2h_1_describe))
+                                $html .= '<dt><strong>What happened?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_1_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_2_describe))
+                                $html .= '<dt><strong>Why did it happen?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_2_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_3_describe))
+                                $html .= '<dt><strong>Where did it happen?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_3_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_4_describe))
+                                $html .= '<dt><strong>When did it happen?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_4_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_5_describe))
+                                $html .= '<dt><strong>Who was involved?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_5_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_6_describe))
+                                $html .= '<dt><strong>How did it happen?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_6_describe) . '</dd>';
+                            if (!empty($r->fivewhy2h_7_describe))
+                                $html .= '<dt><strong>How much/How many (impact/cost)?</strong></dt><dd>' . htmlspecialchars($r->fivewhy2h_7_describe) . '</dd>';
+                            $html .= '</dl>';
+                        }
+
+                        if (!empty($r->corrective_describe)) {
+                            $html .= '<strong>Corrective Action :</strong> ' . htmlspecialchars($r->corrective_describe) . '<br>';
+                        }
+
+                        if (!empty($r->preventive_describe)) {
+                            $html .= '<strong>Preventive Action :</strong> ' . htmlspecialchars($r->preventive_describe) . '<br>';
+                        }
+
+                        if (!empty($r->verification_comment_describe)) {
+                            $html .= '<strong>Lesson Learned :</strong> ' . htmlspecialchars($r->verification_comment_describe) . '<br>';
+                        }
+                    }
+
+                    if (!empty($r->reply) && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') {
+                        $html .= '<strong>' . lang_loader('inc', 'inc_comment') . ':</strong> ' . htmlspecialchars($r->reply) . '<br>';
+                    }
+
+                    if (!empty($r->rca_tool)) {
+                        $html .= '<strong>Root Cause Analysis (RCA) for Incident Closure</strong><br>';
+                        $html .= '<strong>Tool Applied :</strong> ' . htmlspecialchars($r->rca_tool) . '<br>';
+                    }
+
+                    if ($r->rca_tool == 'DEFAULT') {
+                        $html .= '<strong>Closure RCA :</strong> ' . htmlspecialchars($r->rootcause) . '<br>';
+                    }
+
+                    if ($r->rca_tool == '5WHY') {
+                        $html .= '<ul>';
+                        $html .= '<li><b>WHY 1:</b> ' . htmlspecialchars($r->fivewhy_1) . '</li>';
+                        $html .= '<li><b>WHY 2:</b> ' . htmlspecialchars($r->fivewhy_2) . '</li>';
+                        $html .= '<li><b>WHY 3:</b> ' . htmlspecialchars($r->fivewhy_3) . '</li>';
+                        $html .= '<li><b>WHY 4:</b> ' . htmlspecialchars($r->fivewhy_4) . '</li>';
+                        $html .= '<li><b>WHY 5:</b> ' . htmlspecialchars($r->fivewhy_5) . '</li>';
+                        $html .= '</ul>';
+                    }
+
+                    if ($r->rca_tool == '5W2H') {
+                        $html .= '<dl>';
+                        if (!empty($r->fivewhy2h_1))
+                            $html .= '<dt>What happened?</dt><dd>' . htmlspecialchars($r->fivewhy2h_1) . '</dd>';
+                        if (!empty($r->fivewhy2h_2))
+                            $html .= '<dt>Why did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_2) . '</dd>';
+                        if (!empty($r->fivewhy2h_3))
+                            $html .= '<dt>Where did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_3) . '</dd>';
+                        if (!empty($r->fivewhy2h_4))
+                            $html .= '<dt>When did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_4) . '</dd>';
+                        if (!empty($r->fivewhy2h_5))
+                            $html .= '<dt>Who was involved?</dt><dd>' . htmlspecialchars($r->fivewhy2h_5) . '</dd>';
+                        if (!empty($r->fivewhy2h_6))
+                            $html .= '<dt>How did it happen?</dt><dd>' . htmlspecialchars($r->fivewhy2h_6) . '</dd>';
+                        if (!empty($r->fivewhy2h_7))
+                            $html .= '<dt>How much/How many (impact/cost)?</dt><dd>' . htmlspecialchars($r->fivewhy2h_7) . '</dd>';
+                        $html .= '</dl>';
+                    }
+
+                    if (!empty($r->corrective)) {
+                        $html .= '<strong>Closure Corrective Action :</strong> ' . htmlspecialchars($r->corrective) . '<br>';
+                    }
+
+                    if (!empty($r->preventive)) {
+                        $html .= '<strong>Closure Preventive Action :</strong> ' . htmlspecialchars($r->preventive) . '<br>';
+                    }
+
+                    if (!empty($r->verification_comment)) {
+                        $html .= '<strong>Closure Verification Remark :</strong> ' . htmlspecialchars($r->verification_comment) . '<br>';
+                    }
+
+
 
                     $html .= '</div>';
                 }
@@ -494,6 +743,12 @@ class Incident extends CI_Controller
 
 
         $pdf->writeHTML($html, true, false, true, false, '');
+
+
+        // Clear any stray output buffer
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
 
         $fileName = 'EF- INCIDENT REPORT - ' . $tdate . ' to ' . $fdate . '.pdf';
         $pdf->Output($fileName, 'D');
@@ -702,8 +957,10 @@ class Incident extends CI_Controller
         if (ismodule_active('INCIDENT') === true) {
 
             $data['title'] = 'INC- INCIDENTS ';
+            $data['departments'] = $this->ticketsincidents_model->read_by_id($this->uri->segment(3));
             #------------------------------#
             if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
+
                 $data['content'] = $this->load->view('incidentmodules/employee_complaint', $data, true);
             } else {
                 $data['content'] = $this->load->view('incidentmodules/dephead/employee_complaint', $data, true);
@@ -769,7 +1026,7 @@ class Incident extends CI_Controller
             $header[3] = 'Floor/Ward';
             $header[4] = 'Location';
             $header[5] = 'Mobile Number';
-            $header[6] = 'Category';
+            $header[6] = 'Incident Short Name';
             $header[7] = 'Incident';
             $header[8] = 'Description';
             // $j = 9;
@@ -820,12 +1077,14 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
             if (isset($dataexport[0])) {
                 $fp = fopen('php://output', 'w');
-
+                //print_r($header);
                 fputcsv($fp, $header, ',');
                 foreach ($dataexport as $values) {
-
-                    fputcsv($fp, $values, ',');
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    }
                 }
+
                 fclose($fp);
             }
             ob_flush();
@@ -985,7 +1244,7 @@ class Incident extends CI_Controller
             $i++;
 
 
-            $dataexport[$i]['row1'] = 'INCIDENT RECEIVED BY CATEGORY';
+            $dataexport[$i]['row1'] = 'INCIDENT RECEIVED BY INCIDENT SHORT NAME';
             $dataexport[$i]['row2'] = 'PERCENTAGE';
             $dataexport[$i]['row3'] = 'COUNT';
             $dataexport[$i]['row4'] = 'OPEN';
@@ -1036,12 +1295,19 @@ class Incident extends CI_Controller
             if (isset($dataexport[0])) {
                 $fp = fopen('php://output', 'w');
 
-                foreach ($dataexport as $values) {
+                // use first row as header
+                fputcsv($fp, $dataexport[0], ',');
 
-                    fputcsv($fp, $values, ',');
+                // output remaining rows
+                foreach (array_slice($dataexport, 1) as $values) {
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    }
                 }
+
                 fclose($fp);
             }
+
             ob_flush();
             exit;
         } else {
@@ -1064,6 +1330,7 @@ class Incident extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
 
     public function download_capa_report()
     {
@@ -1109,35 +1376,36 @@ class Incident extends CI_Controller
 
 
 
+
+
+
             $dataexport[$i]['row1'] = 'SL No.';
-
             $dataexport[$i]['row2'] = 'INCIDENT ID';
-
-            $dataexport[$i]['row3'] = 'REPORTED ON';
-
-            $dataexport[$i]['row4'] = 'REPORTED BY';
-
-            $dataexport[$i]['row5'] = 'REPORTED IN';
-
-            $dataexport[$i]['row6'] = 'INCIDENT';
-
-            $dataexport[$i]['row7'] = 'INCIDENT CATEGORY';
-
-            $dataexport[$i]['row8'] = 'INCIDENT DESCRIPTION';
-
-            $dataexport[$i]['row9'] = 'INCIDENT PRIORITY';
-
-            $dataexport[$i]['row10'] = 'INCIDENT TYPE';
-
-            // $dataexport[$i]['row7'] = 'DEPARTMENT TAT';
-
-            $dataexport[$i]['row11'] = 'INCIDENT TIMELINE & HISTORY';
+            $dataexport[$i]['row3'] = 'INCIDENT';
+            $dataexport[$i]['row4'] = 'INCIDENT SHORT NAME';
+            $dataexport[$i]['row5'] = 'INCIDENT DESCRIPTION';
+            $dataexport[$i]['row6'] = 'WHAT WENT WRONG';
+            $dataexport[$i]['row7'] = 'IMMEDIATE ACTION TAKEN';
+            $dataexport[$i]['row8'] = 'REPORTED BY';
+            $dataexport[$i]['row9'] = 'INCIDENT OCCURED IN';
+            $dataexport[$i]['row10'] = 'REPORTED ON';
+            $dataexport[$i]['row11'] = 'REPORTED IN';
 
 
+            $dataexport[$i]['row12'] = 'ASSIGNED RISK';
+            $dataexport[$i]['row13'] = 'ASSIGNED PRIORITY';
+            $dataexport[$i]['row14'] = 'ASSIGNED CATEGORY';
 
-            $dataexport[$i]['row12'] = 'CLOSED ON';
+            $dataexport[$i]['row15'] = 'PATIENT DETAILS';
+            $dataexport[$i]['row16'] = 'ASSIGNED TEAM LEADER';
+            $dataexport[$i]['row17'] = 'ASSIGNED PROCESS MONITOR ';
 
-            $dataexport[$i]['row13'] = 'TURN AROUND TIME';
+
+            $dataexport[$i]['row18'] = 'INCIDENT TIMELINE & HISTORY';
+
+            $dataexport[$i]['row19'] = 'CLOSED ON';
+
+            $dataexport[$i]['row20'] = 'TURN AROUND TIME';
 
             // $dataexport[$i]['row13'] = 'TAT STATUS';
 
@@ -1151,192 +1419,325 @@ class Incident extends CI_Controller
 
                 foreach ($departments as $department) {
 
-                    if ($department->status == 'Closed') {
-
-                        $this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
-
-                        $query = $this->db->get('ticket_incident_message');
-
-                        $ticket = $query->result();
-
-                        $rowmessage = $ticket[0]->message . ' Closed this ticket';
-
-                        $createdOn1 = strtotime($department->created_on);
-
-                        $lastModified1 = strtotime($department->last_modified);
-
-                        $closeddiff = $lastModified1 - $createdOn1;
-
-                        if ($department->department->close_time <= $closeddiff) {
-
-                            $close = 'Exceeded TAT';
-                        } else {
-
-                            $close = 'Within TAT';
-                        }
-
-                        if (strlen($rowmessage) > 60) {
-
-                            $rowmessage = substr($rowmessage, 0, 60) . '  ' . ' ... click status to view';
-                        }
-
-                        foreach ($department->feed->reason as $key => $value) {
-
-                            if ($titles[$key] == $department->department->description) {
-
-                                if (in_array($key, $keys)) {
-
-                                    $issue = $res[$key];
-                                }
-                            }
-                        }
-
-                        foreach ($department->replymessage as $r) {
-
-                            if ($r->rootcause != NULL) {
-
-                                $root = $r->rootcause;
-                            }
-                        }
-
-                        foreach ($department->replymessage as $r) {
-
-                            if ($r->corrective != NULL) {
-
-                                $corrective = $r->corrective;
-                            }
-                        }
-
-
-
-                        $value2 = $this->incident_model->convertSecondsToTime($department->department->close_time);
-
-                        $dep_tat = '';
-
-                        if ($value2['days'] != 0) {
-
-                            $dep_tat .= $value2['days'] . ' days, ';
-                        }
-
-                        if ($value2['hours'] != 0) {
-
-                            $dep_tat .= $value2['hours'] . ' hrs, ';
-                        }
-
-                        if ($value2['minutes'] != 0) {
-
-                            $dep_tat .= $value2['minutes'] . ' mins.';
-                        }
-
-
-
-                        $createdOn = strtotime($department->created_on);
-
-                        $lastModified = strtotime($department->last_modified);
-
-                        $timeDifferenceInSeconds = $lastModified - $createdOn;
-
-                        $value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
-
-                        $timetaken = '';
-
-                        if ($value['days'] != 0) {
-
-                            $timetaken .= $value['days'] . ' days, ';
-                        }
-
-                        if ($value['hours'] != 0) {
-
-                            $timetaken .= $value['hours'] . ' hrs, ';
-                        }
-
-                        if ($value['minutes'] != 0) {
-
-                            $timetaken .= $value['minutes'] . ' mins.';
-                        }
-
-                        if ($timeDifferenceInSeconds <= 60) {
-
-                            $timetaken .= 'less than a minute';
-                        }
-
-
-
-                        $dataexport[$i]['row1'] = $sl;
-
-                        $dataexport[$i]['row2'] = 'INC- ' . $department->id;
-
-                        $dataexport[$i]['row3'] = date('g:i a, d-m-y', strtotime($department->created_on));
-
-                        $dataexport[$i]['row4'] = $department->feed->name . '(' . $department->feed->patientid . ')';
-                        $dataexport[$i]['row5'] = $department->feed->ward . '(' . $department->feed->bedno . ')';
-
-                        $dataexport[$i]['row6'] = $issue;
-
-                        $dataexport[$i]['row7'] = $department->department->description;
-                        $dataexport[$i]['row8'] = $department->feed->other;
-
-                        $dataexport[$i]['row9'] = $department->priority;
-
-                        $dataexport[$i]['row10'] = $department->incident_type;
-                        // $dataexport[$i]['row7'] = $dep_tat;
-
-                        // Sort the reply messages by created_on
-                        usort($department->replymessage, function ($a, $b) {
-                            return strtotime($a->created_on) - strtotime($b->created_on);
-                        });
-
-                        $reply_details = "";
-
-                        foreach ($department->replymessage as $r) {
-                            $reply_details .= "Date & Time : " . date('d M, Y - g:i A', strtotime($r->created_on)) . "\n";
-                            $reply_details .= "Action : " . strip_tags($r->action) . "\n";
-
-                            if ($r->ticket_status == 'Assigned') {
-                                $reply_details .= "Assigned by : " . strip_tags($r->message) . "\n";
-                            }
-
-                            if ($r->ticket_status == 'Re-assigned') {
-                                $reply_details .= "Re-assigned by : " . strip_tags($r->message) . "\n";
-                            }
-
-                            if ($r->ticket_status == 'Described') {
-                                $reply_details .= "RCA : " . strip_tags($r->rootcause_describtion) . "\n";
-                                $reply_details .= "CAPA : " . strip_tags($r->corrective_description) . "\n";
-                                $reply_details .= "Additional note : " . strip_tags($r->reply) . "\n";
-                            } elseif (!empty($r->reply)) {
-                                $reply_details .= "Comment : " . strip_tags($r->reply) . "\n";
-                            }
-
-                            if ($r->ticket_status == 'Closed') {
-                                if (!empty($r->rootcause))
-                                    $reply_details .= "Closure RCA : " . strip_tags($r->rootcause) . "\n";
-                                if (!empty($r->corrective))
-                                    $reply_details .= "Closure CAPA : " . strip_tags($r->corrective) . "\n";
-                                if (!empty($r->preventive))
-                                    $reply_details .= "Closure Remarks : " . strip_tags($r->preventive) . "\n";
-                                if (!empty($r->resolution_note))
-                                    $reply_details .= "Additional note : " . strip_tags($r->resolution_note) . "\n";
-                            }
-
-                            $reply_details .= "---------------------------------------\n";
-                        }
-
-                        $dataexport[$i]['row11'] = $reply_details;
-
-
-
-
-                        $dataexport[$i]['row12'] = date('g:i a, d-m-y', strtotime($department->last_modified));
-
-                        $dataexport[$i]['row13'] = $timetaken;
-
-                        // $dataexport[$i]['row13'] = $close;
-
-                        $i++;
-
-                        $sl++;
+                    // Step 1: Build user_id → firstname map
+                    $userss = $this->db->select('user_id, firstname')
+                        ->where('user_id !=', 1)
+                        ->get('user')
+                        ->result();
+
+                    $userMap = [];
+                    foreach ($userss as $u) {
+                        $userMap[$u->user_id] = $u->firstname;
                     }
+
+                    // Step 2: Convert comma-separated IDs into arrays
+                    $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+                        ? explode(',', $department->assign_for_process_monitor)
+                        : [];
+
+                    $assign_to_ids = !empty($department->assign_to)
+                        ? explode(',', $department->assign_to)
+                        : [];
+
+                    // Step 3: Map IDs → names
+                    $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+                        return $userMap[$id] ?? $id;
+                    }, $assign_for_process_monitor_ids);
+
+                    $assign_to_names = array_map(function ($id) use ($userMap) {
+                        return $userMap[$id] ?? $id;
+                    }, $assign_to_ids);
+
+                    // Step 4: Join into comma-separated strings
+                    $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+                    $names = implode(', ', $assign_to_names);
+
+
+
+
+
+
+                    $this->db->where('ticketid', $department->id)->where('ticket_status', 'Closed');
+
+                    $query = $this->db->get('ticket_incident_message');
+
+                    $ticket = $query->result();
+
+                    $rowmessage = $ticket[0]->message . ' Closed this ticket';
+
+                    $createdOn1 = strtotime($department->created_on);
+
+                    $lastModified1 = strtotime($department->last_modified);
+
+                    $closeddiff = $lastModified1 - $createdOn1;
+
+                    if ($department->department->close_time <= $closeddiff) {
+
+                        $close = 'Exceeded TAT';
+                    } else {
+
+                        $close = 'Within TAT';
+                    }
+
+                    if (strlen($rowmessage) > 60) {
+
+                        $rowmessage = substr($rowmessage, 0, 60) . '  ' . ' ... click status to view';
+                    }
+
+                    foreach ($department->feed->reason as $key => $value) {
+
+                        if ($titles[$key] == $department->department->description) {
+
+                            if (in_array($key, $keys)) {
+
+                                $issue = $res[$key];
+                            }
+                        }
+                    }
+
+
+                    $root = [];
+                    $corrective = [];
+                    $resolution_note = [];
+                    $rootcause_describtion = [];
+                    $corrective_description = [];
+
+                    foreach ($department->replymessage as $r) {
+                        if ($r->rootcause != NULL) {
+                            $root[] = $r->rootcause;
+                        }
+
+                        if ($r->corrective != NULL) {
+                            $corrective[] = $r->corrective;
+                        }
+                        if ($r->rootcause_describtion != NULL) {
+                            $rootcause_describtion[] = $r->rootcause_describtion;
+                        }
+                        if ($r->corrective_description != NULL) {
+                            $corrective_description[] = $r->corrective_description;
+                        }
+
+                        if ($r->resolution_note != NULL) {
+                            $resolution_note[] = $r->resolution_note;
+                        }
+
+                        if ($r->ticket_status == 'Addressed' && $r->reply != NULL) {
+                            $rep = $r->reply;
+                        }
+                    }
+
+
+
+                    $value2 = $this->incident_model->convertSecondsToTime($department->department->close_time);
+
+                    $dep_tat = '';
+
+                    if ($value2['days'] != 0) {
+
+                        $dep_tat .= $value2['days'] . ' days, ';
+                    }
+
+                    if ($value2['hours'] != 0) {
+
+                        $dep_tat .= $value2['hours'] . ' hrs, ';
+                    }
+
+                    if ($value2['minutes'] != 0) {
+
+                        $dep_tat .= $value2['minutes'] . ' mins.';
+                    }
+
+
+
+                    $createdOn = strtotime($department->created_on);
+
+                    $lastModified = strtotime($department->last_modified);
+
+                    $timeDifferenceInSeconds = $lastModified - $createdOn;
+
+                    $value = $this->incident_model->convertSecondsToTime($timeDifferenceInSeconds);
+
+                    $timetaken = '';
+
+                    if ($value['days'] != 0) {
+
+                        $timetaken .= $value['days'] . ' days, ';
+                    }
+
+                    if ($value['hours'] != 0) {
+
+                        $timetaken .= $value['hours'] . ' hrs, ';
+                    }
+
+                    if ($value['minutes'] != 0) {
+
+                        $timetaken .= $value['minutes'] . ' mins.';
+                    }
+
+                    if ($timeDifferenceInSeconds <= 60) {
+
+                        $timetaken .= 'less than a minute';
+                    }
+
+                    // Convert ISO date to PHP timestamp
+                    $incidentTime = $department->feed->incident_occured_in;
+
+                    // If it's not empty, format it
+                    if (!empty($incidentTime)) {
+                        $formatted = date('d M, Y - g:i A', strtotime($incidentTime));
+                    } else {
+                        $formatted = 'N/A';
+                    }
+
+                    $dataexport[$i]['row1'] = $sl;
+
+                    $dataexport[$i]['row2'] = 'INC- ' . $department->id;
+                    $dataexport[$i]['row3'] = $department->department->description;
+                    $dataexport[$i]['row4'] = $issue;
+                    $dataexport[$i]['row5'] = $department->feed->other;
+                    $dataexport[$i]['row6'] = $department->feed->what_went_wrong;
+                    $dataexport[$i]['row7'] = $department->feed->action_taken;
+                    $dataexport[$i]['row8'] = $department->feed->name . '(' . $department->feed->patientid . ')';
+                    $dataexport[$i]['row9'] = $formatted;
+                    $dataexport[$i]['row10'] = date('g:i a, d-m-y', strtotime($department->created_on));
+                    $dataexport[$i]['row11'] = $department->feed->ward . '(' . $department->feed->bedno . ')';
+                    $dataexport[$i]['row12'] = $department->feed->risk_matrix->level ?? 'Unassigned';
+                    $dataexport[$i]['row13'] = $department->feed->priority ?? 'Unassigned';
+                    $dataexport[$i]['row14'] = $department->feed->incident_type ?? 'Unassigned';
+
+                    $dataexport[$i]['row15'] = $department->feed->tag_name . '(' . $department->feed->tag_patientid . ')';
+                    $dataexport[$i]['row16'] = $names;
+                    $dataexport[$i]['row17'] = $actionText_process_monitor;
+
+                    usort($department->replymessage, function ($a, $b) {
+                        return strtotime($a->created_on) - strtotime($b->created_on);
+                    });
+
+                    $reply_details = "";
+
+                    foreach ($department->replymessage as $r) {
+
+                        $reply_details .= "" . $r->ticket_status . "\n";
+                        $reply_details .= "Date & Time : " . date('d M, Y - g:i A', strtotime($r->created_on)) . "\n";
+                        $reply_details .= "Action : " . strip_tags($r->action) . "\n";
+
+                        if ($r->process_monitor_note) {
+                            $reply_details .= "Notes : " . strip_tags($r->process_monitor_note) . "\n";
+                        }
+
+                        if ($r->ticket_status == 'Assigned') {
+                            $reply_details .= "Process Monitor : " . strip_tags($r->action_for_process_monitor) . "\n";
+                            $reply_details .= "Assigned by : " . strip_tags($r->message) . "\n";
+                        }
+
+                        if ($r->ticket_status == 'Re-assigned') {
+                            $reply_details .= "Process Monitor : " . strip_tags($r->action_for_process_monitor) . "\n";
+                            $reply_details .= "Re-assigned by : " . strip_tags($r->message) . "\n";
+                        }
+
+                        if ($r->ticket_status == 'Transfered') {
+                            $reply_details .= "Transferred by : " . strip_tags($r->message) . "\n";
+                            $reply_details .= "Comment : " . strip_tags($r->reply) . "\n";
+                        }
+
+                        if ($r->ticket_status == 'Described') {
+                            if ($r->rca_tool_describe) {
+                                $reply_details .= "Root Cause Analysis (RCA)\n";
+                                $reply_details .= "Tool Applied : " . strip_tags($r->rca_tool_describe) . "\n";
+                            }
+
+                            if ($r->rca_tool_describe == 'DEFAULT') {
+                                $reply_details .= "Closure RCA : " . strip_tags($r->rootcause_describe) . "\n";
+                            }
+
+                            if ($r->rca_tool_describe == '5WHY') {
+                                $reply_details .= "WHY 1 : " . strip_tags($r->fivewhy_1_describe) . "\n";
+                                $reply_details .= "WHY 2 : " . strip_tags($r->fivewhy_2_describe) . "\n";
+                                $reply_details .= "WHY 3 : " . strip_tags($r->fivewhy_3_describe) . "\n";
+                                $reply_details .= "WHY 4 : " . strip_tags($r->fivewhy_4_describe) . "\n";
+                                $reply_details .= "WHY 5 : " . strip_tags($r->fivewhy_5_describe) . "\n";
+                            }
+
+                            if ($r->rca_tool_describe == '5W2H') {
+                                $reply_details .= "What happened? : " . strip_tags($r->fivewhy2h_1_describe) . "\n";
+                                $reply_details .= "Why did it happen? : " . strip_tags($r->fivewhy2h_2_describe) . "\n";
+                                $reply_details .= "Where did it happen? : " . strip_tags($r->fivewhy2h_3_describe) . "\n";
+                                $reply_details .= "When did it happen? : " . strip_tags($r->fivewhy2h_4_describe) . "\n";
+                                $reply_details .= "Who was involved? : " . strip_tags($r->fivewhy2h_5_describe) . "\n";
+                                $reply_details .= "How did it happen? : " . strip_tags($r->fivewhy2h_6_describe) . "\n";
+                                $reply_details .= "How much/How many? : " . strip_tags($r->fivewhy2h_7_describe) . "\n";
+                            }
+
+                            if ($r->corrective_describe) {
+                                $reply_details .= "Corrective Action : " . strip_tags($r->corrective_describe) . "\n";
+                            }
+                            if ($r->preventive_describe) {
+                                $reply_details .= "Preventive Action : " . strip_tags($r->preventive_describe) . "\n";
+                            }
+                            if ($r->verification_comment_describe) {
+                                $reply_details .= "Lesson Learned : " . strip_tags($r->verification_comment_describe) . "\n";
+                            }
+                        }
+
+                        if ($r->reply && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') {
+                            $reply_details .= "Comment : " . strip_tags($r->reply) . "\n";
+                        }
+
+                        if ($r->rca_tool) {
+                            $reply_details .= "Root Cause Analysis (Closure)\n";
+                            $reply_details .= "Tool Applied : " . strip_tags($r->rca_tool) . "\n";
+
+                            if ($r->rca_tool == 'DEFAULT') {
+                                $reply_details .= "Closure RCA : " . strip_tags($r->rootcause) . "\n";
+                            }
+                            if ($r->rca_tool == '5WHY') {
+                                $reply_details .= "WHY 1 : " . strip_tags($r->fivewhy_1) . "\n";
+                                $reply_details .= "WHY 2 : " . strip_tags($r->fivewhy_2) . "\n";
+                                $reply_details .= "WHY 3 : " . strip_tags($r->fivewhy_3) . "\n";
+                                $reply_details .= "WHY 4 : " . strip_tags($r->fivewhy_4) . "\n";
+                                $reply_details .= "WHY 5 : " . strip_tags($r->fivewhy_5) . "\n";
+                            }
+                            if ($r->rca_tool == '5W2H') {
+                                $reply_details .= "What happened? : " . strip_tags($r->fivewhy2h_1) . "\n";
+                                $reply_details .= "Why did it happen? : " . strip_tags($r->fivewhy2h_2) . "\n";
+                                $reply_details .= "Where did it happen? : " . strip_tags($r->fivewhy2h_3) . "\n";
+                                $reply_details .= "When did it happen? : " . strip_tags($r->fivewhy2h_4) . "\n";
+                                $reply_details .= "Who was involved? : " . strip_tags($r->fivewhy2h_5) . "\n";
+                                $reply_details .= "How did it happen? : " . strip_tags($r->fivewhy2h_6) . "\n";
+                                $reply_details .= "How much/How many? : " . strip_tags($r->fivewhy2h_7) . "\n";
+                            }
+                        }
+
+                        if ($r->corrective) {
+                            $reply_details .= "Closure Corrective Action : " . strip_tags($r->corrective) . "\n";
+                        }
+                        if ($r->preventive) {
+                            $reply_details .= "Closure Preventive Action : " . strip_tags($r->preventive) . "\n";
+                        }
+                        if ($r->verification_comment) {
+                            $reply_details .= "Closure Verification Remark : " . strip_tags($r->verification_comment) . "\n";
+                        }
+
+
+
+                        $reply_details .= "---------------------------------------\n";
+                    }
+
+                    $dataexport[$i]['row18'] = $reply_details;
+
+
+
+
+                    $dataexport[$i]['row19'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+
+                    $dataexport[$i]['row20'] = $timetaken;
+
+                    // $dataexport[$i]['row13'] = $close;
+
+                    $i++;
+
+                    $sl++;
+
                 }
             }
 
@@ -1359,23 +1760,21 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
 
             if (isset($dataexport[0])) {
-
                 $fp = fopen('php://output', 'w');
 
-               
+                // use first row as header
+                fputcsv($fp, $dataexport[0], ',');
 
-                foreach ($dataexport as $values) {
-
-                    if (empty($values) || !is_array($values)) {
-                        continue; // skip invalid rows
+                // output remaining rows
+                foreach (array_slice($dataexport, 1) as $values) {
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
                     }
-                   
-
-                    fputcsv($fp, (array)$values, ',');
                 }
 
                 fclose($fp);
             }
+
 
             ob_flush();
 
@@ -1403,6 +1802,7 @@ class Incident extends CI_Controller
                 $res[$row->shortkey] = $row->shortname;
                 $titles[$row->shortkey] = $row->title;
             }
+
             $dataexport = array();
             $i = 0;
             $departments = $this->ticketsincidents_model->alltickets();
@@ -1414,23 +1814,44 @@ class Incident extends CI_Controller
             $dataexport[$i]['row6'] = 'PHONE NUMBER';
             $dataexport[$i]['row7'] = 'FLOOR/WARD';
             $dataexport[$i]['row8'] = 'SITE';
-            $dataexport[$i]['row9'] = 'INCIDENT TYPE';
-            $dataexport[$i]['row10'] = 'SEVERITY';
-            $dataexport[$i]['row11'] = 'INCIDENT';
-            $dataexport[$i]['row12'] = 'CATEGORY';
-            $dataexport[$i]['row13'] = 'ASSIGNEE';
-            $dataexport[$i]['row14'] = 'STATUS';
-            $dataexport[$i]['row15'] = 'TRANSFERRED TO';
-            $dataexport[$i]['row16'] = 'LAST MODIFIED';
-            $dataexport[$i]['row17'] = 'TAGGED PATIENT TYPE';
-            $dataexport[$i]['row18'] = 'TAGGED PATIENT NAME';
-            $dataexport[$i]['row19'] = 'TAGGED PATIENT ID';
-            $dataexport[$i]['row20'] = 'PRIMARY CONSULTANT';
+            $dataexport[$i]['row9'] = 'INCIDENT CATEGORY';
+            $dataexport[$i]['row10'] = 'ACTION PRIORITY';
+            $dataexport[$i]['row11'] = 'ASSIGNED RISK';
+            $dataexport[$i]['row12'] = 'INCIDENT';
+            $dataexport[$i]['row13'] = 'INCIDENT SHORT NAME';
+            $dataexport[$i]['row14'] = 'ASSIGNEE';
+            $dataexport[$i]['row15'] = 'STATUS';
+            $dataexport[$i]['row16'] = 'TRANSFERRED TO';
+            $dataexport[$i]['row17'] = 'LAST MODIFIED';
+            $dataexport[$i]['row18'] = 'TAGGED PATIENT TYPE';
+            $dataexport[$i]['row19'] = 'TAGGED PATIENT NAME';
+            $dataexport[$i]['row20'] = 'TAGGED PATIENT ID';
+            $dataexport[$i]['row21'] = 'PRIMARY CONSULTANT';
             $i++;
             if (!empty($departments)) {
+
+
+
+
                 $sl = 1;
                 foreach ($departments as $department) {
+                    $rm = (array) $department->feed->risk_matrix;
 
+                    $level = $rm['level'] ?? 'Unassigned';
+                    $impact = $rm['impact'] ?? 'Unassigned';
+                    $likelihood = $rm['likelihood'] ?? 'Unassigned';
+
+                    // color mapping (not needed for export, but kept consistent)
+                    $riskColors = [
+                        'High' => '#d9534f',
+                        'Medium' => '#f0ad4e',
+                        'Low' => '#5bc0de',
+                        'default' => '#6c757d'
+                    ];
+
+                    $getColor = function ($value) use ($riskColors) {
+                        return $riskColors[$value] ?? $riskColors['default'];
+                    };
                     foreach ($department->feed->reason as $key => $value) {
                         if ($titles[$key] == $department->department->description) {
                             if (in_array($key, $keys)) {
@@ -1458,41 +1879,42 @@ class Incident extends CI_Controller
                             $dataexport[$i]['row8'] = $department->feed->bedno;
                             $dataexport[$i]['row9'] = $department->feed->incident_type;
                             $dataexport[$i]['row10'] = $department->feed->priority;
-                            $dataexport[$i]['row11'] = $issue;
-                            $dataexport[$i]['row12'] = $department->department->description;
+                            $dataexport[$i]['row11'] = $level . ' (' . $impact . ' Impact × ' . $likelihood . ' Likelihood)';
+                            $dataexport[$i]['row12'] = $issue;
+                            $dataexport[$i]['row13'] = $department->department->description;
                             if ($department->department->pname != '' && $department->department->pname != NULL) {
-                                $dataexport[$i]['row13'] = $department->department->pname;
+                                $dataexport[$i]['row14'] = $department->department->pname;
                             } else {
-                                $dataexport[$i]['row13'] = 'NA';
+                                $dataexport[$i]['row14'] = 'NA';
                             }
-                            $dataexport[$i]['row14'] = $department->status;
+                            $dataexport[$i]['row15'] = $department->status;
                             if ($transfer_dep_desc) {
 
-                                $dataexport[$i]['row15'] = $transfer_dep_desc;
+                                $dataexport[$i]['row16'] = $transfer_dep_desc;
                             } else {
-                                $dataexport[$i]['row15'] = 'NA';
+                                $dataexport[$i]['row16'] = 'NA';
                             }
-                            $dataexport[$i]['row16'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+                            $dataexport[$i]['row17'] = date('g:i a, d-m-y', strtotime($department->last_modified));
 
                             if ($department->feed->tag_patient_type != '' && $department->feed->tag_patient_type != NULL) {
-                                $dataexport[$i]['row17'] = $department->feed->tag_patient_type;
-                            } else {
-                                $dataexport[$i]['row17'] = 'NA';
-                            }
-                            if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
-                                $dataexport[$i]['row18'] = $department->feed->tag_name;
+                                $dataexport[$i]['row18'] = $department->feed->tag_patient_type;
                             } else {
                                 $dataexport[$i]['row18'] = 'NA';
                             }
-                            if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
-                                $dataexport[$i]['row19'] = $department->feed->tag_patientid;
+                            if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
+                                $dataexport[$i]['row19'] = $department->feed->tag_name;
                             } else {
                                 $dataexport[$i]['row19'] = 'NA';
                             }
-                            if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
-                                $dataexport[$i]['row20'] = $department->feed->tag_consultant;
+                            if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
+                                $dataexport[$i]['row20'] = $department->feed->tag_patientid;
                             } else {
                                 $dataexport[$i]['row20'] = 'NA';
+                            }
+                            if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
+                                $dataexport[$i]['row21'] = $department->feed->tag_consultant;
+                            } else {
+                                $dataexport[$i]['row21'] = 'NA';
                             }
                         }
                     }
@@ -1519,21 +1941,22 @@ class Incident extends CI_Controller
 
             header('Content-Disposition: attachment;filename=' . $fileName);
 
-            if (isset($dataexport[0])) {
+           if (isset($dataexport[0])) {
+    $fp = fopen('php://output', 'w');
 
-                $fp = fopen('php://output', 'w');
+    // use first row as header
+    fputcsv($fp, $dataexport[0], ',');
 
+    // output remaining rows
+    foreach (array_slice($dataexport, 1) as $values) {
+        if (is_array($values)) {
+            fputcsv($fp, $values, ',');
+        }
+    }
 
+    fclose($fp);
+}
 
-                foreach ($dataexport as $values) {
-
-
-
-                    fputcsv($fp, $values, ',');
-                }
-
-                fclose($fp);
-            }
 
             ob_flush();
 
@@ -1573,23 +1996,41 @@ class Incident extends CI_Controller
                 $dataexport[$i]['row6'] = 'PHONE NUMBER';
                 $dataexport[$i]['row7'] = 'FLOOR/WARD';
                 $dataexport[$i]['row8'] = 'SITE';
-                $dataexport[$i]['row9'] = 'INCIDENT TYPE';
-                $dataexport[$i]['row10'] = 'SEVERITY';
-                $dataexport[$i]['row11'] = 'INCIDENT';
-                $dataexport[$i]['row12'] = 'CATEGORY';
-                $dataexport[$i]['row13'] = 'ASSIGNEE';
-                $dataexport[$i]['row14'] = 'STATUS';
-                $dataexport[$i]['row15'] = 'TRANSFERRED TO';
-                $dataexport[$i]['row16'] = 'LAST MODIFIED';
-                $dataexport[$i]['row17'] = 'TAGGED PATIENT TYPE';
-                $dataexport[$i]['row18'] = 'TAGGED PATIENT NAME';
-                $dataexport[$i]['row19'] = 'TAGGED PATIENT ID';
-                $dataexport[$i]['row20'] = 'PRIMARY CONSULTANT';
+                $dataexport[$i]['row9'] = 'INCIDENT CATEGORY';
+                $dataexport[$i]['row10'] = 'ACTION PRIORITY';
+                $dataexport[$i]['row11'] = 'ASSIGNED RISK';
+                $dataexport[$i]['row12'] = 'INCIDENT';
+                $dataexport[$i]['row13'] = 'INCIDENT SHORT NAME';
+                $dataexport[$i]['row14'] = 'ASSIGNEE';
+                $dataexport[$i]['row15'] = 'STATUS';
+                $dataexport[$i]['row16'] = 'TRANSFERRED TO';
+                $dataexport[$i]['row17'] = 'LAST MODIFIED';
+                $dataexport[$i]['row18'] = 'TAGGED PATIENT TYPE';
+                $dataexport[$i]['row19'] = 'TAGGED PATIENT NAME';
+                $dataexport[$i]['row20'] = 'TAGGED PATIENT ID';
+                $dataexport[$i]['row21'] = 'PRIMARY CONSULTANT';
                 $i++;
             }
             if (!empty($departments)) {
                 $sl = 1;
                 foreach ($departments as $department) {
+                    $rm = (array) $department->feed->risk_matrix;
+
+                    $level = $rm['level'] ?? 'Unassigned';
+                    $impact = $rm['impact'] ?? 'Unassigned';
+                    $likelihood = $rm['likelihood'] ?? 'Unassigned';
+
+                    // color mapping (not needed for export, but kept consistent)
+                    $riskColors = [
+                        'High' => '#d9534f',
+                        'Medium' => '#f0ad4e',
+                        'Low' => '#5bc0de',
+                        'default' => '#6c757d'
+                    ];
+
+                    $getColor = function ($value) use ($riskColors) {
+                        return $riskColors[$value] ?? $riskColors['default'];
+                    };
                     if ($department->status != 'Closed') {
                         foreach ($department->feed->reason as $key => $value) {
                             if ($titles[$key] == $department->department->description) {
@@ -1618,41 +2059,42 @@ class Incident extends CI_Controller
                                 $dataexport[$i]['row8'] = $department->feed->bedno;
                                 $dataexport[$i]['row9'] = $department->feed->incident_type;
                                 $dataexport[$i]['row10'] = $department->feed->priority;
-                                $dataexport[$i]['row11'] = $issue;
-                                $dataexport[$i]['row12'] = $department->department->description;
+                                $dataexport[$i]['row11'] = $level . ' (' . $impact . ' Impact × ' . $likelihood . ' Likelihood)';
+                                $dataexport[$i]['row12'] = $issue;
+                                $dataexport[$i]['row13'] = $department->department->description;
                                 if ($department->department->pname != '' && $department->department->pname != NULL) {
-                                    $dataexport[$i]['row13'] = $department->department->pname;
+                                    $dataexport[$i]['row14'] = $department->department->pname;
                                 } else {
-                                    $dataexport[$i]['row13'] = 'NA';
+                                    $dataexport[$i]['row14'] = 'NA';
                                 }
-                                $dataexport[$i]['row14'] = $department->status;
+                                $dataexport[$i]['row15'] = $department->status;
                                 if ($transfer_dep_desc) {
 
-                                    $dataexport[$i]['row15'] = $transfer_dep_desc;
+                                    $dataexport[$i]['row16'] = $transfer_dep_desc;
                                 } else {
-                                    $dataexport[$i]['row15'] = 'NA';
+                                    $dataexport[$i]['row16'] = 'NA';
                                 }
-                                $dataexport[$i]['row16'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+                                $dataexport[$i]['row17'] = date('g:i a, d-m-y', strtotime($department->last_modified));
 
                                 if ($department->feed->tag_patient_type != '' && $department->feed->tag_patient_type != NULL) {
-                                    $dataexport[$i]['row17'] = $department->feed->tag_patient_type;
-                                } else {
-                                    $dataexport[$i]['row17'] = 'NA';
-                                }
-                                if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
-                                    $dataexport[$i]['row18'] = $department->feed->tag_name;
+                                    $dataexport[$i]['row18'] = $department->feed->tag_patient_type;
                                 } else {
                                     $dataexport[$i]['row18'] = 'NA';
                                 }
-                                if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
-                                    $dataexport[$i]['row19'] = $department->feed->tag_patientid;
+                                if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
+                                    $dataexport[$i]['row19'] = $department->feed->tag_name;
                                 } else {
                                     $dataexport[$i]['row19'] = 'NA';
                                 }
-                                if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
-                                    $dataexport[$i]['row20'] = $department->feed->tag_consultant;
+                                if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
+                                    $dataexport[$i]['row20'] = $department->feed->tag_patientid;
                                 } else {
                                     $dataexport[$i]['row20'] = 'NA';
+                                }
+                                if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
+                                    $dataexport[$i]['row21'] = $department->feed->tag_consultant;
+                                } else {
+                                    $dataexport[$i]['row21'] = 'NA';
                                 }
                             }
                         }
@@ -1681,20 +2123,21 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
 
             if (isset($dataexport[0])) {
-
                 $fp = fopen('php://output', 'w');
 
+                // use first row as header
+                fputcsv($fp, $dataexport[0], ',');
 
-
-                foreach ($dataexport as $values) {
-
-
-
-                    fputcsv($fp, $values, ',');
+                // output remaining rows
+                foreach (array_slice($dataexport, 1) as $values) {
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    }
                 }
 
                 fclose($fp);
             }
+
 
             ob_flush();
 
@@ -1739,3 +2182,4 @@ class Incident extends CI_Controller
         }
     }
 }
+

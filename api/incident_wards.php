@@ -1,4 +1,10 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+//error_reporting(E_ALL);
 $i = 0;
 include('db.php');
 
@@ -23,13 +29,46 @@ $data['setting_data']->logo = 'data:image/' . $type . ';base64,' . base64_encode
 $data['setting_data']->android_apk = 'https://' . $link . '/uploads/' . $data['setting_data']->android_apk;
 
 
-$ch = curl_init($baseurl . 'SetupEfeeder/questionsinc?s=INCIDENT');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
-$output = curl_exec($ch);
+//$ch = curl_init($baseurl . 'SetupEfeeder/questionsinc?s=INCIDENT');
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+//$output = curl_exec($ch);
 
-$data['question_set'] = json_decode($output);
-$x = count($data['question_set']);
+//$data['question_set'] = json_decode($output, true);
+
+// If decode fails or API gives nothing, set to []
+//if (json_last_error() !== JSON_ERROR_NONE || !is_array($data['question_set'])) {
+  //  $data['question_set'] = [];
+//}
+
+//$x = count($data['question_set']);
+
+$apiUrl = $baseurl . 'SetupEfeeder/questionsinc?s=INCIDENT';
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$output = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+if ($output === false) {
+    $data['question_set'] = [];
+    $data['question_set_error'] = 'Curl error: ' . curl_error($ch);
+} elseif ($httpCode !== 200) {
+    $data['question_set'] = [];
+    $data['question_set_error'] = "HTTP error: $httpCode";
+    $data['question_set_raw'] = $output;
+} else {
+    $decoded = json_decode($output, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $data['question_set'] = [];
+        $data['question_set_error'] = 'JSON decode error: ' . json_last_error_msg();
+        $data['question_set_raw'] = $output;
+    } else {
+        $data['question_set'] = $decoded;
+    }
+}
+curl_close($ch);
+
 
 $sql = 'SELECT * FROM `bf_ward_esr` WHERE 1 order by orderd	 asc';
 $result = mysqli_query($con, $sql);
@@ -108,24 +147,14 @@ if ($num2 > 0) {
 	}
 }
 
+$data['pinfo'] = null;
 
-$mobile = isset($_GET['mobile']) ? mysqli_real_escape_string($con, $_GET['mobile']) : '';
-
-if ($mobile !== '') {
-    $sql = 'SELECT * FROM `healthcare_employees` WHERE mobile="' . $mobile . '"';
+if (isset($_GET['mobile']) && $_GET['mobile'] !== '') {
+    $mobile = mysqli_real_escape_string($con, $_GET['mobile']);
+    $sql = "SELECT * FROM `healthcare_employees` WHERE mobile='$mobile' LIMIT 1";
     $result = mysqli_query($con, $sql);
     $data['pinfo'] = mysqli_fetch_object($result);
-} else {
-    $data['pinfo'] = null; // fallback if no mobile is passed
 }
-
-
-
-
-$data['baseurl'] = $baseurl;
-$domain_name = $config_set['DOMAIN_NAME'];
-$data['setup'] =  json_decode(file_get_contents('../config/'.$domain_name.'.json'),true);
-
 
 mysqli_close($con);
 echo json_encode($data);

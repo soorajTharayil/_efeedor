@@ -27,47 +27,34 @@ function get_user_by_sms_activity($type,$con){
  
 }
 
-function get_user_by_access($type, $con, $userId, $roleId){
+
+function get_user_by_access($type,$con,$userId,$roleId){
     $user_list = array();
-    
-    $query = "SELECT * FROM features WHERE feature_name = '".mysqli_real_escape_string($con, $type)."'";
-    $result = mysqli_query($con, $query);
-    
-    if (!$result || mysqli_num_rows($result) === 0) {
-        error_log("Feature not found or query failed: " . mysqli_error($con));
-        return false;
-    }
-
-    $feature_result = mysqli_fetch_object($result);
+    $query = "SELECT * FROM features where feature_name='".$type."'";
+    $feature_result =  mysqli_fetch_object(mysqli_query($con, $query));
     if (!$feature_result) {
-        return false;
+        //echo "Error: " . mysqli_error($con);
     }
-
-    $feature = (int)$feature_result->feature_id;
-
-    $user_permission_query = 'SELECT * FROM `user_permissions` WHERE user_id = "'.mysqli_real_escape_string($con, $userId).'" AND `feature_id` = '.$feature;
-    $permission_result = mysqli_query($con, $user_permission_query);
-
-    if (!$permission_result) {
-        error_log("User permission query failed: " . mysqli_error($con));
-        return false;
+    $feature = $feature_result->feature_id;
+    $user_permission_query = 'SELECT * FROM `user_permissions` where user_id="'.$userId.'" AND `feature_id` ='.$feature;
+    $permission_result =  mysqli_query($con, $user_permission_query);
+    //print_r($permission_result); exit;
+    if($permission_result->num_rows == 0){
+        $user_permission_query = 'SELECT * FROM `role_permissions` where `role_id` = '.$roleId.' AND `feature_id` ='.$feature;
+        $permission_result =  mysqli_query($con, $user_permission_query);
     }
+    
 
-    if (mysqli_num_rows($permission_result) === 0) {
-        $user_permission_query = 'SELECT * FROM `role_permissions` WHERE `role_id` = '.(int)$roleId.' AND `feature_id` = '.$feature;
-        $permission_result = mysqli_query($con, $user_permission_query);
-
-        if (!$permission_result || mysqli_num_rows($permission_result) === 0) {
-            return false;
-        }
-    }
-
+    
+   
     $role_permission = mysqli_fetch_object($permission_result);
-    if (isset($role_permission->status) && $role_permission->status == 1) {
+    if($role_permission->status == 1){
         return true;
+    }else{
+        return false;
     }
-
-    return false;
+   
+ 
 }
 
 

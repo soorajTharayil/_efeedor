@@ -160,7 +160,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $wind
 	// 	event.preventDefault();
 	// 	window.location.href = "/login/?userid=" + $scope.adminId + "&redirectType=userActivity";
 	// };
-	
+
 
 	$scope.closeMenuOnClickOutside = function (event) {
 		if ($scope.menuVisible && !event.target.closest('.menu-dropdown') && !event.target.closest('.menu-toggle')) {
@@ -189,115 +189,67 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $wind
 			$http.get('language/english.json').then(function (responsedata) {
 
 				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'English'
+				$scope.type2 = 'English';
+
 			});
 		}
-		if (type == 'kannada') {
+		if (type == 'lang2') {
 			$http.get('language/lang2.json').then(function (responsedata) {
 
 				$rootScope.lang = responsedata.data;
 				$scope.type2 = 'ಕನ್ನಡ';
+
+
 			});
 		}
-		if (type == 'malayalam') {
+		if (type == 'lang3') {
 			$http.get('language/lang3.json').then(function (responsedata) {
 
 				$rootScope.lang = responsedata.data;
 				$scope.type2 = 'മലയാളം';
+				//	$scope.type2 = 'தமிழ்';
+
+
 
 			});
 		}
-		if (type == 'tamil') {
-			$http.get('language/ip_tamil.json').then(function (responsedata) {
-
-				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'தமிழ்';
-			});
-		}
-		$scope.feedback.langsub = type;
-
-
 	}
 	$scope.language('english');
 
 	$scope.setupapplication = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const userIdFromUrl = urlParams.get("user_id");
 
-      if (userIdFromUrl) {  // ✅ Run login API only if user_id exists
-        $http.post($rootScope.baseurl_main + "/login_userid.php", { userid: userIdFromUrl })
-          .then(
-            function (responsedata) {
-              console.log(responsedata);
-              if (responsedata.status == 200) {
-                var response = responsedata.data;
-                $rootScope.loader = false;
-                $rootScope.profilen = response;
-                $rootScope.adminId = $rootScope.profilen.userid;
+		var url = window.location.href;
 
-                if (!$rootScope.$$phase) {
-                  $rootScope.$apply();
-                }
+		var id = url.substring(url.lastIndexOf('=') + 1);
 
-                $scope.profiled = $rootScope.profilen;
-                localStorage.setItem("ehandor", JSON.stringify(response));
-                if (response.status === "fail") {
-                  $scope.loginerror = response.message;
-                } else if (response.status === "success") {
-                  $rootScope.loginactive = true;
-                  $scope.step0 = false;
-                  $scope.step1 = true;
-                }
-              } else {
-                $scope.loginerror = "Some error happened";
-                $rootScope.loader = false;
-              }
-            },
-            function errorCallback(responsedata) {
-              // your existing error handling
-            }
-          );
-      } else {
-        console.log("No user_id in URL — skipping login_userid API");
-      }
+		const urlParams = new URLSearchParams(window.location.search);
+		const userId = urlParams.get('user_id');
+		$scope.userId = userId;
 
-      var url = window.location.href;
-      var id = url.substring(url.lastIndexOf("=") + 1);
-      const userId = urlParams.get("user_id");
-      $scope.userId = userId;
+		$http.get($rootScope.baseurl_main + '/ward.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.wardlist = responsedata.data;
+			$scope.questioset = responsedata.data.question_set;
+			$scope.setting_data = responsedata.data.setting_data;
+			console.log($scope.feedback);
 
-      $http
-        .get($rootScope.baseurl_main + "/ward.php?patientid=" + id, { timeout: 20000 })
-        .then(
-          function (responsedata) {
-            $scope.wardlist = responsedata.data;
-			// ✅ Load setup into global scope if exists
-            if (responsedata.data && responsedata.data.setup) {
-                $rootScope.GLOBALSETUP = responsedata.data.setup;
-                console.log("GLOBALSETUP Loaded:", $rootScope.GLOBALSETUP);
-            }
-            $scope.questioset = responsedata.data.question_set;
-            $scope.setting_data = responsedata.data.setting_data;
-            console.log($scope.feedback);
+			// Find the user whose user_id matches $scope.userId
+			var matchedUser = $scope.wardlist.user.find(u => u.user_id === $scope.userId);
 
-            var matchedUser = $scope.wardlist.user.find(
-              (u) => u.user_id === $scope.userId
-            );
+			if (matchedUser) {
+				$scope.matchedUserDetails = matchedUser;
+				console.log("Matched User:", $scope.matchedUserDetails);
+				$scope.step0 = false;
+				$scope.step1 = true;
+			} else {
+				console.log("No matching user found for user_id:", $scope.userId);
+			}
+		},
+			function myError(response) {
+				$rootScope.loader = false;
 
-            if (matchedUser) {
-              $scope.matchedUserDetails = matchedUser;
-              console.log("Matched User:", $scope.matchedUserDetails);
-              $scope.step0 = false;
-              $scope.step1 = true;
-            } else {
-              console.log("No matching user found for user_id:", $scope.userId);
-            }
-          },
-          function myError(response) {
-            $rootScope.loader = false;
-          }
-        );
-    };
-	
+			}
+		);
+
+	}
 	$scope.setupapplication();
 });

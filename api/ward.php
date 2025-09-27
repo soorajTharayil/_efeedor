@@ -87,13 +87,13 @@ $data['setting_data']->logo             = imageToBase64('../uploads/' . $data['s
 
 // APK link
 if (!empty($data['setting_data']->android_apk)) {
-    $data['setting_data']->android_apk = 'https://' . $link . '/uploads/' . $data['setting_data']->android_apk;
+    $data['setting_data']->android_apk = 'http://' . $link . '/uploads/' . $data['setting_data']->android_apk;
 }
 
 // ----------------------
 // Fetch Question Set via cURL
 // ----------------------
-$ch = curl_init('https://' . $link . '/SetupEfeeder/questionjson');
+$ch = curl_init('http://' . $link . '/SetupEfeeder/questionjson');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
 $output = curl_exec($ch);

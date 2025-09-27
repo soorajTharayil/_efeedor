@@ -50,7 +50,7 @@
 							foreach ($feedbacktaken as $r) {
 
 								$param = json_decode($r->dataset);
-								if (($param->suggestionText != '' && $param->suggestionText != NULL) || (isset($param->comment) && count((array)$param->comment) > 0)) { ?>
+								if (($param->suggestionText != '' && $param->suggestionText != NULL) || count($param->comment) > 0) { ?>
 									<a href="<?php echo  $int_link_patient_feedback . $r->id; ?>">
 
 										<div class="inbox-item">
@@ -73,7 +73,7 @@
 														<p class="inbox-item-text"><i class="fa fa-ticket" aria-hidden="true"></i>&nbsp;<b><?php echo $question[$key]; ?></b></p>
 													<?php } ?>
 												<?php } ?>
-												<?php foreach ((array)$param->comment as $key => $value) {
+												<?php foreach ($param->comment as $key => $value) {
 													if ($value != '') {
 												?>
 														<p class="inbox-item-text"><b><?php echo $setarray[$key]; ?></b>: <?php echo $value; ?></p>

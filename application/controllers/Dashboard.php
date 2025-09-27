@@ -122,6 +122,7 @@ class Dashboard extends CI_Controller
                     'fullname' => $check_user->row()->firstname,
                     'user_role' => $check_user->row()->user_role,
                     'user_role_name' => $check_user->row()->lastname,
+                    'designation' => $check_user->row()->designation,
 
                     'picture' => $check_user->row()->picture,
                     // 'access1' => $access1,

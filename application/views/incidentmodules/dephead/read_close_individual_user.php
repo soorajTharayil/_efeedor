@@ -270,7 +270,7 @@
 													$createdOn = strtotime($department->created_on);
 													$lastModified = strtotime($department->last_modified);
 													$timeDifferenceInSeconds = $lastModified - $createdOn;
-													$value = $this->ipd_model->convertSecondsToTime($timeDifferenceInSeconds);
+													$value = $this->updated_model->convertSecondsToTime($timeDifferenceInSeconds);
 
 													if ($value['days'] != 0) {
 														echo $value['days'] . ' days, ';

@@ -542,9 +542,6 @@ class Incident_model extends CI_Model
 		$isNegative = $inputSeconds < 0 ? true : false;
 
 		// Always work with positive values for calculations
-		if (!is_numeric($inputSeconds)) {
-            $inputSeconds = 0; // or handle the error as needed
-        }
 		$inputSeconds = abs($inputSeconds);
 
 		$days = floor($inputSeconds / 86400);
@@ -1127,3 +1124,4 @@ class Incident_model extends CI_Model
 		return $data;
 	}
 }
+

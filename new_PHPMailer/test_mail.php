@@ -8,7 +8,7 @@
 
 
 include('../api/db.php');
-include('/home/cpefeedor/globalconfig.php');
+include('/home/efeedor/globalconfig.php');
 
 
 //email to  admins(ip) when ticket is OPEN 

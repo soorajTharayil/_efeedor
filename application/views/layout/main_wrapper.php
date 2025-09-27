@@ -264,7 +264,7 @@ if ($title == null) {
                                         <?php } ?>
                                         <?php if (ismodule_active('INCIDENT') === true && isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
                                             <li><a
-                                                    href="<?php echo base_url("incident/ticket_dashboard") ?>"><?php echo lang_loader('global', 'global_incs_report'); ?></a>
+                                                    href="<?php echo base_url("incident/ticket_dashboard") ?>">Incident Manager</a>
                                             </li>
                                         <?php } ?>
                                         <?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('SG-STAFF-GRIEVANCES-DASHBOARD') === true) { ?>

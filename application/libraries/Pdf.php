@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once  '/home/cpefeedor/public_html/PDFLIBRARY/tcpdf.php';
+require_once  '/var/www/html/PDFLIBRARY/tcpdf.php';
 
 class Pdf extends TCPDF
 {
