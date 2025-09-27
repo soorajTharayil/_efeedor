@@ -7,9 +7,25 @@ $settings = $this->db->select("site_align")
 session_start();
 if (!isset($_SESSION['ward'])) {
     $_SESSION['ward'] = 'ALL';
+    $_SESSION['severity'] = 'ALLT';
+    $_SESSION['priority'] = 'ALLT';
 } else {
     if (isset($_GET['cward'])) {
         $_SESSION['ward'] = $_GET['cward'];
+        $url = $actual_link = base_url() . $this->uri->segment(1) . '/' . $this->uri->segment(2) . '/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/';
+        header('Location: ' . $url);
+        die();
+    }
+
+    if (isset($_GET['severity'])) {
+        $_SESSION['severity'] = $_GET['severity'];
+        $url = $actual_link = base_url() . $this->uri->segment(1) . '/' . $this->uri->segment(2) . '/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/';
+        header('Location: ' . $url);
+        die();
+    }
+
+    if (isset($_GET['priority'])) {
+        $_SESSION['priority'] = $_GET['priority'];
         $url = $actual_link = base_url() . $this->uri->segment(1) . '/' . $this->uri->segment(2) . '/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/';
         header('Location: ' . $url);
         die();
@@ -67,6 +83,9 @@ if ($title == null) {
     <!-- Font Awesome 4.7.0 -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"> -->
+
+
     <!-- semantic css -->
     <link href="<?php echo base_url(); ?>assets/css/semantic.min.css" rel="stylesheet" type="text/css" />
     <!-- sliderAccess css -->
@@ -101,23 +120,28 @@ if ($title == null) {
         integrity="sha512-f1TzI0EVjfhwKkLEFZnu8AgzzzuUBE9X4YY61EoQJhjH8m+25VKdWmEfTJjmtnm0TEP8q9h+J061kCHvx3NJDA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $(document).ready(function () {
-            // Initialize the datepicker for both inputs
+        $(document).ready(function() {
+            // Date format you want (e.g., dd/mm/yy or yyyy-mm-dd)
+            const dateFormat = 'dd/mm/yy'; // If you want to keep dd/mm/yyyy format
+
             $(".datepicker[name='tdate']").datepicker({
-                maxDate: new Date(), // This ensures that the max selectable date is today.
-                onClose: function (selectedDate) {
+                dateFormat: dateFormat,
+                maxDate: new Date(),
+                onClose: function(selectedDate) {
                     $(".datepicker[name='fdate']").datepicker("option", "minDate", selectedDate);
                 }
             });
 
             $(".datepicker[name='fdate']").datepicker({
+                dateFormat: dateFormat,
                 maxDate: new Date(),
-                onClose: function (selectedDate) {
+                onClose: function(selectedDate) {
                     $(".datepicker[name='tdate']").datepicker("option", "maxDate", selectedDate);
                 }
             });
         });
     </script>
+
     <style>
         .loading-overlay {
             position: fixed;
@@ -273,13 +297,17 @@ if ($title == null) {
                                             </li>
                                         <?php } ?>
                                         <?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
-                                            <li><a href="<?php echo base_url("quality/quality_welcome_page") ?>">Quality Indicator
+                                            <li><a href="<?php echo base_url("quality/quality_welcome_page") ?>">Quality KPI
                                                     Manager</a></li>
                                         <?php } ?>
                                         <?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
                                             <li><a href="<?php echo base_url("audit/audit_welcome_page") ?>">Quality Audit Manager</a>
                                             </li>
                                         <?php } ?>
+                                        <!-- <?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
+                                            <li><a href="<?php echo base_url("monthlyreport/monthly_report_welcome_page") ?>">Departmental Monthly Report</a>
+                                            </li>
+                                        <?php } ?> -->
                                         <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
                                             <li><a href="<?php echo base_url("asset/ticket_dashboard") ?>">Asset Manager</a></li>
                                         <?php } ?>
@@ -366,7 +394,8 @@ if ($title == null) {
                                                         </li>
                                                     <?php } ?>
                                                     <?php if (ismodule_active('IP') === true && isfeature_active('IP-CAPA-REPORTS') === true) { ?>
-                                                        <li><a href="<?php echo base_url("ipd/escalation_report") ?>">Escalation Report</a>
+                                                        <li><a
+                                                                href="<?php echo base_url("ipd/escalation_report") ?>">Escalation Report</a>
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
@@ -667,7 +696,8 @@ if ($title == null) {
                                                         <li><a
                                                                 href="<?php echo base_url("pc/capa_report") ?>"><?php echo lang_loader('global', 'global_action_report'); ?></a>
                                                         </li>
-                                                        <li><a href="<?php echo base_url("pc/escalation_report") ?>">Escalation Report</a>
+                                                        <li><a
+                                                                href="<?php echo base_url("pc/escalation_report") ?>">Escalation Report</a>
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
@@ -676,9 +706,28 @@ if ($title == null) {
                                     <?php } ?>
                                 <?php } ?>
 
+                                <?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true && $this->uri->segment(1) == 'audit') { ?>
+
+                                    <li class="treeview <?= ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url("audit/audit_master"); ?>">
+                                            <i class="fa fa-file"></i> <span>Audit Master</span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+
+                                <!-- <?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true && $this->uri->segment(1) == 'quality') { ?>
+
+                                    <li class="treeview <?= ($this->uri->segment(1) === 'quality') ? 'active' : ''; ?>">
+                                        <a href="<?php echo base_url("quality/quality_master"); ?>">
+                                            <i class="fa fa-qrcode"></i> <span>Quality Master</span>
+                                        </a>
+                                    </li>
+                                <?php } ?> -->
+
                                 <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && ($this->uri->segment(1) == 'asset' || $this->uri->segment(1) == 'departmentasset' || $this->uri->segment(1) == 'assetlocation' || $this->uri->segment(1) == 'assetgrade')) { ?>
-                                    <li class="treeview <?php if (in_array(current_url(), [base_url('/departmentasset'), base_url('/assetlocation'), base_url('assetgrade'), base_url('asset/asset_preventive_tickets'), base_url('asset/ticket_dashboard'), base_url('asset/alltickets'), base_url('asset/asset_warranty_reports'), base_url('asset/asset_contract_reports'), base_url('asset/asset_financial_metrices'), base_url('asset/asset_distribution_analysis'), base_url('asset/asset_calibration_tickets')]))
-                                        echo 'active'; ?>">
+                                    <li
+                                        class="treeview <?php if (in_array(current_url(), [base_url('/departmentasset'), base_url('/assetlocation'), base_url('assetgrade'), base_url('asset/asset_preventive_tickets'), base_url('asset/ticket_dashboard'), base_url('asset/alltickets'), base_url('asset/asset_warranty_reports'), base_url('asset/asset_contract_reports'), base_url('asset/asset_financial_metrices'), base_url('asset/asset_distribution_analysis'), base_url('asset/asset_calibration_tickets')]))
+                                                            echo 'active'; ?>">
 
                                         <a href="">
                                             <i class="fa fa fa-list-alt"></i><span>Manage Asset Essentials</span>
@@ -710,7 +759,7 @@ if ($title == null) {
 
                                 <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && $this->uri->segment(1) == 'asset') { ?>
 
-                                    <li class="treeview <?php echo ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
+                                    <li class="treeview <?= ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url("asset/asset_qrcode"); ?>">
                                             <i class="fa fa-qrcode"></i> <span>Asset QR Codes</span>
                                         </a>
@@ -883,7 +932,8 @@ if ($title == null) {
                                                         </li>
                                                     <?php } ?>
                                                     <?php if (ismodule_active('ISR') === true && isfeature_active('ISR-CAPA-REPORTS') === true) { ?>
-                                                        <li><a href="<?php echo base_url("isr/escalation_report") ?>">Escalation Report</a>
+                                                        <li><a
+                                                                href="<?php echo base_url("isr/escalation_report") ?>">Escalation Report</a>
                                                         </li>
                                                     <?php } ?>
                                                 </ul>
@@ -1072,7 +1122,7 @@ if ($title == null) {
                                         <?php } ?>
                                         <?php if (ismodule_active('INCIDENT') === true && isfeature_active('INCIDENTS-DASHBOARD') === true) { ?>
                                             <li><a
-                                                    href="<?php echo base_url("incident/department_tickets") ?>"><?php echo lang_loader('global', 'global_incs_report'); ?></a>
+                                                    href="<?php echo base_url("incident/department_tickets") ?>">Incident Manager</a>
                                             </li>
                                         <?php } ?>
                                         <?php if (ismodule_active('GRIEVANCE') === true && isfeature_active('GRIEVANCES-DASHBOARD') === true) { ?>
@@ -1080,7 +1130,74 @@ if ($title == null) {
                                                     href="<?php echo base_url("grievance/department_tickets") ?>"><?php echo lang_loader('global', 'global_sgs_report'); ?></a>
                                             </li>
                                         <?php } ?>
+                                        <?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
+                                            <li><a href="<?php echo base_url("quality/quality_welcome_page") ?>">Quality Indicator
+                                                    Manager</a></li>
+                                        <?php } ?>
+                                        <?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
+                                            <li><a href="<?php echo base_url("audit/audit_welcome_page") ?>">Quality Audit Manager</a>
+                                            </li>
+                                        <?php } ?>
+                                        <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
+                                            <li><a href="<?php echo base_url("asset/ticket_dashboard") ?>">Asset Manager</a></li>
+                                        <?php } ?>
                                     </ul>
+                                </li>
+                            <?php } ?>
+
+                            <!--<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>-->
+                            <!--    <li><a href="<?php echo base_url("monthlyreport/monthly_report_welcome_page") ?>">Departmental Monthly Report</a>-->
+                            <!--    </li>-->
+                            <!--<?php } ?>-->
+
+                            <!--<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true && $this->uri->segment(1) == 'audit') { ?>-->
+
+                            <!--    <li class="treeview <?= ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">-->
+                            <!--        <a href="<?php echo base_url("audit/audit_activity"); ?>">-->
+                            <!--            <i class="fa fa-qrcode"></i> <span>Audit User Activity</span>-->
+                            <!--        </a>-->
+                            <!--    </li>-->
+                            <!--<?php } ?>-->
+
+                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && ($this->uri->segment(1) == 'asset' || $this->uri->segment(1) == 'departmentasset' || $this->uri->segment(1) == 'assetlocation' || $this->uri->segment(1) == 'assetgrade')) { ?>
+                                <li
+                                    class="treeview <?php if (in_array(current_url(), [base_url('/departmentasset'), base_url('/assetlocation'), base_url('assetgrade'), base_url('asset/asset_preventive_tickets'), base_url('asset/ticket_dashboard'), base_url('asset/alltickets'), base_url('asset/asset_warranty_reports'), base_url('asset/asset_contract_reports'), base_url('asset/asset_financial_metrices'), base_url('asset/asset_distribution_analysis'), base_url('asset/asset_calibration_tickets')]))
+                                                        echo 'active'; ?>">
+
+                                    <a href="">
+                                        <i class="fa fa fa-list-alt"></i><span>Manage Asset Essentials</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="<?php echo base_url("asset/alltickets"); ?>">Asset Master</a></li>
+                                        <li><a href="<?php echo base_url("asset/asset_preventive_tickets"); ?>">Preventive
+                                                Maintenance</a></li>
+                                        <li><a href="<?php echo base_url("asset/asset_calibration_tickets"); ?>">Asset
+                                                Calibration</a></li>
+                                        <li><a href="<?php echo base_url("asset/asset_contract_reports"); ?>">Asset Contracts</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("asset/asset_warranty_reports"); ?>">Asset Warranty</a>
+                                        </li>
+                                        <li><a href="<?php echo base_url("departmentasset"); ?>">Asset Grouping</a></li>
+                                        <li><a href="<?php echo base_url("assetlocation"); ?>">Asset Departments</a></li>
+                                        <li><a href="<?php echo base_url("assetgrade"); ?>">Asset Grading</a></li>
+                                        <li><a href="<?php echo base_url("asset/asset_distribution_analysis"); ?>">Asset
+                                                Distribution Analysis</a></li>
+                                        <li><a href="<?php echo base_url("asset/asset_financial_metrices"); ?>">Asset Financials</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            <?php } ?>
+
+                            <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && $this->uri->segment(1) == 'asset') { ?>
+
+                                <li class="treeview <?= ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
+                                    <a href="<?php echo base_url("asset/asset_qrcode"); ?>">
+                                        <i class="fa fa-qrcode"></i> <span>Asset QR Codes</span>
+                                    </a>
                                 </li>
                             <?php } ?>
 
@@ -1513,7 +1630,7 @@ if ($title == null) {
 
                         <?php } ?>
 
-                        <?php if (ismodule_active('GLOBAL') === true && isfeature_active('USER-ACTIVITY') === true) { ?>
+                        <?php if (ismodule_active('GLOBAL') === true && isfeature_active('USER-ACTIVITY-PAGE') === true) { ?>
                             <li><a href="<?php echo base_url("view/user_activity") ?>"><i class="fa fa-user"></i> User
                                     Activity</a></li>
 
@@ -1586,16 +1703,15 @@ if ($title == null) {
                             </span>
                         </li>
                         <li>
-                            <div
-                                style="display: flex; align-items: center; justify-content: space-between; margin-left: 52px; margin-top: 6px;">
-                                <div class="navheader"><?php echo lang_loader('global', 'global_efeedor_patient_exp'); ?>
-                                </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-left: 52px; margin-top: 6px;">
+                                <div class="navheader"><?php echo lang_loader('global', 'global_efeedor_patient_exp'); ?></div>
                                 <?php if ((ismodule_active('ISR') && (isfeature_active('ISR-REQUESTS-DASHBOARD') || isfeature_active('REQUESTS-DASHBOARD'))) || (ismodule_active('INCIDENT') && (isfeature_active('INC-INCIDENTS-DASHBOARD') || isfeature_active('INCIDENTS-DASHBOARD')))) { ?>
                                     <a class="btn btn-success btn-sm" target="_blank"
                                         style="background: #62c52d; font-size: 13px; margin-left: 10px; margin-top: 10px; border: none; margin-right: 10px;"
-                                        data-placement="bottom" data-toggle="tooltip" title=""
-                                        href="<?php echo base_url() . '/form_login?user_id=' . $this->session->userdata['user_id'] ?>">
-                                        Raise requests/ Report incidents
+                                        data-placement="bottom" data-toggle="tooltip"
+                                        title=""
+                                        href="<?= base_url($this->uri . '/form_login?user_id=' . $this->session->userdata['user_id']) ?>">
+                                        ACCESS INPUT FORMS
                                     </a>
                                 <?php } ?>
                             </div>
@@ -1700,16 +1816,26 @@ if ($title == null) {
 
                                 <h2 class="text header_title">
                                     <?php echo !empty($title) ? $title : null; ?>
-                                    <?php if (($this->uri->segment(2) == 'feedback_dashboard') || (($this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'pc') || $this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'isr') || $this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'incident') || $this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'grievance')))) { ?>
-                                        <i class="fa fa-download no-print" data-toggle="tooltip"
-                                            title="<?php echo lang_loader('global', 'global_click_to_download_tooltip'); ?>"
-                                            onclick="$('#showdownload').toggle(300)"
-                                            style="font-size: 20px;margin-top: 5px;margin-left: 10px;cursor: pointer; color: #62c52d;"></i>
+                                    <?php if (($this->uri->segment(2) == 'feedback_dashboard') || (($this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'pc') || $this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'isr') || (($this->uri->segment(2) == 'ticket_dashboard' || $this->uri->segment(2) == 'track') && $this->uri->segment(1) == 'incident') || $this->uri->segment(2) != 'quality_welcome_page' && strpos($this->uri->segment(2), 'feedbacks_report_') !== 0 && ($this->uri->segment(1) == 'quality') || $this->uri->segment(2) == 'ticket_dashboard' && ($this->uri->segment(1) == 'grievance')))) { ?>
+                                        <?php if (!(($this->uri->segment(1) == 'quality' && strpos($this->uri->segment(2), 'patient_feedback_') === 0) || ($this->uri->segment(2) == 'track' && $this->uri->segment(1) == 'incident'))) { ?>
+                                            <i class="fa fa-download no-print" data-toggle="tooltip"
+                                                title="<?php echo lang_loader('global', 'global_click_to_download_tooltip'); ?>"
+                                                onclick="$('#showdownload').toggle(300)"
+                                                style="font-size: 20px;margin-top: 5px;margin-left: 10px;cursor: pointer; color: #62c52d;"></i>
+                                        <?php } ?>
+
 
                                         <i class="fa fa-print no-print" data-toggle="tooltip"
                                             title="Print a full copy of this dashboard view for record-keeping or review"
                                             onclick="window.print()"
-                                            style="font-size: 20px;margin-top: 5px;margin-left: 10px;cursor: pointer; color:rgb(11, 12, 10);"></i>
+                                            style="font-size: 20px;margin-top: 5px;margin-left: 10px;cursor: pointer; color:rgb(128, 0, 0);"></i>
+                                    <?php } ?>
+                                    <?php if (($this->uri->segment(2) == 'trend_analytic')) { ?>
+
+                                        <i class="fa fa-print no-print" data-toggle="tooltip"
+                                            title="Print a full copy of this dashboard view for record-keeping or review"
+                                            onclick="window.print()"
+                                            style="font-size: 20px;margin-top: 5px;margin-left: 10px;cursor: pointer; color:rgb(128, 0, 0);"></i>
                                     <?php } ?>
                                 </h2>
                                 <!-- </div> -->
@@ -1723,10 +1849,8 @@ if ($title == null) {
                                 $dates = get_from_to_date();
                                 $fdate = $dates['fdate'];
                                 $tdate = $dates['tdate'];
-                                $fdate = date('Y-m-d', strtotime($fdate));
-                                $fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
 
-                                ?>
+                            ?>
                                 <?php if (hidecalender($this->uri->segment(1)) !== true) { ?>
                                     <?php if (hide_cal_seg2($this->uri->segment(2)) !== true) { ?>
 
@@ -1740,16 +1864,21 @@ if ($title == null) {
                                                             class="fa fa-calendar"></i></a></h5>
                                             </div>
                                         <?php } else { ?>
-                                            <div style="width: 429px;float: right;margin-top: -24px;" class="no-print">
-                                                <h3><?php echo lang_loader('global', 'global_showing_datafrom'); ?>&nbsp;<b><?php echo date('d/m/Y', strtotime($tdate)); ?>
-                                                    </b> to&nbsp;<b><?php echo date('d/m/Y', strtotime($fdate)); ?> </b><a
-                                                        data-toggle="modal" data-target="#exampleModal" href="javascript:void()"
+                                            <div style="width: 429px; float: right; margin-top: -24px;" class="no-print">
+                                                <h3>
+                                                    <?php echo lang_loader('global', 'global_showing_datafrom'); ?>&nbsp;
+                                                    <b><?php echo date('d/m/Y', strtotime($tdate)); ?></b> to
+                                                    <b><?php echo date('d/m/Y', strtotime($fdate)); ?></b>
+                                                    <a data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)"
                                                         data-toggle="tooltip"
-                                                        title="Click on the calendar icon and select your date range for which you want to display the reports."><i
-                                                            class="fa fa-calendar"></i></a></h3>
+                                                        title="Click on the calendar icon and select your date range for which you want to display the reports.">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </a>
+                                                </h3>
                                             </div>
+
                                         <?php } ?>
-                                    <?php }
+                            <?php }
                                 }
                             } ?>
                         </div>
@@ -1782,7 +1911,7 @@ if ($title == null) {
 
 
                     <?php //echo $a3; 
-                        ?>
+                    ?>
                     <?php echo (!empty($content) ? $content : null) ?>
 
                 </div> <!-- /.content-wrapper -->
@@ -1865,18 +1994,21 @@ if ($title == null) {
 
                             <table style="width:100%">
                                 <tr>
-                                    <td>
+                                    <td style="width: 48%; padding-right: 10px;">
                                         <?php echo lang_loader('global', 'global_from_date'); ?><br />
                                         <input type="text" name="tdate" class="form-control datepicker"
+                                            style="width: 100%; height: 34px; font-size: 14px; border: 2px solid #ccc;"
                                             autocomplete="off" required>
                                     </td>
-                                    <td>
+                                    <td style="width: 48%; padding-left: 10px;">
                                         <?php echo lang_loader('global', 'global_to_date'); ?><br />
                                         <input type="text" name="fdate" class="form-control datepicker"
+                                            style="width: 100%; height: 34px; font-size: 14px; border: 2px solid #ccc;"
                                             autocomplete="off" required>
                                     </td>
                                 </tr>
                             </table>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
@@ -1932,8 +2064,8 @@ if ($title == null) {
 
 
     <script>
-        $(document).ready(function () {
-            $("#show_hide_password a").on('click', function (event) {
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
                 event.preventDefault();
                 if ($('#show_hide_password input').attr("type") == "text") {
                     $('#show_hide_password input').attr('type', 'password');
@@ -2446,9 +2578,117 @@ if ($title == null) {
                 display: none !important;
             }
 
+            .only-print {
+                display: inline !important;
+            }
+
             .row {
                 display: block !important;
                 width: 100% !important;
+            }
+
+
+            /* for incident track page*/
+            .timeline {
+                position: relative;
+                width: 100% !important;
+                margin: 0 auto;
+                padding: 0 !important;
+            }
+
+            .timeline::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: rgba(0, 128, 0, 0.7);
+                border-radius: 4px;
+                z-index: 1;
+            }
+
+            .timeline-item {
+                position: relative !important;
+                width: 50% !important;
+                padding: 15px 20px !important;
+                margin-bottom: 25px !important;
+                page-break-inside: avoid;
+            }
+
+            .timeline-item:nth-child(odd) {
+                left: 4% !important;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 50% !important;
+            }
+
+            .timeline-item::before,
+            .timeline-item::after {
+                display: none !important;
+            }
+
+            .timeline-badge {
+                position: absolute;
+                top: -6px !important;
+                left: -40px !important;
+                width: 70px !important;
+                background: rgba(0, 128, 0, 0.7) !important;
+                color: #fff !important;
+                text-align: center;
+                padding: 6px 5px !important;
+                border-radius: 4px;
+                font-size: 11px !important;
+                font-weight: bold;
+                box-shadow: none !important;
+                z-index: 2;
+            }
+
+            .timeline-panel {
+                width: 100% !important;
+                padding: 15px !important;
+                background: #fff !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                border-radius: 6px;
+                font-size: 13px;
+            }
+
+            .timeline-heading h5 {
+                font-size: 14px !important;
+                color: rgba(0, 128, 0, 0.7) !important;
+                margin: 0 0 4px !important;
+            }
+
+            .timeline-body p {
+                margin: 3px 0 !important;
+                line-height: 1.4 !important;
+                font-size: 13px !important;
+                word-break: break-word;
+            }
+
+            .timeline-body strong {
+                color: #333 !important;
+            }
+
+            .timeline-item:hover {
+                transform: none !important;
+            }
+
+            /* for quality individual page */
+
+            canvas#barChart {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+
+        }
+
+        @media screen {
+            .only-print {
+                display: none;
             }
         }
     </style>
@@ -2632,7 +2872,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.1psq3a').DataTable({
+        $('.cqi3a1').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -2646,15 +2886,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: '1.PSQ3a- Time taken for initial assessment of indoor patients',
+                    title: 'Average Time for initial assessment of in-patients (Doctors) in MRD(ICU)',
                     className: 'btn-sm',
-                    title: '1.PSQ3a- Time taken for initial assessment of indoor patients',
+                    title: 'Average Time for initial assessment of in-patients (Doctors) in MRD(ICU)',
                 },
                 {
                     extend: 'excel',
-                    title: '1.PSQ3a- Time taken for initial assessment of indoor patients',
+                    title: 'Average Time for initial assessment of in-patients (Doctors) in MRD(ICU)',
                     className: 'btn-sm',
-                    title: '1.PSQ3a- Time taken for initial assessment of indoor patients',
+                    title: 'Average Time for initial assessment of in-patients (Doctors) in MRD(ICU)',
                 },
 
 
@@ -4380,7 +4620,7 @@ if ($title == null) {
 
 
     <script>
-        $('.mrdauditallfeedbacks').DataTable({
+        $('.activecasesmrd').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4394,15 +4634,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'MRD AUDIT REPPORT',
+                    title: 'Active Cases MRD Audit- IP',
                     className: 'btn-sm',
-                    title: 'MRD AUDIT REPPORT',
+                    title: 'Active Cases MRD Audit- IP',
                 },
                 {
                     extend: 'excel',
-                    title: 'MRD AUDIT REPPORT',
+                    title: 'Active Cases MRD Audit- IP',
                     className: 'btn-sm',
-                    title: 'MRD AUDIT REPPORT',
+                    title: 'Active Cases MRD Audit- IP',
                 },
                 // {
                 //     extend: 'pdf',
@@ -4416,7 +4656,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.ppeauditallfeedbacks').DataTable({
+        $('.Discharged').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4430,15 +4670,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PPE AUDIT REPORT',
+                    title: 'Discharged Patients MRD Audit',
                     className: 'btn-sm',
-                    title: 'PPE AUDIT REPORT',
+                    title: 'Discharged Patients MRD Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'PPE AUDIT REPORT',
+                    title: 'Discharged Patients MRD Audit',
                     className: 'btn-sm',
-                    title: 'PPE AUDIT REPORT',
+                    title: 'Discharged Patients MRD Audit',
                 },
 
 
@@ -4447,7 +4687,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.opconsultationtime').DataTable({
+        $('.NursingIPClosedCases').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4461,15 +4701,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP CONSULTATION WAITING TIME REPORT',
+                    title: 'Nursing (IP Closed Cases)',
                     className: 'btn-sm',
-                    title: 'OP CONSULTATION WAITING TIME REPORT',
+                    title: 'Nursing (IP Closed Cases)',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP CONSULTATION WAITING TIME REPORT',
+                    title: 'Nursing (IP Closed Cases)',
                     className: 'btn-sm',
-                    title: 'OP CONSULTATION WAITING TIME REPORT',
+                    title: 'Nursing (IP Closed Cases)',
                 },
 
 
@@ -4478,7 +4718,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.labtime').DataTable({
+        $('.NursingIPOpenCases').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4492,15 +4732,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'LABORATORY WAITING TIME REPORT',
+                    title: 'Nursing (IP Open Cases)',
                     className: 'btn-sm',
-                    title: 'LABORATORY WAITING TIME REPORT',
+                    title: 'Nursing (IP Open Cases)',
                 },
                 {
                     extend: 'excel',
-                    title: 'LABORATORY WAITING TIME REPORT',
+                    title: 'Nursing (IP Open Cases)',
                     className: 'btn-sm',
-                    title: 'LABORATORY WAITING TIME REPORT',
+                    title: 'Nursing (IP Open Cases)',
                 },
 
 
@@ -4509,7 +4749,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.xraytime').DataTable({
+        $('.NursingOPclosedCases').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4523,15 +4763,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'X-RAY WAITING TIME REPORT',
+                    title: 'Nursing (OP Closed Cases)',
                     className: 'btn-sm',
-                    title: 'X-RAY WAITING TIME REPORT',
+                    title: 'Nursing (OP Closed Cases)',
                 },
                 {
                     extend: 'excel',
-                    title: 'X-RAY WAITING TIME REPORT',
+                    title: 'Nursing (OP Closed Cases)',
                     className: 'btn-sm',
-                    title: 'X-RAY WAITING TIME REPORT',
+                    title: 'Nursing (OP Closed Cases)',
                 },
 
 
@@ -4540,7 +4780,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.usgtime').DataTable({
+        $('.ClinicalDietetics').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4554,15 +4794,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'USG WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (Active)',
                     className: 'btn-sm',
-                    title: 'USG WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (Active)',
                 },
                 {
                     extend: 'excel',
-                    title: 'USG WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (Active)',
                     className: 'btn-sm',
-                    title: 'USG WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (Active)',
                 },
 
 
@@ -4571,7 +4811,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.ctscantime').DataTable({
+        $('.ClinicalDieteticsclosed').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4585,15 +4825,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'CT SCAN WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (closed)',
                     className: 'btn-sm',
-                    title: 'CT SCAN WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'CT SCAN WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (closed)',
                     className: 'btn-sm',
-                    title: 'CT SCAN WAITING TIME REPORT',
+                    title: 'Clinical Dietetics (closed)',
                 },
 
 
@@ -4602,7 +4842,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.surgicalsafety').DataTable({
+        $('.clinical_pharmacy_closed').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4616,47 +4856,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'SURGICAL SAFETY AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(Closed)',
                     className: 'btn-sm',
-                    title: 'SURGICAL SAFETY AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(Closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'SURGICAL SAFETY AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(Closed)',
                     className: 'btn-sm',
-                    title: 'SURGICAL SAFETY AUDIT REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-
-    <script>
-        $('.medicinedispense').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'MEDICINE DISPENSING AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'MEDICINE DISPENSING AUDIT REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'MEDICINE DISPENSING AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'MEDICINE DISPENSING AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(Closed)',
                 },
 
 
@@ -4665,7 +4873,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.medicationadministration').DataTable({
+        $('.clinical_pharmacy_op').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -4679,542 +4887,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'MEDICATION ADMINISTRATION AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(OP)',
                     className: 'btn-sm',
-                    title: 'MEDICATION ADMINISTRATION AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(OP)',
                 },
                 {
                     extend: 'excel',
-                    title: 'MEDICATION ADMINISTRATION AUDIT REPORT',
+                    title: 'Clinical Pharmacy-(OP)',
                     className: 'btn-sm',
-                    title: 'MEDICATION ADMINISTRATION AUDIT REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.handover').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'HANDOVER AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'HANDOVER AUDIT REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'HANDOVER AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'HANDOVER AUDIT REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.prescriptions').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'PRESCRIPTIONS AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'PRESCRIPTIONS AUDIT REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'PRESCRIPTIONS AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'PRESCRIPTIONS AUDIT REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.handhygiene').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'HAND HYGIENE AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'HAND HYGIENE AUDIT REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'HAND HYGIENE AUDIT REPORT',
-                    className: 'btn-sm',
-                    title: 'HAND HYGIENE AUDIT REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.tatblood').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'TAT FOR BLOOD ISSUE REPORT',
-                    className: 'btn-sm',
-                    title: 'TAT FOR BLOOD ISSUE REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'TAT FOR BLOOD ISSUE REPORT',
-                    className: 'btn-sm',
-                    title: 'TAT FOR BLOOD ISSUE REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.npratio').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'NURSE-PATIENT RATIO REPORT',
-                    className: 'btn-sm',
-                    title: 'NURSE-PATIENT RATIO REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'NURSE-PATIENT RATIO REPORT',
-                    className: 'btn-sm',
-                    title: 'NURSE-PATIENT RATIO REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.returntoi').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'ICU RETURN REPORT',
-                    className: 'btn-sm',
-                    title: 'ICU RETURN REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'ICU RETURN REPORT',
-                    className: 'btn-sm',
-                    title: 'ICU RETURN REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.returntoicu').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'ICU RETURN REPORT- DATA VERIFICATION',
-                    className: 'btn-sm',
-                    title: 'ICU RETURN REPORT- DATA VERIFICATION',
-                },
-                {
-                    extend: 'excel',
-                    title: 'ICU RETURN REPORT- DATA VERIFICATION',
-                    className: 'btn-sm',
-                    title: 'ICU RETURN REPORT- DATA VERIFICATION',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.returntoed').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'EMERGENCY RETURN REPORT',
-                    className: 'btn-sm',
-                    title: 'EMERGENCY RETURN REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'EMERGENCY RETURN REPORT',
-                    className: 'btn-sm',
-                    title: 'EMERGENCY RETURN REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.returntoemr').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'EMERGENCY RETURN REPORT- DATA VERIFICATION',
-                    className: 'btn-sm',
-                    title: 'EMERGENCY RETURN REPORT- DATA VERIFICATION',
-                },
-                {
-                    extend: 'excel',
-                    title: 'EMERGENCY RETURN REPORT- DATA VERIFICATION',
-                    className: 'btn-sm',
-                    title: 'EMERGENCY RETURN REPORT- DATA VERIFICATION',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.codepink').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'CODE PINK REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE PINK REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'CODE PINK REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE PINK REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.codered').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'CODE RED REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE RED REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'CODE RED REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE RED REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.codeblue').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'CODE BLUE REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE BLUE REPORT',
-                },
-                {
-                    extend: 'excel',
-                    title: 'CODE BLUE REPORT',
-                    className: 'btn-sm',
-                    title: 'CODE BLUE REPORT',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.stairways').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT- ST.THOMAS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT- ST.THOMAS WARD',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT- ST.THOMAS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT- ST.THOMAS WARD',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.alphonsa').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ALPHONSA WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ALPHONSA WARD',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ALPHONSA WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ALPHONSA WARD',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.martins').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.MARTINS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.MARTINS WARD',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.MARTINS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.MARTINS WARD',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.anns').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANNS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANNS WARD',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANNS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANNS WARD',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.antony').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANTONYS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANTONYS WARD',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANTONYS WARD',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ST.ANTONYS WARD',
+                    title: 'Clinical Pharmacy-(OP)',
                 },
 
 
@@ -5224,7 +4905,7 @@ if ($title == null) {
 
 
     <script>
-        $('.paediatric').DataTable({
+        $('.clinical_pharmacy_open').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5238,15 +4919,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PAEDIATRIC-OBSERVATION',
+                    title: 'Clinical Pharmacy-(Open)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PAEDIATRIC-OBSERVATION',
+                    title: 'Clinical Pharmacy-(Open)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PAEDIATRIC-OBSERVATION',
+                    title: 'Clinical Pharmacy-(Open)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PAEDIATRIC-OBSERVATION',
+                    title: 'Clinical Pharmacy-(Open)',
                 },
 
 
@@ -5255,7 +4936,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.ot').DataTable({
+        $('.anesthesia_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5269,15 +4950,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OT',
+                    title: 'Clinicians–Anesthesia(Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OT',
+                    title: 'Clinicians–Anesthesia(Active)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OT ',
+                    title: 'Clinicians–Anesthesia(Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OT ',
+                    title: 'Clinicians–Anesthesia(Active)',
                 },
 
 
@@ -5286,7 +4967,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.icu').DataTable({
+        $('.anesthesia_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5300,15 +4981,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CCU/ICU ',
+                    title: 'Clinicians–Anesthesia(Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CCU/ICU ',
+                    title: 'Clinicians–Anesthesia(Closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CCU/ICU ',
+                    title: 'Clinicians–Anesthesia(Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CCU/ICU ',
+                    title: 'Clinicians–Anesthesia(Closed)',
                 },
 
 
@@ -5317,7 +4998,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.casualty').DataTable({
+        $('.ed_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5331,15 +5012,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CASUALTY',
+                    title: 'Clinicians–ED (Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CASUALTY',
+                    title: 'Clinicians–ED (Active)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CASUALTY',
+                    title: 'Clinicians–ED (Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - CASUALTY',
+                    title: 'Clinicians–ED (Active)',
                 },
 
 
@@ -5348,7 +5029,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.dialysis').DataTable({
+        $('.ed_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5362,15 +5043,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - DIALYSIS',
+                    title: 'Clinicians–ED (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - DIALYSIS',
+                    title: 'Clinicians–ED (Closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - DIALYSIS',
+                    title: 'Clinicians–ED (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - DIALYSIS',
+                    title: 'Clinicians–ED (Closed)',
                 },
 
 
@@ -5379,7 +5060,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.injection').DataTable({
+        $('.icu_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5393,15 +5074,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - INJECTION ROOM',
+                    title: 'Clinicians–ICU (Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - INJECTION ROOM',
+                    title: 'Clinicians–ICU (Active)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - INJECTION ROOM',
+                    title: 'Clinicians–ICU (Active)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - INJECTION ROOM',
+                    title: 'Clinicians–ICU (Active)',
                 },
 
 
@@ -5410,7 +5091,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.nicu').DataTable({
+        $('.icu_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5424,15 +5105,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - NICU',
+                    title: 'Clinicians–ICU (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - NICU',
+                    title: 'Clinicians–ICU (Closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - NICU',
+                    title: 'Clinicians–ICU (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - NICU',
+                    title: 'Clinicians–ICU (Closed)',
                 },
 
 
@@ -5441,7 +5122,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.lab').DataTable({
+        $('.primarycare_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5455,15 +5136,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LABORATORY',
+                    title: 'Clinicians-Primary Care provider (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LABORATORY',
+                    title: 'Clinicians-Primary Care provider (Active) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LABORATORY',
+                    title: 'Clinicians-Primary Care provider (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LABORATORY',
+                    title: 'Clinicians-Primary Care provider (Active) ',
                 },
 
 
@@ -5472,7 +5153,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.basearea').DataTable({
+        $('.primarycare_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5486,15 +5167,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BASEMENT-COMMON AREA',
+                    title: 'Clinicians-Primary Care provider (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BASEMENT-COMMON AREA',
+                    title: 'Clinicians-Primary Care provider (Closed) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BASEMENT-COMMON AREA',
+                    title: 'Clinicians-Primary Care provider (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BASEMENT-COMMON AREA',
+                    title: 'Clinicians-Primary Care provider (Closed) ',
                 },
 
 
@@ -5503,7 +5184,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.groundarea').DataTable({
+        $('.sedation_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5517,15 +5198,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - GROUND FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - GROUND FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Active) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - GROUND FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - GROUND FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Active) ',
                 },
 
 
@@ -5534,7 +5215,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.firstarea').DataTable({
+        $('.sedation_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5548,15 +5229,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - FIRST FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - FIRST FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Closed) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - FIRST FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - FIRST FLOOR-COMMON AREA',
+                    title: 'Clinicians–Sedation (Closed) ',
                 },
 
 
@@ -5565,7 +5246,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.bioarea').DataTable({
+        $('.surgeons_active_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5579,15 +5260,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BIO-MEDICAL WASTE STORAGE AREA',
+                    title: 'Clinicians-Surgeons (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BIO-MEDICAL WASTE STORAGE AREA',
+                    title: 'Clinicians-Surgeons (Active) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BIO-MEDICAL WASTE STORAGE AREA',
+                    title: 'Clinicians-Surgeons (Active) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - BIO-MEDICAL WASTE STORAGE AREA',
+                    title: 'Clinicians-Surgeons (Active) ',
                 },
 
 
@@ -5596,7 +5277,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.water').DataTable({
+        $('.surgeons_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5610,15 +5291,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - WATER STORAGE',
+                    title: 'Clinicians-Surgeons (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - WATER STORAGE',
+                    title: 'Clinicians-Surgeons (Closed) ',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - WATER STORAGE',
+                    title: 'Clinicians-Surgeons (Closed) ',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - WATER STORAGE',
+                    title: 'Clinicians-Surgeons (Closed) ',
                 },
 
 
@@ -5627,7 +5308,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.electricalarea').DataTable({
+        $('.dietconsultation_op_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5641,15 +5322,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ELECTRICAL ROOM/AREA',
+                    title: 'Diet consultation (OP)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ELECTRICAL ROOM/AREA',
+                    title: 'Diet consultation (OP)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ELECTRICAL ROOM/AREA',
+                    title: 'Diet consultation (OP)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ELECTRICAL ROOM/AREA',
+                    title: 'Diet consultation (OP)',
                 },
 
 
@@ -5658,7 +5339,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.oxygenarea').DataTable({
+        $('.physiotherapy_closed_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5672,15 +5353,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OXYGEN CYLINDER STORAGE AREA',
+                    title: 'Physiotherapy- (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OXYGEN CYLINDER STORAGE AREA',
+                    title: 'Physiotherapy- (Closed)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OXYGEN CYLINDER STORAGE AREA',
+                    title: 'Physiotherapy- (Closed)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OXYGEN CYLINDER STORAGE AREA',
+                    title: 'Physiotherapy- (Closed)',
                 },
 
 
@@ -5689,7 +5370,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.xray').DataTable({
+        $('.physiotherapy_op_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5703,15 +5384,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - X-RAY',
+                    title: 'Physiotherapy- (OP)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - X-RAY',
+                    title: 'Physiotherapy- (OP)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - X-RAY',
+                    title: 'Physiotherapy- (OP)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - X-RAY',
+                    title: 'Physiotherapy- (OP)',
                 },
 
 
@@ -5720,7 +5401,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.ultra').DataTable({
+        $('.physiotherapy_open_mdc').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5734,15 +5415,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ULTRASOUND SCANNING',
+                    title: 'Physiotherapy- (Open)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ULTRASOUND SCANNING',
+                    title: 'Physiotherapy- (Open)',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ULTRASOUND SCANNING',
+                    title: 'Physiotherapy- (Open)',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - ULTRASOUND SCANNING',
+                    title: 'Physiotherapy- (Open)',
                 },
 
 
@@ -5751,7 +5432,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.opd').DataTable({
+        $('.mrd_ed_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5765,15 +5446,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PROCEDURE OPD',
+                    title: 'MRD Audit-ED',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PROCEDURE OPD',
+                    title: 'MRD Audit-ED',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PROCEDURE OPD',
+                    title: 'MRD Audit-ED',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PROCEDURE OPD',
+                    title: 'MRD Audit-ED',
                 },
 
 
@@ -5782,7 +5463,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.pharma').DataTable({
+        $('.mrd_lama_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5796,108 +5477,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PHARMACY',
+                    title: 'MRD Audit-LAMA',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PHARMACY',
+                    title: 'MRD Audit-LAMA',
                 },
                 {
                     extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PHARMACY',
+                    title: 'MRD Audit-LAMA',
                     className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - PHARMACY',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.terrace').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - TERRACE',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - TERRACE',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - TERRACE',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - TERRACE',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.laundry').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LAUNDRY',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LAUNDRY',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LAUNDRY',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - LAUNDRY',
-                },
-
-
-            ]
-        });
-    </script>
-
-    <script>
-        $('.otheropd').DataTable({
-            "ordering": true,
-            responsive: true,
-            "pageLength": 50,
-            "stateSave": true, // Enables state saving
-            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            buttons: [
-                /*  {extend: 'copy', className: 'btn-sm'},*/
-                {
-                    extend: 'csv',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OTHER OPDs',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OTHER OPDs',
-                },
-                {
-                    extend: 'excel',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OTHER OPDs',
-                    className: 'btn-sm',
-                    title: 'FACILITY SAFETY INSPECTION REPORT - OTHER OPDs',
+                    title: 'MRD Audit-LAMA',
                 },
 
 
@@ -5907,7 +5495,7 @@ if ($title == null) {
 
 
     <script>
-        $('.vapPrevention').DataTable({
+        $('.mrd_op_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5921,15 +5509,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'VAP PREVENTION CHECKLIST',
+                    title: 'MRD Audit-OP',
                     className: 'btn-sm',
-                    title: 'VAP PREVENTION CHECKLIST',
+                    title: 'MRD Audit-OP',
                 },
                 {
                     extend: 'excel',
-                    title: 'VAP PREVENTION CHECKLIST',
+                    title: 'MRD Audit-OP',
                     className: 'btn-sm',
-                    title: 'VAP PREVENTION CHECKLIST',
+                    title: 'MRD Audit-OP',
                 },
 
 
@@ -5938,7 +5526,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.catheter').DataTable({
+        $('.accidental_delining_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5952,15 +5540,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'CATHETER INSERTION CHECKLIST',
+                    title: 'Accidental Delining Audit',
                     className: 'btn-sm',
-                    title: 'CATHETER INSERTION CHECKLIST',
+                    title: 'Accidental Delining Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'CATHETER INSERTION CHECKLIST',
+                    title: 'Accidental Delining Audit ',
                     className: 'btn-sm',
-                    title: 'CATHETER INSERTION CHECKLIST',
+                    title: 'Accidental Delining Audit ',
                 },
 
 
@@ -5969,7 +5557,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.ssi').DataTable({
+        $('.admission_area_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -5983,15 +5571,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'SSI BUNDLE CARE POLICY',
+                    title: 'Admission Holding Area Audit ',
                     className: 'btn-sm',
-                    title: 'SSI BUNDLE CARE POLICY',
+                    title: 'Admission Holding Area Audit ',
                 },
                 {
                     extend: 'excel',
-                    title: 'SSI BUNDLE CARE POLICY',
+                    title: 'Admission Holding Area Audit ',
                     className: 'btn-sm',
-                    title: 'SSI BUNDLE CARE POLICY',
+                    title: 'Admission Holding Area Audit ',
                 },
 
 
@@ -6000,7 +5588,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.urinary').DataTable({
+        $('.cardio_pulmonary_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6014,15 +5602,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'URINARY CATHETER MAINTENANCE CHECKLIST',
+                    title: 'Cardio Pulmonary Resuscitation analysis record',
                     className: 'btn-sm',
-                    title: 'URINARY CATHETER MAINTENANCE CHECKLIST',
+                    title: 'Cardio Pulmonary Resuscitation analysis record',
                 },
                 {
                     extend: 'excel',
-                    title: 'URINARY CATHETER MAINTENANCE CHECKLIST',
+                    title: 'Cardio Pulmonary Resuscitation analysis record',
                     className: 'btn-sm',
-                    title: 'URINARY CATHETER MAINTENANCE CHECKLIST',
+                    title: 'Cardio Pulmonary Resuscitation analysis record',
                 },
 
 
@@ -6031,7 +5619,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.central').DataTable({
+        $('.extravasation_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6045,15 +5633,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'CENTRAL LINE INSERTION CHECKLIST',
+                    title: 'Cardio PulmonaryExtravasation Audit Checklist',
                     className: 'btn-sm',
-                    title: 'CENTRAL LINE INSERTION CHECKLIST',
+                    title: 'Cardio PulmonaryExtravasation Audit Checklist',
                 },
                 {
                     extend: 'excel',
-                    title: 'CENTRAL LINE INSERTION CHECKLIST',
+                    title: 'Cardio PulmonaryExtravasation Audit Checklist',
                     className: 'btn-sm',
-                    title: 'CENTRAL LINE INSERTION CHECKLIST',
+                    title: 'Cardio PulmonaryExtravasation Audit Checklist',
                 },
 
 
@@ -6062,7 +5650,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.centralline').DataTable({
+        $('.hapu_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6076,15 +5664,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'CENTRAL LINE MAINTENANCE CHECKLIST ',
+                    title: 'Hospital acquired pressure ulcers (HAPU) Audit',
                     className: 'btn-sm',
-                    title: 'CENTRAL LINE MAINTENANCE CHECKLIST ',
+                    title: 'Hospital acquired pressure ulcers (HAPU) Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'CENTRAL LINE MAINTENANCE CHECKLIST ',
+                    title: 'Hospital acquired pressure ulcers (HAPU) Audit',
                     className: 'btn-sm',
-                    title: 'CENTRAL LINE MAINTENANCE CHECKLIST ',
+                    title: 'Hospital acquired pressure ulcers (HAPU) Audit',
                 },
 
 
@@ -6093,7 +5681,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.room').DataTable({
+        $('.assessment_ae').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6107,15 +5695,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PATIENT ROOM CLEANING AUDIT',
+                    title: 'Initial Assessment Accident and Emergency (A&E)',
                     className: 'btn-sm',
-                    title: 'PATIENT ROOM CLEANING AUDIT',
+                    title: 'Initial Assessment Accident and Emergency (A&E)',
                 },
                 {
                     extend: 'excel',
-                    title: 'PATIENT ROOM CLEANING AUDIT',
+                    title: 'Initial Assessment Accident and Emergency (A&E)',
                     className: 'btn-sm',
-                    title: 'PATIENT ROOM CLEANING AUDIT ',
+                    title: 'Initial Assessment Accident and Emergency (A&E)',
                 },
 
 
@@ -6124,7 +5712,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.area').DataTable({
+        $('.assessment_ipd').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6138,15 +5726,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OTHER AREA CLEANING CHECKLIST',
+                    title: 'Initial Assessment IPD',
                     className: 'btn-sm',
-                    title: 'OTHER AREA CLEANING CHECKLIST',
+                    title: 'Initial Assessment IPD',
                 },
                 {
                     extend: 'excel',
-                    title: 'OTHER AREA CLEANING CHECKLIST',
+                    title: 'Initial Assessment IPD',
                     className: 'btn-sm',
-                    title: 'OTHER AREA CLEANING CHECKLIST',
+                    title: 'Initial Assessment IPD',
                 },
 
 
@@ -6155,7 +5743,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.toilet').DataTable({
+        $('.assessment_opd').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6169,15 +5757,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'TOILET CLEANING CHECKLIST',
+                    title: 'Initial Assessment OPD',
                     className: 'btn-sm',
-                    title: 'TOILET CLEANING CHECKLIST',
+                    title: 'Initial Assessment OPD',
                 },
                 {
                     extend: 'excel',
-                    title: 'TOILET CLEANING CHECKLIST',
+                    title: 'Initial Assessment OPD',
                     className: 'btn-sm',
-                    title: 'TOILET CLEANING CHECKLIST',
+                    title: 'Initial Assessment OPD',
                 },
 
 
@@ -6186,7 +5774,7 @@ if ($title == null) {
     </script>
 
     <script>
-        $('.canteen').DataTable({
+        $('.ipsg1_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6200,15 +5788,878 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'CANTEEN AAUDIT CHECKLIST',
+                    title: 'IPSG-1',
                     className: 'btn-sm',
-                    title: 'CANTEEN AAUDIT CHECKLIST',
+                    title: 'IPSG-1',
                 },
                 {
                     extend: 'excel',
-                    title: 'CANTEEN AAUDIT CHECKLIST',
+                    title: 'IPSG-1',
                     className: 'btn-sm',
-                    title: 'CANTEEN AAUDIT CHECKLIST',
+                    title: 'IPSG-1',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.ipsg2_ae').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'IPSG-2-A&E',
+                    className: 'btn-sm',
+                    title: 'IPSG-2-A&E',
+                },
+                {
+                    extend: 'excel',
+                    title: 'IPSG-2-A&E',
+                    className: 'btn-sm',
+                    title: 'IPSG-2-A&E',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.ipsg2_ipd').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'IPSG-2-IPD',
+                    className: 'btn-sm',
+                    title: 'IPSG-2-IPD',
+                },
+                {
+                    extend: 'excel',
+                    title: 'IPSG-2-IPD',
+                    className: 'btn-sm',
+                    title: 'IPSG-2-IPD',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.ipsg4_timeout').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'IPSG4-Timeout- Outside OT Audit',
+                    className: 'btn-sm',
+                    title: 'IPSG4-Timeout- Outside OT Audit',
+                },
+                {
+                    extend: 'excel',
+                    title: 'IPSG4-Timeout- Outside OT Audit',
+                    className: 'btn-sm',
+                    title: 'IPSG4-Timeout- Outside OT Audit',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.ipsg6_ip').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'IPSG-6-IP',
+                    className: 'btn-sm',
+                    title: 'IPSG-6-IP',
+                },
+                {
+                    extend: 'excel',
+                    title: 'IPSG-6-IP',
+                    className: 'btn-sm',
+                    title: 'IPSG-6-IP',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.ipsg6_opd').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'IPSG-6-OPD',
+                    className: 'btn-sm',
+                    title: 'IPSG-6-OPD',
+                },
+                {
+                    extend: 'excel',
+                    title: 'IPSG-6-OPD',
+                    className: 'btn-sm',
+                    title: 'IPSG-6-OPD',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.point_prevlance_audit').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Point Prevalence Audit',
+                    className: 'btn-sm',
+                    title: 'Point Prevalence Audit',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Point Prevalence Audit',
+                    className: 'btn-sm',
+                    title: 'Point Prevalence Audit',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_audit_acl').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'ACL',
+                    className: 'btn-sm',
+                    title: 'ACL',
+                },
+                {
+                    extend: 'excel',
+                    title: 'ACL',
+                    className: 'btn-sm',
+                    title: 'ACL',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_allogenic_bone_marrow').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Allogenic Bonemarrow transplantation',
+                    className: 'btn-sm',
+                    title: 'Allogenic Bonemarrow transplantation',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Allogenic Bonemarrow transplantation',
+                    className: 'btn-sm',
+                    title: 'Allogenic Bonemarrow transplantation',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_aortic_value_replacement').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Aortic Valve Replacement (AVR)',
+                    className: 'btn-sm',
+                    title: 'Aortic Valve Replacement (AVR)',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Aortic Valve Replacement (AVR)',
+                    className: 'btn-sm',
+                    title: 'Aortic Valve Replacement (AVR)',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_autologous_bone').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Autologous Bonemarrow transplantation',
+                    className: 'btn-sm',
+                    title: 'Autologous Bonemarrow transplantation',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Autologous Bonemarrow transplantation',
+                    className: 'btn-sm',
+                    title: 'Autologous Bonemarrow transplantation',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_brain_tumour').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Brain tumour surgery',
+                    className: 'btn-sm',
+                    title: 'Brain tumour surgery',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Brain tumour surgery',
+                    className: 'btn-sm',
+                    title: 'Brain tumour surgery',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_cabg').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'CABG',
+                    className: 'btn-sm',
+                    title: 'CABG',
+                },
+                {
+                    extend: 'excel',
+                    title: 'CABG',
+                    className: 'btn-sm',
+                    title: 'CABG',
+                },
+
+
+            ]
+        });
+    </script>
+
+
+    <script>
+        $('.clinicaloutcome_carotid_stenting').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Carotid Stenting',
+                    className: 'btn-sm',
+                    title: 'Carotid Stenting',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Carotid Stenting',
+                    className: 'btn-sm',
+                    title: 'Carotid Stenting',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_chemotherapy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Chemotherapy (Medical oncology)',
+                    className: 'btn-sm',
+                    title: 'Chemotherapy (Medical oncology)',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Chemotherapy (Medical oncology)',
+                    className: 'btn-sm',
+                    title: 'Chemotherapy (Medical oncology)',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_colo_rectal').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Colo-Rectal Surgeries',
+                    className: 'btn-sm',
+                    title: 'Colo-Rectal Surgeries',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Colo-Rectal Surgeries',
+                    className: 'btn-sm',
+                    title: 'Colo-Rectal Surgeries',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_endoscopy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Endoscopy',
+                    className: 'btn-sm',
+                    title: 'Endoscopy',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Endoscopy',
+                    className: 'btn-sm',
+                    title: 'Endoscopy',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_epilepsy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Epilepsy',
+                    className: 'btn-sm',
+                    title: 'Epilepsy',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Epilepsy',
+                    className: 'btn-sm',
+                    title: 'Epilepsy',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_herniorrhaphy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Herniorrhaphy ',
+                    className: 'btn-sm',
+                    title: 'Herniorrhaphy ',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Herniorrhaphy ',
+                    className: 'btn-sm',
+                    title: 'Herniorrhaphy ',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_holep').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'HoLEP',
+                    className: 'btn-sm',
+                    title: 'HoLEP',
+                },
+                {
+                    extend: 'excel',
+                    title: 'HoLEP',
+                    className: 'btn-sm',
+                    title: 'HoLEP ',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_laparoscopic_appendicectomy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Laparoscopic appendicectomy',
+                    className: 'btn-sm',
+                    title: 'Laparoscopic appendicectomy',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Laparoscopic appendicectomy',
+                    className: 'btn-sm',
+                    title: 'Laparoscopic appendicectomy',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_mechanical_thrombectomy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Mechanical Thrombectomy',
+                    className: 'btn-sm',
+                    title: 'Mechanical Thrombectomy',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Mechanical Thrombectomy',
+                    className: 'btn-sm',
+                    title: 'Mechanical Thrombectomy',
+                },
+
+
+            ]
+        });
+    </script>
+
+    <script>
+        $('.clinicaloutcome_mvr').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'MVR (Mitral Valve replacement)',
+                    className: 'btn-sm',
+                    title: 'MVR (Mitral Valve replacement)',
+                },
+                {
+                    extend: 'excel',
+                    title: 'MVR (Mitral Valve replacement)',
+                    className: 'btn-sm',
+                    title: 'MVR (Mitral Valve replacement)',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_ptca').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'PTCA',
+                    className: 'btn-sm',
+                    title: 'PTCA',
+                },
+                {
+                    extend: 'excel',
+                    title: 'PTCA',
+                    className: 'btn-sm',
+                    title: 'PTCA',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_renal_transplantation').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Renal Transplantation',
+                    className: 'btn-sm',
+                    title: 'Renal Transplantation',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Renal Transplantation',
+                    className: 'btn-sm',
+                    title: 'Renal Transplantation',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_scoliosis_correction').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Scoliosis correction surgery',
+                    className: 'btn-sm',
+                    title: 'Scoliosis correction surgery',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Scoliosis correction surgery',
+                    className: 'btn-sm',
+                    title: 'Scoliosis correction surgery',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_spinal_dysraphism').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Spinal Dysraphism',
+                    className: 'btn-sm',
+                    title: 'Spinal Dysraphism',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Spinal Dysraphism',
+                    className: 'btn-sm',
+                    title: 'Spinal Dysraphism',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_spine_disc_surgery').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Spine and disc surgery-Fusion procedures',
+                    className: 'btn-sm',
+                    title: 'Spine and disc surgery-Fusion procedures',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Spine and disc surgery-Fusion procedures',
+                    className: 'btn-sm',
+                    title: 'Spine and disc surgery-Fusion procedures',
+                },
+
+
+            ]
+        });
+    </script>
+    <script>
+        $('.clinicaloutcome_thoracotomy').DataTable({
+            "ordering": true,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'Thoracotomy',
+                    className: 'btn-sm',
+                    title: 'Thoracotomy',
+                },
+                {
+                    extend: 'excel',
+                    title: 'Thoracotomy',
+                    className: 'btn-sm',
+                    title: 'Thoracotomy',
                 },
 
 
@@ -6219,7 +6670,7 @@ if ($title == null) {
 
     <!-- IP ALL FEEDBACKS -->
     <script>
-        $('.ipallfeedbacks').DataTable({
+        $('.clinicaloutcome_tkr').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6233,15 +6684,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-FEEDBACK REPPORT',
+                    title: 'TKR',
                     className: 'btn-sm',
-                    title: 'IP-FEEDBACK REPPORT',
+                    title: 'TKR',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-FEEDBACK REPPORT',
+                    title: 'TKR',
                     className: 'btn-sm',
-                    title: 'IP-FEEDBACK REPPORT',
+                    title: 'TKR',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6256,7 +6707,7 @@ if ($title == null) {
 
     <!-- IP SATISFIED LIST -->
     <script>
-        $('.ippsatsatisfied').DataTable({
+        $('.clinicaloutcome_uro_oncology').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6270,15 +6721,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-SATISFIED LIST',
+                    title: 'Uro-oncology procedures',
                     className: 'btn-sm',
-                    title: 'IP-SATISFIED LIST',
+                    title: 'Uro-oncology procedures',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-SATISFIED LIST',
+                    title: 'Uro-oncology procedures',
                     className: 'btn-sm',
-                    title: 'IP-SATISFIED LIST',
+                    title: 'Uro-oncology procedures',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6293,7 +6744,7 @@ if ($title == null) {
 
     <!-- IP UNSATISFIED LIST -->
     <script>
-        $('.ippsatunsatisfied').DataTable({
+        $('.clinicaloutcome_whipples_surgery').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6307,15 +6758,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-UNSATISFIED LIST',
+                    title: 'Whipples Surgery',
                     className: 'btn-sm',
-                    title: 'IP-UNSATISFIED LIST',
+                    title: 'Whipples Surgery',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-UNSATISFIED LIST',
+                    title: 'Whipples Surgery',
                     className: 'btn-sm',
-                    title: 'IP-UNSATISFIED LIST',
+                    title: 'Whipples Surgery',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6330,7 +6781,7 @@ if ($title == null) {
 
     <!-- IP PROMOTER LIST -->
     <script>
-        $('.ipnpspromoters').DataTable({
+        $('.clinicaloutcome_laparoscopic_cholecystectom').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6344,15 +6795,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-PROMOTER LIST',
+                    title: 'Laparoscopic Cholecystectomy',
                     className: 'btn-sm',
-                    title: 'IP-PROMOTER LIST',
+                    title: 'Laparoscopic Cholecystectomy',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-PROMOTER LIST',
+                    title: 'Laparoscopic Cholecystectomy',
                     className: 'btn-sm',
-                    title: 'IP-PROMOTER LIST',
+                    title: 'Laparoscopic Cholecystectomy',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6367,7 +6818,7 @@ if ($title == null) {
 
     <!-- IP PASSIVE LIST -->
     <script>
-        $('.ipnpspassive').DataTable({
+        $('.clinicalkpi_bronchodilators_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6381,15 +6832,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-PASSIVE LIST',
+                    title: 'Bronchodilators Audit',
                     className: 'btn-sm',
-                    title: 'IP-PASSIVE LIST',
+                    title: 'Bronchodilators Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-PASSIVE LIST',
+                    title: 'Bronchodilators Audit',
                     className: 'btn-sm',
-                    title: 'IP-PASSIVE LIST',
+                    title: 'Bronchodilators Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6404,7 +6855,7 @@ if ($title == null) {
 
     <!-- IP DETRACTOR LIST -->
     <script>
-        $('.ipnpsdetractor').DataTable({
+        $('.clinicalkpi_copd_protocol_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6418,15 +6869,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-DETRACTOR LIST',
+                    title: 'COPD Protocol Audit',
                     className: 'btn-sm',
-                    title: 'IP-DETRACTOR LIST',
+                    title: 'COPD Protocol Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-DETRACTOR LIST',
+                    title: 'COPD Protocol Audit',
                     className: 'btn-sm',
-                    title: 'IP-DETRACTOR LIST',
+                    title: 'COPD Protocol Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6441,7 +6892,7 @@ if ($title == null) {
 
     <!-- USER LIST -->
     <script>
-        $('.userlisttable').DataTable({
+        $('.infection_control_biomedical_waste').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6455,15 +6906,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'USER LIST',
+                    title: 'Biomedical Waste Management Audit',
                     className: 'btn-sm',
-                    title: 'USER LIST',
+                    title: 'Biomedical Waste Management Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'USER LIST',
+                    title: 'Biomedical Waste Management Audit',
                     className: 'btn-sm',
-                    title: 'USER LIST',
+                    title: 'Biomedical Waste Management Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6478,7 +6929,7 @@ if ($title == null) {
 
     <!-- IP ALL TICKETS -->
     <script>
-        $('.ipticketsall').DataTable({
+        $('.infection_control_canteen_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6492,15 +6943,50 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-ALL TICKETS',
+                    title: 'Canteen Audit',
                     className: 'btn-sm',
-                    title: 'IP-ALL TICKETS',
+                    title: 'Canteen Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-ALL TICKETS',
+                    title: 'Canteen Audit',
                     className: 'btn-sm',
-                    title: 'IP-ALL TICKETS',
+                    title: 'Canteen Audit',
+                },
+                // {
+                //     extend: 'pdf',
+                //     title: 'IP-Promoter List',
+                //     className: 'btn-sm',
+                //     title: 'IP-Promoter List',
+                // },
+
+            ]
+        });
+    </script>
+    <script>
+        $('.infection_control_cssd_audit').DataTable({
+            "ordering": true,
+
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'CSSD audit',
+                    className: 'btn-sm',
+                    title: 'CSSD audit',
+                },
+                {
+                    extend: 'excel',
+                    title: 'CSSD audit',
+                    className: 'btn-sm',
+                    title: 'CSSD audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6515,7 +7001,7 @@ if ($title == null) {
 
     <!-- IP OPEN TICKETS -->
     <script>
-        $('.ipticketsopen').DataTable({
+        $('.infection_control_hand_hygiene').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6529,15 +7015,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-OPEN TICKETS',
+                    title: 'Hand Hygiene Audit',
                     className: 'btn-sm',
-                    title: 'IP-OPEN TICKETS',
+                    title: 'Hand Hygiene Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-OPEN TICKETS',
+                    title: 'Hand Hygiene Audit',
                     className: 'btn-sm',
-                    title: 'IP-OPEN TICKETS',
+                    title: 'Hand Hygiene Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6552,7 +7038,7 @@ if ($title == null) {
 
     <!-- IP ADDRESSED TICKETS -->
     <script>
-        $('.ipticketsaddressed').DataTable({
+        $('.infection_control_bundle_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6566,15 +7052,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-ADDRESSED TICKETS',
+                    title: 'Infection control bundle audit',
                     className: 'btn-sm',
-                    title: 'IP-ADDRESSED TICKETS',
+                    title: 'Infection control bundle audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-ADDRESSED TICKETS',
+                    title: 'Infection control bundle audit',
                     className: 'btn-sm',
-                    title: 'IP-ADDRESSED TICKETS',
+                    title: 'Infection control bundle audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6589,7 +7075,7 @@ if ($title == null) {
 
     <!-- IP CLOSED TICKETS -->
     <script>
-        $('.ipticketsclose').DataTable({
+        $('.infection_control_ot_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6603,15 +7089,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-CLOSED TICKETS',
+                    title: 'Infection Control OT audit',
                     className: 'btn-sm',
-                    title: 'IP-CLOSED TICKETS',
+                    title: 'Infection Control OT audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-CLOSED TICKETS',
+                    title: 'Infection Control OT audit',
                     className: 'btn-sm',
-                    title: 'IP-CLOSED TICKETS',
+                    title: 'Infection Control OT audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6626,7 +7112,7 @@ if ($title == null) {
 
     <!-- IP CAPA REPORT -->
     <script>
-        $('.ipcapa').DataTable({
+        $('.infection_control_linen_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6640,15 +7126,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-CAPA REPORT',
+                    title: 'Linen Audit',
                     className: 'btn-sm',
-                    title: 'IP-CAPA REPORT',
+                    title: 'Linen Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-CAPA REPORT',
+                    title: 'Linen Audit',
                     className: 'btn-sm',
-                    title: 'IP-CAPA REPORT',
+                    title: 'Linen Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6663,7 +7149,7 @@ if ($title == null) {
 
     <!-- IP STAFF REPORT -->
     <script>
-        $('.ipstaffrec').DataTable({
+        $('.infection_control_ambulance_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6677,15 +7163,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'IP-STAFF REPPORT',
+                    title: 'Ambulance PCI Audit',
                     className: 'btn-sm',
-                    title: 'IP-STAFF REPPORT',
+                    title: 'Ambulance PCI Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'IP-STAFF REPPORT',
+                    title: 'Ambulance PCI Audit',
                     className: 'btn-sm',
-                    title: 'IP-STAFF REPPORT',
+                    title: 'Ambulance PCI Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6701,7 +7187,7 @@ if ($title == null) {
 
     <!-- OUTPATIENT MODULES -->
     <script>
-        $('.opticketanalisys').DataTable({
+        $('.infection_control_coffee_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6715,15 +7201,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-TICKET ANALISYS',
+                    title: 'CoffeeShop PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-TICKET ANALISYS',
+                    title: 'CoffeeShop PCI Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-TICKET ANALISYS',
+                    title: 'CoffeeShop PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-TICKET ANALISYS',
+                    title: 'CoffeeShop PCI Audit',
                 },
 
             ]
@@ -6731,7 +7217,7 @@ if ($title == null) {
     </script>
     <!-- OP ALL FEEDBACKS -->
     <script>
-        $('.opallfeedbacks').DataTable({
+        $('.infection_control_laboratory_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6745,15 +7231,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-FEEDBACK REPPORT',
+                    title: 'Laboratory PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-FEEDBACK REPPORT',
+                    title: 'Laboratory PCI Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-FEEDBACK REPPORT',
+                    title: 'Laboratory PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-FEEDBACK REPPORT',
+                    title: 'Laboratory PCI Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6768,7 +7254,7 @@ if ($title == null) {
 
     <!-- OP SATISFIED LIST -->
     <script>
-        $('.oppsatsatisfied').DataTable({
+        $('.infection_control_mortuary_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6782,15 +7268,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-SATISFIED LIST',
+                    title: 'Mortuary PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-SATISFIED LIST',
+                    title: 'Mortuary PCI Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-SATISFIED LIST',
+                    title: 'Mortuary PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-SATISFIED LIST',
+                    title: 'Mortuary PCI Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6805,7 +7291,7 @@ if ($title == null) {
 
     <!-- OP UNSATISFIED LIST -->
     <script>
-        $('.oppsatunsatisfied').DataTable({
+        $('.infection_control_radiology_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6819,15 +7305,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-UNSATISFIED LIST',
+                    title: 'Radiology PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-UNSATISFIED LIST',
+                    title: 'Radiology PCI Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-UNSATISFIED LIST',
+                    title: 'Radiology PCI Audit',
                     className: 'btn-sm',
-                    title: 'OP-UNSATISFIED LIST',
+                    title: 'Radiology PCI Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6842,7 +7328,7 @@ if ($title == null) {
 
     <!-- OP PROMOTER LIST -->
     <script>
-        $('.opnpspromoters').DataTable({
+        $('.infection_control_ssi_survelliance_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6856,15 +7342,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-PROMOTER LIST',
+                    title: 'SSI Surveillance checklist',
                     className: 'btn-sm',
-                    title: 'OP-PROMOTER LIST',
+                    title: 'SSI Surveillance checklist',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-PROMOTER LIST',
+                    title: 'SSI Surveillance checklist',
                     className: 'btn-sm',
-                    title: 'OP-PROMOTER LIST',
+                    title: 'SSI Surveillance checklist',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6879,7 +7365,7 @@ if ($title == null) {
 
     <!-- OP PASSIVE LIST -->
     <script>
-        $('.opnpspassive').DataTable({
+        $('.infection_control_peripheralivline_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6893,15 +7379,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-PASSIVE LIST',
+                    title: 'IV cannula audit',
                     className: 'btn-sm',
-                    title: 'OP-PASSIVE LIST',
+                    title: 'IV cannula audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-PASSIVE LIST',
+                    title: 'IV cannula audit',
                     className: 'btn-sm',
-                    title: 'OP-PASSIVE LIST',
+                    title: 'IV cannula audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6916,7 +7402,7 @@ if ($title == null) {
 
     <!-- OP DETRACTOR LIST -->
     <script>
-        $('.opnpsdetractor').DataTable({
+        $('.infection_control_personalprotective_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6930,15 +7416,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-DETRACTOR LIST',
+                    title: 'Personal Protective Equipment Usage audit',
                     className: 'btn-sm',
-                    title: 'OP-DETRACTOR LIST',
+                    title: 'Personal Protective Equipment Usage audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-DETRACTOR LIST',
+                    title: 'Personal Protective Equipment Usage audit',
                     className: 'btn-sm',
-                    title: 'OP-DETRACTOR LIST',
+                    title: 'Personal Protective Equipment Usage audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6953,7 +7439,7 @@ if ($title == null) {
 
     <!-- OP ALL TICKETS -->
     <script>
-        $('.opticketsall').DataTable({
+        $('.infection_control_safe_injection_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -6967,15 +7453,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-ALL TICKETS',
+                    title: 'Safe Injection and Infusion Audit',
                     className: 'btn-sm',
-                    title: 'OP-ALL TICKETS',
+                    title: 'Safe Injection and Infusion Audit',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-ALL TICKETS',
+                    title: 'Safe Injection and Infusion Audit',
                     className: 'btn-sm',
-                    title: 'OP-ALL TICKETS',
+                    title: 'Safe Injection and Infusion Audit',
                 },
                 // {
                 //     extend: 'pdf',
@@ -6990,7 +7476,7 @@ if ($title == null) {
 
     <!-- OP OPEN TICKETS -->
     <script>
-        $('.opticketsopen').DataTable({
+        $('.infection_control_surface_cleaning_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7004,15 +7490,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-OPEN TICKETS',
+                    title: 'Surface cleaning and disinfection effectiveness monitoring record',
                     className: 'btn-sm',
-                    title: 'OP-OPEN TICKETS',
+                    title: 'Surface cleaning and disinfection effectiveness monitoring record',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-OPEN TICKETS',
+                    title: 'Surface cleaning and disinfection effectiveness monitoring record',
                     className: 'btn-sm',
-                    title: 'OP-OPEN TICKETS',
+                    title: 'Surface cleaning and disinfection effectiveness monitoring record',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7027,7 +7513,7 @@ if ($title == null) {
 
     <!-- OP ADDRESSED TICKETS -->
     <script>
-        $('.opticketsaddressed').DataTable({
+        $('.clinical_pathway_arthroscopic_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7041,15 +7527,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-ADDRESSED TICKETS',
+                    title: 'Arthroscopic ACL Reconstruction Surgery',
                     className: 'btn-sm',
-                    title: 'OP-ADDRESSED TICKETS',
+                    title: 'Arthroscopic ACL Reconstruction Surgery',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-ADDRESSED TICKETS',
+                    title: 'Arthroscopic ACL Reconstruction Surgery',
                     className: 'btn-sm',
-                    title: 'OP-ADDRESSED TICKETS',
+                    title: 'Arthroscopic ACL Reconstruction Surgery',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7064,7 +7550,7 @@ if ($title == null) {
 
     <!-- OP CLOSED TICKETS -->
     <script>
-        $('.opticketsclose').DataTable({
+        $('.clinical_pathway_breast_lump_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7078,15 +7564,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-CLOSED TICKETS',
+                    title: 'Breast Lump Consensus Guidelines',
                     className: 'btn-sm',
-                    title: 'OP-CLOSED TICKETS',
+                    title: 'Breast Lump Consensus Guidelines',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-CLOSED TICKETS',
+                    title: 'Breast Lump Consensus Guidelines',
                     className: 'btn-sm',
-                    title: 'OP-CLOSED TICKETS',
+                    title: 'Breast Lump Consensus Guidelines',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7101,7 +7587,7 @@ if ($title == null) {
 
     <!-- OP CAPA REPORT -->
     <script>
-        $('.opcapa').DataTable({
+        $('.clinical_pathway_cardiac_arrest_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7115,15 +7601,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'OP-CAPA REPORT',
+                    title: 'Cardiac Arrest',
                     className: 'btn-sm',
-                    title: 'OP-CAPA REPORT',
+                    title: 'Cardiac Arrest',
                 },
                 {
                     extend: 'excel',
-                    title: 'OP-CAPA REPORT',
+                    title: 'Cardiac Arrest',
                     className: 'btn-sm',
-                    title: 'OP-CAPA REPORT',
+                    title: 'Cardiac Arrest',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7139,7 +7625,7 @@ if ($title == null) {
 
     <!-- PATIENT COMPLAINTS MODULES -->
     <script>
-        $('.pcticketanalisys').DataTable({
+        $('.clinical_pathway_donor_hepatectomy_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7153,15 +7639,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-COMPLAINT ANALISYS',
+                    title: 'Donor Hepatectomy',
                     className: 'btn-sm',
-                    title: 'PC-COMPLAINT ANALISYS',
+                    title: 'Donor Hepatectomy',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-COMPLAINT ANALISYS',
+                    title: 'Donor Hepatectomy',
                     className: 'btn-sm',
-                    title: 'PC-COMPLAINT ANALISYS',
+                    title: 'Donor Hepatectomy',
                 },
 
             ]
@@ -7169,7 +7655,7 @@ if ($title == null) {
     </script>
     <!-- PC ALL COMPLAINTS -->
     <script>
-        $('.pcticketsall').DataTable({
+        $('.clinical_pathway_febrile_seizure_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7183,15 +7669,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-ALL COMPLAINTS',
+                    title: 'Febrile Seizure',
                     className: 'btn-sm',
-                    title: 'PC-ALL COMPLAINTS',
+                    title: 'Febrile Seizure',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-ALL COMPLAINTS',
+                    title: 'Febrile Seizure',
                     className: 'btn-sm',
-                    title: 'PC-ALL COMPLAINTS',
+                    title: 'Febrile Seizure',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7206,7 +7692,7 @@ if ($title == null) {
 
     <!-- PC OPEN COMPLAINTS -->
     <script>
-        $('.pcticketsopen').DataTable({
+        $('.clinical_pathway_heart_transplant_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7220,15 +7706,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-OPEN COMPLAINTS',
+                    title: 'Heart Transplant Recipient',
                     className: 'btn-sm',
-                    title: 'PC-OPEN COMPLAINTS',
+                    title: 'Heart Transplant Recipient',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-OPEN COMPLAINTS',
+                    title: 'Heart Transplant Recipient',
                     className: 'btn-sm',
-                    title: 'PC-OPEN COMPLAINTS',
+                    title: 'Heart Transplant Recipient',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7243,7 +7729,7 @@ if ($title == null) {
 
     <!-- PC ADDRESSED COMPLAINTS -->
     <script>
-        $('.pcticketsaddressed').DataTable({
+        $('.clinical_pathway_laproscopic_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7257,15 +7743,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-ADDRESSED COMPLAINTS',
+                    title: 'Laparoscopic Donor Nephrectomy',
                     className: 'btn-sm',
-                    title: 'PC-ADDRESSED COMPLAINTS',
+                    title: 'Laparoscopic Donor Nephrectomy',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-ADDRESSED COMPLAINTS',
+                    title: 'Laparoscopic Donor Nephrectomy',
                     className: 'btn-sm',
-                    title: 'PC-ADDRESSED COMPLAINTS',
+                    title: 'Laparoscopic Donor Nephrectomy',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7280,7 +7766,7 @@ if ($title == null) {
 
     <!-- PC CLOSED COMPLAINTS -->
     <script>
-        $('.pcticketsclose').DataTable({
+        $('.clinical_pathway_picc_line_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7294,15 +7780,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-CLOSED COMPLAINTS',
+                    title: 'PICC LINE Insertion',
                     className: 'btn-sm',
-                    title: 'PC-CLOSED COMPLAINTS',
+                    title: 'PICC LINE Insertion',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-CLOSED COMPLAINTS',
+                    title: 'PICC LINE Insertion',
                     className: 'btn-sm',
-                    title: 'PC-CLOSED COMPLAINTS',
+                    title: 'PICC LINE Insertion',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7317,7 +7803,7 @@ if ($title == null) {
 
     <!-- PC CAPA REPORT -->
     <script>
-        $('.pccapa').DataTable({
+        $('.clinical_pathway_stroke_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7331,15 +7817,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'PC-CAPA REPORT',
+                    title: 'Stroke',
                     className: 'btn-sm',
-                    title: 'PC-CAPA REPORT',
+                    title: 'Stroke',
                 },
                 {
                     extend: 'excel',
-                    title: 'PC-CAPA REPORT',
+                    title: 'Stroke',
                     className: 'btn-sm',
-                    title: 'PC-CAPA REPORT',
+                    title: 'Stroke',
                 },
                 // {
                 //     extend: 'pdf',
@@ -7355,7 +7841,7 @@ if ($title == null) {
 
     <!-- ISR REQUESTS MODULES -->
     <script>
-        $('.isrticketanalisys').DataTable({
+        $('.clinical_pathway_urodynamics_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7369,15 +7855,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'ISR-REQUEST ANALISYS',
+                    title: 'Urodynamics',
                     className: 'btn-sm',
-                    title: 'ISR-REQUEST ANALISYS',
+                    title: 'Urodynamics',
                 },
                 {
                     extend: 'excel',
-                    title: 'ISR-REQUEST ANALISYS',
+                    title: 'Urodynamics',
                     className: 'btn-sm',
-                    title: 'ISR-REQUEST ANALISYS',
+                    title: 'Urodynamics',
                 },
 
             ]
@@ -7385,7 +7871,7 @@ if ($title == null) {
     </script>
     <!-- ISR ALL REQUESTS -->
     <script>
-        $('.esrticketsall').DataTable({
+        $('.clinical_pathway_stemi_audit').DataTable({
             "ordering": true,
             responsive: true,
             "pageLength": 50,
@@ -7399,15 +7885,15 @@ if ($title == null) {
                 /*  {extend: 'copy', className: 'btn-sm'},*/
                 {
                     extend: 'csv',
-                    title: 'ISR-ALL REQUESTS',
+                    title: 'STEMI-Primary PCI Clinical Pathway',
                     className: 'btn-sm',
-                    title: 'ISR-ALL REQUESTS',
+                    title: 'STEMI-Primary PCI Clinical Pathway',
                 },
                 {
                     extend: 'excel',
-                    title: 'ISR-ALL REQUESTS',
+                    title: 'STEMI-Primary PCI Clinical Pathway',
                     className: 'btn-sm',
-                    title: 'ISR-ALL REQUESTS',
+                    title: 'STEMI-Primary PCI Clinical Pathway',
                 },
                 // {
                 //     extend: 'pdf',
@@ -8361,8 +8847,8 @@ if ($title == null) {
         });
 
         // Force all responsive-hidden columns to be shown
-        setTimeout(function () {
-            $('.vertical-table tr td').each(function (e) {
+        setTimeout(function() {
+            $('.vertical-table tr td').each(function(e) {
                 $(this).click();
             });
         }, 200);
@@ -8399,9 +8885,684 @@ if ($title == null) {
             ]
         });
     </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    <script>
+        $('.datatabletr').DataTable({
+            "ordering": false,
+            responsive: true,
+            "pageLength": 50,
+            "stateSave": true, // Enables state saving
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                {
+                    extend: 'excel',
+                    title: 'OP-PASSIVE LIST',
+                    className: 'btn-sm',
+                    title: 'OP-PASSIVE LIST'
+                },
+                /*{extend: 'pdf', title: 'ExampleFile', className: 'btn-sm'},*/
+                /*{extend: 'print', className: 'btn-sm'}*/
+            ]
+        });
+    </script>
+    
+    
 
     <script>
-        window.addEventListener("beforeunload", function () {
+        // // Show the loader before the page unloads
+        // window.addEventListener("beforeunload", function() {
+        //     const loadingOverlay = document.getElementById("loading-overlay");
+        //     loadingOverlay.classList.add("active");
+        // });
+
+        // // Hide the loader after the page loads
+        // window.addEventListener("load", function() {
+        //     const loadingOverlay = document.getElementById("loading-overlay");
+        //     loadingOverlay.classList.remove("active");
+        // });
+        // Show the loader before the page unloads
+        // Show the loader before the page unloads
+        window.addEventListener("beforeunload", function() {
             const loadingOverlay = document.getElementById("loading-overlay");
             const loadingMessage = document.getElementById("loading-message");
 
@@ -8421,15 +9582,11 @@ if ($title == null) {
                 }, 1000);
 
                 loadingOverlay.classList.add("active");
-                // ✅ Auto-hide after 15s
-                setTimeout(() => {
-                    loadingOverlay.classList.remove("active");
-                }, 15000);
             }
         });
 
         // Hide the loader after the page loads
-        window.addEventListener("load", function () {
+        window.addEventListener("load", function() {
             const loadingOverlay = document.getElementById("loading-overlay");
             const loadingMessage = document.getElementById("loading-message");
 
@@ -9001,7 +10158,7 @@ if ($title == null) {
     <script>
         // $(document).ready(function() {
         // Hide all elements by default
-        setTimeout(function () {
+        setTimeout(function() {
             $('#capa').hide();
             $('#address').hide();
             $('#move').hide();
