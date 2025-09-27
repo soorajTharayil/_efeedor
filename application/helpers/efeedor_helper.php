@@ -68,9 +68,9 @@ function get_from_to_date()
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
 
-		// $pagetitle = 'Last 90 Days';
-		$pagetitle = 'Last 30 Days';
-		// $pagetitle = "Current Month";
+		//$pagetitle = 'Last 90 Days';
+		//$pagetitle = 'Last 30 Days';
+		$pagetitle = "Current Month";
 
 		$_SESSION['pagetitle'] = $pagetitle;
 	} else {
@@ -80,6 +80,8 @@ function get_from_to_date()
 
 	//$pagetitle = 'Last 90 Days';
 	// $pagetitle = 'Last 30 Days'; //change for default time 30 days
+	$pagetitle = "Current Month";
+
 	if (isset($_GET['today'])) {
 		$pagetitle = "Last 24 Hours";
 	}
@@ -139,13 +141,19 @@ function get_from_to_date()
 	if (isset($_GET['fdate']) && isset($_GET['tdate'])) {
 		$fdate = $_GET['fdate'];
 		$tdate = $_GET['tdate'];
+
+		// Convert to Y-m-d if it contains slashes
+		if (strpos($fdate, '/') !== false) {
+			$fdate = DateTime::createFromFormat('d/m/Y', $fdate)->format('Y-m-d');
+		}
+		if (strpos($tdate, '/') !== false) {
+			$tdate = DateTime::createFromFormat('d/m/Y', $tdate)->format('Y-m-d');
+		}
+
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-		if ($fdate != $tdate) {
-			$pagetitle = 'Custom';
-		} else {
-			$pagetitle = "Last 24 Hours";
-		}
+
+		$pagetitle = ($fdate !== $tdate) ? 'Custom' : 'Last 24 Hours';
 	}
 	if (isset($_GET['this_month'])) {
 		$tdate = date('Y-m-01'); // First day of the current month
@@ -179,6 +187,53 @@ function get_from_to_date()
 		$pagetitle = "Previous Month";
 	}
 
+	// --- NEW OPTIONS ---
+
+	// Current Quarter
+	if (isset($_GET['current_quarter'])) {
+		$currentMonth = date('n');
+		$currentYear = date('Y');
+		if ($currentMonth <= 3) {
+			$start = "$currentYear-01-01";
+			$end = "$currentYear-03-31";
+		} elseif ($currentMonth <= 6) {
+			$start = "$currentYear-04-01";
+			$end = "$currentYear-06-30";
+		} elseif ($currentMonth <= 9) {
+			$start = "$currentYear-07-01";
+			$end = "$currentYear-09-30";
+		} else {
+			$start = "$currentYear-10-01";
+			$end = "$currentYear-12-31";
+		}
+
+		// Swap to make fdate latest and tdate earliest
+		$fdate = $end;
+		$tdate = $start;
+
+		$_SESSION['from_date'] = $fdate;
+		$_SESSION['to_date'] = $tdate;
+		$pagetitle = "Current Quarter";
+	}
+
+	// Current Year
+	if (isset($_GET['current_year'])) {
+		$currentYear = date('Y');
+		$start = "$currentYear-01-01";
+		$end = "$currentYear-12-31";
+
+		// Swap to make fdate latest and tdate earliest
+		$fdate = $end;
+		$tdate = $start;
+
+		$_SESSION['from_date'] = $fdate;
+		$_SESSION['to_date'] = $tdate;
+		$pagetitle = "Current Year";
+	}
+
+
+	// --- END NEW OPTIONS ---
+
 	if ($pagetitle == 'NO TITLE') {
 		$pagetitle = $_SESSION['pagetitle'];
 	} else {
@@ -193,7 +248,6 @@ function get_from_to_date()
 	$dset['tdate'] = $tdate;
 	$dset['days'] = $days;
 	$_SESSION['days'] = $days;
-
 
 	$dset['pagetitle'] = $pagetitle;
 	return $dset;
@@ -512,7 +566,11 @@ function show_filter($segment_1, $segment_2)
 		$show = false;
 	}
 
-	
+	if ($segment_1 == 'audit_doctor') {
+		$show = false;
+	}
+
+
 
 
 	return $show;
