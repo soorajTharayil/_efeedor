@@ -44,14 +44,6 @@ app.controller(
               $scope.profiled = $rootScope.profilen;
               localStorage.setItem("ehandor", JSON.stringify(response));
 
-<<<<<<< HEAD
-				$http.post($rootScope.baseurl_main + '/login.php', $scope.loginvar, { timeout: 20000 }).then(function (responsedata) {
-					console.log(responsedata);
-					if (responsedata.status == 200) {
-						var response = responsedata.data;
-						$rootScope.loader = false;
-						$rootScope.profilen = response;
-=======
               if (response.status === "fail") {
                 $scope.loginerror = response.message;
               } else if (response.status === "success") {
@@ -101,7 +93,6 @@ app.controller(
           }
         );
     };
->>>>>>> 44c8125ec5be25ee91e0afc7fd0586c95b638fe0
 
     $scope.menuVisible = false;
     $scope.aboutVisible = false;
@@ -240,99 +231,6 @@ app.controller(
               (u) => u.user_id === $scope.userId
             );
 
-<<<<<<< HEAD
-	$scope.closeMenuOnClickOutside = function (event) {
-		if ($scope.menuVisible && !event.target.closest('.menu-dropdown') && !event.target.closest('.menu-toggle')) {
-			$scope.menuVisible = false;
-			$scope.$apply(); // Ensure Angular updates the UI
-		}
-	};
-
-	// Attach event listener when step1 is active
-	$scope.$watch('step1', function (newVal) {
-		if (newVal) {
-			document.addEventListener('click', $scope.closeMenuOnClickOutside);
-		} else {
-			document.removeEventListener('click', $scope.closeMenuOnClickOutside);
-		}
-	});
-
-
-
-
-
-
-	$rootScope.language = function (type) {
-		$scope.typel = type;
-		if (type == 'english') {
-			$http.get('language/english.json').then(function (responsedata) {
-
-				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'English';
-
-			});
-		}
-		if (type == 'lang2') {
-			$http.get('language/lang2.json').then(function (responsedata) {
-
-				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'ಕನ್ನಡ';
-
-
-			});
-		}
-		if (type == 'lang3') {
-			$http.get('language/lang3.json').then(function (responsedata) {
-
-				$rootScope.lang = responsedata.data;
-				$scope.type2 = 'മലയാളം';
-				//	$scope.type2 = 'தமிழ்';
-
-
-
-			});
-		}
-	}
-	$scope.language('english');
-
-	$scope.setupapplication = function () {
-
-		var url = window.location.href;
-
-		var id = url.substring(url.lastIndexOf('=') + 1);
-
-		const urlParams = new URLSearchParams(window.location.search);
-		const userId = urlParams.get('user_id');
-		$scope.userId = userId;
-
-		$http.get($rootScope.baseurl_main + '/ward.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
-			$scope.wardlist = responsedata.data;
-			$scope.questioset = responsedata.data.question_set;
-			$scope.setting_data = responsedata.data.setting_data;
-			console.log($scope.feedback);
-
-			// Find the user whose user_id matches $scope.userId
-			var matchedUser = $scope.wardlist.user.find(u => u.user_id === $scope.userId);
-
-			if (matchedUser) {
-				$scope.matchedUserDetails = matchedUser;
-				console.log("Matched User:", $scope.matchedUserDetails);
-				$scope.step0 = false;
-				$scope.step1 = true;
-			} else {
-				console.log("No matching user found for user_id:", $scope.userId);
-			}
-		},
-			function myError(response) {
-				$rootScope.loader = false;
-
-			}
-		);
-
-	}
-	$scope.setupapplication();
-});
-=======
             if (matchedUser) {
               $scope.matchedUserDetails = matchedUser;
               console.log("Matched User:", $scope.matchedUserDetails);
@@ -350,4 +248,3 @@ app.controller(
     $scope.setupapplication();
   }
 );
->>>>>>> 44c8125ec5be25ee91e0afc7fd0586c95b638fe0

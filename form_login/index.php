@@ -12,11 +12,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<<<<<<< HEAD
- 
-=======
-  
->>>>>>> 44c8125ec5be25ee91e0afc7fd0586c95b638fe0
   <script src="app.js?<?php echo time(); ?>"></script>
 
 </head>
