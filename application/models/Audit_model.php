@@ -112,140 +112,547 @@ class Audit_model extends CI_Model
 	// }
 
 
-	public function update_bf_feedback_mrd_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_mrd_audit', $data);
-    }
 
-	public function update_bf_feedback_ppe_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_ppe_audit', $data);
-    }
-	public function update_bf_feedback_consultation_time_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_consultation_time', $data);
-    }
+    //MRD & MDC
+	public function update_active_cases_mrd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_active_cases_mrdip', $data);
+	}
+	public function update_discharged_patients_mrd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_dischargedpatients_mrd_audit', $data);
+	}
+	public function update_nursing_ip_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_nursingip_closed_cases', $data);
+	}
 
-	public function update_bf_feedback_lab_wait_time_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_lab_wait_time', $data);
-    }
-	public function update_bf_feedback_xray_wait_time_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_xray_wait_time', $data);
-    }
+	public function update_nursing_ip_open_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_nursingip_open_cases', $data);
+	}
 
-	public function update_bf_feedback_usg_wait_time_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_usg_wait_time', $data);
-    }
+	public function update_nursing_op_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_nursingop_closed_cases', $data);
+	}
+	public function update_clinical_active_mdc_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_active_mdc', $data);
+	}
 
-	public function update_bf_feedback_ctscan_time_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_ctscan_time', $data);
-    }
-	public function update_bf_feedback_surgical_safety_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_surgical_safety', $data);
-    }
-	public function update_bf_feedback_medicine_dispense_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_medicine_dispense', $data);
-    }
-	public function update_bf_feedback_medication_administration_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_medication_administration', $data);
-    }
-	public function update_bf_feedback_handover_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_handover', $data);
-    }
-	public function update_bf_feedback_prescriptions_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_prescriptions', $data);
-    }
-	public function update_bf_feedback_hand_hygiene_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_hand_hygiene', $data);
-    }
-	public function update_bf_feedback_tat_blood_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_tat_blood', $data);
-    }
-	public function update_bf_feedback_nurse_patients_ratio_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_nurse_patients_ratio', $data);
-    }
-	public function update_bf_feedback_return_to_i_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_return_to_i', $data);
-    }
+	public function update_clinical_closed_mdc_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_closedcases_mdc', $data);
+	}
 
-	public function update_bf_feedback_return_to_icu_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_return_to_icu', $data);
-    }
+	public function update_clinical_pharmacy_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pharmacy_closed', $data);
+	}
 
-	public function update_bf_feedback_return_to_ed_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_return_to_ed', $data);
-    }
-	public function update_bf_feedback_return_to_emr_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_return_to_emr', $data);
-    }
-	public function update_bf_feedback_mock_drill_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_mock_drill', $data);
-    }
-	public function update_bf_feedback_safety_inspection_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_safety_inspection', $data);
-    }
-	public function update_bf_feedback_nurse_patients_ratio_ward_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_nurse_patients_ratio_ward', $data);
-    }
-    public function update_bf_feedback_vap_prevention_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_vap_prevention', $data);
-    }
-	public function update_bf_feedback_catheter_insert_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_catheter_insert', $data);
-    }
-	public function update_bf_feedback_ssi_bundle_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_ssi_bundle', $data);
-    }
-	public function update_bf_feedback_urinary_catheter_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_urinary_catheter', $data);
-    }
-	public function update_bf_feedback_central_line_insert_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_central_line_insert', $data);
-    }
-	public function update_bf_feedback_central_maintenance_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_central_maintenance', $data);
-    }
-	public function update_bf_feedback_room_cleaning_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_room_cleaning', $data);
-    }
-	public function update_bf_feedback_other_area_cleaning_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_other_area_cleaning', $data);
-    }
-	public function update_bf_feedback_toilet_cleaning_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_toilet_cleaning', $data);
-    }
-	public function update_bf_feedback_canteen_audit($id, $data) {
-        $this->db->where('id', $id);
-        $this->db->update('bf_feedback_canteen_audit', $data);
-    }
+	public function update_clinical_pharmacy_op_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pharmacy_op', $data);
+	}
+
+	public function update_clinical_pharmacy_open_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pharmacy_open', $data);
+	}
+	public function update_anesthesia_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_anesthesia_active_mdc', $data);
+	}
+
+	public function update_anesthesia_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_anesthesia_closed_mdc', $data);
+	}
+
+	public function update_ed_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ed_active_mdc', $data);
+	}
+
+	public function update_ed_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ed_closed_mdc', $data);
+	}
+
+	public function update_icu_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_icu_active_mdc', $data);
+	}
+
+	public function update_icu_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_icu_closed_mdc', $data);
+	}
+	public function update_primarycare_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_primarycare_active_mdc', $data);
+	}
+
+	public function update_primarycare_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_primarycare_closed_mdc', $data);
+	}
+
+	public function update_sedation_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_sedation_active_mdc', $data);
+	}
+
+	public function update_sedation_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_sedation_closed_mdc', $data);
+	}
+
+	public function update_surgeons_active_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_surgeons_active_mdc', $data);
+	}
+
+	public function update_surgeons_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_surgeons_closed_mdc', $data);
+	}
+
+	public function update_diet_consultation_op_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_dietconsultation_op_mdc', $data);
+	}
+	public function update_physiotherapy_closed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_physiotherapy_closed_mdc', $data);
+	}
+
+	public function update_physiotherapy_op_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_physiotherapy_op_mdc', $data);
+	}
+
+	public function update_physiotherapy_open_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_physiotherapy_open_mdc', $data);
+	}
+
+	public function update_mrd_ed_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_mrd_ed_audit', $data);
+	}
+
+	public function update_mrd_lama_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_mrd_lama_audit', $data);
+	}
+
+	public function update_mrd_op_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_mrd_op_audit', $data);
+	}
+	
+	//Nursing & IPSG
+	public function update_accidental_delining_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_accidental_delining_audit', $data);
+	}
+	public function update_admission_holding_area_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_admission_area_audit', $data);
+	}
+	public function update_cardio_pulmonary_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_cardio_pulmonary_audit', $data);
+	}
+	public function update_extravasation_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_extravasation_audit', $data);
+	}
+	public function update_hapu_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_hapu_audit', $data);
+	}
+	public function update_initial_assessment_ae_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_assessment_ae', $data);
+	}
+	public function update_initial_assessment_ipd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_assessment_ipd', $data);
+	}
+	public function update_initial_assessment_opd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_assessment_opd', $data);
+	}
+	public function update_ipsg1_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg1_audit', $data);
+	}
+	public function update_ipsg2_ae_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg2_ae', $data);
+	}
+	public function update_ipsg2_ipd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg2_ipd', $data);
+	}
+	public function update_ipsg4_timeout_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg4_timeout', $data);
+	}
+	public function update_ipsg6_ip_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg6_ip', $data);
+	}
+	public function update_ipsg6_opd_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_ipsg6_opd', $data);
+	}
+	public function update_point_prevelance_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_point_prevlance_audit', $data);
+	}
+	
+	//clinical outcome 
+	public function update_clinical_audit_acl_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_audit_acl', $data);
+	}
+	public function update_clinical_allogenic_bone_marrow_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_allogenic_bone_marrow', $data);
+	}
+	public function update_clinical_aortic_value_replacement_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_aortic_value_replacement', $data);
+	}
+	public function update_clinical_autologous_bone_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_autologous_bone', $data);
+	}
+	public function update_clinical_brain_tumour_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_brain_tumour', $data);
+	}
+	public function update_clinical_cabg_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_cabg', $data);
+	}
+	public function update_clinical_carotid_stenting_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_carotid_stenting', $data);
+	}
+	public function update_clinical_chemotherapy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_chemotherapy', $data);
+	}
+	public function update_clinical_colo_rectal_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_colo_rectal', $data);
+	}
+	public function update_clinical_endoscopy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_endoscopy', $data);
+	}
+	public function update_clinical_epilepsy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_epilepsy', $data);
+	}
+	public function update_clinical_herniorrhaphy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_herniorrhaphy', $data);
+	}
+	public function update_clinical_holep_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_holep', $data);
+	}
+	public function update_clinical_laparoscopic_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_laparoscopic_appendicectomy', $data);
+	}
+	public function update_clinical_mechanical_thrombectomy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_mechanical_thrombectomy', $data);
+	}
+	public function update_clinical_mvr_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_mvr', $data);
+	}
+	public function update_clinical_ptca_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_ptca', $data);
+	}
+	public function update_clinical_renal_transplantation_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_renal_transplantation', $data);
+	}
+	public function update_clinical_scoliosis_correction_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_scoliosis_correction', $data);
+	}
+	public function update_clinical_spinal_dysraphism_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_spinal_dysraphism', $data);
+	}
+	public function update_clinical_spine_disc_surgery_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_spine_disc_surgery', $data);
+	}
+	public function update_clinical_thoracotomy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_thoracotomy', $data);
+	}
+	public function update_clinical_tkr_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_tkr', $data);
+	}
+	public function update_clinical_uro_oncology_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_uro_oncology', $data);
+	}
+	public function update_clinical_whipples_surgery_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_whipples_surgery', $data);
+	}
+	public function update_clinical_laparoscopic_cholecystectomy_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicaloutcome_laparoscopic_cholecystectomy', $data);
+	}
+	
+	//clinical KPI
+	
+	public function update_clinicalkpi_bronchodilators_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicalkpi_bronchodilators_audit', $data);
+	}
+	public function update_clinicalkpi_copd_protocol_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinicalkpi_copd_protocol_audit', $data);
+	}
+	
+	//Infection control
+	
+	public function update_infection_control_biomedical_waste_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_biomedical_waste', $data);
+	}
+	public function update_infection_control_canteen_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_canteen_audit', $data);
+	}
+	public function update_infection_control_cssd_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_cssd_audit', $data);
+	}
+	public function update_infection_control_hand_hygiene_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_hand_hygiene', $data);
+	}
+	public function update_infection_control_bundle_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_bundle_audit', $data);
+	}
+	public function update_infection_control_ot_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_ot_audit', $data);
+	}
+	public function update_infection_control_linen_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_linen_audit', $data);
+	}
+	public function update_infection_control_ambulance_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_ambulance_audit', $data);
+	}
+	public function update_infection_control_coffee_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_coffee_audit', $data);
+	}
+	public function update_infection_control_laboratory_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_laboratory_audit', $data);
+	}
+	public function update_infection_control_mortuary_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_mortuary_audit', $data);
+	}
+	public function update_infection_control_radiology_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_radiology_audit', $data);
+	}
+	public function update_infection_control_ssi_survelliance_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_ssi_survelliance_audit', $data);
+	}
+	public function update_infection_control_peripheralivline_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_peripheralivline_audit', $data);
+	}
+	public function update_infection_control_personalprotective_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_personalprotective_audit', $data);
+	}
+	public function update_infection_control_safe_injection_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_safe_injection_audit', $data);
+	}
+	public function update_infection_control_surface_cleaning_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_infection_control_surface_cleaning_audit', $data);
+	}
+	
+	//clinical Pathways
+	public function update_clinical_pathway_arthroscopic_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_arthroscopic_audit', $data);
+	}
+	public function update_clinical_pathway_breast_lump_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_breast_lump_audit', $data);
+	}
+	public function update_clinical_pathway_cardiac_arrest_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_cardiac_arrest_audit', $data);
+	}
+	public function update_clinical_pathway_donor_hepatectomy_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_donor_hepatectomy_audit', $data);
+	}
+	public function update_clinical_pathway_febrile_seizure_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_febrile_seizure_audit', $data);
+	}
+	public function update_clinical_pathway_heart_transplant_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_heart_transplant_audit', $data);
+	}
+	public function update_clinical_pathway_laproscopic_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_laproscopic_audit', $data);
+	}
+	public function update_clinical_pathway_picc_line_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_picc_line_audit', $data);
+	}
+	public function update_clinical_pathway_stroke_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_stroke_audit', $data);
+	}
+	public function update_clinical_pathway_urodynamics_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_urodynamics_audit', $data);
+	}
+	public function update_clinical_pathway_stemi_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_clinical_pathway_stemi_audit', $data);
+	}
+	//End
+	
+
+
+
 
 
 
@@ -295,7 +702,7 @@ class Audit_model extends CI_Model
 
 		foreach ($allfeeds as $row) {
 			$data = json_decode($row->dataset, true); // Decode the dataset JSON
-// asort($data); 
+			// asort($data); 
 			// Determine the month based on the date
 			if ($days > 10 && $days < 93) {
 				$desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
@@ -308,7 +715,7 @@ class Audit_model extends CI_Model
 
 			// Loop through the questions and process the data
 			foreach ($arraydata as $k => $v) {
-				if (isset($data[$k]) && (int)$data[$k] > 0) {
+				if (isset($data[$k]) && $data[$k] * 1 > 0) {
 					// If feedback is received
 					$dataexport[$mon][$k]['check']++;
 					$dataexport[$mon][$k]['received_feedback_score'] += isset($data[$k]) ? $data[$k] : 0;
@@ -351,7 +758,7 @@ class Audit_model extends CI_Model
 					$dataexport[$mon][$k]['nps_promoters'] = isset($dataexport[$mon][$k]['promoters_count']) ? $dataexport[$mon][$k]['promoters_count'] : 0;
 					$dataexport[$mon][$k]['nps_detractors'] = isset($dataexport[$mon][$k]['detractor_count']) ? $dataexport[$mon][$k]['detractor_count'] : 0;
 					$dataexport[$mon][$k]['nps_passives'] = isset($dataexport[$mon][$k]['passives_count']) ? $dataexport[$mon][$k]['passives_count'] : 0;
-					
+
 
 					$dataexport[$mon][$k]['department_nps'] = round((($dataexport[$mon][$k]['nps_promoters'] - $dataexport[$mon][$k]['nps_detractors']) / $dataexport[$mon][$k]['check']) * 100) . '%';
 					$dataexport[$mon][$k]['count_rated_worst'] = isset($dataexport[$mon][$k]['worst']) ? $dataexport[$mon][$k]['worst'] : 0;
@@ -359,7 +766,7 @@ class Audit_model extends CI_Model
 					$dataexport[$mon][$k]['count_rated_average'] = isset($dataexport[$mon][$k]['average']) ? $dataexport[$mon][$k]['average'] : 0;
 					$dataexport[$mon][$k]['count_rated_good'] = isset($dataexport[$mon][$k]['good']) ? $dataexport[$mon][$k]['good'] : 0;
 					$dataexport[$mon][$k]['count_rated_excellent'] = isset($dataexport[$mon][$k]['excellent']) ? $dataexport[$mon][$k]['excellent'] : 0;
-					
+
 					foreach ($subarraydata as $subk => $vsubr) {
 						if (isset($data['reason'][$subk])) {
 							$count_this_re++; // Increment count_this_re for each negative feedback
@@ -404,58 +811,317 @@ class Audit_model extends CI_Model
 
 		//... [Your stopwords initialization code here, I'm skipping this for brevity] ...
 		$conjunctions = [
-			"and", "but", "or", "nor", "for", "so", "yet",
-			"although", "because", "since", "unless", "while",
-			"either...or", "neither...nor"
+			"and",
+			"but",
+			"or",
+			"nor",
+			"for",
+			"so",
+			"yet",
+			"although",
+			"because",
+			"since",
+			"unless",
+			"while",
+			"either...or",
+			"neither...nor"
 		];
 
 		$prepositions = [
-			"about", "above", "across", "after", "against", "along", "among",
-			"around", "at", "before", "behind", "below", "beneath", "beside",
-			"between", "beyond", "by", "down", "during", "for", "from", "in",
-			"inside", "into", "near", "of", "off", "on", "onto", "out",
-			"outside", "over", "through", "to", "under", "up", "with", "without"
+			"about",
+			"above",
+			"across",
+			"after",
+			"against",
+			"along",
+			"among",
+			"around",
+			"at",
+			"before",
+			"behind",
+			"below",
+			"beneath",
+			"beside",
+			"between",
+			"beyond",
+			"by",
+			"down",
+			"during",
+			"for",
+			"from",
+			"in",
+			"inside",
+			"into",
+			"near",
+			"of",
+			"off",
+			"on",
+			"onto",
+			"out",
+			"outside",
+			"over",
+			"through",
+			"to",
+			"under",
+			"up",
+			"with",
+			"without"
 		];
 
 		$interjections = [
-			"ah!", "aha!", "alas!", "ouch!", "hey!", "wow!", "oh!", "oops!",
-			"yikes!", "hmm...", "shh!"
+			"ah!",
+			"aha!",
+			"alas!",
+			"ouch!",
+			"hey!",
+			"wow!",
+			"oh!",
+			"oops!",
+			"yikes!",
+			"hmm...",
+			"shh!"
 		];
 
 		$pronouns = [
-			"I", "you", "he", "she", "it", "we", "they", "mine", "yours",
-			"his", "hers", "ours", "theirs", "myself", "yourself", "himself",
-			"herself", "itself", "ourselves", "yourselves", "themselves", "who",
-			"whom", "whose", "which", "that", "this", "that", "these", "those",
-			"who", "whom", "whose", "which", "what", "anybody", "anyone",
-			"something", "nothing", "everything", "all", "both", "few", "many",
-			"neither", "several", "some", "such"
+			"I",
+			"you",
+			"he",
+			"she",
+			"it",
+			"we",
+			"they",
+			"mine",
+			"yours",
+			"his",
+			"hers",
+			"ours",
+			"theirs",
+			"myself",
+			"yourself",
+			"himself",
+			"herself",
+			"itself",
+			"ourselves",
+			"yourselves",
+			"themselves",
+			"who",
+			"whom",
+			"whose",
+			"which",
+			"that",
+			"this",
+			"that",
+			"these",
+			"those",
+			"who",
+			"whom",
+			"whose",
+			"which",
+			"what",
+			"anybody",
+			"anyone",
+			"something",
+			"nothing",
+			"everything",
+			"all",
+			"both",
+			"few",
+			"many",
+			"neither",
+			"several",
+			"some",
+			"such"
 		];
 
 		$fillerWords = [
-			"um", "uh", "you know", "like", "basically", "actually",
-			"seriously", "literally", "just", "really"
+			"um",
+			"uh",
+			"you know",
+			"like",
+			"basically",
+			"actually",
+			"seriously",
+			"literally",
+			"just",
+			"really"
 		];
 
 		$articles = [
-			"the", "a", "an"
+			"the",
+			"a",
+			"an"
 		];
 
 		$others = [
-			"a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
-			"as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but",
-			"by", "can't", "cannot", "could", "did", "do", "does", "doing", "don't", "down", "during",
-			"each", "few", "for", "from", "further", "had", "has", "have", "having", "he", "he'd", "he'll",
-			"he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how", "how's", "i",
-			"i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "it", "it's", "its", "itself", "let's", "me",
-			"more", "most", "my", "myself", "nor", "of", "on", "once", "only", "or", "other", "ought", "our",
-			"ours", "ourselves", "out", "over", "own", "same", "she", "she'd", "she'll", "she's", "should", "so",
-			"some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then",
-			"there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those",
-			"through", "to", "too", "under", "until", "up", "very", "was", "we", "we'd", "we'll", "we're",
-			"we've", "were", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who",
-			"who's", "whom", "why", "why's", "with", "would", "you", "you'd", "you'll", "you're", "you've",
-			"your", "yours", "yourself", "yourselves", "not", "can", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " "
+			"a",
+			"about",
+			"above",
+			"after",
+			"again",
+			"against",
+			"all",
+			"am",
+			"an",
+			"and",
+			"any",
+			"are",
+			"as",
+			"at",
+			"be",
+			"because",
+			"been",
+			"before",
+			"being",
+			"below",
+			"between",
+			"both",
+			"but",
+			"by",
+			"can't",
+			"cannot",
+			"could",
+			"did",
+			"do",
+			"does",
+			"doing",
+			"don't",
+			"down",
+			"during",
+			"each",
+			"few",
+			"for",
+			"from",
+			"further",
+			"had",
+			"has",
+			"have",
+			"having",
+			"he",
+			"he'd",
+			"he'll",
+			"he's",
+			"her",
+			"here",
+			"here's",
+			"hers",
+			"herself",
+			"him",
+			"himself",
+			"his",
+			"how",
+			"how's",
+			"i",
+			"i'd",
+			"i'll",
+			"i'm",
+			"i've",
+			"if",
+			"in",
+			"into",
+			"is",
+			"it",
+			"it's",
+			"its",
+			"itself",
+			"let's",
+			"me",
+			"more",
+			"most",
+			"my",
+			"myself",
+			"nor",
+			"of",
+			"on",
+			"once",
+			"only",
+			"or",
+			"other",
+			"ought",
+			"our",
+			"ours",
+			"ourselves",
+			"out",
+			"over",
+			"own",
+			"same",
+			"she",
+			"she'd",
+			"she'll",
+			"she's",
+			"should",
+			"so",
+			"some",
+			"such",
+			"than",
+			"that",
+			"that's",
+			"the",
+			"their",
+			"theirs",
+			"them",
+			"themselves",
+			"then",
+			"there",
+			"there's",
+			"these",
+			"they",
+			"they'd",
+			"they'll",
+			"they're",
+			"they've",
+			"this",
+			"those",
+			"through",
+			"to",
+			"too",
+			"under",
+			"until",
+			"up",
+			"very",
+			"was",
+			"we",
+			"we'd",
+			"we'll",
+			"we're",
+			"we've",
+			"were",
+			"what",
+			"what's",
+			"when",
+			"when's",
+			"where",
+			"where's",
+			"which",
+			"while",
+			"who",
+			"who's",
+			"whom",
+			"why",
+			"why's",
+			"with",
+			"would",
+			"you",
+			"you'd",
+			"you'll",
+			"you're",
+			"you've",
+			"your",
+			"yours",
+			"yourself",
+			"yourselves",
+			"not",
+			"can",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"0",
+			" "
 		];
 
 		$stopwords = array_merge($conjunctions, $prepositions, $interjections, $pronouns, $fillerWords, $articles, $others);
@@ -494,13 +1160,13 @@ class Audit_model extends CI_Model
 			if ($count > 3) {
 				// Generate random color for each word
 				$color = sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Random hex color
-				$wordCounts[] = [ $word,$count,$color];
+				$wordCounts[] = [$word, $count, $color];
 			}
 		}
 		usort($wordCounts, function ($a, $b) {
 			return $b['count'] - $a['count'];
 		});
-	
+
 		return $wordCounts;
 	}
 
@@ -629,7 +1295,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -792,7 +1458,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -834,7 +1500,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -890,7 +1556,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -918,7 +1584,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -942,7 +1608,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -966,7 +1632,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1004,7 +1670,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1242,7 +1908,7 @@ class Audit_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}

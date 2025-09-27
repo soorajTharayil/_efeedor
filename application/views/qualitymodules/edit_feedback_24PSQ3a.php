@@ -93,8 +93,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Bench Mark Time</b></td>
-                            <td><span style="margin: 10px;"><?php echo $param['benchmark']; ?></span>
-                                <input class="form-control" style="display:none" name="benchmark" value="<?php echo $param['benchmark']; ?>" />
+                            <td><span style="margin: 10px;"><?php echo $param['benchmark8']; ?></span>
+                                <input class="form-control" style="display:none" name="benchmark8" value="<?php echo $param['benchmark8']; ?>" />
                             </td>
                         </tr>
 
@@ -336,8 +336,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Bench Mark Time</b></td>
-                            <td><span style="margin: 10px;"><?php echo $param['benchmark2']; ?></span>
-                                <input class="form-control" style="display:none" name="benchmark" value="<?php echo $param['benchmark2']; ?>" />
+                            <td><span style="margin: 10px;"><?php echo $param['benchmark9']; ?></span>
+                                <input class="form-control" style="display:none" name="benchmark9" value="<?php echo $param['benchmark9']; ?>" />
                             </td>
                         </tr>
 
@@ -503,7 +503,7 @@ $param = json_decode($row->dataset, true);
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;24. PSQ4c - <?php echo $row->id; ?></h3>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;24. PSQ4c - <?php echo $row->id; ?>(Coporate Patients)</h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -580,8 +580,8 @@ $param = json_decode($row->dataset, true);
 
                         <tr>
                             <td><b>Bench Mark Time</b></td>
-                            <td><span style="margin: 10px;"><?php echo $param['benchmark3']; ?></span>
-                                <input class="form-control" style="display:none" name="benchmark" value="<?php echo $param['benchmark3']; ?>" />
+                            <td><span style="margin: 10px;"><?php echo $param['benchmark7']; ?></span>
+                                <input class="form-control" style="display:none" name="benchmark7" value="<?php echo $param['benchmark7']; ?>" />
                             </td>
                         </tr>
 

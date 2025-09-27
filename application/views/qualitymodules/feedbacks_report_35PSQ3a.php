@@ -50,9 +50,9 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<!-- <a class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_download_total_feedback_tooltip'); ?>" href="<?php echo base_url($this->uri->segment(1)) . '/overall_patient_excel' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_35psq3a_report' ?>">
 								<i class="fa fa-download"></i>
-							</a> -->
+							</a>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -293,13 +293,11 @@
 	var url = window.location.href;
 	var domain = url.replace(/^(?:https?:\/\/)?(?:www\.)?/, "");
 	domain = domain.split("/")[0];
-	var protocol = window.location.protocol;
-	var baseUrl = protocol + '//' + domain;
 
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = baseUrl +  "/analytics_audit_quality/resposnsechart_36ps"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_36ps"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {

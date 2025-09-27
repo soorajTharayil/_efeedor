@@ -47,6 +47,12 @@ $audit_patient_status_tooltip = "Page for Adding/Editing patient status for Nurs
 
 $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock drill audit";
 
+$audit_frequency_tooltip = "Page for setting the frequency and scheduling of audits";
+
+$audit_doctor_tooltip = "Page for Adding/Editing the doctor";
+
+
+
 
 
 ?>
@@ -126,7 +132,7 @@ $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock
 								<?php } ?>
 
 
-								<?php if (isfeature_active('IP-FEEDBACKS-DASHBOARD') === true || isfeature_active('OP-FEEDBACKS-DASHBOARD') === true || isfeature_active('ISR-REQUESTS-DASHBOARD') === true) { ?>
+								<?php if (isfeature_active('IP-FEEDBACKS-DASHBOARD') === true || isfeature_active('OP-FEEDBACKS-DASHBOARD') === true || isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
 
 									<tr>
 
@@ -209,7 +215,7 @@ $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock
 
 									<?php } ?>
 
-									<?php if (ismodule_active('ISR') === true && isfeature_active('ISR-REQUESTS-DASHBOARD') === true) { ?>
+									<?php if (ismodule_active('INCIDENT') === true && isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
 
 										<tr>
 
@@ -535,6 +541,24 @@ $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock
 
 									<tr>
 
+										<td><b>Audit Frequency</b>
+											<span>
+												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_frequency_tooltip; ?>" data-placement="right">
+													<i class="fa fa-info-circle" aria-hidden="true"></i>
+												</a>
+											</span>
+										</td>
+
+										<td>
+
+											<a class="btn btn-success" href="<?php echo base_url("settings/audit_frequency") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+
+										</td>
+
+									</tr>
+
+									<tr>
+
 										<td><b>Audit Departments</b>
 											<span>
 												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_department_tooltip; ?>" data-placement="right">
@@ -552,6 +576,24 @@ $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock
 									</tr>
 
 									<tr>
+
+										<td><b>Audit doctor list</b>
+											<span>
+												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_doctor_tooltip; ?>" data-placement="right">
+													<i class="fa fa-info-circle" aria-hidden="true"></i>
+												</a>
+											</span>
+										</td>
+
+										<td>
+
+											<a class="btn btn-success" href="<?php echo base_url("settings/audit_doctor") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+
+										</td>
+
+									</tr>
+
+									<!-- <tr>
 
 										<td><b>Patient Categories</b>
 											<span>
@@ -765,7 +807,7 @@ $audit_emergency_code_tooltip = "Page for Adding/Editing emergency code for mock
 
 										</td>
 
-									</tr>
+									</tr> -->
 
 									
 								<?php } ?>

@@ -157,82 +157,255 @@ $ip_link_feedback_dashboard = base_url('audit/feedback_dashboard');
 $ip_link_tickets_dashboard = base_url('audit/department_tickets');
 
 
-
-
 // individual patient feedback link
 $ip_link_patient_feedback = base_url('audit/patient_feedback?id=');
 
 
-// All feedbacks
-$feedbacks_report_mrd_audit = base_url('audit/feedbacks_report_mrd_audit');
-$feedbacks_report_ppe_audit = base_url('audit/feedbacks_report_ppe_audit');
-$feedbacks_report_consultation_time = base_url('audit/feedbacks_report_consultation_time');
-$feedbacks_report_lab_time = base_url('audit/feedbacks_report_lab_time');
-$feedbacks_report_xray_time = base_url('audit/feedbacks_report_xray_time');
-$feedbacks_report_usg_time = base_url('audit/feedbacks_report_usg_time');
-$feedbacks_report_ctscan_time = base_url('audit/feedbacks_report_ctscan_time');
-$feedbacks_report_surgical_safety = base_url('audit/feedbacks_report_surgical_safety');
-$feedbacks_report_medicine_dispense = base_url('audit/feedbacks_report_medicine_dispense');
-$feedbacks_report_medication_administration = base_url('audit/feedbacks_report_medication_administration');
-$feedbacks_report_handover = base_url('audit/feedbacks_report_handover');
-$feedbacks_report_prescriptions = base_url('audit/feedbacks_report_prescriptions');
-$feedbacks_report_hand_hygiene = base_url('audit/feedbacks_report_hand_hygiene');
-$feedbacks_report_tat_blood = base_url('audit/feedbacks_report_tat_blood');
-$feedbacks_report_nurse_patients_ratio = base_url('audit/feedbacks_report_nurse_patients_ratio');
-$feedbacks_report_return_to_i = base_url('audit/feedbacks_report_return_to_i');
-$feedbacks_report_return_to_icu = base_url('audit/feedbacks_report_return_to_icu');
-$feedbacks_report_return_to_ed = base_url('audit/feedbacks_report_return_to_ed');
-$feedbacks_report_return_to_emr = base_url('audit/feedbacks_report_return_to_emr');
-$feedbacks_report_mock_drill = base_url('audit/feedbacks_report_mock_drill');
-$feedbacks_report_safety_inspection = base_url('audit/feedbacks_report_safety_inspection');
 
 
-$feedbacks_report_vap = base_url('audit/feedbacks_report_vap');
-$feedbacks_report_catheter_insert = base_url('audit/feedbacks_report_catheter_insert');
-$feedbacks_report_ssi_bundle = base_url('audit/feedbacks_report_ssi_bundle');
-$feedbacks_report_urinary = base_url('audit/feedbacks_report_urinary');
-$feedbacks_report_central_line_insert = base_url('audit/feedbacks_report_central_line_insert');
-$feedbacks_report_central_maintenance = base_url('audit/feedbacks_report_central_maintenance');
-$feedbacks_report_room_cleaning = base_url('audit/feedbacks_report_room_cleaning');
-$feedbacks_report_other_cleaning = base_url('audit/feedbacks_report_other_cleaning');
-$feedbacks_report_toilet_cleaning = base_url('audit/feedbacks_report_toilet_cleaning');
 
 
-$mrd_audit_feedback = base_url('audit/mrd_audit_feedback?id=');
-$ppe_audit_feedback = base_url('audit/ppe_audit_feedback?id=');
-$op_consultation_feedback = base_url('audit/op_consultation_feedback?id=');
-$lab_wait_time_feedback = base_url('audit/lab_wait_time_feedback?id=');
-$xray_wait_time_feedback = base_url('audit/xray_wait_time_feedback?id=');
-$usg_wait_time_feedback = base_url('audit/usg_wait_time_feedback?id=');
-$ctscan_wait_time_feedback = base_url('audit/ctscan_wait_time_feedback?id=');
-$surgical_safety_feedback = base_url('audit/surgical_safety_feedback?id=');
-$medicine_dispensing_feedback = base_url('audit/medicine_dispensing_feedback?id=');
-$medication_administration_feedback = base_url('audit/medication_administration_feedback?id=');
-$handover_feedback = base_url('audit/handover_feedback?id=');
-$prescriptions_feedback = base_url('audit/prescriptions_feedback?id=');
-$hygiene_feedback = base_url('audit/hygiene_feedback?id=');
-$tat_blood_feedback = base_url('audit/tat_blood_feedback?id=');
-$nurse_patient_feedback = base_url('audit/nurse_patient_feedback?id=');
-$return_to_icu_feedback = base_url('audit/return_to_icu_feedback?id=');
-$return_to_icu_dv_feedback = base_url('audit/return_to_icu_dv_feedback?id=');
-$return_to_emr_feedback = base_url('audit/return_to_emr_feedback?id=');
-$return_to_emr_dv_feedback = base_url('audit/return_to_emr_dv_feedback?id=');
-$code_pink_feedback = base_url('audit/code_pink_feedback?id=');
-$code_red_feedback = base_url('audit/code_red_feedback?id=');
-$code_blue_feedback = base_url('audit/code_blue_feedback?id=');
+// Main page link for MRD & MDC
 
-$safety_inspection_feedback = base_url('audit/safety_inspection_feedback?id=');
+$feedbacks_report_active_cases_mrd = base_url('audit/feedbacks_report_active_cases_mrd');
+$feedbacks_report_discharged_patients_mrd = base_url('audit/feedbacks_report_discharged_patients_mrd');
+$feedbacks_report_nursing_ip_closed = base_url('audit/feedbacks_report_nursing_ip_closed');
+$feedbacks_report_nursing_ip_open = base_url('audit/feedbacks_report_nursing_ip_open');
+$feedbacks_report_nursing_op_closed = base_url('audit/feedbacks_report_nursing_op_closed');
+$feedbacks_report_clinical_active_mdc = base_url('audit/feedbacks_report_clinical_active_mdc');
+$feedbacks_report_clinical_closed_mdc = base_url('audit/feedbacks_report_clinical_closed_mdc');
+$feedbacks_report_clinical_pharmacy_closed = base_url('audit/feedbacks_report_clinical_pharmacy_closed');
+$feedbacks_report_clinical_pharmacy_op = base_url('audit/feedbacks_report_clinical_pharmacy_op');
+$feedbacks_report_clinical_pharmacy_open = base_url('audit/feedbacks_report_clinical_pharmacy_open');
+$feedbacks_report_anesthesia_active = base_url('audit/feedbacks_report_anesthesia_active');
+$feedbacks_report_anesthesia_closed = base_url('audit/feedbacks_report_anesthesia_closed');
+$feedbacks_report_ed_active = base_url('audit/feedbacks_report_ed_active');
+$feedbacks_report_ed_closed = base_url('audit/feedbacks_report_ed_closed');
+$feedbacks_report_icu_active = base_url('audit/feedbacks_report_icu_active');
+$feedbacks_report_icu_closed = base_url('audit/feedbacks_report_icu_closed');
+$feedbacks_report_primarycare_active = base_url('audit/feedbacks_report_primarycare_active');
+$feedbacks_report_primarycare_closed = base_url('audit/feedbacks_report_primarycare_closed');
+$feedbacks_report_sedation_active = base_url('audit/feedbacks_report_sedation_active');
+$feedbacks_report_sedation_closed = base_url('audit/feedbacks_report_sedation_closed');
+$feedbacks_report_surgeons_active = base_url('audit/feedbacks_report_surgeons_active');
+$feedbacks_report_surgeons_closed = base_url('audit/feedbacks_report_surgeons_closed');
+$feedbacks_report_diet_consultation_op = base_url('audit/feedbacks_report_diet_consultation_op');
+$feedbacks_report_physiotherapy_closed = base_url('audit/feedbacks_report_physiotherapy_closed');
+$feedbacks_report_physiotherapy_op = base_url('audit/feedbacks_report_physiotherapy_op');
+$feedbacks_report_physiotherapy_open = base_url('audit/feedbacks_report_physiotherapy_open');
+$feedbacks_report_mrd_ed = base_url('audit/feedbacks_report_mrd_ed');
+$feedbacks_report_mrd_lama = base_url('audit/feedbacks_report_mrd_lama');
+$feedbacks_report_mrd_op = base_url('audit/feedbacks_report_mrd_op');
 
 
-$vap_prevention_feedback = base_url('audit/vap_prevention_feedback?id=');
-$catheter_insert_feedback = base_url('audit/catheter_insert_feedback?id=');
-$ssi_bundle_feedback = base_url('audit/ssi_bundle_feedback?id=');
-$urinary_catheter_feedback = base_url('audit/urinary_catheter_feedback?id=');
-$central_line_insert_feedback = base_url('audit/central_line_insert_feedback?id=');
-$central_maintenance_feedback = base_url('audit/central_maintenance_feedback?id=');
-$room_cleaning_feedback = base_url('audit/room_cleaning_feedback?id=');
-$other_cleaning_feedback = base_url('audit/other_cleaning_feedback?id=');
-$toilet_cleaning_feedback = base_url('audit/toilet_cleaning_feedback?id=');
+//Individual page link for MRD & MDC
+
+$active_cases_mrd_feedback = base_url('audit/active_cases_mrd_feedback?id=');
+$discharged_patients_mrd_feedback = base_url('audit/discharged_patients_mrd_feedback?id=');
+$nursing_ip_closed_feedback = base_url('audit/nursing_ip_closed_feedback?id=');
+$nursing_ip_open_feedback = base_url('audit/nursing_ip_open_feedback?id=');
+$nursing_op_closed_feedback = base_url('audit/nursing_op_closed_feedback?id=');
+$clinical_active_mdc_feedback = base_url('audit/clinical_active_mdc_feedback?id=');
+$clinical_closed_mdc_feedback = base_url('audit/clinical_closed_mdc_feedback?id=');
+$clinical_pharmacy_closed_feedback = base_url('audit/clinical_pharmacy_closed_feedback?id=');
+$clinical_pharmacy_op_feedback = base_url('audit/clinical_pharmacy_op_feedback?id=');
+$clinical_pharmacy_open_feedback = base_url('audit/clinical_pharmacy_open_feedback?id=');
+$anesthesia_active_feedback = base_url('audit/anesthesia_active_feedback?id=');
+$anesthesia_closed_feedback = base_url('audit/anesthesia_closed_feedback?id=');
+$ed_active_feedback = base_url('audit/ed_active_feedback?id=');
+$ed_closed_feedback = base_url('audit/ed_closed_feedback?id=');
+$icu_active_feedback = base_url('audit/icu_active_feedback?id=');
+$icu_closed_feedback = base_url('audit/icu_closed_feedback?id=');
+$primarycare_active_feedback = base_url('audit/primarycare_active_feedback?id=');
+$primarycare_closed_feedback = base_url('audit/primarycare_closed_feedback?id=');
+$sedation_active_feedback = base_url('audit/sedation_active_feedback?id=');
+$sedation_closed_feedback = base_url('audit/sedation_closed_feedback?id=');
+$surgeons_active_feedback = base_url('audit/surgeons_active_feedback?id=');
+$surgeons_closed_feedback = base_url('audit/surgeons_closed_feedback?id=');
+$diet_consultation_op_feedback = base_url('audit/diet_consultation_op_feedback?id=');
+$physiotherapy_closed_feedback = base_url('audit/physiotherapy_closed_feedback?id=');
+$physiotherapy_op_feedback = base_url('audit/physiotherapy_op_feedback?id=');
+$physiotherapy_open_feedback = base_url('audit/physiotherapy_open_feedback?id=');
+$mrd_ed_feedback = base_url('audit/mrd_ed_feedback?id=');
+$mrd_lama_feedback = base_url('audit/mrd_lama_feedback?id=');
+$mrd_op_feedback = base_url('audit/mrd_op_feedback?id=');
+
+
+
+// Main page link for Nursing & IPSG
+
+$feedbacks_report_accidental_delining = base_url('audit/feedbacks_report_accidental_delining');
+$feedbacks_report_admission_holding_area = base_url('audit/feedbacks_report_admission_holding_area');
+$feedbacks_report_cardio_pulmonary = base_url('audit/feedbacks_report_cardio_pulmonary');
+$feedbacks_report_extravasation_audit = base_url('audit/feedbacks_report_extravasation_audit');
+$feedbacks_report_hapu_audit = base_url('audit/feedbacks_report_hapu_audit');
+$feedbacks_report_initial_assessment_ae = base_url('audit/feedbacks_report_initial_assessment_ae');
+$feedbacks_report_initial_assessment_ipd = base_url('audit/feedbacks_report_initial_assessment_ipd');
+$feedbacks_report_initial_assessment_opd = base_url('audit/feedbacks_report_initial_assessment_opd');
+$feedbacks_report_ipsg1 = base_url('audit/feedbacks_report_ipsg1');
+$feedbacks_report_ipsg2_ae = base_url('audit/feedbacks_report_ipsg2_ae');
+$feedbacks_report_ipsg2_ipd = base_url('audit/feedbacks_report_ipsg2_ipd');
+$feedbacks_report_ipsg4_timeout = base_url('audit/feedbacks_report_ipsg4_timeout');
+$feedbacks_report_ipsg6_ip = base_url('audit/feedbacks_report_ipsg6_ip');
+$feedbacks_report_ipsg6_opd = base_url('audit/feedbacks_report_ipsg6_opd');
+$feedbacks_report_point_prevelance = base_url('audit/feedbacks_report_point_prevelance');
+
+
+//Individual page link for Nursing & IPSG
+
+$accidental_delining_feedback = base_url('audit/accidental_delining_feedback?id=');
+$admission_holding_area_feedback = base_url('audit/admission_holding_area_feedback?id=');
+$cardio_pulmonary_feedback = base_url('audit/cardio_pulmonary_feedback?id=');
+$extravasation_audit_feedback = base_url('audit/extravasation_audit_feedback?id=');
+$hapu_audit_feedback = base_url('audit/hapu_audit_feedback?id=');
+$initial_assessment_ae_feedback = base_url('audit/initial_assessment_ae_feedback?id=');
+$initial_assessment_ipd_feedback = base_url('audit/initial_assessment_ipd_feedback?id=');
+$initial_assessment_opd_feedback = base_url('audit/initial_assessment_opd_feedback?id=');
+$ipsg1_feedback = base_url('audit/ipsg1_feedback?id=');
+$ipsg2_ae_feedback = base_url('audit/ipsg2_ae_feedback?id=');
+$ipsg2_ipd_feedback = base_url('audit/ipsg2_ipd_feedback?id=');
+$ipsg4_timeout_feedback = base_url('audit/ipsg4_timeout_feedback?id=');
+$ipsg6_ip_feedback = base_url('audit/ipsg6_ip_feedback?id=');
+$ipsg6_opd_feedback = base_url('audit/ipsg6_opd_feedback?id=');
+$point_prevelance_feedback = base_url('audit/point_prevelance_feedback?id=');
+
+// Main page link for Clinical Outcome
+
+$feedbacks_report_clinical_audit_acl = base_url('audit/feedbacks_report_clinical_audit_acl');
+$feedbacks_report_clinical_allogenic_bone_marrow = base_url('audit/feedbacks_report_clinical_allogenic_bone_marrow');
+$feedbacks_report_clinical_aortic_value_replacement = base_url('audit/feedbacks_report_clinical_aortic_value_replacement');
+$feedbacks_report_clinical_autologous_bone = base_url('audit/feedbacks_report_clinical_autologous_bone');
+$feedbacks_report_clinical_brain_tumour = base_url('audit/feedbacks_report_clinical_brain_tumour');
+$feedbacks_report_clinical_cabg = base_url('audit/feedbacks_report_clinical_cabg');
+$feedbacks_report_clinical_carotid_stenting = base_url('audit/feedbacks_report_clinical_carotid_stenting');
+$feedbacks_report_clinical_chemotherapy = base_url('audit/feedbacks_report_clinical_chemotherapy');
+$feedbacks_report_clinical_colo_rectal = base_url('audit/feedbacks_report_clinical_colo_rectal');
+$feedbacks_report_clinical_endoscopy = base_url('audit/feedbacks_report_clinical_endoscopy');
+$feedbacks_report_clinical_epilepsy = base_url('audit/feedbacks_report_clinical_epilepsy');
+$feedbacks_report_clinical_herniorrhaphy = base_url('audit/feedbacks_report_clinical_herniorrhaphy');
+$feedbacks_report_clinical_holep = base_url('audit/feedbacks_report_clinical_holep');
+$feedbacks_report_clinical_laparoscopic = base_url('audit/feedbacks_report_clinical_laparoscopic');
+$feedbacks_report_clinical_mechanical_thrombectomy = base_url('audit/feedbacks_report_clinical_mechanical_thrombectomy');
+$feedbacks_report_clinical_mvr = base_url('audit/feedbacks_report_clinical_mvr');
+$feedbacks_report_clinical_ptca = base_url('audit/feedbacks_report_clinical_ptca');
+$feedbacks_report_clinical_renal_transplantation = base_url('audit/feedbacks_report_clinical_renal_transplantation');
+$feedbacks_report_clinical_scoliosis_correction = base_url('audit/feedbacks_report_clinical_scoliosis_correction');
+$feedbacks_report_clinical_spinal_dysraphism = base_url('audit/feedbacks_report_clinical_spinal_dysraphism');
+$feedbacks_report_clinical_spine_disc_surgery = base_url('audit/feedbacks_report_clinical_spine_disc_surgery');
+$feedbacks_report_clinical_thoracotomy = base_url('audit/feedbacks_report_clinical_thoracotomy');
+$feedbacks_report_clinical_tkr = base_url('audit/feedbacks_report_clinical_tkr');
+$feedbacks_report_clinical_uro_oncology = base_url('audit/feedbacks_report_clinical_uro_oncology');
+$feedbacks_report_clinical_whipples_surgery = base_url('audit/feedbacks_report_clinical_whipples_surgery');
+$feedbacks_report_clinical_laparoscopic_cholecystectomy = base_url('audit/feedbacks_report_clinical_laparoscopic_cholecystectomy');
+
+//Individual page link for Clinical Outcome
+
+$clinical_audit_acl_feedback = base_url('audit/clinical_audit_acl_feedback?id=');
+$clinical_allogenic_bone_marrow_feedback = base_url('audit/clinical_allogenic_bone_marrow_feedback?id=');
+$clinical_aortic_value_replacement_feedback = base_url('audit/clinical_aortic_value_replacement_feedback?id=');
+$clinical_autologous_bone_feedback = base_url('audit/clinical_autologous_bone_feedback?id=');
+$clinical_brain_tumour_feedback = base_url('audit/clinical_brain_tumour_feedback?id=');
+$clinical_cabg_feedback = base_url('audit/clinical_cabg_feedback?id=');
+$clinical_carotid_stenting_feedback = base_url('audit/clinical_carotid_stenting_feedback?id=');
+$clinical_chemotherapy_feedback = base_url('audit/clinical_chemotherapy_feedback?id=');
+$clinical_colo_rectal_feedback = base_url('audit/clinical_colo_rectal_feedback?id=');
+$clinical_endoscopy_feedback = base_url('audit/clinical_endoscopy_feedback?id=');
+$clinical_epilepsy_feedback = base_url('audit/clinical_epilepsy_feedback?id=');
+$clinical_herniorrhaphy_feedback = base_url('audit/clinical_herniorrhaphy_feedback?id=');
+$clinical_holep_feedback = base_url('audit/clinical_holep_feedback?id=');
+$clinical_laparoscopic_feedback = base_url('audit/clinical_laparoscopic_feedback?id=');
+$clinical_mechanical_thrombectomy_feedback = base_url('audit/clinical_mechanical_thrombectomy_feedback?id=');
+$clinical_mvr_feedback = base_url('audit/clinical_mvr_feedback?id=');
+$clinical_ptca_feedback = base_url('audit/clinical_ptca_feedback?id=');
+$clinical_renal_transplantation_feedback = base_url('audit/clinical_renal_transplantation_feedback?id=');
+$clinical_scoliosis_correction_feedback = base_url('audit/clinical_scoliosis_correction_feedback?id=');
+$clinical_spinal_dysraphism_feedback = base_url('audit/clinical_spinal_dysraphism_feedback?id=');
+$clinical_spine_disc_surgery_feedback = base_url('audit/clinical_spine_disc_surgery_feedback?id=');
+$clinical_thoracotomy_feedback = base_url('audit/clinical_thoracotomy_feedback?id=');
+$clinical_tkr_feedback = base_url('audit/clinical_tkr_feedback?id=');
+$clinical_uro_oncology_feedback = base_url('audit/clinical_uro_oncology_feedback?id=');
+$clinical_whipples_surgery_feedback = base_url('audit/clinical_whipples_surgery_feedback?id=');
+$clinical_laparoscopic_cholecystectomy_feedback = base_url('audit/clinical_laparoscopic_cholecystectomy_feedback?id=');
+
+// Main page link for Clinical KPI
+
+$feedbacks_report_clinicalkpi_bronchodilators = base_url('audit/feedbacks_report_clinicalkpi_bronchodilators');
+$feedbacks_report_clinicalkpi_copd_protocol = base_url('audit/feedbacks_report_clinicalkpi_copd_protocol');
+
+//Individual page link for Clinical KPI
+
+$clinicalkpi_bronchodilators_feedback = base_url('audit/clinicalkpi_bronchodilators_feedback?id=');
+$clinicalkpi_copd_protocol_feedback = base_url('audit/clinicalkpi_copd_protocol_feedback?id=');
+
+
+
+// Main page link for Infection Control
+
+$feedbacks_report_infection_control_biomedical_waste = base_url('audit/feedbacks_report_infection_control_biomedical_waste');
+$feedbacks_report_infection_control_canteen_audit = base_url('audit/feedbacks_report_infection_control_canteen_audit');
+$feedbacks_report_infection_control_cssd_audit = base_url('audit/feedbacks_report_infection_control_cssd_audit');
+$feedbacks_report_infection_control_hand_hygiene = base_url('audit/feedbacks_report_infection_control_hand_hygiene');
+$feedbacks_report_infection_control_bundle_audit = base_url('audit/feedbacks_report_infection_control_bundle_audit');
+$feedbacks_report_infection_control_ot_audit = base_url('audit/feedbacks_report_infection_control_ot_audit');
+$feedbacks_report_infection_control_ambulance_audit = base_url('audit/feedbacks_report_infection_control_ambulance_audit');
+$feedbacks_report_infection_control_linen_audit = base_url('audit/feedbacks_report_infection_control_linen_audit');
+$feedbacks_report_infection_control_coffee_audit = base_url('audit/feedbacks_report_infection_control_coffee_audit');
+$feedbacks_report_infection_control_laboratory_audit = base_url('audit/feedbacks_report_infection_control_laboratory_audit');
+$feedbacks_report_infection_control_mortuary_audit = base_url('audit/feedbacks_report_infection_control_mortuary_audit');
+$feedbacks_report_infection_control_radiology_audit = base_url('audit/feedbacks_report_infection_control_radiology_audit');
+$feedbacks_report_infection_control_ssi_survelliance_audit = base_url('audit/feedbacks_report_infection_control_ssi_survelliance_audit');
+$feedbacks_report_infection_control_peripheralivline_audit = base_url('audit/feedbacks_report_infection_control_peripheralivline_audit');
+$feedbacks_report_infection_control_personalprotective_audit = base_url('audit/feedbacks_report_infection_control_personalprotective_audit');
+$feedbacks_report_infection_control_safe_injection_audit = base_url('audit/feedbacks_report_infection_control_safe_injection_audit');
+$feedbacks_report_infection_control_surface_cleaning_audit = base_url('audit/feedbacks_report_infection_control_surface_cleaning_audit');
+
+//Individual page link for Infection Control
+
+$infection_control_biomedical_waste_feedback = base_url('audit/infection_control_biomedical_waste_feedback?id=');
+$infection_control_canteen_audit_feedback = base_url('audit/infection_control_canteen_audit_feedback?id=');
+$infection_control_cssd_audit_feedback = base_url('audit/infection_control_cssd_audit_feedback?id=');
+$infection_control_hand_hygiene_feedback = base_url('audit/infection_control_hand_hygiene_feedback?id=');
+$infection_control_bundle_audit_feedback = base_url('audit/infection_control_bundle_audit_feedback?id=');
+$infection_control_ot_audit_feedback = base_url('audit/infection_control_ot_audit_feedback?id=');
+$infection_control_linen_audit_feedback = base_url('audit/infection_control_linen_audit_feedback?id=');
+$infection_control_ambulance_audit_feedback = base_url('audit/infection_control_ambulance_audit_feedback?id=');
+$infection_control_coffee_audit_feedback = base_url('audit/infection_control_coffee_audit_feedback?id=');
+$infection_control_laboratory_audit_feedback = base_url('audit/infection_control_laboratory_audit_feedback?id=');
+$infection_control_mortuary_audit_feedback = base_url('audit/infection_control_mortuary_audit_feedback?id=');
+$infection_control_radiology_audit_feedback = base_url('audit/infection_control_radiology_audit_feedback?id=');
+$infection_control_ssi_survelliance_audit_feedback = base_url('audit/infection_control_ssi_survelliance_audit_feedback?id=');
+$infection_control_peripheralivline_audit_feedback = base_url('audit/infection_control_peripheralivline_audit_feedback?id=');
+$infection_control_personalprotective_audit_feedback = base_url('audit/infection_control_personalprotective_audit_feedback?id=');
+$infection_control_safe_injection_audit_feedback = base_url('audit/infection_control_safe_injection_audit_feedback?id=');
+$infection_control_surface_cleaning_audit_feedback = base_url('audit/infection_control_surface_cleaning_audit_feedback?id=');
+
+
+
+// Main page link for Clinical Pathways
+$feedbacks_report_clinical_pathway_arthroscopic_audit = base_url('audit/feedbacks_report_clinical_pathway_arthroscopic_audit');
+$feedbacks_report_clinical_pathway_breast_lump_audit = base_url('audit/feedbacks_report_clinical_pathway_breast_lump_audit');
+$feedbacks_report_clinical_pathway_cardiac_arrest_audit = base_url('audit/feedbacks_report_clinical_pathway_cardiac_arrest_audit');
+$feedbacks_report_clinical_pathway_donor_hepatectomy_audit = base_url('audit/feedbacks_report_clinical_pathway_donor_hepatectomy_audit');
+$feedbacks_report_clinical_pathway_febrile_seizure_audit = base_url('audit/feedbacks_report_clinical_pathway_febrile_seizure_audit');
+$feedbacks_report_clinical_pathway_heart_transplant_audit = base_url('audit/feedbacks_report_clinical_pathway_heart_transplant_audit');
+$feedbacks_report_clinical_pathway_laproscopic_audit = base_url('audit/feedbacks_report_clinical_pathway_laproscopic_audit');
+$feedbacks_report_clinical_pathway_picc_line_audit = base_url('audit/feedbacks_report_clinical_pathway_picc_line_audit');
+$feedbacks_report_clinical_pathway_stroke_audit = base_url('audit/feedbacks_report_clinical_pathway_stroke_audit');
+$feedbacks_report_clinical_pathway_urodynamics_audit = base_url('audit/feedbacks_report_clinical_pathway_urodynamics_audit');
+$feedbacks_report_clinical_pathway_stemi_audit = base_url('audit/feedbacks_report_clinical_pathway_stemi_audit');
+
+// Individual page link for Clinical Pathways
+$clinical_pathway_arthroscopic_audit_feedback = base_url('audit/clinical_pathway_arthroscopic_audit_feedback?id=');
+$clinical_pathway_breast_lump_audit_feedback = base_url('audit/clinical_pathway_breast_lump_audit_feedback?id=');
+$clinical_pathway_cardiac_arrest_audit_feedback = base_url('audit/clinical_pathway_cardiac_arrest_audit_feedback?id=');
+$clinical_pathway_donor_hepatectomy_audit_feedback = base_url('audit/clinical_pathway_donor_hepatectomy_audit_feedback?id=');
+$clinical_pathway_febrile_seizure_audit_feedback = base_url('audit/clinical_pathway_febrile_seizure_audit_feedback?id=');
+$clinical_pathway_heart_transplant_audit_feedback = base_url('audit/clinical_pathway_heart_transplant_audit_feedback?id=');
+$clinical_pathway_laproscopic_audit_feedback = base_url('audit/clinical_pathway_laproscopic_audit_feedback?id=');
+$clinical_pathway_picc_line_audit_feedback = base_url('audit/clinical_pathway_picc_line_audit_feedback?id=');
+$clinical_pathway_stroke_audit_feedback = base_url('audit/clinical_pathway_stroke_audit_feedback?id=');
+$clinical_pathway_urodynamics_audit_feedback = base_url('audit/clinical_pathway_urodynamics_audit_feedback?id=');
+$clinical_pathway_stemi_audit_feedback = base_url('audit/clinical_pathway_stemi_audit_feedback?id=');
 
 
 

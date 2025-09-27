@@ -421,7 +421,7 @@ class Quality_model extends CI_Model
 
 			// Loop through the questions and process the data
 			foreach ($arraydata as $k => $v) {
-				if (isset($data[$k]) && (int)$data[$k] > 0) {
+				if (isset($data[$k]) && $data[$k] * 1 > 0) {
 					// If feedback is received
 					$dataexport[$mon][$k]['check']++;
 					$dataexport[$mon][$k]['received_feedback_score'] += isset($data[$k]) ? $data[$k] : 0;
@@ -742,7 +742,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -905,7 +905,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -947,7 +947,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1003,7 +1003,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1031,13 +1031,13 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
 
-		$this->db->where($table_feedback . '.datet <=', $fdate);
-		$this->db->where($table_feedback . '.datet >=', $tdate);
+		$this->db->where($table_feedback . '.datetime <=', $fdate);
+		$this->db->where($table_feedback . '.datetime >=', $tdate);
 		$this->db->order_by('datetime', $sorttime);
 
 		$query = $this->db->get();
@@ -1071,7 +1071,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1095,7 +1095,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1133,7 +1133,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}
@@ -1371,7 +1371,7 @@ class Quality_model extends CI_Model
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (!empty($this->session->userdata('floor_ward')) && is_array($this->session->userdata('floor_ward'))) {
+		} elseif (count($this->session->userdata['floor_ward']) > 0) {
 			$floorwiseArray = $this->session->userdata['floor_ward'];
 			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
 		}

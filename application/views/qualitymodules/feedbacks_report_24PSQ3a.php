@@ -48,9 +48,15 @@
 
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<h3 style="text-align: left;">General Patients</h3>
+					<div style="display: flex; justify-content: space-between; align-items: center;" class="panel-heading">
+						<h3 style="margin: 0;">General Patients</h3>
+						<div class="btn-group">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_24gpsq3a_report' ?>">
+								<i class="fa fa-download"></i>
+							</a>
+						</div>
 					</div>
+
 
 					<div class="panel-body">
 						<table class="24psq3a table table-striped table-hover table-bordered" cellspacing="0" width="100%">
@@ -97,7 +103,7 @@
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
 												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-												
+
 											<?php } ?>
 										</td>
 										<?php if (allfeedbacks_page('feedback_id') == true) { ?>
@@ -135,7 +141,7 @@
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $r->bench_mark_time * 60 * 60;
+											$benchmarkSeconds = $param->benchmark8 * 60 * 60;
 
 											// Convert the calculatedResult to seconds
 											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $r->avg_discharge_time);
@@ -153,7 +159,7 @@
 
 
 										<td>
-											<?php echo $param->benchmark; ?>
+											<?php echo $param->benchmark8; ?>
 										</td>
 
 
@@ -184,8 +190,13 @@
 
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<h3 style="text-align: left;">Insurance Patients</h3>
+					<div style="display: flex; justify-content: space-between; align-items: center;" class="panel-heading">
+						<h3 style="margin: 0;">Insurance Patients</h3>
+						<div class="btn-group">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_24ipsq3a_report' ?>">
+								<i class="fa fa-download"></i>
+							</a>
+						</div>
 					</div>
 
 					<div class="panel-body">
@@ -265,7 +276,7 @@
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $r->bench_mark_time_ins * 60 * 60;
+											$benchmarkSeconds = $param->benchmark9 * 60 * 60;
 
 											// Convert the calculatedResult to seconds
 											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $r->avg_discharge_time_ins);
@@ -283,7 +294,7 @@
 
 
 										<td>
-											<?php echo $param->benchmark2; ?>
+											<?php echo $param->benchmark9; ?>
 										</td>
 
 
@@ -316,8 +327,13 @@
 
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading" style="text-align: right;">
-						<h3 style="text-align: left;">Corporate Patients</h3>
+					<div style="display: flex; justify-content: space-between; align-items: center;" class="panel-heading">
+						<h3 style="margin: 0;">Corporate Patients</h3>
+						<div class="btn-group">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_24cpsq3a_report' ?>">
+								<i class="fa fa-download"></i>
+							</a>
+						</div>
 					</div>
 
 					<div class="panel-body">
@@ -397,7 +413,7 @@
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $r->bench_mark_time_cop * 60 * 60;
+											$benchmarkSeconds = $param->benchmark7 * 60 * 60;
 
 											// Convert the calculatedResult to seconds
 											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $r->avg_discharge_time_cop);
@@ -415,7 +431,7 @@
 
 
 										<td>
-											<?php echo $param->benchmark3; ?>
+											<?php echo $param->benchmark7; ?>
 										</td>
 
 
@@ -558,13 +574,11 @@
 	var url = window.location.href;
 	var domain = url.replace(/^(?:https?:\/\/)?(?:www\.)?/, "");
 	domain = domain.split("/")[0];
-	var protocol = window.location.protocol;
-	var baseUrl = protocol + '//' + domain;
 
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = baseUrl +  "/analytics_audit_quality/resposnsechart_24ps"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_24ps"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {

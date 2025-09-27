@@ -15,7 +15,7 @@ class Quality_benchmark_model extends CI_Model {
 		return $this->db->select("*")
 			->from($this->table)
 			->where('title !=','ALL')
-			->order_by('title','asc')
+			->order_by('id','asc')
 			->get()
 			->result();
 	} 

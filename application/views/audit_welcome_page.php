@@ -8,11 +8,6 @@ require_once 'audit_tables.php';
 
 <!-- content -->
 <div class="content">
-	<!-- alert message -->
-	<!-- content -->
-	<!-- PHP Code {-->
-
-	<!-- } PHP Code -->
 
 
 	<!-- Download Buttons-->
@@ -42,54 +37,29 @@ require_once 'audit_tables.php';
 		<br>
 	</div>
 
-	<!-- </span> -->
-
 	<!-- Close Download Buttons-->
+
 	<!-- Metric Boxes-->
 	<div class="row">
+		<div class="col-12">
+			<div class="heading">
+				<h2 style="font-size: 22px; font-weight: bold;margin-left:25px;">MRD & MDC</h2>
+			</div>
+		</div>
+		
+
 		<?php if (isfeature_active('AUDIT-FORM1') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_mrd_audit';
-			$table_patients_1PSQ3a = 'bf_patients';
-			$desc_1PSQ3a = 'desc';
-			$sorttime = 'asc';
-			$setup = 'setup';
-			$ip_feedbacks_count1 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
-			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div class="panel panel-bd">
-					<!-- <a href="javascript:void()" data-toggle="tooltip" title="Total no. of Inpatient discharge feedbacks collected during the selected period."><i class="fa fa-info-circle" aria-hidden="true"></i></i></a> -->
-
-					<div class="panel-body" style="height: 100px;">
-						<div class="statistic-box">
-							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count1); ?>
-								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
-									</i></span></h2>
-							<div class="small" style="font-size: 18px;">MRD audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
-							<div class="icon large-screen-only">
-								<i class="fa fa-book"></i>
-							</div>
-							<a href="<?php echo $feedbacks_report_mrd_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		<?php } ?>
-		<?php if (isfeature_active('AUDIT-FORM2') === true) { ?>
-			<?php
-			$fdate = $_SESSION['from_date'];
-			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_ppe_audit';
+			$table_feedback_1PSQ3a = 'bf_ma_active_cases_mrdip';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
 			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
@@ -97,11 +67,41 @@ require_once 'audit_tables.php';
 									<?php echo count($ip_feedbacks_count2); ?>
 								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">Safety adherence audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Active Cases MRD Audit-IP <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-shield"></i>
+								<!-- <i class="fa fa-file-text"></i> -->
 							</div>
-							<a href="<?php echo $feedbacks_report_ppe_audit; ?>" style="float: right;  font-size:15px;  margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+							<a href="<?php echo $feedbacks_report_active_cases_mrd; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM2') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_dischargedpatients_mrd_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Discharged Patients MRD Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<!-- <i class="fa fa-sign-out"></i> -->
+							</div>
+							<a href="<?php echo $feedbacks_report_discharged_patients_mrd; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
@@ -112,26 +112,26 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_consultation_time';
+			$table_feedback_1PSQ3a = 'bf_ma_nursingip_closed_cases';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
 							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count3); ?>
+									<?php echo count($ip_feedbacks_count2); ?>
 								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">OP consultation waiting time audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Nursing (IP Closed Cases) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-clock-o"></i>
+								<!-- <i class="fa fa-lock"></i> -->
 							</div>
-							<a href="<?php echo $feedbacks_report_consultation_time; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+							<a href="<?php echo $feedbacks_report_nursing_ip_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
@@ -142,85 +142,86 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_lab_wait_time';
+			$table_feedback_1PSQ3a = 'bf_ma_nursingip_open_cases';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count4 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
 							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count4); ?>
+									<?php echo count($ip_feedbacks_count2); ?>
 								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">Laboratory waiting time audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $medication_errors_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Nursing (IP Open Cases) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-flask"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
-							<a href="<?php echo $feedbacks_report_lab_time; ?>" style="float: right;  font-size:15px;  margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+							<a href="<?php echo $feedbacks_report_nursing_ip_open; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM5') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_xray_wait_time';
+			$table_feedback_1PSQ3a = 'bf_ma_nursingop_closed_cases';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count5 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
 							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count5); ?>
-								</span><span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">X-Ray waiting time audit <a href="javascript:void()" data-toggle="tooltip" data-placement="bottom" title="<?php echo $medication_charts_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Nursing (OP Closed Cases) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-stethoscope"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
-							<a href="<?php echo $feedbacks_report_xray_time; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+							<a href="<?php echo $feedbacks_report_nursing_op_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM6') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_usg_wait_time';
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count6 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
-					<div class="panel-body" style="height: 100px;" style="height: 100px;" data-placement="top" data-toggle="tooltip">
+					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
 							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count6); ?>
-								</span><span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">USG waiting time audit <a href="javascript:void()" data-toggle="tooltip" data-placement="bottom" title="<?php echo $adverse_drug_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Clinical Dietetics (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-heartbeat"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
-							<a href="<?php echo $feedbacks_report_usg_time; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+							<a href="<?php echo $feedbacks_report_clinical_active_mdc; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
@@ -231,389 +232,388 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_ctscan_time';
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_closedcases_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count7 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
 							<h2 style="font-size: 25px;"><span class="count-number">
-									<?php echo count($ip_feedbacks_count7); ?>
-								</span><span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
 									</i></span></h2>
-							<div class="small" style="font-size: 18px;">CT scan waiting time audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $unplanned_return_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="small" style="font-size: 18px;">Clinical Dietetics (Closed Cases) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-clock-o"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
-							<a href="<?php echo $feedbacks_report_ctscan_time; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
+							<a href="<?php echo $feedbacks_report_clinical_closed_mdc; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM8') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_surgical_safety';
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pharmacy_closed';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Surgical safety audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $wrong_surgery_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinical Pharmacy-(Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-user-md"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pharmacy_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_surgical_safety; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM9') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_medicine_dispense';
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pharmacy_op';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Medicine dispensing audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $transfusion_reactions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinical Pharmacy-(OP) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-medkit"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pharmacy_op; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_medicine_dispense; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM10') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_medication_administration';
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pharmacy_open';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Medication administration audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $mortality_ratio_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinical Pharmacy-(Open) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-medkit"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pharmacy_open; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_medication_administration; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM11') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_handover';
+			$table_feedback_1PSQ3a = 'bf_ma_anesthesia_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Handover audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $theemergency_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Anesthesia(Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-handshake-o"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_anesthesia_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_handover; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM12') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_prescriptions';
+			$table_feedback_1PSQ3a = 'bf_ma_anesthesia_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Prescriptions audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $ulcers_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Anesthesia(Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-file-text-o"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_anesthesia_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_prescriptions; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM13') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_hand_hygiene';
+			$table_feedback_1PSQ3a = 'bf_ma_ed_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Hand hygiene audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $urinary_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-ED (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-hand-paper-o"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_ed_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_hand_hygiene; ?>" style="float: right;  font-size:15px;  margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM14') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_tat_blood';
+			$table_feedback_1PSQ3a = 'bf_ma_ed_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">TAT for issue of blood & blood components <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $pneumonia_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-ED (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-tint"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_ed_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_tat_blood; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM15') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_nurse_patients_ratio';
+			$table_feedback_1PSQ3a = 'bf_ma_icu_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Nurse-Patients ratio for ICU <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $blood_infection_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-ICU (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-users"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_icu_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_nurse_patients_ratio; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM16') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_return_to_i';
+			$table_feedback_1PSQ3a = 'bf_ma_icu_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Return to ICU within 48 hours <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $site_infection_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-ICU (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-ambulance"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_icu_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_return_to_i; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
+
 		<?php if (isfeature_active('AUDIT-FORM17') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_return_to_icu';
+			$table_feedback_1PSQ3a = 'bf_ma_primarycare_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Return to ICU- Data Verification <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $hand_hygiene_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Primary Care Provider (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-check"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_primarycare_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_return_to_icu; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM18') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_return_to_ed';
+			$table_feedback_1PSQ3a = 'bf_ma_primarycare_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Return to Emergency within 72 hours <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $prophylactic_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Primary Care Provider (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-ambulance"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_primarycare_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_return_to_ed; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
+
 		<?php if (isfeature_active('AUDIT-FORM19') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_return_to_emr';
+			$table_feedback_1PSQ3a = 'bf_ma_sedation_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Return to Emergency- Data Verification <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $re_scheduling_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Sedation (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-check"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_sedation_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_return_to_emr; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -623,59 +623,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_mock_drill';
+			$table_feedback_1PSQ3a = 'bf_ma_sedation_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Mock drills audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $mock_drill_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Sedation (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-check-square"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_sedation_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_mock_drill; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
-					</div>
-				</div>
-			</div>
-		<?php } ?>
-
-		<?php if (isfeature_active('AUDIT-FORM32') === true) { ?>
-			<?php
-			$fdate = $_SESSION['from_date'];
-			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_code_originals';
-			$table_patients_1PSQ3a = 'bf_patients';
-			$desc_1PSQ3a = 'desc';
-			$sorttime = 'asc';
-			$setup = 'setup';
-			$ip_feedbacks_count66 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
-			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div class="panel panel-bd">
-					<div class="panel-body" style="height: 100px;">
-						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count66); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Code - Originals audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $mock_drill_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
-							<div class="icon large-screen-only">
-								<i class="fa fa-check-square"></i>
-							</div>
-						</div>
-						<a href="<?php echo $feedbacks_report_code_originals; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -685,59 +653,58 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_safety_inspection';
+			$table_feedback_1PSQ3a = 'bf_ma_surgeons_active_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Facility safety inspection audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $facility_inspection_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Surgeons (Active) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-shield"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_surgeons_active; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_safety_inspection; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
 
+
 		<?php if (isfeature_active('AUDIT-FORM22') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_nurse_patients_ratio_ward';
+			$table_feedback_1PSQ3a = 'bf_ma_surgeons_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Nurse-Patients ratio for Ward <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $ward_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Clinicians-Surgeons (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-users"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_surgeons_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_nurse_patients_ratio_ward; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -747,28 +714,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_vap_prevention';
+			$table_feedback_1PSQ3a = 'bf_ma_dietconsultation_op_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">VAP Prevention checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $vap_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Diet Consultation (OP) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-stethoscope"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_diet_consultation_op; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_vap; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -778,28 +744,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_catheter_insert';
+			$table_feedback_1PSQ3a = 'bf_ma_physiotherapy_closed_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Catheter Insertion checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $catheter_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Physiotherapy- (Closed) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-medkit"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_physiotherapy_closed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_catheter_insert; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -809,28 +774,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_ssi_bundle';
+			$table_feedback_1PSQ3a = 'bf_ma_physiotherapy_op_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">SSI Bundle care policy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $ssi_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Physiotherapy- (OP) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-clipboard"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_physiotherapy_op; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_ssi_bundle; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -840,28 +804,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_urinary_catheter';
+			$table_feedback_1PSQ3a = 'bf_ma_physiotherapy_open_mdc';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Urinary Catheter maintenance checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $urinary_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Physiotherapy- (Open) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-wrench"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_physiotherapy_open; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_urinary; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -871,28 +834,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_central_line_insert';
+			$table_feedback_1PSQ3a = 'bf_ma_mrd_ed_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Central Line Insertion checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $central_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">MRD Audit- ED <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-plus-square"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_mrd_ed; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_central_line_insert; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -902,28 +864,27 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_central_maintenance';
+			$table_feedback_1PSQ3a = 'bf_ma_mrd_lama_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Central Line maintenance checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $maintenance_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">MRD Audit- LAMA <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-cogs"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_mrd_lama; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_central_maintenance; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -933,59 +894,68 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_room_cleaning';
+			$table_feedback_1PSQ3a = 'bf_ma_mrd_op_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count2 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Patient room cleaning checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $room_clean_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count2); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">MRD Audit- OP <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $report_error_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-bed"></i>
+								<i class="fa-solid fa-file-medical fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_mrd_op; ?>" style="float: right;  font-size:15px;  margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_room_cleaning; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
 		<?php } ?>
 
+		
+	</div>
+
+	<div class="row">
+
+		<div class="col-12">
+			<div class="heading">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold;margin-left:25px;">Nursing & IPSG</h2>
+			</div>
+		</div>
+
 		<?php if (isfeature_active('AUDIT-FORM30') === true) { ?>
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_other_area_cleaning';
+			$table_feedback_1PSQ3a = 'bf_ma_accidental_delining_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Other area cleaning checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $area_clean_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Accidental Delining Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-map-o"></i>
+								<i class="fa-solid fa-triangle-exclamation fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_accidental_delining; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_other_cleaning; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
-
 					</div>
 				</div>
 			</div>
@@ -995,28 +965,57 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_toilet_cleaning';
+			$table_feedback_1PSQ3a = 'bf_ma_admission_area_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Toilet cleaning checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $toilet_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Admission Holding Area Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-tint"></i>
+								<i class="fa-solid fa-bed-pulse fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_admission_holding_area; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_toilet_cleaning; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 
+		<?php if (isfeature_active('AUDIT-FORM32') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_cardio_pulmonary_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">CPR Analysis Record <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_cardio_pulmonary; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1026,36 +1025,2013 @@ require_once 'audit_tables.php';
 			<?php
 			$fdate = $_SESSION['from_date'];
 			$tdate = $_SESSION['to_date'];
-			$table_feedback_1PSQ3a = 'bf_feedback_canteen_audit';
+			$table_feedback_1PSQ3a = 'bf_ma_extravasation_audit';
 			$table_patients_1PSQ3a = 'bf_patients';
 			$desc_1PSQ3a = 'desc';
 			$sorttime = 'asc';
 			$setup = 'setup';
-			$ip_feedbacks_count8 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
 			?>
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
 				<div class="panel panel-bd">
 					<div class="panel-body" style="height: 100px;">
 						<div class="statistic-box">
-							<h2 style="font-size: 25px;">
-								<?php echo count($ip_feedbacks_count8); ?>&nbsp;<span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span>
-							</h2>
-							<div class="small" style="font-size: 18px;">Canteen audit checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $canteen_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Extravasation Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
 							<div class="icon large-screen-only">
-								<i class="fa fa-cutlery"></i>
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
 							</div>
+							<a href="<?php echo $feedbacks_report_extravasation_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
 						</div>
-						<a href="<?php echo $feedbacks_report_canteen; ?>" style="float: right; font-size:15px;   margin-top: -9px;"><?php echo lang_loader('ip', 'ip_view_list'); ?></a>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 
+		<?php if (isfeature_active('AUDIT-FORM34') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_hapu_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Hospital Acquired Pressure Ulcers (HAPU) Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_hapu_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM35') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_assessment_ae';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Initial Assessment Accident and Emergency (A&E) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_initial_assessment_ae; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM36') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_assessment_ipd';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Initial Assessment IPD <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_initial_assessment_ipd; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM37') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_assessment_opd';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Initial Assessment OPD <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_initial_assessment_opd; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM38') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg1_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG-1 <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg1; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM39') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg2_ae';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG2- A&E <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg2_ae; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM40') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg2_ipd';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG2- IPD <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg2_ipd; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM41') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg4_timeout';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG4-Timeout- Outside OT Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg4_timeout; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		<?php } ?>
 
 
-	</div>
+		<?php if (isfeature_active('AUDIT-FORM42') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg6_ip';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG6- IP <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg6_ip; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 
+		<?php if (isfeature_active('AUDIT-FORM43') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_ipsg6_opd';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IPSG6- OPD <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_ipsg6_opd; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if (isfeature_active('AUDIT-FORM44') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_point_prevlance_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Point Prevalence Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_point_prevelance; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		
+
+
+	</div>
+             <div class="row">
+
+		<div class="col-12">
+			<div class="heading">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold;margin-left:25px;">Clinical Outcome</h2>
+			</div>
+		</div>
+		<?php if (isfeature_active('AUDIT-FORM45') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_audit_acl';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">ACL <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_audit_acl; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM46') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_allogenic_bone_marrow';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Allogenic Bone Marrow Transplantation <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_allogenic_bone_marrow; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM47') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_aortic_value_replacement';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Aortic Valve Replacement (AVR) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_aortic_value_replacement; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM48') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_autologous_bone';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Autologous Bone Marrow Transplantation <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_autologous_bone; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM49') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_brain_tumour';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Brain Tumour Surgery <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_brain_tumour; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM50') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_cabg';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">CABG <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_cabg; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM51') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_carotid_stenting';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Carotid Stenting <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_carotid_stenting; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM52') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_chemotherapy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Chemotherapy (Medical Oncology) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_chemotherapy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM53') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_colo_rectal';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Colo-Rectal Surgeries <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_colo_rectal; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM54') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_endoscopy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Endoscopy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_endoscopy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM55') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_epilepsy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Epilepsy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_epilepsy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM56') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_herniorrhaphy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Herniorrhaphy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_herniorrhaphy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM57') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_holep';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">HoLEP <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_holep; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM58') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_laparoscopic_appendicectomy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Laparoscopic Appendicectomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_laparoscopic; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM59') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_mechanical_thrombectomy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Mechanical Thrombectomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_mechanical_thrombectomy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM60') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_mvr';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">MVR (Mitral Valve Replacement) <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_mvr; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM61') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_ptca';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">PTCA <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_ptca; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM62') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_renal_transplantation';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Renal Transplantation <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_renal_transplantation; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM63') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_scoliosis_correction';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Scoliosis Correction Surgery <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_scoliosis_correction; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM64') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_spinal_dysraphism';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Spinal Dysraphism <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_spinal_dysraphism; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM65') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_spine_disc_surgery';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Spine & Disc Surgery-Fusion Procedures <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_spine_disc_surgery; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM66') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_thoracotomy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Thoracotomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_thoracotomy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM67') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_tkr';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">TKR <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_tkr; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM68') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_uro_oncology';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Uro-oncology Procedures <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_uro_oncology; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM69') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_whipples_surgery';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Whipples Surgery <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_whipples_surgery; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM70') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicaloutcome_laparoscopic_cholecystectomy';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Laparoscopic Cholecystectomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_laparoscopic_cholecystectomy; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+			<div class="heading">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold;margin-left:25px;">Clinical KPI</h2>
+			</div>
+		</div>
+		<?php if (isfeature_active('AUDIT-FORM71') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicalkpi_bronchodilators_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Bronchodilators Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinicalkpi_bronchodilators; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM72') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinicalkpi_copd_protocol_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">COPD Protocol Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinicalkpi_copd_protocol; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<div class="col-12">
+			<div class="heading">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold;margin-left:25px;">Infection Control & PCI</h2>
+			</div>
+		</div>
+		<?php if (isfeature_active('AUDIT-FORM73') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_biomedical_waste';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Biomedical Waste Management Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_biomedical_waste; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM74') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_canteen_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Canteen Audit checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_canteen_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM75') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_cssd_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">CSSD audit checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_cssd_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM76') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_hand_hygiene';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Hand Hygiene Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_hand_hygiene; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM77') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_bundle_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Infection control bundle audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_bundle_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM78') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_ot_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Infection Control OT audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_ot_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM79') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_linen_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Linen Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_linen_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM80') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_ambulance_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Ambulance PCI Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_ambulance_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM81') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_coffee_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">CoffeeShop PCI Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_coffee_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM82') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_laboratory_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Laboratory PCI Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_laboratory_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM83') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_mortuary_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Mortuary PCI Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_mortuary_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM84') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_radiology_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Radiology PCI Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_radiology_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM85') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_ssi_survelliance_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">SSI Surveillance checklist <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_ssi_survelliance_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM86') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_peripheralivline_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">IV cannula audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_peripheralivline_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM87') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_personalprotective_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Personal Protective Equipment Usage audit  <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_personalprotective_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM88') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_safe_injection_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Safe Injection and Infusion Audit <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_safe_injection_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM89') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_infection_control_surface_cleaning_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Surface cleaning and disinfection effectiveness monitoring record <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_infection_control_surface_cleaning_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		  <?php } ?>
+		<div class="col-12">
+			<div class="heading">
+				<h2 style="margin-top: 20px; font-size: 22px; font-weight: bold;margin-left:25px;">Clinical Pathways</h2>
+			</div>
+		</div>
+		 <?php if (isfeature_active('AUDIT-FORM90') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_arthroscopic_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Arthroscopic ACL Reconstruction Surgery <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_arthroscopic_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM91') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_breast_lump_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Breast Lump Consensus Guidelines <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_breast_lump_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM92') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_cardiac_arrest_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Cardiac Arrest <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_cardiac_arrest_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM93') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_donor_hepatectomy_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Donor Hepatectomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_donor_hepatectomy_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM94') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_febrile_seizure_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Febrile Seizure <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_febrile_seizure_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM95') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_heart_transplant_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Heart Transplant Recipient <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_heart_transplant_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM96') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_laproscopic_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Laparoscopic Donor Nephrectomy <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_laproscopic_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM97') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_picc_line_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">PICC LINE Insertion <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_picc_line_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM98') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_stroke_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Stroke <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_stroke_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM99') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_urodynamics_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">Urodynamics <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_urodynamics_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php if (isfeature_active('AUDIT-FORM100') === true) { ?>
+			<?php
+			$fdate = $_SESSION['from_date'];
+			$tdate = $_SESSION['to_date'];
+			$table_feedback_1PSQ3a = 'bf_ma_clinical_pathway_stemi_audit';
+			$table_patients_1PSQ3a = 'bf_patients';
+			$desc_1PSQ3a = 'desc';
+			$sorttime = 'asc';
+			$setup = 'setup';
+			$ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+			?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2 style="font-size: 25px;"><span class="count-number">
+									<?php echo count($ip_feedbacks_count3); ?>
+								</span> <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning">
+									</i></span></h2>
+							<div class="small" style="font-size: 18px;">STEMI-Primary PCI Clinical Pathway  <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="fa fa-info-circle" aria-hidden="true"></i></i></a></div>
+							<div class="icon large-screen-only">
+								<i class="fa-solid fa-heart-pulse fa-4x"></i>
+							</div>
+							<a href="<?php echo $feedbacks_report_clinical_pathway_stemi_audit; ?>" style="float: right; font-size:15px;   margin-top: -9px;">Explore</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+		<?php } ?>
 
 	<!-- Close Metric Boxes-->
 	<?php

@@ -33,7 +33,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -53,7 +53,7 @@
                                         <td>
                                             <?php
                                             // Benchmark time (4 hours) in seconds
-                                            $benchmarkSeconds = $result->bench_mark_time * 60 * 60;
+                                            $benchmarkSeconds = $param['benchmark8'] * 60 * 60;
 
                                             // Convert the calculatedResult to seconds
                                             list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $result->avg_discharge_time);
@@ -69,7 +69,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Bench Mark Time</b></td>
-                                        <td><?php echo $param['benchmark']; ?></td>
+                                        <td><?php echo $param['benchmark8']; ?></td>
                                     </tr>
                                     <tr>
                                         <td><b>Data analysis</b></td>
@@ -147,12 +147,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                    <span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+					 <span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>
@@ -206,7 +206,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data
-        var benchmark = "<?php echo $param['benchmark']; ?>"; // Benchmark value
+        var benchmark = "<?php echo $param['benchmark8']; ?>"; // Benchmark value
         var calculated = "<?php echo $result->avg_discharge_time; ?>"; // Calculated value
         var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Date value
 
@@ -391,7 +391,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -411,7 +411,7 @@
                                         <td>
                                             <?php
                                             // Benchmark time (4 hours) in seconds
-                                            $benchmarkSeconds = $result->bench_mark_time_ins * 60 * 60;
+                                            $benchmarkSeconds = $param['benchmark9'] * 60 * 60;
 
                                             // Convert the calculatedResult to seconds
                                             list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $result->avg_discharge_time_ins);
@@ -427,7 +427,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Bench Mark Time</b></td>
-                                        <td><?php echo $param['benchmark2']; ?></td>
+                                        <td><?php echo $param['benchmark9']; ?></td>
                                     </tr>
                                     <tr>
                                         <td><b>Data analysis</b></td>
@@ -505,12 +505,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                   	<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+						<span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>
@@ -563,7 +563,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data
-        var benchmark = "<?php echo $param['benchmark2']; ?>"; // Benchmark value
+        var benchmark = "<?php echo $param['benchmark9']; ?>"; // Benchmark value
         var calculated = "<?php echo $result->avg_discharge_time_ins; ?>"; // Calculated value
         var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Date value
 
@@ -749,7 +749,7 @@
                             </div>
 
                             <?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
-                                <div class="btn-group" style="float: right;">
+                                <div class="btn-group no-print" style="float: right;">
                                     <a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_24PSQ3a/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
                                 </div>
                             <?php } ?>
@@ -769,7 +769,7 @@
                                         <td>
                                             <?php
                                             // Benchmark time (4 hours) in seconds
-                                            $benchmarkSeconds = $result->bench_mark_time_cop * 60 * 60;
+                                            $benchmarkSeconds = $param['benchmark7'] * 60 * 60;
 
                                             // Convert the calculatedResult to seconds
                                             list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $result->avg_discharge_time_cop);
@@ -785,7 +785,7 @@
                                     </tr>
                                     <tr>
                                         <td><b>Bench Mark Time</b></td>
-                                        <td><?php echo $param['benchmark3']; ?></td>
+                                        <td><?php echo $param['benchmark7']; ?></td>
                                     </tr>
                                     <tr>
                                         <td><b>Data analysis</b></td>
@@ -863,12 +863,12 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div style="float: right; margin-top: 10px; margin-right: 10px;">
-                    <span style="font-size:17px"><strong>Download Chart:</strong></span>
-                    <span style="margin-right: 10px;">
+                   <span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
+					 <span class="no-print" style="margin-right: 10px;">
                         <i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
                             onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
                     </span>
-                    <span>
+                    <span class="no-print">
                         <i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
                             onclick="downloadChartImage()" data-toggle="tooltip"
                             title="Download Chart as Image"></i>
@@ -922,7 +922,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data
-        var benchmark = "<?php echo $param['benchmark3']; ?>"; // Benchmark value
+        var benchmark = "<?php echo $param['benchmark7']; ?>"; // Benchmark value
         var calculated = "<?php echo $result->avg_discharge_time_cop; ?>"; // Calculated value
         var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Date value
 

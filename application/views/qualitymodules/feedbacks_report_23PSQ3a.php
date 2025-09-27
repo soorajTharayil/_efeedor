@@ -317,13 +317,11 @@
 	var url = window.location.href;
 	var domain = url.replace(/^(?:https?:\/\/)?(?:www\.)?/, "");
 	domain = domain.split("/")[0];
-	var protocol = window.location.protocol;
-	var baseUrl = protocol + '//' + domain;
 
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = baseUrl +  "/analytics_audit_quality/resposnsechart_23ps"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_23ps"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
