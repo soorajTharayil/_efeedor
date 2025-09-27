@@ -188,22 +188,21 @@ $users = $this->db->get('user')->result();
 									<ul class="list-group" style="margin-left: 15px;">
 
 
-									<?php 
-										// Ensure variable is always array
-										$level1_escalate_to = is_array($level1_escalate_to) ? $level1_escalate_to : [];
+										<?php
 
 										foreach ($users as $u) {
 											if ($u->user_id > 1 && $u->user_role <= 3) {
 										?>
 												<li class="list-group-item">
 													<div class="checkboxreport">
+
 														<label>
-															<input type="checkbox" 
-																name="level1_escalate_to[]" 
-																value="<?php echo $u->user_id; ?>" 
-																<?php if (in_array($u->user_id, $level1_escalate_to)) echo 'checked'; ?>>
-															<?php echo $u->firstname; ?> (<?php echo $u->email; ?>)
+															<input type="checkbox" name="level1_escalate_to[]" value="<?php echo $u->user_id; ?>" <?php if (in_array($u->user_id, $level1_escalate_to)) {
+																																						echo 'checked';
+																																					} ?>>
+															<?php echo $u->firstname; ?>(<?php echo $u->email; ?>)
 														</label>
+
 													</div>
 												</li>
 										<?php
