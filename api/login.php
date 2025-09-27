@@ -110,12 +110,8 @@ if ($result) {
     $response['KPI19'] = get_user_by_access('QUALITY-KPI19', $con, $result->user_id, $result->user_role);
     $response['KPI20'] = get_user_by_access('QUALITY-KPI20', $con, $result->user_id, $result->user_role);
     $response['KPI21'] = get_user_by_access('QUALITY-KPI21', $con, $result->user_id, $result->user_role);
-    $response['KPI21a'] = get_user_by_access('QUALITY-KPI21a', $con, $result->user_id, $result->user_role);
     $response['KPI22'] = get_user_by_access('QUALITY-KPI22', $con, $result->user_id, $result->user_role);
-    $response['KPI23a'] = get_user_by_access('QUALITY-KPI23a', $con, $result->user_id, $result->user_role);
-    $response['KPI23b'] = get_user_by_access('QUALITY-KPI23b', $con, $result->user_id, $result->user_role);
-    $response['KPI23c'] = get_user_by_access('QUALITY-KPI23c', $con, $result->user_id, $result->user_role);
-    $response['KPI23d'] = get_user_by_access('QUALITY-KPI23d', $con, $result->user_id, $result->user_role);
+    $response['KPI23'] = get_user_by_access('QUALITY-KPI23', $con, $result->user_id, $result->user_role);
     $response['KPI24'] = get_user_by_access('QUALITY-KPI24', $con, $result->user_id, $result->user_role);
     $response['KPI25'] = get_user_by_access('QUALITY-KPI25', $con, $result->user_id, $result->user_role);
     $response['KPI26'] = get_user_by_access('QUALITY-KPI26', $con, $result->user_id, $result->user_role);
@@ -126,6 +122,47 @@ if ($result) {
     $response['KPI31'] = get_user_by_access('QUALITY-KPI31', $con, $result->user_id, $result->user_role);
     $response['KPI32'] = get_user_by_access('QUALITY-KPI32', $con, $result->user_id, $result->user_role);
     $response['KPI33'] = get_user_by_access('QUALITY-KPI33', $con, $result->user_id, $result->user_role);
+
+    $response['KPI34'] = get_user_by_access('QUALITY-KPI34', $con, $result->user_id, $result->user_role);
+    $response['KPI35'] = get_user_by_access('QUALITY-KPI35', $con, $result->user_id, $result->user_role);
+    $response['KPI36'] = get_user_by_access('QUALITY-KPI36', $con, $result->user_id, $result->user_role);
+    $response['KPI37'] = get_user_by_access('QUALITY-KPI37', $con, $result->user_id, $result->user_role);
+    $response['KPI38'] = get_user_by_access('QUALITY-KPI38', $con, $result->user_id, $result->user_role);
+    $response['KPI39'] = get_user_by_access('QUALITY-KPI39', $con, $result->user_id, $result->user_role);
+    $response['KPI40'] = get_user_by_access('QUALITY-KPI40', $con, $result->user_id, $result->user_role);
+    $response['KPI41'] = get_user_by_access('QUALITY-KPI41', $con, $result->user_id, $result->user_role);
+    $response['KPI42'] = get_user_by_access('QUALITY-KPI42', $con, $result->user_id, $result->user_role);
+    $response['KPI43'] = get_user_by_access('QUALITY-KPI43', $con, $result->user_id, $result->user_role);
+    $response['KPI44'] = get_user_by_access('QUALITY-KPI44', $con, $result->user_id, $result->user_role);
+    $response['KPI45'] = get_user_by_access('QUALITY-KPI45', $con, $result->user_id, $result->user_role);
+    $response['KPI46'] = get_user_by_access('QUALITY-KPI46', $con, $result->user_id, $result->user_role);
+    $response['KPI47'] = get_user_by_access('QUALITY-KPI47', $con, $result->user_id, $result->user_role);
+    $response['KPI48'] = get_user_by_access('QUALITY-KPI48', $con, $result->user_id, $result->user_role);
+    $response['KPI49'] = get_user_by_access('QUALITY-KPI49', $con, $result->user_id, $result->user_role);
+    $response['KPI50'] = get_user_by_access('QUALITY-KPI50', $con, $result->user_id, $result->user_role);
+    $response['KPI51'] = get_user_by_access('QUALITY-KPI51', $con, $result->user_id, $result->user_role);
+    $response['KPI52'] = get_user_by_access('QUALITY-KPI52', $con, $result->user_id, $result->user_role);
+    $response['KPI53'] = get_user_by_access('QUALITY-KPI53', $con, $result->user_id, $result->user_role);
+    $response['KPI54'] = get_user_by_access('QUALITY-KPI54', $con, $result->user_id, $result->user_role);
+    $response['KPI55'] = get_user_by_access('QUALITY-KPI55', $con, $result->user_id, $result->user_role);
+    $response['KPI56'] = get_user_by_access('QUALITY-KPI56', $con, $result->user_id, $result->user_role);
+    $response['KPI57'] = get_user_by_access('QUALITY-KPI57', $con, $result->user_id, $result->user_role);
+    $response['KPI58'] = get_user_by_access('QUALITY-KPI58', $con, $result->user_id, $result->user_role);
+    $response['KPI59'] = get_user_by_access('QUALITY-KPI59', $con, $result->user_id, $result->user_role);
+    $response['KPI60'] = get_user_by_access('QUALITY-KPI60', $con, $result->user_id, $result->user_role);
+    $response['KPI61'] = get_user_by_access('QUALITY-KPI61', $con, $result->user_id, $result->user_role);
+    $response['KPI62'] = get_user_by_access('QUALITY-KPI62', $con, $result->user_id, $result->user_role);
+    $response['KPI63'] = get_user_by_access('QUALITY-KPI63', $con, $result->user_id, $result->user_role);
+
+    // Existing lines: KPI1 to KPI63 are already defined above
+
+    for ($i = 64; $i <= 300; $i++) {
+        $response["KPI{$i}"] = get_user_by_access("QUALITY-KPI{$i}", $con, $result->user_id, $result->user_role);
+    }
+
+
+    $response['MONTH-SELECTION'] = get_user_by_access('MONTH-SELECTION', $con, $result->user_id, $result->user_role);
+
 
     $response['AUDIT1'] = get_user_by_access('AUDIT-FORM1', $con, $result->user_id, $result->user_role);
     $response['AUDIT2'] = get_user_by_access('AUDIT-FORM2', $con, $result->user_id, $result->user_role);
@@ -160,6 +197,51 @@ if ($result) {
     $response['AUDIT31'] = get_user_by_access('AUDIT-FORM31', $con, $result->user_id, $result->user_role);
     $response['AUDIT32'] = get_user_by_access('AUDIT-FORM32', $con, $result->user_id, $result->user_role);
     $response['AUDIT33'] = get_user_by_access('AUDIT-FORM33', $con, $result->user_id, $result->user_role);
+    $response['AUDIT34'] = get_user_by_access('AUDIT-FORM34', $con, $result->user_id, $result->user_role);
+    $response['AUDIT35'] = get_user_by_access('AUDIT-FORM35', $con, $result->user_id, $result->user_role);
+    $response['AUDIT36'] = get_user_by_access('AUDIT-FORM36', $con, $result->user_id, $result->user_role);
+    $response['AUDIT37'] = get_user_by_access('AUDIT-FORM37', $con, $result->user_id, $result->user_role);
+    $response['AUDIT38'] = get_user_by_access('AUDIT-FORM38', $con, $result->user_id, $result->user_role);
+    $response['AUDIT39'] = get_user_by_access('AUDIT-FORM39', $con, $result->user_id, $result->user_role);
+    $response['AUDIT40'] = get_user_by_access('AUDIT-FORM40', $con, $result->user_id, $result->user_role);
+    $response['AUDIT41'] = get_user_by_access('AUDIT-FORM41', $con, $result->user_id, $result->user_role);
+    $response['AUDIT42'] = get_user_by_access('AUDIT-FORM42', $con, $result->user_id, $result->user_role);
+    $response['AUDIT43'] = get_user_by_access('AUDIT-FORM43', $con, $result->user_id, $result->user_role);
+    $response['AUDIT44'] = get_user_by_access('AUDIT-FORM44', $con, $result->user_id, $result->user_role);
+    $response['AUDIT45'] = get_user_by_access('AUDIT-FORM45', $con, $result->user_id, $result->user_role);
+    $response['AUDIT46'] = get_user_by_access('AUDIT-FORM46', $con, $result->user_id, $result->user_role);
+    $response['AUDIT47'] = get_user_by_access('AUDIT-FORM47', $con, $result->user_id, $result->user_role);
+    $response['AUDIT48'] = get_user_by_access('AUDIT-FORM48', $con, $result->user_id, $result->user_role);
+    $response['AUDIT49'] = get_user_by_access('AUDIT-FORM49', $con, $result->user_id, $result->user_role);
+    $response['AUDIT50'] = get_user_by_access('AUDIT-FORM50', $con, $result->user_id, $result->user_role);
+    $response['AUDIT51'] = get_user_by_access('AUDIT-FORM51', $con, $result->user_id, $result->user_role);
+    $response['AUDIT52'] = get_user_by_access('AUDIT-FORM52', $con, $result->user_id, $result->user_role);
+    $response['AUDIT53'] = get_user_by_access('AUDIT-FORM53', $con, $result->user_id, $result->user_role);
+    $response['AUDIT54'] = get_user_by_access('AUDIT-FORM54', $con, $result->user_id, $result->user_role);
+    $response['AUDIT55'] = get_user_by_access('AUDIT-FORM55', $con, $result->user_id, $result->user_role);
+    $response['AUDIT56'] = get_user_by_access('AUDIT-FORM56', $con, $result->user_id, $result->user_role);
+    $response['AUDIT57'] = get_user_by_access('AUDIT-FORM57', $con, $result->user_id, $result->user_role);
+    $response['AUDIT58'] = get_user_by_access('AUDIT-FORM58', $con, $result->user_id, $result->user_role);
+    $response['AUDIT59'] = get_user_by_access('AUDIT-FORM59', $con, $result->user_id, $result->user_role);
+    $response['AUDIT60'] = get_user_by_access('AUDIT-FORM60', $con, $result->user_id, $result->user_role);
+    $response['AUDIT61'] = get_user_by_access('AUDIT-FORM61', $con, $result->user_id, $result->user_role);
+    $response['AUDIT62'] = get_user_by_access('AUDIT-FORM62', $con, $result->user_id, $result->user_role);
+    $response['AUDIT63'] = get_user_by_access('AUDIT-FORM63', $con, $result->user_id, $result->user_role);
+    $response['AUDIT64'] = get_user_by_access('AUDIT-FORM64', $con, $result->user_id, $result->user_role);
+    $response['AUDIT65'] = get_user_by_access('AUDIT-FORM65', $con, $result->user_id, $result->user_role);
+    $response['AUDIT66'] = get_user_by_access('AUDIT-FORM66', $con, $result->user_id, $result->user_role);
+    $response['AUDIT67'] = get_user_by_access('AUDIT-FORM67', $con, $result->user_id, $result->user_role);
+    $response['AUDIT68'] = get_user_by_access('AUDIT-FORM68', $con, $result->user_id, $result->user_role);
+    $response['AUDIT69'] = get_user_by_access('AUDIT-FORM69', $con, $result->user_id, $result->user_role);
+    $response['AUDIT70'] = get_user_by_access('AUDIT-FORM70', $con, $result->user_id, $result->user_role);
+    $response['AUDIT71'] = get_user_by_access('AUDIT-FORM71', $con, $result->user_id, $result->user_role);
+    $response['AUDIT72'] = get_user_by_access('AUDIT-FORM72', $con, $result->user_id, $result->user_role);
+
+
+    for ($i = 73; $i <= 110; $i++) {
+        $response["AUDIT{$i}"] = get_user_by_access("AUDIT-FORM{$i}", $con, $result->user_id, $result->user_role);
+    }
+
 
 
     $response['ASSET-DASHBOARD'] = get_user_by_access('ASSET-DASHBOARD', $con, $result->user_id, $result->user_role);
@@ -174,7 +256,6 @@ if ($result) {
     $response['REGISTER-ASSET-FORM'] = get_user_by_access('REGISTER-ASSET-FORM', $con, $result->user_id, $result->user_role);
     $response['WARRANTY-FORM'] = get_user_by_access('WARRANTY-FORM', $con, $result->user_id, $result->user_role);
     $response['AMC-CMC-FORM'] = get_user_by_access('AMC-CMC-FORM', $con, $result->user_id, $result->user_role);
-    
 } else {
     $response['status'] = 'fail';
     $response['message'] = 'Invalid Email Id / Mobile Number / Password';

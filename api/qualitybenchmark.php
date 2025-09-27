@@ -3,7 +3,7 @@
     include('db.php');
 
     // First query for bf_departmentasset
-    $sql = 'SELECT * FROM `bf_quality_benchmark` WHERE 1 ORDER BY title ASC';			
+    $sql = 'SELECT * FROM `bf_quality_benchmark` WHERE 1 ORDER BY id ASC';			
     $result = mysqli_query($con, $sql);	
     $num1 = mysqli_num_rows($result);
     $j = 0;	

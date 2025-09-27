@@ -606,7 +606,7 @@ $mobile = $user->mobile;
                                     ?>
                                         <div class="checkbox-container">
                                             <div class="material-switch pull-left">
-                                                <input id="<?php echo $checkboxId; ?>" name="assetDepartment[]" value="<?php echo $asset->title; ?>" type="checkbox" <?php echo in_array($asset->title, $floorWard_asset) ? 'checked' : ''; ?> />
+                                                <input id="<?php echo $checkboxId; ?>" name="assetDepartment[]" value="<?php echo $asset->title; ?>" type="checkbox" <?php echo in_array($asset->title, (array)$floorWard_asset) ? 'checked' : ''; ?> />
                                                 <label for="<?php echo $checkboxId; ?>" class="label-success"></label>
                                             </div>
                                         </div>

@@ -1,0 +1,104 @@
+{
+   "patient_info": "CLINICAL OUTCOME CHECKLIST - WHIPPLES SURGERY",
+   "patientname": "Patient Name",
+   "patient_name": "Enter Name",
+   "patientid": "Patient UHID",
+   "patient_name_placeholder": "Enter UHID",
+   "age": "Age",
+   "test_name_placeholder": "Enter age",
+   "department": "Designation",
+   "data_analysis": "Additional comments:",
+   "staffname": "Name of the assigned Nurse",
+   "staff_name_placeholder": "Enter input here",
+   "audited_by": "Audited by",
+   "audited_by_placeholder": "Enter the name",
+   "previous": "Back",
+   "next": "Next",
+   "optional": "Please describe :",
+   "telluswrong": "Tell us what went wrong",
+   "detractor": "Please describe reason for low rating",
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+   "submit": "Submit",
+   "thankyou": "Thank you!",
+   "happythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+   "formula_para1": "Date of surgery",
+   "name":"Audit name",
+    "dtandtym":"Date and time of audit",
+    "stname":"Audit short name",
+    "dep":"Department",
+    "seldep":"Select department",
+    "audby":"Audited by",
+    "mid":"Patient MID",
+    "patname":"Patient name",
+    "patage":"Patient age",
+    "patgen":"Patient gender",
+    "selgen":"Select gender",
+    "atdoc":"Attended doctor",
+    "seldoc":"Select doctor",
+    "admidat":"Admission date",
+    "discha":"Discharge Date & Time",
+    "attach_file":"Upload file( Evidences, proofs, etc)",
+    "location":"Area",
+
+
+
+
+
+ 
+  "identification_details": "How many days after admission did the patient get discharged?",
+  "vital_signs": "Did this patient experience Delayed Gastric Emptying after the procedure?",
+  "surgery": "Did this patient have any post operative infection?",
+  "complaints_communicated": "Did the patient have bile leak following the procedure?",
+  "intake": "Did this patient get readmitted anytime for a condition related to surgery within 30 days?",
+  "output": "Did this patient come for a review 30 days after surgery?",
+  "allergies": "Additional remarks or observations",
+
+
+   "medication": "Is personal hygiene training regularly provided to new and existing staff?",
+
+
+   "diagnostic": "Are all small equipment and utensils, including cutting boards, thoroughly cleaned between uses?",
+   "lab_results": "Are all utensils clean and dry?",
+   "pending_investigation": "Are work surfaces clean?",
+   "medicine_order": "Are drawers and racks clean?",
+
+   "facility_communicated": "Is there periodic cleaning schedule in place for utensils, equipment, and canteen areas?",
+   "health_education": "Is cleaning equipment stored appropriately?",
+   "risk_assessment": "Is the dining area clean and sanitized?",
+   "urethral": "Are cleaning solutions properly labelled and stored?",
+   "urine_sample": "Are Material Safety Data Sheets (MSDS) for chemicals available?",
+
+   "bystander": "Are garbage containers regularly washed and well maintained?",
+   "instruments": "Is the garbage/waste storage area protected from insects, pests, or rodent infestation?",
+   "sterile": "Is garbage removed from the canteen in a timely manner?",
+   "antibiotics": "Are records of food waste disposal maintained?",
+   "surgical_site": "Are records of oil waste disposal maintained?",
+
+  "wound": "Is a regular pest control program in place, and are records of the same available?",
+
+  "documented": "Are products supplied by approved suppliers?",
+  "adequate_facilities": "Are incoming food and supplies promptly inspected upon receipt?",
+  "sufficient_lighting": "Are all food items, materials, and supplies immediately moved to appropriate storage areas?",
+  "storage_facility_for_food": "Is all food labelled with the name and delivery/expiry date?",
+  "personnel_hygiene_facilities": "Is food protected from contamination during the receiving process?",
+
+  
+  "food_material_testing": "Is there proper separation between food and chemicals in storage areas?",
+  "incoming_material": "Is air-conditioned storage available where required?",
+  "raw_materials_inspection": "Is all food stored off the floor?",
+  "storage_of_materials": "Is the storage unit clean?",
+
+
+  "raw_materials_cleaning": "Are transport containers and carts regularly cleaned?",
+  "equipment_sanitization": "Are proper temperatures maintained during transport for hot foods?",
+  "frozen_food_thawing": "Are transport trolleys clean?",
+
+
+  "vegetarian_and_non_vegetarian": "Are food handlers' medical checkup records up to date?",
+  "cooked_food_cooling": "Is Food Safety training regularly provided?",
+
+  "food_portioning": "Are food samples preserved for 24 hours?"
+
+
+}

@@ -22,10 +22,10 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     // Handle if data doesn't exist
     console.log('Data not found in local storage');
   }
-  if(localStorage.getItem("ehandor")){
+  if (localStorage.getItem("ehandor")) {
     $rootScope.profilen = JSON.parse(localStorage.getItem('ehandor'));
     // console.log($rootScope.profilen);
-}
+  }
   $scope.feedback = {};
   $rootScope.loader = false;
   $rootScope.overallScore = [];
@@ -51,6 +51,32 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     $(window).scrollTop(0);
   };
   $scope.activeStep("step2");
+
+
+  $scope.months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  $scope.years = [
+    new Date().getFullYear() - 1,
+    new Date().getFullYear(),
+    new Date().getFullYear() + 1
+  ];
+
+  $scope.selectedMonth = $scope.months[new Date().getMonth()];
+  $scope.selectedYear = $scope.years[1];
+
+
+  $scope.saveSelection = function () {
+    // Save month, year, and patient index to localStorage
+    localStorage.setItem('selectedMonth', $scope.selectedMonth);
+    localStorage.setItem('selectedYear', $scope.selectedYear);
+
+  };
+
+
+
 
 
 
@@ -83,6 +109,93 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
       $scope.feedback.image = null;
     }
   };
+  
+  $scope.menuVisible = false;
+  $scope.aboutVisible = false;
+
+  // Function to hide menu only when clicking "Home"
+  $scope.hideMenu = function () {
+    $scope.menuVisible = false;
+  };
+
+  // Function to show all content
+  $scope.showAllContent = function () {
+    $scope.aboutVisible = false;
+    $scope.supportVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.menuVisible = true;
+    $scope.hideMenu();
+  };
+
+
+  // Function to show the 'About' content
+  $scope.showAbout = function () {
+    $scope.menuVisible = false;
+    $scope.supportVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.aboutVisible = true;
+  };
+
+  // Function to show the 'Support' content
+  $scope.showSupport = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.supportVisible = true;
+  };
+
+  // Function to show the 'Web dashboard' content
+  $scope.showDashboard = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.appDownloadVisible = false;
+    $scope.supportVisible = false;
+    $scope.dashboardVisible = true;
+
+  };
+
+  // Function to show the 'App download' content
+  $scope.showAppDown = function () {
+    $scope.menuVisible = false;
+    $scope.aboutVisible = false;
+    $scope.supportVisible = false;
+    $scope.dashboardVisible = false;
+    $scope.appDownloadVisible = true;
+  };
+
+  // To downlaod the apk
+  $scope.downloadApk = function () {
+    if ($scope.setting_data && $scope.setting_data.android_apk) {
+      window.location.href = $scope.setting_data.android_apk;
+    } else {
+      alert("APK download link is not available.");
+    }
+  };
+
+  //To redirect to user activity page
+  $scope.redirectToUserActivity = function (event) {
+    event.preventDefault();
+    window.location.href = "/view/user_activity";
+  };
+
+  $scope.closeMenuOnClickOutside = function (event) {
+    if ($scope.menuVisible && !event.target.closest('.menu-dropdown') && !event.target.closest('.menu-toggle')) {
+      $scope.menuVisible = false;
+      $scope.$apply(); // Ensure Angular updates the UI
+    }
+  };
+
+  // Attach event listener when step is active
+  $scope.$watchGroup(['step2', 'step3', 'step4', 'step5'], function (newVals) {
+    if (newVals.includes(true)) {
+      document.addEventListener('click', $scope.closeMenuOnClickOutside);
+    } else {
+      document.removeEventListener('click', $scope.closeMenuOnClickOutside);
+    }
+  });
 
   $scope.prev_pop = function () {
     $scope.step100 = true;
@@ -271,7 +384,7 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
       $scope.isSearchActive = true; // Set the search active flag
       let foundCategory = null;
       let foundQuestion = null;
-console.log(foundQuestion);
+      console.log(foundQuestion);
       // Loop through each category to find the question.
       for (let category of $scope.questioset) {
         foundQuestion = category.question_set.find(
@@ -313,16 +426,16 @@ console.log(foundQuestion);
     }
   };
 
-  $scope.isLiTagsEmpty = function(questions) {
+  $scope.isLiTagsEmpty = function (questions) {
     // Check if the li tags are empty
-    return !questions || !questions.length || !questions.some(function(p) {
-        return (
-            p.question.trim() !== '' ||
-            p.questionk.trim() !== '' ||
-            p.questionm.trim() !== ''
-        );
+    return !questions || !questions.length || !questions.some(function (p) {
+      return (
+        p.question.trim() !== '' ||
+        p.questionk.trim() !== '' ||
+        p.questionm.trim() !== ''
+      );
     });
-};
+  };
 
   //for radio button
   $scope.selected = undefined;
@@ -428,10 +541,6 @@ console.log(foundQuestion);
           // Ensure data exists before assigning to avoid runtime errors
           if (responsedata.data) {
             $scope.wardlist = responsedata.data;
-            if (responsedata.data && responsedata.data.setup) {
-                $rootScope.GLOBALSETUP = responsedata.data.setup;
-                console.log("GLOBALSETUP Loaded:", $rootScope.GLOBALSETUP);
-            }
             $scope.questioset = responsedata.data.question_set;
             $scope.setting_data = responsedata.data.setting_data;
             $scope.bed_no = [];
@@ -729,10 +838,10 @@ console.log(foundQuestion);
     }
 
     $scope.feedback.name = $scope.loginname;
-		$scope.feedback.email = $scope.loginemail;
-		$scope.feedback.contactnumber = $scope.loginnumber;
-		$scope.feedback.patientid = $scope.loginid;
-    
+    $scope.feedback.email = $scope.loginemail;
+    $scope.feedback.contactnumber = $scope.loginnumber;
+    $scope.feedback.patientid = $scope.loginid;
+
     $rootScope.loader = true;
 
     $scope.feedback.patientType = "GRIEVANCE";

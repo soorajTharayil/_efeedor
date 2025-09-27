@@ -1,0 +1,110 @@
+{
+   "patient_info": "ACTIVE CASES MRD AUDIT - IP",
+   "patientname": "Patient Name",
+   "patient_name": "Enter Name",
+   "patientid": "Patient UHID",
+   "patient_name_placeholder": "Enter UHID",
+   "age": "Age",
+   "test_name_placeholder": "Enter age",
+   "department": "Designation",
+   "data_analysis": "Additional comments:",
+   "staffname": "Name of the assigned Nurse",
+   "staff_name_placeholder": "Enter input here",
+   "audited_by": "Audited by",
+   "audited_by_placeholder": "Enter the name",
+   "previous": "Back",
+   "next": "Next",
+   "optional": "Please describe :",
+   "telluswrong": "Tell us what went wrong",
+   "detractor": "Please describe reason for low rating",
+   "feedbacksuggestion": "Other feedbacks/suggestions:",
+   "submit": "Submit",
+   "thankyou": "Thank you!",
+   "happythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+   "unhappythankyoumessage": "Thank you for taking your time out to provide your valuable inputs.",
+   "formula_para1": "Date of surgery",
+
+    "name":"Audit Name",
+    "dtandtym":"Date & Time of Audit",
+    "stname":"Audit Short Name",
+    "dep":"Department",
+    "seldep":"Select Department",
+    "audby":"Audit by",
+    "mid":"Patient MID",
+    "patname":"Patient Name",
+    "patage":"Patient Age",
+    "patgen":"Patient Gender",
+    "location":"Area",
+    "selgen":"Select Gender",
+    "atdoc":"Attended Doctor",
+    "seldoc":"Select Doctor",
+    "admidat":"Admission Date & Time",
+    "discha":"Discharge Date & Time",
+    "attach_file":"Upload file( Evidences, proofs, etc)",
+
+
+
+
+ "identification_details": "Is the plan of care documented?",
+  "vital_signs": "Is the admitting diagnosis documented?",
+  "surgery": "Are physical examination findings available?",
+  "complaints_communicated": "Are present complaints documented?",
+  "intake": "Is the patient’s history recorded?",
+  "output": "Is the discharge plan documented?",
+  "focus": "Is patient-focused evaluation completed?",
+  "meti": "Is the patient’s medication history documented?",
+  
+  "diagnostic": "Are the patient’s needs assessed and documented?",
+  "lab_results": "Is pain assessment recorded?",
+  "pending_investigation": "Is vulnerability status assessed and documented?",
+  "medicine_order": "Is fall-risk assessment completed?",
+  "psychological": "Is the nursing care plan available?",
+  "vulnerab": "Is the assessment for suicide and self-harm completed?",
+  "social": "Is nutritional assessment documented?",
+   "nutri":"Is nutritional screening available?",
+   "spiritual":"Is spiritual needs screening recorded?",
+   "suicide":"Is suicide risk screening recorded?",
+   "risk":"Is fall risk assessment recorded?",
+   "care":"Is care plan available?",
+   "pfe":"is PFE available?",
+   "disch":"Is discharge planning recorded?",
+
+   "facility_communicated": "Is nutritional assessment available?",
+   "health_education": "Is dietitian assessment done within 30 days for Haemodialysis?",
+   "remarks1": "Remarks",
+   "urethral": "Are cleaning solutions properly labelled and stored?",
+   "urine_sample": "Are material Safety Data Sheets (MSDS) for chemicals available?",
+
+   "bystander": "Appropriate IV fluids started within an hour?",
+   "instruments": "Serum lactate checked?",
+   "sterile": "Cultures taken before antibiotics?",
+   "antibiotics": "Broad spectrum antibiotics started within one hour?",
+   "surgical_site": "Noradrenaline started if required?",
+
+  "wound": "Is a regular pest control program in place, and are records of the same available?",
+
+  "documented": "Are products supplied by approved suppliers?",
+  "adequate_facilities": "Are incoming food and supplies promptly inspected upon receipt?",
+  "sufficient_lighting": "Are all food items, materials, and supplies immediately moved to appropriate storage areas?",
+  "storage_facility_for_food": "Is all food labelled with the name and delivery/expiry date?",
+  "personnel_hygiene_facilities": "Is food protected from contamination during the receiving process?",
+
+  
+  "food_material_testing": "Is there proper separation between food and chemicals in storage areas?",
+  "incoming_material": "Is air-conditioned storage available where required?",
+  "raw_materials_inspection": "Is all food stored off the floor?",
+  "storage_of_materials": "Is the storage unit clean?",
+
+
+  "raw_materials_cleaning": "Are transport containers and carts regularly cleaned?",
+  "equipment_sanitization": "Are proper temperatures maintained during transport for hot foods?",
+  "frozen_food_thawing": "Are transport trolleys clean?",
+
+
+  "vegetarian_and_non_vegetarian": "Are food handlers' medical checkup records up to date?",
+  "cooked_food_cooling": "Is Food Safety training regularly provided?",
+
+  "food_portioning": "Are food samples preserved for 24 hours?"
+
+
+}
