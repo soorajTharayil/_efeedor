@@ -21,92 +21,77 @@ app.controller(
     $rootScope.baseurl_main = window.location.origin + "/api";
 
     $scope.login = function () {
-      // Call reCAPTCHA v3 and get the token before making the HTTP request
-      grecaptcha.ready(function () {
-        grecaptcha
-          .execute("6Lc8CkcqAAAAACv2WebgYioIVJhljcDhqJk5AbAz", {
-            action: "login",
-          })
-          .then(function (token) {
-            // Add the reCAPTCHA token to the login request data
-            $scope.loginvar.recaptchaToken = token;
+      $rootScope.loader = true;
 
-            $rootScope.loader = true;
+      $http
+        .post($rootScope.baseurl_main + "/login.php", $scope.loginvar, {
+          timeout: 20000,
+        })
+        .then(
+          function (responsedata) {
+            console.log(responsedata);
+            if (responsedata.status == 200) {
+              var response = responsedata.data;
+              $rootScope.loader = false;
+              $rootScope.profilen = response;
 
-            $http
-              .post($rootScope.baseurl_main + "/login.php", $scope.loginvar, {
-                timeout: 20000,
-              })
-              .then(
-                function (responsedata) {
-                  console.log(responsedata);
-                  if (responsedata.status == 200) {
-                    var response = responsedata.data;
-                    $rootScope.loader = false;
-                    $rootScope.profilen = response;
+              $rootScope.adminId = $rootScope.profilen.userid;
 
-                    $rootScope.adminId = $rootScope.profilen.userid;
+              if (!$rootScope.$$phase) {
+                $rootScope.$apply();
+              }
 
-                    if (!$rootScope.$$phase) {
-                      $rootScope.$apply();
-                    }
+              $scope.profiled = $rootScope.profilen;
+              localStorage.setItem("ehandor", JSON.stringify(response));
 
-                    $scope.profiled = $rootScope.profilen;
-                    localStorage.setItem("ehandor", JSON.stringify(response));
-
-                    if (response.status === "fail") {
-                      $scope.loginerror = response.message;
-                    } else if (response.status === "success") {
+              if (response.status === "fail") {
+                $scope.loginerror = response.message;
+              } else if (response.status === "success") {
+                $rootScope.loginactive = true;
+                $scope.step0 = false;
+                $scope.step1 = true;
+              }
+            } else {
+              $scope.loginerror = "Some error happened";
+              $rootScope.loader = false;
+            }
+          },
+          function errorCallback(responsedata) {
+            if (localStorage.getItem("cordinator")) {
+              $scope.cordinatorlist = JSON.parse(
+                localStorage.getItem("cordinator")
+              );
+              if (
+                $scope.cordinatorlist &&
+                $scope.cordinatorlist.cordinators &&
+                $scope.cordinatorlist.cordinators.length > 0
+              ) {
+                angular.forEach(
+                  $scope.cordinatorlist.cordinators,
+                  function (value, key) {
+                    if (
+                      value.guid.toLowerCase() ==
+                        $scope.loginvar.userid.toLowerCase() &&
+                      value.password == $scope.loginvar.password
+                    ) {
+                      value.userid = $scope.loginvar.userid;
+                      $rootScope.profilen = value;
+                      $rootScope.adminId = $rootScope.profilen.userid;
+                      $scope.profiled = $rootScope.profilen;
+                      localStorage.setItem("ehandor", JSON.stringify(value));
                       $rootScope.loginactive = true;
                       $scope.step0 = false;
                       $scope.step1 = true;
                     }
-                  } else {
-                    $scope.loginerror = "Some error happened";
-                    $rootScope.loader = false;
                   }
-                },
-                function errorCallback(responsedata) {
-                  if (localStorage.getItem("cordinator")) {
-                    $scope.cordinatorlist = JSON.parse(
-                      localStorage.getItem("cordinator")
-                    );
-                    if (
-                      $scope.cordinatorlist &&
-                      $scope.cordinatorlist.cordinators &&
-                      $scope.cordinatorlist.cordinators.length > 0
-                    ) {
-                      angular.forEach(
-                        $scope.cordinatorlist.cordinators,
-                        function (value, key) {
-                          if (
-                            value.guid.toLowerCase() ==
-                              $scope.loginvar.userid.toLowerCase() &&
-                            value.password == $scope.loginvar.password
-                          ) {
-                            value.userid = $scope.loginvar.userid;
-                            $rootScope.profilen = value;
-                            $rootScope.adminId = $rootScope.profilen.userid;
-                            $scope.profiled = $rootScope.profilen;
-                            localStorage.setItem(
-                              "ehandor",
-                              JSON.stringify(value)
-                            );
-                            $rootScope.loginactive = true;
-                            $scope.step0 = false;
-                            $scope.step1 = true;
-                          }
-                        }
-                      );
-                    }
-                  } else {
-                    $scope.loginerror = "Internet Connection error";
-                  }
-                  $rootScope.loader = false;
-                }
-              );
-          });
-      });
+                );
+              }
+            } else {
+              $scope.loginerror = "Internet Connection error";
+            }
+            $rootScope.loader = false;
+          }
+        );
     };
 
     $scope.menuVisible = false;
