@@ -30,7 +30,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $wind
 
 				$rootScope.loader = true;
 
-				$http.post($rootScope.baseurl_main + '/login_captcha.php', $scope.loginvar, { timeout: 20000 }).then(function (responsedata) {
+				$http.post($rootScope.baseurl_main + '/login.php', $scope.loginvar, { timeout: 20000 }).then(function (responsedata) {
 					console.log(responsedata);
 					if (responsedata.status == 200) {
 						var response = responsedata.data;
