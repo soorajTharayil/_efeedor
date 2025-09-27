@@ -708,7 +708,7 @@ if ($title == null) {
 
                                 <?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true && $this->uri->segment(1) == 'audit') { ?>
 
-                                    <li class="treeview <?= ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">
+                                    <li class="treeview <?php echo ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url("audit/audit_master"); ?>">
                                             <i class="fa fa-file"></i> <span>Audit Master</span>
                                         </a>
@@ -717,7 +717,7 @@ if ($title == null) {
 
                                 <!-- <?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true && $this->uri->segment(1) == 'quality') { ?>
 
-                                    <li class="treeview <?= ($this->uri->segment(1) === 'quality') ? 'active' : ''; ?>">
+                                    <li class="treeview <?php echo ($this->uri->segment(1) === 'quality') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url("quality/quality_master"); ?>">
                                             <i class="fa fa-qrcode"></i> <span>Quality Master</span>
                                         </a>
@@ -759,7 +759,7 @@ if ($title == null) {
 
                                 <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && $this->uri->segment(1) == 'asset') { ?>
 
-                                    <li class="treeview <?= ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
+                                    <li class="treeview <?php echo ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
                                         <a href="<?php echo base_url("asset/asset_qrcode"); ?>">
                                             <i class="fa fa-qrcode"></i> <span>Asset QR Codes</span>
                                         </a>
@@ -1152,7 +1152,7 @@ if ($title == null) {
 
                             <!--<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true && $this->uri->segment(1) == 'audit') { ?>-->
 
-                            <!--    <li class="treeview <?= ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">-->
+                            <!--    <li class="treeview <?php echo ($this->uri->segment(1) === 'audit') ? 'active' : ''; ?>">-->
                             <!--        <a href="<?php echo base_url("audit/audit_activity"); ?>">-->
                             <!--            <i class="fa fa-qrcode"></i> <span>Audit User Activity</span>-->
                             <!--        </a>-->
@@ -1194,7 +1194,7 @@ if ($title == null) {
 
                             <?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true && $this->uri->segment(1) == 'asset') { ?>
 
-                                <li class="treeview <?= ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
+                                <li class="treeview <?php echo ($this->uri->segment(1) === 'asset') ? 'active' : ''; ?>">
                                     <a href="<?php echo base_url("asset/asset_qrcode"); ?>">
                                         <i class="fa fa-qrcode"></i> <span>Asset QR Codes</span>
                                     </a>
@@ -1710,7 +1710,7 @@ if ($title == null) {
                                         style="background: #62c52d; font-size: 13px; margin-left: 10px; margin-top: 10px; border: none; margin-right: 10px;"
                                         data-placement="bottom" data-toggle="tooltip"
                                         title=""
-                                        href="<?= base_url($this->uri . '/form_login?user_id=' . $this->session->userdata['user_id']) ?>">
+                                        href="<?php echo base_url('/form_login?user_id=' . $this->session->userdata['user_id']) ; ?>">
                                         ACCESS INPUT FORMS
                                     </a>
                                 <?php } ?>
