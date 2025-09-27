@@ -147,23 +147,14 @@
                         <table class="incticketsall table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th><?php echo lang_loader('inc', 'inc_slno'); ?></th>
-                                    <th style="white-space: nowrap;"><?php echo lang_loader('inc', 'inc_incidents_id'); ?></th>
-                                      <th style="white-space: nowrap;">Incident / Incident Short Name</th>
-                                    <th style="white-space: nowrap;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
-                                    <th style="white-space: nowrap;"><?php echo lang_loader('inc', 'inc_reported_on'); ?></th>
-
-                                  
-                                    <th style="white-space: nowrap;">Risk / Priority / Category </th>
-                                    <th style="white-space: nowrap;">Assigned to </th>
-                                    <!-- <th style="white-space: nowrap;">Incident<br>Severity</th>
-                                    <th style="white-space: nowrap;">Action<br>Priority</th> -->
-                                  
-
-
-                                    <!-- <th style="white-space: nowrap;"><?php echo lang_loader('inc', 'inc_modified_on'); ?></th> -->
+                                    <th style="width:5%"><?php echo lang_loader('inc', 'inc_slno'); ?></th>
+                                    <th style="width:20%;">Incident details</th>
+                                    <th style="width:15%;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
+                                    <th style="width:10%;"><?php echo lang_loader('inc', 'inc_reported_on'); ?></th>
+                                    <th style="width:20%;">Risk / Priority / Category</th>
+                                    <th style="width:15%;">Assigned to</th>
                                     <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
-                                        <th style="text-align: center;"><?php echo lang_loader('inc', 'inc_status'); ?></th>
+                                        <th style="width:15%; text-align:center;"><?php echo lang_loader('inc', 'inc_status'); ?></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
@@ -240,48 +231,41 @@
                                     ?>
                                         <tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC" ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
                                             <td><?php echo $sl; ?></td>
-                                            <td><?php echo lang_loader('inc', 'inc_inc'); ?><?php echo $department->id; ?></td>
-                                            <td style="overflow: clip; word-break: break-all;">
+                                            <td style="overflow-wrap: break-word; word-break: normal; white-space: normal;">
+                                                <strong>Incident ID:</strong> <?php echo $department->id; ?><br>
 
                                                 <?php
                                                 if ($department->departmentid_trasfered != 0) {
                                                     $show = false;
                                                     if ($department->status == 'Addressed') {
-                                                        echo 'Ticket was transferred';
+                                                        echo '<strong>Incident:</strong> Ticket was transferred<br>';
                                                         $show = true;
                                                     }
                                                     if ($department->status == 'Transfered') {
-                                                        echo $trans_comm;
+                                                        echo '<strong>Incident:</strong> ' . $trans_comm . '<br>';
                                                         $show = true;
                                                     }
                                                     if ($department->status == 'Reopen') {
-                                                        echo $reopen_comm;
+                                                        echo '<strong>Incident:</strong> ' . $reopen_comm . '<br>';
                                                         $show = true;
                                                     }
-
                                                     if ($show == false && $department->status == 'Closed') {
-                                                        echo 'Ticket was transferred';
+                                                        echo '<strong>Incident:</strong> Ticket was transferred<br>';
                                                     }
                                                 } else {
-
                                                     foreach ($department->feed->reason as $key => $value) {
-
-
                                                         if ($key) {
                                                             if ($titles[$key] == $department->department->description) {
-                                                               if (in_array($key, $keys)) {
-    echo "<strong>Incident</strong> : " . $res[$key] . "<br>";
-    echo "<strong>Incident Short Name </strong>: " . $department->department->description . "<br>";
-
-    $show = $res[$key]; // save the incident for later use
-}
+                                                                if (in_array($key, $keys)) {
+                                                                    echo '<strong>Incident:</strong> ' . $res[$key] . '<br>';
+                                                                    echo '<strong>Incident Short Name:</strong> ' . $department->department->description . '<br>';
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
-                                                // print_r($show);
                                                 ?>
-                                                </td>
+                                            </td>
                                             <td style="overflow: clip; word-break: break-all;">
 
 
