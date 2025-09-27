@@ -15,10 +15,7 @@ class Qualitybenchmark extends CI_Controller
 		));
 		if ($this->session->userdata('isLogIn') == false)
 			redirect('login');
-		if ($this->session->userdata['user_role'] > 2) {
-
-			redirect('dashboard/noaccess');
-		}
+		
 	}
 
 	public function index()
