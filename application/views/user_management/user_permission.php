@@ -129,7 +129,7 @@ $mobile = $user->mobile;
                                                         $userId = $userItem->user_id;
                                                         $floorWard = json_decode($userItem->floor_ward, true);
                                                     ?>
-                                                        <input type="checkbox" name="floor_ward[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, $floorWard) ? 'checked' : ''; ?>>
+                                                        <input type="checkbox" name="floor_ward[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, (array)$floorWard) ? 'checked' : ''; ?>>
                                                         &nbsp;
                                                         <?php echo $row->title; ?>
                                                     <?php } ?>
@@ -217,7 +217,7 @@ $mobile = $user->mobile;
                                                         $userId = $userItem->user_id;
                                                         $floorWard_esr = json_decode($userItem->floor_ward_esr, true);
                                                     ?>
-                                                        <input type="checkbox" name="floor_ward_esr[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, $floorWard_esr) ? 'checked' : ''; ?>>
+                                                        <input type="checkbox" name="floor_ward_esr[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, (array)$floorWard_esr) ? 'checked' : ''; ?>>
                                                         &nbsp;
                                                         <?php echo $row->title; ?>
                                                     <?php } ?>
@@ -304,10 +304,10 @@ $mobile = $user->mobile;
                                 $sectionTypes = [
                                     'FEATURE' => 'Feature Access Controls',
                                     'MESSAGE' => 'SMS Alerts',
-                                    'EMAIL' => 'Email Alerts',
+                                    'EMAIL'   => 'Email Alerts',
                                     'WHATSAPP' => 'Whatsapp Alerts'
                                 ];
-                                $groupedFeatures = ['FEATURE' => [], 'MESSAGE' => [], 'EMAIL' => []];
+                                $groupedFeatures = ['FEATURE' => [], 'MESSAGE' => [], 'EMAIL' => [], 'WHATSAPP' => []];
 
                                 foreach ($moduleRow as $sectionId => $sectionRow) {
                                     foreach ($sectionRow as $featureRow) {
@@ -332,34 +332,240 @@ $mobile = $user->mobile;
                                         </div>
                                         <div id="nestedCollapse<?php echo md5($module . $type); ?>" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <table class="table table-bordered">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
-                                                            <th style="font-size: 16px; text-align: center;">Manage Access</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php foreach ($groupedFeatures[$type] as $featureRow) { ?>
-                                                            <tr>
-                                                                <td>
-                                                                    <?php echo $featureRow['feature_description']; ?>
-                                                                    <?php if (!empty($featureRow['feature_tooltip'])) { ?>
-                                                                        <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
-                                                                    <?php } ?>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="d-flex justify-content-center">
-                                                                        <div class="material-switch pull-left">
-                                                                            <input id="feature<?php echo $featureRow['feature_id']; ?>" name="feature[<?php echo $featureRow['feature_id']; ?>]" type="checkbox" <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
-                                                                            <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
-                                                                        </div>
+
+                                                <?php if ($module === 'HEALTHCARE AUDIT FORMS' && $type === 'FEATURE') { ?>
+
+                                                    <!-- Sub-section Accordion under FEATURE for HEALTHCARE AUDIT FORMS -->
+                                                    <div class="panel-group" id="subAccordion<?php echo md5($module . $type); ?>">
+                                                        <?php
+                                                        // Map Subsections into feature_id
+                                                        $manualSubSections = [
+                                                            'AUDIT MANAGER DASHBOARD' => [265, 299],
+                                                            'MRD & MDC' => range(266, 294),
+                                                            'Nursing & IPSG' => array_merge(range(295, 297), [300], range(403, 413)),
+                                                            'Clinical Outcome' => range(434, 459),
+                                                            'Clinical KPI' => range(460, 461),
+                                                            'Infection Control & PCI' => range(475, 501),
+                                                            'Clinical Pathways' => range(502, 512)
+                                                        ];
+
+                                                        foreach ($manualSubSections as $subTitle => $featureIds) { ?>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <h4 class="panel-title">
+                                                                        <a data-toggle="collapse"
+                                                                            data-parent="#subAccordion<?php echo md5($module . $type); ?>"
+                                                                            href="#subCollapse<?php echo md5($module . $type . $subTitle); ?>"
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <?php echo $subTitle; ?>
+                                                                            <span><i class="fa fa-chevron-down rotate-icon"></i></span>
+                                                                        </a>
+                                                                    </h4>
+                                                                </div>
+                                                                <div id="subCollapse<?php echo md5($module . $type . $subTitle); ?>" class="panel-collapse collapse">
+                                                                    <div class="panel-body">
+                                                                        <table class="table table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
+                                                                                    <th style="font-size: 16px; text-align: center;">Manage Access</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php foreach ($groupedFeatures[$type] as $featureRow) {
+                                                                                    if (!in_array($featureRow['feature_id'], $featureIds)) continue; ?>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <?php echo $featureRow['feature_description']; ?>
+                                                                                            <?php if (!empty($featureRow['feature_tooltip'])) { ?>
+                                                                                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
+                                                                                            <?php } ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="d-flex justify-content-center">
+                                                                                                <div class="material-switch pull-left">
+                                                                                                    <input id="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                                                        name="feature[<?php echo $featureRow['feature_id']; ?>]"
+                                                                                                        type="checkbox"
+                                                                                                        <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
+                                                                                                    <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                <?php } ?>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
-                                                                </td>
-                                                            </tr>
+                                                                </div>
+                                                            </div>
                                                         <?php } ?>
-                                                    </tbody>
-                                                </table>
+                                                    </div>
+
+                                                <?php } elseif ($module === 'QUALITY KPI MODULES' && $type === 'FEATURE') { ?>
+
+                                                    <div class="panel-group" id="subAccordion<?php echo md5($module . $type); ?>">
+                                                        <?php
+                                                        // Map Subsections into feature_id
+                                                        $manualSubSections = [
+                                                            'QUALITY MANAGEMENT DASHBOARD' => [227, 298, 433],
+                                                            'MRD' => array_merge(range(228, 229), [231], [233], [519], range(534, 535), range(538, 539), range(543, 544)),
+                                                            'Nursing' => array_merge(range(235, 236), [249, 263, 471, 517], range(520, 522), range(524, 530), [536], range(540, 542), range(545, 547), range(551, 552), [555, 567], range(572, 573)),
+                                                            'Emergency Department' => array_merge([230], [234], range(238, 239), [246], [523], [528]),
+                                                            'Clinical Nutrition & Dietetics' => [232],
+                                                            'Lab Service' => array_merge([237], [250], range(255, 257), [264], range(358, 359)),
+                                                            'Medical Records' => [241],
+                                                            'Pulmonary Medicine' => [242],
+                                                            'Pediatrics' => [243],
+                                                            'Gastro Surgery' => [244],
+                                                            'Radiology' => array_merge([245], range(258, 261), [537]),
+                                                            'Nephrology' => [247],
+                                                            'Medical Administration' => [248, 556],
+                                                            'OT' => array_merge([262], range(465, 467), range(469, 470)),
+                                                            'Clinical Pharmacy' => array_merge(range(360, 373), [464], [468], [533]),
+                                                            'Anasthesia' => array_merge(range(374, 375), range(462, 463)),
+                                                            'Blood Center' => range(476, 485),
+                                                            'Infection Control' => array_merge(range(513, 516), [532], [554], [570]),
+                                                            'Housekeeping' => [518],
+                                                            'Quality Office' => array_merge([531], range(548, 550), [568], [574]),
+                                                            'Physiotherapy' => array_merge([553], range(557, 558)),
+                                                            'Security & Safety' => array_merge(range(559, 561), [569], [571]),
+                                                            'Pharmacy' => range(562, 564),
+                                                            'SCM-Store' => [565],
+                                                            'SCM-Purchase' => [566],
+                                                            'Other' => [240]
+                                                        ];
+
+                                                        // Keep track of all subsection IDs to skip
+                                                        $allSubSectionIds = [];
+                                                        foreach ($manualSubSections as $ids) {
+                                                            $allSubSectionIds = array_merge($allSubSectionIds, $ids);
+                                                        }
+
+                                                        // 1️⃣ Render manual subsections first
+                                                        foreach ($manualSubSections as $subTitle => $featureIds) { ?>
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <h4 class="panel-title">
+                                                                        <a data-toggle="collapse"
+                                                                            data-parent="#subAccordion<?php echo md5($module . $type); ?>"
+                                                                            href="#subCollapse<?php echo md5($module . $type . $subTitle); ?>"
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <?php echo $subTitle; ?>
+                                                                            <span><i class="fa fa-chevron-down rotate-icon"></i></span>
+                                                                        </a>
+                                                                    </h4>
+                                                                </div>
+                                                                <div id="subCollapse<?php echo md5($module . $type . $subTitle); ?>" class="panel-collapse collapse">
+                                                                    <div class="panel-body">
+                                                                        <table class="table table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
+                                                                                    <th style="font-size: 16px; text-align: center;">Manage Access</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php foreach ($groupedFeatures[$type] as $featureRow) {
+                                                                                    if (!in_array($featureRow['feature_id'], $featureIds)) continue; ?>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <?php echo $featureRow['feature_description']; ?>
+                                                                                            <?php if (!empty($featureRow['feature_tooltip'])) { ?>
+                                                                                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
+                                                                                            <?php } ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div class="d-flex justify-content-center">
+                                                                                                <div class="material-switch pull-left">
+                                                                                                    <input id="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                                                        name="feature[<?php echo $featureRow['feature_id']; ?>]"
+                                                                                                        type="checkbox"
+                                                                                                        <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
+                                                                                                    <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                <?php } ?>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+
+                                                        <!-- 2️⃣ Render remaining features directly (Later remove the table-->
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
+                                                                    <th style="font-size: 16px; text-align: center;">Manage Access</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <?php foreach ($groupedFeatures[$type] as $featureRow) {
+                                                                    if (in_array($featureRow['feature_id'], $allSubSectionIds)) continue; ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <?php echo $featureRow['feature_description']; ?>
+                                                                            <?php if (!empty($featureRow['feature_tooltip'])) { ?>
+                                                                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
+                                                                            <?php } ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <div class="material-switch pull-left">
+                                                                                    <input id="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                                        name="feature[<?php echo $featureRow['feature_id']; ?>]"
+                                                                                        type="checkbox"
+                                                                                        <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
+                                                                                    <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div> <!-- End of subAccordion -->
+
+                                                <?php } else { ?>
+                                                    <!-- Default rendering for all other modules -->
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
+                                                                <th style="font-size: 16px; text-align: center;">Manage Access</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($groupedFeatures[$type] as $featureRow) { ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $featureRow['feature_description']; ?>
+                                                                        <?php if (!empty($featureRow['feature_tooltip'])) { ?>
+                                                                            <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
+                                                                        <?php } ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="d-flex justify-content-center">
+                                                                            <div class="material-switch pull-left">
+                                                                                <input id="feature<?php echo $featureRow['feature_id']; ?>"
+                                                                                    name="feature[<?php echo $featureRow['feature_id']; ?>]"
+                                                                                    type="checkbox"
+                                                                                    <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
+                                                                                <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                <?php } ?>
+
                                             </div>
                                         </div>
                                     </div>
