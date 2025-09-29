@@ -1894,12 +1894,16 @@ if ($title == null) {
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <?php echo $this->session->flashdata('message'); ?>
                         </div>
+                          <?php $this->session->unset_userdata('message'); // clear after showing ?>
+
                     <?php } ?>
                     <?php if ($this->session->flashdata('exception') != null) { ?>
                         <div class="alert alert-danger alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <?php echo $this->session->flashdata('exception'); ?>
                         </div>
+                       <?php $this->session->unset_userdata('exception'); // clear after showing ?>
+
                     <?php } ?>
                     <?php if (validation_errors()) { ?>
                         <div class="alert alert-danger alert-dismissable">
