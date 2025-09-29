@@ -458,6 +458,7 @@ $pagetitle = $dates['pagetitle'];
                         <?php echo $this->session->flashdata('message'); ?>
 
                     </div>
+                     <?php $this->session->unset_userdata('message'); // clear after showing ?>
 
                 <?php } ?>
 
@@ -472,6 +473,7 @@ $pagetitle = $dates['pagetitle'];
                         <?php echo $this->session->flashdata('exception'); ?>
 
                     </div>
+                     <?php $this->session->unset_userdata('exception'); // clear after showing ?>
 
                 <?php } ?>
 
