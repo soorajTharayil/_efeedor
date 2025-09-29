@@ -14,7 +14,7 @@ include('get_user.php');
 //message to admin  when they are created 
 
 
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 2';
+$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0 ';
 $user_result = mysqli_query($con, $user_query);
 while ($user_object = mysqli_fetch_object($user_result)) {
     $message = '';
@@ -23,37 +23,10 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $email = $user_object->email;
     $parameter = json_decode($user_object->departmentpermission);
     $password = $parameter->password;
-
-
-    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_superadmin_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
-    'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
-
-    // Execute the second query
-    if ($conn_g->query($insert_notification_query) === TRUE) {
-        echo "Data inserted into notifications table successfully.<br>";
-    } else {
-        echo "Error: " . $con->error . "<br>";
-    }
-
-    $query = 'UPDATE user SET `whatsapp_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
-
-
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 3';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-    $email = $user_object->email;
-    $parameter = json_decode($user_object->departmentpermission);
-    $password = $parameter->password;
-
+    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
 
     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_admin_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
+    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'notificationsms_for_users', '" . json_encode([$name, $link, $loginId, $password]) . "', 
     'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
 
     // Execute the second query
@@ -69,109 +42,8 @@ while ($user_object = mysqli_fetch_object($user_result)) {
 
 
 
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 4';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-    $email = $user_object->email;
-    $parameter = json_decode($user_object->departmentpermission);
-    $password = $parameter->password;
 
 
-    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_departmenthead_account_creation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
-    'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
-
-    // Execute the second query
-    if ($conn_g->query($insert_notification_query) === TRUE) {
-        echo "Data inserted into notifications table successfully.<br>";
-    } else {
-        echo "Error: " . $con->error . "<br>";
-    }
-
-    $query = 'UPDATE user SET `whatsapp_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
-
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 8';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-    $email = $user_object->email;
-    $parameter = json_decode($user_object->departmentpermission);
-    $password = $parameter->password;
-
-
-    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_patientcoordinator_accountcreation', '" . json_encode([$name, $hospitalname, "Your Email id or Mobile Number", $password, $link, $hospitalname]) . "', 
-    'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
-
-    // Execute the second query
-    if ($conn_g->query($insert_notification_query) === TRUE) {
-        echo "Data inserted into notifications table successfully.<br>";
-    } else {
-        echo "Error: " . $con->error . "<br>";
-    }
-
-    $query = 'UPDATE user SET `whatsapp_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
-
-$user_query = 'SELECT * FROM `user` WHERE `whatsapp_alert` = 0  AND `user_role` = 10';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-    $email = $user_object->email;
-    $parameter = json_decode($user_object->departmentpermission);
-    $password = $parameter->password;
-
-
-    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status) 
-    VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'usersms_on_employee_accountcreation', '" . json_encode([$name, $hospitalname, $link, "Your Email id or Mobile Number", $password, $hospitalname]) . "', 
-    'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending')";
-
-    // Execute the second query
-    if ($conn_g->query($insert_notification_query) === TRUE) {
-        echo "Data inserted into notifications table successfully.<br>";
-    } else {
-        echo "Error: " . $con->error . "<br>";
-    }
-
-    $query = 'UPDATE user SET `whatsapp_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
-
-
-
-$user_query = 'SELECT * FROM `user` WHERE `message_alert` = 0  AND `user_role` = 3';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $message = '';
-    $number = $user_object->mobile;
-    $name = $user_object->firstname;
-
-    $message = "Hi " . $name . ",%0aYour user account is now active on the Efeedor Patient Experience Platform at " . $hospitalname . ". Get your login credentials from the superadmin and access your personalized dashboard at " . $link . ". We're dedicated to enhancing your patient experience! %0a-EFEEDOR";
-
-    $TEMPID = '1607100000000284308';
-    $meta_data['config_set_url'] = $config_set['BASE_URL'];
-    $meta_data['config_set_domain'] = $config_set['DOMAIN'];
-    $meta_data['patient_detail'] = $r;
-    $meta_data['sent_time'] = time();
-    $message = str_replace('&', 'and', str_replace(' ', '%20', $message));
-    $query = "INSERT INTO `notification`(`uuid`,`type`, `message`, `status`, `mobile_email`, `template_id`, `HID`,`meta`) VALUES ('$uuid','user', '" . mysqli_real_escape_string($con, $message) . "', 0, '$number', '$TEMPID', '$HID','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "')";
-    $conn_g->query($query);
-
-
-
-    $query = 'UPDATE user SET `message_alert` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
 
 // for whatsapp user message 
 

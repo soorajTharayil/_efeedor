@@ -21,19 +21,18 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $email = $user_object->email;
     $password = $permission->password;
     $name = $user_object->firstname;
+    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
 
-    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
+    $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'Welcome aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b>. You can now access the dashboard to explore insights and receive alerts to enhance service delivery. <br /><br />';
-    $message1 .= 'Get Started: <br /><br />';
+    $message1 .= 'Welcome aboard! <br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
     $message1 .= 'Web Link: ' . $link . ' <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: Please update your default password in the "Edit Profile" section (top-right of your dashboard) for security purposes. <br /><br />';
-    $message1 .= 'If you need any assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'We are excited to have you on board—happy exploring! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= 'Username: ' . $loginId . ' <br />';
+    $message1 .= 'Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
 
 
@@ -54,20 +53,18 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = 'Welcome to Efeedor - Your Admin Account is Now Active!';
+   $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
+
+    $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on the Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b> with Admin privileges. You can now access the dashboard to explore insights and receive alerts to enhance service delivery. <br /><br />';
-    $message1 .= 'Explore Your Admin Privileges: <br /><br />';
-    $message1 .= 'Access the Dashboard: ' . $link . ' <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security purposes, please update your default password in the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
-    $message1 .= 'To familiarize yourself with the application and understand your admin functionalities, we recommend reviewing the Admin Manual here: <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor-AdminDashboard-Manual <br /><br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= 'Welcome aboard! <br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
+    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $loginId . ' <br />';
+    $message1 .= 'Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
 
 
