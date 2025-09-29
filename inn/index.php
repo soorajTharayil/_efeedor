@@ -208,11 +208,11 @@
 
 		</button>
 		<!-- dropdown for three language start -->
-		<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal"
+		<!-- <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal"
 			style="margin: 4px; float:right;">
 			{{type2}}
 			<i class="fa fa-language" aria-hidden="true"></i>
-		</button>
+		</button> -->
 		<!-- dropdown for three language end -->
 	</nav>
 	<!-- top navbar end -->
