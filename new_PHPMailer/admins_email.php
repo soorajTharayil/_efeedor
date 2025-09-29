@@ -25,12 +25,11 @@ while ($user_object = mysqli_fetch_object($user_result)) {
 
     $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'Welcome aboard! <br />';
     $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
     $message1 .= 'Web Link: ' . $link . ' <br /><br />';
     $message1 .= 'Username: ' . $loginId . ' <br />';
     $message1 .= 'Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
     $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
     $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
@@ -53,16 +52,15 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-   $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
+    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
 
     $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'Welcome aboard! <br />';
     $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
     $message1 .= 'Web Link: ' . $link . ' <br /><br />';
     $message1 .= 'Username: ' . $loginId . ' <br />';
     $message1 .= 'Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
     $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
     $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
@@ -98,83 +96,83 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
 
     $setup_query = "SELECT * FROM setup WHERE parent = 1";
     $setup_result = mysqli_query($con, $setup_query);
-    
+
     while ($setup_object = mysqli_fetch_object($setup_result)) {
         $shortkey = trim($setup_object->shortkey);
         $shortname = trim($setup_object->shortname);
-    
+
         echo "Checking shortkey: " . ($shortkey ?: '[EMPTY]') . "<br>";
-    
+
         if (!empty($shortkey) && isset($param_ip->$shortkey) && $param_ip->$shortkey !== "") {
             $feedback_details[] = "$shortname : {$param_ip->$shortkey}";
         }
     }
-    
+
     // Print feedback details for debugging
     // print_r($feedback_details);
-   
+
 
     $nps = $param_ip->recommend1Score * 2;
     //message1 will insert when there is only ONE TIKECT
     $nps = $param_ip->recommend1Score * 2;
 
-  // Message for feedback email
-$message1 = '<html><body>';
-$message1 .= '<div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto;">';
+    // Message for feedback email
+    $message1 = '<html><body>';
+    $message1 .= '<div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto;">';
 
-// Header
-$message1 .= '<h2 style="background-color: #0073e6; color: white; padding: 12px; text-align: center; border-radius: 5px;">Patient Feedback Notification</h2>';
-$message1 .= '<p>Hi, <br /><br />You have received feedback from a discharged inpatient. Please find the details below:</p>';
+    // Header
+    $message1 .= '<h2 style="background-color: #0073e6; color: white; padding: 12px; text-align: center; border-radius: 5px;">Patient Feedback Notification</h2>';
+    $message1 .= '<p>Hi, <br /><br />You have received feedback from a discharged inpatient. Please find the details below:</p>';
 
-// Patient Details Table
-$message1 .= '<table border="0" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">';
-$message1 .= '<tr style="background-color: #f8f8f8;"><th colspan="2" style="text-align: left; padding: 12px;">Patient Details</th></tr>';
-$message1 .= '<tr><td><strong>Patient Name</strong></td><td>' . htmlspecialchars($param_ip->name) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Patient UHID</strong></td><td>' . htmlspecialchars($param_ip->patientid) . '</td></tr>';
-$message1 .= '<tr><td><strong>Mobile Number</strong></td><td>' . htmlspecialchars($param_ip->contactnumber) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Email ID</strong></td><td>' . htmlspecialchars($param_ip->email) . '</td></tr>';
-$message1 .= '<tr><td><strong>Floor/Ward</strong></td><td>' . htmlspecialchars($param_ip->ward) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Site</strong></td><td>' . htmlspecialchars($param_ip->bedno) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Source</strong></td><td>' . htmlspecialchars($feedback_object->source) . '</td></tr>';
-$message1 .= '</table><br>';
+    // Patient Details Table
+    $message1 .= '<table border="0" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">';
+    $message1 .= '<tr style="background-color: #f8f8f8;"><th colspan="2" style="text-align: left; padding: 12px;">Patient Details</th></tr>';
+    $message1 .= '<tr><td><strong>Patient Name</strong></td><td>' . htmlspecialchars($param_ip->name) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Patient UHID</strong></td><td>' . htmlspecialchars($param_ip->patientid) . '</td></tr>';
+    $message1 .= '<tr><td><strong>Mobile Number</strong></td><td>' . htmlspecialchars($param_ip->contactnumber) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Email ID</strong></td><td>' . htmlspecialchars($param_ip->email) . '</td></tr>';
+    $message1 .= '<tr><td><strong>Floor/Ward</strong></td><td>' . htmlspecialchars($param_ip->ward) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Site</strong></td><td>' . htmlspecialchars($param_ip->bedno) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Source</strong></td><td>' . htmlspecialchars($feedback_object->source) . '</td></tr>';
+    $message1 .= '</table><br>';
 
-// Feedback Details Table
-$message1 .= '<table border="0" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">';
-$message1 .= '<tr style="background-color: #0073e6; color: white;"><th colspan="2" style="text-align: left; padding: 12px;">Feedback Details</th></tr>';
+    // Feedback Details Table
+    $message1 .= '<table border="0" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">';
+    $message1 .= '<tr style="background-color: #0073e6; color: white;"><th colspan="2" style="text-align: left; padding: 12px;">Feedback Details</th></tr>';
 
 
-if (!empty($feedback_details)) {
-    $message1 .= '<tr><th style="width: 80%; background-color: #f2f2f2; text-align: left;">Feedback</th>';
-    $message1 .= '<th style="width: 20%; background-color: #f2f2f2; text-align: center;">Rating</th></tr>';
-    
-    foreach ($feedback_details as $feedback) {
-        list($label, $rating) = explode(':', $feedback, 2); // Split label and rating
-        $message1 .= '<tr>';
-        $message1 .= '<td style="border-bottom: 1px solid #ddd; color: #333; padding: 8px; text-align: left;">' . htmlspecialchars(trim($label)) . '</td>';
-        $message1 .= '<td style="border-bottom: 1px solid #ddd; color: #333; padding: 8px; text-align: center;">' . htmlspecialchars(trim($rating)) . '</td>';
-        $message1 .= '</tr>';
+    if (!empty($feedback_details)) {
+        $message1 .= '<tr><th style="width: 80%; background-color: #f2f2f2; text-align: left;">Feedback</th>';
+        $message1 .= '<th style="width: 20%; background-color: #f2f2f2; text-align: center;">Rating</th></tr>';
+
+        foreach ($feedback_details as $feedback) {
+            list($label, $rating) = explode(':', $feedback, 2); // Split label and rating
+            $message1 .= '<tr>';
+            $message1 .= '<td style="border-bottom: 1px solid #ddd; color: #333; padding: 8px; text-align: left;">' . htmlspecialchars(trim($label)) . '</td>';
+            $message1 .= '<td style="border-bottom: 1px solid #ddd; color: #333; padding: 8px; text-align: center;">' . htmlspecialchars(trim($rating)) . '</td>';
+            $message1 .= '</tr>';
+        }
+    } else {
+        $message1 .= '<tr><td colspan="2" style="border-bottom: 1px solid #ddd; color: #999; text-align: center;">No detailed feedback provided.</td></tr>';
     }
-} else {
-    $message1 .= '<tr><td colspan="2" style="border-bottom: 1px solid #ddd; color: #999; text-align: center;">No detailed feedback provided.</td></tr>';
-}
 
-$message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Feedback Link</strong></td><td><a href="' . htmlspecialchars($admins_ip_link) . '" style="color: #0073e6;">View Feedback</a></td></tr>';
-$message1 .= '<tr><td><strong>Satisfaction Status</strong></td><td>' . htmlspecialchars($nps_s) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Average Rating</strong></td><td>' . htmlspecialchars($param_ip->overallScore) . '</td></tr>';
-$message1 .= '<tr><td><strong>NPS Rating</strong></td><td>' . htmlspecialchars($nps) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Recognized Staff</strong></td><td>' . htmlspecialchars($param_ip->staffname) . '</td></tr>';
-$message1 .= '<tr><td><strong>Other Feedbacks / Suggestions</strong></td><td>' . htmlspecialchars($param_ip->suggestionText) . '</td></tr>';
-$message1 .= '</table><br>';
+    $message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Feedback Link</strong></td><td><a href="' . htmlspecialchars($admins_ip_link) . '" style="color: #0073e6;">View Feedback</a></td></tr>';
+    $message1 .= '<tr><td><strong>Satisfaction Status</strong></td><td>' . htmlspecialchars($nps_s) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Average Rating</strong></td><td>' . htmlspecialchars($param_ip->overallScore) . '</td></tr>';
+    $message1 .= '<tr><td><strong>NPS Rating</strong></td><td>' . htmlspecialchars($nps) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Recognized Staff</strong></td><td>' . htmlspecialchars($param_ip->staffname) . '</td></tr>';
+    $message1 .= '<tr><td><strong>Other Feedbacks / Suggestions</strong></td><td>' . htmlspecialchars($param_ip->suggestionText) . '</td></tr>';
+    $message1 .= '</table><br>';
 
-// Call to Action
-$message1 .= '<p style="text-align: center;">';
-$message1 .= '<a href="' . htmlspecialchars($admins_ip_link) . '" style="background-color: #0073e6; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">View Feedback</a>';
-$message1 .= '</p>';
+    // Call to Action
+    $message1 .= '<p style="text-align: center;">';
+    $message1 .= '<a href="' . htmlspecialchars($admins_ip_link) . '" style="background-color: #0073e6; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">View Feedback</a>';
+    $message1 .= '</p>';
 
-// Signature
-$message1 .= '<p><strong>Best Regards,</strong><br>' . $hospitalname . '</p>';
-$message1 .= '</div>';
-$message1 .= '</body></html>';
+    // Signature
+    $message1 .= '<p><strong>Best Regards,</strong><br>' . $hospitalname . '</p>';
+    $message1 .= '</div>';
+    $message1 .= '</body></html>';
 
 
 
@@ -215,71 +213,71 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
 
     $setup_query = "SELECT * FROM setupop WHERE parent = 1";
     $setup_result = mysqli_query($con, $setup_query);
-    
+
     while ($setup_object = mysqli_fetch_object($setup_result)) {
         $shortkey = trim($setup_object->shortkey);
         $shortname = trim($setup_object->shortname);
-    
+
         echo "Checking shortkey: " . ($shortkey ?: '[EMPTY]') . "<br>";
-    
+
         if (!empty($shortkey) && isset($param_ip->$shortkey) && $param_ip->$shortkey !== "") {
             $feedback_details[] = "$shortname : {$param_ip->$shortkey}";
         }
     }
-    
-    
+
+
     $nps = $param_ip->recommend1Score * 2;
     //message1 will insert when there is only ONE TIKECT
     $message1 = 'Hi, <br /><br />';
-$message1 .= 'You have received feedback from an outpatient. Please find the details below: <br /><br />';
+    $message1 .= 'You have received feedback from an outpatient. Please find the details below: <br /><br />';
 
-$message1 .= '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; color: #333;">';
+    $message1 .= '<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; color: #333;">';
 
-// Patient Details Section
-$message1 .= '<tr><th colspan="2" style="background-color: #0073e6; color: #fff; text-align: left; padding: 10px;">Patient Details</th></tr>';
-$message1 .= '<tr><td style="width: 40%; font-weight: bold; background-color: #f9f9f9;">Patient Name</td><td>' . htmlspecialchars($param_ip->name) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Patient UHID</td><td>' . htmlspecialchars($param_ip->patientid) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Mobile Number</td><td>' . htmlspecialchars($param_ip->contactnumber) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Email ID</td><td>' . htmlspecialchars($param_ip->email) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Floor/Ward</td><td>' . htmlspecialchars($param_ip->ward) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Speciality</td><td>' . htmlspecialchars($param_ip->bedno) . '</td></tr>';
-$message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Source</strong></td><td>' . htmlspecialchars($feedback_object->source) . '</td></tr>';
+    // Patient Details Section
+    $message1 .= '<tr><th colspan="2" style="background-color: #0073e6; color: #fff; text-align: left; padding: 10px;">Patient Details</th></tr>';
+    $message1 .= '<tr><td style="width: 40%; font-weight: bold; background-color: #f9f9f9;">Patient Name</td><td>' . htmlspecialchars($param_ip->name) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Patient UHID</td><td>' . htmlspecialchars($param_ip->patientid) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Mobile Number</td><td>' . htmlspecialchars($param_ip->contactnumber) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Email ID</td><td>' . htmlspecialchars($param_ip->email) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Floor/Ward</td><td>' . htmlspecialchars($param_ip->ward) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Speciality</td><td>' . htmlspecialchars($param_ip->bedno) . '</td></tr>';
+    $message1 .= '<tr style="background-color: #f2f2f2;"><td><strong>Source</strong></td><td>' . htmlspecialchars($feedback_object->source) . '</td></tr>';
 
 
-// Feedback Details Section
-$message1 .= '<tr><th colspan="2" style="background-color: #0073e6; color: #fff; text-align: left; padding: 10px;">Feedback Details</th></tr>';
+    // Feedback Details Section
+    $message1 .= '<tr><th colspan="2" style="background-color: #0073e6; color: #fff; text-align: left; padding: 10px;">Feedback Details</th></tr>';
 
-// Display Feedback Details
-if (!empty($feedback_details)) {
-    $message1 .= '<tr><th style="width: 80%; background-color: #f2f2f2; text-align: left;">Feedback</th>';
-    $message1 .= '<th style="width: 20%; background-color: #f2f2f2; text-align: center;">Rating</th></tr>';
-    
-    foreach ($feedback_details as $feedback) {
-        list($label, $rating) = explode(':', $feedback, 2);
-        $message1 .= '<tr>';
-        $message1 .= '<td style="border-bottom: 1px solid #ddd; padding: 8px; text-align: left;">' . htmlspecialchars(trim($label)) . '</td>';
-        $message1 .= '<td style="border-bottom: 1px solid #ddd; padding: 8px; text-align: center;">' . htmlspecialchars(trim($rating)) . '</td>';
-        $message1 .= '</tr>';
+    // Display Feedback Details
+    if (!empty($feedback_details)) {
+        $message1 .= '<tr><th style="width: 80%; background-color: #f2f2f2; text-align: left;">Feedback</th>';
+        $message1 .= '<th style="width: 20%; background-color: #f2f2f2; text-align: center;">Rating</th></tr>';
+
+        foreach ($feedback_details as $feedback) {
+            list($label, $rating) = explode(':', $feedback, 2);
+            $message1 .= '<tr>';
+            $message1 .= '<td style="border-bottom: 1px solid #ddd; padding: 8px; text-align: left;">' . htmlspecialchars(trim($label)) . '</td>';
+            $message1 .= '<td style="border-bottom: 1px solid #ddd; padding: 8px; text-align: center;">' . htmlspecialchars(trim($rating)) . '</td>';
+            $message1 .= '</tr>';
+        }
+    } else {
+        $message1 .= '<tr><td colspan="2" style="border-bottom: 1px solid #ddd; color: #999; text-align: center;">No detailed feedback provided.</td></tr>';
     }
-} else {
-    $message1 .= '<tr><td colspan="2" style="border-bottom: 1px solid #ddd; color: #999; text-align: center;">No detailed feedback provided.</td></tr>';
-}
 
-// Additional Feedback Info
-$message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Feedback Link</strong></td><td><a href="' . htmlspecialchars($admins_ip_link) . '" style="color: #0073e6;">View Feedback</a></td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Satisfaction Status</td><td>' . htmlspecialchars($nps_s) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Average Rating</td><td>' . htmlspecialchars($param_ip->overallScore) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">NPS Rating</td><td>' . htmlspecialchars($nps) . '</td></tr>';
-$message1 .= '<tr><td style="background-color: #f9f9f9;">Other Feedbacks / Suggestions</td><td>' . htmlspecialchars($param_ip->suggestionText) . '</td></tr>';
-$message1 .= '</table><br />';
+    // Additional Feedback Info
+    $message1 .= '<tr style="background-color: #f8f8f8;"><td><strong>Feedback Link</strong></td><td><a href="' . htmlspecialchars($admins_ip_link) . '" style="color: #0073e6;">View Feedback</a></td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Satisfaction Status</td><td>' . htmlspecialchars($nps_s) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Average Rating</td><td>' . htmlspecialchars($param_ip->overallScore) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">NPS Rating</td><td>' . htmlspecialchars($nps) . '</td></tr>';
+    $message1 .= '<tr><td style="background-color: #f9f9f9;">Other Feedbacks / Suggestions</td><td>' . htmlspecialchars($param_ip->suggestionText) . '</td></tr>';
+    $message1 .= '</table><br />';
 
-// Feedback link section
-$message1 .= 'To view the feedback submitted by the patient, please click on the link below:<br />';
-// Call to Action
-$message1 .= '<p style="text-align: center;">';
-$message1 .= '<a href="' . htmlspecialchars($admins_ip_link) . '" style="background-color: #0073e6; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">View Feedback</a>';
-$message1 .= '</p>';
-$message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
+    // Feedback link section
+    $message1 .= 'To view the feedback submitted by the patient, please click on the link below:<br />';
+    // Call to Action
+    $message1 .= '<p style="text-align: center;">';
+    $message1 .= '<a href="' . htmlspecialchars($admins_ip_link) . '" style="background-color: #0073e6; color: white; padding: 10px 20px; text-decoration: none; font-size: 16px; border-radius: 5px; display: inline-block;">View Feedback</a>';
+    $message1 .= '</p>';
+    $message1 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
 
 
     $users = get_user_by_sms_activity('ALL-FEEDBACKS-EMAIL-ALERT-OP', $con);
@@ -393,12 +391,12 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
         //message2 will insert when there is  MULTIPLE TIKECT
         $message2 = 'Dear Team, <br /><br />';
         $message2 .= 'We would like to bring to your attention a recent negative feedback reported by an Discharged Inpatient at ' . $hospitalname . '. Below are the patient details : <br /><br />';
-        $message2 .= '<strong>Patient Name: </strong>' . $param_ip->name . 
-        ' <br /><strong>UHID: </strong>' . $param_ip->patientid . 
-        ' <br /><strong>Floor/Ward: </strong>' . $feedback_object->ward . 
-        ' <br /><strong>Room/Bed No: </strong>' . $feedback_object->bed_no.
-        ' <br /><strong>Source: </strong>' . $feedback_object->source;
-            $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_ip_link . '<br /><br />';
+        $message2 .= '<strong>Patient Name: </strong>' . $param_ip->name .
+            ' <br /><strong>UHID: </strong>' . $param_ip->patientid .
+            ' <br /><strong>Floor/Ward: </strong>' . $feedback_object->ward .
+            ' <br /><strong>Room/Bed No: </strong>' . $feedback_object->bed_no .
+            ' <br /><strong>Source: </strong>' . $feedback_object->source;
+        $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_ip_link . '<br /><br />';
         $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     } else {
@@ -514,11 +512,11 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
         //message2 will insert when there is  MULTIPLE TIKECT
         $message2 = 'Dear Team, <br /><br />';
         $message2 .= 'We would like to bring to your attention a recent negative feedback reported by an  Outpatient at ' . $hospitalname . '. Below are the patient details : <br /><br />';
-        $message2 .= '<strong>Patient Name: </strong>' . $param_op->name . 
-        ' <br /><strong>UHID: </strong>' . $param_op->patientid . 
-        ' <br /><strong>Speciality: </strong>' . $feedbackop_object->ward.
-        ' <br /><strong>Source: </strong>' . $feedbackop_object->source;
-   $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_op_link . '<br /><br />';
+        $message2 .= '<strong>Patient Name: </strong>' . $param_op->name .
+            ' <br /><strong>UHID: </strong>' . $param_op->patientid .
+            ' <br /><strong>Speciality: </strong>' . $feedbackop_object->ward .
+            ' <br /><strong>Source: </strong>' . $feedbackop_object->source;
+        $message2 .= '<br /><br />To view more details and take necessary action, please follow the below link:<br />' . $admins_op_link . '<br /><br />';
         $message2 .= 'Your prompt attention to this matter is crucial in ensuring that we provide the highest quality of care and service to our patients.';
         $message2 .= '<br /><br /><strong>Best Regards,</strong><br />' . $hospitalname . ' ';
     } else {
@@ -942,7 +940,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td width="60%">' . $param_incident->other . '</td>
              </tr>';
         }
-       
+
 
         $message1 .= '
              <tr>
