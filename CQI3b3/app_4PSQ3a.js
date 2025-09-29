@@ -276,7 +276,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		}
 
 		// First check for duplicates
-		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3a3')
+		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3b3')
 			.then(function (response) {
 				if (response.data.status === "exists") {
 					alert("The KPI is already recorded for this month");
