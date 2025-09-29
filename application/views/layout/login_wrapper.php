@@ -33,7 +33,6 @@ $settings = $this->db->select("site_align")
     <!-- style css -->
     <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css" />
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lc8CkcqAAAAACv2WebgYioIVJhljcDhqJk5AbAz"></script>
 
 
 </head>
