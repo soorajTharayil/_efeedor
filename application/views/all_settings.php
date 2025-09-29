@@ -106,7 +106,7 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 								</tr>
 
 
-								<?php if (ismodule_active('GLOBAL') === true && isfeature_active('SUPPLEMENTARY-INFO') === true || $this->session->userdata['user_role'] == 1) { ?>
+								<!-- <?php if (ismodule_active('GLOBAL') === true && isfeature_active('SUPPLEMENTARY-INFO') === true || $this->session->userdata['user_role'] == 1) { ?>
 									<tr>
 
 										<td><b><?php echo lang_loader('global', 'global_supplementary_info'); ?></b>
@@ -129,7 +129,7 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 										</td>
 
 									</tr>
-								<?php } ?>
+								<?php } ?> -->
 
 
 								<?php if (isfeature_active('IP-FEEDBACKS-DASHBOARD') === true || isfeature_active('OP-FEEDBACKS-DASHBOARD') === true || isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
@@ -204,7 +204,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 											<td>
 
-												<a class="btn btn-success" href="<?php echo base_url("settings/sites_op_location") ?>">
+												<a class="btn btn-success"
+													href="<?php echo base_url("settings/sites_op_location") ?>">
 													<i class="fa fa-gear"></i>
 													Manage</a>
 
@@ -219,7 +220,7 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<tr>
 
-											<td><b><?php echo lang_loader('global', 'global_floors_sites_service'); ?></b>
+											<td><b>Floors & Sites for Incident Manager </b>
 												<span>
 													<a href="javascript:void()" data-toggle="tooltip"
 														title="<?php echo $isr_floor_tooltip; ?>" data-placement="right">
@@ -505,7 +506,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 								<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
 									<tr>
-										<td colspan="2"><strong><span style="font-size: 18px;">Manage Quality Module</span></strong>
+										<td colspan="2"><strong><span style="font-size: 18px;">Manage Quality
+													Module</span></strong>
 										</td>
 									</tr>
 
@@ -522,7 +524,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/quality_benchmark") ?>"> <i
+											<a class="btn btn-success"
+												href="<?php echo base_url("settings/quality_benchmark") ?>"> <i
 													class="fa fa-gear"></i>
 												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
@@ -532,10 +535,11 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 								<?php } ?>
 
-								
+
 								<?php if (ismodule_active('AUDIT') === true && isfeature_active('AUDIT-DASHBOARD') === true) { ?>
 									<tr>
-										<td colspan="2"><strong><span style="font-size: 18px;">Manage Audit Module</span></strong>
+										<td colspan="2"><strong><span style="font-size: 18px;">Manage Audit
+													Module</span></strong>
 										</td>
 									</tr>
 
@@ -543,7 +547,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td><b>Audit Frequency</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_frequency_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $audit_frequency_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -551,7 +556,10 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/audit_frequency") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success"
+												href="<?php echo base_url("settings/audit_frequency") ?>" target="_blank">
+												<i class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -561,7 +569,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td><b>Audit Departments</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_department_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $audit_department_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -569,7 +578,10 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/audit_department") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success"
+												href="<?php echo base_url("settings/audit_department") ?>" target="_blank">
+												<i class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -579,7 +591,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td><b>Audit doctor list</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_doctor_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $audit_doctor_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -587,7 +600,10 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/audit_doctor") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success"
+												href="<?php echo base_url("settings/audit_doctor") ?>" target="_blank"> <i
+													class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -809,19 +825,21 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 									</tr> -->
 
-									
+
 								<?php } ?>
 
 								<?php if (ismodule_active('ASSET') === true && isfeature_active('ASSET-DASHBOARD') === true) { ?>
 									<tr>
-										<td colspan="2"><strong><span style="font-size: 18px;">Asset Management Settings</span></strong></td>
+										<td colspan="2"><strong><span style="font-size: 18px;">Asset Management
+													Settings</span></strong></td>
 									</tr>
 
 									<tr>
 
 										<td><b>Asset Groups/ Categories</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $asset_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $asset_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -829,7 +847,9 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/asset_group") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success" href="<?php echo base_url("settings/asset_group") ?>"
+												target="_blank"> <i class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -839,7 +859,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td><b>Asset Departments</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $asset_location_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $asset_location_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -847,7 +868,10 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/asset_location") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success"
+												href="<?php echo base_url("settings/asset_location") ?>" target="_blank"> <i
+													class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -857,7 +881,8 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td><b>Asset Gradings</b>
 											<span>
-												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $asset_grade_tooltip; ?>" data-placement="right">
+												<a href="javascript:void()" data-toggle="tooltip"
+													title="<?php echo $asset_grade_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
 												</a>
 											</span>
@@ -865,7 +890,9 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 										<td>
 
-											<a class="btn btn-success" href="<?php echo base_url("settings/asset_grade") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+											<a class="btn btn-success" href="<?php echo base_url("settings/asset_grade") ?>"
+												target="_blank"> <i class="fa fa-gear"></i>
+												<?php echo lang_loader('global', 'global_manage'); ?> </a>
 
 										</td>
 
@@ -900,7 +927,7 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 
 	<?php // } 
-
+	
 	?>
 
 	<!-- FOR SUPERADMIN AND ADMIN -->
