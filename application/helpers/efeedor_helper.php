@@ -157,10 +157,10 @@ function get_from_to_date()
 	}
 	if (isset($_GET['this_month'])) {
 		$tdate = date('Y-m-01'); // First day of the current month
-		$fdate = date('Y-m-d'); // Current date
+		$fdate = date('Y-m-t'); // Current date
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-		$days = (int) date('d');
+		$days = (int) date('t');
 		$pagetitle = "Current Month";
 	}
 	if (isset($_GET['today_only'])) {
