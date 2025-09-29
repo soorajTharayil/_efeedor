@@ -59,10 +59,10 @@
     <!-- dropdown for three language start -->
 
     <!-- Add a button to trigger the modal -->
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      <!--{{type2}}-->
-      <!--<i class="fa fa-language" aria-hidden="true"></i>-->
-    </button>
+    <!-- <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
+      {{type2}}
+      <i class="fa fa-language" aria-hidden="true"></i>
+    </button> -->
     <!-- dropdown for three language end -->
 
   </nav>

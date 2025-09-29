@@ -59,10 +59,10 @@
     <!-- dropdown for three language start -->
 
     <!-- Add a button to trigger the modal -->
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      <!--{{type2}}-->
-      <!--<i class="fa fa-language" aria-hidden="true"></i>-->
-    </button>
+    <!-- <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
+      {{type2}}
+      <i class="fa fa-language" aria-hidden="true"></i>
+    </button> -->
     <!-- dropdown for three language end -->
 
   </nav>
@@ -92,7 +92,8 @@
   <!-- this div end here -->
 
   <!-- Create a modal for language selection -->
-  <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel" aria-hidden="true">
+  <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -114,7 +115,8 @@
                 <div class="box-body box-profile" style="display: inline-block;">
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('english')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('english')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -133px; color: #4b4c4d;">
                         English
                       </span><br>
@@ -126,7 +128,8 @@
                   <br>
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('lang2')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('lang2')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -133px; color:#4b4c4d;">
                         ಕನ್ನಡ
                       </span><br>
@@ -138,7 +141,8 @@
                   <br>
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('lang3')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -100px; color: #4b4c4d;">
                         മലയാളം
                       </span><br>
@@ -195,7 +199,8 @@
 
                 <fieldset ng-show="step1 == true">
 
-                  <h4 style="font-size:18px; margin-left: 5px;"><strong>{{lang.kpi_info}} {{selectedMonths}} {{selectedYears}}
+                  <h4 style="font-size:18px; margin-left: 5px;"><strong>{{lang.kpi_info}} {{selectedMonths}}
+                      {{selectedYears}}
                       <!-- <select ng-model="selectedMonth" ng-change="fetchData()" ng-options="month for month in months" style="font-size: 16px; margin-left: 10px; border: 1px solid grey; background: white; padding: 2px 5px; border-radius: 4px; font-weight: bold;">
                       </select>
                       <select ng-model="selectedYear" ng-change="fetchData()" ng-options="year for year in years"
@@ -211,25 +216,37 @@
 
                       <!-- KPI Name -->
 
-                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p>
+                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;">
+                        <b>{{lang.definition}}</b> {{lang.kpi_def}}</p>
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
-                          <span class="addon" style="font-size: 16px; margin-bottom: 1px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
+                          <span class="addon"
+                            style="font-size: 16px; margin-bottom: 1px;"><b>{{lang.formula_para1}}</b><sup
+                              style="color:red">*</sup></span>
 
                           <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
                             <span class="has-float-label" style="display: flex; align-items: center; ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.hr_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1_hr" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <input class="form-control" oninput="restrictToNumerals(event)"
+                                placeholder="{{lang.hr_placeholder}}" ng-model="feedback.initial_assessment_hr"
+                                type="number" id="formula_para1_hr" ng-required="true" autocomplete="off"
+                                style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                               <span style="margin-left: 4px; margin-right: 9px;">hr </span>
                               <label for="para1"></label>
                             </span>
                             <span class="has-float-label" style="display: flex; align-items: center;  ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.min_placeholder}}" ng-model="feedback.initial_assessment_min" type="number" id="formula_para1_min" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <input class="form-control" oninput="restrictToNumerals(event)"
+                                placeholder="{{lang.min_placeholder}}" ng-model="feedback.initial_assessment_min"
+                                type="number" id="formula_para1_min" ng-required="true" autocomplete="off"
+                                style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                               <span style="margin-left: 4px; margin-right: 9px;">min </span>
                               <label for="para1"></label>
                             </span>
                             <span class="has-float-label" style="display: flex; align-items: center; ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.sec_placeholder}}" ng-model="feedback.initial_assessment_sec" type="number" id="formula_para1_sec" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <input class="form-control" oninput="restrictToNumerals(event)"
+                                placeholder="{{lang.sec_placeholder}}" ng-model="feedback.initial_assessment_sec"
+                                type="number" id="formula_para1_sec" ng-required="true" autocomplete="off"
+                                style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                               <span style="margin-left: 4px;">sec</span>
                               <label for="para1"></label>
                             </span>
@@ -241,9 +258,14 @@
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder">
-                          <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>
+                          <span class="addon"
+                            style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup
+                              style="color:red">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 52%;" />
+                            <input class="form-control" oninput="restrictToNumerals(event)"
+                              ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}"
+                              type="number" id="formula_para2" ng-required="true" autocomplete="off"
+                              style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 52%;" />
                             <label for="para2"></label>
                           </span>
                         </div>
@@ -251,7 +273,8 @@
 
 
 
-                      <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
+                      <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()"
+                        style="margin-left:20px;">
                         Compute KPI
                       </button>
 
@@ -264,23 +287,33 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>TAT for Lab tests(Lab Service): <span ng-style="{ color: getTextColor() }">{{calculatedResult}}</span></strong><br><br>
+                      <strong>TAT for Lab tests(Lab Service): <span
+                          ng-style="{ color: getTextColor() }">{{calculatedResult}}</span></strong><br><br>
                       <strong>Bench Mark Time: {{ feedback.benchmark }}</strong>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
+                    <div class="col-xs-12 col-sm-12 col-md-12"
+                      style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}</b></p>
-                      <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                      <textarea
+                        style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;"
+                        class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
+                    <div class="col-xs-12 col-sm-12 col-md-12"
+                      style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.corrective_action}}</b></p>
-                      <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea2" ng-model="feedback.correctiveAction" rows="5"></textarea>
+                      <textarea
+                        style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;"
+                        class="form-control" id="textarea2" ng-model="feedback.correctiveAction" rows="5"></textarea>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
+                    <div class="col-xs-12 col-sm-12 col-md-12"
+                      style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}</b></p>
-                      <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
+                      <textarea
+                        style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;"
+                        class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
                     </div>
 
                   </div>
@@ -292,11 +325,14 @@
 
                   <br><br>
 
-                  <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
+                  <input type="button" name="previous" style="font-size:small;margin-left:10px;"
+                    class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
                   <!-- submit button -->
                   <div ng-if="calculatedResult">
 
-                    <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                    <input type="button" ng-show="loader == false"
+                      style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment"
+                      class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
                     <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
                   </div>
                 </fieldset>
@@ -385,11 +421,13 @@
   </div>
 
   <!-- KPI Deadline Popup -->
-  <div class="modal fade" id="deadlineModal" tabindex="-1" role="dialog" aria-labelledby="deadlineModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deadlineModal" tabindex="-1" role="dialog" aria-labelledby="deadlineModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deadlineModalLabel">KPI Submission Deadline- {{selectedMonths}} {{selectedYears}}</h5>
+          <h5 class="modal-title" id="deadlineModalLabel">KPI Submission Deadline- {{selectedMonths}} {{selectedYears}}
+          </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -582,7 +620,7 @@
     return `${currentMonth} ${currentYear}`;
   }
 
-  setTimeout(function() {
+  setTimeout(function () {
 
 
 
