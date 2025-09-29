@@ -194,11 +194,11 @@ $users = $this->db->select('user.*, roles.role_id')
                                                                 </div>
                                                                 <div class="modal-body text-center">
                                                                     <!-- SMS Button -->
-                                                                    <a class="btn btn-rounded"
+                                                                    <!-- <a class="btn btn-rounded"
                                                                         href="<?php echo base_url("UserManagement/sms/{$user->user_id}") ?>"
                                                                         style="background-color: #007bff; color: white;">
                                                                         <i class="fa fa-comment"></i> Send SMS
-                                                                    </a>
+                                                                    </a> -->
                                                                     <!-- Email Button -->
                                                                     <a class="btn btn-rounded"
                                                                         href="<?php echo base_url("UserManagement/email/{$user->user_id}") ?>"
