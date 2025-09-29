@@ -40,7 +40,7 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     mysqli_query($con, $query);
 }
 
-$user_query = 'SELECT * FROM `user` WHERE `patient_coordinator_email` = 0  AND `user_role` = 8';
+$user_query = "SELECT * FROM `user` WHERE `patient_coordinator_email` = 0 AND `user_role` >= 8";
 $user_result = mysqli_query($con, $user_query);
 while ($user_object = mysqli_fetch_object($user_result)) {
     $permission = json_decode($user_object->departmentpermission);
