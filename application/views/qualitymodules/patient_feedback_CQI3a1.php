@@ -16,10 +16,10 @@
 
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
-				$param = json_decode($result->dataset, true);
+				$param = json_decode($result->dataset);
 
 				// echo '<pre>';
-				// print_r($result);
+				// print_r($param);
 				// echo '</pre>';
 				// exit;
 
@@ -44,21 +44,21 @@
 
 									<tr>
 										<td><b>Numerator: Sum of time taken for initial assessment of in-patients in MRD-ICU (in Hrs)</b></td>
-										<td><?php echo $result->time_taken_initial_assessment; ?></td>
+										<td><?php echo $param->initial_assessment_total; ?></td>
 									</tr>
 									<tr>
 										<td><b>Denominator: Total number of in-patients (in No.s)</b></td>
-										<td><?php echo $param['total_admission']; ?></td>
+										<td><?php echo $param->total_admission; ?></td>
 									</tr>
 									<tr>
 										<td><b>Avg. time taken for initial assessment of in-patients in MRD-ICU (in Hrs)</b></td>
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $result->bench_mark_time * 60 * 60;
+											$benchmarkSeconds = $param->benchmark * 60 * 60;
 
 											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $result->average_time_taken_initial_assessment);
+											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
 											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
 
 											// Check if calculatedResult is less than benchmark
@@ -67,36 +67,39 @@
 											// Output the calculatedResult with appropriate color
 											?>
 											<span style="color: <?php echo $color; ?>">
-												<b><?php echo $result->average_time_taken_initial_assessment; ?></b>
+												<b><?php echo $param->calculatedResult; ?></b>
 											</span>
 
 										</td>
 									</tr>
 									<tr>
-										<td><b>Benchmark Time</b></td>
-										<td><?php echo $param['benchmark']; ?></td>
-									</tr>
+                                        <td><b>Benchmark Time</b></td>
+                                        <td><?php echo $param->benchmark; ?></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
+                                        <td><?php echo $param->dataAnalysis; ?></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Corrective action</b></td>
+                                        <td><?php echo $param->correctiveAction; ?></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>Preventive action</b></td>
+                                        <td><?php echo $param->preventiveAction; ?></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><b>KPI recorded by</b></td>
+                                        <td>
+                                            <?php echo $param->name; ?> ,
+                                            <?php echo $param->patientid; ?>
+                                        </td>
+                                    </tr>
 
-									<tr>
-										<td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
-										<td><?php echo $param['dataAnalysis']; ?></td>
-									</tr>
-									<tr>
-										<td><b>Corrective action</b></td>
-										<td><?php echo $param['correctiveAction']; ?></td>
-									</tr>
-									<tr>
-										<td><b>Preventive action</b></td>
-										<td><?php echo $param['preventiveAction']; ?></td>
-									</tr>
-									<tr>
-										<td><b>KPI recorded by</b></td>
-										<td>
-											<?php echo $param['name']; ?> ,
-											<?php echo $param['patientid']; ?>
-
-										</td>
-									</tr>
 									<tr>
 										<td><b>Data collection on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
@@ -264,8 +267,8 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo $param['benchmark']; ?>"; // Benchmark value
-					var calculated = "<?php echo $result->average_time_taken_initial_assessment; ?>"; // Calculated value
+					var benchmark = "<?php echo $param->benchmark; ?>"; // Benchmark value
+					var calculated = "<?php echo $param->calculatedResult; ?>"; // Calculated value
 					var monthyear = "<?php echo date('M-Y', strtotime($result->datetime)); ?>"; // Date value
 
 					// Parse times to seconds

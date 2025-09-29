@@ -1,7 +1,7 @@
 <?php
 $id = $this->uri->segment(3);
 $this->db->where('id', $id);
-$query = $this->db->get('bf_feedback_1PSQ3a');
+$query = $this->db->get('bf_feedback_CQI3a1');
 $results = $query->result();
 // print_r($results);
 $row = $results[0];
