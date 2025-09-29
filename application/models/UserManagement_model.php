@@ -621,10 +621,13 @@ class UserManagement_model extends CI_Model
 				$data['admin_email'] = '0';
 				break;
 			case 4:
-				$data['departmenthead_email'] = '0';
+				$data['admin_email'] = '0';
 				break;
 			case 8:
-				$data['patient_coordinator_email'] = '0';
+				$data['admin_email'] = '0';
+				break;
+				case 10:
+				$data['admin_email'] = '0';
 				break;
 			default:
 				return false; // Invalid user role
@@ -656,6 +659,9 @@ class UserManagement_model extends CI_Model
 				$data['message_alert'] = '0';
 				break;
 			case 8:
+				$data['message_alert'] = '0';
+				break;
+				case 10:
 				$data['message_alert'] = '0';
 				break;
 			default:
