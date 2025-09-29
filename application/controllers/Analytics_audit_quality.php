@@ -89,26 +89,25 @@ class Analytics_audit_quality extends CI_Controller
 
 
     // Response chart for MRD & MDC Audit
-
     public function resposnsechart_active_cases_mrd()
     {
-
         $table_feedback = 'bf_ma_active_cases_mrdip';
         $table_patients = 'bf_patients';
         $sorttime = 'asc';
         $setup = 'setup';
-        $asc = 'asc';
-        $desc = 'desc';
-        //$dates = get_from_to_date();
+
         $feedback_data = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
-        $days = $_SESSION['days'];
-        $set = array();
-        $report = array();
+
+        $days = $_SESSION['days'] ?? 0;
         $y = date('Y');
-        $fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
-        $tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+        $fdate = isset($_SESSION['from_date']) ? date('Y-m-d', strtotime($_SESSION['from_date'])) : null;
+        $tdate = isset($_SESSION['to_date']) ? date('Y-m-d', strtotime($_SESSION['to_date'])) : null;
+
+        $report = [];
+
         foreach ($feedback_data as $row) {
-            if ($days > 10 && $days < 93) {
+            // group label
+            if ($days > 10 && $days < 93 && function_exists('getStartAndEndDate')) {
                 $desdate = getStartAndEndDate($row->datetime, $fdate, $tdate);
                 $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . $desdate['mon'];
             } elseif ($days <= 10) {
@@ -116,35 +115,36 @@ class Analytics_audit_quality extends CI_Controller
             } else {
                 $mon = date("F", strtotime($row->datetime));
             }
-            // if ($days > 0) {
-            //     if ($days < 183 && $days > 10) {
-            //         $desdate = getStartAndEndDate(date("W", strtotime($row->datetime)), $y);
-            //         $mon = $desdate['week_start'] . '-' . $desdate['week_end'] . ' ' . date("F", strtotime($row->datetime));
-            //     }
-            // }
-            $param = json_decode($row->dataset);
+
+            // init report slot
             if (!isset($report[$mon])) {
                 $report[$mon]['count'] = 0;
             }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
+
+            // decode dataset if needed
+            $param = json_decode($row->dataset, true);
+
+            if (!empty($param)) {
+                $report[$mon]['count']++;
             }
+
             $report[$mon]['overall'] = count($feedback_data);
         }
-        $response = array();
-        foreach ($report as $key => $row) {
-            $set = array();
-            $set['label_field'] = $key;
-            $set['data_field'] = round((($report[$key]['count']) / count($feedback_data)) * 100);
-            $set['all_detail'] = $report[$key];
-            $response[] = $set;
+
+        // build response
+        $response = [];
+        foreach ($report as $key => $r) {
+            $response[] = [
+                'label_field' => $key,
+                'data_field' => round(($r['count'] / count($feedback_data)) * 100),
+                'all_detail' => $r
+            ];
         }
+
         echo json_encode($response);
         exit;
     }
+
 
 
     public function resposnsechart_discharged_patients_mrd()
@@ -883,8 +883,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_icu_active()
     {
 
@@ -940,9 +940,9 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
-    
+
+
+
     public function resposnsechart_icu_closed()
     {
 
@@ -998,8 +998,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_primarycare_active_mdc()
     {
 
@@ -1055,8 +1055,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_primarycare_closed_mdc()
     {
 
@@ -1112,8 +1112,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_sedation_active_mdc()
     {
 
@@ -1169,8 +1169,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_sedation_closed_mdc()
     {
 
@@ -1226,8 +1226,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_surgeons_active_mdc()
     {
 
@@ -1283,8 +1283,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_surgeons_closed_mdc()
     {
 
@@ -1340,7 +1340,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_dietconsultation_op_mdc()
     {
 
@@ -1396,8 +1396,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_physiotherapy_closed_mdc()
     {
 
@@ -1453,9 +1453,9 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
-    
+
+
+
     public function resposnsechart_physiotherapy_op_mdc()
     {
 
@@ -1511,10 +1511,10 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
-    
-    
+
+
+
+
     public function resposnsechart_physiotherapy_open_mdc()
     {
 
@@ -1570,8 +1570,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_mrd_ed_audit()
     {
 
@@ -1627,8 +1627,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_mrd_lama_audit()
     {
 
@@ -1684,9 +1684,9 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
-    
+
+
+
     public function resposnsechart_mrd_op_audit()
     {
 
@@ -1744,7 +1744,7 @@ class Analytics_audit_quality extends CI_Controller
     }
 
 
-    
+
 
 
     public function resposnsechart_accidental_delining_audit()
@@ -1802,7 +1802,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_admissionholding_area_audit()
     {
 
@@ -1858,7 +1858,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_cardio_pulmonary_checklist()
     {
 
@@ -1914,7 +1914,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_extravasation_audit()
     {
 
@@ -1970,7 +1970,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_hapu_audit()
     {
 
@@ -2026,8 +2026,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_initial_assessment_ae()
     {
 
@@ -2083,7 +2083,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_initial_assessment_ipd()
     {
 
@@ -2139,8 +2139,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_initial_assessment_opd()
     {
 
@@ -2196,7 +2196,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_ipsg1()
     {
 
@@ -2252,8 +2252,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_ipsg2_ae()
     {
 
@@ -2309,7 +2309,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_ipsg2_ipd()
     {
 
@@ -2365,8 +2365,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_ipsg4_timeout()
     {
 
@@ -2422,7 +2422,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_ipsg6_ip()
     {
 
@@ -2478,7 +2478,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
+
     public function resposnsechart_ipsg6_opd()
     {
 
@@ -2534,8 +2534,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     public function resposnsechart_point_prevelance()
     {
 
@@ -2924,7 +2924,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-     public function resposnsechart_clinicaloutcome_carotid_stenting()
+    public function resposnsechart_clinicaloutcome_carotid_stenting()
     {
 
         $table_feedback = 'bf_ma_clinicaloutcome_carotid_stenting';
@@ -4024,10 +4024,10 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     // Response chart for Clinical KPI
-    
+
     public function resposnsechart_clinicalkpi_bronchodilators_audit()
     {
 
@@ -4138,9 +4138,9 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
-    
+
+
+
     // Response chart for Infection Control
     public function resposnsechart_infection_control_biomedical_waste()
     {
@@ -4637,7 +4637,7 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-     public function resposnsechart_infection_control_laboratory_audit()
+    public function resposnsechart_infection_control_laboratory_audit()
     {
 
         $table_feedback = 'bf_ma_infection_control_laboratory_audit';
@@ -5077,8 +5077,8 @@ class Analytics_audit_quality extends CI_Controller
         echo json_encode($response);
         exit;
     }
-    
-    
+
+
     //ResponseChart for Clinical Pathways
     public function resposnsechart_clinical_pathway_arthroscopic_audit()
     {
@@ -5687,9 +5687,9 @@ class Analytics_audit_quality extends CI_Controller
     }
 
 
-   
 
-    
+
+
 
 
 
@@ -5980,8 +5980,8 @@ class Analytics_audit_quality extends CI_Controller
         exit;
     }
 
-    
-    
+
+
 
 
 
