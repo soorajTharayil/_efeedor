@@ -906,14 +906,15 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
              </tr>
+               <tr>
+                 <td width="40%">Incident Short Name</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
               <tr>
                  <td width="40%">Incident</td>
                  <td width="60%">' . $department_object->name . '</td>
              </tr>
-              <tr>
-                 <td width="40%">Category</td>
-                 <td width="60%">' . $department . '</td>
-             </tr>
+            
               <tr>
                  <td width="40%">Incident Occured On</td>
                  <td width="60%">' . $param_incident->incident_occured_in . '</td>
@@ -928,7 +929,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td width="60%">' . $param_incident->priority . '</td>
              </tr>
              <tr>
-                 <td width="40%">Assigned Severity</td>
+                 <td width="40%">Assigned Category</td>
                  <td width="60%">' . $param_incident->incident_type . '</td>
              </tr>
             
