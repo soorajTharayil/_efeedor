@@ -552,6 +552,48 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
 
   //IN USED
   $scope.setupapplication = function () {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const userIdFromUrl = urlParams.get("user_id");
+
+    if (userIdFromUrl) {  // ✅ Run login API only if user_id exists
+      $http.post($rootScope.baseurl_main + "/login_userid.php", { userid: userIdFromUrl })
+        .then(
+          function (responsedata) {
+            console.log(responsedata);
+            if (responsedata.status == 200) {
+              var response = responsedata.data;
+              $rootScope.loader = false;
+              $rootScope.profilen = response;
+              $rootScope.adminId = $rootScope.profilen.userid;
+
+              if (!$rootScope.$$phase) {
+                $rootScope.$apply();
+              }
+
+              $scope.profiled = $rootScope.profilen;
+              localStorage.setItem("ehandor", JSON.stringify(response));
+              if (response.status === "fail") {
+                $scope.loginerror = response.message;
+              } else if (response.status === "success") {
+                $rootScope.loginactive = true;
+                $scope.step0 = false;
+                $scope.step1 = true;
+              }
+            } else {
+              $scope.loginerror = "Some error happened";
+              $rootScope.loader = false;
+            }
+          },
+          function errorCallback(responsedata) {
+            // your existing error handling
+          }
+        );
+    } else {
+      console.log("No user_id in URL — skipping login_userid API");
+    }
+
+
     // Consider using $location service for extracting URL parameters
     var url = window.location.href;
     var id = url.substring(url.lastIndexOf("=") + 1);

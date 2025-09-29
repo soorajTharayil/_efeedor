@@ -206,19 +206,54 @@ app.controller(
     };
     $scope.language("english");
 
-    $scope.setupapplication = function () {
-      var url = window.location.href;
-
-      var id = url.substring(url.lastIndexOf("=") + 1);
-
+  $scope.setupapplication = function () {
       const urlParams = new URLSearchParams(window.location.search);
+      const userIdFromUrl = urlParams.get("user_id");
+
+      if (userIdFromUrl) {  // ✅ Run login API only if user_id exists
+        $http.post($rootScope.baseurl_main + "/login_userid.php", { userid: userIdFromUrl })
+          .then(
+            function (responsedata) {
+              console.log(responsedata);
+              if (responsedata.status == 200) {
+                var response = responsedata.data;
+                $rootScope.loader = false;
+                $rootScope.profilen = response;
+                $rootScope.adminId = $rootScope.profilen.userid;
+
+                if (!$rootScope.$$phase) {
+                  $rootScope.$apply();
+                }
+
+                $scope.profiled = $rootScope.profilen;
+                localStorage.setItem("ehandor", JSON.stringify(response));
+                if (response.status === "fail") {
+                  $scope.loginerror = response.message;
+                } else if (response.status === "success") {
+                  $rootScope.loginactive = true;
+                  $scope.step0 = false;
+                  $scope.step1 = true;
+                }
+              } else {
+                $scope.loginerror = "Some error happened";
+                $rootScope.loader = false;
+              }
+            },
+            function errorCallback(responsedata) {
+              // your existing error handling
+            }
+          );
+      } else {
+        console.log("No user_id in URL — skipping login_userid API");
+      }
+
+      var url = window.location.href;
+      var id = url.substring(url.lastIndexOf("=") + 1);
       const userId = urlParams.get("user_id");
       $scope.userId = userId;
 
       $http
-        .get($rootScope.baseurl_main + "/ward.php?patientid=" + id, {
-          timeout: 20000,
-        })
+        .get($rootScope.baseurl_main + "/ward.php?patientid=" + id, { timeout: 20000 })
         .then(
           function (responsedata) {
             $scope.wardlist = responsedata.data;
@@ -226,7 +261,6 @@ app.controller(
             $scope.setting_data = responsedata.data.setting_data;
             console.log($scope.feedback);
 
-            // Find the user whose user_id matches $scope.userId
             var matchedUser = $scope.wardlist.user.find(
               (u) => u.user_id === $scope.userId
             );
@@ -245,6 +279,7 @@ app.controller(
           }
         );
     };
+    
     $scope.setupapplication();
   }
 );
