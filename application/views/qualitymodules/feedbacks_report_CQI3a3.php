@@ -62,7 +62,7 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<table class="cqi3a1 table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+						<table class="cqi3a3 table table-striped table-hover table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th>Recorded by</th> -->
@@ -75,6 +75,9 @@
 								<th>Avg.Time for initial assessment of in-patients (in Hrs)</th>
 
 								<th>Bench Mark Time</th>
+
+								<th>View</th>
+
 
 								<!-- <th>Data analysis</th>
 
@@ -159,7 +162,7 @@
 											$benchmarkSeconds = $param->benchmark * 60 * 60;
 
 											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $r->average_time_taken_initial_assessment);
+											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
 											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
 
 											// Check if calculatedResult is less than benchmark
@@ -191,6 +194,13 @@
 										<td>
 											<?php echo $param->preventiveAction; ?>
 										</td> -->
+
+										<td>
+											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
+												class="btn btn-info btn-sm">
+												View Details
+											</a>
+										</td>
 
 
 									</tr>

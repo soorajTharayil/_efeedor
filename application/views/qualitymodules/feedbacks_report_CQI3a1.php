@@ -76,6 +76,8 @@
 
 								<th>Bench Mark Time</th>
 
+								<th>View</th>
+
 								<!-- <th>Data analysis</th>
 
 								<th>Corrective action</th>
@@ -95,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-									// echo '<pre>';
-									// print_r($param);
-									// echo '</pre>';
-									// exit;
+								// 	echo '<pre>';
+								// 	print_r($param);
+								// 	echo '</pre>';
+								// 	exit;
 
 
 								?>
@@ -106,7 +108,7 @@
 									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>" onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
 										<!-- <td>
-											<?php echo $r->name; ?>
+											<?php echo $param->audit_by; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
@@ -147,19 +149,19 @@
 
 
 										<td>
-											<?php echo $r->time_taken_initial_assessment; ?>
+											<?php echo $param->initial_assessment_total; ?>
 										</td>
 										<td>
-											<?php echo $r->number_of_admission; ?>
+											<?php echo $param->total_admission; ?>
 										</td>
 
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $r->bench_mark_time * 60 * 60;
+											$benchmarkSeconds = $param->benchmark * 60 * 60;
 
 											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $r->average_time_taken_initial_assessment);
+											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
 											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
 
 											// Check if calculatedResult is less than benchmark
@@ -168,8 +170,8 @@
 											// Output the calculatedResult with appropriate color
 											?>
 											<span style="color: <?php echo $color; ?>">
-												<?php echo $r->average_time_taken_initial_assessment;
-												$calculated_time[round(date("m", strtotime($r->datetime))) - 1] = $r->average_time_taken_initial_assessment;
+												<?php echo $param->calculatedResult;
+												$calculated_time[round(date("m", strtotime($r->datetime))) - 1] = $param->calculatedResult;
 												?>
 											</span>
 										</td>
@@ -191,6 +193,13 @@
 										<td>
 											<?php echo $param->preventiveAction; ?>
 										</td> -->
+
+										<td>
+											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
+												class="btn btn-info btn-sm">
+												View Details
+											</a>
+										</td>
 
 
 									</tr>

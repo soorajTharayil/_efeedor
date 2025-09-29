@@ -3,16 +3,16 @@
 	<?php
 	include 'info_buttons_ip.php';
 	// require 'ip_table_variables.php';
-	/* START DATE AND CALENDER */
-	$dates = get_from_to_date();
-	$pagetitle = $dates['pagetitle'];
-	$fdate = $dates['fdate'];
-	$tdate = $dates['tdate'];
-	$pagetitle = $dates['pagetitle'];
-	$fdate = date('Y-m-d', strtotime($fdate));
-	$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
-	$days = $dates['days'];
-	/* END DATE AND CALENDER */
+		/* START DATE AND CALENDER */
+		$dates = get_from_to_date();
+		$pagetitle = $dates['pagetitle'];
+		$fdate = $dates['fdate'];
+		$tdate = $dates['tdate'];
+		$pagetitle = $dates['pagetitle'];
+		$fdate = date('Y-m-d', strtotime($fdate));
+		$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
+		$days = $dates['days'];
+		/* END DATE AND CALENDER */
 	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_3PSQ3a?id=');
 
 	$table_feedback_2PSQ3a = 'bf_feedback_3PSQ3a';
@@ -24,14 +24,14 @@
 	$feedbacktaken = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_2PSQ3a, $desc_1PSQ3a);
 
 	if ($feedbacktaken) {
-		?>
+	?>
 
 		<div class="row">
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
-							<?php $text = "In the " . $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
+						<?php $text = "In the " .  $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
 							<span class="typing-text"></span>
 
 						</span>
@@ -50,9 +50,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
-								title="Download detailed KPI report"
-								href="<?php echo base_url($this->uri->segment(1)) . '/overall_3psq3a_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_3psq3a_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -62,7 +60,7 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Recorded by</th>
+								 <th>Recorded by</th>
 								<th>Month-Year</th>
 
 								<th style="white-space: nowrap;">Employee details</th>
@@ -87,7 +85,7 @@
 
 
 								<th>Preventive action</th>
-
+								
 
 
 							</thead>
@@ -100,11 +98,9 @@
 									$param = json_decode($r->dataset);
 
 
-									?>
+								?>
 
-									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>"
-										onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'"
-										style="cursor: pointer;">
+									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>" onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
 										<td>
 											<?php echo $r->name; ?>
@@ -112,13 +108,13 @@
 										<!-- <td style="white-space: nowrap;"><?php if ($r->datetime) { ?>
 
 												<?php
-												// Assuming $r->datetime contains the datetime value
-												$datetime = new DateTime($r->datetime);
-												$formatted_date = $datetime->format('Y-m-d');
-												$formatted_time = $datetime->format('h:i a');
+																				// Assuming $r->datetime contains the datetime value
+																				$datetime = new DateTime($r->datetime);
+																				$formatted_date = $datetime->format('Y-m-d');
+																				$formatted_time = $datetime->format('h:i a');
 
-												echo $formatted_date . "<br>"; // Display date on one line
-												echo $formatted_time; // Display time on another line
+																				echo $formatted_date . "<br>"; // Display date on one line
+																				echo $formatted_time; // Display time on another line
 												?>
 
 
@@ -127,21 +123,19 @@
 										<td style="white-space: nowrap;">
 											<?php if ($r->datetime) { ?>
 												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
+												
 											<?php } ?>
 										</td>
 										<?php if (allfeedbacks_page('feedback_id') == true) { ?>
 											<td>
-												<a
-													href="<?php echo $ip_link_patient_feedback . $id; ?>">IPDF-<?php echo $id; ?></a>
+												<a href="<?php echo  $ip_link_patient_feedback . $id; ?>">IPDF-<?php echo $id; ?></a>
 											</td>
 										<?php } ?>
 
 										<td style="overflow: clip;">
 											<?php echo $param->name; ?>
 											<?php if (allfeedbacks_page('feedback_id') == false) { ?>
-												(<a
-													href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"><?php echo $param->patientid; ?></a>)
+												(<a href="<?php echo  $patient_feedback_1PSQ3a . $id; ?>"><?php echo $param->patientid; ?></a>)
 											<?php } else { ?>
 												(<?php echo $param->patientid; ?>)
 											<?php } ?>
@@ -183,7 +177,7 @@
 										<td>
 											<?php echo $param->preventiveAction; ?>
 										</td>
-
+										
 
 									</tr>
 									<?php $sl++; ?>
@@ -199,7 +193,7 @@
 			</div>
 			<!-- /.row -->
 		</div>
-	<?php } else { ?>
+	<?php } else {   ?>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -217,7 +211,7 @@
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function () {
+	document.addEventListener('DOMContentLoaded', function() {
 		var typed = new Typed(".typing-text", {
 			strings: ["<?php echo $text; ?>"],
 			// delay: 10,
@@ -314,9 +308,9 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_3ps"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_3ps"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
-		xhr.onreadystatechange = function () {
+		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var responseData = JSON.parse(xhr.responseText);
 				callback(responseData); // Call the callback function with the API data
@@ -326,11 +320,11 @@
 	}
 
 	function resposnseChart(apiData) {
-		var labels = apiData.map(function (item) {
+		var labels = apiData.map(function(item) {
 			return item.label_field;
 		});
 
-		var dataPoints = apiData.map(function (item) {
+		var dataPoints = apiData.map(function(item) {
 			return item.all_detail.count;
 		});
 		if (dataPoints.length == 1) {
@@ -361,7 +355,7 @@
 					pointBorderColor: "rgba(0, 128, 0, 1)",
 					pointHoverBackgroundColor: "rgba(255, 165, 0, 0.4)", // Orange color with reduced opacity
 					pointHoverBorderColor: "rgba(0, 128, 0, 1)",
-				},],
+				}, ],
 			},
 			options: {
 				responsive: true,
@@ -374,7 +368,7 @@
 					enabled: true,
 					mode: "single",
 					callbacks: {
-						label: function (tooltipItems, data) {
+						label: function(tooltipItems, data) {
 							var multistringText = [];
 							var dataIndex = tooltipItems.index; // Get the index of the hovered data point
 							var all_detail = apiData[dataIndex].all_detail;
@@ -394,7 +388,7 @@
 							display: false,
 							labelString: "Month",
 						},
-					},],
+					}, ],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
@@ -408,14 +402,14 @@
 							// forces step size to be 5 units
 							stepSize: 30,
 						},
-					},],
+					}, ],
 				},
 			},
 		});
 	}
 
 	// Call the fetchDataFromAPI function and pass the callback function to create the chart
-	setTimeout(function () {
+	setTimeout(function() {
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
