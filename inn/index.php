@@ -523,7 +523,7 @@
 													ng-if="searchTextmain != TRUE && searchTextmain.length > 1">
 													<div ng-click="customTicket()">
 														<label class="container">
-															Submit your concern as "{{searchTextmain}}"
+															Submit your incident as "{{searchTextmain}}"
 														</label>
 													</div>
 

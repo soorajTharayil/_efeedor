@@ -939,7 +939,9 @@ app.controller(
           },
           function myError(response) {
             $rootScope.loader = false;
-            alert("An error occurred while fetching dataaaa. Please try again."); // User feedback on error
+            alert(
+              "An error occurred while fetching dataaaa. Please try again."
+            ); // User feedback on error
           }
         );
     };
@@ -992,9 +994,12 @@ app.controller(
 
     $scope.customTicket = function () {
       $scope.showBack = false;
-      $scope.submit_as_concern = false;
-
-      $scope.selectedParameterObject = {};
+      $scope.submit_as_concern = true;
+      $scope.selectedParameterObject = {
+        title: "Others",
+        question: "Other incidents",
+        shortkey: "incident230",
+      };
       $scope.feedback.other = $scope.searchTextmain;
       $scope.activeStep("step4");
     };
@@ -1456,8 +1461,8 @@ app.controller(
       if (type == "lang3") {
         $http.get("language/lang3.json").then(function (responsedata) {
           $rootScope.lang = responsedata.data;
-           $scope.type2 = "മലയാളം";
-        //   $scope.type2 = "தமிழ்";
+          $scope.type2 = "മലയാളം";
+          //   $scope.type2 = "தமிழ்";
         });
       }
       $scope.feedback.langsub = type;
@@ -1466,4 +1471,3 @@ app.controller(
     $rootScope.language("english");
   }
 );
-
