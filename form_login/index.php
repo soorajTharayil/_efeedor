@@ -77,11 +77,11 @@
 
         <!-- Right Side: Language Button -->
         <div class="right-buttons d-flex align-items-center">
-          <button type="button" class="btn btn-dark language-btn" data-toggle="modal" data-target="#languageModal"
+          <!-- <button type="button" class="btn btn-dark language-btn" data-toggle="modal" data-target="#languageModal"
             style="margin: 4px;">
             {{type2}}
             <i class="fa fa-language" aria-hidden="true"></i>
-          </button>
+          </button> -->
           <button class="btn btn-dark menu-toggle" ng-click="menuVisible = !menuVisible" style="margin: 4px;">
             <i class="fa fa-bars"></i>
           </button>
