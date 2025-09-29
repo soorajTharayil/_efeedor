@@ -13,7 +13,7 @@ include('get_user.php');
 
 //email to admin  when they are created 
 
-$user_query = 'SELECT * FROM `user` WHERE `admin_email` = 0  AND  `user_role` = 2';
+$user_query = 'SELECT * FROM `user` WHERE `admin_email` = 0 ';
 $user_result = mysqli_query($con, $user_query);
 while ($user_object = mysqli_fetch_object($user_result)) {
     $permission = json_decode($user_object->departmentpermission);
@@ -42,36 +42,6 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     mysqli_query($con, $query);
 }
 
-
-$user_query = 'SELECT * FROM `user` WHERE `admin_email` = 0  AND  `user_role` = 3';
-$user_result = mysqli_query($con, $user_query);
-while ($user_object = mysqli_fetch_object($user_result)) {
-    $permission = json_decode($user_object->departmentpermission);
-
-    $email = $user_object->email;
-    $password = $permission->password;
-    $name = $user_object->firstname;
-
-    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
-
-    $Subject = 'Welcome to Efeedor - Your Account is Active';
-    $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
-    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
-    $message1 .= 'Username: ' . $loginId . ' <br />';
-    $message1 .= 'Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
-    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Thank you, <br />';
-    $message1 .= $hospitalname;
-
-
-    $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
-    $conn_g->query($query);
-
-    $query = 'UPDATE user SET `admin_email` = 1 WHERE user_id=' . $user_object->user_id;
-    mysqli_query($con, $query);
-}
 
 
 
