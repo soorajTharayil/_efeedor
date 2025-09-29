@@ -14,14 +14,14 @@ $settings = $this->db->select("site_align")
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title><?php echo lang_loader('global','global_login_efeedor_patient_exp'); ?></title>
+    <title><?php echo lang_loader('global', 'global_login_efeedor_patient_exp'); ?></title>
 
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="<?php echo base_url('favicon.png'); ?>">
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <?php if (!empty($settings->site_align) && $settings->site_align == "RTL") {  ?>
+    <?php if (!empty($settings->site_align) && $settings->site_align == "RTL") { ?>
         <!-- THEME RTL -->
         <link href="<?php echo base_url(); ?>assets/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url('assets/css/custom-rtl.css') ?>" rel="stylesheet" type="text/css" />
@@ -32,7 +32,8 @@ $settings = $this->db->select("site_align")
 
     <!-- style css -->
     <link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css" />
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css" />
 
 
 </head>
@@ -50,10 +51,11 @@ $settings = $this->db->select("site_align")
 
                         </div>
                         <div class="title" style="text-align:center;align-items:center; ">
-                            <img src="<?php echo base_url(); ?>assets/icon/loginlogo1.png" style="height:40px; width:120px;">
+                            <img src="<?php echo base_url(); ?>assets/icon/loginlogo1.png"
+                                style="height:40px; width:120px;">
                             <h3 style="font-size: 30px; font-weight: bold;"></h3> <br>
                             <!-- <small><strong>Please sign-in to your account </strong></small><br> -->
-                            <h5><strong><?php echo lang_loader('global','global_login_to_access_dash'); ?></strong></h5>
+                            <h5><strong><?php echo lang_loader('global', 'global_login_to_access_dash'); ?></strong></h5>
 
                         </div>
 
@@ -62,21 +64,23 @@ $settings = $this->db->select("site_align")
                     <div class="">
 
                         <!-- alert message -->
-                        <?php if ($this->session->flashdata('message') != null) {  ?>
+                        <?php if ($this->session->flashdata('message') != null) { ?>
                             <div class="alert alert-info alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <?php echo $this->session->flashdata('message'); ?>
                             </div>
+                            <?php $this->session->unset_userdata('message'); // clear after showing ?>
                         <?php } ?>
 
-                        <?php if ($this->session->flashdata('exception') != null) {  ?>
+                        <?php if ($this->session->flashdata('exception') != null) { ?>
                             <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <?php echo $this->session->flashdata('exception'); ?>
                             </div>
+                            <?php $this->session->unset_userdata('exception'); // clear after showing ?>
                         <?php } ?>
 
-                        <?php if (validation_errors()) {  ?>
+                        <?php if (validation_errors()) { ?>
                             <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <?php echo validation_errors(); ?>
@@ -89,18 +93,20 @@ $settings = $this->db->select("site_align")
                 <div class="panel-body" style="text-align: center;align-items:center;">
                     <?php echo form_open('login', 'id="loginForm" novalidate'); ?>
                     <div class="form-group">
-                        <!-- <label class="control-label" for="email"><?php echo  display('email') ?></label> -->
-                        <input type="text" placeholder="Email Id / Mobile Number" name="email" id="email" class="form-control" required>
+                        <!-- <label class="control-label" for="email"><?php echo display('email') ?></label> -->
+                        <input type="text" placeholder="Email Id / Mobile Number" name="email" id="email"
+                            class="form-control" required>
                     </div>
                     <div class="form-group" id="show_hide_password">
-                        <!-- <label class="control-label" for="password"><?php echo  display('password') ?></label> -->
-                        <input type="password" placeholder="Password" name="password" id="password" class="form-control" required>
+                        <!-- <label class="control-label" for="password"><?php echo display('password') ?></label> -->
+                        <input type="password" placeholder="Password" name="password" id="password" class="form-control"
+                            required>
                         <div class="input-group-addon changepassword">
                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                         </div>
                     </div>
                     <div class="form-group" style="display:none;">
-                        <label class="control-label" for="user_role"><?php echo  display('user_role') ?></label>
+                        <label class="control-label" for="user_role"><?php echo display('user_role') ?></label>
                         <?php
                         $userRoles = array(
                             // ''  => display('select_user_role'),
@@ -122,7 +128,8 @@ $settings = $this->db->select("site_align")
                     </div>
                     <br>
                     <div style="text-align:center;align-items:center;">
-                        <button class="btn btn-success " type="submit" class="btn btn-success"><?php echo lang_loader('global','global_login'); ?></button>
+                        <button class="btn btn-success " type="submit"
+                            class="btn btn-success"><?php echo lang_loader('global', 'global_login'); ?></button>
                     </div>
                     <br />
 
@@ -138,8 +145,8 @@ $settings = $this->db->select("site_align")
     <!-- bootstrap js -->
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>" type="text/javascript"></script>
     <script>
-        $(document).ready(function() {
-            $("#show_hide_password a").on('click', function(event) {
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
                 event.preventDefault();
                 if ($('#show_hide_password input').attr("type") == "text") {
                     $('#show_hide_password input').attr('type', 'password');
