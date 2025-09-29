@@ -30,13 +30,13 @@
 		// print_r($feedbacktaken);
 		// echo '</pre>';
 		// exit;
+	
 
-
-	?>
+		?>
 
 		<div class="row">
 
-			
+
 
 			<!-- Download chart and image section -->
 			<div class="col-lg-12 col-sm-12">
@@ -45,19 +45,20 @@
 					<div style="float: right; margin-top: 10px; margin-right: 10px;">
 						<span style="font-size:17px"><strong>Download Chart:</strong></span>
 						<span style="margin-right: 10px;">
-							<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
-								onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
+							<i data-placement="bottom" class="fa fa-file-pdf-o"
+								style="font-size: 20px; color: red; cursor: pointer;" onclick="printChart()"
+								data-toggle="tooltip" title="Download Chart as PDF"></i>
 						</span>
 						<span>
-							<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
-								onclick="downloadChartImage()" data-toggle="tooltip"
-								title="Download Chart as Image"></i>
+							<i data-placement="bottom" class="fa fa-file-image-o"
+								style="font-size: 20px; color: green; cursor: pointer;" onclick="downloadChartImage()"
+								data-toggle="tooltip" title="Download Chart as Image"></i>
 						</span>
 					</div>
 
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
-							<?php $text = "In the " .  $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
+							<?php $text = "In the " . $dates['pagetitle'] . "," . "a total of " . count($ip_feedbacks_count) . " audits were conducted." ?>
 							<span class="typing-text"></span>
 
 						</span>
@@ -87,14 +88,17 @@
 							<strong>Physiotherapy- (OP) - Audit Summary</strong>
 						</div>
 						<div>
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed audit report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_physiotherapy_op' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+								title="Download detailed audit report"
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_physiotherapy_op' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
 					</div>
 
 					<div class="panel-body">
-						<table class="physiotherapy_op_mdc table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+						<table class="physiotherapy_op_mdc table table-striped table-hover table-bordered" cellspacing="0"
+							width="100%">
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<th>Audit by</th>
@@ -123,11 +127,13 @@
 									// print_r($param);
 									// echo '</pre>';
 									// exit;
+							
 
+									?>
 
-								?>
-
-									<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>" onclick="window.location='<?php echo $physiotherapy_op_feedback . $id; ?>';" style="cursor: pointer;">
+									<tr class="<?php echo ($sl & 1) ? 'odd gradeX' : 'even gradeC'; ?>"
+										onclick="window.location='<?php echo $physiotherapy_op_feedback . $id; ?>';"
+										style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
 										<td><?php echo $param->audit_by; ?></td>
 
@@ -190,7 +196,7 @@
 			</div>
 			<!-- /.row -->
 		</div>
-	<?php } else {   ?>
+	<?php } else { ?>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -207,7 +213,7 @@
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function () {
 		var typed = new Typed(".typing-text", {
 			strings: ["<?php echo $text; ?>"],
 			// delay: 10,
@@ -304,9 +310,9 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_physiotherapy_op_mdc"; // Replace with your API endpoint
+		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_physiotherapy_op_mdc"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
-		xhr.onreadystatechange = function() {
+		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var responseData = JSON.parse(xhr.responseText);
 				callback(responseData); // Call the callback function with the API data
@@ -316,11 +322,11 @@
 	}
 
 	function resposnseChart(apiData) {
-		var labels = apiData.map(function(item) {
+		var labels = apiData.map(function (item) {
 			return item.label_field;
 		});
 
-		var dataPoints = apiData.map(function(item) {
+		var dataPoints = apiData.map(function (item) {
 			return item.all_detail.count;
 		});
 		if (dataPoints.length == 1) {
@@ -351,7 +357,7 @@
 					pointBorderColor: "rgba(0, 128, 0, 1)",
 					pointHoverBackgroundColor: "rgba(255, 165, 0, 0.4)", // Orange color with reduced opacity
 					pointHoverBorderColor: "rgba(0, 128, 0, 1)",
-				}, ],
+				},],
 			},
 			options: {
 				responsive: true,
@@ -364,7 +370,7 @@
 					enabled: true,
 					mode: "single",
 					callbacks: {
-						label: function(tooltipItems, data) {
+						label: function (tooltipItems, data) {
 							var multistringText = [];
 							var dataIndex = tooltipItems.index; // Get the index of the hovered data point
 							var all_detail = apiData[dataIndex].all_detail;
@@ -384,7 +390,7 @@
 							display: false,
 							labelString: "Month",
 						},
-					}, ],
+					},],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
@@ -398,14 +404,14 @@
 							// forces step size to be 5 units
 							stepSize: 30,
 						},
-					}, ],
+					},],
 				},
 			},
 		});
 	}
 
 	// Call the fetchDataFromAPI function and pass the callback function to create the chart
-	setTimeout(function() {
+	setTimeout(function () {
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/
@@ -487,7 +493,7 @@
 
 		// Draw the chart image after it loads
 		const img = new Image();
-		img.onload = function() {
+		img.onload = function () {
 			ctx.drawImage(img, 0, extraHeight);
 
 			// Create downloadable image
