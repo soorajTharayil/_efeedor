@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 class Analytics_audit_quality extends CI_Controller
 {
     private $table_feedback;
