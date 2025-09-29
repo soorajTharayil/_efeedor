@@ -19,20 +19,18 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
+     $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
+
+    $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at  <b>' . $hospitalname . '</b> . You can now access the dashboard to review concerns raised for your departments, take relevant actions, and receive alerts to ensure smooth service resolution. <br /><br />';
-    $message1 .= 'Getting Started: <br /><br />';
-    $message1 .= 'Access the Dashboard: ' . $link . ' <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Important: For security purposes, please update your default password in the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
-    $message1 .= 'To familiarize yourself with the application and understand how to address concerns efficiently, we recommend reviewing the guide below: <br />';
-    $message1 .= 'Ticket Closing Guide: https://rebrand.ly/Efeedor_Ticket_Closing_Guide  <br /><br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= 'Welcome aboard! <br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
+    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $loginId . ' <br />';
+    $message1 .= 'Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
@@ -51,24 +49,20 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = 'Welcome to Efeedor - Your Account is Now Active!';
+    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
+
+    $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b>  You can now collect patient feedback using the Efeedor Mobile App with the credentials provided below: <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Alternatively, you can use the following link and the same credentials to log in and record data: <br /><br />';
-    $message1 .= 'Web Link: <a href="' . $link . '/form_login">' . $link . '/form_login</a> <br /><br />';
-    $message1 .= 'Learn How to Collect Patient Feedback <br /><br />';
-    $message1 .= 'To familiarize yourself with collecting patient feedback, complaints, and requests, we recommend reviewing the manuals below: <br />';
-    $message1 .= 'Patient Feedback System Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Patient_Feedback_System_Manual <br />';
-    $message1 .= 'Patient Complaint System Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Patient_Compliant_System_Manual<br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= 'Welcome aboard! <br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
+    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $loginId . ' <br />';
+    $message1 .= 'Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
+
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
     $conn_g->query($query);
@@ -120,23 +114,20 @@ while ($user_object = mysqli_fetch_object($user_result)) {
     $password = $permission->password;
     $name = $user_object->firstname;
 
-    $Subject = ' Welcome to Efeedor - Your Account is Now Active!';
+    $loginId = !empty($email) ? $email : "Your Email id or Mobile Number";
+
+    $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'We are delighted to welcome you aboard! <br /><br />';
-    $message1 .= 'Your account is now active on Efeedor Healthcare Experience Management Software at <b>' . $hospitalname . '</b> .You can now raise concerns such as internal service requests and incident reports using the link below: <br /><br />';
-    $message1 .= 'Web Link: <a href="' . $link . '/form_login">' . $link . '/form_login</a> <br /><br />';
-    $message1 .= 'Username: ' . $email . ' <br />';
-    $message1 .= 'Default Password: ' . $password . ' <br /><br />';
-    $message1 .= 'Alternatively, you can also use the Efeedor Android mobile app with the same credentials to log in, record data, and monitor activity on the go. <br /><br />';
-    $message1 .= 'To familiarize yourself with submitting internal service requests, reporting incidents, and collecting feedback, we recommend reviewing the manuals below: <br />';
-    $message1 .= 'Internal Service Request Manual:  <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Internal_Service_Request_Manual <br />';
-    $message1 .= 'Incident Reporting System Manual: <br />';
-    $message1 .= 'https://rebrand.ly/Efeedor_Incident_Reporting_System_Manual <br />';
-    $message1 .= 'If you have any questions or need assistance, feel free to reach out to your Software Admin. <br /><br />';
-    $message1 .= 'Welcome aboard — we look forward to your journey with Efeedor! <br /><br />';
-    $message1 .= 'Best regards, <br /><br />';
+    $message1 .= 'Welcome aboard! <br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
+    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Username: ' . $loginId . ' <br />';
+    $message1 .= 'Password: ' . $password . ' <br /><br />';
+    $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the “Edit Profile” section at the top-right of your dashboard. <br /><br />';
+    $message1 .= 'For any assistance, please reach out to your Software Admin. <br /><br />';
+    $message1 .= 'Thank you, <br />';
     $message1 .= $hospitalname;
+
 
     $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`subject` ,`HID`) VALUES ("email","' . $conn_g->real_escape_string($message1) . '",0,"' . $conn_g->real_escape_string($user_object->email) . '","' . $conn_g->real_escape_string($Subject) . '","' . $HID . '")';
     $conn_g->query($query);
