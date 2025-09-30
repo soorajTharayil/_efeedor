@@ -856,6 +856,13 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $res = array();
         $titles = array();
         $zz = array();
+        $rawDate = $param_incident->incident_occured_in;
+
+        // Convert ISO string to timestamp
+        $timestamp = strtotime($rawDate);
+
+        // Format as dd-mm-YYYY, h:i AM/PM
+        $formattedDate = date('d-m-Y, h:i A', $timestamp);
         //message1 will insert when there is only ONE TIKECT
         $message1 = 'Dear Team, <br /><br />';
         $message1 .= 'We would like to bring to your attention a recent incident reported by an employee at ' . $hospitalname . '. Below are the incident details: <br /><br />';
@@ -885,7 +892,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             
               <tr>
                  <td width="40%">Incident Occured On</td>
-                 <td width="60%">' . $param_incident->incident_occured_in . '</td>
+                 <td width="60%">' . $formattedDate . '</td>
              </tr>
             
               <tr>
