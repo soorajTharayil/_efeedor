@@ -25,8 +25,10 @@ while ($user_object = mysqli_fetch_object($user_result)) {
 
     $Subject = 'Welcome to Efeedor - Your Account is Active';
     $message1 = 'Dear ' . $name . ', <br /><br />';
-    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Healthcare Experience Platform. You can access your account using the below link and credentials : <br /><br />';
-    $message1 .= 'Web Link: ' . $link . ' <br /><br />';
+    $message1 .= 'Welcome aboard! Your account is now active on the Efeedor Quality Management Software. You can access your account using the below link and credentials : <br /><br />';
+    $message1 .= '*Link to access input forms: <a href="https://qms.pmhcp.com/form_link">qms.pmhcp.com/form_link</a><br />';
+    $message1 .= '*Link to access Dashboard: <a href="https://qms.pmhcp.com">qms.pmhcp.com</a><br /><br />';
+
     $message1 .= 'Username: ' . $loginId . ' <br />';
     $message1 .= 'Password: ' . $password . ' <br /><br />';
     $message1 .= 'Important: For security reasons, we request you to change your default password after logging in. You can do this by going to the "Edit Profile" section at the top-right of your dashboard. <br /><br />';
