@@ -207,7 +207,7 @@
                           <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
                             <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
                             <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}</span>
+                              <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color: red;">*</sup></span>
                               <span class="has-float-label">
                                 <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
                               </span>
@@ -219,7 +219,7 @@
     
                             <div class="form-group">
                               <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
-                                {{lang.dtandtym}}<sup style="color:red"></sup><br>
+                                {{lang.dtandtym}}<sup style="color:red">*</sup><br>
                                 <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
                                   {{lang.format}}
                                 </p>
@@ -227,10 +227,10 @@
     
                               <!-- Input -->
                               <div style="position: relative; width: 100%;">
-                                <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local" id="formula_para1_hr" ng-required="true" max="{{todayDateTime}}"
+                                <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
                                   autocomplete="off" onclick="this.showPicker && this.showPicker()"
                                   onfocus="this.showPicker && this.showPicker()"
-                                  style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" disabled/>
+                                  style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
                               </div>
                             </div>
     
@@ -248,7 +248,7 @@
                             <!-- Audit By -->
     
                             <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}</span>
+                              <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color: red;">*</sup></span>
                               <span class="has-float-label">
                                 <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
                               </span>
@@ -259,7 +259,7 @@
                             <!-- MID No -->
     
                             <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}</span>
+                              <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}<sup style="color: red;">*</sup></span>
                               <span class="has-float-label" style="margin-top: 12px;">
                                 <input type="text" class="form-control" maxlength="20" ng-model="feedback.mid_no" placeholder="Enter Patient MID" autocomplete="off" />
                               </span>
@@ -269,7 +269,7 @@
                             <!-- Patient Name -->
     
                             <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}</span>
+                              <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}<sup style="color: red;">*</sup></span>
                               <span class="has-float-label" style="margin-top: 8px;">
                                 <input type="text" class="form-control" ng-model="feedback.patient_name" placeholder="Enter Patient Name" maxlength="50" autocomplete="off" />
                               </span>
@@ -305,7 +305,7 @@
                               ng-init="locationOpen=false; locationSearch='';"
                               click-outside="locationOpen=false">
     
-                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}</span>
+                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup style="color: red;">*</sup></span>
     
                               <div style="margin-top:8px; position:relative;">
                                 <!-- Trigger -->
@@ -338,7 +338,7 @@
     
                             <!-- Department -->
                             <div class="form-group" ng-init="depOpen=false; depSearch='';" click-outside="closeDepartment()">
-                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}</span>
+                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup style="color: red;">*</sup></span>
     
                               <div style="position:relative; margin-top:8px;">
                                 <!-- Trigger -->
@@ -371,7 +371,7 @@
     
                             <!-- Attended Doctor -->
                             <div class="form-group" ng-init="docOpen=false; docSearch='';" click-outside="closeDoctor()">
-                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}</span>
+                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}<sup style="color: red;">*</sup></span>
     
                               <div style="position:relative; margin-top:8px;">
                                 <!-- Trigger -->
@@ -405,7 +405,7 @@
     
                             <div class="form-group">
                               <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
-                                {{lang.admidat}}<sup style="color:red"></sup><br>
+                                {{lang.admidat}}<sup style="color: red;">*</sup><br>
                                 <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
                               </span>
     
@@ -762,61 +762,44 @@
 
 
                 <fieldset ng-show="step4 == true">
-
                   <div class="form-card">
-
-                    <!-- happy customer code start		 -->
-
-                    <!-- <div class="row justify-content-center">
-
-                      <div class="col-12 text-center">
-
-                        <br>
-
-                        <h2 class="fs-title text-center" style="font-weight: 300;">{{lang.thankyou}}</h2> <br>
-
-                        <img src="dist/happy100x100.png"> <br>
-
-                        <p style="text-align:center; margin-top: 15px; font-weight: 300;" class="lead">
-
-                          {{lang.happythankyoumessage}}
-                        </p><br>
-
-                        <p style="text-align:center;"><a href="{{setting_data.google_review_link}}" target="_blank"><img style="width:268px" src="dist/ggg.jpg"></a></p>
-
-                      </div>
-
-                    </div> -->
-
-                    <!-- happy customer code end		 -->
-
-
-
-                    <!-- unhappy customer code start		 -->
-
+                    <!-- unhappy customer code start -->
                     <div class="row justify-content-center">
-
                       <div class="col-12 text-center">
-
                         <br>
-
                         <h2 class="fs-title text-center" style="font-weight: 300;">{{lang.thankyou}}</h2><br>
-
                         <img src="dist/tick.png"> <br>
-
                         <p style="text-align:center; margin-top: 45px; font-weight: 300;" class="lead">
-
                           {{lang.unhappythankyoumessage}}
                         </p>
 
+                        <style>
+                          @media (max-width: 768px) {
+                            .thankyou-buttons .btn {
+                              display: block;
+                              width: 92%;
+                              margin-left: 10px !important;
+                              margin-top: 10px !important;
+                            }
+                          }
+                        </style>
+
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="step4=false; step0=true; step=0;">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}"
+                            class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
+
+
                       </div>
-
                     </div>
-
-                    <!-- unhappy customer code end		 -->
-
+                    <!-- unhappy customer code end -->
                   </div>
-
                 </fieldset>
 
 

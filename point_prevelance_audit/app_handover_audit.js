@@ -95,6 +95,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
+$scope.user_id = ehandor.userid;
 		//load audit name
 		$scope.feedback.audit_by = $scope.loginname;
 

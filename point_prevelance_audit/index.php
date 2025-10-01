@@ -656,61 +656,44 @@
 
 
                 <fieldset ng-show="step4 == true">
-
                   <div class="form-card">
-
-                    <!-- happy customer code start		 -->
-
-                    <!-- <div class="row justify-content-center">
-
-                      <div class="col-12 text-center">
-
-                        <br>
-
-                        <h2 class="fs-title text-center" style="font-weight: 300;">{{lang.thankyou}}</h2> <br>
-
-                        <img src="dist/happy100x100.png"> <br>
-
-                        <p style="text-align:center; margin-top: 15px; font-weight: 300;" class="lead">
-
-                          {{lang.happythankyoumessage}}
-                        </p><br>
-
-                        <p style="text-align:center;"><a href="{{setting_data.google_review_link}}" target="_blank"><img style="width:268px" src="dist/ggg.jpg"></a></p>
-
-                      </div>
-
-                    </div> -->
-
-                    <!-- happy customer code end		 -->
-
-
-
-                    <!-- unhappy customer code start		 -->
-
+                    <!-- unhappy customer code start -->
                     <div class="row justify-content-center">
-
                       <div class="col-12 text-center">
-
                         <br>
-
                         <h2 class="fs-title text-center" style="font-weight: 300;">{{lang.thankyou}}</h2><br>
-
                         <img src="dist/tick.png"> <br>
-
                         <p style="text-align:center; margin-top: 45px; font-weight: 300;" class="lead">
-
                           {{lang.unhappythankyoumessage}}
                         </p>
 
+                        <style>
+                          @media (max-width: 768px) {
+                            .thankyou-buttons .btn {
+                              display: block;
+                              width: 92%;
+                              margin-left: 10px !important;
+                              margin-top: 10px !important;
+                            }
+                          }
+                        </style>
+
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <button type="button" class="btn btn-primary" ng-click="step4=false; step0=true; step=0;">
+                            🔄 Repeat Audit
+                          </button>
+                          <a ng-href="/audit_forms?user_id={{user_id}}"
+                            class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            🏠 Audits Home Page
+                          </a>
+                        </div>
+
+
                       </div>
-
                     </div>
-
-                    <!-- unhappy customer code end		 -->
-
+                    <!-- unhappy customer code end -->
                   </div>
-
                 </fieldset>
 
 

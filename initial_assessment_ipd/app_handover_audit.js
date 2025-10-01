@@ -22,23 +22,32 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.selectedMonths = $window.localStorage.getItem('selectedMonth');
 	$scope.selectedYears = $window.localStorage.getItem('selectedYear');
 	
-		//show date and time in input field
+		// current date & time (rounded seconds)
 	let now = new Date();
 	now.setSeconds(0, 0);
-
 	$scope.feedback.initial_assessment_hr2 = now;
 
+	// max (current date/time)
+	let maxDate = new Date();
+	maxDate.setSeconds(59, 999);
 
-    let maxDate = new Date();
-    maxDate.setSeconds(59, 999); // allow full current minute
-    
-    let year = maxDate.getFullYear();
-    let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
-    let day = ('0' + maxDate.getDate()).slice(-2);
-    let hours = ('0' + maxDate.getHours()).slice(-2);
-    let minutes = ('0' + maxDate.getMinutes()).slice(-2);
-    
-    $scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+	let year = maxDate.getFullYear();
+	let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
+	let day = ('0' + maxDate.getDate()).slice(-2);
+	let hours = ('0' + maxDate.getHours()).slice(-2);
+	let minutes = ('0' + maxDate.getMinutes()).slice(-2);
+	$scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+	// min (7 days back)
+	let minDate = new Date();
+	minDate.setDate(minDate.getDate() - 7);
+
+	let minYear = minDate.getFullYear();
+	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+	let minDay = ('0' + minDate.getDate()).slice(-2);
+	let minHours = ('0' + minDate.getHours()).slice(-2);
+	let minMinutes = ('0' + minDate.getMinutes()).slice(-2);
+	$scope.minDateTime = `${minYear}-${minMonth}-${minDay}T${minHours}:${minMinutes}`;
 
 
 
@@ -51,7 +60,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 				$scope.type2 = 'English'
 				//load main heading
 				$scope.feedback.audit_type = $rootScope.lang.patient_info;
-				$scope.feedback.audit_shortname = $rootScope.lang.patient_info + " " + formatted;
+				
 			});
 		}
 		if (type == 'lang2') {
@@ -85,6 +94,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
+$scope.user_id = ehandor.userid;
 		
 		//load audit name
 		$scope.feedback.audit_by = $scope.loginname;
@@ -253,7 +263,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	
 
-	$scope.todayDateTime = new Date().toISOString().slice(0, 16);
+	
 
 	
 	//load doctor list
