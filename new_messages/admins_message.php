@@ -904,7 +904,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             if (is_null($floor_wards) || empty($floor_wards) || in_array($emp_ward, $floor_wards)) {
                 $number = $users_whatsapp_object->mobile;
                 $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_for_incident', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staff_alert_for_incident_reported', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area,  $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                 // Execute the second query

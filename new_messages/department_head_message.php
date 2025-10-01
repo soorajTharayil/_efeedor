@@ -2114,7 +2114,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 $users_whatsapp = get_user_by_sms_activity('INC-WHATSAPP-DEPTHEAD', $con);
                 if (!empty($users_whatsapp)) {
                     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffalertsms_for_incident', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $admins_link_whatsapp]) . "', 
+             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staff_alert_for_incident_reported', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area,$risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp]) . "', 
              'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
@@ -2240,7 +2240,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             // $conn_g->query($query);
 
             $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'incident_reopen_staffalertsms', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp]) . "', 
+        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'incident_reopen_staff_notification_alert', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority,  $incident_type, $emp_ward, $emp_bed_no, $department_head_link_whatsapp]) . "', 
         'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
             // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
