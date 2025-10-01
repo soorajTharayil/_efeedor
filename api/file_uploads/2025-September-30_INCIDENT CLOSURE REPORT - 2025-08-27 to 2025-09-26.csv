@@ -1,0 +1,83 @@
+"SL No.","INCIDENT ID",INCIDENT,"INCIDENT SHORT NAME","INCIDENT DESCRIPTION","WHAT WENT WRONG","IMMEDIATE ACTION TAKEN","REPORTED BY","INCIDENT OCCURED IN","REPORTED ON","REPORTED IN","ASSIGNED RISK","ASSIGNED PRIORITY","ASSIGNED CATEGORY","PATIENT DETAILS","ASSIGNED TEAM LEADER","ASSIGNED PROCESS MONITOR ","INCIDENT TIMELINE & HISTORY","CLOSED ON","TURN AROUND TIME"
+1,"INC- 8","Food & Beverages","Food & Beverages related issues","A concern was raised regarding food and beverage services, where the quality, handling, or delivery of meals did not meet hospital standards. This created dissatisfaction and potential risk to patient comfort and care experience.","tandard protocols for food preparation, storage, or service were not consistently followed. Gaps in communication between the dietary team and service staff contributed to the issue, leading to errors in quality or timeliness of delivery.","The affected meals were immediately corrected/replaced, and the patient(s) were assured. The dietary and service staff were counseled to follow prescribed standards and cross-check processes before meal delivery. The Food & Beverages team reviewed the workflow to identify gaps.","TEST EFEEDOR(9009)","18 Sep, 2025 - 4:34 PM","3:37 pm, 26-09-25","2208 B- Main Building - 3rd Floor( HO Day care)",Medium,P2-High,Unassigned,JNEETH(66666),Megha,Pintu,"Assigned
+Date & Time : 26 Sep, 2025 - 3:45 PM
+Action : Incident Assigned to Megha (Nursing head)
+Process Monitor : Pintu (Nursing staff)
+Assigned by : Vignesh
+Comment : Assgined for testing
+---------------------------------------
+Investigator comment
+Date & Time : 26 Sep, 2025 - 3:50 PM
+Action : Commented by Pintu ()
+Notes : The incident reflects a deviation from established food and beverage service protocols, resulting in compromised quality and patient dissatisfaction. The issue appears to stem from inadequate adherence to preparation, storage, and delivery standards, along with gaps in communication between dietary and service staff. While immediate corrective steps were taken, this highlights the need for stricter monitoring, regular staff training, and systematic checks to ensure compliance with dietary service standards. Ongoing audits and feedback mechanisms will be essential to prevent recurrence.
+---------------------------------------
+Described
+Date & Time : 26 Sep, 2025 - 3:58 PM
+Action : Incident Explained by Megha ()
+Root Cause Analysis (RCA)
+Tool Applied : 5WHY
+WHY 1 : Because the meals delivered did not meet hospital standards/prescribed requirements.
+WHY 2 : Because dietary service staff did not properly cross-check meal orders with prescribed standards.
+WHY 3 : Because there was a communication gap between the dietary team and the food service staff.
+WHY 4 : Because there was no standardized verification process or monitoring system in place.
+WHY 5 : Because existing oversight practices were insufficient, and accountability for food quality/service was not strictly enforced.
+Corrective Action : Because dietary service staff did not properly cross-check meal orders with prescribed standards.
+Preventive Action : Because there was a communication gap between the dietary team and the food service staff.
+Lesson Learned : Because the meals delivered did not meet hospital standards/prescribed requirements.
+---------------------------------------
+Re-assigned
+Date & Time : 26 Sep, 2025 - 4:03 PM
+Action : Incident Re-assigned to Suhail (Nursing staff)
+Process Monitor : 
+Re-assigned by : Vignesh
+Comment : Reassigned for testing 
+---------------------------------------
+Described
+Date & Time : 26 Sep, 2025 - 4:14 PM
+Action : Incident Explained by Suhail ()
+Root Cause Analysis (RCA)
+Tool Applied : 5W2H
+What happened? : Meals provided to patients did not meet the prescribed dietary requirements/standards.
+Why did it happen? : Communication gaps and lack of cross-verification between the dietary team and service staff, leading to delivery errors.
+Where did it happen? : In the hospital food & beverage service workflow (kitchen, dietary planning, and meal delivery areas).
+When did it happen? : During routine patient meal service.
+Who was involved? : Dietary service staff, food preparation team, and service/delivery staff.
+How did it happen? : Failure to follow standard meal verification protocols, inadequate monitoring, and over-reliance on verbal instructions.
+How much/How many? : Patient dissatisfaction and potential compromise of patient care experience, with risk to dietary compliance in clinical cases.
+Corrective Action : Failure in communication and lack of a robust verification/monitoring process within the food & beverages service workflow, leading to delivery of meals that did not align with prescribed requirements.
+Preventive Action : Because dietary service staff did not properly cross-check meal orders with prescribed standards.
+Lesson Learned : Because the meals delivered did not meet hospital standards/prescribed requirements.
+---------------------------------------
+Closed
+Date & Time : 26 Sep, 2025 - 4:16 PM
+Action : Incident Closed by Vignesh ()
+Closure Verification Remark : Verification has confirmed that corrective and preventive actions have been implemented. Communication between the dietary and service staff has been standardized, mandatory cross-checks of meal orders against prescribed diets are being followed, and periodic audits show compliance. No further deviations have been observed. The incident is considered closed with continuous monitoring in place.
+---------------------------------------
+","4:16 pm, 26-09-25","39 mins."
+2,"INC- 1","Medication Errors","Dispensing error",test,,,TEST(123),"18 Sep, 2025 - 8:33 PM","8:33 pm, 25-09-25",Others(Others),High,P2-High,Adverse,(),Fathima,Bhavyasree,"Assigned
+Date & Time : 25 Sep, 2025 - 10:12 PM
+Action : Incident Assigned to Fathima (Nursing In-charge)
+Process Monitor : Bhavyasree (Nursing Superintendent)
+Assigned by : Kamal Thiyagarajan
+Comment : test
+---------------------------------------
+Described
+Date & Time : 25 Sep, 2025 - 10:15 PM
+Action : Incident Explained by Kamal Thiyagarajan ()
+Root Cause Analysis (RCA)
+Tool Applied : 5WHY
+WHY 1 :  the Incident in detail with
+WHY 2 : v the Incident in detail with
+WHY 3 :  the Incident in detail with
+WHY 4 :  the Incident in detail with
+WHY 5 :  the Incident in detail with
+Corrective Action :  Corrective Actions, Preventive
+Preventive Action :  Corrective Actions, Preventive
+Lesson Learned :  Corrective Actions, Preventive
+---------------------------------------
+Closed
+Date & Time : 25 Sep, 2025 - 10:21 PM
+Action : Incident Closed by Kamal Thiyagarajan ()
+Closure Verification Remark : test remark
+---------------------------------------
+","10:21 pm, 25-09-25","1 hrs, 48 mins."

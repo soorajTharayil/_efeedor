@@ -37,8 +37,8 @@ if (!empty($all_email_array)) {
             $mail->Password   = "Welcome@123"; // your SMTP password
 
             // Sender
-            $mail->setFrom('qmsalerts@meitra.com', 'Efeedor Quality Management Software Alerts');
-            $mail->addReplyTo('qmsalerts@meitra.com', 'Efeedor Quality Management Software Alerts');
+            $mail->setFrom('qmsalerts@meitra.com', 'Efeedor QMS Alerts');
+            $mail->addReplyTo('qmsalerts@meitra.com', 'Efeedor QMS Alerts');
 
             // Recipient
             $mail->clearAddresses();
