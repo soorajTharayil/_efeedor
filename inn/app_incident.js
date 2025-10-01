@@ -998,11 +998,14 @@ app.controller(
       $scope.selectedParameterObject = {
         title: "Others",
         question: "Other incidents",
-        shortkey: "incident230",
+        shortkey: "incident160"
       };
       $scope.feedback.other = $scope.searchTextmain;
       $scope.activeStep("step4");
     };
+
+
+
     $scope.selectQuestionCategory1 = function (Parameter, Question) {
       $scope.showBack = false;
       $scope.submit_as_concern = true;
