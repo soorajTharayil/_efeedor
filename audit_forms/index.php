@@ -25,8 +25,51 @@
 
 <!-- body part start -->
 
-<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" style="display:none;" id="body">
-	<!-- top navbar start -->
+<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl"  id="body">
+	  <fieldset ng-show="step0 == true">
+    <div class="main-container">
+      <div class="form-container" style="margin-top: 100px;">
+
+
+        <div class="form-body" style="align-items:center;">
+          <form class="the-form">
+            <div style="text-align: center; margin-top:-22px;">
+              <a class="navbar-brand" href="#"><img src="{{setting_data.logo}}" style="height: 100px; width:100%"></a>
+            </div>
+            <br>
+            <div style="color: red; text-align: center;" class="alert-error" ng-show="loginerror.length > 3">
+              {{loginerror}}</div>
+            <!-- <label for="text">Email / Mobile Number</label> -->
+            <input type="text" name="email" id="email" class="input-field" placeholder="Enter email/ mobile no."
+              ng-model="loginvar.userid">
+            <!-- <label for="password">Password</label> -->
+            <div class="password-container">
+              <input type="password" name="password" id="password" class="input-field" placeholder="Enter password"
+                ng-model="loginvar.password">
+              <span style="color: rgba(0, 0, 0, 0.8);" class="password-toggle" onclick="togglePassword()">
+                <i class="fa fa-eye-slash" aria-hidden="true"></i>
+              </span>
+            </div>
+            <div style=" display: flex;
+        justify-content: center; /* horizontally center */
+        align-items: center; ">
+              <input ng-click="login()" type="submit" value="LOGIN" style="width: 100px; height:45px;">
+            </div>
+          </form>
+        </div>
+        <!-- FORM BODY-->
+        <br><br><br>
+        <div class="form-footer" style=" display: flex;
+        justify-content: center; /* horizontally center */
+        align-items: center; ">
+          <img src="./logo.png" style="max-width: 100%; height: 45px; " alt="">
+        </div><!-- FORM FOOTER -->
+
+      </div><!-- FORM CONTAINER -->
+    </div>
+  </fieldset>
+<!-- top navbar start -->
+	<div ng-show="step2 == true">
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 		<!-- Logo of efeedor -->
 		<!-- <a class="navbar-brand" href="#"><img src="{{setting_data.logo}}" style="height: 36px; margin-left: -10px;" alt="Efeedor Logo"></a> -->
@@ -126,6 +169,7 @@
 		</a>
 	</div>
 	<!-- top navbar end -->
+
 	<!-- Create a modal for language selection -->
 	<div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -202,6 +246,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="container-fluid" id="grad1" ng-show="!aboutVisible && !supportVisible && !appDownloadVisible && !dashboardVisible">
 		<div class="row justify-content-center mt-0" style="height:max-content;">
 			<div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
@@ -215,7 +260,7 @@
 
 
 								<!-- INTERIM FEEDBACK FORM page start  -->
-								<fieldset ng-show="step2 == true">
+								<fieldset >
 									<div class="form-card">
 										<h3 class="sectiondivision" style="font-weight:bold;">{{lang.pagetitle}}</h3>
 
@@ -249,15 +294,20 @@
 									</h4>
 
 
+									<!-- Search box -->
+									<input type="text" ng-model="searchAudit" placeholder="🔍 Search audits..."
+										style="width:94%;margin:10px auto;display:block; padding:8px 10px;border:1px solid #ccc; border-radius:4px;font-size:16px;">
+
+
 
 									<div class="" style="width: 94%; margin: 0px auto;">
-										<div class="row">
+										<div class="row" ng-if="hasAuditInRange(1,29)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">MRD & MDC</h4>
 											</div>
 										</div>
-										
-										<div class="row" ng-if="profilen['AUDIT1'] == true" title="Ensures completeness of IP records incl. doctor, nurse & dietician notes; aligned with NABH, JCI, CAHO standards and WHO/ICMR patient safety protocols.">
+
+										<div class="row" ng-if="profilen['AUDIT1'] == true" ng-show="matchSearch(lang.active_cases_mrd_audit_ip)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -266,7 +316,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.active_cases_mrd_audit_ip}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Ensures completeness of IP records incl. doctor, nurse & dietician notes; aligned with NABH, JCI, CAHO standards and WHO/ICMR patient safety protocols."></i></p>
+																		<p class="text ">{{lang.active_cases_mrd_audit_ip}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 
 																	</div>
 																</div>
@@ -276,7 +326,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT2'] == true" title="Tracks X-ray waiting time from billing to procedure completion as per NABH, WHO, AERB, ICMR, CDC, CAHO & JCI standards to improve workflow, ensure safety, and enhance patient care.">
+										<div class="row" ng-if="profilen['AUDIT2'] == true" ng-show="matchSearch(lang.discharged_patients_mrd_audit_2023)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -285,7 +335,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.discharged_patients_mrd_audit_2023}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks X-ray waiting time from billing to procedure completion as per NABH, WHO, AERB, ICMR, CDC, CAHO & JCI standards to improve workflow, ensure safety, and enhance patient care."></i></p>
+																		<p class="text ">{{lang.discharged_patients_mrd_audit_2023}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 
 																	</div>
 																</div>
@@ -296,7 +346,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT3'] == true" title="Tracks USG waiting time from billing to report delivery as per NABH, WHO, ICMR, CDC, CAHO & JCI standards to enhance efficiency, streamline workflow, and improve patient satisfaction.">
+										<div class="row" ng-if="profilen['AUDIT3'] == true" ng-show="matchSearch(lang.nursing_ip_closed_cases)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -305,7 +355,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.nursing_ip_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks USG waiting time from billing to report delivery as per NABH, WHO, ICMR, CDC, CAHO & JCI standards to enhance efficiency, streamline workflow, and improve patient satisfaction."></i></p>
+																		<p class="text ">{{lang.nursing_ip_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 
 																	</div>
 																</div>
@@ -316,7 +366,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT4'] == true" title="Tracks CT scan waiting time from billing to procedure completion as per NABH, WHO, ICMR, CDC, CAHO & JCI standards to optimize workflow, ensure safety, and enhance patient satisfaction.">
+										<div class="row" ng-if="profilen['AUDIT4'] == true" ng-show="matchSearch(lang.nursing_ip_open_cases)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -325,8 +375,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.nursing_ip_open_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks CT scan waiting time from billing to procedure completion as per NABH, WHO, ICMR, CDC, CAHO & JCI standards to optimize workflow, ensure safety, and enhance patient satisfaction."></i></p>
-
+																		<p class="text">{{lang.nursing_ip_open_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -336,7 +385,8 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT5'] == true" title="Validates OR safety compliance—patient ID, consent, site marking, infection control & equipment checks as per NABH, JCI, CAHO, WHO Safe Surgery & CDC perioperative standards.">
+
+										<div class="row" ng-if="profilen['AUDIT5'] == true" ng-show="matchSearch(lang.nursing_op_closed_cases)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -345,8 +395,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.nursing_op_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Validates OR safety compliance—patient ID, consent, site marking, infection control & equipment checks as per NABH, JCI, CAHO, WHO Safe Surgery & CDC perioperative standards."></i></p>
-
+																		<p class="text">{{lang.nursing_op_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -356,7 +405,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT6'] == true" title="Assesses safe prescribing, dispensing & administration of medications as per NABH, JCI, CAHO, WHO Medication Safety, ISMP & CDSCO standards to ensure compliance and patient safety.">
+										<div class="row" ng-if="profilen['AUDIT6'] == true" ng-show="matchSearch(lang.clinical_dietetics_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -365,8 +414,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_dietetics_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses safe prescribing, dispensing & administration of medications as per NABH, JCI, CAHO, WHO Medication Safety, ISMP & CDSCO standards to ensure compliance and patient safety."></i></p>
-
+																		<p class="text">{{lang.clinical_dietetics_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -376,7 +424,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT7'] == true" title="Ensures safe, timely & accurate medication administration with patient rights, infection control & documentation checks as per NABH, JCI, CAHO & WHO safe medication standards.">
+										<div class="row" ng-if="profilen['AUDIT7'] == true" ng-show="matchSearch(lang.clinical_dietetics_closed_cases)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -385,8 +433,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_dietetics_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Ensures safe, timely & accurate medication administration with patient rights, infection control & documentation checks as per NABH, JCI, CAHO & WHO safe medication standards."></i></p>
-
+																		<p class="text">{{lang.clinical_dietetics_closed_cases}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -396,7 +443,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT8'] == true" title="Monitors safe, complete patient handover including ID, vitals, meds, risks & pending results as per NABH, JCI, CAHO & WHO communication standards (SBAR/IPASS) to ensure continuity of care.">
+										<div class="row" ng-if="profilen['AUDIT8'] == true" ng-show="matchSearch(lang.clinical_pharmacy_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -405,8 +452,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pharmacy_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Monitors safe, complete patient handover including ID, vitals, meds, risks & pending results as per NABH, JCI, CAHO & WHO communication standards (SBAR/IPASS) to ensure continuity of care."></i></p>
-
+																		<p class="text">{{lang.clinical_pharmacy_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -416,7 +462,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT9'] == true" title="Audits prescriptions for legibility & completeness—drug, dose, route, frequency, patient ID & doctor signature—as per NABH, JCI, CAHO, MCI & WHO safe prescribing standards.">
+										<div class="row" ng-if="profilen['AUDIT9'] == true" ng-show="matchSearch(lang.clinical_pharmacy_op)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -425,8 +471,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pharmacy_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits prescriptions for legibility & completeness—drug, dose, route, frequency, patient ID & doctor signature—as per NABH, JCI, CAHO, MCI & WHO safe prescribing standards."></i></p>
-
+																		<p class="text">{{lang.clinical_pharmacy_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -436,7 +481,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT10'] == true" title="Tracks staff hand hygiene practices & compliance by role/department to prevent HAIs, aligned with NABH, JCI, CAHO, WHO 5 Moments & CDC infection control guidelines.">
+										<div class="row" ng-if="profilen['AUDIT10'] == true" ng-show="matchSearch(lang.clinical_pharmacy_open)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -445,8 +490,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pharmacy_open}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks staff hand hygiene practices & compliance by role/department to prevent HAIs, aligned with NABH, JCI, CAHO, WHO 5 Moments & CDC infection control guidelines."></i></p>
-
+																		<p class="text">{{lang.clinical_pharmacy_open}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -456,7 +500,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT11'] == true" title="Monitors turnaround time for blood and component requests to ensure timely transfusion, as per NABH, JCI, CAHO, NACO & WHO standards on blood bank safety and transfusion practices.">
+										<div class="row" ng-if="profilen['AUDIT11'] == true" ng-show="matchSearch(lang.clinicians_anesthesia_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -465,8 +509,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_anesthesia_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Monitors turnaround time for blood and component requests to ensure timely transfusion, as per NABH, JCI, CAHO, NACO & WHO standards on blood bank safety and transfusion practices."></i></p>
-
+																		<p class="text">{{lang.clinicians_anesthesia_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -476,7 +519,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT12'] == true" title="Tracks ICU nurse-patient ratio to ensure safe staffing and quality care, aligned with NABH, JCI, CAHO, MoHFW & Indian Nursing Council standards for critical care units.">
+										<div class="row" ng-if="profilen['AUDIT12'] == true" ng-show="matchSearch(lang.clinicians_anesthesia_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -485,8 +528,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_anesthesia_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks ICU nurse-patient ratio to ensure safe staffing and quality care, aligned with NABH, JCI, CAHO, MoHFW & Indian Nursing Council standards for critical care units."></i></p>
-
+																		<p class="text">{{lang.clinicians_anesthesia_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -496,7 +538,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT13'] == true" title="Monitors ICU readmissions within 48 hours of discharge to evaluate care quality, prevent adverse events, and improve outcomes as per NABH, JCI, CAHO, MoHFW & ICMR patient safety standards.">
+										<div class="row" ng-if="profilen['AUDIT13'] == true" ng-show="matchSearch(lang.clinicians_ed_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -505,8 +547,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_ed_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Monitors ICU readmissions within 48 hours of discharge to evaluate care quality, prevent adverse events, and improve outcomes as per NABH, JCI, CAHO, MoHFW & ICMR patient safety standards."></i></p>
-
+																		<p class="text">{{lang.clinicians_ed_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -516,8 +557,7 @@
 											</div>
 										</div>
 
-
-										<div class="row" ng-if="profilen['AUDIT14'] == true" title="Validates ICU readmission data within 24–48 hrs to ensure accuracy, support quality reviews, and minimize errors as per NABH, JCI, CAHO, MoHFW & ICMR patient safety guidelines.">
+										<div class="row" ng-if="profilen['AUDIT14'] == true" ng-show="matchSearch(lang.clinicians_ed_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -526,8 +566,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_ed_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Validates ICU readmission data within 24–48 hrs to ensure accuracy, support quality reviews, and minimize errors as per NABH, JCI, CAHO, MoHFW & ICMR patient safety guidelines."></i></p>
-
+																		<p class="text">{{lang.clinicians_ed_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -537,7 +576,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT15'] == true" title="Tracks ED revisits within 72 hours with similar complaints to assess care adequacy, detect missed diagnoses, and enhance patient safety as per NABH, JCI, CAHO, MoHFW & ICMR guidelines.">
+										<div class="row" ng-if="profilen['AUDIT15'] == true" ng-show="matchSearch(lang.clinicians_icu_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -546,8 +585,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_icu_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks ED revisits within 72 hours with similar complaints to assess care adequacy, detect missed diagnoses, and enhance patient safety as per NABH, JCI, CAHO, MoHFW & ICMR guidelines."></i></p>
-
+																		<p class="text">{{lang.clinicians_icu_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -557,7 +595,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT16'] == true" title="Verifies ED revisit data within 24–72 hrs to ensure accurate documentation, monitor patient outcomes, and improve emergency care as per NABH, JCI, CAHO, MoHFW & ICMR standards.">
+										<div class="row" ng-if="profilen['AUDIT16'] == true" ng-show="matchSearch(lang.clinicians_icu_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -566,8 +604,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_icu_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Verifies ED revisit data within 24–72 hrs to ensure accurate documentation, monitor patient outcomes, and improve emergency care as per NABH, JCI, CAHO, MoHFW & ICMR standards."></i></p>
-
+																		<p class="text">{{lang.clinicians_icu_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -577,7 +614,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT17'] == true" title="Audits code mock drills to assess emergency response, child safety, staff readiness & debriefing, aligned with NABH, JCI, CAHO, MoHFW & hospital safety protocols for preparedness.">
+										<div class="row" ng-if="profilen['AUDIT17'] == true" ng-show="matchSearch(lang.clinicians_primary_care_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -586,8 +623,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_primary_care_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits code mock drills to assess emergency response, child safety, staff readiness & debriefing, aligned with NABH, JCI, CAHO, MoHFW & hospital safety protocols for preparedness."></i></p>
-
+																		<p class="text">{{lang.clinicians_primary_care_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -597,7 +633,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT18'] == true" title="Audits Code emergency response, CPR quality, patient transport & CCU readiness to ensure staff efficiency and patient safety, aligned with NABH, JCI, CAHO & hospital emergency protocols.">
+										<div class="row" ng-if="profilen['AUDIT18'] == true" ng-show="matchSearch(lang.clinicians_primary_care_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -606,8 +642,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_primary_care_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits Code emergency response, CPR quality, patient transport & CCU readiness to ensure staff efficiency and patient safety, aligned with NABH, JCI, CAHO & hospital emergency protocols."></i></p>
-
+																		<p class="text">{{lang.clinicians_primary_care_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -617,7 +652,8 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT19'] == true" title="Audits hospital facility safety—stairways, corridors, lighting, electricals, fire safety, cleanliness & signage—to prevent accidents and ensure compliance with NABH, JCI, CAHO & safety standards.">
+
+										<div class="row" ng-if="profilen['AUDIT19'] == true" ng-show="matchSearch(lang.clinicians_sedation_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -626,8 +662,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_sedation_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits hospital facility safety—stairways, corridors, lighting, electricals, fire safety, cleanliness & signage—to prevent accidents and ensure compliance with NABH, JCI, CAHO & safety standards."></i></p>
-
+																		<p class="text">{{lang.clinicians_sedation_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -637,7 +672,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT20'] == true" title="Monitors nurse-to-patient ratios in wards to ensure adequate staffing and safe patient care, aligned with NABH, JCI, CAHO & Indian hospital staffing standards.">
+										<div class="row" ng-if="profilen['AUDIT20'] == true" ng-show="matchSearch(lang.clinicians_sedation_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -646,8 +681,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_sedation_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Monitors nurse-to-patient ratios in wards to ensure adequate staffing and safe patient care, aligned with NABH, JCI, CAHO & Indian hospital staffing standards."></i></p>
-
+																		<p class="text">{{lang.clinicians_sedation_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -657,8 +691,7 @@
 											</div>
 										</div>
 
-
-										<div class="row" ng-if="profilen['AUDIT21'] == true" title="Ensures compliance with VAP prevention in ICU patients—covering hygiene, positioning, sedation & prophylaxis—as per NABH, JCI, CAHO & Indian ICU care standards to improve safety and outcomes.">
+										<div class="row" ng-if="profilen['AUDIT21'] == true" ng-show="matchSearch(lang.clinicians_surgeons_active)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -667,8 +700,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_surgeons_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Ensures compliance with VAP prevention in ICU patients—covering hygiene, positioning, sedation & prophylaxis—as per NABH, JCI, CAHO & Indian ICU care standards to improve safety and outcomes."></i></p>
-
+																		<p class="text">{{lang.clinicians_surgeons_active}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -677,7 +709,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT22'] == true" title="Ensures safe, sterile urinary catheter insertion with patient ID, consent, aseptic technique & post-care education as per NABH, JCI, CAHO & Indian hospital catheter care standards.">
+
+										<div class="row" ng-if="profilen['AUDIT22'] == true" ng-show="matchSearch(lang.clinicians_surgeons_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -686,8 +719,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicians_surgeons_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Ensures safe, sterile urinary catheter insertion with patient ID, consent, aseptic technique & post-care education as per NABH, JCI, CAHO & Indian hospital catheter care standards."></i></p>
-
+																		<p class="text">{{lang.clinicians_surgeons_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -696,7 +728,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT23'] == true" title="Ensures compliance with SSI bundle—pre, intra & post-op care, sterile technique, antibiotic prophylaxis & documentation—as per NABH, JCI, CAHO & Indian surgical infection prevention standards.">
+
+										<div class="row" ng-if="profilen['AUDIT23'] == true" ng-show="matchSearch(lang.diet_consultation_op)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -705,8 +738,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.diet_consultation_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Ensures compliance with SSI bundle—pre, intra & post-op care, sterile technique, antibiotic prophylaxis & documentation—as per NABH, JCI, CAHO & Indian surgical infection prevention standards."></i></p>
-
+																		<p class="text">{{lang.diet_consultation_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -715,7 +747,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT24'] == true" title="Audits urinary catheter care—aseptic handling, drainage, hygiene & documentation—to prevent CAUTI, aligned with NABH, JCI, CAHO & Indian infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT24'] == true" ng-show="matchSearch(lang.physiotherapy_closed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -724,8 +757,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.physiotherapy_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits urinary catheter care—aseptic handling, drainage, hygiene & documentation—to prevent CAUTI, aligned with NABH, JCI, CAHO & Indian infection control standards."></i></p>
-
+																		<p class="text">{{lang.physiotherapy_closed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -734,7 +766,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT25'] == true" title="Audits central line insertion—aseptic technique, site prep, consent, hand hygiene & documentation—to prevent CLABSI, aligned with NABH, JCI, CAHO & Indian infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT25'] == true" ng-show="matchSearch(lang.physiotherapy_op)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -743,8 +776,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.physiotherapy_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits central line insertion—aseptic technique, site prep, consent, hand hygiene & documentation—to prevent CLABSI, aligned with NABH, JCI, CAHO & Indian infection control standards."></i></p>
-
+																		<p class="text">{{lang.physiotherapy_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -753,7 +785,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT26'] == true" title="Audits central line maintenance—hand hygiene, aseptic access, dressing care, daily assessment & documentation—to prevent CLABSI, aligned with NABH, JCI, CAHO & Indian infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT26'] == true" ng-show="matchSearch(lang.physiotherapy_open)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -762,8 +795,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.physiotherapy_open}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits central line maintenance—hand hygiene, aseptic access, dressing care, daily assessment & documentation—to prevent CLABSI, aligned with NABH, JCI, CAHO & Indian infection control standards."></i></p>
-
+																		<p class="text">{{lang.physiotherapy_open}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -772,7 +804,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT27'] == true" title="Audits cleaning of non-patient areas—trash, surfaces, floors, fixtures, toilets & equipment—ensuring hygiene as per NABH, JCI, CAHO & Indian hospital housekeeping and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT27'] == true" ng-show="matchSearch(lang.mrd_audit_ed)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -781,8 +814,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.mrd_audit_ed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits cleaning of non-patient areas—trash, surfaces, floors, fixtures, toilets & equipment—ensuring hygiene as per NABH, JCI, CAHO & Indian hospital housekeeping and infection control standards."></i></p>
-
+																		<p class="text">{{lang.mrd_audit_ed}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -791,7 +823,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT28'] == true" title="Audits toilet cleaning—hygiene, disinfection, supplies, odor control & maintenance—ensuring compliance with NABH, JCI, CAHO & Indian hospital infection control and housekeeping protocols.">
+
+										<div class="row" ng-if="profilen['AUDIT28'] == true" ng-show="matchSearch(lang.mrd_audit_lama)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -800,8 +833,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.mrd_audit_lama}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits toilet cleaning—hygiene, disinfection, supplies, odor control & maintenance—ensuring compliance with NABH, JCI, CAHO & Indian hospital infection control and housekeeping protocols."></i></p>
-
+																		<p class="text">{{lang.mrd_audit_lama}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -810,7 +842,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT29'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT29'] == true" ng-show="matchSearch(lang.mrd_audit_op)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -819,8 +852,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.mrd_audit_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.mrd_audit_op}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -829,13 +861,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
+
+										<div class="row" ng-if="hasAuditInRange(30,44)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">Nursing & IPSG</h4>
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT30'] == true" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols.">
+										<div class="row" ng-if="profilen['AUDIT30'] == true" ng-show="matchSearch(lang.accidental_delining_audit_checklist)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -844,8 +877,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.accidental_delining_audit_checklist}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols."></i></p>
-
+																		<p class="text">{{lang.accidental_delining_audit_checklist}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -855,7 +887,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT31'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+										<div class="row" ng-if="profilen['AUDIT31'] == true" ng-show="matchSearch(lang.admission_holding_area_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -864,8 +896,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.admission_holding_area_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.admission_holding_area_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -875,7 +906,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT32'] == true" title="Evaluates CPR events for response time, quality & outcomes to improve survival; aligned with NABH, JCI, CAHO and AHA resuscitation guidelines.">
+										<div class="row" ng-if="profilen['AUDIT32'] == true" ng-show="matchSearch(lang.cpr_analysis_record)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -884,8 +915,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.cpr_analysis_record}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Evaluates CPR events for response time, quality & outcomes to improve survival; aligned with NABH, JCI, CAHO and AHA resuscitation guidelines."></i></p>
-
+																		<p class="text">{{lang.cpr_analysis_record}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -895,9 +925,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT33'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT33'] == true" ng-show="matchSearch(lang.extravasation_audit_checklist)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -906,8 +934,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.extravasation_audit_checklist}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.extravasation_audit_checklist}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -917,7 +944,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT34'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT34'] == true" ng-show="matchSearch(lang.hapu_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -926,8 +953,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.hapu_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.hapu_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -937,7 +963,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT35'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT35'] == true" ng-show="matchSearch(lang.initial_assessment_ae)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -946,8 +972,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.initial_assessment_ae}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.initial_assessment_ae}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -957,9 +982,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT36'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT36'] == true" ng-show="matchSearch(lang.initial_assessment_ipd)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -968,8 +991,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.initial_assessment_ipd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.initial_assessment_ipd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -979,7 +1001,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT37'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT37'] == true" ng-show="matchSearch(lang.initial_assessment_opd)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -988,8 +1010,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.initial_assessment_opd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.initial_assessment_opd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -999,7 +1020,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT38'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT38'] == true" ng-show="matchSearch(lang.ipsg_1)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1008,8 +1029,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_1}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_1}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1019,7 +1039,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT39'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT39'] == true" ng-show="matchSearch(lang.ipsg_2_ae)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1028,8 +1048,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_2_ae}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_2_ae}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1039,9 +1058,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT40'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT40'] == true" ng-show="matchSearch(lang.ipsg_2_ipd)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1050,8 +1067,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_2_ipd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_2_ipd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1061,8 +1077,7 @@
 											</div>
 										</div>
 
-										
-										<div class="row" ng-if="profilen['AUDIT41'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT41'] == true" ng-show="matchSearch(lang.ipsg_4_timeout_outside_ot)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1071,8 +1086,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_4_timeout_outside_ot}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_4_timeout_outside_ot}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1082,7 +1096,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT42'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT42'] == true" ng-show="matchSearch(lang.ipsg_6_ip)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1091,8 +1105,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_6_ip}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_6_ip}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1102,7 +1115,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT43'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT43'] == true" ng-show="matchSearch(lang.ipsg_6_opd)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1111,8 +1124,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.ipsg_6_opd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.ipsg_6_opd}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1122,11 +1134,7 @@
 											</div>
 										</div>
 
-										
-
-										
-
-										<div class="row" ng-if="profilen['AUDIT44'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT44'] == true" ng-show="matchSearch(lang.point_prevalence_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1135,8 +1143,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.point_prevalence_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.point_prevalence_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1145,13 +1152,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
+
+										<div class="row" ng-if="hasAuditInRange(45,70)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">Clinical Outcome</h4>
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT45'] == true" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols.">
+										<div class="row" ng-if="profilen['AUDIT45'] == true" ng-show="matchSearch(lang.clinicaloutcome_audit_acl)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1160,8 +1168,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_audit_acl}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_audit_acl}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1171,7 +1178,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT46'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+										<div class="row" ng-if="profilen['AUDIT46'] == true" ng-show="matchSearch(lang.clinicaloutcome_allogenic_bone_marrow)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1180,8 +1187,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_allogenic_bone_marrow}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_allogenic_bone_marrow}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1191,7 +1197,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT47'] == true" title="Evaluates CPR events for response time, quality & outcomes to improve survival; aligned with NABH, JCI, CAHO and AHA resuscitation guidelines.">
+										<div class="row" ng-if="profilen['AUDIT47'] == true" ng-show="matchSearch(lang.clinicaloutcome_aortic_value_replacement)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1200,8 +1206,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_aortic_value_replacement}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Evaluates CPR events for response time, quality & outcomes to improve survival; aligned with NABH, JCI, CAHO and AHA resuscitation guidelines."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_aortic_value_replacement}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1211,9 +1216,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT48'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT48'] == true" ng-show="matchSearch(lang.clinicaloutcome_autologous_bone)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1222,8 +1225,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_autologous_bone}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_autologous_bone}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1233,7 +1235,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT49'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT49'] == true" ng-show="matchSearch(lang.clinicaloutcome_brain_tumour)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1242,8 +1244,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_brain_tumour}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_brain_tumour}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1253,7 +1254,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT50'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT50'] == true" ng-show="matchSearch(lang.clinicaloutcome_cabg)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1262,8 +1263,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_cabg}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_cabg}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1273,9 +1273,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT51'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT51'] == true" ng-show="matchSearch(lang.clinicaloutcome_carotid_stenting)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1284,8 +1282,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_carotid_stenting}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_carotid_stenting}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1295,7 +1292,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT52'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT52'] == true" ng-show="matchSearch(lang.clinicaloutcome_chemotherapy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1304,8 +1301,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_chemotherapy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_chemotherapy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1315,7 +1311,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT53'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT53'] == true" ng-show="matchSearch(lang.clinicaloutcome_colo_rectal)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1324,8 +1320,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_colo_rectal}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_colo_rectal}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1335,7 +1330,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT54'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT54'] == true" ng-show="matchSearch(lang.clinicaloutcome_endoscopy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1344,8 +1339,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_endoscopy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_endoscopy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1355,9 +1349,7 @@
 											</div>
 										</div>
 
-										
-
-										<div class="row" ng-if="profilen['AUDIT55'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT55'] == true" ng-show="matchSearch(lang.clinicaloutcome_epilepsy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1366,8 +1358,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_epilepsy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_epilepsy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1377,8 +1368,9 @@
 											</div>
 										</div>
 
-										
-										<div class="row" ng-if="profilen['AUDIT56'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+
+										<div class="row" ng-if="profilen['AUDIT56'] == true" ng-show="matchSearch(lang.clinicaloutcome_herniorrhaphy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1387,8 +1379,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_herniorrhaphy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_herniorrhaphy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1398,7 +1389,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT57'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT57'] == true" ng-show="matchSearch(lang.clinicaloutcome_holep)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1407,8 +1398,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_holep}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_holep}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1418,7 +1408,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT58'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT58'] == true" ng-show="matchSearch(lang.clinicaloutcome_laparoscopic_appendicectomy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1427,8 +1417,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_laparoscopic_appendicectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_laparoscopic_appendicectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1438,11 +1427,7 @@
 											</div>
 										</div>
 
-										
-
-										
-
-										<div class="row" ng-if="profilen['AUDIT59'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+										<div class="row" ng-if="profilen['AUDIT59'] == true" ng-show="matchSearch(lang.clinicaloutcome_mechanical_thrombectomy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1451,8 +1436,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_mechanical_thrombectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_mechanical_thrombectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1461,7 +1445,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT60'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT60'] == true" ng-show="matchSearch(lang.clinicaloutcome_mvr)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1470,8 +1455,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_mvr}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_mvr}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1480,7 +1464,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT61'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT61'] == true" ng-show="matchSearch(lang.clinicaloutcome_ptca)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1489,8 +1474,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_ptca}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_ptca}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1499,7 +1483,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT62'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT62'] == true" ng-show="matchSearch(lang.clinicaloutcome_renal_transplantation)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1508,8 +1493,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_renal_transplantation}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_renal_transplantation}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1518,7 +1502,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT63'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT63'] == true" ng-show="matchSearch(lang.clinicaloutcome_scoliosis_correction)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1527,8 +1512,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_scoliosis_correction}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_scoliosis_correction}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1537,7 +1521,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT64'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT64'] == true" ng-show="matchSearch(lang.clinicaloutcome_spinal_dysraphism)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1546,8 +1531,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_spinal_dysraphism}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_spinal_dysraphism}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1556,7 +1540,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT65'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT65'] == true" ng-show="matchSearch(lang.clinicaloutcome_spine_disc_surgery)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1565,8 +1550,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_spine_disc_surgery}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_spine_disc_surgery}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1575,7 +1559,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT66'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT66'] == true" ng-show="matchSearch(lang.clinicaloutcome_thoracotomy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1584,8 +1569,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_thoracotomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_thoracotomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1594,7 +1578,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT67'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT67'] == true" ng-show="matchSearch(lang.clinicaloutcome_tkr)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1603,8 +1588,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_tkr}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_tkr}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1613,7 +1597,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT68'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT68'] == true" ng-show="matchSearch(lang.clinicaloutcome_uro_oncology)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1622,8 +1607,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_uro_oncology}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_uro_oncology}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1632,7 +1616,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT69'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT69'] == true" ng-show="matchSearch(lang.clinicaloutcome_whipples_surgery)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1641,8 +1626,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_whipples_surgery}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_whipples_surgery}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1651,7 +1635,8 @@
 												</div>
 											</div>
 										</div>
-											<div class="row" ng-if="profilen['AUDIT70'] == true" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI  & Indian hospital food safety and infection control standards.">
+
+										<div class="row" ng-if="profilen['AUDIT70'] == true" ng-show="matchSearch(lang.clinicaloutcome_laparoscopic_cholecystectomy)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1660,8 +1645,7 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicaloutcome_laparoscopic_cholecystectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Audits canteen hygiene, food handling, storage, transport, pest control & staff training per NABH, JCI & Indian hospital food safety and infection control standards."></i></p>
-
+																		<p class="text">{{lang.clinicaloutcome_laparoscopic_cholecystectomy}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title=""></i></p>
 																	</div>
 																</div>
 															</a>
@@ -1670,13 +1654,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
+
+										<div class="row" ng-if="hasAuditInRange(71,72)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">Clinical KPI</h4>
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT71'] == true" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols.">
+										<div class="row" ng-if="profilen['AUDIT71'] == true" ng-show="matchSearch(lang.clinicalkpi_bronchodilators_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1685,8 +1670,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicalkpi_bronchodilators_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols."></i></p>
-
+																		<p class="text">{{lang.clinicalkpi_bronchodilators_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1696,7 +1683,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT72'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+										<div class="row" ng-if="profilen['AUDIT72'] == true" ng-show="matchSearch(lang.clinicalkpi_copd_protocol_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1705,8 +1692,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinicalkpi_copd_protocol_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.clinicalkpi_copd_protocol_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1715,13 +1704,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
+
+										<div class="row" ng-if="hasAuditInRange(73,89)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">Infection Control & PCI</h4>
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT73'] == true" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols.">
+										<div class="row" ng-if="profilen['AUDIT73'] == true" ng-show="matchSearch(lang.infection_control_biomedical_waste)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1730,8 +1720,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_biomedical_waste}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Tracks causes of accidental line dislodgement to enhance patient safety & care; complies with NABH, JCI, CAHO standards and WHO line-care protocols."></i></p>
-
+																		<p class="text">{{lang.infection_control_biomedical_waste}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1741,7 +1733,7 @@
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT74'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+										<div class="row" ng-if="profilen['AUDIT74'] == true" ng-show="matchSearch(lang.infection_control_canteen_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1750,8 +1742,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_canteen_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_canteen_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1760,7 +1754,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT75'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT75'] == true" ng-show="matchSearch(lang.infection_control_cssd_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1769,8 +1764,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_cssd_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_cssd_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1779,7 +1776,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT76'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT76'] == true" ng-show="matchSearch(lang.infection_control_hand_hygiene)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1788,8 +1786,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_hand_hygiene}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_hand_hygiene}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1798,7 +1798,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT77'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT77'] == true" ng-show="matchSearch(lang.infection_control_bundle_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1807,8 +1808,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_bundle_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_bundle_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1817,7 +1820,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT78'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT78'] == true" ng-show="matchSearch(lang.infection_control_ot_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1826,8 +1830,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_ot_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_ot_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1836,7 +1842,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT79'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT79'] == true" ng-show="matchSearch(lang.infection_control_linen_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1845,8 +1852,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_linen_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_linen_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1855,7 +1864,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT80'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT80'] == true" ng-show="matchSearch(lang.infection_control_ambulance_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1864,8 +1874,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_ambulance_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_ambulance_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1874,7 +1886,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT81'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT81'] == true" ng-show="matchSearch(lang.infection_control_coffee_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1883,8 +1896,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_coffee_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_coffee_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1893,7 +1908,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT82'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT82'] == true" ng-show="matchSearch(lang.infection_control_laboratory_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1902,8 +1918,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_laboratory_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_laboratory_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1912,7 +1930,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT83'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT83'] == true" ng-show="matchSearch(lang.infection_control_mortuary_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1921,8 +1940,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_mortuary_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_mortuary_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1931,7 +1952,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT84'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT84'] == true" ng-show="matchSearch(lang.infection_control_radiology_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1940,8 +1962,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_radiology_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_radiology_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1950,7 +1974,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT85'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT85'] == true" ng-show="matchSearch(lang.infection_control_ssi_survelliance_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1959,8 +1984,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_ssi_survelliance_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_ssi_survelliance_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1969,7 +1996,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT86'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT86'] == true" ng-show="matchSearch(lang.infection_control_peripheralivline_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1978,8 +2006,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_peripheralivline_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_peripheralivline_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -1988,7 +2018,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT87'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT87'] == true" ng-show="matchSearch(lang.infection_control_personalprotective_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -1997,8 +2028,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_personalprotective_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_personalprotective_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2007,7 +2040,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT88'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT88'] == true" ng-show="matchSearch(lang.infection_control_safe_injection_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2016,8 +2050,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_safe_injection_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_safe_injection_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2026,7 +2062,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT89'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT89'] == true" ng-show="matchSearch(lang.infection_control_surface_cleaning_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2035,8 +2072,10 @@
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
 																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.infection_control_surface_cleaning_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text">{{lang.infection_control_surface_cleaning_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2045,13 +2084,14 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
+
+										<div class="row" ng-if="hasAuditInRange(90,100)">
 											<div class="col-12">
 												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">Clinical Pathways</h4>
 											</div>
 										</div>
 
-										<div class="row" ng-if="profilen['AUDIT90'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+										<div class="row" ng-if="profilen['AUDIT90'] == true" ng-show="matchSearch(lang.clinical_pathway_arthroscopic_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2059,9 +2099,11 @@
 															<a href="../clinical_pathway_arthroscopic_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_arthroscopic_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_arthroscopic_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2070,7 +2112,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT91'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT91'] == true" ng-show="matchSearch(lang.clinical_pathway_breast_lump_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2078,9 +2121,11 @@
 															<a href="../clinical_pathway_breast_lump_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_breast_lump_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_breast_lump_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2089,7 +2134,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT92'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT92'] == true" ng-show="matchSearch(lang.clinical_pathway_cardiac_arrest_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2097,9 +2143,11 @@
 															<a href="../clinical_pathway_cardiac_arrest_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_cardiac_arrest_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_cardiac_arrest_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2108,7 +2156,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT93'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT93'] == true" ng-show="matchSearch(lang.clinical_pathway_donor_hepatectomy_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2116,9 +2165,11 @@
 															<a href="../clinical_pathway_donor_hepatectomy_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_donor_hepatectomy_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_donor_hepatectomy_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2127,7 +2178,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT94'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT94'] == true" ng-show="matchSearch(lang.clinical_pathway_febrile_seizure_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2135,9 +2187,11 @@
 															<a href="../clinical_pathway_febrile_seizure_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_febrile_seizure_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_febrile_seizure_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2146,7 +2200,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT95'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT95'] == true" ng-show="matchSearch(lang.clinical_pathway_heart_transplant_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2154,9 +2209,11 @@
 															<a href="../clinical_pathway_heart_transplant_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_heart_transplant_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_heart_transplant_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2165,7 +2222,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT96'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT96'] == true" ng-show="matchSearch(lang.clinical_pathway_laproscopic_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2173,9 +2231,11 @@
 															<a href="../clinical_pathway_laproscopic_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_laproscopic_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_laproscopic_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2184,7 +2244,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT97'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT97'] == true" ng-show="matchSearch(lang.clinical_pathway_picc_line_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2192,9 +2253,11 @@
 															<a href="../clinical_pathway_picc_line_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_picc_line_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_picc_line_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2203,7 +2266,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT98'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT98'] == true" ng-show="matchSearch(lang.clinical_pathway_stroke_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2211,9 +2275,11 @@
 															<a href="../clinical_pathway_stroke_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_stroke_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_stroke_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2222,7 +2288,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT99'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT99'] == true" ng-show="matchSearch(lang.clinical_pathway_urodynamics_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2230,9 +2297,11 @@
 															<a href="../clinical_pathway_urodynamics_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_urodynamics_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_urodynamics_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2241,7 +2310,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="profilen['AUDIT100'] == true" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance.">
+
+										<div class="row" ng-if="profilen['AUDIT100'] == true" ng-show="matchSearch(lang.clinical_pathway_stemi_audit)">
 											<div class="col-12">
 												<div class="card">
 													<div class="row">
@@ -2249,9 +2319,11 @@
 															<a href="../clinical_pathway_stemi_audit" class="card" style="text-decoration: none;">
 																<div class="card product-card" style="margin-bottom: 10px;">
 																	<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																		<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
-																		<p class="text ">{{lang.clinical_pathway_stemi_audit}} <i class="fa fa-info-circle" aria-hidden="true" style="margin-left:6px;color:#6c757d;" title="Assesses patient safety, care continuity & staff competency in holding areas; follows NABH, JCI, CAHO standards with WHO patient safety guidance."></i></p>
-
+																		<p class="text" ng-bind-html="q.icon" style="color:#5c5959;font-size:36px;"></p>
+																		<p class="text">{{lang.clinical_pathway_stemi_audit}}
+																			<i class="fa fa-info-circle" aria-hidden="true"
+																				style="margin-left:6px;color:#6c757d;" title=""></i>
+																		</p>
 																	</div>
 																</div>
 															</a>
@@ -2260,22 +2332,17 @@
 												</div>
 											</div>
 										</div>
-										
-										
 
 
-									
+
+
+
+
 
 
 									</div>
 
-
-
 								</fieldset>
-
-
-
-
 
 							</form>
 							<!-- form end  -->
@@ -2285,6 +2352,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 <!-- body section end  -->
@@ -2298,6 +2366,145 @@
 
 	}, 2000);
 </script>
+  <script>
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      var passwordToggle = document.querySelector(".password-toggle");
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        passwordToggle.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>'; // Change HTML to eye icon
+      } else {
+        passwordField.type = "password";
+        passwordToggle.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>'; // Change HTML to eye slash icon
+      }
+    }
+  </script>
+
+  <style>
+    .menu-dropdown {
+      position: absolute;
+      right: 10px;
+      top: 50px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      width: 200px;
+      display: none;
+      z-index: 1000;
+    }
+
+    .menu-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu-dropdown ul li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-dropdown ul li a {
+      text-decoration: none;
+      color: black;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .menu-dropdown ul li a i {
+      margin-right: 10px;
+    }
+
+    .menu-dropdown ul li:last-child {
+      border-bottom: none;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+    }
+
+    [ng-show="menuVisible"] {
+      display: block !important;
+    }
+
+    .menu-dropdown ul li a:hover {
+      color: #555;
+    }
+
+
+    .input-field {
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      /* Add border */
+      border-radius: 25px;
+      /* Add border radius */
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      /* Add box shadow */
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .password-input {
+      width: calc(100% - 40px);
+      /* Adjust width to accommodate the show/hide button */
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 39%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: nowrap;
+      }
+
+      .navbar .navbar-brand {
+        flex-shrink: 0;
+        margin-right: 10px;
+      }
+
+      .navbar .ml-auto {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .navbar .left-buttons a,
+      .navbar .right-buttons button {
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+
+      .navbar .right-buttons {
+        margin-left: -5px;
+        /* Adjust the position of the language button */
+      }
+
+      .navbar .btn {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
 
 <!-- script code end  -->
 
