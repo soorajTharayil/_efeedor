@@ -1061,6 +1061,8 @@ app.controller(
       $scope.feedback.priority = "";
       $scope.feedback.incident_type = "";
       $scope.feedback.tag_name = "";
+      $scope.feedback.bedno = "";
+      $scope.feedback.ward = "";
       $scope.feedback.tag_patientid = "";
       $scope.feedback.files_name = [];
       $scope.feedback.images = [];
