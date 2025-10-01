@@ -1456,21 +1456,28 @@
 </style>
 
 <script>
-	function setMaxDateTime() {
-		const now = new Date();
+function setMaxDateTime() {
+    const now = new Date();
 
-		// format: YYYY-MM-DDTHH:MM (what datetime-local needs)
-		const formatted = now.toISOString().slice(0, 16);
+    // Build YYYY-MM-DDTHH:MM in LOCAL time
+    const year    = now.getFullYear();
+    const month   = String(now.getMonth() + 1).padStart(2, '0');
+    const day     = String(now.getDate()).padStart(2, '0');
+    const hours   = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
 
-		document.getElementById("incident_occured_in").setAttribute("max", formatted);
-	}
+    const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
 
-	// set max once on load
-	setMaxDateTime();
+    document.getElementById("incident_occured_in").setAttribute("max", formatted);
+}
 
-	// OPTIONAL: keep refreshing every minute so "now" moves forward
-	setInterval(setMaxDateTime, 60000);
+// Run once on load
+setMaxDateTime();
+
+// OPTIONAL: update every minute so "now" moves forward
+setInterval(setMaxDateTime, 60000);
 </script>
+
 <style>
 	img {
 		max-width: 100%;
