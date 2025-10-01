@@ -270,8 +270,9 @@
 									</div>
 									<br> -->
 
-									 <div class="card" style=" border: 2px solid #000;">
-										<div class="" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+									<div class="card" style=" border: 2px solid #000;">
+										<div class="" ng-click="language('lang3')"
+											style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
 											<span style="margin-left: -100px; color: #4b4c4d;">
 												മലയാളം
 											</span><br>
@@ -386,8 +387,7 @@
 														<input class="form-control" id="employee_name"
 															placeholder="{{lang.employee_name_placeholder}}"
 															oninput="restrictToAlphabets(event)" maxlength="25"
-															name="name" type="text" 
-															ng-model="feedback.name"
+															name="name" type="text" ng-model="feedback.name"
 															onblur="this.value = this.value.toUpperCase();"
 															autocomplete="off" />
 														<label for="emailid"></label>
@@ -402,7 +402,7 @@
 													<span class="has-float-label">
 														<input class="form-control" id="employee_id"
 															placeholder="{{lang.enter_placeholder}}" type="text"
-															maxlength="10"  ng-required="true"
+															maxlength="10" ng-required="true"
 															ng-model="feedback.patientid" autocomplete="off"
 															placeholder="Numerical digits only" />
 														<label for="contactnumber"></label>
@@ -1007,10 +1007,10 @@
 													<span class="addon"
 														style="    font-size: 16px;">{{lang.tag_id}}</span>
 													<span class="has-float-label">
-														<input class="form-control" placeholder="{{lang.tag_id}}" type="text"
-															maxlength="10" id="contactnumber" ng-required="true"
-															ng-model="feedback.tag_patientid" autocomplete="off"
-															placeholder="Numerical digits only"
+														<input class="form-control" placeholder="{{lang.tag_id}}"
+															type="text" maxlength="10" id="contactnumber"
+															ng-required="true" ng-model="feedback.tag_patientid"
+															autocomplete="off" placeholder="Numerical digits only"
 															style="padding-top:0px;" />
 														<label for="contactnumber"></label>
 													</span>
@@ -1077,7 +1077,8 @@
 
 											<!-- Display the list of uploaded files -->
 											<div ng-if="feedback.files_name && feedback.files_name.length > 0">
-												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}</h3>
+												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}
+												</h3>
 												<ul style="margin-left: 19px;">
 													<li ng-repeat="files_name in feedback.files_name track by $index"
 														style="display: flex; align-items: center;">
@@ -1456,27 +1457,32 @@
 </style>
 
 <script>
-function setMaxDateTime() {
-    const now = new Date();
+	function setMaxDateTime() {
+		const now = new Date();
 
-    // Build YYYY-MM-DDTHH:MM in LOCAL time
-    const year    = now.getFullYear();
-    const month   = String(now.getMonth() + 1).padStart(2, '0');
-    const day     = String(now.getDate()).padStart(2, '0');
-    const hours   = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+		// Round up to the next full minute if seconds > 0
+		if (now.getSeconds() > 0) {
+			now.setMinutes(now.getMinutes() + 1);
+		}
 
-    const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
+		// Build YYYY-MM-DDTHH:MM in LOCAL time
+		const year = now.getFullYear();
+		const month = String(now.getMonth() + 1).padStart(2, '0');
+		const day = String(now.getDate()).padStart(2, '0');
+		const hours = String(now.getHours()).padStart(2, '0');
+		const minutes = String(now.getMinutes()).padStart(2, '0');
 
-    document.getElementById("incident_occured_in").setAttribute("max", formatted);
-}
+		const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
+		document.getElementById("incident_occured_in").setAttribute("max", formatted);
+	}
 
-// Run once on load
-setMaxDateTime();
+	// Run once on load
+	setMaxDateTime();
 
-// OPTIONAL: update every minute so "now" moves forward
-setInterval(setMaxDateTime, 60000);
+	// OPTIONAL: update every minute so "now" moves forward
+	setInterval(setMaxDateTime, 60000);
 </script>
+
 
 <style>
 	img {
