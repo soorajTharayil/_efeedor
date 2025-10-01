@@ -3,7 +3,6 @@
 
 
 class UserManagement_model extends CI_Model
-
 {
 
 
@@ -14,7 +13,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function create($data = [])
-
 	{
 
 
@@ -67,7 +65,6 @@ class UserManagement_model extends CI_Model
 		return $descriptions;
 	}
 	public function read()
-
 	{
 
 		return $this->db->select("*")
@@ -107,7 +104,6 @@ class UserManagement_model extends CI_Model
 	}
 
 	public function read_by_id($dprt_id = null)
-
 	{
 
 		return $this->db->select("*")
@@ -122,7 +118,6 @@ class UserManagement_model extends CI_Model
 	}
 
 	public function role_edit($dprt_id = null)
-
 	{
 
 		return $this->db->select("*")
@@ -140,7 +135,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function departmentList()
-
 	{
 
 		return $this->db->select("*")
@@ -228,7 +222,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function sinkdeparment($d, $old_email)
-
 	{
 
 
@@ -560,7 +553,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function delete($dprt_id = null)
-
 	{
 
 
@@ -626,7 +618,7 @@ class UserManagement_model extends CI_Model
 			case 8:
 				$data['admin_email'] = '0';
 				break;
-				case 10:
+			case 10:
 				$data['admin_email'] = '0';
 				break;
 			default:
@@ -636,77 +628,44 @@ class UserManagement_model extends CI_Model
 		$this->db->where('user_id', $dprt_id);
 		return $this->db->update('user', $data);
 	}
-
 	public function update_sms_status($dprt_id)
 	{
-		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->result();
+		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->row();
 
-		if (empty($user)) {
+		if (!$user) {
 			return false; // No user found
 		}
 
-		$admin = $user[0]->user_role;
-		$data = array();
+		$allowed_roles = [2, 3, 4, 8, 10];
 
-		switch ($admin) {
-			case 2:
-				$data['message_alert'] = '0';
-				break;
-			case 3:
-				$data['message_alert'] = '0';
-				break;
-			case 4:
-				$data['message_alert'] = '0';
-				break;
-			case 8:
-				$data['message_alert'] = '0';
-				break;
-				case 10:
-				$data['message_alert'] = '0';
-				break;
-			default:
-				return false; // Invalid user role
+		if (!in_array($user->user_role, $allowed_roles)) {
+			return false; // Invalid user role
 		}
 
-		$this->db->where('user_id', $dprt_id);
-		return $this->db->update('user', $data);
+		return $this->db->where('user_id', $dprt_id)
+			->update('user', ['message_alert' => '0']);
 	}
-
 
 	public function update_whatsapp_status($dprt_id)
 	{
-		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->result();
+		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->row();
 
-		if (empty($user)) {
+		if (!$user) {
 			return false; // No user found
 		}
 
-		$admin = $user[0]->user_role;
-		$data = array();
+		$allowed_roles = [2, 3, 4, 8, 10];
 
-		switch ($admin) {
-			case 2:
-				$data['whatsapp_alert'] = '0';
-				break;
-			case 3:
-				$data['whatsapp_alert'] = '0';
-				break;
-			case 4:
-				$data['whatsapp_alert'] = '0';
-				break;
-			case 8:
-				$data['whatsapp_alert'] = '0';
-				break;
-			default:
-				return false; // Invalid user role
+		if (!in_array($user->user_role, $allowed_roles)) {
+			return false; // Invalid user role
 		}
 
-		$this->db->where('user_id', $dprt_id);
-		return $this->db->update('user', $data);
+		return $this->db->where('user_id', $dprt_id)
+			->update('user', ['whatsapp_alert' => '0']);
 	}
 
-	public function role_delete($dprt_id = null)
 
+	public function role_delete($dprt_id = null)
 	{
 
 		$this->db->where('role_id', $dprt_id)->delete($this->table2);
@@ -725,7 +684,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function department_list($dep)
-
 	{
 
 		$result = $this->db->select("*")
@@ -750,7 +708,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function role_list()
-
 	{
 
 		$result = $this->db
@@ -773,7 +730,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function role_permission($role)
-
 	{
 
 		// $this->db->where('R.role_id', $userRole);
@@ -867,7 +823,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function user_permission($user_id, $role_id)
-
 	{
 
 		$this->db->from('user_permissions as UP');
@@ -958,7 +913,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function save_role_permission($NewPermission, $role)
-
 	{
 
 		$this->db->from('features as F');
@@ -973,7 +927,7 @@ class UserManagement_model extends CI_Model
 
 		$permissionList = $query->result();
 
-		foreach ($permissionList  as $permission) {
+		foreach ($permissionList as $permission) {
 
 			$status = 0;
 
@@ -1027,7 +981,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function save_user_permission($NewPermission, $floor_ward, $floor_ward_esr, $floor_asset, $department, $user_id)
-
 	{
 
 
@@ -1039,7 +992,7 @@ class UserManagement_model extends CI_Model
 			$query = $this->db->get();
 			$permissionList = $query->result();
 
-			foreach ($permissionList  as $permission) {
+			foreach ($permissionList as $permission) {
 
 				$status = 0;
 
@@ -1110,7 +1063,6 @@ class UserManagement_model extends CI_Model
 
 
 	public function role_create($data = [])
-
 	{
 
 		return $this->db->insert('roles', $data);
