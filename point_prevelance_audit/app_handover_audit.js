@@ -13,7 +13,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.step0 = true;
 	$scope.step1 = false;
 	$scope.step4 = false;
-	
+
 	var selectedMonths = $window.localStorage.getItem('selectedMonth');
 	console.log(selectedMonths); // This will log "June"
 	var selectedYears = $window.localStorage.getItem('selectedYear');
@@ -21,24 +21,34 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	$scope.selectedMonths = $window.localStorage.getItem('selectedMonth');
 	$scope.selectedYears = $window.localStorage.getItem('selectedYear');
-	
-	//show date and time in input field
+
+	// current date & time (rounded seconds)
 	let now = new Date();
 	now.setSeconds(0, 0);
-
 	$scope.feedback.initial_assessment_hr2 = now;
 
+	// max (current date/time)
+	let maxDate = new Date();
+	maxDate.setSeconds(59, 999);
 
-    let maxDate = new Date();
-    maxDate.setSeconds(59, 999); // allow full current minute
-    
-    let year = maxDate.getFullYear();
-    let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
-    let day = ('0' + maxDate.getDate()).slice(-2);
-    let hours = ('0' + maxDate.getHours()).slice(-2);
-    let minutes = ('0' + maxDate.getMinutes()).slice(-2);
-    
-    $scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+	let year = maxDate.getFullYear();
+	let month = ('0' + (maxDate.getMonth() + 1)).slice(-2);
+	let day = ('0' + maxDate.getDate()).slice(-2);
+	let hours = ('0' + maxDate.getHours()).slice(-2);
+	let minutes = ('0' + maxDate.getMinutes()).slice(-2);
+	$scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+	// min (7 days back)
+	let minDate = new Date();
+	minDate.setDate(minDate.getDate() - 7);
+
+	let minYear = minDate.getFullYear();
+	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
+	let minDay = ('0' + minDate.getDate()).slice(-2);
+	let minHours = ('0' + minDate.getHours()).slice(-2);
+	let minMinutes = ('0' + minDate.getMinutes()).slice(-2);
+	$scope.minDateTime = `${minYear}-${minMonth}-${minDay}T${minHours}:${minMinutes}`;
+
 
 
 
@@ -51,7 +61,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 				$scope.type2 = 'English'
 				//load main heading
 				$scope.feedback.audit_type = $rootScope.lang.patient_info;
-				$scope.feedback.audit_shortname = $rootScope.lang.patient_info + " " + formatted;
+				
 			});
 		}
 		if (type == 'lang2') {
@@ -106,7 +116,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 
 	}
-	
+
 	$scope.next1 = function () {
 
 		if (!$scope.feedback.mid_no || ($scope.feedback.mid_no + '').trim() === '') {
@@ -119,7 +129,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			return;
 		}
 
-		
+
 
 		if (!$scope.feedback.location || ($scope.feedback.location + '').trim() === '') {
 			alert("Please select Area");
@@ -147,7 +157,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.step1 = true;
 		$(window).scrollTop(0);
 	}
-	
+
 	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
@@ -250,12 +260,9 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 
-	
 
-	$scope.todayDateTime = new Date().toISOString().slice(0, 16);
 
-	
-	
+
 	//load doctor list
 	$scope.setupapplication = function () {
 		//$rootScope.loader = true;
@@ -276,8 +283,8 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	}
 
 	$scope.setupapplication();
-	
-	
+
+
 	$scope.setupapplication1 = function () {
 		//$rootScope.loader = true;
 		var url = window.location.href;
@@ -449,8 +456,6 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	};
 
 
-$scope.todayDateTime = new Date().toISOString().slice(0,16);
-
 	// re-size of textarea based on long text
 	function autoResizeTextArea(textarea) {
 		// Reset height to auto to allow expansion
@@ -471,13 +476,13 @@ $scope.todayDateTime = new Date().toISOString().slice(0,16);
 	$scope.savefeedback = function () {
 
 		// function isFeedbackValid() {
-			
+
 		// 	// if ($scope.feedback.department == '' || $scope.feedback.department == undefined) {
 		// 	// 	alert('Please enter designation');
 		// 	// 	return false;
 		// 	// }
-			
-			
+
+
 		// 	return true;
 		// }
 
@@ -485,22 +490,22 @@ $scope.todayDateTime = new Date().toISOString().slice(0,16);
 		// if (!isFeedbackValid()) {
 		// 	return;
 		// }
-		
-		
+
+
 		var formatDateToLocalString = function (date) {
-            if (!date) return "";
-            var d = new Date(date);
-        
-            if (isNaN(d.getTime())) return "";
-        
-            var year = d.getFullYear();
-            var month = ('0' + (d.getMonth() + 1)).slice(-2);
-            var day = ('0' + d.getDate()).slice(-2);
-            var hours = ('0' + d.getHours()).slice(-2);
-            var minutes = ('0' + d.getMinutes()).slice(-2);
-        
-            return `${year}-${month}-${day} ${hours}:${minutes}`;
-        };
+			if (!date) return "";
+			var d = new Date(date);
+
+			if (isNaN(d.getTime())) return "";
+
+			var year = d.getFullYear();
+			var month = ('0' + (d.getMonth() + 1)).slice(-2);
+			var day = ('0' + d.getDate()).slice(-2);
+			var hours = ('0' + d.getHours()).slice(-2);
+			var minutes = ('0' + d.getMinutes()).slice(-2);
+
+			return `${year}-${month}-${day} ${hours}:${minutes}`;
+		};
 
 		// Convert before saving
 		$scope.feedback.initial_assessment_hr2 = formatDateToLocalString($scope.feedback.initial_assessment_hr2);
@@ -525,7 +530,7 @@ $scope.todayDateTime = new Date().toISOString().slice(0,16);
 				$rootScope.loader = false;
 				// navigator.showToast('Patient Feedback Submitted Successfully');
 				//$location.path('/thankyou');
-				$scope.step0 = false;
+				$scope.step1 = false;
 				$scope.step4 = true;
 				$(window).scrollTop(0);
 			}
