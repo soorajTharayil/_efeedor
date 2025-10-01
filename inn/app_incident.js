@@ -1054,6 +1054,15 @@ app.controller(
         $scope.activeStep("step2");
       }
       $scope.feedback.other = "";
+      $scope.feedback.incident_occured_in = "";
+      $scope.feedback.action_taken = "";
+      $scope.feedback.what_went_wrong = "";
+      $scope.feedback.risk_matrix = "";
+      $scope.feedback.priority = "";
+      $scope.feedback.incident_type = "";
+      $scope.feedback.tag_name = "";
+      $scope.feedback.tag_patientid = "";
+      $scope.feedback.files_name = [];
       $scope.feedback.images = [];
     };
 
