@@ -31,6 +31,7 @@ app.controller(
 
     $scope.feedback = {};
     $rootScope.loader = false;
+    $scope.nav = false;
     $rootScope.overallScore = [];
     $rootScope.baseurl_main = window.location.origin + "/api";
     $scope.activeStep = function (step) {
@@ -86,6 +87,7 @@ app.controller(
                 $rootScope.loginactive = true;
                 $scope.step0 = false;
                 $scope.step2 = true;
+                $scope.nav = true;
               }
             } else {
               $scope.loginerror = "Some error happened";
@@ -115,6 +117,7 @@ app.controller(
                         $rootScope.loginactive = true;
                         $scope.step0 = false;
                         $scope.step2 = true;
+                        $scope.nav = true;
                       }
                     }
                   );
@@ -678,7 +681,7 @@ app.controller(
                 } else if (response.status === "success") {
                   $rootScope.loginactive = true;
                   $scope.step0 = false;
-                  $scope.step2 = true;
+                  $scope.step1 = true;
                 }
               } else {
                 $scope.loginerror = "Some error happened";

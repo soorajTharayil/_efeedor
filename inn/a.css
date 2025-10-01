@@ -779,9 +779,9 @@ li.fb a::before {
 .the-form [type="password"],
 .the-form [type="text"] {
     padding: 15px;
-    font-size: 14px;
+    font-size: 25px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
+    border-radius: 3px;
     margin-bottom: 15px;
     transition: background 0.3s;
     color: #000000;
