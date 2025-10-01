@@ -391,11 +391,16 @@
                         
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in doctor.doctor | filter:docSearch"
-                                     ng-if="x.title !== 'ALL'"
-                                     ng-click="selectDoctor(x.title)"
-                                     style="padding:8px; cursor:pointer;">
+                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectDoctor(x.title)" style="padding:8px; cursor:pointer;">
                                   {{x.title}}
+                                </div>
+
+                                <!-- If no match found -->
+                                <div ng-if="(doctor.doctor | filter:docSearch).length === 0 && docSearch"
+                                  ng-click="selectDoctor(docSearch)"
+                                  style="padding:8px; cursor:pointer; font-style:italic; color:#007bff;">
+                                  + Add "{{docSearch}}"
                                 </div>
                               </div>
                             </div>
