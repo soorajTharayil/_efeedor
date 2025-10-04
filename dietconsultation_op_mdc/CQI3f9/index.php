@@ -50,25 +50,92 @@
 
   <!-- top navbar start -->
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
-    <!-- logo of efeedor -->
+    <!-- Section for Buttons and Language Button -->
+    <div class="ml-auto d-flex justify-content-between align-items-center w-100">
+      <div class="left-buttons d-flex">
 
-    <a class="navbar-brand" href="#"><img style="    height: 36px;"></a>
+        <!-- Home button -->
+        <!-- <a ng-href="/audit_forms?user_id={{ user_id }}"
+          class="btn btn-secondary mr-3"
+          style="width: 100px; height: 32px; font-size: 14px; font-weight: bold; display: flex; align-items: center; justify-content: center;">
+          <i class="fa fa-home" style="margin-right: 6px;"></i> Home
+        </a> -->
 
-    <!-- dropdown for three language start -->
 
-    <!-- Add a button to trigger the modal -->
-    <!--
-<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}} 
-      <i class="fa fa-language" aria-hidden="true"></i> 
-</button>
--->
+        <!-- Dashboard button with icon -->
+        <a ng-href="/login/?user_id={{ user_id }}"
+          class="btn btn-light dashboard-btn"
+          style="width: 120px; height: 32px; font-size: 14px; font-weight: bold; text-align: left; display: flex; align-items: center; padding-left: 10px;">
+          <i class="fa fa-tachometer" style="margin-right: 6px;"></i> Dashboard
+        </a>
 
-    <!-- dropdown for three language end -->
+      </div>
 
+
+      <!-- Right Side: Language Button -->
+      <div class="right-buttons d-flex align-items-center">
+        <!-- <button type="button" class="btn btn-dark language-btn" data-toggle="modal" data-target="#languageModal" style="margin: 4px;">
+          {{type2}}
+          <i class="fa fa-language" aria-hidden="true"></i>
+        </button> -->
+        <button class="btn btn-dark menu-toggle" ng-click="menuVisible = !menuVisible" style="margin: 4px;">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
   </nav>
+
+  <div class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
+    <div class="user-info" style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
+      <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
+      <div>
+        <div style="font-weight: bold; font-size: 14px;">{{ loginname }}</div>
+        <div style="font-size: 12px; font-weight: bold;">{{ loginemail }}</div>
+      </div>
+    </div>
+    <ul style="margin-left: -5px;">
+      <li><a href="#" ng-click="showAllContent()"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#" ng-click="showDashboard()"><i class="fa fa-globe"></i> Web Dashboard Access</a></li>
+      <li><a href="/login/?user_id={{ user_id }}&redirectType=userActivity"><i class="fa fa-user"></i> User Activity</a></li>
+      <li><a href="#" ng-click="showAbout()"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="/audit_forms"><i class="fa fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- About Content Section -->
+  <div ng-show="aboutVisible" class="about-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>About</h2>
+    <!-- <img src="/Efeedor_logo.png" alt="Efeedor Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
+    <p><strong>Version:</strong> 8.01.10</p>
+    <p>
+      The Efeedor Quality Management Software (QMS) is an extension of Efeedor's Healthcare Experience Management Suite, developed by ITATONE POINT CONSULTING LLP, a global health-tech company specializing in enterprise applications for hospitals.
+    </p>
+    <p>
+      Designed for healthcare staff on the go, the QMS application simplifies essential tasks such as reporting incidents, performing audits, and recording monthly KPIs, while enabling healthcare institutions to efficiently analyze quality parameters to enhance healthcare quality and patient safety.
+    </p>
+    <p>
+      Efeedor’s software tools are widely recognized for their simple, intuitive interface and exceptional user experience, making them the preferred choice for modern hospitals.
+    </p>
+    <p>For more information, visit: <a href="https://www.efeedor.com" target="_blank">www.efeedor.com</a></p>
+    <p>For support, contact: <a href="mailto:support@efeedor.com">support@efeedor.com</a></p>
+  </div>
+
+
+  <!-- Web Dashboard section -->
+  <div ng-show="dashboardVisible" class="dashboard-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>Explore Web Dashboard</h2>
+    <p>
+      To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin role, you will have access to view reports and analytics based on the permissions granted. If you are a department head or in charge of a department, you will be able to access the dashboard to view reports and analytics specific to your department and take action on the tickets assigned to you or your team.
+    </p>
+
+    <!-- Button for APK Download -->
+    <a href="/login/?userid={{ adminId }}"
+      style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
+      <i class="fa fa-globe"></i> Click here to open the link
+    </a>
+  </div>
 
   <!-- top navbar end -->
 
@@ -175,7 +242,7 @@
   </div>
   <!-- ip  -->
 
-  <div class="container-fluid" id="grad1">
+  <div class="container-fluid" id="grad1" ng-show="!aboutVisible && !dashboardVisible">
     <div class="row justify-content-center mt-0">
 
       <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">

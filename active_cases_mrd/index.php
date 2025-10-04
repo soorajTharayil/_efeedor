@@ -39,10 +39,7 @@
 <!-- head part end -->
 
 
-
 <!-- body part start -->
-
-
 
 <body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" style="display:none;" id="body">
 
@@ -50,25 +47,92 @@
 
   <!-- top navbar start -->
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
-    <!-- logo of efeedor -->
+    <!-- Section for Buttons and Language Button -->
+    <div class="ml-auto d-flex justify-content-between align-items-center w-100">
+      <div class="left-buttons d-flex">
 
-    <a class="navbar-brand" href="#"><img style="    height: 36px;"></a>
+        <!-- Home button -->
+        <!-- <a ng-href="/audit_forms?user_id={{ user_id }}"
+          class="btn btn-secondary mr-3"
+          style="width: 100px; height: 32px; font-size: 14px; font-weight: bold; display: flex; align-items: center; justify-content: center;">
+          <i class="fa fa-home" style="margin-right: 6px;"></i> Home
+        </a> -->
 
-    <!-- dropdown for three language start -->
 
-    <!-- Add a button to trigger the modal -->
-    <!--
-<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-      {{type2}} 
-      <i class="fa fa-language" aria-hidden="true"></i> 
-</button>
--->
+        <!-- Dashboard button with icon -->
+        <a ng-href="/login/?user_id={{ user_id }}"
+          class="btn btn-light dashboard-btn"
+          style="width: 120px; height: 32px; font-size: 14px; font-weight: bold; text-align: left; display: flex; align-items: center; padding-left: 10px;">
+          <i class="fa fa-tachometer" style="margin-right: 6px;"></i> Dashboard
+        </a>
 
-    <!-- dropdown for three language end -->
+      </div>
 
+
+      <!-- Right Side: Language Button -->
+      <div class="right-buttons d-flex align-items-center">
+        <!-- <button type="button" class="btn btn-dark language-btn" data-toggle="modal" data-target="#languageModal" style="margin: 4px;">
+          {{type2}}
+          <i class="fa fa-language" aria-hidden="true"></i>
+        </button> -->
+        <button class="btn btn-dark menu-toggle" ng-click="menuVisible = !menuVisible" style="margin: 4px;">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
   </nav>
+
+  <div class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
+    <div class="user-info" style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
+      <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
+      <div>
+        <div style="font-weight: bold; font-size: 14px;">{{ loginname }}</div>
+        <div style="font-size: 12px; font-weight: bold;">{{ loginemail }}</div>
+      </div>
+    </div>
+    <ul style="margin-left: -5px;">
+      <li><a href="#" ng-click="showAllContent()"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#" ng-click="showDashboard()"><i class="fa fa-globe"></i> Web Dashboard Access</a></li>
+      <li><a href="/login/?user_id={{ user_id }}&redirectType=userActivity"><i class="fa fa-user"></i> User Activity</a></li>
+      <li><a href="#" ng-click="showAbout()"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="/audit_forms"><i class="fa fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- About Content Section -->
+  <div ng-show="aboutVisible" class="about-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>About</h2>
+    <!-- <img src="/Efeedor_logo.png" alt="Efeedor Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
+    <p><strong>Version:</strong> 8.01.10</p>
+    <p>
+      The Efeedor Quality Management Software (QMS) is an extension of Efeedor's Healthcare Experience Management Suite, developed by ITATONE POINT CONSULTING LLP, a global health-tech company specializing in enterprise applications for hospitals.
+    </p>
+    <p>
+      Designed for healthcare staff on the go, the QMS application simplifies essential tasks such as reporting incidents, performing audits, and recording monthly KPIs, while enabling healthcare institutions to efficiently analyze quality parameters to enhance healthcare quality and patient safety.
+    </p>
+    <p>
+      Efeedor’s software tools are widely recognized for their simple, intuitive interface and exceptional user experience, making them the preferred choice for modern hospitals.
+    </p>
+    <p>For more information, visit: <a href="https://www.efeedor.com" target="_blank">www.efeedor.com</a></p>
+    <p>For support, contact: <a href="mailto:support@efeedor.com">support@efeedor.com</a></p>
+  </div>
+
+
+  <!-- Web Dashboard section -->
+  <div ng-show="dashboardVisible" class="dashboard-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>Explore Web Dashboard</h2>
+    <p>
+      To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin role, you will have access to view reports and analytics based on the permissions granted. If you are a department head or in charge of a department, you will be able to access the dashboard to view reports and analytics specific to your department and take action on the tickets assigned to you or your team.
+    </p>
+
+    <!-- Button for APK Download -->
+    <a href="/login/?userid={{ adminId }}"
+      style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
+      <i class="fa fa-globe"></i> Click here to open the link
+    </a>
+  </div>
 
   <!-- top navbar end -->
 
@@ -94,8 +158,10 @@
 
   <!-- this div end here -->
 
+
   <!-- Create a modal for language selection -->
-  <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel" aria-hidden="true">
+  <div class="modal fade" id="languageModal" tabindex="-1" role="dialog" aria-labelledby="languageModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -117,7 +183,8 @@
                 <div class="box-body box-profile" style="display: inline-block;">
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('english')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('english')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -133px; color: #4b4c4d;">
                         English
                       </span><br>
@@ -129,7 +196,8 @@
                   <br>
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('lang2')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('lang2')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -133px; color:#4b4c4d;">
                         ಕನ್ನಡ
                       </span><br>
@@ -141,7 +209,8 @@
                   <br>
 
                   <div class="card" style=" border: 2px solid #000;">
-                    <div class="card-body" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+                    <div class="card-body" ng-click="language('lang3')"
+                      style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
                       <span style="margin-left: -100px; color: #4b4c4d;">
                         മലയാളം
                       </span><br>
@@ -173,9 +242,9 @@
       </div>
     </div>
   </div>
-  <!-- ip  -->
 
-  <div class="container-fluid" id="grad1">
+
+  <div class="container-fluid" id="grad1" ng-show="!aboutVisible && !dashboardVisible">
     <div class="row justify-content-center mt-0">
 
       <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
@@ -205,9 +274,11 @@
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
                         <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
                         <div class="form-group">
-                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup
+                              style="color: red;">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled />
+                            <input class="form-control" type="text" ng-model="feedback.audit_type"
+                              placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled />
                           </span>
                         </div>
 
@@ -225,7 +296,8 @@
 
                           <!-- Input -->
                           <div style="position: relative; width: 100%;">
-                            <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                            <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local"
+                              id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
                               autocomplete="off" onclick="this.showPicker && this.showPicker()"
                               onfocus="this.showPicker && this.showPicker()"
                               style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
@@ -246,9 +318,11 @@
                         <!-- Audit By -->
 
                         <div class="form-group">
-                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup
+                              style="color: red;">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                            <input class="form-control" type="text" ng-model="feedback.audit_by"
+                              placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
                           </span>
                         </div>
 
@@ -257,9 +331,11 @@
                         <!-- MID No -->
 
                         <div class="form-group">
-                          <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}<sup
+                              style="color: red;">*</sup></span>
                           <span class="has-float-label" style="margin-top: 12px;">
-                            <input type="text" class="form-control" maxlength="20" ng-model="feedback.mid_no" placeholder="Enter Patient MID" autocomplete="off" />
+                            <input type="text" class="form-control" maxlength="20" ng-model="feedback.mid_no"
+                              placeholder="Enter Patient MID" autocomplete="off" />
                           </span>
                         </div>
 
@@ -267,9 +343,11 @@
                         <!-- Patient Name -->
 
                         <div class="form-group">
-                          <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}<sup
+                              style="color: red;">*</sup></span>
                           <span class="has-float-label" style="margin-top: 8px;">
-                            <input type="text" class="form-control" ng-model="feedback.patient_name" placeholder="Enter Patient Name" maxlength="50" autocomplete="off" />
+                            <input type="text" class="form-control" ng-model="feedback.patient_name"
+                              placeholder="Enter Patient Name" maxlength="50" autocomplete="off" />
                           </span>
                         </div>
 
@@ -279,7 +357,8 @@
                         <div class="form-group">
                           <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patage}}</span>
                           <span class="has-float-label" style="margin-top: 8px;">
-                            <input type="number" class="form-control" ng-model="feedback.patient_age" placeholder="Enter Age" min="0" max="120" />
+                            <input type="number" class="form-control" ng-model="feedback.patient_age"
+                              placeholder="Enter Age" min="0" max="120" />
                           </span>
                         </div>
 
@@ -299,11 +378,11 @@
                         </div>
 
                         <!-- Location -->
-                        <div class="form-group"
-                          ng-init="locationOpen=false; locationSearch='';"
+                        <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
                           click-outside="locationOpen=false">
 
-                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
+                              style="color: red;">*</sup></span>
 
                           <div style="margin-top:8px; position:relative;">
                             <!-- Trigger -->
@@ -318,11 +397,13 @@
                                 style="margin-bottom:8px;" autofocus />
 
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="loc in locations | filter:locationSearch"
-                                  ng-click="selectLocation(loc)"
+                                <div ng-repeat="x in area | filter:locationSearch"
+                                  ng-if="x.title !== 'ALL'"
+                                  ng-click="selectLocation(x.title)"
                                   style="padding:8px; cursor:pointer;">
-                                  {{loc}}
+                                  {{x.title}}
                                 </div>
+
                               </div>
                             </div>
                           </div>
@@ -335,8 +416,10 @@
 
 
                         <!-- Department -->
-                        <div class="form-group" ng-init="depOpen=false; depSearch='';" click-outside="closeDepartment()">
-                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup style="color: red;">*</sup></span>
+                        <div class="form-group" ng-init="depOpen=false; depSearch='';"
+                          click-outside="closeDepartment()">
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup
+                              style="color: red;">*</sup></span>
 
                           <div style="position:relative; margin-top:8px;">
                             <!-- Trigger -->
@@ -349,14 +432,13 @@
                               style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
 
                               <!-- Search box -->
-                              <input class="form-control" placeholder="Search Department" ng-model="depSearch" style="margin-bottom:8px;" />
+                              <input class="form-control" placeholder="Search Department" ng-model="depSearch"
+                                style="margin-bottom:8px;" />
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in auditdept.auditdept | filter:depSearch"
-                                  ng-if="x.title !== 'ALL'"
-                                  ng-click="selectDepartment(x.title)"
-                                  style="padding:8px; cursor:pointer;">
+                                <div ng-repeat="x in auditdept.auditdept | filter:depSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectDepartment(x.title)" style="padding:8px; cursor:pointer;">
                                   {{x.title}}
                                 </div>
                               </div>
@@ -369,7 +451,8 @@
 
                         <!-- Attended Doctor -->
                         <div class="form-group" ng-init="docOpen=false; docSearch='';" click-outside="closeDoctor()">
-                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}<sup style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}<sup
+                              style="color: red;">*</sup></span>
 
                           <div style="position:relative; margin-top:8px;">
                             <!-- Trigger -->
@@ -382,7 +465,8 @@
                               style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
 
                               <!-- Search box -->
-                              <input class="form-control" placeholder="Search Doctor..." ng-model="docSearch" style="margin-bottom:8px;" />
+                              <input class="form-control" placeholder="Search Doctor..." ng-model="docSearch"
+                                style="margin-bottom:8px;" />
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
@@ -398,6 +482,7 @@
                                   + Add "{{docSearch}}"
                                 </div>
                               </div>
+
                             </div>
                           </div>
                         </div>
@@ -414,13 +499,8 @@
 
                           <!-- Input -->
                           <div style="position: relative; width: 100%;">
-                            <input class="form-control"
-                              ng-model="feedback.initial_assessment_hr6"
-                              type="datetime-local"
-                              id="formula_para1_hr6"
-                              ng-required="true"
-                              autocomplete="off"
-                              max="{{todayDateTime}}"
+                            <input class="form-control" ng-model="feedback.initial_assessment_hr6" type="datetime-local"
+                              id="formula_para1_hr6" ng-required="true" autocomplete="off" max="{{todayDateTime}}"
                               onclick="this.showPicker && this.showPicker()"
                               style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
                           </div>
@@ -435,13 +515,8 @@
 
                           <!-- Input -->
                           <div style="position: relative; width: 100%;">
-                            <input class="form-control"
-                              ng-model="feedback.discharge_date_time"
-                              type="datetime-local"
-                              id="formula_para1_discharge"
-                              ng-required="true"
-                              autocomplete="off"
-                              max="{{todayDateTime}}"
+                            <input class="form-control" ng-model="feedback.discharge_date_time" type="datetime-local"
+                              id="formula_para1_discharge" ng-required="true" autocomplete="off" max="{{todayDateTime}}"
                               onclick="this.showPicker && this.showPicker()"
                               style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
                           </div>
@@ -451,9 +526,12 @@
 
 
 
-                        <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
+                        <input type="button" name="previous" class="previous action-button-previous"
+                          style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
 
-                        <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+                        <input type="button" name="next" ng-click="next1()"
+                          style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button"
+                          value="{{lang.next}}" />
 
                 </fieldset>
 
@@ -465,7 +543,8 @@
 
                   <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 30px; margin-left:5px;">
                     <div class="form-group" style="text-align: left;">
-                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:15px;"><b>Doctors documentation - Admission note:</b></h6>
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:15px;"><b>Doctors documentation - Admission
+                          note:</b></h6>
                       <div style="margin-top: 12px; text-align: left; margin-left:-6px;">
                         <p style="font-size: 18px; margin-bottom: 6px;">{{lang.identification_details}}</p>
 
@@ -484,7 +563,8 @@
                           </label>
                         </div>
                         <span class="has-float-label">
-                          <input type="text" class="form-cont" ng-model="feedback.identification_details_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.identification_details_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -507,7 +587,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.vital_signs_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.vital_signs_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -530,7 +611,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.surgery_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.surgery_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -554,7 +636,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -577,7 +660,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.intake_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.intake_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -601,7 +685,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.output_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.output_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -625,7 +710,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.focus_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.focus_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -649,7 +735,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.meti_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.meti_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -658,7 +745,8 @@
 
 
 
-                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>Nurses documentation - Initial assessment IPD:</b></h6>
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>Nurses documentation - Initial
+                          assessment IPD:</b></h6>
                       <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
                         <p style="font-size: 18px; margin-bottom: 6px;">{{lang.diagnostic}}</p>
 
@@ -677,7 +765,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.diagnostic_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.diagnostic_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -701,7 +790,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.lab_results_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.lab_results_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -725,7 +815,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -749,7 +840,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.medicine_order_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.medicine_order_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -773,7 +865,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.psychological_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.psychological_text"
+                            placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
@@ -797,12 +890,14 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.vulnerab_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.vulnerab_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
 
 
-                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician documentation:</b></h6>
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician
+                          documentation:</b></h6>
                       <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                         <p style="font-size: 18px; margin-bottom: 6px;">{{lang.social}}</p>
 
@@ -821,7 +916,8 @@
                           </label>
                         </div>
                         <span class="has-float-label" style="margin-top: 5px;">
-                          <input type="text" class="form-cont" ng-model="feedback.social_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                          <input type="text" class="form-cont" ng-model="feedback.social_text" placeholder="Remarks"
+                            style="margin-left:-2px;margin-top:5px;" />
                         </span>
 
 
@@ -854,9 +950,14 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 2px; margin-left: -5px; margin-top: 13px;">
-                      <p style="font-size: 18px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
-                      <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                    <div class="col-xs-12 col-sm-12 col-md-12"
+                      style="padding-right: 0px; padding-left: 2px; margin-left: -5px; margin-top: 13px;">
+                      <p style="font-size: 18px; text-align:left; margin-bottom: 6px; margin-left: -2px;">
+                        {{lang.data_analysis}}
+                      </p>
+                      <textarea
+                        style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;"
+                        class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
                     <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
                       <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
@@ -864,16 +965,20 @@
                       </label>
 
                       <!-- File Input for Document Upload -->
-                      <input style="border-bottom: 0px;" type="file" accept="*" multiple onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
                       <br>
 
                       <!-- Display the list of uploaded files -->
                       <div ng-if="feedback.files_name && feedback.files_name.length > 0">
                         <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
                         <ul style="margin-left: 19px;">
-                          <li ng-repeat="files_name in feedback.files_name track by $index" style="display: flex; align-items: center;">
-                            <a href="{{files_name.url}}" target="_blank" style="margin-right: 8px;">{{files_name.name}}</a>
-                            <span style="cursor: pointer; color: red; font-weight: bold;" ng-click="removeFile($index)">&#10060;</span>
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
                           </li>
                         </ul>
                       </div>
@@ -881,10 +986,15 @@
 
 
                     <!-- submit button -->
-                    <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:-6px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />
+                    <input type="button" name="previous" class="previous action-button-previous"
+                      style=" font-size:small;margin-left:-6px;margin-top:35px;" ng-click="prev1()"
+                      value="{{lang.previous}}" />
 
                     <div>
-                      <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                      <input type="button" ng-show="loader == false"
+                        style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;"
+                        name="make_payment" class="next action-button" ng-click="savefeedback()"
+                        value="{{lang.submit}}" />
                       <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
                     </div>
 
@@ -893,7 +1003,7 @@
 
 
 
-                                <fieldset ng-show="step4 == true">
+                <fieldset ng-show="step4 == true">
                   <div class="form-card">
                     <!-- unhappy customer code start -->
                     <div class="row justify-content-center">
@@ -917,11 +1027,10 @@
                         </style>
 
                         <div class="thankyou-buttons" style="margin-top: 40px;">
-                          <button type="button" class="btn btn-primary" ng-click="step4=false; step0=true; step=0;">
+                          <button type="button" class="btn btn-primary" ng-click="repeatAudit()">
                             🔄 Repeat Audit
                           </button>
-                          <a ng-href="/audit_forms?user_id={{user_id}}"
-                            class="btn btn-secondary"
+                          <a ng-href="/audit_forms?user_id={{user_id}}" class="btn btn-secondary"
                             style="margin-left: 15px;">
                             🏠 Audits Home Page
                           </a>
@@ -1082,6 +1191,131 @@
 
     font-size: 15px;
 
+  }
+</style>
+
+<style>
+  .menu-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-dropdown ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-dropdown ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .menu-dropdown ul li a i {
+    margin-right: 10px;
+  }
+
+  .menu-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+
+  .menu-toggle {
+    cursor: pointer;
+  }
+
+  [ng-show="menuVisible"] {
+    display: block !important;
+  }
+
+  .menu-dropdown ul li a:hover {
+    color: #555;
+  }
+
+
+  .input-field {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Add border */
+    border-radius: 25px;
+    /* Add border radius */
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    /* Add box shadow */
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-input {
+    width: calc(100% - 40px);
+    /* Adjust width to accommodate the show/hide button */
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 39%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
+
+    .navbar .navbar-brand {
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    .navbar .ml-auto {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .navbar .left-buttons a,
+    .navbar .right-buttons button {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .navbar .right-buttons {
+      margin-left: -5px;
+      /* Adjust the position of the language button */
+    }
+
+    .navbar .btn {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
   }
 </style>
 

@@ -13,6 +13,8 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     $scope.loginid = ehandor.empid;
     $scope.loginname = ehandor.data.name;
     $scope.loginnumber = ehandor.data.mobile;
+    $scope.user_id = ehandor.userid;
+
     console.log($scope.loginemail);
     console.log($scope.loginid);
     console.log($scope.loginname);
@@ -53,79 +55,79 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
   $scope.activeStep("step0");
 
 
-    $scope.login = function () {
-      $rootScope.loader = true;
+  $scope.login = function () {
+    $rootScope.loader = true;
 
-      $http
-        .post(
-          $rootScope.baseurl_main + "/login.php", // you may rename login_captcha.php to login.php
-          $scope.loginvar,
-          { timeout: 20000 }
-        )
-        .then(
-          function (responsedata) {
-            console.log(responsedata);
-            if (responsedata.status == 200) {
-              var response = responsedata.data;
-              $rootScope.loader = false;
-              $rootScope.profilen = response;
+    $http
+      .post(
+        $rootScope.baseurl_main + "/login.php", // you may rename login_captcha.php to login.php
+        $scope.loginvar,
+        { timeout: 20000 }
+      )
+      .then(
+        function (responsedata) {
+          console.log(responsedata);
+          if (responsedata.status == 200) {
+            var response = responsedata.data;
+            $rootScope.loader = false;
+            $rootScope.profilen = response;
 
-              $rootScope.adminId = $rootScope.profilen.userid;
+            $rootScope.adminId = $rootScope.profilen.userid;
 
-              if (!$rootScope.$$phase) {
-                $rootScope.$apply();
-              }
-
-              $scope.profiled = $rootScope.profilen;
-              localStorage.setItem("ehandor", JSON.stringify(response));
-
-              if (response.status === "fail") {
-                $scope.loginerror = response.message;
-              } else if (response.status === "success") {
-                $rootScope.loginactive = true;
-                $scope.step0 = false;
-                $scope.step2 = true;
-              }
-            } else {
-              $scope.loginerror = "Some error happened";
-              $rootScope.loader = false;
+            if (!$rootScope.$$phase) {
+              $rootScope.$apply();
             }
-          },
-          function errorCallback(responsedata) {
-            if (localStorage.getItem("cordinator")) {
-              $scope.cordinatorlist = JSON.parse(
-                localStorage.getItem("cordinator")
-              );
-              if ($scope.cordinatorlist && $scope.cordinatorlist.cordinators) {
-                if ($scope.cordinatorlist.cordinators.length > 0) {
-                  angular.forEach(
-                    $scope.cordinatorlist.cordinators,
-                    function (value) {
-                      if (
-                        value.guid.toLowerCase() ==
-                          $scope.loginvar.userid.toLowerCase() &&
-                        value.password == $scope.loginvar.password
-                      ) {
-                        value.userid = $scope.loginvar.userid;
-                        $rootScope.profilen = value;
-                        $rootScope.adminId = $rootScope.profilen.userid;
-                        $scope.profiled = $rootScope.profilen;
-                        localStorage.setItem("ehandor", JSON.stringify(value));
-                        $rootScope.loginactive = true;
-                        $scope.step0 = false;
-                        $scope.step2 = true;
-                      }
-                    }
-                  );
-                }
-              }
-            } else {
-              $scope.loginerror = "Internet Connection error";
+
+            $scope.profiled = $rootScope.profilen;
+            localStorage.setItem("ehandor", JSON.stringify(response));
+
+            if (response.status === "fail") {
+              $scope.loginerror = response.message;
+            } else if (response.status === "success") {
+              $rootScope.loginactive = true;
+              $scope.step0 = false;
+              $scope.step2 = true;
             }
+          } else {
+            $scope.loginerror = "Some error happened";
             $rootScope.loader = false;
           }
-        );
-    };
+        },
+        function errorCallback(responsedata) {
+          if (localStorage.getItem("cordinator")) {
+            $scope.cordinatorlist = JSON.parse(
+              localStorage.getItem("cordinator")
+            );
+            if ($scope.cordinatorlist && $scope.cordinatorlist.cordinators) {
+              if ($scope.cordinatorlist.cordinators.length > 0) {
+                angular.forEach(
+                  $scope.cordinatorlist.cordinators,
+                  function (value) {
+                    if (
+                      value.guid.toLowerCase() ==
+                      $scope.loginvar.userid.toLowerCase() &&
+                      value.password == $scope.loginvar.password
+                    ) {
+                      value.userid = $scope.loginvar.userid;
+                      $rootScope.profilen = value;
+                      $rootScope.adminId = $rootScope.profilen.userid;
+                      $scope.profiled = $rootScope.profilen;
+                      localStorage.setItem("ehandor", JSON.stringify(value));
+                      $rootScope.loginactive = true;
+                      $scope.step0 = false;
+                      $scope.step2 = true;
+                    }
+                  }
+                );
+              }
+            }
+          } else {
+            $scope.loginerror = "Internet Connection error";
+          }
+          $rootScope.loader = false;
+        }
+      );
+  };
 
 
 
@@ -220,6 +222,8 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     }
   };
 
+
+  // Menu bar start
   $scope.menuVisible = false;
   $scope.aboutVisible = false;
 
@@ -248,14 +252,7 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     $scope.aboutVisible = true;
   };
 
-  // Function to show the 'Support' content
-  $scope.showSupport = function () {
-    $scope.menuVisible = false;
-    $scope.aboutVisible = false;
-    $scope.appDownloadVisible = false;
-    $scope.dashboardVisible = false;
-    $scope.supportVisible = true;
-  };
+  
 
   // Function to show the 'Web dashboard' content
   $scope.showDashboard = function () {
@@ -267,23 +264,7 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
 
   };
 
-  // Function to show the 'App download' content
-  $scope.showAppDown = function () {
-    $scope.menuVisible = false;
-    $scope.aboutVisible = false;
-    $scope.supportVisible = false;
-    $scope.dashboardVisible = false;
-    $scope.appDownloadVisible = true;
-  };
-
-  // To downlaod the apk
-  $scope.downloadApk = function () {
-    if ($scope.setting_data && $scope.setting_data.android_apk) {
-      window.location.href = $scope.setting_data.android_apk;
-    } else {
-      alert("APK download link is not available.");
-    }
-  };
+  
 
   //To redirect to user activity page
   $scope.redirectToUserActivity = function (event) {
@@ -306,6 +287,9 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
       document.removeEventListener('click', $scope.closeMenuOnClickOutside);
     }
   });
+
+  // menu bar end
+
 
   $scope.prev_pop = function () {
     $scope.step100 = true;

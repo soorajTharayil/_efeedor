@@ -114,6 +114,93 @@ $scope.user_id = ehandor.userid;
 		console.log('Data not found in local storage');
 	}
 
+	// Menu bar start
+	$scope.menuVisible = false;
+	$scope.aboutVisible = false;
+
+	// Function to hide menu only when clicking "Home"
+	$scope.hideMenu = function () {
+		$scope.menuVisible = false;
+	};
+
+	// Function to show all content
+	$scope.showAllContent = function () {
+		$scope.aboutVisible = false;
+		$scope.supportVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.menuVisible = true;
+		$scope.hideMenu();
+	};
+
+
+	// Function to show the 'About' content
+	$scope.showAbout = function () {
+		$scope.menuVisible = false;
+		$scope.supportVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.dashboardVisible = false;
+		$scope.aboutVisible = true;
+	};
+
+
+	// Function to show the 'Web dashboard' content
+	$scope.showDashboard = function () {
+		$scope.menuVisible = false;
+		$scope.aboutVisible = false;
+		$scope.appDownloadVisible = false;
+		$scope.supportVisible = false;
+		$scope.dashboardVisible = true;
+
+	};
+
+
+	//To redirect to user activity page
+	$scope.redirectToUserActivity = function (event) {
+		event.preventDefault();
+		window.location.href = "/view/user_activity";
+	};
+
+	$scope.closeMenuOnClickOutside = function (event) {
+		if ($scope.menuVisible && !event.target.closest('.menu-dropdown') && !event.target.closest('.menu-toggle')) {
+			$scope.menuVisible = false;
+			$scope.$apply(); // Ensure Angular updates the UI
+		}
+	};
+
+	// Attach event listener when step is active
+	$scope.$watchGroup(['step0', 'step1', 'step4'], function (newVals) {
+		if (newVals.includes(true)) {
+			document.addEventListener('click', $scope.closeMenuOnClickOutside);
+		} else {
+			document.removeEventListener('click', $scope.closeMenuOnClickOutside);
+		}
+	});
+
+	$scope.repeatAudit = function () {
+		// keep the values you don’t want to reset
+		var keep = {
+			audit_by: $scope.feedback.audit_by,
+			initial_assessment_hr2: $scope.feedback.initial_assessment_hr2,
+			audit_type: $scope.feedback.audit_type
+		};
+
+		// reset everything else
+		$scope.feedback = {};
+
+		// restore the kept values
+		$scope.feedback.audit_by = keep.audit_by;
+		$scope.feedback.initial_assessment_hr2 = keep.initial_assessment_hr2;
+		$scope.feedback.audit_type = keep.audit_type;
+
+		// reset steps
+		$scope.step0 = true;
+		$scope.step1 = $scope.step2 = $scope.step3 = $scope.step4 = false;
+		$scope.step = 0;
+	};
+
+
+
 	$scope.prev1 = function () {
 
 		$scope.step0 = true;
@@ -310,6 +397,27 @@ $scope.user_id = ehandor.userid;
 
 	$scope.setupapplication1();
 
+	
+	$scope.setupapplication2 = function () {
+		//$rootScope.loader = true;
+		var url = window.location.href;
+		//console.log(url);
+		var id = url.substring(url.lastIndexOf('=') + 1);
+		//alert(id);
+		$http.get($rootScope.baseurl_main + '/audit_load_area.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
+			$scope.area = responsedata.data.area;
+			console.log($scope.area);
+		},
+			function myError(response) {
+				$rootScope.loader = false;
+
+			}
+		);
+
+	}
+
+	$scope.setupapplication2();
+
 
 
 	//Calculate function for initail assessment
@@ -443,7 +551,7 @@ $scope.user_id = ehandor.userid;
 	// Navigate to a specific page
 	$scope.prev = function () {
 
-		window.location.href = '/audit_forms';
+		window.history.back();
 	};
 
 
