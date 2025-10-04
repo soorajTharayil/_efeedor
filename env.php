@@ -6,7 +6,7 @@ $config_set = array(
   "DBUSER" => "phpmyadmin",
   "DBPASSWORD" => "Efeedor#@100",
   //  "DBNAME" => "efeedor_usermanagement_speedissue",
-  "DBNAME" => "efeedor_qms",
+  "DBNAME" => "efeedor_qms_new",
 
 );
 ?>
