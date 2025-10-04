@@ -208,11 +208,11 @@
 
 		</button>
 		<!-- dropdown for three language start -->
-		<!-- <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal"
-			style="margin: 4px; float:right;">
-			{{type2}}
-			<i class="fa fa-language" aria-hidden="true"></i>
-		</button> -->
+		<!--<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal"-->
+		<!--	style="margin: 4px; float:right;">-->
+		<!--	{{type2}}-->
+		<!--	<i class="fa fa-language" aria-hidden="true"></i>-->
+		<!--</button>-->
 		<!-- dropdown for three language end -->
 	</nav>
 	<!-- top navbar end -->
@@ -271,8 +271,7 @@
 									<br> -->
 
 									<div class="card" style=" border: 2px solid #000;">
-										<div class="" ng-click="language('lang3')"
-											style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+										<div class="" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
 											<span style="margin-left: -100px; color: #4b4c4d;">
 												മലയാളം
 											</span><br>
@@ -387,7 +386,8 @@
 														<input class="form-control" id="employee_name"
 															placeholder="{{lang.employee_name_placeholder}}"
 															oninput="restrictToAlphabets(event)" maxlength="25"
-															name="name" type="text" ng-model="feedback.name"
+															name="name" type="text"
+															ng-model="feedback.name"
 															onblur="this.value = this.value.toUpperCase();"
 															autocomplete="off" />
 														<label for="emailid"></label>
@@ -696,7 +696,7 @@
 												style="display: flex; flex-direction: column; position: relative;">
 
 												<label for="comment"><b
-														style="margin-left: -6px;">{{lang.incident_occurred}}</b><br></label>
+														style="margin-left: -6px;">{{lang.incident_occurred}}<sup style="color:red">*</sup></b><br></label>
 
 
 												<div
@@ -734,7 +734,7 @@
 											<!-- <h4 style="font-size: 18px; margin-bottom: 22px;">
 												<b>{{lang.add_details_to_incident}}</b>
 											</h4> -->
-											<label for="comment"><b>{{lang.describe_incident}}</b><br></label>
+											<label for="comment"><b>{{lang.describe_incident}}<sup style="color:red">*</sup></b><br></label>
 											<textarea placeholder="{{lang.describe_incident_placeholder}}"
 												style="border: 2px solid #ccc;margin-top:7px" class="form-control"
 												ng-model="feedback.other" rows="5" id="comment"></textarea>
@@ -943,7 +943,8 @@
 																<option ng-repeat="x in wardlist.ward"
 																	ng-show="x.title !== 'ALL' " value="{{x.title}}"
 																	required>
-																	{{x.title}}</option>
+																	{{x.title}}
+																</option>
 
 															</select>
 														</span>
@@ -1007,10 +1008,10 @@
 													<span class="addon"
 														style="    font-size: 16px;">{{lang.tag_id}}</span>
 													<span class="has-float-label">
-														<input class="form-control" placeholder="{{lang.tag_id}}"
-															type="text" maxlength="10" id="contactnumber"
-															ng-required="true" ng-model="feedback.tag_patientid"
-															autocomplete="off" placeholder="Numerical digits only"
+														<input class="form-control" placeholder="{{lang.tag_id}}" type="text"
+															maxlength="10" id="contactnumber" ng-required="true"
+															ng-model="feedback.tag_patientid" autocomplete="off"
+															placeholder="Numerical digits only"
 															style="padding-top:0px;" />
 														<label for="contactnumber"></label>
 													</span>
@@ -1077,8 +1078,7 @@
 
 											<!-- Display the list of uploaded files -->
 											<div ng-if="feedback.files_name && feedback.files_name.length > 0">
-												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}
-												</h3>
+												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}</h3>
 												<ul style="margin-left: 19px;">
 													<li ng-repeat="files_name in feedback.files_name track by $index"
 														style="display: flex; align-items: center;">
@@ -1129,7 +1129,8 @@
 												<tr ng-show="submit_as_concern == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.SelectedCategory}}</td>
+														{{lang.SelectedCategory}}
+													</td>
 													<td ng-show="selectedParameterObject.title && selectedParameterObject.title != 'Other'"
 														style="border: 1px solid #dddddd; padding: 10px;">
 														<span style="margin-left: 0px;" class="lang-content"
@@ -1143,7 +1144,8 @@
 												<tr ng-show="submit_as_concern == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.concern_request}}</td>
+														{{lang.concern_request}}
+													</td>
 													<td ng-show="selectedParameterObject.title && selectedParameterObject.title != 'Other'"
 														style="border: 1px solid #dddddd; padding: 10px;">
 														<span style="margin-left: 0px;" class="lang-content"
@@ -1170,7 +1172,8 @@
 														{{lang.descb}}
 													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.other}}</td>
+														{{feedback.other}}
+													</td>
 												</tr>
 												<tr ng-show="what_went_wrong == true">
 													<td class="details-label"
@@ -1178,7 +1181,8 @@
 														{{lang.what_went_wrong}}
 													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.what_went_wrong}}</td>
+														{{feedback.what_went_wrong}}
+													</td>
 												</tr>
 												<tr ng-show="action_taken == true">
 													<td class="details-label"
@@ -1186,7 +1190,8 @@
 														{{lang.action_taken}}
 													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.action_taken}}</td>
+														{{feedback.action_taken}}
+													</td>
 												</tr>
 												<tr ng-show="feedback.images && feedback.images.length > 0">
 													<td class="details-label"
@@ -1254,7 +1259,8 @@
 												<tr>
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showincident_type}}</td>
+														{{lang.showincident_type}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
 														<span ng-if="!feedback.incident_type">Unassigned</span>
 														<span ng-if="feedback.incident_type"
@@ -1276,16 +1282,20 @@
 												<tr>
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showfloor}}</td>
+														{{lang.showfloor}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.ward}}</td>
+														{{feedback.ward}}
+													</td>
 												</tr>
 												<tr>
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showlocation}}</td>
+														{{lang.showlocation}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.bedno}}</td>
+														{{feedback.bedno}}
+													</td>
 												</tr>
 
 												<tr>
@@ -1295,31 +1305,39 @@
 												<tr ng-show="employeename == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.employeename}}</td>
+														{{lang.employeename}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.name}}</td>
+														{{feedback.name}}
+													</td>
 												</tr>
 												<tr ng-show="employeeid == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.employeeid}}</td>
+														{{lang.employeeid}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.patientid}}</td>
+														{{feedback.patientid}}
+													</td>
 												</tr>
 
 												<tr ng-show="showmobileno == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showmobileno}}</td>
+														{{lang.showmobileno}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.contactnumber}}</td>
+														{{feedback.contactnumber}}
+													</td>
 												</tr>
 												<tr ng-show="showemail == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.showemail}}</td>
+														{{lang.showemail}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.email}}</td>
+														{{feedback.email}}
+													</td>
 												</tr>
 
 
@@ -1331,30 +1349,38 @@
 												<tr ng-show="tag_name == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.tag_name}}</td>
+														{{lang.tag_name}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.tag_name}}</td>
+														{{feedback.tag_name}}
+													</td>
 												</tr>
 												<tr ng-show="tag_patientid == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.tag_id}}</td>
+														{{lang.tag_id}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.tag_patientid}}</td>
+														{{feedback.tag_patientid}}
+													</td>
 												</tr>
 												<tr ng-show="tagpatient == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.tag_type}}</td>
+														{{lang.tag_type}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.tag_patient_type}}</td>
+														{{feedback.tag_patient_type}}
+													</td>
 												</tr>
 												<tr ng-show="tagpatient == true">
 													<td class="details-label"
 														style="border: 1px solid #dddddd; padding: 10px;">
-														{{lang.tag_consultant}}</td>
+														{{lang.tag_consultant}}
+													</td>
 													<td style="border: 1px solid #dddddd; padding: 10px;">
-														{{feedback.tag_consultant}}</td>
+														{{feedback.tag_consultant}}
+													</td>
 												</tr>
 											</table>
 											<br><br>
@@ -1388,8 +1414,28 @@
 												<img src="dist/tick.png"> <br>
 												<p style="text-align:center; margin-top: 45px; font-weight: 300;"
 													class="lead">
-													{{lang.thankyoumessage}}</p>
+													{{lang.thankyoumessage}}
+												</p>
 												<br>
+
+												<style>
+													@media (max-width: 768px) {
+														.thankyou-buttons .btn {
+															display: block;
+															width: 92%;
+															margin-left: 10px !important;
+															margin-top: 10px !important;
+														}
+													}
+												</style>
+
+												<div class="thankyou-buttons" style="margin-top: 40px;">
+													<a ng-href="/form_login"
+														class="btn btn-secondary"
+														style="margin-left: 15px;">
+														Incident Home Page
+													</a>
+												</div>
 
 											</div>
 										</div>
@@ -1460,11 +1506,6 @@
 	function setMaxDateTime() {
 		const now = new Date();
 
-		// Round up to the next full minute if seconds > 0
-		if (now.getSeconds() > 0) {
-			now.setMinutes(now.getMinutes() + 1);
-		}
-
 		// Build YYYY-MM-DDTHH:MM in LOCAL time
 		const year = now.getFullYear();
 		const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -1473,6 +1514,7 @@
 		const minutes = String(now.getMinutes()).padStart(2, '0');
 
 		const formatted = `${year}-${month}-${day}T${hours}:${minutes}`;
+
 		document.getElementById("incident_occured_in").setAttribute("max", formatted);
 	}
 
@@ -1482,7 +1524,6 @@
 	// OPTIONAL: update every minute so "now" moves forward
 	setInterval(setMaxDateTime, 60000);
 </script>
-
 
 <style>
 	img {
@@ -1532,16 +1573,16 @@
 
 <!-- Activate popover on click -->
 <script>
-	$(document).ready(function () {
+	$(document).ready(function() {
 		$('#questionMark').popover({
 			trigger: 'manual'
 		});
 
-		$('#questionMark').on('click', function () {
+		$('#questionMark').on('click', function() {
 			$(this).popover('toggle');
 
 			// Hide the popover after 2 seconds
-			setTimeout(function () {
+			setTimeout(function() {
 				$('#questionMark').popover('hide');
 			}, 2000);
 		});
@@ -1549,7 +1590,7 @@
 </script>
 
 <script>
-	setTimeout(function () {
+	setTimeout(function() {
 
 		$('#body').show();
 
@@ -1573,7 +1614,7 @@
 		}
 	}
 
-	document.getElementById("refreshBtn").addEventListener("click", function () {
+	document.getElementById("refreshBtn").addEventListener("click", function() {
 		location.reload(); // This will refresh the page when the button is clicked
 	});
 </script>
@@ -1747,6 +1788,7 @@
 			passwordToggle.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>'; // Change HTML to eye slash icon
 		}
 	}
+
 	function restrictToAlphabets(event) {
 		const inputElement = event.target;
 		const currentValue = inputElement.value;

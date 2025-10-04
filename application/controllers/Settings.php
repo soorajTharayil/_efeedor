@@ -154,6 +154,11 @@ class Settings extends CI_Controller
 		redirect('audit_doctor');
 	}
 
+	public function audit_area()
+	{
+		redirect('audit_area');
+	}
+
 	public function audit_safety_department()
 	{
 		redirect('audit_safety_department');

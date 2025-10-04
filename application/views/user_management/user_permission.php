@@ -6,13 +6,21 @@ $ward = $this->db->order_by('id', 'asc')->get('bf_ward')->result();
 $ward_esr = $this->db->order_by('id', 'asc')->get('bf_ward_esr')->result();
 $asset_dep = $this->db->order_by('id', 'asc')->get('bf_asset_location')->result();
 
+$speciality_op = $this->db->order_by('id', 'asc')->get('bf_departmentop')->result(); //OP speaclity tag
+
+
 $userCheckedItems = $this->db->select('user_id, floor_ward,department')->where('user_id', $user_id)->get('user')->result();
 $userCheckedItems_esr = $this->db->select('user_id, floor_ward_esr,department')->where('user_id', $user_id)->get('user')->result();
 $userCheckedItems_asset = $this->db->select('user_id, floor_asset,department')->where('user_id', $user_id)->get('user')->result();
+$userCheckedItems_speciality = $this->db->select('user_id, speciality_op,department')->where('user_id', $user_id)->get('user')->result();
+
 
 $welcometext1 = "Welcome to the User Permissions page, your centralized interface for managing access rights within Efeedor. This page empowers administrators to finely control who can access what features and functionalities within the system, ensuring data security and user privacy.";
 $welcometext2 = "This page facilitates user tagging to specific departments, enabling department-level permissions, data access, and the configuration of department-level alerts.";
 $welcometext3 = "This section enables us to provide floor-level controls to specific users, allowing them access to data and receive alerts specific to the tagged floors.";
+$welcometext4 = "This section enables us to provide speciality-level controls to specific users, allowing them access to data and receive alerts specific to the tagged specialities.";
+
+
 $module_components_tooltip = "";
 $feature_functionality_tooltip = "";
 $manage_access_tooltip = "";
@@ -41,27 +49,33 @@ $mobile = $user->mobile;
     </div>
 </div>
 
-<section id="tabs" class="project-tab ">
+<section id="tabs" class="project-tab">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <nav>
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link  <?php if ($this->uri->segment(5) == 'user_permission') {
-                                                            echo 'active';
-                                                        }  ?>" id="nav-home-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/user_permission'); ?>" role="tab" aria-controls="nav-home" aria-selected="true" style="margin-right:20px ;"><i class="fa fa-unlock-alt" style="font-size:18px; padding-right: 15px;"></i>User Permissions</a>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'user_permission') echo 'active'; ?>" id="nav-user-permission-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/user_permission'); ?>" role="tab" aria-controls="nav-user-permission" aria-selected="true" style="margin-right: 20px;"><i class="fa fa-unlock-alt" style="font-size:18px; padding-right: 15px;"></i>User Permissions</a>
+
                         <?php if ($this->uri->segment(4) >= 4) { ?>
-                            <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'department') {
-                                                            echo 'active';
-                                                        } ?>" id="nav-contact-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/department'); ?>" role="tab" style=" margin-right:20px;" aria-controls="nav-contact" aria-selected="false"><i class="fa fa-user-plus" style="font-size:18px; padding-right: 15px;"></i>Tag Department</a>
+                            <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'department') echo 'active'; ?>" id="nav-department-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/department'); ?>" role="tab" aria-controls="nav-department" aria-selected="false"><i class="fa fa-user-plus" style="font-size:18px; padding-right: 15px;"></i>Tag Department</a>
                         <?php } ?>
-                        <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor') {
-                                                        echo 'active';
-                                                    }  ?>" id="nav-profile-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor'); ?>" role="tab" style="margin-right:20px;" aria-controls="nav-profile" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this User to Inpatient Floor/Wards</a>
+
+                        <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor') echo 'active'; ?>" id="nav-floor-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor'); ?>" role="tab" aria-controls="nav-floor" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this User to Inpatient Floor/Wards</a>
+
                         <?php if (ismodule_active('ISR') === true) { ?>
-                            <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor_esr') {
-                                                            echo 'active';
-                                                        }  ?>" id="nav-profile-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor_esr'); ?>" role="tab" style="" aria-controls="nav-profile" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to Hospital Zones</a>
+                            <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor_esr') echo 'active'; ?>" id="nav-floor-esr-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor_esr'); ?>" role="tab" aria-controls="nav-floor-esr" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to Hospital Zones</a>
+                        <?php } ?>
+
+                        <?php if (ismodule_active('OP') === true) { ?>
+                            <?php if ($this->uri->segment(4) >= 4) { ?>
+                                <div class="w-100 d-block"></div>
+                                <div style="margin-top: 15px;">
+                                    <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'speciality') echo 'active'; ?>" id="nav-speciality-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/speciality'); ?>" role="tab" aria-controls="nav-speciality" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to OP Specialities</a>
+                                </div>
+                            <?php } else { ?>
+                                <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'speciality') echo 'active'; ?>" id="nav-speciality-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/speciality'); ?>" role="tab" aria-controls="nav-speciality" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to OP Specialities</a>
+                            <?php } ?>
                         <?php } ?>
                     </div>
                 </nav>
@@ -69,6 +83,13 @@ $mobile = $user->mobile;
         </div>
     </div>
 </section>
+
+
+
+
+
+
+
 <br>
 <?php if ($this->uri->segment(5) == 'floor') { ?>
 
@@ -129,7 +150,7 @@ $mobile = $user->mobile;
                                                         $userId = $userItem->user_id;
                                                         $floorWard = json_decode($userItem->floor_ward, true);
                                                     ?>
-                                                        <input type="checkbox" name="floor_ward[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, (array)$floorWard) ? 'checked' : ''; ?>>
+                                                        <input type="checkbox" name="floor_ward[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, $floorWard) ? 'checked' : ''; ?>>
                                                         &nbsp;
                                                         <?php echo $row->title; ?>
                                                     <?php } ?>
@@ -217,7 +238,7 @@ $mobile = $user->mobile;
                                                         $userId = $userItem->user_id;
                                                         $floorWard_esr = json_decode($userItem->floor_ward_esr, true);
                                                     ?>
-                                                        <input type="checkbox" name="floor_ward_esr[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, (array)$floorWard_esr) ? 'checked' : ''; ?>>
+                                                        <input type="checkbox" name="floor_ward_esr[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, $floorWard_esr) ? 'checked' : ''; ?>>
                                                         &nbsp;
                                                         <?php echo $row->title; ?>
                                                     <?php } ?>
@@ -352,14 +373,22 @@ $mobile = $user->mobile;
                                                         foreach ($manualSubSections as $subTitle => $featureIds) { ?>
                                                             <div class="panel panel-default">
                                                                 <div class="panel-heading">
-                                                                    <h4 class="panel-title">
+                                                                    <h4 class="panel-title d-flex justify-content-between align-items-center" style="display:flex;justify-content:space-between;align-items:center;">
                                                                         <a data-toggle="collapse"
                                                                             data-parent="#subAccordion<?php echo md5($module . $type); ?>"
                                                                             href="#subCollapse<?php echo md5($module . $type . $subTitle); ?>"
-                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            style="flex:1;display:flex;justify-content:space-between;align-items:center;text-decoration:none;">
                                                                             <?php echo $subTitle; ?>
                                                                             <span><i class="fa fa-chevron-down rotate-icon"></i></span>
                                                                         </a>
+                                                                        <!-- Master Toggle for Subsection -->
+                                                                        <div class="material-switch" style="margin-left:15px;">
+                                                                            <input id="master<?php echo md5($module . $type . $subTitle); ?>"
+                                                                                type="checkbox"
+                                                                                class="master-toggle"
+                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" />
+                                                                            <label for="master<?php echo md5($module . $type . $subTitle); ?>" class="label-success"></label>
+                                                                        </div>
                                                                     </h4>
                                                                 </div>
                                                                 <div id="subCollapse<?php echo md5($module . $type . $subTitle); ?>" class="panel-collapse collapse">
@@ -408,52 +437,64 @@ $mobile = $user->mobile;
                                                         <?php
                                                         // Map Subsections into feature_id
                                                         $manualSubSections = [
-                                                            'QUALITY MANAGEMENT DASHBOARD' => [227, 298, 433],
-                                                            'MRD' => array_merge(range(228, 229), [231], [233], [519], range(534, 535), range(538, 539), range(543, 544)),
-                                                            'Nursing' => array_merge(range(235, 236), [249, 263, 471, 517], range(520, 522), range(524, 530), [536], range(540, 542), range(545, 547), range(551, 552), [555, 567], range(572, 573)),
-                                                            'Emergency Department' => array_merge([230], [234], range(238, 239), [246], [523], [528]),
-                                                            'Clinical Nutrition & Dietetics' => [232],
-                                                            'Lab Service' => array_merge([237], [250], range(255, 257), [264], range(358, 359)),
-                                                            'Medical Records' => [241],
+                                                            'QUALITY KPI SETTINGS' => [227, 298, 433],
+                                                            'MRD' => array_merge(range(228, 229), [231], [233], [241], [519], range(534, 535), range(538, 539), range(543, 544), range(575, 576), range(615, 621), range(637, 641), [647], range(649, 650), [665], range(741, 756)),
+                                                            'Nursing' => array_merge(range(235, 236), [249, 263, 471, 517], range(520, 522), range(524, 530), [536], range(540, 542), range(545, 547), range(551, 552), [555, 567], range(572, 573), range(578, 581), range(583, 587), range(598, 599), [605], range(660, 664), [682], [684], range(737, 740)),
+                                                            'Emergency Department' => array_merge([230], [234], range(238, 239), [246], [523], [528], range(630, 634), range(642, 643), [681], [683]),
+                                                            'Clinical Nutrition & Dietetics' => array_merge([232], [636]),
+                                                            'Lab Service' => array_merge([237], [250], range(255, 257), [264], range(358, 359), [644], [648], range(711, 716), [727]),
                                                             'Pulmonary Medicine' => [242],
                                                             'Pediatrics' => [243],
-                                                            'Gastro Surgery' => [244],
-                                                            'Radiology' => array_merge([245], range(258, 261), [537]),
-                                                            'Nephrology' => [247],
-                                                            'Medical Administration' => [248, 556],
-                                                            'OT' => array_merge([262], range(465, 467), range(469, 470)),
-                                                            'Clinical Pharmacy' => array_merge(range(360, 373), [464], [468], [533]),
+                                                            'Gastro Surgery' => array_merge([244], [680]),
+                                                            'Radiology' => array_merge([245], range(258, 261), [537], range(593, 595), range(666, 669), range(686, 690), [820]),
+                                                            'Nephrology' => array_merge([247], [653]),
+                                                            'Medical Administration' => array_merge([248, 556], range(818, 819)),
+                                                            'OT' => array_merge([262], range(465, 467), range(469, 470), [472], [473], [577], [629], [655], range(670, 672)),
+                                                            'Clinical Pharmacy' => array_merge(range(360, 373), [464], [468], [533], range(626, 627)),
                                                             'Anasthesia' => array_merge(range(374, 375), range(462, 463)),
-                                                            'Blood Center' => range(476, 485),
-                                                            'Infection Control' => array_merge(range(513, 516), [532], [554], [570]),
-                                                            'Housekeeping' => [518],
-                                                            'Quality Office' => array_merge([531], range(548, 550), [568], [574]),
-                                                            'Physiotherapy' => array_merge([553], range(557, 558)),
-                                                            'Security & Safety' => array_merge(range(559, 561), [569], [571]),
-                                                            'Pharmacy' => range(562, 564),
+                                                            'Blood Center' => array_merge(range(476, 485), [817]),
+                                                            'Infection Control' => array_merge(range(513, 516), [532], [554], [570], range(608, 609), range(612, 613), range(623, 625), [654], range(657, 659), range(757, 759), range(807, 816)),
+                                                            'Housekeeping' => array_merge([518], range(719, 722), [724], range(731, 732), range(821, 823), [825], range(827, 831)),
+                                                            'Quality Office' => array_merge([531], range(548, 550), [568], [574], range(610, 611), [622], [656], [693]),
+                                                            'Physiotherapy' => array_merge([553], range(557, 558), [679], [685]),
+                                                            'Security & Safety' => array_merge(range(559, 561), [569], [571], [710], [736]),
+                                                            'Pharmacy' => array_merge(range(562, 564), [628], range(694, 695)),
                                                             'SCM-Store' => [565],
                                                             'SCM-Purchase' => [566],
-                                                            'Other' => [240]
+                                                            'Biomedical Engineering' => array_merge([582], [726]),
+                                                            'Engineering & Maintenance' => array_merge([588], range(704, 709), [730], range(733, 734), [826]),
+                                                            'Patient Care Services' => array_merge(range(589, 592), range(596, 597), [606], range(691, 692)),
+                                                            'HR' => array_merge(range(600, 604), [607], range(696, 703)),
+                                                            'CSSD' => array_merge([614], range(645, 646)),
+                                                            'Endoscopy' => array_merge(range(651, 652)),
+                                                            'Transplant Unit' => array_merge(range(673, 674)),
+                                                            'Research' => array_merge(range(675, 678)),
+                                                            'Insurance' => array_merge(range(717, 718)),
+                                                            'ITD' => array_merge([723], [725]),
+                                                            'F & B Services' => array_merge(range(728, 729), [735]),
+                                                            'Stroke Unit' => array_merge(range(832, 853)),
+                                                            'Other' => array_merge([240], [635], [824])
                                                         ];
 
-                                                        // Keep track of all subsection IDs to skip
-                                                        $allSubSectionIds = [];
-                                                        foreach ($manualSubSections as $ids) {
-                                                            $allSubSectionIds = array_merge($allSubSectionIds, $ids);
-                                                        }
-
-                                                        // 1️⃣ Render manual subsections first
                                                         foreach ($manualSubSections as $subTitle => $featureIds) { ?>
                                                             <div class="panel panel-default">
                                                                 <div class="panel-heading">
-                                                                    <h4 class="panel-title">
+                                                                    <h4 class="panel-title d-flex justify-content-between align-items-center" style="display:flex;justify-content:space-between;align-items:center;">
                                                                         <a data-toggle="collapse"
                                                                             data-parent="#subAccordion<?php echo md5($module . $type); ?>"
                                                                             href="#subCollapse<?php echo md5($module . $type . $subTitle); ?>"
-                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            style="flex:1;display:flex;justify-content:space-between;align-items:center;text-decoration:none;">
                                                                             <?php echo $subTitle; ?>
                                                                             <span><i class="fa fa-chevron-down rotate-icon"></i></span>
                                                                         </a>
+                                                                        <!-- Master Toggle for Subsection -->
+                                                                        <div class="material-switch" style="margin-left:15px;">
+                                                                            <input id="master<?php echo md5($module . $type . $subTitle); ?>"
+                                                                                type="checkbox"
+                                                                                class="master-toggle"
+                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" />
+                                                                            <label for="master<?php echo md5($module . $type . $subTitle); ?>" class="label-success"></label>
+                                                                        </div>
                                                                     </h4>
                                                                 </div>
                                                                 <div id="subCollapse<?php echo md5($module . $type . $subTitle); ?>" class="panel-collapse collapse">
@@ -494,41 +535,6 @@ $mobile = $user->mobile;
                                                                 </div>
                                                             </div>
                                                         <?php } ?>
-
-                                                        <!-- 2️⃣ Render remaining features directly (Later remove the table-->
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="font-size: 16px; text-align: center;">Feature/ Functionality</th>
-                                                                    <th style="font-size: 16px; text-align: center;">Manage Access</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php foreach ($groupedFeatures[$type] as $featureRow) {
-                                                                    if (in_array($featureRow['feature_id'], $allSubSectionIds)) continue; ?>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <?php echo $featureRow['feature_description']; ?>
-                                                                            <?php if (!empty($featureRow['feature_tooltip'])) { ?>
-                                                                                <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="<?php echo $featureRow['feature_tooltip']; ?>"></i>
-                                                                            <?php } ?>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="d-flex justify-content-center">
-                                                                                <div class="material-switch pull-left">
-                                                                                    <input id="feature<?php echo $featureRow['feature_id']; ?>"
-                                                                                        name="feature[<?php echo $featureRow['feature_id']; ?>]"
-                                                                                        type="checkbox"
-                                                                                        <?php echo $featureRow['status'] ? 'checked' : ''; ?> />
-                                                                                    <label for="feature<?php echo $featureRow['feature_id']; ?>" class="label-success"></label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php } ?>
-                                                            </tbody>
-                                                        </table>
-
                                                     </div> <!-- End of subAccordion -->
 
                                                 <?php } else { ?>
@@ -573,9 +579,39 @@ $mobile = $user->mobile;
                             </div>
                         </div>
                     </div>
+
+                    <!-- 🔹 JS for Master Toggle -->
+                    <script>
+                        // Parent toggle controls all children
+                        $(document).on("change", ".master-toggle", function() {
+                            let targetPanel = "#" + $(this).data("target");
+                            let checked = $(this).is(":checked");
+                            $(targetPanel).find("tbody input[type=checkbox]").prop("checked", checked);
+                        });
+
+                        // Child checkboxes control parent state
+                        $(document).on("change", "tbody input[type=checkbox]", function() {
+                            let panelBody = $(this).closest(".panel-collapse");
+                            let all = panelBody.find("tbody input[type=checkbox]").length;
+                            let checked = panelBody.find("tbody input[type=checkbox]:checked").length;
+
+                            let master = panelBody.prev().find(".master-toggle");
+
+                            // update the parent input and also refresh UI
+                            if (all === checked) {
+                                master.prop("checked", true).trigger("change");
+                            } else {
+                                master.prop("checked", false).trigger("change");
+                            }
+                        });
+                    </script>
+
+
                 </div>
             <?php } ?>
         </div>
+
+
 
 
 
@@ -812,7 +848,7 @@ $mobile = $user->mobile;
                                     ?>
                                         <div class="checkbox-container">
                                             <div class="material-switch pull-left">
-                                                <input id="<?php echo $checkboxId; ?>" name="assetDepartment[]" value="<?php echo $asset->title; ?>" type="checkbox" <?php echo in_array($asset->title, (array)$floorWard_asset) ? 'checked' : ''; ?> />
+                                                <input id="<?php echo $checkboxId; ?>" name="assetDepartment[]" value="<?php echo $asset->title; ?>" type="checkbox" <?php echo in_array($asset->title, $floorWard_asset) ? 'checked' : ''; ?> />
                                                 <label for="<?php echo $checkboxId; ?>" class="label-success"></label>
                                             </div>
                                         </div>
@@ -843,6 +879,97 @@ $mobile = $user->mobile;
         </div>
     </div>
 <?php } ?>
+
+<?php if ($this->uri->segment(5) == 'speciality') { ?>
+
+    <div class="content ">
+        <div style="margin-bottom: 30px;margin-top: 15px;">
+
+            <h4 style="font-size:18px;font-weight:normal;">
+                <span style="font-size: 17px; "><?php echo $welcometext4; ?></span>
+            </h4>
+
+            <table style="width: 100%; font-size: 17px; border-collapse: separate; border-spacing: 5px;"> <!-- Use border-collapse: separate for spacing -->
+                <tr>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><b>Name:</b></td> <!-- Change to #7a7e85 for gray border -->
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><?php echo $firstname; ?></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><b>Email:</b></td>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><?php echo $email; ?></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><b>Role:</b></td>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><?php echo $lastname; ?></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><b>Designation:</b></td>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><?php echo $designation; ?></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><b>Mobile No:</b></td>
+                    <td style="padding: 5px 10px; border: 1px solid #7a7e85;"><?php echo $mobile; ?></td>
+                </tr>
+            </table>
+
+
+        </div>
+        <div class="panel-body panel panel-default">
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-lg-12">
+                    <?php echo form_open(); ?>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th style="font-size: 17px;">OP Speciality wise controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($speciality_op as $row) {
+                                if ($row->title != 'ALL') { ?>
+
+                                    <tr>
+
+                                        <td>
+                                            <div class="checkboxreport">
+                                                <label style="font-weight: normal;">
+                                                    <?php foreach ($userCheckedItems_speciality as $userItem) {
+                                                        $userId = $userItem->user_id;
+                                                        $speciality_op = json_decode($userItem->speciality_op, true);
+                                                    ?>
+                                                        <input type="checkbox" name="speciality_op[]" value="<?php echo $row->title; ?>" <?php echo in_array($row->title, $speciality_op) ? 'checked' : ''; ?>>
+                                                        &nbsp;
+                                                        <?php echo $row->title; ?>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                        </tbody>
+                    </table>
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <div class="ui buttons">
+                            <button type="reset" class="ui button">
+                                <?php echo display('reset') ?>
+                            </button>
+                            <div class="or"></div>
+                            <button type="submit" name="speciality" class="ui positive button">
+                                <?php echo display('save') ?>
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+
 <style>
     .asset-department-title {
         margin-top: 3px;

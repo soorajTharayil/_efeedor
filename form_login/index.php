@@ -16,8 +16,8 @@
 
 </head>
 
-<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl">
-  <fieldset ng-show="step0 == true">
+<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" ng-show="lang">
+  <fieldset ng-cloak ng-show="step0 == true">
     <div class="main-container">
       <div class="form-container" style="margin-top: 100px;">
 
@@ -28,7 +28,7 @@
               <a class="navbar-brand" href="#"><img src="{{setting_data.logo}}" style="height: 100px; width:100%"></a>
             </div>
             <br>
-            <div style="color: red; text-align: center;" class="alert-error" ng-show="loginerror.length > 3">
+            <div ng-cloak style="color: red; text-align: center;" class="alert-error" ng-show="loginerror.length > 3">
               {{loginerror}}</div>
             <!-- <label for="text">Email / Mobile Number</label> -->
             <input type="text" name="email" id="email" class="input-field" placeholder="Enter email/ mobile no."
@@ -89,7 +89,7 @@
       </div>
     </nav>
 
-    <div class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
+    <div ng-cloak class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
       <div class="user-info"
         style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
         <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
@@ -111,7 +111,7 @@
     </div>
 
     <!-- About Content Section -->
-    <div ng-show="aboutVisible" class="about-section"
+    <div ng-cloak ng-show="aboutVisible" class="about-section"
       style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <h2>About</h2>
       <!-- <img src="/Efeedor_logo.png" alt="Colorful Image" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
@@ -133,7 +133,7 @@
     </div>
 
     <!-- Support Content Section -->
-    <div ng-show="supportVisible" class="support-section"
+    <div ng-cloak ng-show="supportVisible" class="support-section"
       style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <h2>Support</h2>
       <p>
@@ -146,7 +146,7 @@
     </div>
 
     <!-- App Download Section -->
-    <div ng-show="appDownloadVisible" class="app-download-section"
+    <div ng-cloak ng-show="appDownloadVisible" class="app-download-section"
       style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <h2>App Download</h2>
       <p>
@@ -162,7 +162,7 @@
     </div>
 
     <!-- Web Dashboard section -->
-    <div ng-show="dashboardVisible" class="dashboard-section"
+    <div ng-cloak ng-show="dashboardVisible" class="dashboard-section"
       style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
       <h2>Explore Web Dashboard</h2>
       <p>
@@ -516,6 +516,12 @@
       }
     }
   </style>
+  
+  <style>
+      [ng-cloak] {
+        display: none !important;
+      }
+   </style>
 
 
 </body>

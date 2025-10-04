@@ -939,9 +939,7 @@ app.controller(
           },
           function myError(response) {
             $rootScope.loader = false;
-            alert(
-              "An error occurred while fetching dataaaa. Please try again."
-            ); // User feedback on error
+            alert("An error occurred while fetching data. Please try again."); // User feedback on error
           }
         );
     };
@@ -1003,9 +1001,7 @@ app.controller(
       $scope.feedback.other = $scope.searchTextmain;
       $scope.activeStep("step4");
     };
-
-
-
+    
     $scope.selectQuestionCategory1 = function (Parameter, Question) {
       $scope.showBack = false;
       $scope.submit_as_concern = true;
@@ -1061,8 +1057,6 @@ app.controller(
       $scope.feedback.priority = "";
       $scope.feedback.incident_type = "";
       $scope.feedback.tag_name = "";
-      $scope.feedback.bedno = "";
-      $scope.feedback.ward = "";
       $scope.feedback.tag_patientid = "";
       $scope.feedback.files_name = [];
       $scope.feedback.images = [];
@@ -1475,8 +1469,8 @@ app.controller(
       if (type == "lang3") {
         $http.get("language/lang3.json").then(function (responsedata) {
           $rootScope.lang = responsedata.data;
-          $scope.type2 = "മലയാളം";
-          //   $scope.type2 = "தமிழ்";
+           $scope.type2 = "മലയാളം";
+        //   $scope.type2 = "தமிழ்";
         });
       }
       $scope.feedback.langsub = type;
