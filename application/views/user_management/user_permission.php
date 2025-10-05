@@ -57,7 +57,7 @@ $mobile = $user->mobile;
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'user_permission') echo 'active'; ?>" id="nav-user-permission-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/user_permission'); ?>" role="tab" aria-controls="nav-user-permission" aria-selected="true" style="margin-right: 20px;"><i class="fa fa-unlock-alt" style="font-size:18px; padding-right: 15px;"></i>User Permissions</a>
 
-                        <?php if ($this->uri->segment(4) >= 4) { ?>
+                        <!-- <?php if ($this->uri->segment(4) >= 4) { ?>
                             <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'department') echo 'active'; ?>" id="nav-department-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/department'); ?>" role="tab" aria-controls="nav-department" aria-selected="false"><i class="fa fa-user-plus" style="font-size:18px; padding-right: 15px;"></i>Tag Department</a>
                         <?php } ?>
 
@@ -65,7 +65,7 @@ $mobile = $user->mobile;
 
                         <?php if (ismodule_active('ISR') === true) { ?>
                             <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor_esr') echo 'active'; ?>" id="nav-floor-esr-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor_esr'); ?>" role="tab" aria-controls="nav-floor-esr" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to Hospital Zones</a>
-                        <?php } ?>
+                        <?php } ?> -->
 
                         <?php if (ismodule_active('OP') === true) { ?>
                             <?php if ($this->uri->segment(4) >= 4) { ?>
