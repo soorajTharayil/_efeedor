@@ -57,7 +57,7 @@ $mobile = $user->mobile;
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'user_permission') echo 'active'; ?>" id="nav-user-permission-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/user_permission'); ?>" role="tab" aria-controls="nav-user-permission" aria-selected="true" style="margin-right: 20px;"><i class="fa fa-unlock-alt" style="font-size:18px; padding-right: 15px;"></i>User Permissions</a>
 
-                        <!-- <?php if ($this->uri->segment(4) >= 4) { ?>
+                        <?php if ($this->uri->segment(4) >= 4) { ?>
                             <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'department') echo 'active'; ?>" id="nav-department-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/department'); ?>" role="tab" aria-controls="nav-department" aria-selected="false"><i class="fa fa-user-plus" style="font-size:18px; padding-right: 15px;"></i>Tag Department</a>
                         <?php } ?>
 
@@ -65,7 +65,7 @@ $mobile = $user->mobile;
 
                         <?php if (ismodule_active('ISR') === true) { ?>
                             <a class="nav-item nav-link <?php if ($this->uri->segment(5) == 'floor_esr') echo 'active'; ?>" id="nav-floor-esr-tab" href="<?php echo base_url('UserManagement/user_permission/' . $this->uri->segment(3) . '/' . $this->uri->segment(4) . '/floor_esr'); ?>" role="tab" aria-controls="nav-floor-esr" aria-selected="false"><i class="fa fa-hospital-o" style="font-size:18px; padding-right: 15px;"></i>Tag this user to Hospital Zones</a>
-                        <?php } ?> -->
+                        <?php } ?>
 
                         <?php if (ismodule_active('OP') === true) { ?>
                             <?php if ($this->uri->segment(4) >= 4) { ?>
@@ -582,29 +582,70 @@ $mobile = $user->mobile;
 
                     <!-- 🔹 JS for Master Toggle -->
                     <script>
-                        // Parent toggle controls all children
-                        $(document).on("change", ".master-toggle", function() {
-                            let targetPanel = "#" + $(this).data("target");
-                            let checked = $(this).is(":checked");
-                            $(targetPanel).find("tbody input[type=checkbox]").prop("checked", checked);
-                        });
+                        $(document).ready(function() {
 
-                        // Child checkboxes control parent state
-                        $(document).on("change", "tbody input[type=checkbox]", function() {
-                            let panelBody = $(this).closest(".panel-collapse");
-                            let all = panelBody.find("tbody input[type=checkbox]").length;
-                            let checked = panelBody.find("tbody input[type=checkbox]:checked").length;
+                            // 🔹 Parent toggle controls all children
+                            $(document).on("change", ".master-toggle", function() {
+                                let targetPanel = "#" + $(this).data("target");
+                                let checked = $(this).is(":checked");
 
-                            let master = panelBody.prev().find(".master-toggle");
+                                $(targetPanel).find("tbody input[type=checkbox]").each(function() {
+                                    $(this).prop("checked", checked);
+                                });
 
-                            // update the parent input and also refresh UI
-                            if (all === checked) {
-                                master.prop("checked", true).trigger("change");
-                            } else {
-                                master.prop("checked", false).trigger("change");
-                            }
+                                // ✅ Visually refresh all labels inside that panel
+                                $(targetPanel).find("tbody label").each(function() {
+                                    this.offsetHeight; // force reflow
+                                });
+                            });
+
+                            // 🔹 Child checkboxes control parent toggle
+                            $(document).on("change", "tbody input[type=checkbox]", function() {
+                                let panelBody = $(this).closest(".panel-collapse");
+                                let all = panelBody.find("tbody input[type=checkbox]").length;
+                                let checked = panelBody.find("tbody input[type=checkbox]:checked").length;
+
+                                let master = panelBody.prev().find(".master-toggle");
+                                let masterId = master.attr("id");
+                                let masterLabel = $('label[for="' + masterId + '"]');
+
+                                if (all === checked) {
+                                    master.prop("checked", true);
+                                } else {
+                                    master.prop("checked", false);
+                                }
+
+                                // ✅ Force the visual UI to sync instantly (fixes “stuck” appearance)
+                                masterLabel.addClass("ui-refresh-fix");
+                                master[0].offsetHeight; // force reflow
+                                setTimeout(function() {
+                                    masterLabel.removeClass("ui-refresh-fix");
+                                }, 80);
+                            });
                         });
                     </script>
+
+                    <style>
+                        /* ✅ CSS fix for delayed repaint of custom switch labels */
+                        .ui-refresh-fix {
+                            animation: toggleRepaint 0.08s linear;
+                        }
+
+                        @keyframes toggleRepaint {
+                            from {
+                                opacity: 0.99;
+                            }
+
+                            to {
+                                opacity: 1;
+                            }
+                        }
+                    </style>
+
+
+
+
+
 
 
                 </div>

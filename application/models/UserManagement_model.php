@@ -3,6 +3,7 @@
 
 
 class UserManagement_model extends CI_Model
+
 {
 
 
@@ -13,6 +14,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function create($data = [])
+
 	{
 
 
@@ -65,6 +67,7 @@ class UserManagement_model extends CI_Model
 		return $descriptions;
 	}
 	public function read()
+
 	{
 
 		return $this->db->select("*")
@@ -104,6 +107,7 @@ class UserManagement_model extends CI_Model
 	}
 
 	public function read_by_id($dprt_id = null)
+
 	{
 
 		return $this->db->select("*")
@@ -118,6 +122,7 @@ class UserManagement_model extends CI_Model
 	}
 
 	public function role_edit($dprt_id = null)
+
 	{
 
 		return $this->db->select("*")
@@ -135,6 +140,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function departmentList()
+
 	{
 
 		return $this->db->select("*")
@@ -222,6 +228,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function sinkdeparment($d, $old_email)
+
 	{
 
 
@@ -553,6 +560,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function delete($dprt_id = null)
+
 	{
 
 
@@ -613,13 +621,10 @@ class UserManagement_model extends CI_Model
 				$data['admin_email'] = '0';
 				break;
 			case 4:
-				$data['admin_email'] = '0';
+				$data['departmenthead_email'] = '0';
 				break;
 			case 8:
-				$data['admin_email'] = '0';
-				break;
-			case 10:
-				$data['admin_email'] = '0';
+				$data['patient_coordinator_email'] = '0';
 				break;
 			default:
 				return false; // Invalid user role
@@ -628,44 +633,74 @@ class UserManagement_model extends CI_Model
 		$this->db->where('user_id', $dprt_id);
 		return $this->db->update('user', $data);
 	}
+
 	public function update_sms_status($dprt_id)
 	{
-		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->row();
+		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->result();
 
-		if (!$user) {
+		if (empty($user)) {
 			return false; // No user found
 		}
 
-		$allowed_roles = [2, 3, 4, 8, 10];
+		$admin = $user[0]->user_role;
+		$data = array();
 
-		if (!in_array($user->user_role, $allowed_roles)) {
-			return false; // Invalid user role
+		switch ($admin) {
+			case 2:
+				$data['message_alert'] = '0';
+				break;
+			case 3:
+				$data['message_alert'] = '0';
+				break;
+			case 4:
+				$data['message_alert'] = '0';
+				break;
+			case 8:
+				$data['message_alert'] = '0';
+				break;
+			default:
+				return false; // Invalid user role
 		}
 
-		return $this->db->where('user_id', $dprt_id)
-			->update('user', ['message_alert' => '0']);
+		$this->db->where('user_id', $dprt_id);
+		return $this->db->update('user', $data);
 	}
+
 
 	public function update_whatsapp_status($dprt_id)
 	{
-		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->row();
+		$user = $this->db->where('user_id', $dprt_id)->get($this->table)->result();
 
-		if (!$user) {
+		if (empty($user)) {
 			return false; // No user found
 		}
 
-		$allowed_roles = [2, 3, 4, 8, 10];
+		$admin = $user[0]->user_role;
+		$data = array();
 
-		if (!in_array($user->user_role, $allowed_roles)) {
-			return false; // Invalid user role
+		switch ($admin) {
+			case 2:
+				$data['whatsapp_alert'] = '0';
+				break;
+			case 3:
+				$data['whatsapp_alert'] = '0';
+				break;
+			case 4:
+				$data['whatsapp_alert'] = '0';
+				break;
+			case 8:
+				$data['whatsapp_alert'] = '0';
+				break;
+			default:
+				return false; // Invalid user role
 		}
 
-		return $this->db->where('user_id', $dprt_id)
-			->update('user', ['whatsapp_alert' => '0']);
+		$this->db->where('user_id', $dprt_id);
+		return $this->db->update('user', $data);
 	}
 
-
 	public function role_delete($dprt_id = null)
+
 	{
 
 		$this->db->where('role_id', $dprt_id)->delete($this->table2);
@@ -684,6 +719,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function department_list($dep)
+
 	{
 
 		$result = $this->db->select("*")
@@ -708,6 +744,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function role_list()
+
 	{
 
 		$result = $this->db
@@ -730,6 +767,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function role_permission($role)
+
 	{
 
 		// $this->db->where('R.role_id', $userRole);
@@ -823,6 +861,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function user_permission($user_id, $role_id)
+
 	{
 
 		$this->db->from('user_permissions as UP');
@@ -913,6 +952,7 @@ class UserManagement_model extends CI_Model
 
 
 	public function save_role_permission($NewPermission, $role)
+
 	{
 
 		$this->db->from('features as F');
@@ -927,7 +967,7 @@ class UserManagement_model extends CI_Model
 
 		$permissionList = $query->result();
 
-		foreach ($permissionList as $permission) {
+		foreach ($permissionList  as $permission) {
 
 			$status = 0;
 
@@ -980,12 +1020,10 @@ class UserManagement_model extends CI_Model
 
 
 
-	public function save_user_permission($NewPermission, $floor_ward, $floor_ward_esr, $floor_asset, $department, $user_id)
+	public function save_user_permission($NewPermission, $floor_ward, $floor_ward_esr, $floor_asset, $speciality_op, $department, $user_id)
 	{
-
-
 		if ($NewPermission !== null) {
-
+			// Get all features with their module + section
 			$this->db->from('features as F');
 			$this->db->join('sections as S', 'S.section_id = F.section_id');
 			$this->db->select('F.*,S.module_id');
@@ -993,76 +1031,206 @@ class UserManagement_model extends CI_Model
 			$permissionList = $query->result();
 
 			foreach ($permissionList as $permission) {
-
 				$status = 0;
-
 				if (isset($NewPermission[$permission->feature_id])) {
-
 					$status = 1;
 				}
 
 				$this->db->where('user_id', $user_id);
-
 				$this->db->where('feature_id', $permission->feature_id);
-
 				$query = $this->db->get('user_permissions');
-
 				$result = $query->result();
 
 				if (count($result) > 0) {
-
-					$set = array('status' => $status);
-
+					$set = ['status' => $status];
 					$this->db->where('user_id', $user_id);
-
 					$this->db->where('feature_id', $permission->feature_id);
-
 					$this->db->update('user_permissions', $set);
 				} else {
-
-					$set = array(
-
-						'status' => $status,
-
-						'user_id' => $user_id,
-
+					$set = [
+						'status'     => $status,
+						'user_id'    => $user_id,
 						'feature_id' => $permission->feature_id,
-
-						'section' => $permission->section_id,
-
-						'module' => $permission->module_id,
-
-
-
-					);
+						'section'    => $permission->section_id,
+						'module'     => $permission->module_id,
+					];
 					$this->db->insert('user_permissions', $set);
 				}
 			}
 		}
 
-		$data = array();
+		$data = [];
 		if ($floor_ward !== null) {
 			$data['floor_ward'] = json_encode($floor_ward);
-			$this->db->where('user_id', $user_id)->update('user', $data);
 		}
 		if ($floor_ward_esr !== null) {
 			$data['floor_ward_esr'] = json_encode($floor_ward_esr);
-			$this->db->where('user_id', $user_id)->update('user', $data);
+		}
+		if ($speciality_op !== null) {
+			$data['speciality_op'] = json_encode($speciality_op);
 		}
 		if ($floor_asset !== null) {
 			$data['floor_asset'] = json_encode($floor_asset);
-			$this->db->where('user_id', $user_id)->update('user', $data);
 		}
 		if ($department !== null) {
 			$data['department'] = json_encode($department);
+		}
+		if (!empty($data)) {
 			$this->db->where('user_id', $user_id)->update('user', $data);
 		}
+
+		// Sync custodians to bf_audit_frequency
+
+		// Map department title → feature_name
+		$title_to_feature = [
+			'Active Cases MRD Audit-IP' => 'AUDIT-FORM1',
+			'Discharged Patients MRD Audit' => 'AUDIT-FORM2',
+			'Nursing (IP Closed Cases)' => 'AUDIT-FORM3',
+			'Nursing (IP Open Cases)' => 'AUDIT-FORM4',
+			'Nursing (OP Closed Cases)' => 'AUDIT-FORM5',
+			'Clinical Dietetics (Active)' => 'AUDIT-FORM6',
+			'Clinical Dietetics (Closed Cases)' => 'AUDIT-FORM7',
+			'Clinical Pharmacy-(Closed)' => 'AUDIT-FORM8',
+			'Clinical Pharmacy-(OP)' => 'AUDIT-FORM9',
+			'Clinical Pharmacy-(Open)' => 'AUDIT-FORM10',
+			'Clinicians-Anesthesia(Active)' => 'AUDIT-FORM11',
+			'Clinicians-Anesthesia(Closed)' => 'AUDIT-FORM12',
+			'Clinicians-ED (Active)' => 'AUDIT-FORM13',
+			'Clinicians-ED (Closed)' => 'AUDIT-FORM14',
+			'Clinicians-ICU (Active)' => 'AUDIT-FORM15',
+			'Clinicians-ICU (Closed)' => 'AUDIT-FORM16',
+			'Clinicians-Primary Care Provider (Active)' => 'AUDIT-FORM17',
+			'Clinicians-Primary Care Provider (Closed)' => 'AUDIT-FORM18',
+			'Clinicians-Sedation (Active)' => 'AUDIT-FORM19',
+			'Clinicians-Sedation (Closed)' => 'AUDIT-FORM20',
+			'Clinicians-Surgeons (Active)' => 'AUDIT-FORM21',
+			'Clinicians-Surgeons (Closed)' => 'AUDIT-FORM22',
+			'Diet Consultation (OP)' => 'AUDIT-FORM23',
+			'Physiotherapy- (Closed)' => 'AUDIT-FORM24',
+			'Physiotherapy- (OP)' => 'AUDIT-FORM25',
+			'Physiotherapy- (Open)' => 'AUDIT-FORM26',
+			'MRD Audit- ED' => 'AUDIT-FORM27',
+			'MRD Audit- LAMA' => 'AUDIT-FORM28',
+			'MRD Audit- OP' => 'AUDIT-FORM29',
+			// 'Nursing & IPSG'
+			'Accidental Delining Audit' => 'AUDIT-FORM30',
+			'Admission Holding Area Audit' => 'AUDIT-FORM31',
+			'CPR Analysis Record' => 'AUDIT-FORM32',
+			'Extravasation Audit' => 'AUDIT-FORM33',
+			'Hospital Acquired Pressure Ulcers (HAPU) Audit' => 'AUDIT-FORM34',
+			'Initial Assessment Accident and Emergency (A&E)' => 'AUDIT-FORM35',
+			'Initial Assessment IPD' => 'AUDIT-FORM36',
+			'Initial Assessment OPD' => 'AUDIT-FORM37',
+			'IPSG-1' => 'AUDIT-FORM38',
+			'IPSG2- A&E' => 'AUDIT-FORM39',
+			'IPSG2- IPD' => 'AUDIT-FORM40',
+			'IPSG4-Timeout- Outside OT Audit' => 'AUDIT-FORM41',
+			'IPSG6- IP' => 'AUDIT-FORM42',
+			'IPSG6- OPD' => 'AUDIT-FORM43',
+			'Point Prevalence Audit' => 'AUDIT-FORM44',
+
+			// --- Clinical Outcome ---
+			'ACL' => 'AUDIT-FORM45',
+			'Allogenic Bone-marrow Transplantation' => 'AUDIT-FORM46',
+			'Aortic Valve Replacement (AVR)' => 'AUDIT-FORM47',
+			'Autologous Bone-marrow transplantation' => 'AUDIT-FORM48',
+			'Brain Tumour Surgery' => 'AUDIT-FORM49',
+			'CABG' => 'AUDIT-FORM50',
+			'Carotid Stenting' => 'AUDIT-FORM51',
+			'Chemotherapy (Medical oncology)' => 'AUDIT-FORM52',
+			'Colo-Rectal Surgeries' => 'AUDIT-FORM53',
+			'Endoscopy' => 'AUDIT-FORM54',
+			'Epilepsy' => 'AUDIT-FORM55',
+			'Herniorrhaphy' => 'AUDIT-FORM56',
+			'HoLEP' => 'AUDIT-FORM57',
+			'Laparoscopic Appendicectomy' => 'AUDIT-FORM58',
+			'Mechanical Thrombectomy' => 'AUDIT-FORM59',
+			'MVR (Mitral Valve replacement)' => 'AUDIT-FORM60',
+			'PTCA' => 'AUDIT-FORM61',
+			'Renal Transplantation' => 'AUDIT-FORM62',
+			'Scoliosis correction surgery' => 'AUDIT-FORM63',
+			'Spinal Dysraphism' => 'AUDIT-FORM64',
+			'Spine and Disc Surgery-Fusion procedures' => 'AUDIT-FORM65',
+			'Thoracotomy' => 'AUDIT-FORM66',
+			'TKR' => 'AUDIT-FORM67',
+			'Uro-oncology procedures' => 'AUDIT-FORM68',
+			'Whipples Surgery' => 'AUDIT-FORM69',
+			'Laparoscopic Cholecystectomy' => 'AUDIT-FORM70',
+
+			// --- Clinical KPI ---
+			'Bronchodilators Audit' => 'AUDIT-FORM71',
+			'COPD Protocol Audit' => 'AUDIT-FORM72',
+
+			// --- Infection Control & PCI ---
+			'Biomedical Waste Management Audit' => 'AUDIT-FORM73',
+			'Canteen Audit checklist' => 'AUDIT-FORM74',
+			'CSSD audit checklist' => 'AUDIT-FORM75',
+			'Hand Hygiene Audit' => 'AUDIT-FORM76',
+			'Infection control bundle audit' => 'AUDIT-FORM77',
+			'Infection Control OT audit checklist' => 'AUDIT-FORM78',
+			'Linen Audit' => 'AUDIT-FORM79',
+			'Ambulance PCI Audit' => 'AUDIT-FORM80',
+			'CoffeeShop PCI Audit' => 'AUDIT-FORM81',
+			'Laboratory PCI Audit' => 'AUDIT-FORM82',
+			'Mortuary PCI Audit' => 'AUDIT-FORM83',
+			'Radiology PCI Audit' => 'AUDIT-FORM84',
+			'SSI Surveillance checklist' => 'AUDIT-FORM85',
+			'IV cannula audit' => 'AUDIT-FORM86',
+			'Personal Protective Equipment Usage audit' => 'AUDIT-FORM87',
+			'Safe Injection and Infusion Audit' => 'AUDIT-FORM88',
+			'Surface cleaning and disinfection effectiveness monitoring record' => 'AUDIT-FORM89',
+
+			// --- Clinical Pathways ---
+			'Arthroscopic Anterior Cruciate Ligament Reconstruction Surgery' => 'AUDIT-FORM90',
+			'Breast Lump Consensus Guidelines' => 'AUDIT-FORM91',
+			'Cardiac Arrest' => 'AUDIT-FORM92',
+			'Donor Hepatectomy' => 'AUDIT-FORM93',
+			'Febrile Seizure' => 'AUDIT-FORM94',
+			'Heart Transplant Recipient' => 'AUDIT-FORM95',
+			'Laparoscopic Donor Nephrectomy' => 'AUDIT-FORM96',
+			'PICC LINE Insertion' => 'AUDIT-FORM97',
+			'Stroke' => 'AUDIT-FORM98',
+			'Urodynamics' => 'AUDIT-FORM99',
+			'STEMI-Primary PCI Clinical Pathway' => 'AUDIT-FORM100',
+		];
+
+		// Get all audit departments
+		$departments = $this->db->get('bf_audit_frequency')->result();
+
+		foreach ($departments as $dept) {
+			$current_feature = isset($title_to_feature[$dept->title]) ? $title_to_feature[$dept->title] : '';
+
+			if ($current_feature) {
+				// Get custodians: all users with permission for this feature
+				$this->db->select('u.firstname');
+				$this->db->from('user_permissions as up');
+				$this->db->join('user as u', 'u.user_id = up.user_id');
+				$this->db->join('features as f', 'f.feature_id = up.feature_id');
+				$this->db->where('up.status', 1);
+				$this->db->where('f.feature_name', $current_feature);
+				$users = $this->db->get()->result();
+
+				$custodians = [];
+				foreach ($users as $u) {
+					$custodians[] = htmlspecialchars($u->firstname, ENT_QUOTES, 'UTF-8');
+				}
+
+				$default_custodians = !empty($custodians) ? implode(', ', array_unique($custodians)) : 'No custodians assigned';
+
+				// Update bf_audit_frequency
+				$this->db->where('id', $dept->id)
+					->update('bf_audit_frequency', ['bed_no' => $default_custodians]);
+			}
+		}
+
 		return true;
 	}
 
 
 
+
 	public function role_create($data = [])
+
 	{
 
 		return $this->db->insert('roles', $data);
