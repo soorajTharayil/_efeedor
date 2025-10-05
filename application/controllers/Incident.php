@@ -1028,7 +1028,13 @@ class Incident extends CI_Controller
             $header[5] = 'Mobile Number';
             $header[6] = 'Incident Short Name';
             $header[7] = 'Incident';
-            $header[8] = 'Description';
+            $header[8] = 'Incident Occured On';
+            $header[9] = 'Assigned Risk';
+            $header[10] = 'Assigned Priority';
+            $header[11] = 'Incident Category';
+            $header[12] = 'Description';
+            $header[13] = 'What Went Wrong';
+            $header[14] = 'Immediate Action Taken';
             // $j = 9;
             // foreach ($setarray as $r) {
             //     $header[$j] = $r;
@@ -1039,27 +1045,53 @@ class Incident extends CI_Controller
             $i = 0;
             foreach ($feedbacktaken as $row) {
                 $data = json_decode($row->dataset, true);
+
                 $dataexport[$i]['date'] = date('d-m-Y', strtotime($row->datetime));
-                $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['patient_id'] = $data['patientid'];
-                $dataexport[$i]['ward'] = $data['ward'];
-                $dataexport[$i]['bedno'] = $data['bedno'];
-                $dataexport[$i]['mobile'] = $data['contactnumber'];
+                $dataexport[$i]['name'] = $data['name'] ?? 'N/A';
+                $dataexport[$i]['patient_id'] = $data['patientid'] ?? 'N/A';
+                $dataexport[$i]['ward'] = $data['ward'] ?? 'N/A';
+                $dataexport[$i]['bedno'] = $data['bedno'] ?? 'N/A';
+                $dataexport[$i]['mobile'] = $data['contactnumber'] ?? 'N/A';
+
+                // Department
                 foreach ($data['comment'] as $key => $value) {
-                    $dataexport[$i]['Department'] = $setarray[$key];
+                    $dataexport[$i]['Department'] = $setarray[$key] ?? 'N/A';
                 }
+
+                // Ticket question
                 foreach ($data['reason'] as $key => $value) {
                     if ($value) {
-                        $dataexport[$i]['ticket'] = $question[$key];
+                        $dataexport[$i]['ticket'] = $question[$key] ?? 'N/A';
                     }
                 }
+
+                  // ✅ Additional Fields
+                $incidentTime = $data['incident_occured_in'] ?? '';
+                if (!empty($incidentTime)) {
+                    $formattedIncidentTime = date('d M, Y - g:i A', strtotime($incidentTime));
+                } else {
+                    $formattedIncidentTime = 'N/A';
+                }
+                $dataexport[$i]['incident_occured_in'] = $formattedIncidentTime;
+
+                $dataexport[$i]['risk_level'] = $data['risk_matrix']['level'] ?? 'Unassigned';
+                $dataexport[$i]['priority'] = $data['priority'] ?? 'Unassigned';
+                $dataexport[$i]['incident_type'] = $data['incident_type'] ?? 'Unassigned';
+
+                // Comment
                 foreach ($data['comment'] as $key => $value) {
                     if ($value) {
-                        $dataexport[$i]['comment'] = $value;
+                        $dataexport[$i]['comment'] = $value ?? 'N/A';
                     }
                 }
+
+              
+                $dataexport[$i]['what_went_wrong'] = $data['what_went_wrong'] ?? 'N/A';
+                $dataexport[$i]['action_taken'] = $data['action_taken'] ?? 'N/A';
+
                 $i++;
             }
+
             $newdataset = $dataexport;
             // echo '<pre>';
             // print_r($dataexport);
@@ -1080,11 +1112,9 @@ class Incident extends CI_Controller
                 //print_r($header);
                 fputcsv($fp, $header, ',');
                 foreach ($dataexport as $values) {
-                    if (is_array($values)) {
-                        fputcsv($fp, $values, ',');
-                    }
+                    //print_r($values); exit;
+                    fputcsv($fp, $values, ',');
                 }
-
                 fclose($fp);
             }
             ob_flush();

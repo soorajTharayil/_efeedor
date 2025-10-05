@@ -1276,6 +1276,131 @@
   }
 </style>
 
+<style>
+  .menu-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-dropdown ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-dropdown ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .menu-dropdown ul li a i {
+    margin-right: 10px;
+  }
+
+  .menu-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+
+  .menu-toggle {
+    cursor: pointer;
+  }
+
+  [ng-show="menuVisible"] {
+    display: block !important;
+  }
+
+  .menu-dropdown ul li a:hover {
+    color: #555;
+  }
+
+
+  .input-field {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Add border */
+    border-radius: 25px;
+    /* Add border radius */
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    /* Add box shadow */
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-input {
+    width: calc(100% - 40px);
+    /* Adjust width to accommodate the show/hide button */
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 39%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
+
+    .navbar .navbar-brand {
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    .navbar .ml-auto {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .navbar .left-buttons a,
+    .navbar .right-buttons button {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .navbar .right-buttons {
+      margin-left: -5px;
+      /* Adjust the position of the language button */
+    }
+
+    .navbar .btn {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  }
+</style>
+
 <!-- css code end  -->
 
 
