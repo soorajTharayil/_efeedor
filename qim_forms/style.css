@@ -780,7 +780,6 @@ li.fb a::before {
 .the-form [type="text"] {
     padding: 15px;
     font-size: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     margin-bottom: 15px;
     transition: background 0.3s;
@@ -791,6 +790,14 @@ li.fb a::before {
 .the-form [type="password"]::placeholder,
 .the-form [type="text"]::placeholder {
     color: rgba(255, 255, 255, 0.3);
+}
+.input-field::placeholder {
+  color: rgba(0, 0, 0, 0.6) !important;
+  opacity: 1 !important;
+}
+.input-field:focus {
+  border-color: #000;  /* stays black when focused */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3); /* optional subtle glow */
 }
 
 .the-form [type="email"]:hover,

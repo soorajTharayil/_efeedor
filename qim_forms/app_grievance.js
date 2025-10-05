@@ -7,6 +7,7 @@ app.controller(
   function ($rootScope, $scope, $http, $window) {
     $scope.typel = "english";
     $scope.type2 = "English";
+    $scope.step2 = false;
 
     var ehandor = JSON.parse($window.localStorage.getItem("ehandor"));
     if (ehandor) {
@@ -15,6 +16,7 @@ app.controller(
       $scope.loginid = ehandor.empid;
       $scope.loginname = ehandor.data.name;
       $scope.loginnumber = ehandor.data.mobile;
+      $scope.user_id = ehandor.userid;
       console.log($scope.loginemail);
       console.log($scope.loginid);
       console.log($scope.loginname);
