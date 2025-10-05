@@ -852,6 +852,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             $k = '';
         }
         $TID = $department_object->id;
+        $occured_in = $department_object->incident_occured_in;
         $admins_incident_link = $config_set['BASE_URL'] . 'incident/track/' . $TID;
 
         $keys = array();
@@ -894,7 +895,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             
               <tr>
                  <td width="40%">Incident Occured On</td>
-                 <td width="60%">' . $formattedDate . '</td>
+                 <td width="60%">' . $occured_in . '</td>
              </tr>
             
               <tr>
