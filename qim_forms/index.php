@@ -10,14 +10,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="style.css?<?php echo time(); ?>">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" ></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.7.9/angular-sanitize.min.js" ></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/2.21.0/load-image.all.min.js" ></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.7.9/angular-sanitize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/2.21.0/load-image.all.min.js"></script>
 
-	<script src="app_grievance.js?<?php echo time(); ?>" ></script>
+	<script src="app_grievance.js?<?php echo time(); ?>"></script>
 </head>
 <!-- head part end -->
 
@@ -25,10 +25,11 @@
 <!-- body part start -->
 
 <body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" id="body">
-    <body>
-  <div class="container">
-  </div>
-</body>
+
+	<body>
+		<div class="container">
+		</div>
+	</body>
 
 	<fieldset ng-show="step0 == true">
 		<div class="main-container">
@@ -345,11 +346,11 @@
 										</h4>
 
 										<div class="" style="width: 94%; margin: 0px auto;">
-											 <div class="row">
-											<div class="col-12">
-												<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">MRD</h4>
+											<div class="row">
+												<div class="col-12">
+													<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">MRD</h4>
+												</div>
 											</div>
-										</div> 
 											<div class="row" ng-if="profilen['KPI1'] == true">
 												<div class="col-12">
 													<div class="card">
@@ -433,7 +434,7 @@
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3a" class="card"
+																<a href="../CQI3a4" class="card"
 																	style="text-decoration: none;">
 																	<div class="card product-card"
 																		style="margin-bottom: 10px;">
@@ -4963,9 +4964,7 @@
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color: #5c5959;font-size: 36px;">
 																			</p>
-																			<p class="text">Adverse events related to
-																				SUDs
-																				(JCI8-PCI 3.1) - (CSSD)</p>
+																			<p class="text">Adverse events related to SUDs(JCI8-PCI 3.1)-(CSSD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -4974,8 +4973,10 @@
 													</div>
 												</div>
 											</div>
+
+
 											<!-- KPI177 -->
-											<div class="row" ng-if="profilen['KPI177'] == true">
+											<div class="row" ng-if="profilen['KPI176'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5002,7 +5003,7 @@
 											</div>
 
 											<!-- KPI178 -->
-											<div class="row" ng-if="profilen['KPI178'] == true">
+											<div class="row" ng-if="profilen['KPI177'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5030,7 +5031,7 @@
 											</div>
 
 											<!-- KPI179 -->
-											<div class="row" ng-if="profilen['KPI179'] == true">
+											<div class="row" ng-if="profilen['KPI178'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5059,7 +5060,7 @@
 											</div>
 
 											<!-- KPI180 -->
-											<div class="row" ng-if="profilen['KPI180'] == true">
+											<div class="row" ng-if="profilen['KPI179'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5085,28 +5086,21 @@
 												</div>
 											</div>
 
-											<!-- KPI181 -->
-											<div class="row" ng-if="profilen['KPI181'] == true">
+
+											<div class="row" ng-if="profilen['KPI180'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI4g5" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
+																<a href="../CQI4g5" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
 																			<p class="text">Compliance rate of adhering
-																				with
-																				policies and procedures for care of
-																				patients
-																				at risk for suicide and self-harm
-																				(JCI8-COP
-																				5) - (MRD)</p>
+																				with policies and procedures for care of
+																				patients at risk for suicide and self-harm
+																				(JCI8-COP 5) - (MRD)
+																			</p>
 																		</div>
 																	</div>
 																</a>
@@ -5116,24 +5110,19 @@
 												</div>
 											</div>
 
-											<!-- KPI182 -->
-											<div class="row" ng-if="profilen['KPI182'] == true">
+
+											<div class="row" ng-if="profilen['KPI181'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI4g6" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
+																<a href="../CQI4g6" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">
+																				Monthly Abbreviation Compliance (MRD)
 																			</p>
-																			<p class="text">Monthly Abbreviation
-																				Compliance
-																				(MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5142,8 +5131,9 @@
 													</div>
 												</div>
 											</div>
+
 											<!-- KPI183 -->
-											<div class="row" ng-if="profilen['KPI183'] == true">
+											<div class="row" ng-if="profilen['KPI182'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5170,7 +5160,7 @@
 											</div>
 
 											<!-- KPI184 -->
-											<div class="row" ng-if="profilen['KPI184'] == true">
+											<div class="row" ng-if="profilen['KPI183'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5197,7 +5187,7 @@
 											</div>
 
 											<!-- KPI185 -->
-											<div class="row" ng-if="profilen['KPI185'] == true">
+											<div class="row" ng-if="profilen['KPI184'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5224,7 +5214,7 @@
 											</div>
 
 											<!-- KPI186 -->
-											<div class="row" ng-if="profilen['KPI186'] == true">
+											<div class="row" ng-if="profilen['KPI185'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5251,7 +5241,7 @@
 											</div>
 
 											<!-- KPI187 -->
-											<div class="row" ng-if="profilen['KPI187'] == true">
+											<div class="row" ng-if="profilen['KPI186'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5277,7 +5267,7 @@
 											</div>
 
 											<!-- KPI188 -->
-											<div class="row" ng-if="profilen['KPI188'] == true">
+											<div class="row" ng-if="profilen['KPI187'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5303,8 +5293,7 @@
 												</div>
 											</div>
 
-											<!-- KPI189 -->
-											<div class="row" ng-if="profilen['KPI189'] == true">
+											<div class="row" ng-if="profilen['KPI188'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5329,25 +5318,38 @@
 												</div>
 											</div>
 
-											<!-- KPI190 -->
+
+											<div class="row" ng-if="profilen['KPI189'] == true">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI3k8" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">High Alert Medication
+																				Segregation, storage & labelling
+																				Compliance rate (Pharmacy - Store)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
 											<div class="row" ng-if="profilen['KPI190'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k8" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">High Alert Medication
-																				Segregation, storage & labelling
-																				Compliance
-																				rate (Pharmacy - Store)</p>
+																<a href="../CQI3k9" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Average recovery time (OT-Post OP)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5357,24 +5359,16 @@
 												</div>
 											</div>
 
-											<!-- KPI191 -->
 											<div class="row" ng-if="profilen['KPI191'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k9" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Average recovery time
-																				(OT-Post
-																				OP)</p>
+																<a href="../CQI3k10" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Door to thrombolysis time in ischemic stroke in ER (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5384,25 +5378,16 @@
 												</div>
 											</div>
 
-											<!-- KPI192 -->
 											<div class="row" ng-if="profilen['KPI192'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k10" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Door to thrombolysis time in
-																				ischemic stroke in ER (Emergency
-																				Department)
-																			</p>
+																<a href="../CQI3k11" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Door to image time in Stroke patients (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5411,23 +5396,17 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI193 -->
+
 											<div class="row" ng-if="profilen['KPI193'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k11" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Door to image time in Stroke
-																				patients (Emergency Department)</p>
+																<a href="../CQI3k12" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Average number of patients visiting Emergency per day (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5437,24 +5416,16 @@
 												</div>
 											</div>
 
-											<!-- KPI194 -->
 											<div class="row" ng-if="profilen['KPI194'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k12" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Average number of patients
-																				visiting Emergency per day (Emergency
-																				Department)</p>
+																<a href="../CQI3k13" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Efficiency of code blue team (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5464,23 +5435,16 @@
 												</div>
 											</div>
 
-											<!-- KPI195 -->
 											<div class="row" ng-if="profilen['KPI195'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k13" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Efficiency of code blue team
-																				(Emergency Department)</p>
+																<a href="../CQI3k14" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Time for first defibrillation (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5490,24 +5454,16 @@
 												</div>
 											</div>
 
-											<!-- KPI196 -->
 											<div class="row" ng-if="profilen['KPI196'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k14" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Time for first
-																				defibrillation
-																				(Emergency Department)</p>
+																<a href="../CQI3k15" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Door to Balloon time in PTCA (Cath Lab)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5517,23 +5473,16 @@
 												</div>
 											</div>
 
-											<!-- KPI197 -->
 											<div class="row" ng-if="profilen['KPI197'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k15" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Door to Balloon time in PTCA
-																				(Cath Lab)</p>
+																<a href="../CQI3k16" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Compliance to diet order (Clinical Nutrition and Dietetics)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5543,23 +5492,16 @@
 												</div>
 											</div>
 
-											<!-- KPI198 -->
 											<div class="row" ng-if="profilen['KPI198'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k16" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Compliance to diet order
-																				(Clinical Nutrition and Dietetics)</p>
+																<a href="../CQI3k17" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality 1 - CAD (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5569,23 +5511,17 @@
 												</div>
 											</div>
 
-											<!-- KPI199 -->
+
 											<div class="row" ng-if="profilen['KPI199'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k17" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality 1 - CAD (MRD)
-																			</p>
+																<a href="../CQI3k18" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality 2 - Acute coronary syndrome (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5595,24 +5531,16 @@
 												</div>
 											</div>
 
-											<!-- KPI200 -->
 											<div class="row" ng-if="profilen['KPI200'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k18" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality 2 - Acute
-																				coronary
-																				syndrome (MRD)</p>
+																<a href="../CQI3k19" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality 3 - Cerebral infarction (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5622,23 +5550,16 @@
 												</div>
 											</div>
 
-											<!-- KPI201 -->
 											<div class="row" ng-if="profilen['KPI201'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k19" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality 3 - Cerebral
-																				infarction (MRD)</p>
+																<a href="../CQI3k20" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality 4 - MI (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5648,23 +5569,16 @@
 												</div>
 											</div>
 
-											<!-- KPI202 -->
 											<div class="row" ng-if="profilen['KPI202'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k20" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality 4 - MI (MRD)
-																			</p>
+																<a href="../CQI3k21" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality 5 - Heart failure (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5673,24 +5587,17 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI203 -->
+
 											<div class="row" ng-if="profilen['KPI203'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k21" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality 5 - Heart
-																				failure
-																				(MRD)</p>
+																<a href="../CQI3k22" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Compliances in patient transfer and transportation process (External transfer) (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5700,25 +5607,16 @@
 												</div>
 											</div>
 
-											<!-- KPI204 -->
 											<div class="row" ng-if="profilen['KPI204'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k22" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Compliances in patient
-																				transfer
-																				and transportation process (External
-																				transfer) (Emergency Department)</p>
+																<a href="../CQI3k23" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Number of Adverse Events During Patient Transfers (Outside) (Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5728,25 +5626,16 @@
 												</div>
 											</div>
 
-											<!-- KPI205 -->
 											<div class="row" ng-if="profilen['KPI205'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k23" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Number of Adverse Events
-																				During
-																				Patient Transfers (Outside) (Emergency
-																				Department)</p>
+																<a href="../CQI3k24" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">ILC/EQAS compliance rate (Lab Services)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5756,24 +5645,16 @@
 												</div>
 											</div>
 
-											<!-- KPI206 -->
 											<div class="row" ng-if="profilen['KPI206'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k24" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">ILC/EQAS compliance rate
-																				(Lab
-																				Services)</p>
+																<a href="../CQI3k25" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Compliance with Biological Indicator (CSSD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5783,23 +5664,16 @@
 												</div>
 											</div>
 
-											<!-- KPI207 -->
 											<div class="row" ng-if="profilen['KPI207'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k25" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Compliance with Biological
-																				Indicator (CSSD)</p>
+																<a href="../CQI3k26" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Compliance to risk assessment in reprocessing of SUMD (CSSD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5809,24 +5683,16 @@
 												</div>
 											</div>
 
-											<!-- KPI208 -->
 											<div class="row" ng-if="profilen['KPI208'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k26" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Compliance to risk
-																				assessment in
-																				reprocessing of SUMD (CSSD)</p>
+																<a href="../CQI3k27" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Non-compliance to Copy and paste policy (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5836,24 +5702,16 @@
 												</div>
 											</div>
 
-											<!-- KPI209 -->
 											<div class="row" ng-if="profilen['KPI209'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k27" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Non-compliance to Copy and
-																				paste
-																				policy (MRD)</p>
+																<a href="../CQI3k28" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Compliance to POCT IQC Checking (Lab Services)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5863,24 +5721,17 @@
 												</div>
 											</div>
 
-											<!-- KPI210 -->
+
 											<div class="row" ng-if="profilen['KPI210'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k28" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Compliance to POCT IQC
-																				Checking
-																				(Lab Services)</p>
+																<a href="../CQI3k29" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality - COVID 19 (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5890,24 +5741,16 @@
 												</div>
 											</div>
 
-											<!-- KPI211 -->
 											<div class="row" ng-if="profilen['KPI211'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k29" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality - COVID 19
-																				(MRD)
-																			</p>
+																<a href="../CQI3k30" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Case Fatality - Stroke (MRD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5917,23 +5760,16 @@
 												</div>
 											</div>
 
-											<!-- KPI212 -->
 											<div class="row" ng-if="profilen['KPI212'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k30" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Case Fatality - Stroke (MRD)
-																			</p>
+																<a href="../CQI3k31" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Post procedure complication rate - Colonoscopy (Endoscopy)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5943,24 +5779,16 @@
 												</div>
 											</div>
 
-											<!-- KPI213 -->
 											<div class="row" ng-if="profilen['KPI213'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k31" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Post procedure complication
-																				rate
-																				- Colonoscopy (Endoscopy)</p>
+																<a href="../CQI3k32" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5970,23 +5798,16 @@
 												</div>
 											</div>
 
-											<!-- KPI214 -->
 											<div class="row" ng-if="profilen['KPI214'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k32" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Polyp retrieval rate after
-																				colonoscopic polypectomy (Endoscopy)</p>
+																<a href="../CQI3k33" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Survival rate for living donor kidney transplants (Nephrology)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5996,24 +5817,16 @@
 												</div>
 											</div>
 
-											<!-- KPI215 -->
 											<div class="row" ng-if="profilen['KPI215'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k33" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Survival rate for living
-																				donor
-																				kidney transplants (Nephrology)</p>
+																<a href="../CQI3k34" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">CAUTI Prevention Bundle compliance Rate (Infection Control)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6023,23 +5836,16 @@
 												</div>
 											</div>
 
-											<!-- KPI216 -->
 											<div class="row" ng-if="profilen['KPI216'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k34" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">CAUTI Prevention Bundle
-																				compliance Rate (Infection Control)</p>
+																<a href="../CQI3k35" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Major Discrepancies between Preoperative and Post operative Diagnosis (OT)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6049,25 +5855,16 @@
 												</div>
 											</div>
 
-											<!-- KPI217 -->
 											<div class="row" ng-if="profilen['KPI217'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k35" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Major Discrepancies between
-																				Preoperative and Post operative
-																				Diagnosis
-																				(OT)</p>
+																<a href="../CQI3k36" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Adverse Events Related to patient Identification (Quality Office)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6077,24 +5874,16 @@
 												</div>
 											</div>
 
-											<!-- KPI218 -->
 											<div class="row" ng-if="profilen['KPI218'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k36" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Adverse Events Related to
-																				patient Identification (Quality Office)
-																			</p>
+																<a href="../CQI3k37" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">CLABSI Prevention Bundle compliance Rate (Infection Control)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6104,23 +5893,16 @@
 												</div>
 											</div>
 
-											<!-- KPI219 -->
 											<div class="row" ng-if="profilen['KPI219'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k37" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">CLABSI Prevention Bundle
-																				compliance Rate (Infection Control)</p>
+																<a href="../CQI3k38" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">SSI Prevention Bundle compliance Rate (Infection Control)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6129,24 +5911,17 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI220 -->
+
 											<div class="row" ng-if="profilen['KPI220'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k38" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">SSI Prevention Bundle
-																				compliance
-																				Rate (Infection Control)</p>
+																<a href="../CQI3k39" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">VAP Prevention Bundle compliance Rate (Infection Control)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6156,24 +5931,16 @@
 												</div>
 											</div>
 
-											<!-- KPI221 -->
 											<div class="row" ng-if="profilen['KPI221'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k39" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">VAP Prevention Bundle
-																				compliance
-																				Rate (Infection Control)</p>
+																<a href="../CQI3k40" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Restraint related injuries among admitted patients (Nursing)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6183,24 +5950,17 @@
 												</div>
 											</div>
 
-											<!-- KPI222 -->
+
 											<div class="row" ng-if="profilen['KPI222'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k40" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Restraint related injuries
-																				among
-																				admitted patients (Nursing)</p>
+																<a href="../CQI3k41" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Rate of compliance for restraint consent policy (Nursing)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6210,24 +5970,16 @@
 												</div>
 											</div>
 
-											<!-- KPI223 -->
 											<div class="row" ng-if="profilen['KPI223'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k41" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Rate of compliance for
-																				restraint
-																				consent policy (Nursing)</p>
+																<a href="../CQI3k42" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of Accidental removal of line (Nursing)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6237,24 +5989,16 @@
 												</div>
 											</div>
 
-											<!-- KPI224 -->
 											<div class="row" ng-if="profilen['KPI224'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k42" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of Accidental
-																				removal
-																				of line (Nursing)</p>
+																<a href="../CQI3k43" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Significant hypotension necessitating termination of dialysis (Nursing)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6263,24 +6007,17 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI225 -->
+
 											<div class="row" ng-if="profilen['KPI225'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k43" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Significant hypotension
-																				necessitating termination of dialysis
-																				(Nursing)</p>
+																<a href="../CQI3k44" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">IPSG4 - Time out compliance in outside OT (Nursing)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6290,24 +6027,16 @@
 												</div>
 											</div>
 
-											<!-- KPI226 -->
 											<div class="row" ng-if="profilen['KPI226'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k44" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">IPSG4 - Time out compliance
-																				in
-																				outside OT (Nursing)</p>
+																<a href="../CQI3k45" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of cases where initial assessment done in physiotherapy within 24 hours (IPD) - Physical therapy and Rehabilitation Department - Medical records</p>
 																		</div>
 																	</div>
 																</a>
@@ -6317,28 +6046,16 @@
 												</div>
 											</div>
 
-											<!-- KPI227 -->
 											<div class="row" ng-if="profilen['KPI227'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k45" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of cases where
-																				initial assessment done in physiotherapy
-																				within 24 hours (IPD) - Physical therapy
-																				and
-																				Rehabilitation Department - Medical
-																				records
-																			</p>
+																<a href="../CQI3k46" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Radiology TAT orders for CT (Radiology)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6348,23 +6065,16 @@
 												</div>
 											</div>
 
-											<!-- KPI228 -->
 											<div class="row" ng-if="profilen['KPI228'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k46" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Radiology TAT orders for CT
-																				(Radiology)</p>
+																<a href="../CQI3k47" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Radiology TAT orders for MRI (Radiology)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6374,23 +6084,16 @@
 												</div>
 											</div>
 
-											<!-- KPI229 -->
 											<div class="row" ng-if="profilen['KPI229'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k47" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Radiology TAT orders for MRI
-																				(Radiology)</p>
+																<a href="../CQI3k48" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Radiology TAT orders for USG (Radiology)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6400,23 +6103,16 @@
 												</div>
 											</div>
 
-											<!-- KPI230 -->
 											<div class="row" ng-if="profilen['KPI230'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k48" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Radiology TAT orders for USG
-																				(Radiology)</p>
+																<a href="../CQI3k49" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Radiology TAT orders for X-ray (Radiology)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6426,24 +6122,16 @@
 												</div>
 											</div>
 
-											<!-- KPI231 -->
 											<div class="row" ng-if="profilen['KPI231'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k49" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Radiology TAT orders for
-																				X-ray
-																				(Radiology)</p>
+																<a href="../CQI3k50" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Site Marking Compliance Rate (OT)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6453,23 +6141,16 @@
 												</div>
 											</div>
 
-											<!-- KPI232 -->
 											<div class="row" ng-if="profilen['KPI232'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k50" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Site Marking Compliance Rate
-																				(OT)</p>
+																<a href="../CQI3k51" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Time Out Compliance Rate (OT)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6479,24 +6160,16 @@
 												</div>
 											</div>
 
-											<!-- KPI233 -->
 											<div class="row" ng-if="profilen['KPI233'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k51" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Time Out Compliance Rate
-																				(OT)
-																			</p>
+																<a href="../CQI3k52" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Sign Out Compliance Rate (OT)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6506,24 +6179,16 @@
 												</div>
 											</div>
 
-											<!-- KPI234 -->
 											<div class="row" ng-if="profilen['KPI234'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k52" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Sign Out Compliance Rate
-																				(OT)
-																			</p>
+																<a href="../CQI3k53" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Post transplant complication rate for Donor (Liver) - Transplant Unit</p>
 																		</div>
 																	</div>
 																</a>
@@ -6533,24 +6198,16 @@
 												</div>
 											</div>
 
-											<!-- KPI235 -->
 											<div class="row" ng-if="profilen['KPI235'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k53" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Post transplant complication
-																				rate for Donor (Liver) - Transplant Unit
-																			</p>
+																<a href="../CQI3k54" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Post transplant complication rate (Heart) - Transplant Unit</p>
 																		</div>
 																	</div>
 																</a>
@@ -6560,23 +6217,16 @@
 												</div>
 											</div>
 
-											<!-- KPI236 -->
 											<div class="row" ng-if="profilen['KPI236'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k54" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Post transplant complication
-																				rate (Heart) - Transplant Unit</p>
+																<a href="../CQI3k55" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of research activities approved by ethics committee (Research)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6586,24 +6236,16 @@
 												</div>
 											</div>
 
-											<!-- KPI237 -->
 											<div class="row" ng-if="profilen['KPI237'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k55" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of research
-																				activities approved by ethics committee
-																				(Research)</p>
+																<a href="../CQI3k56" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of patients withdrawing from the study (Research)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6613,24 +6255,16 @@
 												</div>
 											</div>
 
-											<!-- KPI238 -->
 											<div class="row" ng-if="profilen['KPI238'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k56" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of patients
-																				withdrawing from the study (Research)
-																			</p>
+																<a href="../CQI3k57" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of protocol violations/deviations reported (Research)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6640,25 +6274,17 @@
 												</div>
 											</div>
 
-											<!-- KPI239 -->
+
 											<div class="row" ng-if="profilen['KPI239'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
 															<div class="col-12">
-																<a href="../CQI3k57" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of protocol
-																				violations/deviations reported
-																				(Research)
-																			</p>
+																<a href="../CQI3k58" class="card" style="text-decoration: none;">
+																	<div class="card product-card" style="margin-bottom: 10px;">
+																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon" style="color: #5c5959;font-size: 36px;"></p>
+																			<p class="text">Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)</p>
 																		</div>
 																	</div>
 																</a>
@@ -6668,36 +6294,7 @@
 												</div>
 											</div>
 
-											<!-- KPI240 -->
 											<div class="row" ng-if="profilen['KPI240'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI3k58" class="card"
-																	style="text-decoration: none;">
-																	<div class="card product-card"
-																		style="margin-bottom: 10px;">
-																		<div class="card-body"
-																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color: #5c5959;font-size: 36px;">
-																			</p>
-																			<p class="text">Percentage of serious
-																				adverse
-																				events reported to the ethics committee
-																				within the defined timeframe (Research)
-																			</p>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- KPI241 -->
-											<div class="row" ng-if="profilen['KPI241'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6716,8 +6313,7 @@
 												</div>
 											</div>
 
-											<!-- KPI242 -->
-											<div class="row" ng-if="profilen['KPI242'] == true">
+											<div class="row" ng-if="profilen['KPI241'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6736,8 +6332,7 @@
 												</div>
 											</div>
 
-											<!-- KPI243 -->
-											<div class="row" ng-if="profilen['KPI243'] == true">
+											<div class="row" ng-if="profilen['KPI242'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6756,8 +6351,7 @@
 												</div>
 											</div>
 
-											<!-- KPI244 -->
-											<div class="row" ng-if="profilen['KPI244'] == true">
+											<div class="row" ng-if="profilen['KPI243'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6776,8 +6370,7 @@
 												</div>
 											</div>
 
-											<!-- KPI245 -->
-											<div class="row" ng-if="profilen['KPI245'] == true">
+											<div class="row" ng-if="profilen['KPI244'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6796,8 +6389,7 @@
 												</div>
 											</div>
 
-											<!-- KPI246 -->
-											<div class="row" ng-if="profilen['KPI246'] == true">
+											<div class="row" ng-if="profilen['KPI245'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6815,8 +6407,8 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI247 -->
-											<div class="row" ng-if="profilen['KPI247'] == true">
+
+											<div class="row" ng-if="profilen['KPI246'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6834,8 +6426,7 @@
 												</div>
 											</div>
 
-											<!-- KPI248 -->
-											<div class="row" ng-if="profilen['KPI248'] == true">
+											<div class="row" ng-if="profilen['KPI247'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6853,8 +6444,7 @@
 												</div>
 											</div>
 
-											<!-- KPI249 -->
-											<div class="row" ng-if="profilen['KPI249'] == true">
+											<div class="row" ng-if="profilen['KPI248'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6872,8 +6462,7 @@
 												</div>
 											</div>
 
-											<!-- KPI250 -->
-											<div class="row" ng-if="profilen['KPI250'] == true">
+											<div class="row" ng-if="profilen['KPI249'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6891,8 +6480,7 @@
 												</div>
 											</div>
 
-											<!-- KPI251 -->
-											<div class="row" ng-if="profilen['KPI251'] == true">
+											<div class="row" ng-if="profilen['KPI250'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6910,8 +6498,7 @@
 												</div>
 											</div>
 
-											<!-- KPI252 -->
-											<div class="row" ng-if="profilen['KPI252'] == true">
+											<div class="row" ng-if="profilen['KPI251'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6929,8 +6516,7 @@
 												</div>
 											</div>
 
-											<!-- KPI253 -->
-											<div class="row" ng-if="profilen['KPI253'] == true">
+											<div class="row" ng-if="profilen['KPI252'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6948,8 +6534,8 @@
 												</div>
 											</div>
 
-											<!-- KPI254 -->
-											<div class="row" ng-if="profilen['KPI254'] == true">
+
+											<div class="row" ng-if="profilen['KPI253'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6967,8 +6553,7 @@
 												</div>
 											</div>
 
-											<!-- KPI255 -->
-											<div class="row" ng-if="profilen['KPI255'] == true">
+											<div class="row" ng-if="profilen['KPI254'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6986,8 +6571,7 @@
 												</div>
 											</div>
 
-											<!-- KPI256 -->
-											<div class="row" ng-if="profilen['KPI256'] == true">
+											<div class="row" ng-if="profilen['KPI255'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7005,8 +6589,7 @@
 												</div>
 											</div>
 
-											<!-- KPI257 -->
-											<div class="row" ng-if="profilen['KPI257'] == true">
+											<div class="row" ng-if="profilen['KPI256'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7024,8 +6607,7 @@
 												</div>
 											</div>
 
-											<!-- KPI258 -->
-											<div class="row" ng-if="profilen['KPI258'] == true">
+											<div class="row" ng-if="profilen['KPI257'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7043,8 +6625,7 @@
 												</div>
 											</div>
 
-											<!-- KPI259 -->
-											<div class="row" ng-if="profilen['KPI259'] == true">
+											<div class="row" ng-if="profilen['KPI258'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7062,8 +6643,7 @@
 												</div>
 											</div>
 
-											<!-- KPI260 -->
-											<div class="row" ng-if="profilen['KPI260'] == true">
+											<div class="row" ng-if="profilen['KPI259'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7081,8 +6661,7 @@
 												</div>
 											</div>
 
-											<!-- KPI261 -->
-											<div class="row" ng-if="profilen['KPI261'] == true">
+											<div class="row" ng-if="profilen['KPI260'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7099,8 +6678,8 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI262 -->
-											<div class="row" ng-if="profilen['KPI262'] == true">
+
+											<div class="row" ng-if="profilen['KPI261'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7118,8 +6697,7 @@
 												</div>
 											</div>
 
-											<!-- KPI263 -->
-											<div class="row" ng-if="profilen['KPI263'] == true">
+											<div class="row" ng-if="profilen['KPI262'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7137,8 +6715,7 @@
 												</div>
 											</div>
 
-											<!-- KPI264 -->
-											<div class="row" ng-if="profilen['KPI264'] == true">
+											<div class="row" ng-if="profilen['KPI263'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7156,8 +6733,7 @@
 												</div>
 											</div>
 
-											<!-- KPI265 -->
-											<div class="row" ng-if="profilen['KPI265'] == true">
+											<div class="row" ng-if="profilen['KPI264'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7175,8 +6751,7 @@
 												</div>
 											</div>
 
-											<!-- KPI266 -->
-											<div class="row" ng-if="profilen['KPI266'] == true">
+											<div class="row" ng-if="profilen['KPI265'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7194,8 +6769,7 @@
 												</div>
 											</div>
 
-											<!-- KPI267 -->
-											<div class="row" ng-if="profilen['KPI267'] == true">
+											<div class="row" ng-if="profilen['KPI266'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7213,8 +6787,7 @@
 												</div>
 											</div>
 
-											<!-- KPI268 -->
-											<div class="row" ng-if="profilen['KPI268'] == true">
+											<div class="row" ng-if="profilen['KPI267'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7232,8 +6805,7 @@
 												</div>
 											</div>
 
-											<!-- KPI269 -->
-											<div class="row" ng-if="profilen['KPI269'] == true">
+											<div class="row" ng-if="profilen['KPI268'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7251,8 +6823,7 @@
 												</div>
 											</div>
 
-											<!-- KPI270 -->
-											<div class="row" ng-if="profilen['KPI270'] == true">
+											<div class="row" ng-if="profilen['KPI269'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7270,8 +6841,8 @@
 												</div>
 											</div>
 
-											<!-- KPI271 -->
-											<div class="row" ng-if="profilen['KPI271'] == true">
+
+											<div class="row" ng-if="profilen['KPI270'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7289,8 +6860,7 @@
 												</div>
 											</div>
 
-											<!-- KPI272 -->
-											<div class="row" ng-if="profilen['KPI272'] == true">
+											<div class="row" ng-if="profilen['KPI271'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7308,8 +6878,7 @@
 												</div>
 											</div>
 
-											<!-- KPI273 -->
-											<div class="row" ng-if="profilen['KPI273'] == true">
+											<div class="row" ng-if="profilen['KPI272'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7327,8 +6896,7 @@
 												</div>
 											</div>
 
-											<!-- KPI274 -->
-											<div class="row" ng-if="profilen['KPI274'] == true">
+											<div class="row" ng-if="profilen['KPI273'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7346,8 +6914,7 @@
 												</div>
 											</div>
 
-											<!-- KPI275 -->
-											<div class="row" ng-if="profilen['KPI275'] == true">
+											<div class="row" ng-if="profilen['KPI274'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7355,7 +6922,7 @@
 																<a href="../CQI4h29" class="card" style="text-decoration: none;">
 																	<div class="card product-card" style="margin-bottom: 10px;">
 																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">TAT for Lab tests (Lab Service)</p>
+																			<p class="text">TAT for Lab tests(Lab Service)</p>
 																		</div>
 																	</div>
 																</a>
@@ -7365,8 +6932,7 @@
 												</div>
 											</div>
 
-											<!-- KPI276 -->
-											<div class="row" ng-if="profilen['KPI276'] == true">
+											<div class="row" ng-if="profilen['KPI275'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7383,8 +6949,8 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI277 -->
-											<div class="row" ng-if="profilen['KPI277'] == true">
+
+											<div class="row" ng-if="profilen['KPI276'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7402,8 +6968,7 @@
 												</div>
 											</div>
 
-											<!-- KPI278 -->
-											<div class="row" ng-if="profilen['KPI278'] == true">
+											<div class="row" ng-if="profilen['KPI277'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7421,8 +6986,7 @@
 												</div>
 											</div>
 
-											<!-- KPI279 -->
-											<div class="row" ng-if="profilen['KPI279'] == true">
+											<div class="row" ng-if="profilen['KPI278'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7440,8 +7004,7 @@
 												</div>
 											</div>
 
-											<!-- KPI280 -->
-											<div class="row" ng-if="profilen['KPI280'] == true">
+											<div class="row" ng-if="profilen['KPI279'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7459,8 +7022,7 @@
 												</div>
 											</div>
 
-											<!-- KPI281 -->
-											<div class="row" ng-if="profilen['KPI281'] == true">
+											<div class="row" ng-if="profilen['KPI280'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7478,8 +7040,7 @@
 												</div>
 											</div>
 
-											<!-- KPI282 -->
-											<div class="row" ng-if="profilen['KPI282'] == true">
+											<div class="row" ng-if="profilen['KPI281'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7497,8 +7058,7 @@
 												</div>
 											</div>
 
-											<!-- KPI283 -->
-											<div class="row" ng-if="profilen['KPI283'] == true">
+											<div class="row" ng-if="profilen['KPI282'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7516,8 +7076,7 @@
 												</div>
 											</div>
 
-											<!-- KPI284 -->
-											<div class="row" ng-if="profilen['KPI284'] == true">
+											<div class="row" ng-if="profilen['KPI283'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7535,8 +7094,7 @@
 												</div>
 											</div>
 
-											<!-- KPI285 -->
-											<div class="row" ng-if="profilen['KPI285'] == true">
+											<div class="row" ng-if="profilen['KPI284'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7554,8 +7112,7 @@
 												</div>
 											</div>
 
-											<!-- KPI286 -->
-											<div class="row" ng-if="profilen['KPI286'] == true">
+											<div class="row" ng-if="profilen['KPI285'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7573,8 +7130,7 @@
 												</div>
 											</div>
 
-											<!-- KPI287 -->
-											<div class="row" ng-if="profilen['KPI287'] == true">
+											<div class="row" ng-if="profilen['KPI286'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7592,8 +7148,7 @@
 												</div>
 											</div>
 
-											<!-- KPI288 -->
-											<div class="row" ng-if="profilen['KPI288'] == true">
+											<div class="row" ng-if="profilen['KPI287'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7611,8 +7166,7 @@
 												</div>
 											</div>
 
-											<!-- KPI289 -->
-											<div class="row" ng-if="profilen['KPI289'] == true">
+											<div class="row" ng-if="profilen['KPI288'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7630,8 +7184,7 @@
 												</div>
 											</div>
 
-											<!-- KPI290 -->
-											<div class="row" ng-if="profilen['KPI290'] == true">
+											<div class="row" ng-if="profilen['KPI289'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7649,8 +7202,7 @@
 												</div>
 											</div>
 
-											<!-- KPI291 -->
-											<div class="row" ng-if="profilen['KPI291'] == true">
+											<div class="row" ng-if="profilen['KPI290'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7667,8 +7219,8 @@
 													</div>
 												</div>
 											</div>
-											<!-- KPI292 -->
-											<div class="row" ng-if="profilen['KPI292'] == true">
+
+											<div class="row" ng-if="profilen['KPI291'] == true">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -7684,1482 +7236,1457 @@
 														</div>
 													</div>
 												</div>
-											</div>
-
-											<!-- KPI293 -->
-											<div class="row" ng-if="profilen['KPI293'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h47" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Compliances in patient room cleaning and hygiene practices (House Keeping)</p>
+												<div class="row" ng-if="profilen['KPI292'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h47" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Compliances in patient room cleaning and hygiene practices (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI294 -->
-											<div class="row" ng-if="profilen['KPI294'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h48" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Patient's Complaints Rate (House Keeping)</p>
+												<div class="row" ng-if="profilen['KPI293'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h48" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Patient's Complaints Rate (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI295 -->
-											<div class="row" ng-if="profilen['KPI295'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h49" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of renewable energy used against total energy used (JCI8-GHI 3) - (Engineering & Maintenance)</p>
+												<div class="row" ng-if="profilen['KPI294'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h49" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of renewable energy used against total energy used (JCI8-GHI 3) - (Engineering & Maintenance)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI296 -->
-											<div class="row" ng-if="profilen['KPI296'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h50" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">To Monitor the energy consumption (JCI8-GHI 3) - (Engineering & Maintenance)</p>
+												<div class="row" ng-if="profilen['KPI295'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h50" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">To Monitor the energy consumption (JCI8-GHI 3) - (Engineering & Maintenance)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
+
 
-											<!-- KPI297 -->
-											<div class="row" ng-if="profilen['KPI297'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h51" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)</p>
+												<!-- KPI296 -->
+												<div class="row" ng-if="profilen['KPI296'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h51" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI298 -->
-											<div class="row" ng-if="profilen['KPI298'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h52" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of adherence to facility audit observation closure (Safety & Security)</p>
+												<!-- KPI297 -->
+												<div class="row" ng-if="profilen['KPI297'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h52" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of adherence to facility audit observation closure (Safety & Security)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI299 -->
-											<div class="row" ng-if="profilen['KPI299'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h53" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Standardised Mortality Ratio for ICU - 1 (Nursing - ICU 1)</p>
+												<!-- KPI298 -->
+												<div class="row" ng-if="profilen['KPI298'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h53" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Standardised Mortality Ratio for ICU - 1 (Nursing - ICU 1)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI300 -->
-											<div class="row" ng-if="profilen['KPI300'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h54" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Standardised Mortality Ratio for ICU - 2 (Nursing in ICU-2)</p>
+												<!-- KPI299 -->
+												<div class="row" ng-if="profilen['KPI299'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h54" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Standardised Mortality Ratio for ICU - 2 (Nursing in ICU-2)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI301 -->
-											<div class="row" ng-if="profilen['KPI301'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h55" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Standardised Mortality Ratio for PICU (Nursing in PICU)</p>
+												<!-- KPI300 -->
+												<div class="row" ng-if="profilen['KPI300'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h55" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Standardised Mortality Ratio for PICU (Nursing in PICU)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI302 -->
-											<div class="row" ng-if="profilen['KPI302'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h56" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Standardised Mortality Ratio for NICU (Nursing in NICU)</p>
+												<!-- KPI301 -->
+												<div class="row" ng-if="profilen['KPI301'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4h56" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Standardised Mortality Ratio for NICU (Nursing in NICU)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- KPI303 -->
-											<div class="row" ng-if="profilen['KPI303'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM1" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Cardiology)</p>
+
+												<!-- KPI302 -->
+												<div class="row" ng-if="profilen['KPI302'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM1" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Cardiology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI304 -->
-											<div class="row" ng-if="profilen['KPI304'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM2" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - CVTS)</p>
+												<!-- KPI303 -->
+												<div class="row" ng-if="profilen['KPI303'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM2" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - CVTS)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI305 -->
-											<div class="row" ng-if="profilen['KPI305'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM3" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Gastro surgery)</p>
+												<!-- KPI304 -->
+												<div class="row" ng-if="profilen['KPI304'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM3" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Gastro surgery)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI306 -->
-											<div class="row" ng-if="profilen['KPI306'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM4" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Gastroenterology)</p>
+												<!-- KPI305 -->
+												<div class="row" ng-if="profilen['KPI305'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM4" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Gastroenterology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI307 -->
-											<div class="row" ng-if="profilen['KPI307'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM5" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - General Medicine)</p>
+												<!-- KPI306 -->
+												<div class="row" ng-if="profilen['KPI306'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM5" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - General Medicine)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI308 -->
-											<div class="row" ng-if="profilen['KPI308'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM6" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - ICU)</p>
+												<!-- KPI307 -->
+												<div class="row" ng-if="profilen['KPI307'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM6" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - ICU)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI309 -->
-											<div class="row" ng-if="profilen['KPI309'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM7" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Nephrology)</p>
+												<!-- KPI308 -->
+												<div class="row" ng-if="profilen['KPI308'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM7" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Nephrology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI310 -->
-											<div class="row" ng-if="profilen['KPI310'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM8" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Neuro Intervention)</p>
+												<!-- KPI309 -->
+												<div class="row" ng-if="profilen['KPI309'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM8" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Neuro Intervention)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI311 -->
-											<div class="row" ng-if="profilen['KPI311'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM9" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Neurology)</p>
+												<!-- KPI310 -->
+												<div class="row" ng-if="profilen['KPI310'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM9" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Neurology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI312 -->
-											<div class="row" ng-if="profilen['KPI312'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM10" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Neurosurgery)</p>
+												<!-- KPI311 -->
+												<div class="row" ng-if="profilen['KPI311'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM10" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Neurosurgery)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI313 -->
-											<div class="row" ng-if="profilen['KPI313'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM11" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Ortho neuro integrated spine)</p>
+												<!-- KPI312 -->
+												<div class="row" ng-if="profilen['KPI312'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM11" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Ortho neuro integrated spine)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI314 -->
-											<div class="row" ng-if="profilen['KPI314'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM12" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Ortho THR)</p>
+												<!-- KPI313 -->
+												<div class="row" ng-if="profilen['KPI313'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM12" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Ortho THR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI315 -->
-											<div class="row" ng-if="profilen['KPI315'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM13" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Ortho TKR)</p>
+
+												<!-- KPI314 -->
+												<div class="row" ng-if="profilen['KPI314'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM13" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Ortho TKR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI316 -->
-											<div class="row" ng-if="profilen['KPI316'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM14" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Orthopaedics)</p>
+												<!-- KPI315 -->
+												<div class="row" ng-if="profilen['KPI315'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM14" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Orthopaedics)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI317 -->
-											<div class="row" ng-if="profilen['KPI317'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM15" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Pulmonology)</p>
+												<!-- KPI316 -->
+												<div class="row" ng-if="profilen['KPI316'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM15" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Pulmonology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- CLOTCM16 -->
-											<div class="row" ng-if="profilen['KPI318'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM16" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average length of stay (MRD - Urology)</p>
+
+												<!-- CLOTCM16 -->
+												<div class="row" ng-if="profilen['KPI317'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM16" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average length of stay (MRD - Urology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM17 -->
-											<div class="row" ng-if="profilen['KPI319'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM17" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU1)</p>
+												<!-- CLOTCM17 -->
+												<div class="row" ng-if="profilen['KPI318'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM17" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU1)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM18 -->
-											<div class="row" ng-if="profilen['KPI320'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM18" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU2)</p>
+												<!-- CLOTCM18 -->
+												<div class="row" ng-if="profilen['KPI319'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM18" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU2)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM19 -->
-											<div class="row" ng-if="profilen['KPI321'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM19" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU3)</p>
+												<!-- CLOTCM19 -->
+												<div class="row" ng-if="profilen['KPI320'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM19" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Catheter associated urinary tract infection rate (Infection Control - ICU3)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM20 -->
-											<div class="row" ng-if="profilen['KPI322'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM20" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU1)</p>
+												<!-- CLOTCM20 -->
+												<div class="row" ng-if="profilen['KPI321'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM20" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU1)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM21 -->
-											<div class="row" ng-if="profilen['KPI323'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM21" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU2)</p>
+												<!-- CLOTCM21 -->
+												<div class="row" ng-if="profilen['KPI322'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM21" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU2)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM22 -->
-											<div class="row" ng-if="profilen['KPI324'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM22" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU3)</p>
+												<!-- CLOTCM22 -->
+												<div class="row" ng-if="profilen['KPI323'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM22" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU3)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM23 -->
-											<div class="row" ng-if="profilen['KPI325'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM23" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Surgical Site Infection rate (Infection Control - Ortho THR)</p>
+												<!-- CLOTCM23 -->
+												<div class="row" ng-if="profilen['KPI324'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM23" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Surgical Site Infection rate (Infection Control - Ortho THR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM24 -->
-											<div class="row" ng-if="profilen['KPI326'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM24" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Surgical Site Infection rate (Infection Control - Ortho TKR)</p>
+												<!-- CLOTCM24 -->
+												<div class="row" ng-if="profilen['KPI325'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM24" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Surgical Site Infection rate (Infection Control - Ortho TKR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
+
 
-											<!-- CLOTCM25 -->
-											<div class="row" ng-if="profilen['KPI327'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM25" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU1)</p>
+												<!-- CLOTCM25 -->
+												<div class="row" ng-if="profilen['KPI326'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM25" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU1)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- CLOTCM26 -->
-											<div class="row" ng-if="profilen['KPI328'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM26" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU2)</p>
+
+												<!-- CLOTCM26 -->
+												<div class="row" ng-if="profilen['KPI327'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM26" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU2)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM27 -->
-											<div class="row" ng-if="profilen['KPI329'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM27" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU3)</p>
+												<!-- CLOTCM27 -->
+												<div class="row" ng-if="profilen['KPI328'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM27" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU3)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM28 -->
-											<div class="row" ng-if="profilen['KPI330'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM28" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho THR)</p>
+												<!-- CLOTCM28 -->
+												<div class="row" ng-if="profilen['KPI329'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM28" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho THR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM29 -->
-											<div class="row" ng-if="profilen['KPI331'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM29" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho TKR)</p>
+												<!-- CLOTCM29 -->
+												<div class="row" ng-if="profilen['KPI330'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM29" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho TKR)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- CLOTCM30 -->
-											<div class="row" ng-if="profilen['KPI332'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CLOTCM30" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Prevalence of transfusion reactions in Leuco depleted PRBC transfusions (Blood Center)</p>
+												<!-- CLOTCM30 -->
+												<div class="row" ng-if="profilen['KPI331'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CLOTCM30" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Prevalence of transfusion reactions in Leuco depleted PRBC transfusions (Blood Center)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- KPI333 -->
-											<div class="row" ng-if="profilen['KPI333'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i1" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Compliance to medical service requests - Heart, Lung transplantation (Medical Administration)</p>
+
+												<!-- KPI332 -->
+												<div class="row" ng-if="profilen['KPI332'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i1" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Compliance to medical service requests - Heart, Lung transplantation (Medical Administration)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI334 -->
-											<div class="row" ng-if="profilen['KPI334'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i2" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Compliance to medical service requests - Heart, Lung transplantation (Medical Adminstration)</p>
+												<!-- KPI333 -->
+												<div class="row" ng-if="profilen['KPI333'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i2" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Compliance to medical service requests - Heart, Lung transplantation (Medical Adminstration)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI335 -->
-											<div class="row" ng-if="profilen['KPI335'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i3" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">TAT compliance for radiology outsourced test (Radiology)</p>
+												<!-- KPI334 -->
+												<div class="row" ng-if="profilen['KPI334'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i3" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">TAT compliance for radiology outsourced test (Radiology)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI336 -->
-											<div class="row" ng-if="profilen['KPI336'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i4" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Food waste collection rate (House Keeping)</p>
+												<!-- KPI335 -->
+												<div class="row" ng-if="profilen['KPI335'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i4" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Food waste collection rate (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI337 -->
-											<div class="row" ng-if="profilen['KPI337'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i5" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Solid waste collection rate (House Keeping)</p>
+												<!-- KPI336 -->
+												<div class="row" ng-if="profilen['KPI336'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i5" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Solid waste collection rate (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI338 -->
-											<div class="row" ng-if="profilen['KPI338'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i6" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Outsourced GDA (General Duty Assistance) absenteeism rate (House Keeping)</p>
+												<!-- KPI337 -->
+												<div class="row" ng-if="profilen['KPI337'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i6" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Outsourced GDA (General Duty Assistance) absenteeism rate (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI339 -->
-											<div class="row" ng-if="profilen['KPI339'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i7" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Outsourced OPD Assistance attendance (Operation)</p>
+												<!-- KPI338 -->
+												<div class="row" ng-if="profilen['KPI338'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i7" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Outsourced OPD Assistance attendance (Operation)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI340 -->
-											<div class="row" ng-if="profilen['KPI340'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i8" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Outsourced UTIZ staff attendance (House Keeping)</p>
+												<!-- KPI339 -->
+												<div class="row" ng-if="profilen['KPI339'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i8" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Outsourced UTIZ staff attendance (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI341 -->
-											<div class="row" ng-if="profilen['KPI341'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i9" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Compliance to safe transportation of Oil waste (Engineering & Maintenance)</p>
+
+												<!-- KPI340 -->
+												<div class="row" ng-if="profilen['KPI340'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i9" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Compliance to safe transportation of Oil waste (Engineering & Maintenance)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI342 -->
-											<div class="row" ng-if="profilen['KPI342'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i10" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Number of laundry loads reduced by optimizing and sorting laundry (JCI8-GHI 3) (House Keeping)</p>
+												<!-- KPI341 -->
+												<div class="row" ng-if="profilen['KPI341'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i10" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Number of laundry loads reduced by optimizing and sorting laundry (JCI8-GHI 3) (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI343 -->
-											<div class="row" ng-if="profilen['KPI343'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i11" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of cleaning products used biodegradable (JCI8-GHI 3) (House Keeping)</p>
+												<!-- KPI342 -->
+												<div class="row" ng-if="profilen['KPI342'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i11" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of cleaning products used biodegradable (JCI8-GHI 3) (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI344 -->
-											<div class="row" ng-if="profilen['KPI344'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i12" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) (House Keeping)</p>
+												<!-- KPI343 -->
+												<div class="row" ng-if="profilen['KPI343'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i12" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI345 -->
-											<div class="row" ng-if="profilen['KPI345'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i13" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact - JCI8-GHI 3) (House Keeping)</p>
+												<!-- KPI344 -->
+												<div class="row" ng-if="profilen['KPI344'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i13" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact - JCI8-GHI 3) (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI346 -->
-											<div class="row" ng-if="profilen['KPI346'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i14" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Non-Recyclable Waste per Patient Day (Kg) - (JCI8-GHI 3) (House Keeping)</p>
+												<!-- KPI345 -->
+												<div class="row" ng-if="profilen['KPI345'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4i14" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Non-Recyclable Waste per Patient Day (Kg) - (JCI8-GHI 3) (House Keeping)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- KPI347 -->
-											<div class="row" ng-if="profilen['KPI347'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j1" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to Physician ≤10 min (Stroke Unit)</p>
+
+												<!-- KPI346 -->
+												<div class="row" ng-if="profilen['KPI346'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j1" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to Physician ≤10 min (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI348 -->
-											<div class="row" ng-if="profilen['KPI348'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j2" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to stroke team ≤15 min (Stroke Unit)</p>
+												<!-- KPI347 -->
+												<div class="row" ng-if="profilen['KPI347'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j2" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to stroke team ≤15 min (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI349 -->
-											<div class="row" ng-if="profilen['KPI349'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j3" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to CT/MRI initiation ≤20 min (Stroke Unit)</p>
+												<!-- KPI348 -->
+												<div class="row" ng-if="profilen['KPI348'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j3" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to CT/MRI initiation ≤20 min (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI350 -->
-											<div class="row" ng-if="profilen['KPI350'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j4" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to CT/MRI interpretation ≤30 min (Stroke Unit)</p>
+												<!-- KPI349 -->
+												<div class="row" ng-if="profilen['KPI349'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j4" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to CT/MRI interpretation ≤30 min (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI351 -->
-											<div class="row" ng-if="profilen['KPI351'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j5" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Order to lab results ≤30 min, if ordered (Stroke Unit)</p>
+												<!-- KPI350 -->
+												<div class="row" ng-if="profilen['KPI350'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j5" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Order to lab results ≤30 min, if ordered (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI352 -->
-											<div class="row" ng-if="profilen['KPI352'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j6" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to IV thrombolytic bolus (≥75% compliance) ≤60 min [Achieving Door to needle times within 60 min in ≥75% of acute ischemic stroke] (Stroke Unit)</p>
+
+												<!-- KPI351 -->
+												<div class="row" ng-if="profilen['KPI351'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j6" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to IV thrombolytic bolus (≥75% compliance) ≤60 min [Achieving Door to needle times within 60 min in ≥75% of acute ischemic stroke] (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI353 -->
-											<div class="row" ng-if="profilen['KPI353'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j7" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times within 45 min in ≥50% of acute ischemic stroke patients] (Stroke Unit)</p>
+												<!-- KPI352 -->
+												<div class="row" ng-if="profilen['KPI352'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j7" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times within 45 min in ≥50% of acute ischemic stroke patients] (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI354 -->
-											<div class="row" ng-if="profilen['KPI354'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j8" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Door to puncture time ≤90 min (Stroke Unit)</p>
+												<!-- KPI353 -->
+												<div class="row" ng-if="profilen['KPI353'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j8" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Door to puncture time ≤90 min (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI355 -->
-											<div class="row" ng-if="profilen['KPI355'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j9" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)</p>
+												<!-- KPI354 -->
+												<div class="row" ng-if="profilen['KPI354'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j9" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI356 -->
-											<div class="row" ng-if="profilen['KPI356'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j10" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)</p>
+												<!-- KPI355 -->
+												<div class="row" ng-if="profilen['KPI355'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j10" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-											<!-- KPI357 -->
-											<div class="row" ng-if="profilen['KPI357'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j11" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented (Stroke Unit)</p>
+
+												<!-- KPI356 -->
+												<div class="row" ng-if="profilen['KPI356'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j11" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI358 -->
-											<div class="row" ng-if="profilen['KPI358'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j12" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window (Stroke Unit)</p>
+												<!-- KPI357 -->
+												<div class="row" ng-if="profilen['KPI357'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j12" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI359 -->
-											<div class="row" ng-if="profilen['KPI359'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j13" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of patients treated for acute ischemic stroke with intravenous thrombolysis whose treatment is started within 60 minutes after arrival (Stroke Unit)</p>
+												<!-- KPI358 -->
+												<div class="row" ng-if="profilen['KPI358'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j13" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of patients treated for acute ischemic stroke with intravenous thrombolysis whose treatment is started within 60 minutes after arrival (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI360 -->
-											<div class="row" ng-if="profilen['KPI360'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j14" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well (In Minutes) (Stroke Unit)</p>
+												<!-- KPI359 -->
+												<div class="row" ng-if="profilen['KPI359'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j14" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well (In Minutes) (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI361 -->
-											<div class="row" ng-if="profilen['KPI361'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j15" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage within ≤36 hours after onset of IV or IA thrombolytic therapy, or mechanical endovascular reperfusion procedure (Stroke Unit)</p>
+
+												<!-- KPI360 -->
+												<div class="row" ng-if="profilen['KPI360'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j15" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage within ≤36 hours after onset of IV or IA thrombolytic therapy, or mechanical endovascular reperfusion procedure (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI362 -->
-											<div class="row" ng-if="profilen['KPI362'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j16" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of patients undergoing CEA, or carotid angioplasty or stenting, having stroke or death within 30 days of the procedure (Stroke Unit)</p>
+												<!-- KPI361 -->
+												<div class="row" ng-if="profilen['KPI361'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j16" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of patients undergoing CEA, or carotid angioplasty or stenting, having stroke or death within 30 days of the procedure (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI363 -->
-											<div class="row" ng-if="profilen['KPI363'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j17" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of patients undergoing intracranial angioplasty and/or stenting for atherosclerotic disease having stroke or death within 30 days of the procedure (Stroke Unit)</p>
+												<!-- KPI362 -->
+												<div class="row" ng-if="profilen['KPI362'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j17" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of patients undergoing intracranial angioplasty and/or stenting for atherosclerotic disease having stroke or death within 30 days of the procedure (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI364 -->
-											<div class="row" ng-if="profilen['KPI364'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j18" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)</p>
+												<!-- KPI363 -->
+												<div class="row" ng-if="profilen['KPI363'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j18" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI365 -->
-											<div class="row" ng-if="profilen['KPI365'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j19" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)</p>
+												<!-- KPI364 -->
+												<div class="row" ng-if="profilen['KPI364'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j19" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI366 -->
-											<div class="row" ng-if="profilen['KPI366'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j20" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of ischemic stroke patients with post-treatment reperfusion grade of TICI 2B or higher at the end of IA thrombolytic and/or mechanical endovascular reperfusion therapy (Stroke Unit)</p>
+												<!-- KPI365 -->
+												<div class="row" ng-if="profilen['KPI365'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j20" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of ischemic stroke patients with post-treatment reperfusion grade of TICI 2B or higher at the end of IA thrombolytic and/or mechanical endovascular reperfusion therapy (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI367 -->
-											<div class="row" ng-if="profilen['KPI367'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j21" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy within 120 minutes of hospital arrival achieving TICI 2B or higher (Stroke Unit)</p>
+												<!-- KPI366 -->
+												<div class="row" ng-if="profilen['KPI366'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j21" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy within 120 minutes of hospital arrival achieving TICI 2B or higher (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
 
-											<!-- KPI368 -->
-											<div class="row" ng-if="profilen['KPI368'] == true">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4j22" class="card" style="text-decoration: none;">
-																	<div class="card product-card" style="margin-bottom: 10px;">
-																		<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
-																			<p class="text">Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy and achieving TICI 2B or higher ≤60 minutes from skin puncture (Stroke Unit)</p>
+												<!-- KPI367 -->
+												<div class="row" ng-if="profilen['KPI367'] == true">
+													<div class="col-12">
+														<div class="card">
+															<div class="row">
+																<div class="col-12">
+																	<a href="../CQI4j22" class="card" style="text-decoration: none;">
+																		<div class="card product-card" style="margin-bottom: 10px;">
+																			<div class="card-body" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																				<p class="text">Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy and achieving TICI 2B or higher ≤60 minutes from skin puncture (Stroke Unit)</p>
+																			</div>
 																		</div>
-																	</div>
-																</a>
+																	</a>
+																</div>
 															</div>
 														</div>
 													</div>
 												</div>
-											</div>
-
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-										</div>
+											</div>
 
 
 
@@ -9211,8 +8738,6 @@
 </script>
 
 <style>
-
-   
 	.menu-dropdown {
 		position: absolute;
 		right: 10px;
@@ -9338,9 +8863,9 @@
 </style>
 
 <style>
-  [ng-cloak] {
-    display: none !important;
-  }
+	[ng-cloak] {
+		display: none !important;
+	}
 </style>
 
 
