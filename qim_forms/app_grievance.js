@@ -106,7 +106,7 @@ app.controller(
                     function (value) {
                       if (
                         value.guid.toLowerCase() ==
-                          $scope.loginvar.userid.toLowerCase() &&
+                        $scope.loginvar.userid.toLowerCase() &&
                         value.password == $scope.loginvar.password
                       ) {
                         value.userid = $scope.loginvar.userid;
@@ -159,6 +159,13 @@ app.controller(
         $scope.feedback.image = null;
       }
     };
+
+
+    // On init, check if URL hash asks for step2
+    if (window.location.hash === '#step2') {
+      $scope.step0 = false;
+      $scope.step2 = true;
+    }
 
     $scope.months = [
       "January",
@@ -239,12 +246,12 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/esr_mobile_number.php?mobile=" +
-            $scope.feedback.contactnumber +
-            "&email=" +
-            $scope.feedback.contactnumber +
-            "&pin=" +
-            $scope.feedback.pin,
+          "/esr_mobile_number.php?mobile=" +
+          $scope.feedback.contactnumber +
+          "&email=" +
+          $scope.feedback.contactnumber +
+          "&pin=" +
+          $scope.feedback.pin,
           { timeout: 20000 }
         )
         .then(
@@ -299,8 +306,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/mobile_patientfrom_admission.php?mobile=" +
-            $scope.feedback.patient_number,
+          "/mobile_patientfrom_admission.php?mobile=" +
+          $scope.feedback.patient_number,
           { timeout: 20000 }
         )
         .then(
@@ -439,10 +446,10 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/forgotten_pin.php?mobile=" +
-            $scope.feedback.pin_contactnumber +
-            "&email=" +
-            $scope.feedback.pin_contactnumber,
+          "/forgotten_pin.php?mobile=" +
+          $scope.feedback.pin_contactnumber +
+          "&email=" +
+          $scope.feedback.pin_contactnumber,
           { timeout: 20000 }
         )
         .then(
@@ -1028,10 +1035,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-            "/savepatientfeedback_grievance.php?patient_id=" +
-            $scope.feedback.patientid +
-            "&administratorId=" +
-            $rootScope.adminId,
+          "/savepatientfeedback_grievance.php?patient_id=" +
+          $scope.feedback.patientid +
+          "&administratorId=" +
+          $rootScope.adminId,
           $scope.feedback
         )
         .then(

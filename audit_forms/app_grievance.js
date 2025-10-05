@@ -131,6 +131,10 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
 
 
 
+  
+
+
+
   // Audit range on category
   $scope.hasAuditInRange = function (start, end) {
     for (let i = start; i <= end; i++) {
@@ -161,7 +165,13 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     return text.toLowerCase().indexOf($scope.searchAudit.toLowerCase()) !== -1;
   };
 
+  
 
+  // On init, check if URL hash asks for step2
+  if (window.location.hash === '#step2') {
+    $scope.step0 = false;
+    $scope.step2 = true;
+  }
 
 
 
@@ -252,7 +262,7 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
     $scope.aboutVisible = true;
   };
 
-  
+
 
   // Function to show the 'Web dashboard' content
   $scope.showDashboard = function () {
@@ -264,7 +274,7 @@ app.controller("PatientFeedbackCtrl", function ($rootScope, $scope, $http, $wind
 
   };
 
-  
+
 
   //To redirect to user activity page
   $scope.redirectToUserActivity = function (event) {
