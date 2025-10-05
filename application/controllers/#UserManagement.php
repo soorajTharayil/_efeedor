@@ -432,9 +432,6 @@ class UserManagement extends CI_Controller
 			$floor_ward_esr = null;
 			$floor_asset = null;
 
-			$speciality_op = null;
-
-
 			$department = null;
 			if (isset($_POST['feature'])) {
 				$NewPermission = $_POST['feature'];
@@ -451,13 +448,6 @@ class UserManagement extends CI_Controller
 			} elseif (isset($_POST['floor_esr'])) {
 				$floor_ward_esr = [];
 			}
-
-			if (isset($_POST['speciality_op'])) {
-				$speciality_op = $_POST['speciality_op'];
-			} elseif (isset($_POST['speciality'])) {
-				$speciality_op = [];
-			}
-
 			if (isset($_POST['department'])) {
 				$department = $_POST['department'];
 			} elseif (isset($_POST['departmentpermission'])) {
@@ -475,7 +465,7 @@ class UserManagement extends CI_Controller
 
 
 
-			$this->UserManagement_model->save_user_permission($NewPermission, $floor_ward, $floor_ward_esr, $floor_asset, $speciality_op, $department, $this->uri->segment(3));
+			$this->UserManagement_model->save_user_permission($NewPermission, $floor_ward, $floor_ward_esr, $floor_asset, $department, $this->uri->segment(3));
 		}
 		$data['title'] = 'USER PERMISSION ';
 		#-------------------------------#
