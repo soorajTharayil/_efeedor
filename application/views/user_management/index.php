@@ -101,6 +101,12 @@ $users = $this->db->select('user.*, roles.role_id')
                                                                 case 'INC-INCIDENTS-DASHBOARD':
                                                                     echo '<li><strong style="font-size: 13px;">INCIDENTS MODULE</strong></li>';
                                                                     break;
+                                                                       case 'QUALITY-DASHBOARD':
+                                                                    echo '<li><strong style="font-size: 13px;">QUALITY INDICATOR MANAGER</strong></li>';
+                                                                    break;   
+                                                                case 'AUDIT-DASHBOARD':
+                                                                    echo '<li><strong style="font-size: 13px;">QUALITY AUDIT MANAGER</strong></li>';
+                                                                    break;  
                                                                 case 'SG-STAFF-GRIEVANCES-DASHBOARD':
                                                                     echo '<li><strong style="font-size: 13px;">GRIEVANCES MODULE</strong></li>';
                                                                     break;
