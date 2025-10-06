@@ -6117,7 +6117,41 @@ if ($title == null) {
             ]
         });
     </script>
+   <script>
+        $('.userlisttable').DataTable({
+            // "ordering": true,
+            // "order": [[ 6, "asc" ]],
+            responsive: true,
+            "pageLength": 50,
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                /*  {extend: 'copy', className: 'btn-sm'},*/
+                {
+                    extend: 'csv',
+                    title: 'USER LIST',
+                    className: 'btn-sm',
+                    title: 'USER LIST',
+                },
+                {
+                    extend: 'excel',
+                    title: 'USER LIST',
+                    className: 'btn-sm',
+                    title: 'USER LIST',
+                },
+                // {
+                //     extend: 'pdf',
+                //     title: 'IP-Promoter List',
+                //     className: 'btn-sm',
+                //     title: 'IP-Promoter List',
+                // },
 
+            ]
+        });
+    </script>
     <script>
         $('.clinicaloutcome_brain_tumour').DataTable({
             "ordering": true,
