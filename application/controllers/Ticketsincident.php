@@ -422,105 +422,89 @@ class Ticketsincident extends CI_Controller
 				// curl_setopt($curl, CURLOPT_URL, base_url() . 'api/curl.php');
 				// curl_exec($curl);
 				redirect('incident/alltickets');
-			} elseif ($this->input->post('status') == 'Assigned') {
-				// Get the selected users from checkboxes
-				$assigned_user_ids = $this->input->post('users'); // Assuming 'users' is the name of your checkbox array
-				$assigned_user_ids_for_process_monitor = $this->input->post('users_for_process_monitor'); // Assuming 'users' is the name of your checkbox array
+			}elseif ($this->input->post('status') == 'Assigned') {
+				// Get selected users
+				$assigned_user_ids = $this->input->post('users');
+				$assigned_user_ids_for_process_monitor = $this->input->post('users_for_process_monitor');
 
-				if (!empty($assigned_user_ids)) {
-
-					// Prepare the comma-separated list of user IDs
-					$assigned_user_ids_str = implode(',', $assigned_user_ids);
-					$assigned_user_ids_str_for_process_monitor = implode(',', $assigned_user_ids_for_process_monitor);
-
-					// Fetch user names + designation from the user table based on the selected user IDs
-					$this->db->select('firstname, designation');
-					$this->db->from('user');
-					$this->db->where_in('user_id', $assigned_user_ids);
-					$query = $this->db->get();
-					$assigned_users = $query->result_array();
-
-					// Prepare names with designation in ()
-					$assigned_user_names = array_map(function ($user) {
-						return $user['firstname'] . ' (' . $user['designation'] . ')';
-					}, $assigned_users);
-
-					// Comma-separated list
-					$assigned_user_names_str = implode(', ', $assigned_user_names);
-
-					// Prepare action and message
-					$action = 'Incident Assigned to ' . $assigned_user_names_str;
-					$message = $this->session->userdata('fullname');
-
-
-					// Fetch user names + designation from the user table based on the selected user IDs
-					$this->db->select('firstname, designation');
-					$this->db->from('user');
-					$this->db->where_in('user_id', $assigned_user_ids_for_process_monitor);
-					$query = $this->db->get();
-					$assigned_users_for_process_monitor = $query->result_array();
-
-					// Build array of "Name (Designation)"
-					$assigned_user_names_for_process_monitor = array_map(function ($user) {
-						return $user['firstname'] . ' (' . $user['designation'] . ')';
-					}, $assigned_users_for_process_monitor);
-
-					// Prepare the comma-separated list
-					$assigned_user_names_str_for_process_monitor = implode(', ', $assigned_user_names_for_process_monitor);
-
-					// Prepare action and message
-					$action_for_process_monitor = $assigned_user_names_str_for_process_monitor;
-
-					// Update the ticket incident
-					$updatedepartment = array(
-
-						'status' => 'Assigned',
-						'assign_by' => $this->session->userdata('user_id'),
-						'assigned_message' => 0,
-						'describe_message' => -1,
-						'assigned_email' => 0,
-
-						'assign_to' => $assigned_user_ids_str, // Store comma-separated IDs in 'assign_to' field
-						'assign_for_process_monitor' => $assigned_user_ids_str_for_process_monitor // Store comma-separated IDs in 'assign_to' field
-					);
-
-					$this->db->where('id', $this->input->post('id'));
-					$this->db->update('tickets_incident', $updatedepartment);
-
-
-					$updatedepartment_feedback = array(
-						'whatsapp_assign_status' => 0
-					);
-
-					$this->db->where('id', $this->input->post('feedbackid'));
-					$this->db->update('bf_feedback_incident', $updatedepartment_feedback);
-
-					// Insert message into ticket message table
-					$dataset = array(
-						'reply' => $this->input->post('reply'), // Assuming 'assign_reply' is the input field for reply
-						'message' => $message,
-						'action' => $action,
-						'action_for_process_monitor' => $action_for_process_monitor,
-						'ticket_status' => 'Assigned',
-						'created_by' => $this->session->userdata('user_id'),
-						'ticketid' => $this->input->post('id')
-					);
-
-					$this->db->insert('ticket_incident_message', $dataset);
+				// Validation: both must be selected
+				if (empty($assigned_user_ids) || empty($assigned_user_ids_for_process_monitor)) {
+					echo "<script>alert('Please select both Team Leader and Process Monitors before assigning.');window.history.back();</script>";
+					exit; // stop further execution
 				}
 
+				// ---- continue with your existing assignment logic ---- //
+				$assigned_user_ids_str = implode(',', $assigned_user_ids);
+				$assigned_user_ids_str_for_process_monitor = implode(',', $assigned_user_ids_for_process_monitor);
+
+				// Fetch team leader details
+				$this->db->select('firstname, designation');
+				$this->db->from('user');
+				$this->db->where_in('user_id', $assigned_user_ids);
+				$query = $this->db->get();
+				$assigned_users = $query->result_array();
+
+				$assigned_user_names = array_map(function ($user) {
+					return $user['firstname'] . ' (' . $user['designation'] . ')';
+				}, $assigned_users);
+				$assigned_user_names_str = implode(', ', $assigned_user_names);
+
+				$action = 'Incident Assigned to ' . $assigned_user_names_str;
+				$message = $this->session->userdata('fullname');
+
+				// Fetch process monitor details
+				$this->db->select('firstname, designation');
+				$this->db->from('user');
+				$this->db->where_in('user_id', $assigned_user_ids_for_process_monitor);
+				$query = $this->db->get();
+				$assigned_users_for_process_monitor = $query->result_array();
+
+				$assigned_user_names_for_process_monitor = array_map(function ($user) {
+					return $user['firstname'] . ' (' . $user['designation'] . ')';
+				}, $assigned_users_for_process_monitor);
+				$assigned_user_names_str_for_process_monitor = implode(', ', $assigned_user_names_for_process_monitor);
+
+				$action_for_process_monitor = $assigned_user_names_str_for_process_monitor;
+
+				// Update tickets
+				$updatedepartment = array(
+					'status' => 'Assigned',
+					'assign_by' => $this->session->userdata('user_id'),
+					'assigned_message' => 0,
+					'describe_message' => -1,
+					'assigned_email' => 0,
+					'assign_to' => $assigned_user_ids_str,
+					'assign_for_process_monitor' => $assigned_user_ids_str_for_process_monitor
+				);
+				$this->db->where('id', $this->input->post('id'));
+				$this->db->update('tickets_incident', $updatedepartment);
+
+				$updatedepartment_feedback = array(
+					'whatsapp_assign_status' => 0
+				);
+				$this->db->where('id', $this->input->post('feedbackid'));
+				$this->db->update('bf_feedback_incident', $updatedepartment_feedback);
+
+				// Insert message
+				$dataset = array(
+					'reply' => $this->input->post('reply'),
+					'message' => $message,
+					'action' => $action,
+					'action_for_process_monitor' => $action_for_process_monitor,
+					'ticket_status' => 'Assigned',
+					'created_by' => $this->session->userdata('user_id'),
+					'ticketid' => $this->input->post('id')
+				);
+				$this->db->insert('ticket_incident_message', $dataset);
+
+				// Call API
 				$curl = curl_init();
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 				curl_setopt($curl, CURLOPT_URL, base_url() . 'api/curl.php');
 				curl_exec($curl);
 
-				// Redirect to open tickets page after assigning users
+				// Redirect only if both are selected
 				redirect('incident/opentickets');
-
-				$curl = curl_init();
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($curl, CURLOPT_URL, base_url() . 'api/curl.php');
-				curl_exec($curl);
 			} elseif ($this->input->post('status') == 'Re-assigned') {
 				// Get the selected users from checkboxes
 				$assigned_user_ids = $this->input->post('users_reassign'); // Assuming 'users' is the name of your checkbox array
