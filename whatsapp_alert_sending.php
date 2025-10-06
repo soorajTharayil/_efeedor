@@ -3,7 +3,7 @@ date_default_timezone_set("Asia/Kolkata");
 $servername = "localhost";
 $username = "phpmyadmin";
 $password = "Efeedor#@100";
-$dbname = "efeedor_qms";
+$dbname = "efeedor_qms_new";
 
 // Create a new PDO instance for database connection
 try {
