@@ -50,7 +50,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a5_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a6_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -60,14 +60,14 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Month-Year</th>
+								<th>Record Date & Time</th>
 								<th>KPI Recorded by</th>
 
-								<th>Number of case sheets where nutritional assessment is documented (in Nos.)</th>
+								<th>Number of case sheets where nursing plan is documented</th>
 
-								<th>Total number of in-patients for the month (in Nos.)</th>
+								<th>Total number of in-patients for the month</th>
 
-								<th>Percentage of Nutritional assessment is documented for inpatients</th>
+								<th>Percentage of Nursing care is documented for inpatients (MRD - Nursing)</th>
 
 								<th>View</th>
 
@@ -93,11 +93,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
-											<?php } ?>
-										</td>
+    <?php if (!empty($r->datetime)) { ?>
+        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+        <?php echo date('h:i A', strtotime($r->datetime)); ?>
+    <?php } else { ?>
+        -
+    <?php } ?>
+</td>
 
 
 										<td style="overflow: clip;">

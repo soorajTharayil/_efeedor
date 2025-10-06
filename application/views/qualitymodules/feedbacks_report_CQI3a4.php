@@ -60,14 +60,14 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Month-Year</th>
+								<th>Record Date & Time</th>
 								<th>KPI Recorded by</th>
 
 								<th>Number of case sheets where care plan is documented (in Nos.)</th>
 
 								<th>Total number of in-patients for the month (in Nos.)</th>
 
-								<th>Percentage of Care-plan is documented for inpatients</th>
+								<th>Percentage of Care-plan is documented for inpatients(MRD)</th>
 
 								<th>View</th>
 
@@ -93,11 +93,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
-											<?php } ?>
-										</td>
+    <?php if (!empty($r->datetime)) { ?>
+        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+        <?php echo date('h:i A', strtotime($r->datetime)); ?>
+    <?php } else { ?>
+        -
+    <?php } ?>
+</td>
 
 
 										<td style="overflow: clip;">

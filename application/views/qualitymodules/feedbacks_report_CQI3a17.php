@@ -60,7 +60,7 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Month-Year</th>
+								<th>Record Date & Time</th>
 								<th>KPI Recorded by</th>
 
 								<th>Number of new oncology patients who had treatment initiated following multidisciplinary meeting tumor board (in Nos.)</th>
@@ -93,11 +93,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
-											<?php } ?>
-										</td>
+    <?php if (!empty($r->datetime)) { ?>
+        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+        <?php echo date('h:i A', strtotime($r->datetime)); ?>
+    <?php } else { ?>
+        -
+    <?php } ?>
+</td>
 
 
 										<td style="overflow: clip;">

@@ -4459,7 +4459,7 @@ class Audit extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
 
-            $data['title'] = 'CSSD audit';
+            $data['title'] = 'CSSD Audit';
             $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_cssd_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
@@ -4529,7 +4529,7 @@ class Audit extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
 
-            $data['title'] = 'Infection control bundle audit';
+            $data['title'] = 'Infection Control Bundle Audit';
             $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_bundle_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
@@ -4669,7 +4669,7 @@ class Audit extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
 
-            $data['title'] = 'CoffeeShop PCI Audit';
+            $data['title'] = 'Coffee Shop PCI Audit';
             $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_coffee_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
@@ -4844,7 +4844,7 @@ class Audit extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
 
-            $data['title'] = 'IV cannula audit';
+            $data['title'] = 'IV Cannula Audit';
             $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_peripheralivline_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
@@ -4949,7 +4949,7 @@ class Audit extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
 
-            $data['title'] = 'Surface cleaning and disinfection effectiveness monitoring record';
+            $data['title'] = 'Surface cleaning & Disinfection effectiveness monitoring record';
             $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_surface_cleaning_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
@@ -20992,6 +20992,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_biomedical_waste()
     {
 
@@ -21082,8 +21084,6 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -21095,7 +21095,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Biomedical Waste Management Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21118,6 +21118,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_canteen_audit()
     {
 
@@ -21212,6 +21213,8 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -21224,7 +21227,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Canteen Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21247,6 +21250,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_cssd_audit()
     {
 
@@ -21304,8 +21308,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are Daily Process records of ETO and Steam Autoclave Machine Maintained?';
 
 
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -21352,7 +21354,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- CSSD Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21375,6 +21377,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_hand_hygiene()
     {
 
@@ -21484,8 +21487,6 @@ class Audit extends CI_Controller
 
 
 
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -21519,9 +21520,63 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+                $dataexport[$i]['bystander'] = ucfirst($data['bystander']) . "\r\nRemarks: " . $data['bystander_text'];
+                $dataexport[$i]['instruments'] = ucfirst($data['instruments']) . "\r\nRemarks: " . $data['instruments_text'];
+                $dataexport[$i]['sterile'] = ucfirst($data['sterile']) . "\r\nRemarks: " . $data['sterile_text'];
+                $dataexport[$i]['antibiotics'] = ucfirst($data['antibiotics']) . "\r\nRemarks: " . $data['antibiotics_text'];
+                $dataexport[$i]['surgical_site'] = ucfirst($data['surgical_site']) . "\r\nRemarks: " . $data['surgical_site_text'];
+                $dataexport[$i]['wound'] = ucfirst($data['wound']) . "\r\nRemarks: " . $data['wound_text'];
+                $dataexport[$i]['documented'] = ucfirst($data['documented']) . "\r\nRemarks: " . $data['documented_text'];
+                $dataexport[$i]['adequate_facilities'] = ucfirst($data['adequate_facilities']) . "\r\nRemarks: " . $data['adequate_facilities_text'];
+                $dataexport[$i]['sufficient_lighting'] = ucfirst($data['sufficient_lighting']) . "\r\nRemarks: " . $data['sufficient_lighting_text'];
+                $dataexport[$i]['storage_facility_for_food'] = ucfirst($data['storage_facility_for_food']) . "\r\nRemarks: " . $data['storage_facility_for_food_text'];
+                $dataexport[$i]['personnel_hygiene_facilities'] = ucfirst($data['personnel_hygiene_facilities']) . "\r\nRemarks: " . $data['personnel_hygiene_facilities_text'];
+                $dataexport[$i]['food_material_testing'] = ucfirst($data['food_material_testing']) . "\r\nRemarks: " . $data['food_material_testing_text'];
+                $dataexport[$i]['incoming_material'] = ucfirst($data['incoming_material']) . "\r\nRemarks: " . $data['incoming_material_text'];
+                $dataexport[$i]['raw_materials_inspection'] = ucfirst($data['raw_materials_inspection']) . "\r\nRemarks: " . $data['raw_materials_inspection_text'];
+                $dataexport[$i]['storage_of_materials'] = ucfirst($data['storage_of_materials']) . "\r\nRemarks: " . $data['storage_of_materials_text'];
+                $dataexport[$i]['raw_materials_cleaning'] = ucfirst($data['raw_materials_cleaning']) . "\r\nRemarks: " . $data['raw_materials_cleaning_text'];
+                $dataexport[$i]['equipment_sanitization'] = ucfirst($data['equipment_sanitization']) . "\r\nRemarks: " . $data['equipment_sanitization_text'];
+                $dataexport[$i]['frozen_food_thawing'] = ucfirst($data['frozen_food_thawing']) . "\r\nRemarks: " . $data['frozen_food_thawing_text'];
+                $dataexport[$i]['vegetarian_and_non_vegetarian'] = ucfirst($data['vegetarian_and_non_vegetarian']) . "\r\nRemarks: " . $data['vegetarian_and_non_vegetarian_text'];
+                $dataexport[$i]['cooked_food_cooling'] = ucfirst($data['cooked_food_cooling']) . "\r\nRemarks: " . $data['cooked_food_cooling_text'];
+                $dataexport[$i]['food_portioning'] = ucfirst($data['food_portioning']) . "\r\nRemarks: " . $data['food_portioning_text'];
 
+                $dataexport[$i]['ab1'] = ucfirst($data['ab1']) . "\r\nRemarks: " . $data['ab1_text'];
+                $dataexport[$i]['ab2'] = ucfirst($data['ab2']) . "\r\nRemarks: " . $data['ab2_text'];
+                $dataexport[$i]['ab3'] = ucfirst($data['ab3']) . "\r\nRemarks: " . $data['ab3_text'];
+                $dataexport[$i]['ab4'] = ucfirst($data['ab4']) . "\r\nRemarks: " . $data['ab4_text'];
+                $dataexport[$i]['ab5'] = ucfirst($data['ab5']) . "\r\nRemarks: " . $data['ab5_text'];
+                $dataexport[$i]['ab6'] = ucfirst($data['ab6']) . "\r\nRemarks: " . $data['ab6_text'];
+                $dataexport[$i]['ab7'] = ucfirst($data['ab7']) . "\r\nRemarks: " . $data['ab7_text'];
+                $dataexport[$i]['ab8'] = ucfirst($data['ab8']) . "\r\nRemarks: " . $data['ab8_text'];
+                $dataexport[$i]['ab9'] = ucfirst($data['ab9']) . "\r\nRemarks: " . $data['ab9_text'];
+                $dataexport[$i]['ab10'] = ucfirst($data['ab10']) . "\r\nRemarks: " . $data['ab10_text'];
+                $dataexport[$i]['ab11'] = ucfirst($data['ab11']) . "\r\nRemarks: " . $data['ab11_text'];
+                $dataexport[$i]['ab12'] = ucfirst($data['ab12']) . "\r\nRemarks: " . $data['ab12_text'];
 
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -21532,7 +21587,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Hand Hygiene Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21555,7 +21610,9 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
-        public function overall_infection_control_bundle_audit()
+
+
+    public function overall_infection_control_bundle_audit()
     {
 
         if ($this->session->userdata('isLogIn') == false)
@@ -21622,9 +21679,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'VAP/VAE Intermittent closed suctioning done';
 
 
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -21658,9 +21712,19 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
 
-
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -21671,7 +21735,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Infection Control Bundle Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21694,6 +21758,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_ot_audit()
     {
 
@@ -21765,10 +21831,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'OT Staff aware of infection control practices to be followed';
 
 
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -21802,7 +21864,21 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -21815,7 +21891,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Infection Control OT audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21838,6 +21914,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_linen_audit()
     {
 
@@ -21894,10 +21972,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Storage of clean linen adequate';
 
 
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -21931,9 +22005,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
-
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -21944,7 +22016,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Linen Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21967,6 +22039,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_ambulance_audit()
     {
 
@@ -22026,11 +22100,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Air exhaust is properly functioning';
 
 
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22065,6 +22134,8 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -22077,7 +22148,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Ambulance PCI Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22100,6 +22171,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_coffee_audit()
     {
 
@@ -22170,12 +22243,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Coffee shop is kept clean and dry with no stagnant water spills';
 
 
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22209,7 +22276,20 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -22222,7 +22302,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Coffee Shop PCI Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22245,6 +22325,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_laboratory_audit()
     {
 
@@ -22330,13 +22412,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Housekeeper is educated in cleaning techniques using separate cleaning supplies for regular cleaning, for bathrooms and for isolation rooms';
 
 
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22370,7 +22445,38 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['food'] = ucfirst($data['food']) . "\r\nRemarks: " . $data['food_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['needle'] = ucfirst($data['needle']) . "\r\nRemarks: " . $data['needle_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+                $dataexport[$i]['bystander'] = ucfirst($data['bystander']) . "\r\nRemarks: " . $data['bystander_text'];
+                $dataexport[$i]['instruments'] = ucfirst($data['instruments']) . "\r\nRemarks: " . $data['instruments_text'];
+                $dataexport[$i]['sterile'] = ucfirst($data['sterile']) . "\r\nRemarks: " . $data['sterile_text'];
+                $dataexport[$i]['antibiotics'] = ucfirst($data['antibiotics']) . "\r\nRemarks: " . $data['antibiotics_text'];
+                $dataexport[$i]['surgical_site'] = ucfirst($data['surgical_site']) . "\r\nRemarks: " . $data['surgical_site_text'];
+                $dataexport[$i]['wound'] = ucfirst($data['wound']) . "\r\nRemarks: " . $data['wound_text'];
+                $dataexport[$i]['documented'] = ucfirst($data['documented']) . "\r\nRemarks: " . $data['documented_text'];
+                $dataexport[$i]['adequate_facilities'] = ucfirst($data['adequate_facilities']) . "\r\nRemarks: " . $data['adequate_facilities_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -22383,7 +22489,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Laboratory PCI Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22406,6 +22512,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_mortuary_audit()
     {
 
@@ -22466,14 +22573,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'All PPE are readily available to use';
 
 
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22508,6 +22607,10 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -22520,7 +22623,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Mortuary PCI Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22543,6 +22646,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_radiology_audit()
     {
 
@@ -22628,14 +22732,6 @@ class Audit extends CI_Controller
 
 
 
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22669,8 +22765,34 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+                $dataexport[$i]['bystander'] = ucfirst($data['bystander']) . "\r\nRemarks: " . $data['bystander_text'];
+                $dataexport[$i]['instruments'] = ucfirst($data['instruments']) . "\r\nRemarks: " . $data['instruments_text'];
+                $dataexport[$i]['sterile'] = ucfirst($data['sterile']) . "\r\nRemarks: " . $data['sterile_text'];
+                $dataexport[$i]['antibiotics'] = ucfirst($data['antibiotics']) . "\r\nRemarks: " . $data['antibiotics_text'];
+                $dataexport[$i]['surgical_site'] = ucfirst($data['surgical_site']) . "\r\nRemarks: " . $data['surgical_site_text'];
+                $dataexport[$i]['wound'] = ucfirst($data['wound']) . "\r\nRemarks: " . $data['wound_text'];
+                $dataexport[$i]['documented'] = ucfirst($data['documented']) . "\r\nRemarks: " . $data['documented_text'];
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -22682,7 +22804,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Radiology PCI Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22705,6 +22827,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_ssi_survelliance_audit()
     {
 
@@ -22764,16 +22887,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Has the ward staff educated patient/relatives on the care of the surgical wound';
 
 
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22808,7 +22921,8 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -22820,7 +22934,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- SSI Surveillance checklist - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22843,6 +22957,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_peripheralivline_audit()
     {
 
@@ -22902,18 +23018,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are Removal of IV recorded';
             $header[$j++] = 'Are No. of attempts for Cannulation documented';
 
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -22948,7 +23052,9 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -22960,7 +23066,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- IV Cannula Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -22983,6 +23089,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_personalprotective_audit()
     {
 
@@ -23037,19 +23145,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are Technicians (X-ray, Echo) wearing appropriate PPE (Gloves, Mask, Apron) during the procedures';
             $header[$j++] = 'Are House-keeping staff wearing appropriate PPE while cleaning & removing BM (Hard Gloves, Mask, Cap, Shoes)';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23083,9 +23178,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
-
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -23096,7 +23189,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Personal Protective Equipment Usage audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23119,6 +23212,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_infection_control_safe_injection_audit()
     {
 
@@ -23198,19 +23293,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are sharps safety devices used where possible and activated immediately after use prior to disposal';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23246,6 +23328,29 @@ class Audit extends CI_Controller
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
 
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicatedr_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['risk_assessment'] = ucfirst($data['risk_assessment']) . "\r\nRemarks: " . $data['risk_assessment_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+                $dataexport[$i]['bystander'] = ucfirst($data['bystander']) . "\r\nRemarks: " . $data['bystander_text'];
+                $dataexport[$i]['instruments'] = ucfirst($data['instruments']) . "\r\nRemarks: " . $data['instruments_text'];
+                $dataexport[$i]['sterile'] = ucfirst($data['sterile']) . "\r\nRemarks: " . $data['sterile_text'];
+                $dataexport[$i]['antibiotics'] = ucfirst($data['antibiotics']) . "\r\nRemarks: " . $data['antibiotics_text'];
+                $dataexport[$i]['surgical_site'] = ucfirst($data['surgical_site']) . "\r\nRemarks: " . $data['surgical_site_text'];
+                $dataexport[$i]['wound'] = ucfirst($data['wound']) . "\r\nRemarks: " . $data['wound_text'];
+                $dataexport[$i]['documented'] = ucfirst($data['documented']) . "\r\nRemarks: " . $data['documented_text'];
+                $dataexport[$i]['adequate_facilities'] = ucfirst($data['adequate_facilities']) . "\r\nRemarks: " . $data['adequate_facilities_text'];
+                $dataexport[$i]['sufficient_lighting'] = ucfirst($data['sufficient_lighting']) . "\r\nRemarks: " . $data['sufficient_lighting_text'];
+                $dataexport[$i]['storage_facility_for_food'] = ucfirst($data['storage_facility_for_food']) . "\r\nRemarks: " . $data['storage_facility_for_food_text'];
+                $dataexport[$i]['personnel_hygiene_facilities'] = ucfirst($data['personnel_hygiene_facilities']) . "\r\nRemarks: " . $data['personnel_hygiene_facilities_text'];
+                $dataexport[$i]['food_material_testing'] = ucfirst($data['food_material_testing']) . "\r\nRemarks: " . $data['food_material_testing_text'];
+
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -23257,7 +23362,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Safe Injection and Infusion Audit - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23280,6 +23385,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_infection_control_surface_cleaning_audit()
     {
 
@@ -23331,21 +23437,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are Housekeeping Staff Aware about disinfectant solution Dilution';
             $header[$j++] = 'Is the Effectiveness of cleaning & disinfection adequate';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23375,13 +23466,7 @@ class Audit extends CI_Controller
 
                 $dataexport[$i]['identification_details'] = ucfirst($data['identification_details']) . "\r\nRemarks: " . $data['identification_details_text'];
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
-                $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
-                $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
-                $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
-                $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
-
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -23392,7 +23477,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Surface cleaning & Disinfection effectiveness monitoring record - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23415,6 +23500,8 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+
     public function overall_clinical_pathway_arthroscopic_audit()
     {
 
@@ -23505,21 +23592,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Follow up - Post Operative ROM achieved according to protocol at two week review';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23553,8 +23625,42 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+                $dataexport[$i]['bystander'] = ucfirst($data['bystander']) . "\r\nRemarks: " . $data['bystander_text'];
+                $dataexport[$i]['instruments'] = ucfirst($data['instruments']) . "\r\nRemarks: " . $data['instruments_text'];
+                $dataexport[$i]['sterile'] = ucfirst($data['sterile']) . "\r\nRemarks: " . $data['sterile_text'];
+                $dataexport[$i]['antibiotics'] = ucfirst($data['antibiotics']) . "\r\nRemarks: " . $data['antibiotics_text'];
+                $dataexport[$i]['surgical_site'] = ucfirst($data['surgical_site']) . "\r\nRemarks: " . $data['surgical_site_text'];
+                $dataexport[$i]['wound'] = ucfirst($data['wound']) . "\r\nRemarks: " . $data['wound_text'];
+                $dataexport[$i]['documented'] = ucfirst($data['documented']) . "\r\nRemarks: " . $data['documented_text'];
+                $dataexport[$i]['adequate_facilities'] = ucfirst($data['adequate_facilities']) . "\r\nRemarks: " . $data['adequate_facilities_text'];
+                $dataexport[$i]['sufficient_lighting'] = ucfirst($data['sufficient_lighting']) . "\r\nRemarks: " . $data['sufficient_lighting_text'];
+                $dataexport[$i]['storage_facility_for_food'] = ucfirst($data['storage_facility_for_food']) . "\r\nRemarks: " . $data['storage_facility_for_food_text'];
+                $dataexport[$i]['personnel_hygiene_facilities'] = ucfirst($data['personnel_hygiene_facilities']) . "\r\nRemarks: " . $data['personnel_hygiene_facilities_text'];
+                $dataexport[$i]['food_material_testing'] = ucfirst($data['food_material_testing']) . "\r\nRemarks: " . $data['food_material_testing_text'];
+                $dataexport[$i]['incoming_material'] = ucfirst($data['incoming_material']) . "\r\nRemarks: " . $data['incoming_material_text'];
 
+                
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -23566,7 +23672,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Arthroscopic ACL Reconstruction Surgery - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23643,22 +23749,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Whether all patients taken up for surgery with prior preoperative staging workup';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23690,10 +23780,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
-                $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
-                $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
+                
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -23705,7 +23792,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Breast Lump Consensus Guidelines - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23728,6 +23815,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_clinical_pathway_cardiac_arrest_audit()
     {
 
@@ -23786,23 +23874,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Whether EEG has been done on day 3';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23837,6 +23908,8 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -23849,7 +23922,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Cardiac Arrest - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -23872,6 +23945,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_clinical_pathway_donor_hepatectomy_audit()
     {
 
@@ -23931,25 +24005,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Was the patient discharged on POD 5';
             $header[$j++] = 'Was the follow up instructions given';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -23984,6 +24039,10 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -23996,7 +24055,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Donor Hepatectomy - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24019,6 +24078,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_clinical_pathway_febrile_seizure_audit()
     {
 
@@ -24074,26 +24134,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Whether 1st episode febrile seizure was advised admission';
             $header[$j++] = 'Whether the family was properly educated regarding febrile, when to seek emergency care and How to perform first aid';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24127,9 +24167,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
-
+                
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -24140,7 +24178,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Febrile Seizure - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24163,6 +24201,7 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
     public function overall_clinical_pathway_heart_transplant_audit()
     {
 
@@ -24225,26 +24264,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Was the patient get counselling from physiotherapist, Dietician, Social worker, Co-ordinator and Clinical Pharmacist';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24277,8 +24296,13 @@ class Audit extends CI_Controller
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
-                $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -24291,7 +24315,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Heart Transplant Recipient - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24375,27 +24399,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Was there a conversion from laparoscopic donor neprotomy to open donor neprectomy';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24430,6 +24433,11 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -24442,7 +24450,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Laparoscopic Donor Nephrectomy - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24526,28 +24534,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Post procedure management and education';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24583,6 +24569,11 @@ class Audit extends CI_Controller
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
 
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -24594,7 +24585,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- PICC LINE Insertion - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24675,29 +24666,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Door to puncture within 60 minutes of arrival';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24732,6 +24700,8 @@ class Audit extends CI_Controller
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -24744,7 +24714,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Stroke - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24821,30 +24791,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'Was any post procedure infection identified?';
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -24876,10 +24822,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
-                $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
-                $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-
+                
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -24891,7 +24834,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Urodynamics - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -24989,32 +24932,6 @@ class Audit extends CI_Controller
             $header[$j++] = 'In hospital mortality';
             $header[$j++] = 'Timi 3 flow?';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             $header[$j++] = 'Additional comments';
 
             $dataexport = [];
@@ -25048,7 +24965,27 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
+
+                $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
+                $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
+                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
+                $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
+                $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+                $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
+                $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
+                $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -25061,7 +24998,7 @@ class Audit extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- COPD Protocol Audit - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- STEMI-Primary PCI Clinical Pathway - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

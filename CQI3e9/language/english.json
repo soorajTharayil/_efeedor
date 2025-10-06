@@ -58,7 +58,7 @@
    "kpi_info": "All major patient safety events or errors related to surgical procedures(JCI8-QPS 3.04) for this month",
    "definition": "Definition:",
    "kpi_def": "A medication error is any preventable event that may cause or lead to inappropriate medication use or patient harm while the medication is in the control of the healthcare professional, patient or consumer.",
-   "formula_para1": "No of major patient safety events or errors related to surgical procedures reported in the month (Nominator)",   
+   "formula_para1": "No of major patient safety events or errors related to surgical procedures reported in the month (Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",

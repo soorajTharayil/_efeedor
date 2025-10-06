@@ -66,7 +66,7 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th>Recorded by</th> -->
-								<th>Month-Year</th>
+								<th>Record Date & Time</th>
 
 								<th style="white-space: nowrap;">KPI Recorded by</th>
 
@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-								// 	echo '<pre>';
-								// 	print_r($param);
-								// 	echo '</pre>';
-								// 	exit;
+									// 	echo '<pre>';
+									// 	print_r($param);
+									// 	echo '</pre>';
+									// 	exit;
 
 
 								?>
@@ -111,11 +111,14 @@
 											<?php echo $param->audit_by; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
+											<?php if (!empty($r->datetime)) { ?>
+												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+												<?php echo date('h:i A', strtotime($r->datetime)); ?>
+											<?php } else { ?>
+												-
 											<?php } ?>
 										</td>
+
 
 
 										<td style="overflow: clip;">

@@ -93,7 +93,15 @@
 									</tr>
 									<tr>
 										<td>Discharge Date & Time</td>
-										<td><?php echo date('Y-m-d H:i', strtotime($param['discharge_date_time'])); ?></td>
+										<td>
+											<?php
+											if (!empty($param['discharge_date_time']) && strtotime($param['discharge_date_time']) > 0 && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+												echo date('Y-m-d H:i', strtotime($param['discharge_date_time']));
+											} else {
+												echo '-';
+											}
+											?>
+										</td>
 									</tr>
 
 									<!-- Audit parameter -->

@@ -50,7 +50,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a4_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a14_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -60,7 +60,7 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Month-Year</th>
+								<th>Record Date & Time</th>
 								<th>KPI Recorded by</th>
 
 								<th>Number of sepsis patients who receive care as per the hour-1 sepsis bundle (in Nos.)</th>
@@ -93,11 +93,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if ($r->datetime) { ?>
-												<?php echo date('M-Y', strtotime($r->datetime)); ?>
-
-											<?php } ?>
-										</td>
+    <?php if (!empty($r->datetime)) { ?>
+        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+        <?php echo date('h:i A', strtotime($r->datetime)); ?>
+    <?php } else { ?>
+        -
+    <?php } ?>
+</td>
 
 
 										<td style="overflow: clip;">
