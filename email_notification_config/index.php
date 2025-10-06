@@ -17,8 +17,8 @@ require __DIR__ . '/vendor/autoload.php';
 date_default_timezone_set('Etc/UTC');
 
 // Fetch pending emails from your API
-$all_pending_email = file_get_contents('http://qms.pmhcp.com/pendingemail.php');
-$all_email_array   = json_decode($all_pending_email);
+$all_pending_email = file_get_contents('http://172.20.253.248/pendingemail.php');
+$all_email_array = json_decode($all_pending_email);
 
 if (!empty($all_email_array)) {
     foreach ($all_email_array as $EMAIL_CONTENT) {
@@ -29,12 +29,12 @@ if (!empty($all_email_array)) {
             $mail->isSMTP();
             $mail->SMTPDebug = 4; // set 2 for verbose debug output
             $mail->Debugoutput = 'html';
-            $mail->Host       = "mail.meitra.com";
-            $mail->Port       = 587;
-            $mail->SMTPAuth   = true;
+            $mail->Host = "mail.meitra.com";
+            $mail->Port = 587;
+            $mail->SMTPAuth = true;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Username   = "qmsalerts@meitra.com"; // your SMTP username
-            $mail->Password   = "Welcome@123"; // your SMTP password
+            $mail->Username = "qmsalerts@meitra.com"; // your SMTP username
+            $mail->Password = "Welcome@123"; // your SMTP password
 
             // Sender
             $mail->setFrom('qmsalerts@meitra.com', 'Efeedor QMS Alerts');
@@ -46,14 +46,14 @@ if (!empty($all_email_array)) {
 
             // Content
             $mail->Subject = $EMAIL_CONTENT->subject ?? '(No Subject)';
-            $mail->Body    = $EMAIL_CONTENT->message ?? '';
+            $mail->Body = $EMAIL_CONTENT->message ?? '';
             $mail->AltBody = strip_tags($EMAIL_CONTENT->message ?? '');
 
             // Extra options (ignore SSL errors if needed)
             $mail->SMTPOptions = [
                 'ssl' => [
-                    'verify_peer'       => false,
-                    'verify_peer_name'  => false,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
                     'allow_self_signed' => true,
                 ]
             ];

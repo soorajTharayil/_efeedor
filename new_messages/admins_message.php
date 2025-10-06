@@ -864,8 +864,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_admins_tracking_link_UniqueId();
-        $admins_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $admins_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
+        $admins_link = '172.20.253.248/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $admins_link_whatsapp = '172.20.253.248/tkts/?p=' . $uuid;    //pointing to public_html/tickets for sending whatsapp message
     }
 
     if ($department_rowcount > 1) {

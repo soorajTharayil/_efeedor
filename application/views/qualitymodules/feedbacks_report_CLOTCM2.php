@@ -24,14 +24,14 @@
 	$feedbacktaken = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_2PSQ3a, $desc_1PSQ3a);
 
 	if ($feedbacktaken) {
-	?>
+		?>
 
 		<div class="row">
 			<div class="col-lg-12 col-sm-12">
 				<div class="panel panel-default">
 					<div class="alert alert-dismissible" role="alert" style="margin-bottom: -12px;">
 						<span class="p-l-30 p-r-30" style="font-size: 15px">
-							<?php $text = "In the " .  $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
+							<?php $text = "In the " . $dates['pagetitle'] . "," . count($ip_feedbacks_count) . " KPI forms were submitted." ?>
 							<span class="typing-text"></span>
 
 						</span>
@@ -50,7 +50,9 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CLOTCM2_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+								title="Download detailed KPI report"
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CLOTCM2_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -60,7 +62,7 @@
 							<thead>
 								<th><?php echo lang_loader('ip', 'ip_slno'); ?></th>
 								<!-- <th><?php echo lang_loader('ip', 'ip_date'); ?></th> -->
-								<th>Record Date & Time</th>
+								<th>KPI Recorded on</th>
 								<th>KPI Recorded by</th>
 
 								<th>Total number of in-patient days for the month (in Nos.)</th>
@@ -79,33 +81,36 @@
 									$id = $r->id;
 
 									$param = json_decode($r->dataset);
-										// echo '<pre>';
-										// print_r($param);
-										// echo '</pre>';
-										// exit;
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
+							
 
+									?>
 
-								?>
-
-									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>" onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'" style="cursor: pointer;">
+									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>"
+										onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'"
+										style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
 										<!-- <td>
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-    <?php if (!empty($r->datetime)) { ?>
-        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
-        <?php echo date('h:i A', strtotime($r->datetime)); ?>
-    <?php } else { ?>
-        -
-    <?php } ?>
-</td>
+											<?php if (!empty($r->datetime)) { ?>
+												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+												<?php echo date('h:i A', strtotime($r->datetime)); ?>
+											<?php } else { ?>
+												-
+											<?php } ?>
+										</td>
 
 
 										<td style="overflow: clip;">
 											<?php echo $r->name; ?>
 											<?php if (allfeedbacks_page('feedback_id') == false) { ?>
-												(<a href="<?php echo  $patient_feedback_1PSQ3a . $id; ?>"><?php echo $r->patientid; ?></a>)
+												(<a
+													href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"><?php echo $r->patientid; ?></a>)
 											<?php } else { ?>
 												(<?php echo $r->patientid; ?>)
 											<?php } ?>
@@ -144,8 +149,7 @@
 										</td>
 
 										<td>
-											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
-												class="btn btn-info btn-sm">
+											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>" class="btn btn-info btn-sm">
 												View Details
 											</a>
 										</td>
@@ -165,7 +169,7 @@
 			</div>
 			<!-- /.row -->
 		</div>
-	<?php } else {   ?>
+	<?php } else { ?>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -183,7 +187,7 @@
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function () {
 		var typed = new Typed(".typing-text", {
 			strings: ["<?php echo $text; ?>"],
 			// delay: 10,
@@ -282,7 +286,7 @@
 		var xhr = new XMLHttpRequest();
 		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_CQI3a4"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
-		xhr.onreadystatechange = function() {
+		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var responseData = JSON.parse(xhr.responseText);
 				callback(responseData); // Call the callback function with the API data
@@ -292,11 +296,11 @@
 	}
 
 	function resposnseChart(apiData) {
-		var labels = apiData.map(function(item) {
+		var labels = apiData.map(function (item) {
 			return item.label_field;
 		});
 
-		var dataPoints = apiData.map(function(item) {
+		var dataPoints = apiData.map(function (item) {
 			return item.all_detail.count;
 		});
 		if (dataPoints.length == 1) {
@@ -327,7 +331,7 @@
 					pointBorderColor: "rgba(0, 128, 0, 1)",
 					pointHoverBackgroundColor: "rgba(255, 165, 0, 0.4)", // Orange color with reduced opacity
 					pointHoverBorderColor: "rgba(0, 128, 0, 1)",
-				}, ],
+				},],
 			},
 			options: {
 				responsive: true,
@@ -340,7 +344,7 @@
 					enabled: true,
 					mode: "single",
 					callbacks: {
-						label: function(tooltipItems, data) {
+						label: function (tooltipItems, data) {
 							var multistringText = [];
 							var dataIndex = tooltipItems.index; // Get the index of the hovered data point
 							var all_detail = apiData[dataIndex].all_detail;
@@ -360,7 +364,7 @@
 							display: false,
 							labelString: "Month",
 						},
-					}, ],
+					},],
 					yAxes: [{
 						display: true,
 						scaleLabel: {
@@ -374,14 +378,14 @@
 							// forces step size to be 5 units
 							stepSize: 30,
 						},
-					}, ],
+					},],
 				},
 			},
 		});
 	}
 
 	// Call the fetchDataFromAPI function and pass the callback function to create the chart
-	setTimeout(function() {
+	setTimeout(function () {
 		resposnsechart(resposnseChart);
 	}, 1000);
 	/*patient_feedback_analysis*/

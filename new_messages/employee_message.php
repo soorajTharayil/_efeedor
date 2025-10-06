@@ -255,8 +255,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'track/inc/' . $TID;
         $uuid = incident_employee_tracking_link_UniqueId();
-        $employee_tracking_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;     //pointing to public_html/ticket
-        $employee_tracking_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;     //pointing to public_html/ticket
+        $employee_tracking_link = '172.20.253.248/tkt/?p=' . $uuid;     //pointing to public_html/ticket
+        $employee_tracking_link_whatsapp = '172.20.253.248/tkts/?p=' . $uuid;     //pointing to public_html/ticket
 
         $message = "Thank you for reporting the incident at " . $hospitalname . ". Please follow the link to track the status of the incident:%0a" . $employee_tracking_link . "%0a -EFEEDOR";
         $message = str_replace('&', 'and', str_replace(' ', '%20', $message));
@@ -357,8 +357,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_assigned_departmenthead_tracking_link_UniqueId();
-        $department_head_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $employee_tracking_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;     //pointing to public_html/ticket
+        $department_head_link = '172.20.253.248/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $employee_tracking_link_whatsapp = '172.20.253.248/tkts/?p=' . $uuid;     //pointing to public_html/ticket
 
         $message = 'Alert: Incident reported by an employee at ' . $hospitalname . '. Follow the link for details: ' . $department_head_link . '.%0a-EFEEDOR';
         $message = str_replace('&', 'and', str_replace(' ', '%20', $message));
@@ -394,7 +394,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 // $conn_g->query($query);
             }
             $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'process_moniter_alert_incidentassigning', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix,$incident_type, $emp_ward, $emp_bed_no, $employee_tracking_link_whatsapp]) . "', 
+        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'process_moniter_alert_incidentassigning', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $priority, $risk_matrix, $incident_type, $emp_ward, $emp_bed_no, $employee_tracking_link_whatsapp]) . "', 
         'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
             // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -469,8 +469,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_reassigned_departmenthead_tracking_link_UniqueId();
-        $department_head_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $employee_tracking_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;     //pointing to public_html/ticket
+        $department_head_link = '172.20.253.248/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $employee_tracking_link_whatsapp = '172.20.253.248/tkts/?p=' . $uuid;     //pointing to public_html/ticket
 
         $message = 'Alert: Incident reported by an employee at ' . $hospitalname . '. Follow the link for details: ' . $department_head_link . '.%0a-EFEEDOR';
         $message = str_replace('&', 'and', str_replace(' ', '%20', $message));
@@ -584,8 +584,8 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $meta_data['config_set_domain'] = $config_set['DOMAIN'];
         $meta_data['link'] = $config_set['BASE_URL'] . 'incident/track/' . $TID;
         $uuid = incident_describe_departmenthead_tracking_link_UniqueId();
-        $department_head_link = 'qms.pmhcp.com/tkt/?p=' . $uuid;    //pointing to public_html/ticket
-        $employee_tracking_link_whatsapp = 'qms.pmhcp.com/tkts/?p=' . $uuid;     //pointing to public_html/ticket
+        $department_head_link = '172.20.253.248/tkt/?p=' . $uuid;    //pointing to public_html/ticket
+        $employee_tracking_link_whatsapp = '172.20.253.248/tkts/?p=' . $uuid;     //pointing to public_html/ticket
 
         $message = 'Alert: Incident reported by an employee at ' . $hospitalname . '. Follow the link for details: ' . $department_head_link . '.%0a-EFEEDOR';
         $message = str_replace('&', 'and', str_replace(' ', '%20', $message));
@@ -600,10 +600,10 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 // $query = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`,`template_id` ,`HID`,`meta`,`uuid`) VALUES ("department_message","' . $message . '",0,"' . $number . '","1607100000000288910","' . $HID . '","' . mysqli_real_escape_string($con, json_encode($meta_data)) . '","' . $uuid . '")';
                 // $conn_g->query($query);
             }
-              $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
         VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staff_alert_for_incidentdescription', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $employee_tracking_link_whatsapp]) . "', 
         'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-              // Execute the second query
+            // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
