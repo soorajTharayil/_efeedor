@@ -60,7 +60,7 @@ $users = $this->db->select('user.*, roles.role_id')
                                                 <td style="vertical-align: middle; font-size: 15px;">
                                                     <b><?php echo $user->lastname; ?></b><br>
                                                     <?php
-                                                    if ($user->lastname == 'ADMIN' || $user->lastname == 'SUPER ADMIN') {
+                                                    if ($user->lastname == 'ADMIN' || $user->lastname == 'SUPER ADMIN' || $user->lastname == 'QUALITY ADMIN/ MANAGER') {
 
                                                         // Fetch permissions for the user
                                                         $this->db->from('user_permissions as UP');
