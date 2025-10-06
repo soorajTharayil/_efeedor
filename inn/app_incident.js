@@ -501,7 +501,7 @@ app.controller(
                         //alert(value.guid);
                         if (
                           value.guid.toLowerCase() ==
-                            $scope.loginvar.userid.toLowerCase() &&
+                          $scope.loginvar.userid.toLowerCase() &&
                           value.password == $scope.loginvar.password
                         ) {
                           //	alert(2);
@@ -565,12 +565,12 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/esr_mobile_number.php?mobile=" +
-            $scope.feedback.contactnumber +
-            "&email=" +
-            $scope.feedback.contactnumber +
-            "&pin=" +
-            $scope.feedback.pin,
+          "/esr_mobile_number.php?mobile=" +
+          $scope.feedback.contactnumber +
+          "&email=" +
+          $scope.feedback.contactnumber +
+          "&pin=" +
+          $scope.feedback.pin,
           { timeout: 20000 }
         )
         .then(
@@ -626,8 +626,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/mobile_patientfrom_admission.php?mobile=" +
-            $scope.feedback.patient_number,
+          "/mobile_patientfrom_admission.php?mobile=" +
+          $scope.feedback.patient_number,
           { timeout: 20000 }
         )
         .then(
@@ -674,10 +674,10 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/forgotten_pin.php?mobile=" +
-            $scope.feedback.pin_contactnumber +
-            "&email=" +
-            $scope.feedback.pin_contactnumber,
+          "/forgotten_pin.php?mobile=" +
+          $scope.feedback.pin_contactnumber +
+          "&email=" +
+          $scope.feedback.pin_contactnumber,
           { timeout: 20000 }
         )
         .then(
@@ -1001,7 +1001,7 @@ app.controller(
       $scope.feedback.other = $scope.searchTextmain;
       $scope.activeStep("step4");
     };
-    
+
     $scope.selectQuestionCategory1 = function (Parameter, Question) {
       $scope.showBack = false;
       $scope.submit_as_concern = true;
@@ -1056,6 +1056,8 @@ app.controller(
       $scope.feedback.risk_matrix = "";
       $scope.feedback.priority = "";
       $scope.feedback.incident_type = "";
+      $scope.feedback.ward = "";
+      $scope.feedback.bedno = "";
       $scope.feedback.tag_name = "";
       $scope.feedback.tag_patientid = "";
       $scope.feedback.files_name = [];
@@ -1147,6 +1149,33 @@ app.controller(
         }, 100);
         return false;
       }
+
+      if (!$scope.feedback.ward || $scope.feedback.ward === "") {
+        alert("Please select floor");
+        // Scroll to ward field
+        setTimeout(function () {
+          document.getElementById("ward").scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+          document.getElementById("ward").focus();
+        }, 100);
+        return false;
+      }
+
+      if (!$scope.feedback.bedno || $scope.feedback.bedno === "") {
+        alert("Please select site");
+        // Scroll to bed number field
+        setTimeout(function () {
+          document.getElementById("bedno").scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+          document.getElementById("bedno").focus();
+        }, 100);
+        return false;
+      }
+
 
       if (
         $scope.feedback.tag_name == "" ||
@@ -1417,10 +1446,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-            "/savepatientfeedback_incident.php?patient_id=" +
-            $scope.feedback.patientid +
-            "&administratorId=" +
-            $rootScope.adminId,
+          "/savepatientfeedback_incident.php?patient_id=" +
+          $scope.feedback.patientid +
+          "&administratorId=" +
+          $rootScope.adminId,
           $scope.feedback
         )
         .then(
@@ -1469,8 +1498,8 @@ app.controller(
       if (type == "lang3") {
         $http.get("language/lang3.json").then(function (responsedata) {
           $rootScope.lang = responsedata.data;
-           $scope.type2 = "മലയാളം";
-        //   $scope.type2 = "தமிழ்";
+          $scope.type2 = "മലയാളം";
+          //   $scope.type2 = "தமிழ்";
         });
       }
       $scope.feedback.langsub = type;

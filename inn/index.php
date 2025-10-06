@@ -202,7 +202,7 @@
 		<a class="navbar-brand" href="#"><img style="    height: 36px;"></a>
 		<!-- dropdown for three language start -->
 		<button type="button" class="btn btn-success" style="margin: -30px;" ng-click="raiseAnonymousIncident()"
-			ng-show="AnonymousIncident_show == true">
+			ng-show="AnonymousIncident_show == true && step1 == true ">
 			<i class="fa fa-user-times" aria-hidden="true" style="margin-right:5px;"></i>
 			Report Anonymous Incident
 
@@ -325,7 +325,7 @@
 													</a>
 												</div>
 												<br>
-												<div style="color: red; text-align: center;" class="alert-error"
+												<div ng-cloak style="color: red; text-align: center;" class="alert-error"
 													ng-show="loginerror.length > 3">{{loginerror}}</div>
 
 												<input type="text" name="email" id="email" class="input-field"
@@ -929,7 +929,7 @@
 
 										<br />
 										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
-											<label for="comment"><b>{{lang.floor}}</b><br></label>
+											<label for="comment"><b>{{lang.floor}}</b><sup style="color:red">*</sup><br></label>
 
 											<div class="row">
 												<div class="col-xs-12 col-sm-12 col-md-12">
@@ -937,7 +937,7 @@
 														style="margin-left: 13px; margin-right:13px;">
 														<span class="has-float-label">
 															<select class="form-control" ng-model="feedback.ward"
-																ng-change="change_ward()"
+																ng-change="change_ward()" id="ward"
 																style=" width: 100%; margin-left: -16px; ">
 																<option value="" disabled>{{lang.select_floor}}</option>
 																<option ng-repeat="x in wardlist.ward"
@@ -955,14 +955,14 @@
 										<br />
 										<div class="form-group"
 											style="margin-left: 13px; margin-right:13px;margin-top:-15px;">
-											<label for="comment"><b>{{lang.location}}</b><br></label>
+											<label for="comment"><b>{{lang.location}}</b><sup style="color:red">*</sup><br></label>
 
 											<div class="row">
 												<div class="col-xs-12 col-sm-12 col-md-12">
 													<div class="form-group"
 														style="margin-left: 13px; margin-right:13px;">
 														<span class="has-float-label">
-															<select class="form-control" ng-model="feedback.bedno"
+															<select class="form-control" ng-model="feedback.bedno" id="bedno"
 																style=" width: 100%;  margin-left: -16px; ">
 																<option value="" disabled>{{lang.select_location}}
 																</option>
@@ -1499,6 +1499,12 @@
 		.calendar-icon-container {
 			display: block;
 		}
+	}
+</style>
+
+<style>
+	[ng-cloak] {
+		display: none !important;
 	}
 </style>
 

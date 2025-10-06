@@ -146,12 +146,12 @@
 
                         <table class="incticketsall table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <thead>
-                                <tr>
+                             <tr>
                                     <th style="width:5%"><?php echo lang_loader('inc', 'inc_slno'); ?></th>
                                     <th style="width:20%;">Incident details</th>
                                     <th style="width:15%;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
-                                    <th style="width:10%;"><?php echo lang_loader('inc', 'inc_reported_on'); ?></th>
-                                    <th style="width:20%;">Risk / Priority / Category</th>
+                                    <th style="width:13%;"><?php echo lang_loader('inc', 'inc_reported_on'); ?> / Occurred on</th>
+                                    <th style="width:17%;">Risk / Priority / Category</th>
                                     <th style="width:15%;">Assigned to</th>
                                     <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
                                         <th style="width:15%; text-align:center;"><?php echo lang_loader('inc', 'inc_status'); ?></th>
@@ -298,10 +298,21 @@
                                                 <?php } ?>
                                             </td>
 
-                                            <td style="overflow: clip; word-break: break-all;">
-                                                <?php echo date('g:i A', strtotime($department->created_on)); ?>
-                                                <br>
-                                                <?php echo date('d-m-y', strtotime($department->created_on)); ?>
+
+                                         <td style="overflow: clip; word-break: break-all;">
+                                                <strong>Reported on:</strong><br>
+                                                <?php echo date('g:i A', strtotime($department->created_on)); ?><br>
+                                                <?php echo date('d-m-Y', strtotime($department->created_on)); ?><br><br>
+
+                                                <strong>Occurred on:</strong><br>
+                                                <?php
+                                                if (!empty($department->incident_occured_in)) {
+                                                    echo date('g:i A', strtotime(str_replace([',', '-'], '', $department->incident_occured_in))) . "<br>";
+                                                    echo date('d-m-Y', strtotime(str_replace([',', '-'], '', $department->incident_occured_in)));
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?>
                                             </td>
                                             <?php
 $priority = !empty($department->feed->priority) 

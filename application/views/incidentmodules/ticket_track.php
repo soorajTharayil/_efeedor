@@ -689,7 +689,7 @@ foreach ($users as $user) {
 
         <div class="col-sm-12">
             <div class="form-group row">
-                <textarea class="form-control" rows="5" minlength="15" id="comment" name="process_monitor_note"
+                <textarea class="form-control" rows="5"  id="comment" name="process_monitor_note"
                     placeholder="Add notes" required></textarea>
                 <input type="hidden" name="reply_by" value="Admin">
                 <input type="hidden" name="status" value="Monitor">
@@ -737,7 +737,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
+                            <textarea class="form-control" rows="5"  id="comment" name="reply"
                                 placeholder="Reason to reopen incident" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Reopen">
@@ -777,7 +777,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
+                            <textarea class="form-control" rows="5"  id="comment" name="reply"
                                 placeholder="Reason for verifying incident" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Verified">
@@ -825,7 +825,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
+                            <textarea class="form-control" rows="5"  id="comment" name="reply"
                                 placeholder="Please enter your initial response message" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Addressed">
@@ -865,7 +865,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
+                            <textarea class="form-control" rows="5"  id="comment" name="reply"
                                 placeholder="Please enter your input here" required></textarea>
                             <input type="hidden" name="rejected_by" value="Admin">
                             <input type="hidden" name="status" value="Rejected">
@@ -953,7 +953,7 @@ foreach ($users as $user) {
                     <div id="rca_DEFAULT">
                         <div class="col-sm-12" style="margin-bottom:21px;">
                             <br>
-                            <textarea class="form-control" style="margin-left: -16px;" rows="5" minlength="15"
+                            <textarea class="form-control" style="margin-left: -16px;" rows="5" 
                                 id="rootcause" name="rootcause"
                                 placeholder="Enter the Root Cause Analysis (RCA) for incident closure:"
                                 required></textarea>
@@ -1081,7 +1081,7 @@ foreach ($users as $user) {
                 <!-- <div class="col-sm-12">
                     <div class="form-group " id="correctiveid">
                         <br>
-                        <textarea class="form-control" rows="5" minlength="15" id="corrective" name="corrective"
+                        <textarea class="form-control" rows="5"  id="corrective" name="corrective"
                             placeholder="Enter the Corrective Action for incident closure:" required></textarea>
 
                         <input type="hidden" name="status" value="Closed">
@@ -1090,7 +1090,7 @@ foreach ($users as $user) {
                 <div class="col-sm-12">
                     <div class="form-group " id="correctiveid">
 
-                        <textarea class="form-control" rows="5" minlength="15" id="preventive" name="preventive"
+                        <textarea class="form-control" rows="5"  id="preventive" name="preventive"
                             placeholder="Enter the Preventive Action for incident closure:" required></textarea>
 
                        
@@ -1166,7 +1166,7 @@ foreach ($users as $user) {
                     <label for="name"
                         class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_comment'); ?></label>
                     <div class="col-xs-9">
-                        <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
+                        <textarea class="form-control" rows="5"  id="comment" name="reply"
                             placeholder="Enter the reason for incident transfer" required></textarea>
                         <input type="hidden" name="reply_by" value="Admin">
                         <input type="hidden" name="reply_departmen"
@@ -1357,7 +1357,7 @@ foreach ($users as $user) {
 
                     <div class="col-sm-12" style="margin-bottom:10px;">
                         <br>
-                        <textarea class="form-control" rows="5" minlength="15" id="rootcause_describe"
+                        <textarea class="form-control" rows="5"  id="rootcause_describe"
                             name="rootcause_describe"
                             placeholder="Enter the Root Cause Analysis (RCA) for incident in brief:"
                             required></textarea>
@@ -1424,7 +1424,7 @@ foreach ($users as $user) {
                     <!-- <div id="rca_DEFAULT_describe">
                         <div class="col-sm-12" style="margin-bottom:30px;margin-left:-25px;">
                             <br>
-                            <textarea class="form-control" rows="5" minlength="15" id="rootcause_describe"
+                            <textarea class="form-control" rows="5"  id="rootcause_describe"
                                 name="rootcause_describe"
                                 placeholder="Enter the Root Cause Analysis (RCA) for incident closure:"
                                 required></textarea>
@@ -1575,7 +1575,7 @@ foreach ($users as $user) {
             <div class="col-sm-12">
                 <div class="form-group " id="correctiveid">
                     <br>
-                    <textarea class="form-control" rows="5" minlength="15" id="corrective_describe"
+                    <textarea class="form-control" rows="5"  id="corrective_describe"
                         name="corrective_describe" placeholder="Enter the Corrective Action" required></textarea>
 
                 </div>
@@ -1583,7 +1583,7 @@ foreach ($users as $user) {
             <div class="col-sm-12">
                 <div class="form-group " id="correctiveid">
 
-                    <textarea class="form-control" rows="5" minlength="15" id="preventive_describe"
+                    <textarea class="form-control" rows="5"  id="preventive_describe"
                         name="preventive_describe" placeholder="Enter the Preventive Action" required></textarea>
 
                     <input type="hidden" name="status" value="Described">
