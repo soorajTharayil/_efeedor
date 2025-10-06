@@ -51,8 +51,8 @@
 
    "submit":"Submit",
    "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "happythankyoumessage":"Your KPI inputs have been successfully recorded.",
+   "unhappythankyoumessage":"Your KPI inputs have been successfully recorded.",
    
    "kpi_info": "TAT for radiology STAT orders(Radiology -USG) for the month of ",
    "definition": "Definition : ",

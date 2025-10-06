@@ -50,22 +50,92 @@
 
   <!-- top navbar start -->
 
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
-    <!-- logo of efeedor -->
+    <!-- Section for Buttons and Language Button -->
+    <div class="ml-auto d-flex justify-content-between align-items-center w-100">
+      <div class="left-buttons d-flex">
 
-    <a class="navbar-brand" href="#"><img style="    height: 36px;"></a>
+        <!-- Home button -->
+        <!-- <a ng-href="/qim_forms?user_id={{ user_id }}"
+          class="btn btn-secondary mr-3"
+          style="width: 100px; height: 32px; font-size: 14px; font-weight: bold; display: flex; align-items: center; justify-content: center;">
+          <i class="fa fa-home" style="margin-right: 6px;"></i> Home
+        </a> -->
 
-    <!-- dropdown for three language start -->
 
-    <!-- Add a button to trigger the modal -->
-    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#languageModal" style="margin: 4px; float:right;">
-    <!--  {{type2}}-->
-    <!--  <i class="fa fa-language" aria-hidden="true"></i>-->
-    <!--</button>-->
-    <!-- dropdown for three language end -->
+        <!-- Dashboard button with icon -->
+        <a ng-href="/login/?user_id={{ user_id }}"
+          class="btn btn-light dashboard-btn"
+          style="width: 120px; height: 32px; font-size: 14px; font-weight: bold; text-align: left; display: flex; align-items: center; padding-left: 10px;">
+          <i class="fa fa-tachometer" style="margin-right: 6px;"></i> Dashboard
+        </a>
 
+      </div>
+
+
+      <!-- Right Side: Language Button -->
+      <div class="right-buttons d-flex align-items-center">
+        <!-- <button type="button" class="btn btn-dark language-btn" data-toggle="modal" data-target="#languageModal" style="margin: 4px;">
+          {{type2}}
+          <i class="fa fa-language" aria-hidden="true"></i>
+        </button> -->
+        <button class="btn btn-dark menu-toggle" ng-click="menuVisible = !menuVisible" style="margin: 4px;">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
   </nav>
+
+  <div class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
+    <div class="user-info" style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
+      <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
+      <div>
+        <div style="font-weight: bold; font-size: 14px;">{{ loginname }}</div>
+        <div style="font-size: 12px; font-weight: bold;">{{ loginemail }}</div>
+      </div>
+    </div>
+    <ul style="margin-left: -5px;">
+      <li><a href="#" ng-click="showAllContent()"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#" ng-click="showDashboard()"><i class="fa fa-globe"></i> Web Dashboard Access</a></li>
+      <li><a href="/login/?user_id={{ user_id }}&redirectType=userActivity"><i class="fa fa-user"></i> User Activity</a></li>
+      <li><a href="#" ng-click="showAbout()"><i class="fa fa-info-circle"></i> About</a></li>
+      <li><a href="/qim_forms"><i class="fa fa-sign-out"></i> Logout</a></li>
+    </ul>
+  </div>
+
+  <!-- About Content Section -->
+  <div ng-show="aboutVisible" class="about-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>About</h2>
+    <!-- <img src="/Efeedor_logo.png" alt="Efeedor Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
+    <p><strong>Version:</strong> 8.01.10</p>
+    <p>
+      The Efeedor Quality Management Software (QMS) is an extension of Efeedor's Healthcare Experience Management Suite, developed by ITATONE POINT CONSULTING LLP, a global health-tech company specializing in enterprise applications for hospitals.
+    </p>
+    <p>
+      Designed for healthcare staff on the go, the QMS application simplifies essential tasks such as reporting incidents, performing audits, and recording monthly KPIs, while enabling healthcare institutions to efficiently analyze quality parameters to enhance healthcare quality and patient safety.
+    </p>
+    <p>
+      Efeedor’s software tools are widely recognized for their simple, intuitive interface and exceptional user experience, making them the preferred choice for modern hospitals.
+    </p>
+    <p>For more information, visit: <a href="https://www.efeedor.com" target="_blank">www.efeedor.com</a></p>
+    <p>For support, contact: <a href="mailto:support@efeedor.com">support@efeedor.com</a></p>
+  </div>
+
+
+  <!-- Web Dashboard section -->
+  <div ng-show="dashboardVisible" class="dashboard-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h2>Explore Web Dashboard</h2>
+    <p>
+      To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin role, you will have access to view reports and analytics based on the permissions granted. If you are a department head or in charge of a department, you will be able to access the dashboard to view reports and analytics specific to your department and take action on the tickets assigned to you or your team.
+    </p>
+
+    <!-- Button for APK Download -->
+    <a href="/login/?userid={{ adminId }}"
+      style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
+      <i class="fa fa-globe"></i> Click here to open the link
+    </a>
+  </div>
 
   <!-- top navbar end -->
 
@@ -172,7 +242,7 @@
   </div>
   <!-- ip  -->
 
-  <div class="container-fluid" id="grad1">
+  <div class="container-fluid" id="grad1" ng-show="!aboutVisible && !dashboardVisible">
     <div class="row justify-content-center mt-0">
 
       <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-2 mb-2">
@@ -254,18 +324,44 @@
                     <!--</div>-->
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: -20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.corrective_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.corrective_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea2" ng-model="feedback.correctiveAction" rows="5"></textarea>
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
-                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}</b></p>
+                      <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
+                    </div>
+
+                    <!-- Code for Upload files -->
+                    <div style="margin-top: 20px; text-align: left; margin-left:17px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:16px;">
+                        Upload Files
+                      </label>
+
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple
+                        onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index"
+                            style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank"
+                              style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;"
+                              ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
 
                   </div>
@@ -289,39 +385,6 @@
 
                   <div class="form-card">
 
-
-
-
-
-                    <!-- happy customer code start		 -->
-
-                    <!-- <div class="row justify-content-center">
-
-                      <div class="col-12 text-center">
-
-                        <br>
-
-                        <h2 class="fs-title text-center" style="font-weight: 300;">{{lang.thankyou}}</h2> <br>
-
-                        <img src="dist/happy100x100.png"> <br>
-
-                        <p style="text-align:center; margin-top: 15px; font-weight: 300;" class="lead">
-
-                          {{lang.happythankyoumessage}}
-                        </p><br>
-
-                        <p style="text-align:center;"><a href="{{setting_data.google_review_link}}" target="_blank"><img style="width:268px" src="dist/ggg.jpg"></a></p>
-
-                      </div>
-
-                    </div> -->
-
-                    <!-- happy customer code end		 -->
-
-
-
-                    <!-- unhappy customer code start		 -->
-
                     <div class="row justify-content-center">
 
                       <div class="col-12 text-center">
@@ -336,6 +399,27 @@
 
                           {{lang.unhappythankyoumessage}}
                         </p>
+
+
+                        <style>
+                          @media (max-width: 768px) {
+                            .thankyou-buttons .btn {
+                              display: block;
+                              width: 92%;
+                              margin-left: 10px !important;
+                              margin-top: 10px !important;
+                            }
+                          }
+                        </style>
+
+                        <div class="thankyou-buttons" style="margin-top: 40px;">
+                          <a ng-href="/qim_forms?user_id={{user_id}}"
+                            class="btn btn-secondary"
+                            style="margin-left: 15px;">
+                            📊 KPI Home Page
+                          </a>
+                        </div>
+
 
                       </div>
 
@@ -403,19 +487,6 @@
 <!-- css code start  -->
 
 <style>
-  #formula_para1,
-  #formula_para2 {
-    width: 50% !important;
-  }
-
-  @media (max-width: 768px) {
-
-    #formula_para1,
-    #formula_para2 {
-      width: 73% !important;
-    }
-  }
-
   .transparent-placeholder input::placeholder {
     opacity: 0.5;
   }
@@ -452,6 +523,7 @@
   .btn-primary {
     transition: background-color 0.3s, box-shadow 0.3s;
   }
+
 
 
   .dropdown-menu {
@@ -497,6 +569,8 @@
     margin-top: -16px;
 
     text-transform: capitalize;
+
+
   }
 
 
@@ -556,6 +630,256 @@
 
     font-size: 15px;
 
+  }
+</style>
+
+<style>
+  .menu-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-dropdown ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-dropdown ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .menu-dropdown ul li a i {
+    margin-right: 10px;
+  }
+
+  .menu-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+
+  .menu-toggle {
+    cursor: pointer;
+  }
+
+  [ng-show="menuVisible"] {
+    display: block !important;
+  }
+
+  .menu-dropdown ul li a:hover {
+    color: #555;
+  }
+
+
+  .input-field {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Add border */
+    border-radius: 25px;
+    /* Add border radius */
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    /* Add box shadow */
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-input {
+    width: calc(100% - 40px);
+    /* Adjust width to accommodate the show/hide button */
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 39%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
+
+    .navbar .navbar-brand {
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    .navbar .ml-auto {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .navbar .left-buttons a,
+    .navbar .right-buttons button {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .navbar .right-buttons {
+      margin-left: -5px;
+      /* Adjust the position of the language button */
+    }
+
+    .navbar .btn {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<style>
+  .menu-dropdown {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+  }
+
+  .menu-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-dropdown ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-dropdown ul li a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .menu-dropdown ul li a i {
+    margin-right: 10px;
+  }
+
+  .menu-dropdown ul li:last-child {
+    border-bottom: none;
+  }
+
+  .menu-toggle {
+    cursor: pointer;
+  }
+
+  [ng-show="menuVisible"] {
+    display: block !important;
+  }
+
+  .menu-dropdown ul li a:hover {
+    color: #555;
+  }
+
+
+  .input-field {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    /* Add border */
+    border-radius: 25px;
+    /* Add border radius */
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    /* Add box shadow */
+  }
+
+  .password-container {
+    position: relative;
+  }
+
+  .password-input {
+    width: calc(100% - 40px);
+    /* Adjust width to accommodate the show/hide button */
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 39%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+
+  @media (max-width: 768px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
+
+    .navbar .navbar-brand {
+      flex-shrink: 0;
+      margin-right: 10px;
+    }
+
+    .navbar .ml-auto {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .navbar .left-buttons a,
+    .navbar .right-buttons button {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .navbar .right-buttons {
+      margin-left: -5px;
+      /* Adjust the position of the language button */
+    }
+
+    .navbar .btn {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
   }
 </style>
 

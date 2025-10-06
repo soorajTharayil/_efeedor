@@ -51,8 +51,8 @@
 
    "submit":"Submit",
    "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "happythankyoumessage":"Your KPI inputs have been successfully recorded.",
+   "unhappythankyoumessage":"Your KPI inputs have been successfully recorded.",
    
    
    "kpi_info": "CT Ratio (cross match to transfusion)(JCI8-AOP 4.00)-(Blood Center)for this month",

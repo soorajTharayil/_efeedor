@@ -51,8 +51,8 @@
 
    "submit":"Submit",
    "thankyou":"Thank you!",
-   "happythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
-   "unhappythankyoumessage":"Thank you for taking your time out to provide your valuable inputs.",
+   "happythankyoumessage":"Your KPI inputs have been successfully recorded.",
+   "unhappythankyoumessage":"Your KPI inputs have been successfully recorded.",
    
    
    "kpi_info": "Patient safety events or errors related to pathology samples, such as biopsy or other tissue specimens(JCI8-QPS 3.04)-(Lab Services) for the month",
