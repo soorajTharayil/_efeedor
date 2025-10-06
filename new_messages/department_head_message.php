@@ -232,9 +232,9 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
                 if (!empty($users_whatsapp)) {
                     $conn_g->query($query1);
 
-                    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-                 VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_inpatientcomplaints', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
-                 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+                //     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+                //  VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_inpatientcomplaints', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
+                //  'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
                     if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -316,10 +316,10 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
 
             $conn_g->query($query);
 
-            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-            VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'inpatientcomplaint_reopen_reques_to_staffsmsalert', '" . json_encode([$hospitalname, $emp_name, $patientid, $emp_ward, $emp_bed_no, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
-            'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-            // Execute the second query
+            // $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'inpatientcomplaint_reopen_reques_to_staffsmsalert', '" . json_encode([$hospitalname, $emp_name, $patientid, $emp_ward, $emp_bed_no, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
+            // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            // // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
@@ -336,10 +336,10 @@ while ($feedback_int_object = mysqli_fetch_object($feedback_int_result)) {
 
             $conn_g->query($query);
 
-            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-            VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'inpatientcomplaint_reopen_reques_to_staffsmsalert', '" . json_encode([$hospitalname, $emp_name, $patientid, $emp_ward, $emp_bed_no, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
-            'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-            // Execute the second query
+            // $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'inpatientcomplaint_reopen_reques_to_staffsmsalert', '" . json_encode([$hospitalname, $emp_name, $patientid, $emp_ward, $emp_bed_no, $Concern_Category, $Concern_Area, $department_head_link_whatsapp]) . "', 
+            // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            // // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
@@ -943,9 +943,9 @@ while ($feedback_object = mysqli_fetch_object($feedback_result)) {
                 $users_whatsapp = get_user_by_sms_activity('IP-WHATSAPP-DEPTHEAD', $con);
                 if (!empty($users_whatsapp)) {
 
-                    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsms_on_negativeexperiences_inpatient', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $department_head_link_whatsapp, $hospitalname]) . "', 
-             'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            //         $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            //  VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsms_on_negativeexperiences_inpatient', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $patient_bedno, $Concern_Category, $Concern_Area, $department_head_link_whatsapp, $hospitalname]) . "', 
+            //  'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
                     if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -1339,9 +1339,9 @@ while ($feedbackop_object = mysqli_fetch_object($feedbackop_result)) {
                 // Retrieve the list of users for the new condition
                 $users_whatsapp = get_user_by_sms_activity('OP-WHATSAPP-DEPTHEAD', $con);
                 if (!empty($users_whatsapp)) {
-                    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_negativeexperience_oppatients', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $Concern_Category, $Concern_Area, $department_head_link_whatsapp, $hospitalname]) . "', 
-             'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            //         $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            //  VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_negativeexperience_oppatients', '" . json_encode([$hospitalname, $patient_name, $patient_uhid, $patient_ward, $Concern_Category, $Concern_Area, $department_head_link_whatsapp, $hospitalname]) . "', 
+            //  'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
                     if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -1698,9 +1698,9 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
                 // Retrieve the list of users for the new condition
                 $users_whatsapp = get_user_by_sms_activity('ISR-WHATSAPP-DEPTHEAD', $con);
                 if (!empty($users_whatsapp)) {
-                    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-            VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_servicerequest', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, !empty($emp_contactnumber) ? $emp_contactnumber : 'NIL', $department_head_link_whatsapp, $hospitalname]) . "', 
-            'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            //         $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staffsmsalert_on_servicerequest', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, !empty($emp_contactnumber) ? $emp_contactnumber : 'NIL', $department_head_link_whatsapp, $hospitalname]) . "', 
+            // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
                     if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -1828,10 +1828,10 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
 
             $conn_g->query($query);
 
-            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-            VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'servicerequest_reopen_message_to_staff', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp, $hospitalname]) . "', 
-            'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-            // Execute the second query
+            // $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'servicerequest_reopen_message_to_staff', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp, $hospitalname]) . "', 
+            // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            // // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
@@ -1849,10 +1849,10 @@ while ($feedback_isr_object = mysqli_fetch_object($feedback_isr_result)) {
 
             $conn_g->query($query);
 
-            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-            VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'servicerequest_reopen_message_to_staff', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp, $hospitalname]) . "', 
-            'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-            // Execute the second query
+            // $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'servicerequest_reopen_message_to_staff', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp, $hospitalname]) . "', 
+            // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            // // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
@@ -2113,9 +2113,9 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 // Retrieve the list of users for the new condition
                 $users_whatsapp = get_user_by_sms_activity('INC-WHATSAPP-DEPTHEAD', $con);
                 if (!empty($users_whatsapp)) {
-                    $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-             VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staff_alert_for_incident_reported', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp]) . "', 
-             'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+            //         $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+            //  VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'staff_alert_for_incident_reported', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $emp_name, $emp_contactnumber, $department_head_link_whatsapp]) . "', 
+            //  'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
 
                     // Execute the second query
                     if ($conn_g->query($insert_notification_query) === TRUE) {
@@ -2239,10 +2239,10 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
             // $conn_g->query($query);
 
-            $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
-        VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'incident_reopen_staff_notification_alert', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $department_head_link_whatsapp]) . "', 
-        'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
-            // Execute the second query
+        //     $insert_notification_query = "INSERT INTO notifications_whatsapp (destination, userName, campaignName, templateParams, source, media, buttons, carouselCards, location, paramsFallbackValue, status,meta,uuid) 
+        // VALUES ('91$number', 'ITATONE POINT CONSULTING LLP 7345', 'incident_reopen_staff_notification_alert', '" . json_encode([$hospitalname, $Concern_Category, $Concern_Area, $risk_matrix, $priority, $incident_type, $emp_ward, $emp_bed_no, $department_head_link_whatsapp]) . "', 
+        // 'new-landing-page form', '{}', '[]', '[]', '{}', '" . json_encode(["FirstName" => "user"]) . "', 'pending','" . mysqli_real_escape_string($con, json_encode($meta_data)) . "','" . $uuid . "')";
+        //     // Execute the second query
             if ($conn_g->query($insert_notification_query) === TRUE) {
                 echo "Data inserted into notifications table successfully.<br>";
             } else {
