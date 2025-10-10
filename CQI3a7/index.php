@@ -282,7 +282,7 @@
 
                       <!-- KPI Name -->
 
-                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p>
+                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">

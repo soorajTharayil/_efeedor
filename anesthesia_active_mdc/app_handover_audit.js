@@ -1,4 +1,28 @@
 var app = angular.module('ehandorApp', []);
+
+app.directive('clickOutside', function ($document) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			function handleClick(event) {
+				// If click is outside this element
+				if (!element[0].contains(event.target)) {
+					scope.$apply(function () {
+						scope.$eval(attrs.clickOutside);
+					});
+				}
+			}
+
+			// Listen for clicks on the whole page
+			$document.on('click', handleClick);
+
+			// Remove listener when scope destroyed
+			scope.$on('$destroy', function () {
+				$document.off('click', handleClick);
+			});
+		}
+	};
+});
 // adf 
 app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $location, $window) {
 	$scope.typel = 'english';
@@ -13,7 +37,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.step0 = true;
 	$scope.step1 = false;
 	$scope.step4 = false;
-	
+
 	var selectedMonths = $window.localStorage.getItem('selectedMonth');
 	console.log(selectedMonths); // This will log "June"
 	var selectedYears = $window.localStorage.getItem('selectedYear');
@@ -41,7 +65,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	// min (7 days back)
 	let minDate = new Date();
-	minDate.setDate(minDate.getDate() - 7);
+	minDate.setDate(minDate.getDate() - 30);
 
 	let minYear = minDate.getFullYear();
 	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
@@ -60,7 +84,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 				$scope.type2 = 'English'
 				//load main heading
 				$scope.feedback.audit_type = $rootScope.lang.patient_info;
-				
+
 			});
 		}
 		if (type == 'lang2') {
@@ -94,7 +118,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 		//load audit name
@@ -206,144 +230,122 @@ $scope.user_id = ehandor.userid;
 
 	}
 
-$scope.next1 = function () {
-    if (!$scope.feedback.mid_no || ($scope.feedback.mid_no + '').trim() === '') {
-        alert('Please enter Patient MID');
-        return;
-    }
+	$scope.next1 = function () {
+		if (!$scope.feedback.mid_no || ($scope.feedback.mid_no + '').trim() === '') {
+			alert('Please enter Patient MID');
+			return;
+		}
 
-    if (!$scope.feedback.patient_name || ($scope.feedback.patient_name + '').trim() === '') {
-        alert('Please enter Patient Name');
-        return;
-    }
+		if (!$scope.feedback.patient_name || ($scope.feedback.patient_name + '').trim() === '') {
+			alert('Please enter Patient Name');
+			return;
+		}
 
-    
 
-    if (!$scope.feedback.location || ($scope.feedback.location + '').trim() === '') {
-        alert("Please select Area");
-        return;
-    }
 
-    if (!$scope.feedback.department || ($scope.feedback.department + '').trim() === '') {
-        alert("Please select Department");
-        return;
-    }
+		if (!$scope.feedback.location || ($scope.feedback.location + '').trim() === '') {
+			alert("Please select Area");
+			return;
+		}
 
-    if (!$scope.feedback.attended_doctor || ($scope.feedback.attended_doctor + '').trim() === '') {
-        alert("Please select Attended Doctor");
-        return;
-    }
+		if (!$scope.feedback.department || ($scope.feedback.department + '').trim() === '') {
+			alert("Please select Department");
+			return;
+		}
 
-    if (!$scope.feedback.initial_assessment_hr6) {
+		if (!$scope.feedback.attended_doctor || ($scope.feedback.attended_doctor + '').trim() === '') {
+			alert("Please select Attended Doctor");
+			return;
+		}
+
+		if (!$scope.feedback.initial_assessment_hr6) {
 			alert("Please enter admission date.");
 			return; // stop submission
 		}
-        
-        // ✅ If all passed → go next
-        $scope.step0 = false;
-        $scope.step1 = true;
-        $(window).scrollTop(0);
-}
-  
-  $scope.encodeFiles = function (element) {
-    var files_name = Array.from(element.files);
 
-    files_name.forEach(function (file) {
-      var formData = new FormData();
-      formData.append('file', file);
+		// ✅ If all passed → go next
+		$scope.step0 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
 
-      $http.post($rootScope.baseurl_main + '/upload_file.php', formData, {
-        transformRequest: angular.identity,
-        headers: { 'Content-Type': undefined }
-      }).then(function (response) {
-        if (response.data.file_url) {
-          var fileUrl = response.data.file_url;
-          if (!fileUrl.startsWith('http')) {
-            fileUrl = $rootScope.baseurl_main + '/' + fileUrl;
-          }
+	$scope.encodeFiles = function (element) {
+		var files_name = Array.from(element.files);
 
-          // Ensure files_name is an array before pushing
-          if (!$scope.feedback.files_name) {
-            $scope.feedback.files_name = []; // Initialize if undefined
-          }
+		files_name.forEach(function (file) {
+			var formData = new FormData();
+			formData.append('file', file);
 
-          // Push file info to the array
-          $scope.feedback.files_name.push({
-            url: fileUrl,
-            name: file.name
-          });
-        }
-      }).catch(function (error) {
-        console.error('Error uploading file:', error);
-      });
-    });
-  };
+			$http.post($rootScope.baseurl_main + '/upload_file.php', formData, {
+				transformRequest: angular.identity,
+				headers: { 'Content-Type': undefined }
+			}).then(function (response) {
+				if (response.data.file_url) {
+					var fileUrl = response.data.file_url;
+					if (!fileUrl.startsWith('http')) {
+						fileUrl = $rootScope.baseurl_main + '/' + fileUrl;
+					}
+
+					// Ensure files_name is an array before pushing
+					if (!$scope.feedback.files_name) {
+						$scope.feedback.files_name = []; // Initialize if undefined
+					}
+
+					// Push file info to the array
+					$scope.feedback.files_name.push({
+						url: fileUrl,
+						name: file.name
+					});
+				}
+			}).catch(function (error) {
+				console.error('Error uploading file:', error);
+			});
+		});
+	};
 
 
-  $scope.removeFile = function (index) {
-    $scope.feedback.files_name.splice(index, 1);
-  };
+	$scope.removeFile = function (index) {
+		$scope.feedback.files_name.splice(index, 1);
+	};
 
-	
+
 	$scope.locations = [
-  "Ground Floor","First Floor","Second Floor","Third Floor","Fourth Floor",
-  "ICU Block A","ICU Block B","Emergency Ward","General Ward","OPD Reception"
-];
+		"Ground Floor", "First Floor", "Second Floor", "Third Floor", "Fourth Floor",
+		"ICU Block A", "ICU Block B", "Emergency Ward", "General Ward", "OPD Reception"
+	];
 
-// Custom select handler
-$scope.selectLocation = function(loc){
-  $scope.feedback.location = loc;
-  $scope.locationOpen = false;   // close dropdown
-  $scope.locationSearch = "";    // clear search
-};
-app.directive('clickOutside', function($document) {
-  return {
-    restrict: 'A',
-    scope: {
-      clickOutside: '&'
-    },
-    link: function(scope, element) {
-      function onClick(event) {
-        if (!element[0].contains(event.target)) {
-          scope.$apply(function () {
-            scope.clickOutside();
-          });
-        }
-      }
-
-      $document.on('click', onClick);
-
-      scope.$on('$destroy', function() {
-        $document.off('click', onClick);
-      });
-    }
-  };
-});
+	// Custom select handler
+	$scope.selectLocation = function (loc) {
+		$scope.feedback.location = loc;
+		$scope.locationOpen = false;   // close dropdown
+		$scope.locationSearch = "";    // clear search
+	};
 
 
-// Select Department
-$scope.selectDepartment = function(dep) {
-    $scope.feedback.department = dep;
-    $scope.depOpen = false;   // close dropdown
-    $scope.depSearch = "";    // clear search
-};
 
-// Close dropdown on outside click
-$scope.closeDepartment = function() {
-    $scope.depOpen = false;
-};
+	// Select Department
+	$scope.selectDepartment = function (dep) {
+		$scope.feedback.department = dep;
+		$scope.depOpen = false;   // close dropdown
+		$scope.depSearch = "";    // clear search
+	};
 
-// Select Doctor
-$scope.selectDoctor = function(doc) {
-    $scope.feedback.attended_doctor = doc;
-    $scope.docOpen = false;   // close dropdown
-    $scope.docSearch = "";    // clear search
-};
+	// Close dropdown on outside click
+	$scope.closeDepartment = function () {
+		$scope.depOpen = false;
+	};
 
-// Close on outside click
-$scope.closeDoctor = function() {
-    $scope.docOpen = false;
-};
+	// Select Doctor
+	$scope.selectDoctor = function (doc) {
+		$scope.feedback.attended_doctor = doc;
+		$scope.docOpen = false;   // close dropdown
+		$scope.docSearch = "";    // clear search
+	};
+
+	// Close on outside click
+	$scope.closeDoctor = function () {
+		$scope.docOpen = false;
+	};
 
 
 
@@ -392,7 +394,7 @@ $scope.closeDoctor = function() {
 
 	$scope.setupapplication1();
 
-	
+
 	$scope.setupapplication2 = function () {
 		//$rootScope.loader = true;
 		var url = window.location.href;
@@ -599,21 +601,21 @@ $scope.closeDoctor = function() {
 		// if (!isFeedbackValid()) {
 		// 	return;
 		// }
-		
+
 		var formatDateToLocalString = function (date) {
-            if (!date) return "";
-            var d = new Date(date);
-        
-            if (isNaN(d.getTime())) return "";
-        
-            var year = d.getFullYear();
-            var month = ('0' + (d.getMonth() + 1)).slice(-2);
-            var day = ('0' + d.getDate()).slice(-2);
-            var hours = ('0' + d.getHours()).slice(-2);
-            var minutes = ('0' + d.getMinutes()).slice(-2);
-        
-            return `${year}-${month}-${day} ${hours}:${minutes}`;
-        };
+			if (!date) return "";
+			var d = new Date(date);
+
+			if (isNaN(d.getTime())) return "";
+
+			var year = d.getFullYear();
+			var month = ('0' + (d.getMonth() + 1)).slice(-2);
+			var day = ('0' + d.getDate()).slice(-2);
+			var hours = ('0' + d.getHours()).slice(-2);
+			var minutes = ('0' + d.getMinutes()).slice(-2);
+
+			return `${year}-${month}-${day} ${hours}:${minutes}`;
+		};
 
 		// Convert before saving
 		$scope.feedback.initial_assessment_hr2 = formatDateToLocalString($scope.feedback.initial_assessment_hr2);
@@ -631,7 +633,7 @@ $scope.closeDoctor = function() {
 
 
 		// $scope.feedback.questioset = $scope.questioset;
-		$http.post($rootScope.baseurl_main + '/save_ma_anesthesia_active_mdc.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId , $scope.feedback).then(function (responsedata) {
+		$http.post($rootScope.baseurl_main + '/save_ma_anesthesia_active_mdc.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId, $scope.feedback).then(function (responsedata) {
 			if (responsedata.status = "success") {
 				$rootScope.loader = false;
 				// navigator.showToast('Patient Feedback Submitted Successfully');

@@ -37,7 +37,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		if (m == null || isNaN(y)) return null;
 		let nextMonth = m + 1, nextYear = y;
 		if (nextMonth > 11) { nextMonth = 0; nextYear += 1; }
-		const d = new Date(nextYear, nextMonth, 10);
+		const d = new Date(nextYear, nextMonth, 8);
 		d.setHours(23, 59, 59, 999);
 		return d;
 	}

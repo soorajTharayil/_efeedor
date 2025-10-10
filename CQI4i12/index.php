@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average use of Ecofriendly catering supplies in a month (carbon intensity reduction -JCI8-GHI 3)-(House Keeping):</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Average use of Ecofriendly catering supplies in a month (carbon intensity reduction -JCI8-GHI 3)-(House Keeping): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

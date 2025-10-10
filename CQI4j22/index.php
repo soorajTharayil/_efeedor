@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Percentage Ischemic stroke patients with a large vessel cerebral occlusion (i.e., internal carotid artery (ICA) or ICA terminus (T lesion; T-occlusion), middle cerebral artery (MCA) M1 or M2, basilar artery) who receive mechanical endovascular reperfusion (MER) therapy (time of first pass or deployment of device) and achieve TICI 2B or higher ≤60 minutes from the time of skin puncture(Stroke Unit) :</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Percentage Ischemic stroke patients with a large vessel cerebral occlusion (i.e., internal carotid artery (ICA) or ICA terminus (T lesion; T-occlusion), middle cerebral artery (MCA) M1 or M2, basilar artery) who receive mechanical endovascular reperfusion (MER) therapy (time of first pass or deployment of device) and achieve TICI 2B or higher ≤60 minutes from the time of skin puncture(Stroke Unit) : <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

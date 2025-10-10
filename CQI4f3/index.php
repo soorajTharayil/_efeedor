@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Number of sentinel events, reported, collected and analysed within the defined time frame:</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Number of sentinel events, reported, collected and analysed within the defined time frame: <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

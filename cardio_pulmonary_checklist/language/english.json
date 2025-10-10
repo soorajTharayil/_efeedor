@@ -37,7 +37,7 @@
     "location":"Area",
     "atdoc":"Attended doctor",
     "seldoc":"Select doctor",
-    "admidat":"Admission date",
+    "admidat":"Admission / Visit Date & Time",
     "discha":"Discharge Date & Time",
     "attach_file":"Upload file( Evidences, proofs, etc)",
 

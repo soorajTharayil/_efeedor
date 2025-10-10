@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented(Stroke Unit) </strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented(Stroke Unit): <span style="color: blue !important; ">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

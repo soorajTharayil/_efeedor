@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window(Stroke Unit) </strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window(Stroke Unit): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times (time of bolus administration) within 45 minutes in 50% or more of acute ischemic stroke patients treated with IV thrombolytic(Stroke Unit):</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times (time of bolus administration) within 45 minutes in 50% or more of acute ischemic stroke patients treated with IV thrombolytic(Stroke Unit): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

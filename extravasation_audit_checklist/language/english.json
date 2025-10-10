@@ -36,7 +36,7 @@
     "selgen":"Select gender",
     "atdoc":"Attended doctor",
     "seldoc":"Select doctor",
-    "admidat":"Admission date",
+    "admidat":"Admission / Visit Date & Time",
     "location":"Area",
     "discha":"Discharge Date & Time",
     "attach_file":"Upload file( Evidences, proofs, etc)",

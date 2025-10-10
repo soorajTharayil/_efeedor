@@ -1,4 +1,31 @@
 var app = angular.module('ehandorApp', []);
+
+app.directive('clickOutside', function ($document) {
+	return {
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+			function handleClick(event) {
+				// If click is outside this element
+				if (!element[0].contains(event.target)) {
+					scope.$apply(function () {
+						scope.$eval(attrs.clickOutside);
+					});
+				}
+			}
+
+			// Listen for clicks on the whole page
+			$document.on('click', handleClick);
+
+			// Remove listener when scope destroyed
+			scope.$on('$destroy', function () {
+				$document.off('click', handleClick);
+			});
+		}
+	};
+});
+
+
+
 // adf 
 app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $location, $window) {
 	$scope.typel = 'english';
@@ -41,7 +68,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	// min (7 days back)
 	let minDate = new Date();
-	minDate.setDate(minDate.getDate() - 7);
+	minDate.setDate(minDate.getDate() - 30);
 
 	let minYear = minDate.getFullYear();
 	let minMonth = ('0' + (minDate.getMonth() + 1)).slice(-2);
@@ -307,29 +334,10 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.locationOpen = false;   // close dropdown
 		$scope.locationSearch = "";    // clear search
 	};
-	app.directive('clickOutside', function ($document) {
-		return {
-			restrict: 'A',
-			scope: {
-				clickOutside: '&'
-			},
-			link: function (scope, element) {
-				function onClick(event) {
-					if (!element[0].contains(event.target)) {
-						scope.$apply(function () {
-							scope.clickOutside();
-						});
-					}
-				}
 
-				$document.on('click', onClick);
 
-				scope.$on('$destroy', function () {
-					$document.off('click', onClick);
-				});
-			}
-		};
-	});
+
+
 
 
 	// Select Department
@@ -405,7 +413,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 	$scope.setupapplication1();
 
-	
+
 	$scope.setupapplication2 = function () {
 		//$rootScope.loader = true;
 		var url = window.location.href;
@@ -425,7 +433,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	}
 
 	$scope.setupapplication2();
-    
+
 
 
 	//Calculate function for initail assessment

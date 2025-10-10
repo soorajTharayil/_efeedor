@@ -277,7 +277,7 @@
 
                       <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>Submission Deadline: </b> {{ formatKPIDate(kpiDeadline, false) }}</p> -->
 
-                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
+                      <!-- <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> --> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px; margin-top: -20px;">
                         <div class="form-group transparent-placeholder">
@@ -320,7 +320,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Central Line Associated Blood Stream Infection (CLABSI)-(Infection Control - Nursing): <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
+                      <strong>Central Line Associated Blood Stream Infection (CLABSI)-(Infection Control - Nursing): <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

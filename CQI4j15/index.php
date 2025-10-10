@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage (i.e., clinical deterioration ≥ 4-point increase on NIHSS and brain image finding of parenchymal hematoma, or subarachnoid hemorrhage, or intraventricular hemorrhage) within (≤) 36 hours after the onset of treatment with intra-venous (IV) or intra-arterial (IA) thrombolytic (t-PA) therapy, or mechanical endovascular reperfusion procedure (i.e., mechanical endovascular thrombectomy with a clot retrieval dev (Stroke Unit) </strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage (i.e., clinical deterioration ≥ 4-point increase on NIHSS and brain image finding of parenchymal hematoma, or subarachnoid hemorrhage, or intraventricular hemorrhage) within (≤) 36 hours after the onset of treatment with intra-venous (IV) or intra-arterial (IA) thrombolytic (t-PA) therapy, or mechanical endovascular reperfusion procedure (i.e., mechanical endovascular thrombectomy with a clot retrieval dev (Stroke Unit): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

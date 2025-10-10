@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>IPSG 4 - Ensure correct site, correct procedure, correct patient surgery-(Quality Office - Endoscopy) :</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>IPSG 4 - Ensure correct site, correct procedure, correct patient surgery-(Quality Office - Endoscopy) : <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 
