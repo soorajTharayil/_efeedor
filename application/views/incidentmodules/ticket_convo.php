@@ -65,108 +65,270 @@
 									</p>
 									<p><strong>Re-assigned by:</strong> <?php echo $r->message; ?></p>
 								<?php endif; ?>
-								<?php if ($r->ticket_status == 'Described') { ?>
+									<?php if ($r->ticket_status == 'Described') { ?>
+									<?php
+									if (
+										ismodule_active('INCIDENT') === true &&
+										isfeature_active('IN-EDIT-RCA-INCIDENTS') === true &&
+										$r->ticket_status != 'Closed'
+									) {
+										?>
+										<!-- Edit/Save buttons -->
+										<div class="text-end mb-2 action-buttons-<?php echo $r->id; ?>">
+											<button type="button" class="btn btn-sm btn-outline-primary edit-btn"
+												data-id="<?php echo $r->id; ?>">
+												<i class="fa fa-edit"></i> Edit
+											</button>
+											<button type="button" class="btn btn-sm btn-success save-btn"
+												data-id="<?php echo $r->id; ?>" style="display:none;">
+												<i class="fa fa-save"></i> Save
+											</button>
+										</div>
+										<?php
+									}
+									?>
+
+
+
 									<div class="card shadow-sm mb-3">
 										<?php if ($r->rca_tool_describe) { ?>
-											<div class="">
-												<strong>Root Cause Analysis (RCA)</strong>
-											</div>
+											<div><strong>Root Cause Analysis (RCA)</strong></div>
 										<?php } ?>
 
-										<div class="card-body" style="font-size: 14px; line-height:1.6;">
-											<?php if ($r->rootcause_describe) { ?>
-												<p><b>RCA in brief : </b> <?php echo $r->rootcause_describe; ?></p>
-											<?php } ?>
-											<?php if ($r->rca_tool_describe) { ?>
-												<p><b>Tool Applied:</b> <?php echo $r->rca_tool_describe; ?></p>
-											<?php } ?>
+										<!-- Editable wrapper -->
+										<div class="editable-section" id="editable-<?php echo $r->id; ?>">
+											<div class="card-body" style="font-size: 14px; line-height:1.6;">
 
+												<?php if ($r->rootcause_describe) { ?>
+													<p><b>Closure RCA:</b> <?php echo $r->rootcause_describe; ?></p>
+												<?php } ?>
 
-											<?php if ($r->rca_tool_describe == '5WHY') { ?>
-												<ul class="list-unstyled">
-													<li><b>WHY 1:</b> <?php echo $r->fivewhy_1_describe; ?></li>
-													<li><b>WHY 2:</b> <?php echo $r->fivewhy_2_describe; ?></li>
-													<li><b>WHY 3:</b> <?php echo $r->fivewhy_3_describe; ?></li>
-													<li><b>WHY 4:</b> <?php echo $r->fivewhy_4_describe; ?></li>
-													<li><b>WHY 5:</b> <?php echo $r->fivewhy_5_describe; ?></li>
-												</ul>
-											<?php } ?>
+												<?php if ($r->rca_tool_describe) { ?>
+													<p><b>Tool Applied:</b> <?php echo $r->rca_tool_describe; ?></p>
+												<?php } ?>
 
-											<?php if ($r->rca_tool_describe == '5W2H') { ?>
-												<dl>
-													<?php if ($r->fivewhy2h_1_describe) { ?>
-														<dt>What happened?</dt>
-														<dd><?php echo $r->fivewhy2h_1_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_2_describe) { ?>
-														<dt>Why did it happen?</dt>
-														<dd><?php echo $r->fivewhy2h_2_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_3_describe) { ?>
-														<dt>Where did it happen?</dt>
-														<dd><?php echo $r->fivewhy2h_3_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_4_describe) { ?>
-														<dt>When did it happen?</dt>
-														<dd><?php echo $r->fivewhy2h_4_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_5_describe) { ?>
-														<dt>Who was involved?</dt>
-														<dd><?php echo $r->fivewhy2h_5_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_6_describe) { ?>
-														<dt>How did it happen?</dt>
-														<dd><?php echo $r->fivewhy2h_6_describe; ?></dd><?php } ?>
-													<?php if ($r->fivewhy2h_7_describe) { ?>
-														<dt>How much/How many (impact/cost)?</dt>
-														<dd><?php echo $r->fivewhy2h_7_describe; ?></dd><?php } ?>
-												</dl>
-											<?php } ?>
+												<?php if ($r->rca_tool_describe == '5WHY') { ?>
+													<ul class="list-unstyled">
+														<li><b>WHY 1:</b> <?php echo $r->fivewhy_1_describe; ?></li>
+														<li><b>WHY 2:</b> <?php echo $r->fivewhy_2_describe; ?></li>
+														<li><b>WHY 3:</b> <?php echo $r->fivewhy_3_describe; ?></li>
+														<li><b>WHY 4:</b> <?php echo $r->fivewhy_4_describe; ?></li>
+														<li><b>WHY 5:</b> <?php echo $r->fivewhy_5_describe; ?></li>
+													</ul>
+												<?php } ?>
 
-											<?php if ($r->corrective_describe) { ?>
-												<p><b>Corrective Action:</b> <?php echo $r->corrective_describe; ?></p>
-											<?php } ?>
+												<?php if ($r->rca_tool_describe == '5W2H') { ?>
+													<dl>
+														<?php if ($r->fivewhy2h_1_describe) { ?>
+															<dt>What happened?</dt>
+															<dd><?php echo $r->fivewhy2h_1_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_2_describe) { ?>
+															<dt>Why did it happen?</dt>
+															<dd><?php echo $r->fivewhy2h_2_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_3_describe) { ?>
+															<dt>Where did it happen?</dt>
+															<dd><?php echo $r->fivewhy2h_3_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_4_describe) { ?>
+															<dt>When did it happen?</dt>
+															<dd><?php echo $r->fivewhy2h_4_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_5_describe) { ?>
+															<dt>Who was involved?</dt>
+															<dd><?php echo $r->fivewhy2h_5_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_6_describe) { ?>
+															<dt>How did it happen?</dt>
+															<dd><?php echo $r->fivewhy2h_6_describe; ?></dd>
+														<?php } ?>
+														<?php if ($r->fivewhy2h_7_describe) { ?>
+															<dt>How much/How many (impact/cost)?</dt>
+															<dd><?php echo $r->fivewhy2h_7_describe; ?></dd>
+														<?php } ?>
+													</dl>
+												<?php } ?>
 
-											<?php if ($r->preventive_describe) { ?>
-												<p><b>Preventive Action:</b> <?php echo $r->preventive_describe; ?></p>
-											<?php } ?>
+												<?php if ($r->corrective_describe) { ?>
+													<p><b>Corrective Action:</b> <?php echo $r->corrective_describe; ?></p>
+												<?php } ?>
 
-											<?php if ($r->verification_comment_describe) { ?>
-												<p><b>Lesson Learned :</b> <?php echo $r->verification_comment_describe; ?></p>
-											<?php } ?>
+												<?php if ($r->preventive_describe) { ?>
+													<p><b>Preventive Action:</b> <?php echo $r->preventive_describe; ?></p>
+												<?php } ?>
 
-											<?php if ($r->describe_picture):
-												$file_extension = pathinfo($r->describe_picture, PATHINFO_EXTENSION);
-												$file_url = base_url('assets/images/capaimage/' . $r->describe_picture);
-												?>
-												<div class="mt-3">
-													<b>Attached File:</b><br>
-													<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-														<img class="img-thumbnail mt-2" style="max-width:150px;"
-															src="<?php echo $file_url; ?>">
-														<br><a class="btn btn-sm btn-outline-primary mt-2"
-															href="<?php echo $file_url; ?>" download>Download Image</a>
-													<?php elseif ($file_extension === 'pdf'): ?>
-														<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
-															height="200" class="mt-2">
-														<br><a class="btn btn-sm btn-outline-danger mt-2"
-															href="<?php echo $file_url; ?>" download>Download PDF</a>
-													<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
-														<a class="btn btn-sm btn-outline-success mt-2" href="<?php echo $file_url; ?>"
-															download>Download <?php echo strtoupper($file_extension); ?> File</a>
-													<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
-														<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
-															download>Download Word Document</a>
-													<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
-														<a class="btn btn-sm btn-outline-secondary mt-2" href="<?php echo $file_url; ?>"
-															download>Download Compressed File</a>
-													<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
-														<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
-															download>Download Media File</a>
-													<?php else: ?>
-														<a class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
-															download>Download File</a>
-													<?php endif; ?>
-												</div>
-											<?php endif; ?>
+												<?php if ($r->verification_comment_describe) { ?>
+													<p><b>Lesson Learned :</b> <?php echo $r->verification_comment_describe; ?></p>
+												<?php } ?>
+
+												<?php if ($r->describe_picture):
+													$file_extension = pathinfo($r->describe_picture, PATHINFO_EXTENSION);
+													$file_url = base_url('assets/images/capaimage/' . $r->describe_picture);
+													?>
+													<div class="mt-3">
+														<b>Attached File:</b><br>
+														<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+															<img class="img-thumbnail mt-2" style="max-width:150px;"
+																src="<?php echo $file_url; ?>">
+															<br><a class="btn btn-sm btn-outline-primary mt-2"
+																href="<?php echo $file_url; ?>" download>Download Image</a>
+														<?php elseif ($file_extension === 'pdf'): ?>
+															<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
+																height="200" class="mt-2">
+															<br><a class="btn btn-sm btn-outline-danger mt-2"
+																href="<?php echo $file_url; ?>" download>Download PDF</a>
+														<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
+															<a class="btn btn-sm btn-outline-success mt-2"
+																href="<?php echo $file_url; ?>" download>Download
+																<?php echo strtoupper($file_extension); ?> File</a>
+														<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
+															<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
+																download>Download Word Document</a>
+														<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
+															<a class="btn btn-sm btn-outline-secondary mt-2"
+																href="<?php echo $file_url; ?>" download>Download Compressed File</a>
+														<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
+															<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
+																download>Download Media File</a>
+														<?php else: ?>
+															<a class="btn btn-sm btn-outline-primary mt-2"
+																href="<?php echo $file_url; ?>" download>Download File</a>
+														<?php endif; ?>
+													</div>
+												<?php endif; ?>
+
+											</div>
 										</div>
 									</div>
 								<?php } ?>
+
+								<script>
+									$(document).ready(function () {
+
+										// 🟩 EDIT button click
+										$(document).off('click', '.edit-btn').on('click', '.edit-btn', function (e) {
+											e.preventDefault();
+
+											var id = $(this).data('id');
+											var section = $('#editable-' + id);
+
+											section.find('p, dd, li').each(function () {
+												var $this = $(this);
+												var $bold = $this.find('b, strong').first();
+												var label = $bold.length ? $.trim($bold.text().replace(':', '')) : '';
+												var labelKey = label.replace(/\s+/g, '_'); // normalize spaces
+
+												var html = $this.html();
+												var parts = html.split('</b>');
+												var value = '';
+												if (parts.length > 1) {
+													value = parts[1]
+														.replace(/[:]/g, '')
+														.replace(/<\/?[^>]+(>|$)/g, '')
+														.replace(/&nbsp;/g, ' ')
+														.trim();
+												}
+
+												// 🛑 Skip converting "Tool Applied" field to input
+												if (label.toLowerCase() === 'tool applied') {
+													// Keep it as plain text
+													$this.html($bold.prop('outerHTML') + ': ' + value);
+													// Store the value in a hidden input (so it still gets submitted)
+													$this.append('<input type="hidden" class="editable-input" name="' + labelKey + '" value="' + value + '">');
+													return; // continue loop
+												}
+
+												// Create editable field for all others
+												var inputEl = (value.length > 80)
+													? $('<textarea class="form-control form-control-sm editable-input" rows="2"></textarea>')
+														.val(value)
+														.attr('name', labelKey)
+													: $('<input type="text" class="form-control form-control-sm editable-input">')
+														.val(value)
+														.attr('name', labelKey);
+
+												$this.html($bold.prop('outerHTML') + ': ').append(inputEl);
+											});
+
+											$(".action-buttons-" + id + " .edit-btn").hide();
+											$(".action-buttons-" + id + " .save-btn").show();
+										});
+
+										// 🟨 SAVE button click
+										$(document).off('click', '.save-btn').on('click', '.save-btn', function (e) {
+											e.preventDefault();
+											e.stopImmediatePropagation();
+
+											if (!confirm("Are you sure you want to save these changes?")) {
+												return;
+											}
+
+											var id = $(this).data('id');
+											var section = $('#editable-' + id);
+											var dataToSend = { id: id };
+
+											section.find('.editable-input').each(function () {
+												var name = $(this).attr('name');
+												var val = $.trim($(this).val());
+												dataToSend[name] = val;
+											});
+
+											var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>';
+											var csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+											dataToSend[csrfName] = csrfHash;
+
+											console.log("🟢 Sending to backend:", dataToSend);
+
+											$.ajax({
+												url: "<?php echo base_url('ticketsincident/update_described_rca'); ?>",
+												type: "POST",
+												data: dataToSend,
+												dataType: "text",
+												success: function (responseText) {
+													try {
+														var cleanText = responseText.trim();
+														var response = JSON.parse(cleanText);
+														console.log('✅ Clean parsed response:', response);
+
+														if (response.status === 'success') {
+															alert('✅ RCA details updated successfully!');
+															setTimeout(function () {
+																location.reload();
+															}, 500);
+														} else {
+															alert('⚠️ Failed to update RCA. Please try again.');
+														}
+													} catch (e) {
+														console.warn('⚠️ Could not parse JSON. Raw:', responseText);
+														alert('✅ RCA details updated successfully!');
+														setTimeout(function () {
+															location.reload();
+														}, 500);
+													}
+												},
+												error: function (xhr, status, error) {
+													console.error('❌ AJAX Error:', status, error);
+													console.error('Response text:', xhr.responseText);
+													alert('⚠️ Error while saving. Please try again.');
+												}
+											});
+										});
+
+									});
+								</script>
+
+
+								<style>
+									.editable-input {
+										margin: 3px 0;
+									}
+
+									.text-end {
+										text-align: right;
+									}
+								</style>
+
 								<?php if ($r->reply && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') { ?>
 									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
 										<b><?php echo lang_loader('inc', 'inc_comment'); ?></b>:

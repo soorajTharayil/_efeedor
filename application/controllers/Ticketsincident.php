@@ -913,5 +913,61 @@ class Ticketsincident extends CI_Controller
 			}
 		}
 	}
+
+
+	public function update_described_rca()
+	{
+		// --- Safety & headers ---
+		ob_clean(); // Clear stray output (fixes JSON parse errors)
+		header('Content-Type: application/json; charset=utf-8');
+
+		// --- Get ID ---
+		$id = $this->input->post('id');
+		if (empty($id)) {
+			echo json_encode(['status' => 'error', 'message' => 'Missing ID']);
+			exit;
+		}
+
+		// --- Map incoming POST fields to DB columns ---
+		$updateData = [
+			'rootcause_describe' => $this->input->post('Closure_RCA'),
+			'rca_tool_describe' => $this->input->post('Tool_Applied'),
+			'fivewhy_1_describe' => $this->input->post('WHY_1'),
+			'fivewhy_2_describe' => $this->input->post('WHY_2'),
+			'fivewhy_3_describe' => $this->input->post('WHY_3'),
+			'fivewhy_4_describe' => $this->input->post('WHY_4'),
+			'fivewhy_5_describe' => $this->input->post('WHY_5'),
+			'fivewhy2h_1_describe' => $this->input->post('What_happened'),
+			'fivewhy2h_2_describe' => $this->input->post('Why_did_it_happen'),
+			'fivewhy2h_3_describe' => $this->input->post('Where_did_it_happen'),
+			'fivewhy2h_4_describe' => $this->input->post('When_did_it_happen'),
+			'fivewhy2h_5_describe' => $this->input->post('Who_was_involved'),
+			'fivewhy2h_6_describe' => $this->input->post('How_did_it_happen'),
+			'fivewhy2h_7_describe' => $this->input->post('How_much_or_How_many_impact_cost'),
+			'corrective_describe' => $this->input->post('Corrective_Action'),
+			'preventive_describe' => $this->input->post('Preventive_Action'),
+			'verification_comment_describe' => $this->input->post('Lesson_Learned')
+		];
+
+		// --- Normalize empty values to NULL ---
+		foreach ($updateData as $key => $val) {
+			$updateData[$key] = ($val === '' || $val === null) ? null : trim($val);
+		}
+
+		// --- Model call ---
+		$this->load->model('ticketsincidents_model');
+		$ok = $this->ticketsincidents_model->update_rca_details($id, $updateData);
+
+		// --- Logging for debugging (safe, won’t break JSON) ---
+		log_message('debug', '🟢 update_described_rca(): POST=' . json_encode($_POST));
+		log_message('debug', '🟢 update_described_rca(): Data=' . json_encode($updateData));
+		log_message('debug', '🟢 update_described_rca(): SQL=' . $this->db->last_query());
+
+		// --- JSON Response ---
+		echo json_encode(['status' => $ok ? 'success' : 'error']);
+		exit;
+	}
+
+
 }
 
