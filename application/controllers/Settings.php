@@ -159,6 +159,11 @@ class Settings extends CI_Controller
 		redirect('audit_area');
 	}
 
+	public function audit_custodians()
+	{
+		redirect('audit_custodians');
+	}
+
 	public function audit_safety_department()
 	{
 		redirect('audit_safety_department');

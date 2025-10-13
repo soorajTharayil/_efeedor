@@ -18,8 +18,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp; Infection Control OT audit - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp; Infection Control OT
+                        audit - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -34,16 +36,52 @@ $param = json_decode($row->dataset, true);
                                 <b>Audit Details</b>
                             </td>
                             <td style="overflow: clip;">
-                                Audit Name: <?php echo $param['audit_type']; ?>
+                                <label><b>Audit Name:</b></label>
+                                <input class="form-control" type="text" name="audit_type"
+                                    value="<?php echo isset($param['audit_type']) ? htmlspecialchars($param['audit_type'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    readonly>
                                 <br>
-                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
-                                <br>
-                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Date & Time of Audit -->
+                                <label><b>Date & Time of Audit:</b></label>
+                                <?php
+                                $datetimeValue = '';
+                                if (!empty($param['datetime']) && $param['datetime'] != '0000-00-00 00:00:00') {
+                                    $datetimeValue = date('Y-m-d\TH:i', strtotime($param['datetime'])); // use param datetime
+                                }
+
+                                // Set max to current date/time to disable future values
+                                $maxDatetime = date('Y-m-d\TH:i');
+                                ?>
+                                <input class="form-control" type="datetime-local" id="auditDatetime" name="datetime"
+                                    value="<?php echo $datetimeValue; ?>" max="<?php echo $maxDatetime; ?>"readonly>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        const datetimeInput = document.getElementById("auditDatetime");
+
+                                        // When user clicks anywhere in the input, open the date/time picker
+                                        datetimeInput.addEventListener("click", function () {
+                                            this.showPicker?.(); // âœ… supported in modern browsers
+                                        });
+
+                                        // Prevent future date/time selection dynamically
+                                        datetimeInput.max = new Date().toISOString().slice(0, 16);
+                                    });
+                                </script> <br>
+                                <!-- Audit By -->
+                                <label><b>Audit By:</b></label>
+                                <input class="form-control" type="text" name="audit_by"
+                                    value="<?php echo isset($param['audit_by']) ? htmlspecialchars($param['audit_by'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    readonly>
 
                                 <!-- Hidden inputs -->
-                                <input class="form-control" type="hidden" name="audit_type" value="<?php echo $param['audit_type']; ?>" />
-                                <input class="form-control" type="hidden" name="datetime" value="<?php echo $row->datetime; ?>" />
-                                <input class="form-control" type="hidden" name="audit_by" value="<?php echo $param['audit_by']; ?>" />
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
                             </td>
                         </tr>
 
@@ -54,228 +92,755 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td style="width: 43%;"><b>Patient MID</b></td>
                             <td>
-                                <input class="form-control" type="text" name="mid_no" value="<?php echo $param['mid_no']; ?>">
+                                <input class="form-control" type="text" name="mid_no"
+                                    value="<?php echo $param['mid_no']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Patient Name</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_name" value="<?php echo $param['patient_name']; ?>">
+                                <input class="form-control" type="text" name="patient_name"
+                                    value="<?php echo $param['patient_name']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Patient Age</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_age" value="<?php echo $param['patient_age']; ?>">
+                                <input class="form-control" type="text" name="patient_age"
+                                    value="<?php echo $param['patient_age']; ?>">
                             </td>
+                        </tr>
                         </tr>
                         <tr>
                             <td><b>Patient Gender</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_gender" value="<?php echo $param['patient_gender']; ?>">
+                                <select class="form-control" name="patient_gender">
+                                    <option value="" <?php if (empty($param['patient_gender']))
+                                        echo 'selected'; ?>>
+                                    </option>
+                                    <option value="Male" <?php if ($param['patient_gender'] == 'Male')
+                                        echo 'selected'; ?>>Male</option>
+                                    <option value="Female" <?php if ($param['patient_gender'] == 'Female')
+                                        echo 'selected'; ?>>Female</option>
+                                    <option value="Other" <?php if ($param['patient_gender'] == 'Other')
+                                        echo 'selected'; ?>>Other</option>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Area</b></td>
                             <td>
-                                <input class="form-control" type="text" name="location" value="<?php echo $param['location']; ?>">
+                                <select class="form-control" name="location">
+                                    <option value="">Select Area</option>
+                                    <?php
+                                    $areas = $this->db->get('bf_audit_area')->result_array();
+                                    foreach ($areas as $a) {
+                                        $selected = ($param['location'] == $a['title']) ? 'selected' : '';
+                                        echo "<option value='{$a['title']}' $selected>{$a['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Department</b></td>
                             <td>
-                                <input class="form-control" type="text" name="department" value="<?php echo $param['department']; ?>">
+                                <select class="form-control" name="department">
+                                    <option value="">Select Department</option>
+                                    <?php
+                                    $departments = $this->db->get('bf_audit_department')->result_array();
+                                    foreach ($departments as $d) {
+                                        $selected = ($param['department'] == $d['title']) ? 'selected' : '';
+                                        echo "<option value='{$d['title']}' $selected>{$d['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Attended Doctor</b></td>
                             <td>
-                                <input class="form-control" type="text" name="attended_doctor" value="<?php echo $param['attended_doctor']; ?>">
+                                <select class="form-control" name="attended_doctor">
+                                    <option value="">Select Doctor</option>
+                                    <?php
+                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
+                                    foreach ($doctors as $doc) {
+                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
+                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
+                        <?php
+                        // Common max datetime to disable future selection
+                        $maxDatetime = date('Y-m-d\TH:i');
+                        ?>
+
+                        <!-- ðŸŸ© Admission Date & Time (Editable) -->
                         <tr>
                             <td><b>Admission Date & Time</b></td>
                             <td>
-                                <input class="form-control" type="text" name="initial_assessment_hr6" value="<?php echo $param['initial_assessment_hr6']; ?>">
+                                <?php
+                                $admissionDatetime = '';
+                                if (!empty($param['initial_assessment_hr6']) && $param['initial_assessment_hr6'] != '1970-01-01 05:30:00') {
+                                    $admissionDatetime = date('Y-m-d\TH:i', strtotime($param['initial_assessment_hr6']));
+                                } else {
+                                    $admissionDatetime = $maxDatetime; // Default current date-time
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="admissionDatetime"
+                                    name="initial_assessment_hr6" value="<?php echo $admissionDatetime; ?>"
+                                    max="<?php echo $maxDatetime; ?>">
                             </td>
                         </tr>
+
+                        <!-- ðŸŸ© Discharge Date & Time (Editable) -->
                         <tr>
                             <td><b>Discharge Date & Time</b></td>
                             <td>
-                                <input class="form-control" type="text" name="discharge_date_time" value="<?php echo $param['discharge_date_time']; ?>">
+                                <?php
+                                $dischargeDatetime = '';
+                                if (!empty($param['discharge_date_time']) && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+                                    $dischargeDatetime = date('Y-m-d\TH:i', strtotime($param['discharge_date_time']));
+                                } else {
+                                    $dischargeDatetime = $maxDatetime; // Default current date-time
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="dischargeDatetime"
+                                    name="discharge_date_time" value="<?php echo $dischargeDatetime; ?>"
+                                    max="<?php echo $maxDatetime; ?>">
                             </td>
                         </tr>
-                            <tr>
-                                <th colspan="2">OT Hygiene / Infection Control</th>
-                            </tr>
-                            <tr>
-                                <td>Are Floors clean?</td>
-                                <td>
-                                    <input type="text" name="identification_details" class="form-control" value="<?php echo htmlspecialchars($param['identification_details']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="identification_details_text" class="form-control" value="<?php echo htmlspecialchars($param['identification_details_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are equipment’s inside OT cleaned?</td>
-                                <td>
-                                    <input type="text" name="vital_signs" class="form-control" value="<?php echo htmlspecialchars($param['vital_signs']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="vital_signs_text" class="form-control" value="<?php echo htmlspecialchars($param['vital_signs_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is Disinfection done according to protocol?</td>
-                                <td>
-                                    <input type="text" name="surgery" class="form-control" value="<?php echo htmlspecialchars($param['surgery']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="surgery_text" class="form-control" value="<?php echo htmlspecialchars($param['surgery_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is Waste segregation done appropriately?</td>
-                                <td>
-                                    <input type="text" name="complaints_communicated" class="form-control" value="<?php echo htmlspecialchars($param['complaints_communicated']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="complaints_communicated_text" class="form-control" value="<?php echo htmlspecialchars($param['complaints_communicated_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is Hand washing available?</td>
-                                <td>
-                                    <input type="text" name="intake" class="form-control" value="<?php echo htmlspecialchars($param['intake']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="intake_text" class="form-control" value="<?php echo htmlspecialchars($param['intake_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are all posters displayed eg. surgical Hand washing, BMW management?</td>
-                                <td>
-                                    <input type="text" name="output" class="form-control" value="<?php echo htmlspecialchars($param['output']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="output_text" class="form-control" value="<?php echo htmlspecialchars($param['output_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are all instruments disinfected / sterilized?</td>
-                                <td>
-                                    <input type="text" name="focus" class="form-control" value="<?php echo htmlspecialchars($param['focus']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="focus_text" class="form-control" value="<?php echo htmlspecialchars($param['focus_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are CSSD items stored appropriately in sterile room?</td>
-                                <td>
-                                    <input type="text" name="meti" class="form-control" value="<?php echo htmlspecialchars($param['meti']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="meti_text" class="form-control" value="<?php echo htmlspecialchars($param['meti_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are Checks for the expiry dates of sterilized items done?</td>
-                                <td>
-                                    <input type="text" name="diagnostic" class="form-control" value="<?php echo htmlspecialchars($param['diagnostic']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="diagnostic_text" class="form-control" value="<?php echo htmlspecialchars($param['diagnostic_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is Cleaning done after each OT utilization for 20 minutes?</td>
-                                <td>
-                                    <input type="text" name="lab_results" class="form-control" value="<?php echo htmlspecialchars($param['lab_results']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="lab_results_text" class="form-control" value="<?php echo htmlspecialchars($param['lab_results_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are Temperature, Humidity and pressure monitored daily?</td>
-                                <td>
-                                    <input type="text" name="pending_investigation" class="form-control" value="<?php echo htmlspecialchars($param['pending_investigation']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="pending_investigation_text" class="form-control" value="<?php echo htmlspecialchars($param['pending_investigation_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are OT temperature & Humidity maintained at appropriate levels?</td>
-                                <td>
-                                    <input type="text" name="medicine_order" class="form-control" value="<?php echo htmlspecialchars($param['medicine_order']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="medicine_order_text" class="form-control" value="<?php echo htmlspecialchars($param['medicine_order_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is staff adhering to designated OT attire?</td>
-                                <td>
-                                    <input type="text" name="psychological" class="form-control" value="<?php echo htmlspecialchars($param['psychological']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="psychological_text" class="form-control" value="<?php echo htmlspecialchars($param['psychological_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are PPEs used appropriately?</td>
-                                <td>
-                                    <input type="text" name="vulnerab" class="form-control" value="<?php echo htmlspecialchars($param['vulnerab']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="vulnerab_text" class="form-control" value="<?php echo htmlspecialchars($param['vulnerab_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is the material flow inside the OT appropriate?</td>
-                                <td>
-                                    <input type="text" name="social" class="form-control" value="<?php echo htmlspecialchars($param['social']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="social_text" class="form-control" value="<?php echo htmlspecialchars($param['social_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are number of people inside OT restricted to Minimum required level?</td>
-                                <td>
-                                    <input type="text" name="nutri" class="form-control" value="<?php echo htmlspecialchars($param['nutri']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="nutri_text" class="form-control" value="<?php echo htmlspecialchars($param['nutri_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are operating room doors not opened during a procedure except for emergency purposes?</td>
-                                <td>
-                                    <input type="text" name="spiritual" class="form-control" value="<?php echo htmlspecialchars($param['spiritual']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="spiritual_text" class="form-control" value="<?php echo htmlspecialchars($param['spiritual_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are safe injection and infusion practices are followed?</td>
-                                <td>
-                                    <input type="text" name="suicide" class="form-control" value="<?php echo htmlspecialchars($param['suicide']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="suicide_text" class="form-control" value="<?php echo htmlspecialchars($param['suicide_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Is Good personal hygiene practiced?</td>
-                                <td>
-                                    <input type="text" name="risk" class="form-control" value="<?php echo htmlspecialchars($param['risk']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="risk_text" class="form-control" value="<?php echo htmlspecialchars($param['risk_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are spills kits adequate?</td>
-                                <td>
-                                    <input type="text" name="care" class="form-control" value="<?php echo htmlspecialchars($param['care']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="care_text" class="form-control" value="<?php echo htmlspecialchars($param['care_text']); ?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Are staff aware of infection control practices to be followed?</td>
-                                <td>
-                                    <input type="text" name="pfe" class="form-control" value="<?php echo htmlspecialchars($param['pfe']); ?>"><br>
-                                    <strong>Remarks:</strong>
-                                    <input type="text" name="pfe_text" class="form-control" value="<?php echo htmlspecialchars($param['pfe_text']); ?>">
-                                </td>
-                            </tr>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Select all datetime pickers
+                                const pickers = document.querySelectorAll(".datetime-picker");
+
+                                pickers.forEach(function (input) {
+                                    // Disable future dates dynamically
+                                    input.max = new Date().toISOString().slice(0, 16);
+
+                                    // Open the calendar/time picker when clicking anywhere in the box
+                                    input.addEventListener("click", function () {
+                                        this.showPicker?.();
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <script>
+                            // Force open calendar picker when clicking anywhere in the input box
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
+                                    this.showPicker(); // Opens the native calendar/clock popup
+                                });
+                            });
+                        </script>
+                        <style>
+                            .datetime-picker {
+                                cursor: pointer;
+                            }
+                        </style>
+
+
+                        <tr>
+                            <th colspan="2">OT Hygiene / Infection Control</th>
+                        </tr>
+                        <tr>
+                            <td>Are Floors clean?</td>
+                            <td>
+                                <?php $val = isset($param['identification_details']) ? strtolower(trim($param['identification_details'])) : ''; ?>
+                                <select class="form-control" name="identification_details">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="identification_details_text"
+                                        value="<?php echo isset($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are equipmentâ€™s inside OT cleaned?</td>
+                            <td>
+                                <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
+                                <select class="form-control" name="vital_signs">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="vital_signs_text"
+                                        value="<?php echo isset($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Disinfection done according to protocol?</td>
+                            <td>
+                                <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
+                                <select class="form-control" name="surgery">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="surgery_text"
+                                        value="<?php echo isset($param['surgery_text']) ? htmlspecialchars($param['surgery_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Waste segregation done appropriately?</td>
+                            <td>
+                                <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
+                                <select class="form-control" name="complaints_communicated">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="complaints_communicated_text"
+                                        value="<?php echo isset($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Hand washing available?</td>
+                            <td>
+                                <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
+                                <select class="form-control" name="intake">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="intake_text"
+                                        value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are all posters displayed eg. surgical Hand washing, BMW management?</td>
+                            <td>
+                                <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
+                                <select class="form-control" name="output">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="output_text"
+                                        value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are all instruments disinfected / sterilized?</td>
+                            <td>
+                                <?php $val = isset($param['focus']) ? strtolower(trim($param['focus'])) : ''; ?>
+                                <select class="form-control" name="focus">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="focus_text"
+                                        value="<?php echo isset($param['focus_text']) ? htmlspecialchars($param['focus_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are CSSD items stored appropriately in sterile room?</td>
+                            <td>
+                                <?php $val = isset($param['meti']) ? strtolower(trim($param['meti'])) : ''; ?>
+                                <select class="form-control" name="meti">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="meti_text"
+                                        value="<?php echo isset($param['meti_text']) ? htmlspecialchars($param['meti_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are Checks for the expiry dates of sterilized items done?</td>
+                            <td>
+                                <?php $val = isset($param['diagnostic']) ? strtolower(trim($param['diagnostic'])) : ''; ?>
+                                <select class="form-control" name="diagnostic">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="diagnostic_text"
+                                        value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Cleaning done after each OT utilization for 20 minutes?</td>
+                            <td>
+                                <?php $val = isset($param['lab_results']) ? strtolower(trim($param['lab_results'])) : ''; ?>
+                                <select class="form-control" name="lab_results">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="lab_results_text"
+                                        value="<?php echo isset($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are Temperature, Humidity and pressure monitored daily?</td>
+                            <td>
+                                <?php $val = isset($param['pending_investigation']) ? strtolower(trim($param['pending_investigation'])) : ''; ?>
+                                <select class="form-control" name="pending_investigation">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="pending_investigation_text"
+                                        value="<?php echo isset($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are OT temperature & Humidity maintained at appropriate levels?</td>
+                            <td>
+                                <?php $val = isset($param['medicine_order']) ? strtolower(trim($param['medicine_order'])) : ''; ?>
+                                <select class="form-control" name="medicine_order">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="medicine_order_text"
+                                        value="<?php echo isset($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is staff adhering to designated OT attire?</td>
+                            <td>
+                                <?php $val = isset($param['psychological']) ? strtolower(trim($param['psychological'])) : ''; ?>
+                                <select class="form-control" name="psychological">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="psychological_text"
+                                        value="<?php echo isset($param['psychological_text']) ? htmlspecialchars($param['psychological_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are PPEs used appropriately?</td>
+                            <td>
+                                <?php $val = isset($param['vulnerab']) ? strtolower(trim($param['vulnerab'])) : ''; ?>
+                                <select class="form-control" name="vulnerab">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="vulnerab_text"
+                                        value="<?php echo isset($param['vulnerab_text']) ? htmlspecialchars($param['vulnerab_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is the material flow inside the OT appropriate?</td>
+                            <td>
+                                <?php $val = isset($param['social']) ? strtolower(trim($param['social'])) : ''; ?>
+                                <select class="form-control" name="social">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="social_text"
+                                        value="<?php echo isset($param['social_text']) ? htmlspecialchars($param['social_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are number of people inside OT restricted to Minimum required level?</td>
+                            <td>
+                                <?php $val = isset($param['nutri']) ? strtolower(trim($param['nutri'])) : ''; ?>
+                                <select class="form-control" name="nutri">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="nutri_text"
+                                        value="<?php echo isset($param['nutri_text']) ? htmlspecialchars($param['nutri_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are operating room doors not opened during a procedure except for emergency purposes?
+                            </td>
+                            <td>
+                                <?php $val = isset($param['spiritual']) ? strtolower(trim($param['spiritual'])) : ''; ?>
+                                <select class="form-control" name="spiritual">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="spiritual_text"
+                                        value="<?php echo isset($param['spiritual_text']) ? htmlspecialchars($param['spiritual_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are safe injection and infusion practices are followed?</td>
+                            <td>
+                                <?php $val = isset($param['suicide']) ? strtolower(trim($param['suicide'])) : ''; ?>
+                                <select class="form-control" name="suicide">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="suicide_text"
+                                        value="<?php echo isset($param['suicide_text']) ? htmlspecialchars($param['suicide_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Is Good personal hygiene practiced?</td>
+                            <td>
+                                <?php $val = isset($param['risk']) ? strtolower(trim($param['risk'])) : ''; ?>
+                                <select class="form-control" name="risk">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="risk_text"
+                                        value="<?php echo isset($param['risk_text']) ? htmlspecialchars($param['risk_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are spills kits adequate?</td>
+                            <td>
+                                <?php $val = isset($param['care']) ? strtolower(trim($param['care'])) : ''; ?>
+                                <select class="form-control" name="care">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="care_text"
+                                        value="<?php echo isset($param['care_text']) ? htmlspecialchars($param['care_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Are staff aware of infection control practices to be followed?</td>
+                            <td>
+                                <?php $val = isset($param['pfe']) ? strtolower(trim($param['pfe'])) : ''; ?>
+                                <select class="form-control" name="pfe">
+                                    <option value="" <?php if ($val === '')
+                                        echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes')
+                                        echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no')
+                                        echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a')
+                                        echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="pfe_text"
+                                        value="<?php echo isset($param['pfe_text']) ? htmlspecialchars($param['pfe_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>Uploaded Files</b></td>
+                            <td>
+                                <?php
+                                // $param = json_decode($record->dataset, true);
+                                $existingFiles = !empty($param['files_name']) ? $param['files_name'] : [];
+                                ?>
+
+                                <!-- 🗂 Existing Files Section -->
+                                <div id="existing-files">
+                                    <?php if (!empty($existingFiles)) { ?>
+                                        <!-- <label><b>Current Files:</b></label> -->
+                                        <ul id="file-list" style="list-style-type:none; padding-left:0;">
+                                            <?php foreach ($existingFiles as $index => $file) { ?>
+                                                <li data-index="<?php echo $index; ?>"
+                                                    style="margin-bottom:6px; background:#f8f9fa; padding:6px 10px; border-radius:6px; display:flex; align-items:center; justify-content:space-between;">
+                                                    <a href="<?php echo htmlspecialchars($file['url']); ?>" target="_blank"
+                                                        style="text-decoration:none; color:#007bff;">
+                                                        <?php echo htmlspecialchars($file['name']); ?>
+                                                    </a>
+                                                    <button type="button" class="btn btn-sm btn-danger remove-file"
+                                                        style="margin-left:10px; padding:2px 6px; font-size:12px;">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <p id="no-files">No files uploaded</p>
+                                    <?php } ?>
+                                </div>
+
+                                <!-- 📤 Dynamic Upload Inputs -->
+                                <div class="form-group" id="upload-container" style="margin-top:10px;">
+                                    <label><b>Add New Files:</b></label>
+                                    <div class="upload-row"
+                                        style="display:flex; align-items:center; margin-bottom:6px;">
+                                        <input type="file" name="uploaded_files[]" class="form-control upload-input"
+                                            style="flex:1; margin-right:10px;">
+                                        <button type="button" class="btn btn-danger btn-sm remove-upload"
+                                            style="display:none;">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- ➕ Add More Files Button -->
+                                <button type="button" id="add-more-files" class="btn btn-sm btn-success"
+                                    style="margin-top:5px;">
+                                    <i class="fa fa-plus"></i> Add More Files
+                                </button>
+
+                                <!-- Hidden input for removed old files -->
+                                <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
+                            </td>
+                        </tr>
+<script>
+                            document.addEventListener("DOMContentLoaded", function () {
+
+                                // 🗑️ Handle removing existing old files
+                                const removeInput = document.getElementById("remove_files_json");
+                                let removedIndexes = [];
+
+                                document.querySelectorAll(".remove-file").forEach(btn => {
+                                    btn.addEventListener("click", function () {
+                                        const li = this.closest("li");
+                                        const index = li.getAttribute("data-index");
+                                        removedIndexes.push(index);
+                                        removeInput.value = JSON.stringify(removedIndexes);
+                                        li.remove();
+                                        if (document.querySelectorAll("#file-list li").length === 0) {
+                                            document.getElementById("existing-files").innerHTML = "<p id='no-files'>No files uploaded</p>";
+                                        }
+                                    });
+                                });
+
+                                // ➕ Dynamic "Add More Files"
+                                const addMoreBtn = document.getElementById("add-more-files");
+                                const uploadContainer = document.getElementById("upload-container");
+
+                                addMoreBtn.addEventListener("click", function () {
+                                    const newRow = document.createElement("div");
+                                    newRow.className = "upload-row";
+                                    newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
+
+                                    const input = document.createElement("input");
+                                    input.type = "file";
+                                    input.name = "uploaded_files[]";
+                                    input.className = "form-control upload-input";
+                                    input.style.cssText = "flex:1; margin-right:10px;";
+
+                                    const removeBtn = document.createElement("button");
+                                    removeBtn.type = "button";
+                                    removeBtn.className = "btn btn-danger btn-sm remove-upload";
+                                    removeBtn.innerHTML = '<i class="fa fa-times"></i>';
+                                    removeBtn.addEventListener("click", function () {
+                                        newRow.remove();
+                                    });
+                                    removeBtn.style.display = "inline-block";
+
+                                    newRow.appendChild(input);
+                                    newRow.appendChild(removeBtn);
+                                    uploadContainer.appendChild(newRow);
+                                });
+                            });
+                        </script>
 
 
 
@@ -297,7 +862,6 @@ $param = json_decode($row->dataset, true);
 
 
 
-                            
 
 
 
@@ -307,11 +871,13 @@ $param = json_decode($row->dataset, true);
 
 
 
-                                    
 
-                                    
 
-                                
+
+
+
+
+
 
 
 
@@ -324,7 +890,8 @@ $param = json_decode($row->dataset, true);
                                             <?php echo display('reset') ?>
                                         </button>
                                         <div class="or"></div>
-                                        <button type="submit" id="saveButton" class="ui positive button" style="text-align: left;">
+                                        <button type="submit" id="saveButton" class="ui positive button"
+                                            style="text-align: left;">
                                             <?php echo display('save') ?>
                                         </button>
                                     </div>
@@ -334,7 +901,7 @@ $param = json_decode($row->dataset, true);
 
                     </table>
 
-                    
+
 
                     </form>
 
@@ -374,7 +941,7 @@ $param = json_decode($row->dataset, true);
 
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
+    document.getElementById('saveButton').addEventListener('click', function () {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

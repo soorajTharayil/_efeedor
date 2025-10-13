@@ -53,6 +53,9 @@ $audit_doctor_tooltip = "Page for Adding/Editing the doctor";
 
 $audit_area_tooltip = "Page for Adding/Editing the area";
 
+$audit_custdian_tooltip = "Page for display the custdians";
+
+
 
 
 
@@ -109,7 +112,7 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 								</tr>
 
 
-								<?php if (ismodule_active('GLOBAL') === true && isfeature_active('SUPPLEMENTARY-INFO') === true || $this->session->userdata['user_role'] == 1) { ?>
+								<!-- <?php if (ismodule_active('GLOBAL') === true && isfeature_active('SUPPLEMENTARY-INFO') === true || $this->session->userdata['user_role'] == 1) { ?>
 									<tr>
 
 										<td><b><?php echo lang_loader('global', 'global_supplementary_info'); ?></b>
@@ -132,7 +135,7 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 										</td>
 
 									</tr>
-								<?php } ?>
+								<?php } ?> -->
 
 
 								<?php if (isfeature_active('IP-FEEDBACKS-DASHBOARD') === true || isfeature_active('OP-FEEDBACKS-DASHBOARD') === true || isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
@@ -222,7 +225,7 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 
 										<tr>
 
-											<td><b><?php echo lang_loader('global', 'global_floors_sites_service'); ?></b>
+											<td><b>Floors & Sites for Incident </b>
 												<span>
 													<a href="javascript:void()" data-toggle="tooltip"
 														title="<?php echo $isr_floor_tooltip; ?>" data-placement="right">
@@ -508,13 +511,13 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 
 								<?php if (ismodule_active('QUALITY') === true && isfeature_active('QUALITY-DASHBOARD') === true) { ?>
 									<tr>
-										<td colspan="2"><strong><span style="font-size: 18px;">Manage Quality Module</span></strong>
+										<td colspan="2"><strong><span style="font-size: 18px;">Manage KPI Module</span></strong>
 										</td>
 									</tr>
 
 									<tr>
 
-										<td><b>Set bench mark time for KPIs</b>
+										<td><b>Set Benchmark time for KPIs</b>
 											<span>
 												<a href="javascript:void()" data-toggle="tooltip"
 													title="<?php echo $benchmark_tooltip; ?>" data-placement="right">
@@ -580,7 +583,7 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 
 									<tr>
 
-										<td><b>Audit doctor list</b>
+										<td><b>Audit Doctor lists</b>
 											<span>
 												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_doctor_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -598,7 +601,7 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 
 									<tr>
 
-										<td><b>Audit area list</b>
+										<td><b>Audit Patient Area lists</b>
 											<span>
 												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_area_tooltip; ?>" data-placement="right">
 													<i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -609,6 +612,24 @@ $audit_area_tooltip = "Page for Adding/Editing the area";
 										<td>
 
 											<a class="btn btn-success" href="<?php echo base_url("settings/audit_area") ?>" target="_blank"> <i class="fa fa-gear"></i> <?php echo lang_loader('global', 'global_manage'); ?> </a>
+
+										</td>
+
+									</tr>
+
+									<tr>
+
+										<td><b>Audit Custodians lists</b>
+											<span>
+												<a href="javascript:void()" data-toggle="tooltip" title="<?php echo $audit_custdian_tooltip; ?>" data-placement="right">
+													<i class="fa fa-info-circle" aria-hidden="true"></i>
+												</a>
+											</span>
+										</td>
+
+										<td>
+
+											<a class="btn btn-success" href="<?php echo base_url("settings/audit_custodians") ?>" target="_blank"> <i class="fa fa-eye"></i> View</a>
 
 										</td>
 

@@ -203,6 +203,276 @@ $feedbacks_report_CQI3j31 = base_url('quality/feedbacks_report_CQI3j31');
 $feedbacks_report_CQI3j32 = base_url('quality/feedbacks_report_CQI3j32');
 $feedbacks_report_CQI3j33 = base_url('quality/feedbacks_report_CQI3j33');
 $feedbacks_report_CQI3j34 = base_url('quality/feedbacks_report_CQI3j34');
+// ======================== CQI4a1 → CQI4a5 ========================
+$feedbacks_report_CQI4a1 = base_url('quality/feedbacks_report_CQI4a1');
+$feedbacks_report_CQI4a2 = base_url('quality/feedbacks_report_CQI4a2');
+$feedbacks_report_CQI4a3 = base_url('quality/feedbacks_report_CQI4a3');
+$feedbacks_report_CQI4a4 = base_url('quality/feedbacks_report_CQI4a4');
+$feedbacks_report_CQI4a5 = base_url('quality/feedbacks_report_CQI4a5');
+
+// ======================== CQI4b1 → CQI4b8 ========================
+$feedbacks_report_CQI4b1 = base_url('quality/feedbacks_report_CQI4b1');
+$feedbacks_report_CQI4b2 = base_url('quality/feedbacks_report_CQI4b2');
+$feedbacks_report_CQI4b3 = base_url('quality/feedbacks_report_CQI4b3');
+$feedbacks_report_CQI4b4 = base_url('quality/feedbacks_report_CQI4b4');
+$feedbacks_report_CQI4b5 = base_url('quality/feedbacks_report_CQI4b5');
+$feedbacks_report_CQI4b6 = base_url('quality/feedbacks_report_CQI4b6');
+$feedbacks_report_CQI4b7 = base_url('quality/feedbacks_report_CQI4b7');
+$feedbacks_report_CQI4b8 = base_url('quality/feedbacks_report_CQI4b8');
+
+// ======================== CQI4c1 → CQI4c14 ========================
+$feedbacks_report_CQI4c1 = base_url('quality/feedbacks_report_CQI4c1');
+$feedbacks_report_CQI4c2 = base_url('quality/feedbacks_report_CQI4c2');
+$feedbacks_report_CQI4c3 = base_url('quality/feedbacks_report_CQI4c3');
+$feedbacks_report_CQI4c4 = base_url('quality/feedbacks_report_CQI4c4');
+$feedbacks_report_CQI4c5 = base_url('quality/feedbacks_report_CQI4c5');
+$feedbacks_report_CQI4c6 = base_url('quality/feedbacks_report_CQI4c6');
+$feedbacks_report_CQI4c7 = base_url('quality/feedbacks_report_CQI4c7');
+$feedbacks_report_CQI4c8 = base_url('quality/feedbacks_report_CQI4c8');
+$feedbacks_report_CQI4c9 = base_url('quality/feedbacks_report_CQI4c9');
+$feedbacks_report_CQI4c10 = base_url('quality/feedbacks_report_CQI4c10');
+$feedbacks_report_CQI4c11 = base_url('quality/feedbacks_report_CQI4c11');
+$feedbacks_report_CQI4c12 = base_url('quality/feedbacks_report_CQI4c12');
+$feedbacks_report_CQI4c13 = base_url('quality/feedbacks_report_CQI4c13');
+$feedbacks_report_CQI4c14 = base_url('quality/feedbacks_report_CQI4c14');
+
+// ======================== CQI4d1 → CQI4d11 ========================
+$feedbacks_report_CQI4d1 = base_url('quality/feedbacks_report_CQI4d1');
+$feedbacks_report_CQI4d2 = base_url('quality/feedbacks_report_CQI4d2');
+$feedbacks_report_CQI4d3 = base_url('quality/feedbacks_report_CQI4d3');
+$feedbacks_report_CQI4d4 = base_url('quality/feedbacks_report_CQI4d4');
+$feedbacks_report_CQI4d5 = base_url('quality/feedbacks_report_CQI4d5');
+$feedbacks_report_CQI4d6 = base_url('quality/feedbacks_report_CQI4d6');
+$feedbacks_report_CQI4d7 = base_url('quality/feedbacks_report_CQI4d7');
+$feedbacks_report_CQI4d8 = base_url('quality/feedbacks_report_CQI4d8');
+$feedbacks_report_CQI4d9 = base_url('quality/feedbacks_report_CQI4d9');
+$feedbacks_report_CQI4d10 = base_url('quality/feedbacks_report_CQI4d10');
+$feedbacks_report_CQI4d11 = base_url('quality/feedbacks_report_CQI4d11');
+
+// ======================== CQI4e1 → CQI4e8 ========================
+$feedbacks_report_CQI4e1 = base_url('quality/feedbacks_report_CQI4e1');
+$feedbacks_report_CQI4e2 = base_url('quality/feedbacks_report_CQI4e2');
+$feedbacks_report_CQI4e3 = base_url('quality/feedbacks_report_CQI4e3');
+$feedbacks_report_CQI4e4 = base_url('quality/feedbacks_report_CQI4e4');
+$feedbacks_report_CQI4e5 = base_url('quality/feedbacks_report_CQI4e5');
+$feedbacks_report_CQI4e6 = base_url('quality/feedbacks_report_CQI4e6');
+$feedbacks_report_CQI4e7 = base_url('quality/feedbacks_report_CQI4e7');
+$feedbacks_report_CQI4e8 = base_url('quality/feedbacks_report_CQI4e8');
+
+// ======================== CQI4f1 → CQI4f7 ========================
+$feedbacks_report_CQI4f1 = base_url('quality/feedbacks_report_CQI4f1');
+$feedbacks_report_CQI4f2 = base_url('quality/feedbacks_report_CQI4f2');
+$feedbacks_report_CQI4f3 = base_url('quality/feedbacks_report_CQI4f3');
+$feedbacks_report_CQI4f4 = base_url('quality/feedbacks_report_CQI4f4');
+$feedbacks_report_CQI4f5 = base_url('quality/feedbacks_report_CQI4f5');
+$feedbacks_report_CQI4f6 = base_url('quality/feedbacks_report_CQI4f6');
+$feedbacks_report_CQI4f7 = base_url('quality/feedbacks_report_CQI4f7');
+
+// ======================== CQI4g1 → CQI4g6 ========================
+$feedbacks_report_CQI4g1 = base_url('quality/feedbacks_report_CQI4g1');
+$feedbacks_report_CQI4g2 = base_url('quality/feedbacks_report_CQI4g2');
+$feedbacks_report_CQI4g3 = base_url('quality/feedbacks_report_CQI4g3');
+$feedbacks_report_CQI4g4 = base_url('quality/feedbacks_report_CQI4g4');
+$feedbacks_report_CQI4g5 = base_url('quality/feedbacks_report_CQI4g5');
+$feedbacks_report_CQI4g6 = base_url('quality/feedbacks_report_CQI4g6');
+
+// ======================== CQI3k1 → CQI3k50 ========================
+$feedbacks_report_CQI3k1 = base_url('quality/feedbacks_report_CQI3k1');
+$feedbacks_report_CQI3k2 = base_url('quality/feedbacks_report_CQI3k2');
+$feedbacks_report_CQI3k3 = base_url('quality/feedbacks_report_CQI3k3');
+$feedbacks_report_CQI3k4 = base_url('quality/feedbacks_report_CQI3k4');
+$feedbacks_report_CQI3k5 = base_url('quality/feedbacks_report_CQI3k5');
+$feedbacks_report_CQI3k6 = base_url('quality/feedbacks_report_CQI3k6');
+$feedbacks_report_CQI3k7 = base_url('quality/feedbacks_report_CQI3k7');
+$feedbacks_report_CQI3k8 = base_url('quality/feedbacks_report_CQI3k8');
+$feedbacks_report_CQI3k9 = base_url('quality/feedbacks_report_CQI3k9');
+$feedbacks_report_CQI3k10 = base_url('quality/feedbacks_report_CQI3k10');
+$feedbacks_report_CQI3k11 = base_url('quality/feedbacks_report_CQI3k11');
+$feedbacks_report_CQI3k12 = base_url('quality/feedbacks_report_CQI3k12');
+$feedbacks_report_CQI3k13 = base_url('quality/feedbacks_report_CQI3k13');
+$feedbacks_report_CQI3k14 = base_url('quality/feedbacks_report_CQI3k14');
+$feedbacks_report_CQI3k15 = base_url('quality/feedbacks_report_CQI3k15');
+$feedbacks_report_CQI3k16 = base_url('quality/feedbacks_report_CQI3k16');
+$feedbacks_report_CQI3k17 = base_url('quality/feedbacks_report_CQI3k17');
+$feedbacks_report_CQI3k18 = base_url('quality/feedbacks_report_CQI3k18');
+$feedbacks_report_CQI3k19 = base_url('quality/feedbacks_report_CQI3k19');
+$feedbacks_report_CQI3k20 = base_url('quality/feedbacks_report_CQI3k20');
+$feedbacks_report_CQI3k21 = base_url('quality/feedbacks_report_CQI3k21');
+$feedbacks_report_CQI3k22 = base_url('quality/feedbacks_report_CQI3k22');
+$feedbacks_report_CQI3k23 = base_url('quality/feedbacks_report_CQI3k23');
+$feedbacks_report_CQI3k24 = base_url('quality/feedbacks_report_CQI3k24');
+$feedbacks_report_CQI3k25 = base_url('quality/feedbacks_report_CQI3k25');
+$feedbacks_report_CQI3k26 = base_url('quality/feedbacks_report_CQI3k26');
+$feedbacks_report_CQI3k27 = base_url('quality/feedbacks_report_CQI3k27');
+$feedbacks_report_CQI3k28 = base_url('quality/feedbacks_report_CQI3k28');
+$feedbacks_report_CQI3k29 = base_url('quality/feedbacks_report_CQI3k29');
+$feedbacks_report_CQI3k30 = base_url('quality/feedbacks_report_CQI3k30');
+$feedbacks_report_CQI3k31 = base_url('quality/feedbacks_report_CQI3k31');
+$feedbacks_report_CQI3k32 = base_url('quality/feedbacks_report_CQI3k32');
+$feedbacks_report_CQI3k33 = base_url('quality/feedbacks_report_CQI3k33');
+$feedbacks_report_CQI3k34 = base_url('quality/feedbacks_report_CQI3k34');
+$feedbacks_report_CQI3k35 = base_url('quality/feedbacks_report_CQI3k35');
+$feedbacks_report_CQI3k36 = base_url('quality/feedbacks_report_CQI3k36');
+$feedbacks_report_CQI3k37 = base_url('quality/feedbacks_report_CQI3k37');
+$feedbacks_report_CQI3k38 = base_url('quality/feedbacks_report_CQI3k38');
+$feedbacks_report_CQI3k39 = base_url('quality/feedbacks_report_CQI3k39');
+$feedbacks_report_CQI3k40 = base_url('quality/feedbacks_report_CQI3k40');
+$feedbacks_report_CQI3k41 = base_url('quality/feedbacks_report_CQI3k41');
+$feedbacks_report_CQI3k42 = base_url('quality/feedbacks_report_CQI3k42');
+$feedbacks_report_CQI3k43 = base_url('quality/feedbacks_report_CQI3k43');
+$feedbacks_report_CQI3k44 = base_url('quality/feedbacks_report_CQI3k44');
+$feedbacks_report_CQI3k45 = base_url('quality/feedbacks_report_CQI3k45');
+$feedbacks_report_CQI3k46 = base_url('quality/feedbacks_report_CQI3k46');
+$feedbacks_report_CQI3k47 = base_url('quality/feedbacks_report_CQI3k47');
+$feedbacks_report_CQI3k48 = base_url('quality/feedbacks_report_CQI3k48');
+$feedbacks_report_CQI3k49 = base_url('quality/feedbacks_report_CQI3k49');
+$feedbacks_report_CQI3k50 = base_url('quality/feedbacks_report_CQI3k50');
+// ======================== CQI3k51 → CQI3k64 ========================
+$feedbacks_report_CQI3k51 = base_url('quality/feedbacks_report_CQI3k51');
+$feedbacks_report_CQI3k52 = base_url('quality/feedbacks_report_CQI3k52');
+$feedbacks_report_CQI3k53 = base_url('quality/feedbacks_report_CQI3k53');
+$feedbacks_report_CQI3k54 = base_url('quality/feedbacks_report_CQI3k54');
+$feedbacks_report_CQI3k55 = base_url('quality/feedbacks_report_CQI3k55');
+$feedbacks_report_CQI3k56 = base_url('quality/feedbacks_report_CQI3k56');
+$feedbacks_report_CQI3k57 = base_url('quality/feedbacks_report_CQI3k57');
+$feedbacks_report_CQI3k58 = base_url('quality/feedbacks_report_CQI3k58');
+$feedbacks_report_CQI3k59 = base_url('quality/feedbacks_report_CQI3k59');
+$feedbacks_report_CQI3k60 = base_url('quality/feedbacks_report_CQI3k60');
+$feedbacks_report_CQI3k61 = base_url('quality/feedbacks_report_CQI3k61');
+$feedbacks_report_CQI3k62 = base_url('quality/feedbacks_report_CQI3k62');
+$feedbacks_report_CQI3k63 = base_url('quality/feedbacks_report_CQI3k63');
+$feedbacks_report_CQI3k64 = base_url('quality/feedbacks_report_CQI3k64');
+
+// ======================== CQI4h1 → CQI4h55 ========================
+$feedbacks_report_CQI4h1 = base_url('quality/feedbacks_report_CQI4h1');
+$feedbacks_report_CQI4h2 = base_url('quality/feedbacks_report_CQI4h2');
+$feedbacks_report_CQI4h3 = base_url('quality/feedbacks_report_CQI4h3');
+$feedbacks_report_CQI4h4 = base_url('quality/feedbacks_report_CQI4h4');
+$feedbacks_report_CQI4h5 = base_url('quality/feedbacks_report_CQI4h5');
+$feedbacks_report_CQI4h6 = base_url('quality/feedbacks_report_CQI4h6');
+$feedbacks_report_CQI4h7 = base_url('quality/feedbacks_report_CQI4h7');
+$feedbacks_report_CQI4h8 = base_url('quality/feedbacks_report_CQI4h8');
+$feedbacks_report_CQI4h9 = base_url('quality/feedbacks_report_CQI4h9');
+$feedbacks_report_CQI4h10 = base_url('quality/feedbacks_report_CQI4h10');
+$feedbacks_report_CQI4h11 = base_url('quality/feedbacks_report_CQI4h11');
+$feedbacks_report_CQI4h12 = base_url('quality/feedbacks_report_CQI4h12');
+$feedbacks_report_CQI4h13 = base_url('quality/feedbacks_report_CQI4h13');
+$feedbacks_report_CQI4h14 = base_url('quality/feedbacks_report_CQI4h14');
+$feedbacks_report_CQI4h15 = base_url('quality/feedbacks_report_CQI4h15');
+$feedbacks_report_CQI4h16 = base_url('quality/feedbacks_report_CQI4h16');
+$feedbacks_report_CQI4h17 = base_url('quality/feedbacks_report_CQI4h17');
+$feedbacks_report_CQI4h18 = base_url('quality/feedbacks_report_CQI4h18');
+$feedbacks_report_CQI4h19 = base_url('quality/feedbacks_report_CQI4h19');
+$feedbacks_report_CQI4h20 = base_url('quality/feedbacks_report_CQI4h20');
+$feedbacks_report_CQI4h21 = base_url('quality/feedbacks_report_CQI4h21');
+$feedbacks_report_CQI4h22 = base_url('quality/feedbacks_report_CQI4h22');
+$feedbacks_report_CQI4h23 = base_url('quality/feedbacks_report_CQI4h23');
+$feedbacks_report_CQI4h24 = base_url('quality/feedbacks_report_CQI4h24');
+$feedbacks_report_CQI4h25 = base_url('quality/feedbacks_report_CQI4h25');
+$feedbacks_report_CQI4h26 = base_url('quality/feedbacks_report_CQI4h26');
+$feedbacks_report_CQI4h27 = base_url('quality/feedbacks_report_CQI4h27');
+$feedbacks_report_CQI4h28 = base_url('quality/feedbacks_report_CQI4h28');
+$feedbacks_report_CQI4h29 = base_url('quality/feedbacks_report_CQI4h29');
+$feedbacks_report_CQI4h30 = base_url('quality/feedbacks_report_CQI4h30');
+$feedbacks_report_CQI4h31 = base_url('quality/feedbacks_report_CQI4h31');
+$feedbacks_report_CQI4h32 = base_url('quality/feedbacks_report_CQI4h32');
+$feedbacks_report_CQI4h33 = base_url('quality/feedbacks_report_CQI4h33');
+$feedbacks_report_CQI4h34 = base_url('quality/feedbacks_report_CQI4h34');
+$feedbacks_report_CQI4h35 = base_url('quality/feedbacks_report_CQI4h35');
+$feedbacks_report_CQI4h36 = base_url('quality/feedbacks_report_CQI4h36');
+$feedbacks_report_CQI4h37 = base_url('quality/feedbacks_report_CQI4h37');
+$feedbacks_report_CQI4h38 = base_url('quality/feedbacks_report_CQI4h38');
+$feedbacks_report_CQI4h39 = base_url('quality/feedbacks_report_CQI4h39');
+$feedbacks_report_CQI4h40 = base_url('quality/feedbacks_report_CQI4h40');
+$feedbacks_report_CQI4h41 = base_url('quality/feedbacks_report_CQI4h41');
+$feedbacks_report_CQI4h42 = base_url('quality/feedbacks_report_CQI4h42');
+$feedbacks_report_CQI4h43 = base_url('quality/feedbacks_report_CQI4h43');
+$feedbacks_report_CQI4h44 = base_url('quality/feedbacks_report_CQI4h44');
+$feedbacks_report_CQI4h45 = base_url('quality/feedbacks_report_CQI4h45');
+$feedbacks_report_CQI4h46 = base_url('quality/feedbacks_report_CQI4h46');
+$feedbacks_report_CQI4h47 = base_url('quality/feedbacks_report_CQI4h47');
+$feedbacks_report_CQI4h48 = base_url('quality/feedbacks_report_CQI4h48');
+$feedbacks_report_CQI4h49 = base_url('quality/feedbacks_report_CQI4h49');
+$feedbacks_report_CQI4h50 = base_url('quality/feedbacks_report_CQI4h50');
+$feedbacks_report_CQI4h51 = base_url('quality/feedbacks_report_CQI4h51');
+$feedbacks_report_CQI4h52 = base_url('quality/feedbacks_report_CQI4h52');
+$feedbacks_report_CQI4h53 = base_url('quality/feedbacks_report_CQI4h53');
+$feedbacks_report_CQI4h54 = base_url('quality/feedbacks_report_CQI4h54');
+$feedbacks_report_CQI4h55 = base_url('quality/feedbacks_report_CQI4h55');
+
+// ======================== CLOTCM1 → CLOTCM30 ========================
+$feedbacks_report_CLOTCM1 = base_url('quality/feedbacks_report_CLOTCM1');
+$feedbacks_report_CLOTCM2 = base_url('quality/feedbacks_report_CLOTCM2');
+$feedbacks_report_CLOTCM3 = base_url('quality/feedbacks_report_CLOTCM3');
+$feedbacks_report_CLOTCM4 = base_url('quality/feedbacks_report_CLOTCM4');
+$feedbacks_report_CLOTCM5 = base_url('quality/feedbacks_report_CLOTCM5');
+$feedbacks_report_CLOTCM6 = base_url('quality/feedbacks_report_CLOTCM6');
+$feedbacks_report_CLOTCM7 = base_url('quality/feedbacks_report_CLOTCM7');
+$feedbacks_report_CLOTCM8 = base_url('quality/feedbacks_report_CLOTCM8');
+$feedbacks_report_CLOTCM9 = base_url('quality/feedbacks_report_CLOTCM9');
+$feedbacks_report_CLOTCM10 = base_url('quality/feedbacks_report_CLOTCM10');
+$feedbacks_report_CLOTCM11 = base_url('quality/feedbacks_report_CLOTCM11');
+$feedbacks_report_CLOTCM12 = base_url('quality/feedbacks_report_CLOTCM12');
+$feedbacks_report_CLOTCM13 = base_url('quality/feedbacks_report_CLOTCM13');
+$feedbacks_report_CLOTCM14 = base_url('quality/feedbacks_report_CLOTCM14');
+$feedbacks_report_CLOTCM15 = base_url('quality/feedbacks_report_CLOTCM15');
+$feedbacks_report_CLOTCM16 = base_url('quality/feedbacks_report_CLOTCM16');
+$feedbacks_report_CLOTCM17 = base_url('quality/feedbacks_report_CLOTCM17');
+$feedbacks_report_CLOTCM18 = base_url('quality/feedbacks_report_CLOTCM18');
+$feedbacks_report_CLOTCM19 = base_url('quality/feedbacks_report_CLOTCM19');
+$feedbacks_report_CLOTCM20 = base_url('quality/feedbacks_report_CLOTCM20');
+$feedbacks_report_CLOTCM21 = base_url('quality/feedbacks_report_CLOTCM21');
+$feedbacks_report_CLOTCM22 = base_url('quality/feedbacks_report_CLOTCM22');
+$feedbacks_report_CLOTCM23 = base_url('quality/feedbacks_report_CLOTCM23');
+$feedbacks_report_CLOTCM24 = base_url('quality/feedbacks_report_CLOTCM24');
+$feedbacks_report_CLOTCM25 = base_url('quality/feedbacks_report_CLOTCM25');
+$feedbacks_report_CLOTCM26 = base_url('quality/feedbacks_report_CLOTCM26');
+$feedbacks_report_CLOTCM27 = base_url('quality/feedbacks_report_CLOTCM27');
+$feedbacks_report_CLOTCM28 = base_url('quality/feedbacks_report_CLOTCM28');
+$feedbacks_report_CLOTCM29 = base_url('quality/feedbacks_report_CLOTCM29');
+$feedbacks_report_CLOTCM30 = base_url('quality/feedbacks_report_CLOTCM30');
+
+// ======================== CQI4i1 → CQI4i14 ========================
+$feedbacks_report_CQI4i1 = base_url('quality/feedbacks_report_CQI4i1');
+$feedbacks_report_CQI4i2 = base_url('quality/feedbacks_report_CQI4i2');
+$feedbacks_report_CQI4i3 = base_url('quality/feedbacks_report_CQI4i3');
+$feedbacks_report_CQI4i4 = base_url('quality/feedbacks_report_CQI4i4');
+$feedbacks_report_CQI4i5 = base_url('quality/feedbacks_report_CQI4i5');
+$feedbacks_report_CQI4i6 = base_url('quality/feedbacks_report_CQI4i6');
+$feedbacks_report_CQI4i7 = base_url('quality/feedbacks_report_CQI4i7');
+$feedbacks_report_CQI4i8 = base_url('quality/feedbacks_report_CQI4i8');
+$feedbacks_report_CQI4i9 = base_url('quality/feedbacks_report_CQI4i9');
+$feedbacks_report_CQI4i10 = base_url('quality/feedbacks_report_CQI4i10');
+$feedbacks_report_CQI4i11 = base_url('quality/feedbacks_report_CQI4i11');
+$feedbacks_report_CQI4i12 = base_url('quality/feedbacks_report_CQI4i12');
+$feedbacks_report_CQI4i13 = base_url('quality/feedbacks_report_CQI4i13');
+$feedbacks_report_CQI4i14 = base_url('quality/feedbacks_report_CQI4i14');
+
+// ======================== CQI4j1 → CQI4j22 ========================
+$feedbacks_report_CQI4j1 = base_url('quality/feedbacks_report_CQI4j1');
+$feedbacks_report_CQI4j2 = base_url('quality/feedbacks_report_CQI4j2');
+$feedbacks_report_CQI4j3 = base_url('quality/feedbacks_report_CQI4j3');
+$feedbacks_report_CQI4j4 = base_url('quality/feedbacks_report_CQI4j4');
+$feedbacks_report_CQI4j5 = base_url('quality/feedbacks_report_CQI4j5');
+$feedbacks_report_CQI4j6 = base_url('quality/feedbacks_report_CQI4j6');
+$feedbacks_report_CQI4j7 = base_url('quality/feedbacks_report_CQI4j7');
+$feedbacks_report_CQI4j8 = base_url('quality/feedbacks_report_CQI4j8');
+$feedbacks_report_CQI4j9 = base_url('quality/feedbacks_report_CQI4j9');
+$feedbacks_report_CQI4j10 = base_url('quality/feedbacks_report_CQI4j10');
+$feedbacks_report_CQI4j11 = base_url('quality/feedbacks_report_CQI4j11');
+$feedbacks_report_CQI4j12 = base_url('quality/feedbacks_report_CQI4j12');
+$feedbacks_report_CQI4j13 = base_url('quality/feedbacks_report_CQI4j13');
+$feedbacks_report_CQI4j14 = base_url('quality/feedbacks_report_CQI4j14');
+$feedbacks_report_CQI4j15 = base_url('quality/feedbacks_report_CQI4j15');
+$feedbacks_report_CQI4j16 = base_url('quality/feedbacks_report_CQI4j16');
+$feedbacks_report_CQI4j17 = base_url('quality/feedbacks_report_CQI4j17');
+$feedbacks_report_CQI4j18 = base_url('quality/feedbacks_report_CQI4j18');
+$feedbacks_report_CQI4j19 = base_url('quality/feedbacks_report_CQI4j19');
+$feedbacks_report_CQI4j20 = base_url('quality/feedbacks_report_CQI4j20');
+$feedbacks_report_CQI4j21 = base_url('quality/feedbacks_report_CQI4j21');
+$feedbacks_report_CQI4j22 = base_url('quality/feedbacks_report_CQI4j22');
+
+
 
 
 

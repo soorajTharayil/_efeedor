@@ -30,11 +30,11 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="QUALITY INDICATOR MANAGER <KPI ID>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>  Average Time for initial assessment of in-patients (Nurses)-(Nursing-Ward)  tients(Nurses)-(Emergency Department)- <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="QUALITY INDICATOR MANAGER <KPI ID>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>  Average Time for initial assessment of in-patients (Nurses)-(Nursing-Ward)- <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
-									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI3a8/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
+									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI3a9/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
 							<div class="panel-body" style="background: #fff;">
@@ -98,7 +98,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><b>Data collection on</b></td>
+										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($param->datetime)); ?></td>
 									</tr>
 
@@ -265,7 +265,7 @@
 				<script>
 					// Data
 					var benchmark = "<?php echo $param['benchmark']; ?>"; // Benchmark value
-					var calculated = "<?php echo $result->average_time_taken_initial_assessment; ?>"; // Calculated value
+					var calculated = "<?php echo $param['calculatedResult']; ?>"; // Calculated value
 					var monthyear = "<?php echo date('M-Y', strtotime($result->datetime)); ?>"; // Date value
 
 					// Parse times to seconds

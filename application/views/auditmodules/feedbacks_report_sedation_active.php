@@ -104,7 +104,7 @@
 
 								<th>Department</th>
 								<th>Attended Doctor</th>
-								<th>Admission Date & Time</th>
+								<th>Admission / Visit Date & Time</th>
 								<th>Discharge Date & Time</th>
 								<th>View</th>
 

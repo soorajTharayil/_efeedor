@@ -51,26 +51,27 @@ function ismodule_active($module)
 }
 
 
-
-function get_from_to_date()
+function get_from_to_date($requestFrom = null)
 {
 	$y = date('Y');
 
 	$pagetitle = 'NO TITLE';
-	// $tdate = date('Y-m-d', strtotime('-30 days')); //change for default time 30 days
-	// 	$_SESSION['from_date'] = $fdate;
-	// 	$_SESSION['to_date'] = $tdate;
+	
+	if(!isset($_SESSION['quality_date']) && $requestFrom == "QUALITY"){
+		$tdate = date('Y-m-01'); // First day of the current month
+		$fdate = date('Y-m-d'); // Current date
+		$_SESSION['from_date'] = $fdate;
+		$_SESSION['quality_date'] = 1;
+		$_SESSION['to_date'] = $tdate;
+		$days = (int) date('d');
+		$pagetitle = "Current Month";
+	}
 	if (!isset($_SESSION['from_date']) && !isset($_SESSION['to_date'])) {
 		$fdate = date('Y-m-d', time());
-		// $tdate  = date('Y-m-01'); // First day of the current month
 		$tdate = date('Y-m-d', strtotime('-30 days')); //change for default time 30 days
-		// $tdate = date('Y-m-d', strtotime('-90 days'));
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-
-		//$pagetitle = 'Last 90 Days';
-		//$pagetitle = 'Last 30 Days';
-		$pagetitle = "Current Month";
+		$pagetitle = 'Last 30 Days';
 
 		$_SESSION['pagetitle'] = $pagetitle;
 	} else {
@@ -79,9 +80,7 @@ function get_from_to_date()
 	}
 
 	//$pagetitle = 'Last 90 Days';
-	// $pagetitle = 'Last 30 Days'; //change for default time 30 days
-	$pagetitle = "Current Month";
-
+	$pagetitle = 'Last 30 Days'; //change for default time 30 days
 	if (isset($_GET['today'])) {
 		$pagetitle = "Last 24 Hours";
 	}
@@ -141,26 +140,20 @@ function get_from_to_date()
 	if (isset($_GET['fdate']) && isset($_GET['tdate'])) {
 		$fdate = $_GET['fdate'];
 		$tdate = $_GET['tdate'];
-
-		// Convert to Y-m-d if it contains slashes
-		if (strpos($fdate, '/') !== false) {
-			$fdate = DateTime::createFromFormat('d/m/Y', $fdate)->format('Y-m-d');
-		}
-		if (strpos($tdate, '/') !== false) {
-			$tdate = DateTime::createFromFormat('d/m/Y', $tdate)->format('Y-m-d');
-		}
-
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-
-		$pagetitle = ($fdate !== $tdate) ? 'Custom' : 'Last 24 Hours';
+		if ($fdate != $tdate) {
+			$pagetitle = 'Custom';
+		} else {
+			$pagetitle = "Last 24 Hours";
+		}
 	}
 	if (isset($_GET['this_month'])) {
 		$tdate = date('Y-m-01'); // First day of the current month
-		$fdate = date('Y-m-t'); // Current date
+		$fdate = date('Y-m-d'); // Current date
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-		$days = (int) date('t');
+		$days = (int) date('d');
 		$pagetitle = "Current Month";
 	}
 	if (isset($_GET['today_only'])) {
@@ -170,25 +163,7 @@ function get_from_to_date()
 		$_SESSION['to_date'] = $tdate;
 		$pagetitle = "Today";
 	}
-
-	if (isset($_GET['previous_day'])) {
-		$fdate = date('Y-m-d', strtotime('-1 day')); // Previous day's date
-		$tdate = date('Y-m-d', strtotime('-1 day')); // Previous day's date
-		$_SESSION['from_date'] = $fdate;
-		$_SESSION['to_date'] = $tdate;
-		$pagetitle = "Previous Day";
-	}
-	if (isset($_GET['last_month'])) {
-		$tdate = date('Y-m-01', strtotime('first day of previous month')); // First day of last month
-		$fdate = date('Y-m-t', strtotime('last day of previous month')); // Last day of last month
-		$_SESSION['from_date'] = $fdate;
-		$_SESSION['to_date'] = $tdate;
-		$days = (int) date('t', strtotime('-1 month'));
-		$pagetitle = "Previous Month";
-	}
-
-	// --- NEW OPTIONS ---
-
+	
 	// Current Quarter
 	if (isset($_GET['current_quarter'])) {
 		$currentMonth = date('n');
@@ -231,8 +206,21 @@ function get_from_to_date()
 		$pagetitle = "Current Year";
 	}
 
-
-	// --- END NEW OPTIONS ---
+	if (isset($_GET['previous_day'])) {
+		$fdate = date('Y-m-d', strtotime('-1 day')); // Previous day's date
+		$tdate = date('Y-m-d', strtotime('-1 day')); // Previous day's date
+		$_SESSION['from_date'] = $fdate;
+		$_SESSION['to_date'] = $tdate;
+		$pagetitle = "Previous Day";
+	}
+	if (isset($_GET['last_month'])) {
+		$tdate = date('Y-m-01', strtotime('first day of previous month')); // First day of last month
+		$fdate = date('Y-m-t', strtotime('last day of previous month')); // Last day of last month
+		$_SESSION['from_date'] = $fdate;
+		$_SESSION['to_date'] = $tdate;
+		$days = (int) date('t', strtotime('-1 month'));
+		$pagetitle = "Previous Month";
+	}
 
 	if ($pagetitle == 'NO TITLE') {
 		$pagetitle = $_SESSION['pagetitle'];
@@ -249,9 +237,11 @@ function get_from_to_date()
 	$dset['days'] = $days;
 	$_SESSION['days'] = $days;
 
+
 	$dset['pagetitle'] = $pagetitle;
 	return $dset;
 }
+
 
 function isfeature_active($feature)
 {
@@ -514,6 +504,18 @@ function show_filter($segment_1, $segment_2)
 		$show = false;
 	}
 
+	if ($segment_1 == 'audit_custodians') {
+		$show = false;
+	}
+
+	if ($segment_1 == 'audit_area') {
+		$show = false;
+	}
+
+	if ($segment_1 == 'audit_doctor') {
+		$show = false;
+	}
+
 	if ($segment_1 == 'audit_safety_department') {
 		$show = false;
 	}
@@ -566,10 +568,17 @@ function show_filter($segment_1, $segment_2)
 		$show = false;
 	}
 
-	if ($segment_1 == 'audit_doctor') {
+	if ($segment_1 == 'audit_frequency') {
 		$show = false;
 	}
 
+	// if ($segment_2 == 'audit_master') {
+	// 	$show = false;
+	// }
+
+	// 	if ($segment_2 == 'escalation_report') {
+	// 		$show = false;
+	// 	}
 
 
 
@@ -584,7 +593,7 @@ function hidecalender($segment_1)
 
 	// $h3[] = ('users';'escalation'. 'department'.'ward'. 'patient'. 'settings');
 	$h3 = array();
-	$h3 = ['view', 'patientop', 'UserManagement', 'subscription', 'role', 'users', 'escalation', 'department', 'ward', 'patient', 'settings', 'departmentop', 'wardesr', 'employee', 'escalation_esr', 'escalation_int', 'escalation_op', 'escalation_incident', 'asset', 'assetgrade', 'departmentasset', 'assetlocation', 'auditdepartment', 'audit_patient_category', 'audit_safety_department', 'audit_safety_adherence_dept', 'audit_np_ratio_icu', 'audit_np_ratio_ward', 'audit_hand_designation', 'audit_hand_indication', 'audit_hand_action', 'audit_hand_compliance', 'audit_transfusion_type', 'audit_patient_status', 'audit_emergency_code', 'qualitybenchmark'];
+	$h3 = ['view', 'patientop', 'UserManagement', 'subscription', 'role', 'users', 'escalation', 'department', 'ward', 'patient', 'settings', 'departmentop', 'wardesr', 'employee', 'escalation_esr', 'escalation_int', 'escalation_op', 'escalation_incident', 'asset', 'assetgrade', 'departmentasset', 'assetlocation', 'auditdepartment', 'audit_patient_category', 'audit_doctor', 'audit_area', 'audit_custodians', 'audit_safety_department', 'audit_safety_adherence_dept', 'audit_np_ratio_icu', 'audit_np_ratio_ward', 'audit_hand_designation', 'audit_hand_indication', 'audit_hand_action', 'audit_hand_compliance', 'audit_transfusion_type', 'audit_patient_status', 'audit_emergency_code', 'qualitybenchmark'];
 	$TEMP123 = in_array($show, $h3);
 	return $TEMP123;
 }
@@ -595,7 +604,7 @@ function hide_cal_seg2($segment_2)
 
 	// $h3[] = ('users';'escalation'. 'department'.'ward'. 'patient'. 'settings');
 	$h3 = array();
-	$h3 = ['form', 'trend_analytic', 'profile', 'welcome', 'admin_track', 'tickets_list', 'settings', 'patient_feedback', 'patient_complaint', 'employee_complaint', 'dep_tat', 'dep_tat_edit', 'asset_qrcode'];
+	$h3 = ['form', 'profile', 'welcome', 'admin_track', 'tickets_list', 'settings', 'patient_feedback', 'patient_complaint', 'employee_complaint', 'dep_tat', 'dep_tat_edit', 'asset_qrcode'];
 	$TEMP123 = in_array($show, $h3);
 	return $TEMP123;
 }

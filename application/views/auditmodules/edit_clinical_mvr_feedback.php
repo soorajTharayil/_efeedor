@@ -18,8 +18,10 @@ $param = json_decode($row->dataset, true);
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp; MVR (Mitral Valve replacement)  - <?php echo $row->id; ?></h3>
+                    <h3><a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo lang_loader('ip', 'audit_id_tooltip'); ?>">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp; MVR (Mitral Valve
+                        replacement) - <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>
@@ -34,16 +36,52 @@ $param = json_decode($row->dataset, true);
                                 <b>Audit Details</b>
                             </td>
                             <td style="overflow: clip;">
-                                Audit Name: <?php echo $param['audit_type']; ?>
+                                <label><b>Audit Name:</b></label>
+                                <input class="form-control" type="text" name="audit_type"
+                                    value="<?php echo isset($param['audit_type']) ? htmlspecialchars($param['audit_type'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    readonly>
                                 <br>
-                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
-                                <br>
-                                Audit by: <?php echo $param['audit_by']; ?>
+
+                                <!-- Date & Time of Audit -->
+                                <label><b>Date & Time of Audit:</b></label>
+                                <?php
+                                $datetimeValue = '';
+                                if (!empty($param['datetime']) && $param['datetime'] != '0000-00-00 00:00:00') {
+                                    $datetimeValue = date('Y-m-d\TH:i', strtotime($param['datetime'])); // use param datetime
+                                }
+
+                                // Set max to current date/time to disable future values
+                                $maxDatetime = date('Y-m-d\TH:i');
+                                ?>
+                                <input class="form-control" type="datetime-local" id="auditDatetime" name="datetime"
+                                    value="<?php echo $datetimeValue; ?>" max="<?php echo $maxDatetime; ?>" readonly>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        const datetimeInput = document.getElementById("auditDatetime");
+
+                                        // When user clicks anywhere in the input, open the date/time picker
+                                        datetimeInput.addEventListener("click", function () {
+                                            this.showPicker?.(); // ✅ supported in modern browsers
+                                        });
+
+                                        // Prevent future date/time selection dynamically
+                                        datetimeInput.max = new Date().toISOString().slice(0, 16);
+                                    });
+                                </script> <br>
+                                <!-- Audit By -->
+                                <label><b>Audit By:</b></label>
+                                <input class="form-control" type="text" name="audit_by"
+                                    value="<?php echo isset($param['audit_by']) ? htmlspecialchars($param['audit_by'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                    readonly>
 
                                 <!-- Hidden inputs -->
-                                <input class="form-control" type="hidden" name="audit_type" value="<?php echo $param['audit_type']; ?>" />
-                                <input class="form-control" type="hidden" name="datetime" value="<?php echo $row->datetime; ?>" />
-                                <input class="form-control" type="hidden" name="audit_by" value="<?php echo $param['audit_by']; ?>" />
+                                <input class="form-control" type="hidden" name="audit_type"
+                                    value="<?php echo $param['audit_type']; ?>" />
+                                <input class="form-control" type="hidden" name="datetime"
+                                    value="<?php echo $row->datetime; ?>" />
+                                <input class="form-control" type="hidden" name="audit_by"
+                                    value="<?php echo $param['audit_by']; ?>" />
                             </td>
                         </tr>
 
@@ -54,106 +92,214 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td style="width: 43%;"><b>Patient MID</b></td>
                             <td>
-                                <input class="form-control" type="text" name="mid_no" value="<?php echo $param['mid_no']; ?>">
+                                <input class="form-control" type="text" name="mid_no"
+                                    value="<?php echo $param['mid_no']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Patient Name</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_name" value="<?php echo $param['patient_name']; ?>">
+                                <input class="form-control" type="text" name="patient_name"
+                                    value="<?php echo $param['patient_name']; ?>">
                             </td>
                         </tr>
                         <tr>
                             <td><b>Patient Age</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_age" value="<?php echo $param['patient_age']; ?>">
+                                <input class="form-control" type="text" name="patient_age"
+                                    value="<?php echo $param['patient_age']; ?>">
                             </td>
+                        </tr>
                         </tr>
                         <tr>
                             <td><b>Patient Gender</b></td>
                             <td>
-                                <input class="form-control" type="text" name="patient_gender" value="<?php echo $param['patient_gender']; ?>">
+                                <select class="form-control" name="patient_gender">
+                                    <option value="" <?php if (empty($param['patient_gender']))
+                                        echo 'selected'; ?>>
+                                    </option>
+                                    <option value="Male" <?php if ($param['patient_gender'] == 'Male')
+                                        echo 'selected'; ?>>Male</option>
+                                    <option value="Female" <?php if ($param['patient_gender'] == 'Female')
+                                        echo 'selected'; ?>>Female</option>
+                                    <option value="Other" <?php if ($param['patient_gender'] == 'Other')
+                                        echo 'selected'; ?>>Other</option>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Area</b></td>
                             <td>
-                                <input class="form-control" type="text" name="location" value="<?php echo $param['location']; ?>">
+                                <select class="form-control" name="location">
+                                    <option value="">Select Area</option>
+                                    <?php
+                                    $areas = $this->db->get('bf_audit_area')->result_array();
+                                    foreach ($areas as $a) {
+                                        $selected = ($param['location'] == $a['title']) ? 'selected' : '';
+                                        echo "<option value='{$a['title']}' $selected>{$a['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Department</b></td>
                             <td>
-                                <input class="form-control" type="text" name="department" value="<?php echo $param['department']; ?>">
+                                <select class="form-control" name="department">
+                                    <option value="">Select Department</option>
+                                    <?php
+                                    $departments = $this->db->get('bf_audit_department')->result_array();
+                                    foreach ($departments as $d) {
+                                        $selected = ($param['department'] == $d['title']) ? 'selected' : '';
+                                        echo "<option value='{$d['title']}' $selected>{$d['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Attended Doctor</b></td>
                             <td>
-                                <input class="form-control" type="text" name="attended_doctor" value="<?php echo $param['attended_doctor']; ?>">
+                                <select class="form-control" name="attended_doctor">
+                                    <option value="">Select Doctor</option>
+                                    <?php
+                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
+                                    foreach ($doctors as $doc) {
+                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
+                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    }
+                                    ?>
+                                </select>
                             </td>
                         </tr>
+
+                        <?php
+                        // Common max datetime to disable future selection
+                        $maxDatetime = date('Y-m-d\TH:i');
+                        ?>
+
+                        <!-- 🟩 Admission Date & Time (Editable) -->
                         <tr>
                             <td><b>Admission Date & Time</b></td>
                             <td>
-                                <input class="form-control" type="text" name="initial_assessment_hr6" value="<?php echo $param['initial_assessment_hr6']; ?>">
+                                <?php
+                                $admissionDatetime = '';
+                                if (!empty($param['initial_assessment_hr6']) && $param['initial_assessment_hr6'] != '1970-01-01 05:30:00') {
+                                    $admissionDatetime = date('Y-m-d\TH:i', strtotime($param['initial_assessment_hr6']));
+                                } else {
+                                    $admissionDatetime = $maxDatetime; // Default current date-time
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="admissionDatetime"
+                                    name="initial_assessment_hr6" value="<?php echo $admissionDatetime; ?>"
+                                    max="<?php echo $maxDatetime; ?>">
                             </td>
                         </tr>
+
+                        <!-- 🟩 Discharge Date & Time (Editable) -->
                         <tr>
                             <td><b>Discharge Date & Time</b></td>
                             <td>
-                                <input class="form-control" type="text" name="discharge_date_time" value="<?php echo $param['discharge_date_time']; ?>">
+                                <?php
+                                $dischargeDatetime = '';
+                                if (!empty($param['discharge_date_time']) && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
+                                    $dischargeDatetime = date('Y-m-d\TH:i', strtotime($param['discharge_date_time']));
+                                } else {
+                                    $dischargeDatetime = $maxDatetime; // Default current date-time
+                                }
+                                ?>
+                                <input class="form-control datetime-picker" type="datetime-local" id="dischargeDatetime"
+                                    name="discharge_date_time" value="<?php echo $dischargeDatetime; ?>"
+                                    max="<?php echo $maxDatetime; ?>">
                             </td>
                         </tr>
+
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Select all datetime pickers
+                                const pickers = document.querySelectorAll(".datetime-picker");
+
+                                pickers.forEach(function (input) {
+                                    // Disable future dates dynamically
+                                    input.max = new Date().toISOString().slice(0, 16);
+
+                                    // Open the calendar/time picker when clicking anywhere in the box
+                                    input.addEventListener("click", function () {
+                                        this.showPicker?.();
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <script>
+                            // Force open calendar picker when clicking anywhere in the input box
+                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
+                                input.addEventListener('click', function () {
+                                    this.showPicker(); // Opens the native calendar/clock popup
+                                });
+                            });
+                        </script>
+                        <style>
+                            .datetime-picker {
+                                cursor: pointer;
+                            }
+                        </style>
+
+
                         <tr>
-                            <th colspan="2" style="background-color: #f5f5f5; text-align: left;">Part A (filled in after procedure)</th>
+                            <th colspan="2" style="background-color: #f5f5f5; text-align: left;">Part A (filled in after
+                                procedure)</th>
                         </tr>
-                        
+
                         <tr>
                             <td>Did this patient have any post operative complications?</td>
                             <td>
                                 <input type="text" name="identification_details" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['identification_details']); ?>"><br>
+                                    value="<?php echo htmlspecialchars($param['identification_details']); ?>"><br>
                                 <strong>Remarks:</strong>
                                 <input type="text" name="identification_details_text" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['identification_details_text']); ?>">
+                                    value="<?php echo htmlspecialchars($param['identification_details_text']); ?>">
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td>How many days after admission did the patient get discharged?</td>
                             <td>
                                 <input type="text" name="vital_signs" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['vital_signs']); ?>"><br>
+                                    value="<?php echo htmlspecialchars($param['vital_signs']); ?>"><br>
                                 <strong>Remarks:</strong>
                                 <input type="text" name="vital_signs_text" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['vital_signs_text']); ?>">
+                                    value="<?php echo htmlspecialchars($param['vital_signs_text']); ?>">
                             </td>
                         </tr>
-                        
+
                         <tr>
-                            <th colspan="2" style="background-color: #f5f5f5; text-align: left;">Part B (filled 30 days after procedure)</th>
+                            <th colspan="2" style="background-color: #f5f5f5; text-align: left;">Part B (filled 30 days
+                                after procedure)</th>
                         </tr>
-                        
+
                         <tr>
                             <td>Did this patient get re admitted within 30 days after surgery?</td>
                             <td>
                                 <input type="text" name="surgery" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['surgery']); ?>"><br>
+                                    value="<?php echo htmlspecialchars($param['surgery']); ?>"><br>
                                 <strong>Remarks:</strong>
                                 <input type="text" name="surgery_text" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['surgery_text']); ?>">
+                                    value="<?php echo htmlspecialchars($param['surgery_text']); ?>">
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td>Did this patient come for a review 30 days after surgery?</td>
                             <td>
                                 <input type="text" name="complaints_communicated" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['complaints_communicated']); ?>"><br>
+                                    value="<?php echo htmlspecialchars($param['complaints_communicated']); ?>"><br>
                                 <strong>Remarks:</strong>
                                 <input type="text" name="complaints_communicated_text" class="form-control"
-                                       value="<?php echo htmlspecialchars($param['complaints_communicated_text']); ?>">
+                                    value="<?php echo htmlspecialchars($param['complaints_communicated_text']); ?>">
                             </td>
                         </tr>
 
@@ -183,7 +329,6 @@ $param = json_decode($row->dataset, true);
 
 
 
-                            
 
 
 
@@ -195,7 +340,6 @@ $param = json_decode($row->dataset, true);
 
 
 
-                            
 
 
 
@@ -205,11 +349,13 @@ $param = json_decode($row->dataset, true);
 
 
 
-                                    
 
-                                    
 
-                                
+
+
+
+
+
 
 
 
@@ -222,7 +368,8 @@ $param = json_decode($row->dataset, true);
                                             <?php echo display('reset') ?>
                                         </button>
                                         <div class="or"></div>
-                                        <button type="submit" id="saveButton" class="ui positive button" style="text-align: left;">
+                                        <button type="submit" id="saveButton" class="ui positive button"
+                                            style="text-align: left;">
                                             <?php echo display('save') ?>
                                         </button>
                                     </div>
@@ -232,7 +379,7 @@ $param = json_decode($row->dataset, true);
 
                     </table>
 
-                    
+
 
                     </form>
 
@@ -272,7 +419,7 @@ $param = json_decode($row->dataset, true);
 
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
+    document.getElementById('saveButton').addEventListener('click', function () {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

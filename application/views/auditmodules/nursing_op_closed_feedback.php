@@ -88,7 +88,7 @@
 										<td><?php echo $param['attended_doctor']; ?></td>
 									</tr>
 									<tr>
-										<td>Admission Date & Time</td>
+										<td>Admission / Visit Date & Time</td>
 										<td><?php echo date('Y-m-d H:i', strtotime($param['initial_assessment_hr6'])); ?></td>
 									</tr>
 									<tr>

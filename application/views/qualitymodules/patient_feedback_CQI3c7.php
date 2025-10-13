@@ -79,7 +79,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><b>Data collection on</b></td>
+										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
 
@@ -221,8 +221,8 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo  $result->no_medication_errors; ?>"; // Benchmark value
-					var calculated = "<?php echo $result->no_opportunity_errors; ?>"; // Calculated value
+					var benchmark = "<?php echo  $param['initial_assessment_hr']; ?>"; // Benchmark value
+					var calculated = "<?php echo $param['calculatedResult']; ?>"; // Calculated value
 					var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
 
 					// Parse times to seconds

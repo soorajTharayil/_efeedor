@@ -111,9 +111,738 @@ class Audit_model extends CI_Model
 	// 	print_r($set1);
 	// }
 
+	// 🔹 Get single active case MRD feedback record by ID
+	public function get_active_cases_mrd_feedback_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_ma_active_cases_mrdip');
+		return $query->row(); // return single row as object
+	}
+	public function get_discharged_patients_mrd_feedback_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_ma_dischargedpatients_mrd_audit');
+		return $query->row(); // return single row as object
+	}
+	// ======================== GET FUNCTIONS ========================
+
+// Nursing
+public function get_nursing_ip_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_nursingip_closed_cases');
+    return $query->row();
+}
+
+public function get_nursing_ip_open_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_nursingip_open_cases');
+    return $query->row();
+}
+
+public function get_nursing_op_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_nursingop_closed_cases');
+    return $query->row();
+}
+
+// Clinical MDC
+public function get_clinical_active_mdc_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_active_mdc');
+    return $query->row();
+}
+
+public function get_clinical_closed_mdc_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_closedcases_mdc');
+    return $query->row();
+}
+
+// Clinical Pharmacy
+public function get_clinical_pharmacy_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pharmacy_closed');
+    return $query->row();
+}
+
+public function get_clinical_pharmacy_op_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pharmacy_op');
+    return $query->row();
+}
+
+public function get_clinical_pharmacy_open_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pharmacy_open');
+    return $query->row();
+}
+
+// Anesthesia
+public function get_anesthesia_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_anesthesia_active_mdc');
+    return $query->row();
+}
+
+public function get_anesthesia_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_anesthesia_closed_mdc');
+    return $query->row();
+}
+
+// Emergency Department (ED)
+public function get_ed_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ed_active_mdc');
+    return $query->row();
+}
+
+public function get_ed_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ed_closed_mdc');
+    return $query->row();
+}
+
+// ICU
+public function get_icu_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_icu_active_mdc');
+    return $query->row();
+}
+
+public function get_icu_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_icu_closed_mdc');
+    return $query->row();
+}
+
+// Primary Care
+public function get_primarycare_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_primarycare_active_mdc');
+    return $query->row();
+}
+
+public function get_primarycare_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_primarycare_closed_mdc');
+    return $query->row();
+}
+
+// Sedation
+public function get_sedation_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_sedation_active_mdc');
+    return $query->row();
+}
+
+public function get_sedation_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_sedation_closed_mdc');
+    return $query->row();
+}
+
+// Surgeons
+public function get_surgeons_active_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_surgeons_active_mdc');
+    return $query->row();
+}
+
+public function get_surgeons_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_surgeons_closed_mdc');
+    return $query->row();
+}
+
+// Diet Consultation
+public function get_diet_consultation_op_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_dietconsultation_op_mdc');
+    return $query->row();
+}
+
+// Physiotherapy
+public function get_physiotherapy_closed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_physiotherapy_closed_mdc');
+    return $query->row();
+}
+
+public function get_physiotherapy_op_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_physiotherapy_op_mdc');
+    return $query->row();
+}
+
+public function get_physiotherapy_open_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_physiotherapy_open_mdc');
+    return $query->row();
+}
+
+// MRD Sections
+public function get_mrd_ed_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_mrd_ed_audit');
+    return $query->row();
+}
+
+public function get_mrd_lama_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_mrd_lama_audit');
+    return $query->row();
+}
+
+public function get_mrd_op_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_mrd_op_audit');
+    return $query->row();
+}
+// ======================== GET FUNCTIONS ========================
+
+public function get_accidental_delining_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_accidental_delining_audit');
+    return $query->row();
+}
+
+public function get_admission_holding_area_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_admission_area_audit');
+    return $query->row();
+}
+
+public function get_cardio_pulmonary_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_cardio_pulmonary_audit');
+    return $query->row();
+}
+
+public function get_extravasation_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_extravasation_audit');
+    return $query->row();
+}
+
+public function get_hapu_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_hapu_audit');
+    return $query->row();
+}
+
+public function get_initial_assessment_ae_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_assessment_ae');
+    return $query->row();
+}
+
+public function get_initial_assessment_ipd_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_assessment_ipd');
+    return $query->row();
+}
+
+public function get_initial_assessment_opd_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_assessment_opd');
+    return $query->row();
+}
+
+public function get_ipsg1_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg1_audit');
+    return $query->row();
+}
+
+public function get_ipsg2_ae_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg2_ae');
+    return $query->row();
+}
+
+public function get_ipsg2_ipd_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg2_ipd');
+    return $query->row();
+}
+
+public function get_ipsg4_timeout_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg4_timeout');
+    return $query->row();
+}
+
+public function get_ipsg6_ip_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg6_ip');
+    return $query->row();
+}
+
+public function get_ipsg6_opd_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_ipsg6_opd');
+    return $query->row();
+}
+
+public function get_point_prevelance_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_point_prevlance_audit');
+    return $query->row();
+}
+// ======================== GET FUNCTIONS ========================
+
+public function get_clinical_audit_acl_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_audit_acl');
+    return $query->row();
+}
+
+public function get_clinical_allogenic_bone_marrow_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_allogenic_bone_marrow');
+    return $query->row();
+}
+
+public function get_clinical_aortic_value_replacement_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_aortic_value_replacement');
+    return $query->row();
+}
+
+public function get_clinical_autologous_bone_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_autologous_bone');
+    return $query->row();
+}
+
+public function get_clinical_brain_tumour_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_brain_tumour');
+    return $query->row();
+}
+
+public function get_clinical_cabg_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_cabg');
+    return $query->row();
+}
+
+public function get_clinical_carotid_stenting_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_carotid_stenting');
+    return $query->row();
+}
+
+public function get_clinical_chemotherapy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_chemotherapy');
+    return $query->row();
+}
+
+public function get_clinical_colo_rectal_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_colo_rectal');
+    return $query->row();
+}
+
+public function get_clinical_endoscopy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_endoscopy');
+    return $query->row();
+}
+
+public function get_clinical_epilepsy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_epilepsy');
+    return $query->row();
+}
+
+public function get_clinical_herniorrhaphy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_herniorrhaphy');
+    return $query->row();
+}
+
+public function get_clinical_holep_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_holep');
+    return $query->row();
+}
+
+public function get_clinical_laparoscopic_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_laparoscopic_appendicectomy');
+    return $query->row();
+}
+
+public function get_clinical_mechanical_thrombectomy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_mechanical_thrombectomy');
+    return $query->row();
+}
+
+public function get_clinical_mvr_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_mvr');
+    return $query->row();
+}
+
+public function get_clinical_ptca_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_ptca');
+    return $query->row();
+}
+
+public function get_clinical_renal_transplantation_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_renal_transplantation');
+    return $query->row();
+}
+
+public function get_clinical_scoliosis_correction_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_scoliosis_correction');
+    return $query->row();
+}
+
+public function get_clinical_spinal_dysraphism_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_spinal_dysraphism');
+    return $query->row();
+}
+
+public function get_clinical_spine_disc_surgery_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_spine_disc_surgery');
+    return $query->row();
+}
+
+public function get_clinical_thoracotomy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_thoracotomy');
+    return $query->row();
+}
+
+public function get_clinical_tkr_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_tkr');
+    return $query->row();
+}
+
+public function get_clinical_uro_oncology_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_uro_oncology');
+    return $query->row();
+}
+
+public function get_clinical_whipples_surgery_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_whipples_surgery');
+    return $query->row();
+}
+
+public function get_clinical_laparoscopic_cholecystectomy_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicaloutcome_laparoscopic_cholecystectomy');
+    return $query->row();
+}
+
+// ======================== CLINICAL KPI ========================
+
+public function get_clinicalkpi_bronchodilators_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicalkpi_bronchodilators_audit');
+    return $query->row();
+}
+
+public function get_clinicalkpi_copd_protocol_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinicalkpi_copd_protocol_audit');
+    return $query->row();
+}
+// ===============================
+// ======================== GET FUNCTIONS ========================
+// Infection Control Get Queries
+// =============================
+
+public function get_infection_control_biomedical_waste_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_biomedical_waste');
+    return $query->row();
+}
+
+public function get_infection_control_canteen_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_canteen_audit');
+    return $query->row();
+}
+
+public function get_infection_control_cssd_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_cssd_audit');
+    return $query->row();
+}
+
+public function get_infection_control_hand_hygiene_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_hand_hygiene');
+    return $query->row();
+}
+
+public function get_infection_control_bundle_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_bundle_audit');
+    return $query->row();
+}
+
+public function get_infection_control_ot_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_ot_audit');
+    return $query->row();
+}
+
+public function get_infection_control_linen_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_linen_audit');
+    return $query->row();
+}
+
+public function get_infection_control_ambulance_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_ambulance_audit');
+    return $query->row();
+}
+
+public function get_infection_control_coffee_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_coffee_audit');
+    return $query->row();
+}
+
+public function get_infection_control_laboratory_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_laboratory_audit');
+    return $query->row();
+}
+
+public function get_infection_control_mortuary_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_mortuary_audit');
+    return $query->row();
+}
+
+public function get_infection_control_radiology_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_radiology_audit');
+    return $query->row();
+}
+
+public function get_infection_control_ssi_survelliance_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_ssi_survelliance_audit');
+    return $query->row();
+}
+
+public function get_infection_control_peripheralivline_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_peripheralivline_audit');
+    return $query->row();
+}
+
+public function get_infection_control_personalprotective_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_personalprotective_audit');
+    return $query->row();
+}
+
+public function get_infection_control_safe_injection_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_safe_injection_audit');
+    return $query->row();
+}
+
+public function get_infection_control_surface_cleaning_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_infection_control_surface_cleaning_audit');
+    return $query->row();
+}
+
+// ===============================
+// Clinical Pathways Get Queries
+// ===============================
+
+public function get_clinical_pathway_arthroscopic_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_arthroscopic_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_breast_lump_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_breast_lump_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_cardiac_arrest_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_cardiac_arrest_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_donor_hepatectomy_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_donor_hepatectomy_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_febrile_seizure_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_febrile_seizure_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_heart_transplant_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_heart_transplant_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_laproscopic_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_laproscopic_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_picc_line_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_picc_line_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_stroke_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_stroke_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_urodynamics_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_urodynamics_audit');
+    return $query->row();
+}
+
+public function get_clinical_pathway_stemi_audit_feedback_byid($id)
+{
+    $this->db->where('id', $id);
+    $query = $this->db->get('bf_ma_clinical_pathway_stemi_audit');
+    return $query->row();
+}
 
 
-    //MRD & MDC
+
+
+
+
+
+	//MRD & MDC
 	public function update_active_cases_mrd_feedback($id, $data)
 	{
 		$this->db->where('id', $id);
@@ -281,7 +1010,7 @@ class Audit_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_ma_mrd_op_audit', $data);
 	}
-	
+
 	//Nursing & IPSG
 	public function update_accidental_delining_feedback($id, $data)
 	{
@@ -358,7 +1087,7 @@ class Audit_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_ma_point_prevlance_audit', $data);
 	}
-	
+
 	//clinical outcome 
 	public function update_clinical_audit_acl_feedback($id, $data)
 	{
@@ -490,9 +1219,9 @@ class Audit_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_ma_clinicaloutcome_laparoscopic_cholecystectomy', $data);
 	}
-	
+
 	//clinical KPI
-	
+
 	public function update_clinicalkpi_bronchodilators_feedback($id, $data)
 	{
 		$this->db->where('id', $id);
@@ -503,9 +1232,9 @@ class Audit_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_ma_clinicalkpi_copd_protocol_audit', $data);
 	}
-	
+
 	//Infection control
-	
+
 	public function update_infection_control_biomedical_waste_feedback($id, $data)
 	{
 		$this->db->where('id', $id);
@@ -591,7 +1320,7 @@ class Audit_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_ma_infection_control_surface_cleaning_audit', $data);
 	}
-	
+
 	//clinical Pathways
 	public function update_clinical_pathway_arthroscopic_audit_feedback($id, $data)
 	{
@@ -649,7 +1378,7 @@ class Audit_model extends CI_Model
 		$this->db->update('bf_ma_clinical_pathway_stemi_audit', $data);
 	}
 	//End
-	
+
 
 
 
@@ -666,7 +1395,7 @@ class Audit_model extends CI_Model
 		$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
 		$days = $_SESSION['days'];
 		// $type = 'inpatient';
-		$setarray = $questioarray = $arraydata = $dataexport  = array();
+		$setarray = $questioarray = $arraydata = $dataexport = array();
 		$allfeeds = $this->patient_and_feedback($table_patients, $table_feedback, $sorttime, $setup);
 		$sresult = $this->setup_result($setup);
 		$question_list_reasons = $this->setup_sub_result($setup);
@@ -1188,7 +1917,7 @@ class Audit_model extends CI_Model
 			$set[$i]['parent_param'] = $row->shortname;
 			$set[$i]['parent_percentage'] = $this->get_total_feedback_rating_percentage($row->shortkey, $feedback_data);
 			// $set[$i]['parent_count'] = $this->get_total_feedback_rating_count($row->shortkey, $feedback_data);
-			$set[$i]['shortkey'] =  $row->shortkey;
+			$set[$i]['shortkey'] = $row->shortkey;
 			$res['parent'] = $set;
 			$i++;
 		}
@@ -1196,7 +1925,7 @@ class Audit_model extends CI_Model
 		foreach ($question_list_reasons as $row2) {
 			$set1[$z]['sub_param'] = $row2->shortname;
 			$set1[$z]['sub_count'] = $this->get_feedback_for_reason($row2->shortkey, $feedback_data);
-			$set1[$z]['shortkey'] =  $row2->shortkey;
+			$set1[$z]['shortkey'] = $row2->shortkey;
 			$res['sub'] = $set1;
 			$z++;
 		}
@@ -1349,9 +2078,9 @@ class Audit_model extends CI_Model
 			$i = $row->slug;
 			if (count($get_tickes) >= 1) {
 
-				$data =  $this->get_toal_ticket_by_department($row->dprt_id, $get_tickes);
-				$percentage  = $data['percentage'];
-				$total_count  = $data['total_count'];
+				$data = $this->get_toal_ticket_by_department($row->dprt_id, $get_tickes);
+				$percentage = $data['percentage'];
+				$total_count = $data['total_count'];
 				$total_count = $data['total_count'];
 				$open_tickets = $data['open_tickets'];
 				$closed_tickets = $data['closed_tickets'];
@@ -1442,7 +2171,7 @@ class Audit_model extends CI_Model
 		$this->db->select($settings . '.*');
 		$this->db->from($settings);
 		$query = $this->db->get();
-		$response  = $query->result();
+		$response = $query->result();
 		return $response;
 	}
 
@@ -1573,29 +2302,175 @@ class Audit_model extends CI_Model
 	//keep
 	public function patient_and_feedback($table_patient, $table_feedback, $sorttime)
 	{
-
 		$fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
 		$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+
+		//mapping between AUDIT-FORM and table names
+		$audit_array = [
+			'bf_ma_active_cases_mrdip',
+			'bf_ma_dischargedpatients_mrd_audit',
+			'bf_ma_nursingip_closed_cases',
+			'bf_ma_nursingip_open_cases',
+			'bf_ma_nursingop_closed_cases',
+			'bf_ma_clinical_active_mdc',
+			'bf_ma_clinical_closedcases_mdc',
+			'bf_ma_clinical_pharmacy_closed',
+			'bf_ma_clinical_pharmacy_op',
+			'bf_ma_clinical_pharmacy_open',
+			'bf_ma_anesthesia_active_mdc',
+			'bf_ma_anesthesia_closed_mdc',
+			'bf_ma_ed_active_mdc',
+			'bf_ma_ed_closed_mdc',
+			'bf_ma_icu_active_mdc',
+			'bf_ma_icu_closed_mdc',
+			'bf_ma_primarycare_active_mdc',
+			'bf_ma_primarycare_closed_mdc',
+			'bf_ma_sedation_active_mdc',
+			'bf_ma_sedation_closed_mdc',
+			'bf_ma_surgeons_active_mdc',
+			'bf_ma_surgeons_closed_mdc',
+			'bf_ma_dietconsultation_op_mdc',
+			'bf_ma_physiotherapy_closed_mdc',
+			'bf_ma_physiotherapy_op_mdc',
+			'bf_ma_physiotherapy_open_mdc',
+			'bf_ma_mrd_ed_audit',
+			'bf_ma_mrd_lama_audit',
+			'bf_ma_mrd_op_audit',
+			'bf_ma_accidental_delining_audit',
+			'bf_ma_admission_area_audit',
+			'bf_ma_cardio_pulmonary_audit',
+			'bf_ma_extravasation_audit',
+			'bf_ma_hapu_audit',
+			'bf_ma_assessment_ae',
+			'bf_ma_assessment_ipd',
+			'bf_ma_assessment_opd',
+			'bf_ma_ipsg1_audit',
+			'bf_ma_ipsg2_ae',
+			'bf_ma_ipsg2_ipd',
+			'bf_ma_ipsg4_timeout',
+			'bf_ma_ipsg6_ip',
+			'bf_ma_ipsg6_opd',
+			'bf_ma_point_prevlance_audit',
+			'bf_ma_clinicaloutcome_audit_acl',
+			'bf_ma_clinicaloutcome_allogenic_bone_marrow',
+			'bf_ma_clinicaloutcome_aortic_value_replacement',
+			'bf_ma_clinicaloutcome_autologous_bone',
+			'bf_ma_clinicaloutcome_brain_tumour',
+			'bf_ma_clinicaloutcome_cabg',
+			'bf_ma_clinicaloutcome_carotid_stenting',
+			'bf_ma_clinicaloutcome_chemotherapy',
+			'bf_ma_clinicaloutcome_colo_rectal',
+			'bf_ma_clinicaloutcome_endoscopy',
+			'bf_ma_clinicaloutcome_epilepsy',
+			'bf_ma_clinicaloutcome_herniorrhaphy',
+			'bf_ma_clinicaloutcome_holep',
+			'bf_ma_clinicaloutcome_laparoscopic_appendicectomy',
+			'bf_ma_clinicaloutcome_mechanical_thrombectomy',
+			'bf_ma_clinicaloutcome_mvr',
+			'bf_ma_clinicaloutcome_ptca',
+			'bf_ma_clinicaloutcome_renal_transplantation',
+			'bf_ma_clinicaloutcome_scoliosis_correction',
+			'bf_ma_clinicaloutcome_spinal_dysraphism',
+			'bf_ma_clinicaloutcome_spine_disc_surgery',
+			'bf_ma_clinicaloutcome_thoracotomy',
+			'bf_ma_clinicaloutcome_tkr',
+			'bf_ma_clinicaloutcome_uro_oncology',
+			'bf_ma_clinicaloutcome_whipples_surgery',
+			'bf_ma_clinicaloutcome_laparoscopic_cholecystectomy',
+			'bf_ma_clinicalkpi_bronchodilators_audit',
+			'bf_ma_clinicalkpi_copd_protocol_audit',
+			'bf_ma_infection_control_biomedical_waste',
+			'bf_ma_infection_control_canteen_audit',
+			'bf_ma_infection_control_cssd_audit',
+			'bf_ma_infection_control_hand_hygiene',
+			'bf_ma_infection_control_bundle_audit',
+			'bf_ma_infection_control_ot_audit',
+			'bf_ma_infection_control_linen_audit',
+			'bf_ma_infection_control_ambulance_audit',
+			'bf_ma_infection_control_coffee_audit',
+			'bf_ma_infection_control_laboratory_audit',
+			'bf_ma_infection_control_mortuary_audit',
+			'bf_ma_infection_control_radiology_audit',
+			'bf_ma_infection_control_ssi_survelliance_audit',
+			'bf_ma_infection_control_peripheralivline_audit',
+			'bf_ma_infection_control_personalprotective_audit',
+			'bf_ma_infection_control_safe_injection_audit',
+			'bf_ma_infection_control_surface_cleaning_audit',
+			'bf_ma_clinical_pathway_arthroscopic_audit',
+			'bf_ma_clinical_pathway_breast_lump_audit',
+			'bf_ma_clinical_pathway_cardiac_arrest_audit',
+			'bf_ma_clinical_pathway_donor_hepatectomy_audit',
+			'bf_ma_clinical_pathway_febrile_seizure_audit',
+			'bf_ma_clinical_pathway_heart_transplant_audit',
+			'bf_ma_clinical_pathway_laproscopic_audit',
+			'bf_ma_clinical_pathway_picc_line_audit',
+			'bf_ma_clinical_pathway_stroke_audit',
+			'bf_ma_clinical_pathway_urodynamics_audit',
+			'bf_ma_clinical_pathway_stemi_audit'
+		];
+
+		//feature mapping
+		$audit_feature_map = [];
+		foreach ($audit_array as $index => $tbl) {
+			$audit_feature_map['AUDIT-FORM' . ($index + 1)] = $tbl;
+		}
+
+		//Check if this user has permission for the current table
+		$allowed = false;
+		if (isset($this->session->userdata['feature']) && is_array($this->session->userdata['feature'])) {
+			foreach ($this->session->userdata['feature'] as $key => $val) {
+				if ($val === true && isset($audit_feature_map[$key]) && $audit_feature_map[$key] === $table_feedback) {
+					$allowed = true;
+					break;
+				}
+			}
+		}
+
+		if (!$allowed) {
+			return [];
+		}
+
+		
+		$user_id = $this->session->userdata('user_id');
+		$this->db->select('firstname');
+		$this->db->from('user');
+		$this->db->where('user_id', $user_id);
+		$query_user = $this->db->get();
+		$user = $query_user->row();
+		$current_user_name = !empty($user) ? trim($user->firstname) : '';
+
+		//Fetch only user-specific permitted audits
 		$this->db->select($table_feedback . '.*');
 		$this->db->from($table_feedback);
-		// $this->db->join($table_patient, $table_patient . '.id = ' . $table_feedback . '.pid', 'inner');
 
-		// Check if floorwise exists and is an object
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
-			// Use ward only if floorwise doesn't exist
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (count($this->session->userdata['floor_ward']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
+		} elseif (
+			isset($this->session->userdata['floor_ward']) &&
+			is_array($this->session->userdata['floor_ward']) &&
+			count($this->session->userdata['floor_ward']) > 0
+		) {
+			$this->db->where_in($table_feedback . '.ward', $this->session->userdata['floor_ward']);
 		}
 
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
+
+		//Match by JSON audit_by = current user's firstname
+		// if (!empty($current_user_name)) {
+		// 	$this->db->where("JSON_UNQUOTE(JSON_EXTRACT(dataset, '$.audit_by')) =", $current_user_name);
+		// }
+
 		$this->db->order_by('datetime', $sorttime);
 
 		$query = $this->db->get();
-		return $patientandfeedback = $query->result();
+		if (!$query) return [];
+
+		return $query->result();
 	}
+
+
+
 
 	//keep
 	public function feedback_and_ticket($table_feedback, $table_tickets, $sorttime)
@@ -1640,7 +2515,7 @@ class Audit_model extends CI_Model
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
 		$query = $this->db->get();
-		return 	$feedbackandticket = $query->result();
+		return $feedbackandticket = $query->result();
 	}
 
 
@@ -1657,7 +2532,7 @@ class Audit_model extends CI_Model
 		$this->db->where($table_feedback . '.datet <=', $fdate);
 		$this->db->where($table_feedback . '.datet >=', $tdate);
 		$query = $this->db->get();
-		return 	$tickets23 = $query->result();
+		return $tickets23 = $query->result();
 	}
 
 	//keep
@@ -1721,7 +2596,7 @@ class Audit_model extends CI_Model
 		$nps['detractors_feedback'] = $detractors_feedback;
 		$nps['passives_count'] = $passives_count;
 		$nps['passives_feedback'] = $passives_feedback;
-		$nps['to_reach_benchmark'] = 	$neededPromoters;
+		$nps['to_reach_benchmark'] = $neededPromoters;
 		// echo $neededPromoters;
 		return $nps;
 	}
@@ -1817,8 +2692,8 @@ class Audit_model extends CI_Model
 			$dataexport[$i]['patientid'] = $data['patientid'];
 			$dataexport[$i]['ward'] = $data['ward'];
 			$dataexport[$i]['bed'] = $data['bedno'];
-			$dataexport[$i]['suggestions']  = $data['suggestionText'];
-			$dataexport[$i]['avgrating']  = $data['overallScore'];
+			$dataexport[$i]['suggestions'] = $data['suggestionText'];
+			$dataexport[$i]['avgrating'] = $data['overallScore'];
 			foreach ($setarray as $key => $t) {
 				if ($data['comment'][$key]) {
 					$dataexport[$i]['comment'] = $data['comment'];
@@ -1874,10 +2749,10 @@ class Audit_model extends CI_Model
 			$dataexport['mobile'] = $data['contactnumber'];
 			$dataexport['ward'] = $data['ward'];
 			$dataexport['bed'] = $data['bedno'];
-			$dataexport['suggestions']  = $data['suggestionText'];
-			$dataexport['average_rating']  = $data['overallScore'];
-			$dataexport['source']  = $row->source;
-			$dataexport['feedtime']  = date('g:i A, d-m-y', strtotime($row->datetime));
+			$dataexport['suggestions'] = $data['suggestionText'];
+			$dataexport['average_rating'] = $data['overallScore'];
+			$dataexport['source'] = $row->source;
+			$dataexport['feedtime'] = date('g:i A, d-m-y', strtotime($row->datetime));
 			foreach ($setarray as $key => $t) {
 				if ($data['comment'][$key]) {
 					$dataexport[$i][$t] = $data['comment'][$key];
@@ -1961,12 +2836,12 @@ class Audit_model extends CI_Model
 				$piechart[$i]['percentage'] .= round(($percentage));
 				$piechart[$i]['title'] .= $v;
 				$piechart[$i]['count'] .= $count;
-				$oba[$i] = (object)$piechart[$i];
+				$oba[$i] = (object) $piechart[$i];
 			} else {
-				$piechart[$i]['percentage'] .=   round(($percentage));
+				$piechart[$i]['percentage'] .= round(($percentage));
 				$piechart[$i]['title'] .= $v;
-				$piechart[$i]['count'] .=  $count;
-				$oba[$i] = (object)$piechart[$i];
+				$piechart[$i]['count'] .= $count;
+				$oba[$i] = (object) $piechart[$i];
 			}
 			$i++;
 		}
@@ -2073,9 +2948,9 @@ class Audit_model extends CI_Model
 		foreach ($department_set as $key => $department_set_row) {
 			// echo '<pre>';
 			// print_r($department_set_row); exit;
-			$data =  $this->get_toal_ticket_by_department_interim($all_tickes, $department_set_row);
-			$percentage  = $data['percentage'];
-			$total_count  = $data['total_count'];
+			$data = $this->get_toal_ticket_by_department_interim($all_tickes, $department_set_row);
+			$percentage = $data['percentage'];
+			$total_count = $data['total_count'];
 			$open_tickets = $data['open_tickets'];
 			$closed_tickets = $data['closed_tickets'];
 			$addressed_tickets = $data['addressed_tickets'];

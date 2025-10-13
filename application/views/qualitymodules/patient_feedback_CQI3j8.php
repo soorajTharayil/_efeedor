@@ -79,7 +79,7 @@
 										</td>
 									</tr>
 									<tr>
-										<td><b>Data collection on</b></td>
+										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
 

@@ -134,7 +134,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Active Cases MRD Audit- IP';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_active_cases_mrd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_active_cases_mrd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -170,7 +170,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Discharged Patients MRD Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_discharged_patients_mrd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_discharged_patients_mrd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -206,7 +206,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Nursing (IP Closed Cases)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_nursing_ip_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_nursing_ip_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -242,7 +242,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Nursing (IP Open Cases)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_nursing_ip_open', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_nursing_ip_open', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -278,7 +278,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Nursing (OP Closed Cases)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_nursing_op_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_nursing_op_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -314,7 +314,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinical Dietetics (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_active_mdc', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_active_mdc', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -350,7 +350,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinical Dietetics (Closed Cases)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_closed_mdc', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_closed_mdc', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -386,7 +386,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinical Pharmacy- (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -422,7 +422,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinical Pharmacy- (OP)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_op', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_op', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -458,7 +458,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinical Pharmacy- (Open)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_open', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pharmacy_open', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -495,7 +495,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians-Anesthesia (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_anesthesia_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_anesthesia_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -531,7 +531,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians-Anesthesia (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_anesthesia_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_anesthesia_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -567,7 +567,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- ED (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ed_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ed_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -604,7 +604,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- ED (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ed_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ed_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -640,7 +640,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- ICU (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_icu_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_icu_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -676,7 +676,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- ICU (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_icu_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_icu_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -712,7 +712,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Primary Care Provider (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_primarycare_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_primarycare_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -748,7 +748,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Primary Care Provider (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_primarycare_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_primarycare_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -784,7 +784,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Sedation (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_sedation_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_sedation_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -820,7 +820,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Sedation (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_sedation_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_sedation_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -857,7 +857,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Surgeons (Active)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_surgeons_active', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_surgeons_active', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -893,7 +893,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Clinicians- Surgeons (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_surgeons_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_surgeons_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -929,7 +929,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Diet Consultation (OP)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_diet_consultation_op', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_diet_consultation_op', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -965,7 +965,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Physiotherapy- (Closed)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_physiotherapy_closed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_physiotherapy_closed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1002,7 +1002,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Physiotherapy- (OP)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_physiotherapy_op', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_physiotherapy_op', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1038,7 +1038,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Physiotherapy- (Open)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_physiotherapy_open', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_physiotherapy_open', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1075,7 +1075,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'MRD Audit- ED';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_mrd_ed', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_mrd_ed', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1112,7 +1112,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'MRD Audit- LAMA';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_mrd_lama', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_mrd_lama', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1148,7 +1148,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'MRD Audit- OP';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_mrd_op', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_mrd_op', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1864,7 +1864,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Accidental Delining Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_accidental_delining', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_accidental_delining', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1900,7 +1900,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Admission Holding Area Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_admission_holding_area', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_admission_holding_area', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1936,7 +1936,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'CPR Analysis Record';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_cardio_pulmonary', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_cardio_pulmonary', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -1972,7 +1972,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Extravasation Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_extravasation_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_extravasation_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2008,7 +2008,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Hospital Acquired Pressure Ulcers (HAPU) Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_hapu_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_hapu_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2044,7 +2044,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Initial Assessment Accident and Emergency (A&E)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_initial_assessment_ae', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_initial_assessment_ae', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2080,7 +2080,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Initial Assessment IPD';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_initial_assessment_ipd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_initial_assessment_ipd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2117,7 +2117,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Initial Assessment OPD';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_initial_assessment_opd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_initial_assessment_opd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2154,7 +2154,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG-1';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg1', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg1', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2191,7 +2191,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG-2- A&E';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg2_ae', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg2_ae', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2228,7 +2228,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG-2- IPD';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg2_ipd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg2_ipd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2265,7 +2265,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG4-Timeout- Outside OT Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg4_timeout', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg4_timeout', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2302,7 +2302,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG6- IP';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg6_ip', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg6_ip', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2339,7 +2339,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IPSG6- OPD';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_ipsg6_opd', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg6_opd', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2376,7 +2376,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Point Prevalence Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_point_prevelance', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_point_prevelance', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2760,7 +2760,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'ACL';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_audit_acl', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_audit_acl', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2796,7 +2796,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Allogenic Bone Marrow Transplantation';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_allogenic_bone_marrow', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_allogenic_bone_marrow', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2832,7 +2832,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Aortic Valve Replacement (AVR)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_aortic_value_replacement', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_aortic_value_replacement', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2868,7 +2868,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Autologous Bone Marrow Transplantation';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_autologous_bone', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_autologous_bone', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2904,7 +2904,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Brain Tumour Surgery';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_brain_tumour', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_brain_tumour', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2940,7 +2940,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'CABG';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_cabg', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_cabg', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -2976,7 +2976,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Carotid Stenting';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_carotid_stenting', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_carotid_stenting', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3012,7 +3012,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Chemotherapy (Medical Oncology)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_chemotherapy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_chemotherapy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3048,7 +3048,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Colo-Rectal Surgeries';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_colo_rectal', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_colo_rectal', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3084,7 +3084,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Endoscopy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_endoscopy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_endoscopy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3120,7 +3120,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Epilepsy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_epilepsy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_epilepsy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3156,7 +3156,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Herniorrhaphy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_herniorrhaphy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_herniorrhaphy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3192,7 +3192,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'HoLEP';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_holep', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_holep', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3228,7 +3228,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Laparoscopic Appendicectomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_laparoscopic', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_laparoscopic', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3264,7 +3264,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Mechanical Thrombectomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_mechanical_thrombectomy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_mechanical_thrombectomy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3300,7 +3300,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'MVR (Mitral Valve Replacement)';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_mvr', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_mvr', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3336,7 +3336,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'PTCA';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_ptca', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_ptca', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3372,7 +3372,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Renal Transplantation';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_renal_transplantation', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_renal_transplantation', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3408,7 +3408,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Scoliosis Correction Surgery';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_scoliosis_correction', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_scoliosis_correction', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3444,7 +3444,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Spinal Dysraphism';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_spinal_dysraphism', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_spinal_dysraphism', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3480,7 +3480,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Spine & Disc Surgery-Fusion Procedures';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_spine_disc_surgery', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_spine_disc_surgery', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3516,7 +3516,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Thoracotomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_thoracotomy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_thoracotomy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3552,7 +3552,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'TKR';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_tkr', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_tkr', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3588,7 +3588,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Uro-oncology Procedures';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_uro_oncology', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_uro_oncology', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3624,7 +3624,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Whipples Surgery';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_whipples_surgery', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_whipples_surgery', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -3660,7 +3660,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Laparoscopic Cholecystectomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_laparoscopic_cholecystectomy', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_laparoscopic_cholecystectomy', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4272,7 +4272,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Bronchodilators Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinicalkpi_bronchodilators', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinicalkpi_bronchodilators', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4308,7 +4308,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'COPD Protocol Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinicalkpi_copd_protocol', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinicalkpi_copd_protocol', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4390,7 +4390,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Biomedical Waste Management Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_biomedical_waste', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_biomedical_waste', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4425,7 +4425,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Canteen Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_canteen_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_canteen_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4460,7 +4460,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'CSSD Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_cssd_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_cssd_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4495,7 +4495,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Hand Hygiene Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_hand_hygiene', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_hand_hygiene', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4530,7 +4530,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Infection Control Bundle Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_bundle_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_bundle_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4565,7 +4565,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Infection Control OT audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_ot_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_ot_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4600,7 +4600,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Ambulance PCI Audit ';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_ambulance_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_ambulance_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4635,7 +4635,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Linen Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_linen_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_linen_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4670,7 +4670,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Coffee Shop PCI Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_coffee_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_coffee_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4705,7 +4705,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Laboratory PCI Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_laboratory_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_laboratory_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4740,7 +4740,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Mortuary PCI Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_mortuary_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_mortuary_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4775,7 +4775,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Radiology PCI Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_radiology_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_radiology_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4810,7 +4810,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'SSI Surveillance checklist';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_ssi_survelliance_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_ssi_survelliance_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4845,7 +4845,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'IV Cannula Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_peripheralivline_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_peripheralivline_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4880,7 +4880,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Personal Protective Equipment Usage audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_personalprotective_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_personalprotective_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4915,7 +4915,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Safe Injection and Infusion Audit';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_safe_injection_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_safe_injection_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -4950,7 +4950,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Surface cleaning & Disinfection effectiveness monitoring record';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_infection_control_surface_cleaning_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_infection_control_surface_cleaning_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5348,7 +5348,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Arthroscopic Anterior Cruciate Ligament Reconstruction Surgery';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_arthroscopic_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_arthroscopic_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5383,7 +5383,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Breast Lump Consensus Guidelines';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_breast_lump_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_breast_lump_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5418,7 +5418,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Cardiac Arrest';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_cardiac_arrest_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_cardiac_arrest_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5453,7 +5453,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Donor Hepatectomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_donor_hepatectomy_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_donor_hepatectomy_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5488,7 +5488,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Febrile Seizure';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_febrile_seizure_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_febrile_seizure_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5523,7 +5523,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Heart Transplant Recipient';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_heart_transplant_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_heart_transplant_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5558,7 +5558,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Laparoscopic Donor Nephrectomy';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_laproscopic_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_laproscopic_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5593,7 +5593,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'PICC LINE Insertion';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_picc_line_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_picc_line_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5628,7 +5628,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Stroke';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_stroke_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_stroke_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5663,7 +5663,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'Urodynamics';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_urodynamics_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_urodynamics_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -5698,7 +5698,7 @@ class Audit extends CI_Controller
             }
 
             $data['title'] = 'STEMI-Primary PCI Clinical Pathway ';
-            $data['content']  = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_stemi_audit', $data, true);
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_clinical_pathway_stemi_audit', $data, true);
             $this->load->view('layout/main_wrapper', $data);
             // redirect('report/feedbacks_report');
         } else {
@@ -6596,551 +6596,2050 @@ class Audit extends CI_Controller
 
 
     // To Edit audit by id
+public function edit_active_cases_mrd_feedback_byid($id)
+{
+    // Check if form submitted
+    if ($this->input->post()) {
 
-    public function edit_active_cases_mrd_feedback_byid($id)
-    {
+        // 🧾 Get existing record
+        $existing = $this->audit_model->get_active_cases_mrd_feedback_byid($id);
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_active_cases_mrd_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/active_cases_mrd_feedback?id=' . $id);
-        } else {
+        // Decode existing dataset JSON
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
         }
+
+        // Get existing files from dataset
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🗑️ Handle removed files (from remove_files_json hidden field)
+        $removeIndexesJson = $this->input->post('remove_files_json');
+        $removeIndexes = !empty($removeIndexesJson) ? json_decode($removeIndexesJson, true) : [];
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+
+                    // Optionally delete physical file
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) {
+                        @unlink($absolutePath);
+                    }
+
+                    unset($existingFiles[$index]);
+                }
+            }
+
+            // Reindex after removal
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📤 Handle multiple new file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+
+            $filesCount = count($_FILES['uploaded_files']['name']);
+
+            $config['upload_path']   = './api/file_uploads/';
+            $config['allowed_types'] = 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx';
+            $config['max_size']      = 50000;
+            $config['encrypt_name']  = FALSE;
+
+            $this->load->library('upload');
+
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file']['name']     = $_FILES['uploaded_files']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['uploaded_files']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['uploaded_files']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['uploaded_files']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['uploaded_files']['size'][$i];
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+
+                    $newFile = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+
+                    // Add new file to existing array
+                    $existingFiles[] = $newFile;
+                }
+            }
+        }
+
+        // 🧠 Merge updated file list back into dataset
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧩 Merge other post data (excluding upload fields)
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🕒 Save updated data
+        $data = [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ];
+
+        // Update in database
+        $this->audit_model->update_active_cases_mrd_feedback($id, $data);
+
+        // Redirect back
+        redirect('audit/active_cases_mrd_feedback?id=' . $id);
+    } 
+    else {
+        // 🧭 Load existing record for edit view
+        $data['record'] = $this->audit_model->get_active_cases_mrd_feedback_byid($id);
+        $this->load->view('audit/edit_active_cases_mrd_feedback', $data);
     }
+}
 
     public function edit_discharged_patients_mrd_feedback_byid($id)
-    {
-        // Check if form is submitted
-        if ($this->input->post()) {
+{
+    // ✅ Check if form submitted
+    if ($this->input->post()) {
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
+        // 🧾 Get existing record
+        $existing = $this->audit_model->get_discharged_patients_mrd_feedback_byid($id);
 
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            // Update the data in the database
-            $this->audit_model->update_discharged_patients_mrd_feedback($id, $data);
-
-            //redirect
-            redirect('audit/discharged_patients_mrd_feedback?id=' . $id);
-        } else {
+        // Decode existing dataset JSON
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
         }
+
+        // Get existing files from dataset
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🗑️ Handle removed files (from remove_files_json hidden field)
+        $removeIndexesJson = $this->input->post('remove_files_json');
+        $removeIndexes = !empty($removeIndexesJson) ? json_decode($removeIndexesJson, true) : [];
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+
+                    // Optionally delete physical file
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) {
+                        @unlink($absolutePath);
+                    }
+
+                    unset($existingFiles[$index]);
+                }
+            }
+
+            // Reindex files after removal
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📤 Handle new file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+
+            $filesCount = count($_FILES['uploaded_files']['name']);
+
+            $config['upload_path']   = './api/file_uploads/';
+            $config['allowed_types'] = 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx';
+            $config['max_size']      = 50000;
+            $config['encrypt_name']  = FALSE;
+
+            $this->load->library('upload');
+
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file']['name']     = $_FILES['uploaded_files']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['uploaded_files']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['uploaded_files']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['uploaded_files']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['uploaded_files']['size'][$i];
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+
+                    $newFile = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+
+                    // Add new file to existing array
+                    $existingFiles[] = $newFile;
+                }
+            }
+        }
+
+        // 🧠 Merge updated file list back into dataset
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧩 Merge other post data (excluding upload fields)
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🕒 Save updated data
+        $data = [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ];
+
+        // Update in database
+        $this->audit_model->update_discharged_patients_mrd_feedback($id, $data);
+
+        // Redirect back
+        redirect('audit/discharged_patients_mrd_feedback?id=' . $id);
+    } 
+    else {
+        // 🧭 Load existing record for edit view
+        $data['record'] = $this->audit_model->get_discharged_patients_mrd_feedback_byid($id);
+        $this->load->view('audit/edit_discharged_patients_mrd_feedback', $data);
     }
+}
+
 
 
     public function edit_nursing_ip_closed_feedback_byid($id)
-    {
-        // Check if form is submitted
-        if ($this->input->post()) {
+{
+    if ($this->input->post()) {
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
+        // 🧾 Get existing record
+        $existing = $this->audit_model->get_nursing_ip_closed_feedback_byid($id);
 
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            // Update the data in the database
-            $this->audit_model->update_nursing_ip_closed_feedback($id, $data);
-
-            // Redirect
-            redirect('audit/nursing_ip_closed_feedback?id=' . $id);
+        // Decode existing dataset JSON
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
         }
-    }
 
-    public function edit_nursing_ip_open_feedback_byid($id)
-    {
-        // Check if form is submitted
-        if ($this->input->post()) {
+        // Existing files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            // Update the data in the database
-            $this->audit_model->update_nursing_ip_open_feedback($id, $data);
-
-            // Redirect
-            redirect('audit/nursing_ip_open_feedback?id=' . $id);
+        // Handle removed files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_nursing_op_closed_feedback_byid($id)
-    {
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            // Update the data in the database
-            $this->audit_model->update_nursing_op_closed_feedback($id, $data);
-
-            // Redirect
-            redirect('audit/nursing_op_closed_feedback?id=' . $id);
+        // Handle new uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-
-    public function edit_clinical_active_mdc_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_clinical_active_mdc_feedback($id, $data);
-
-            redirect('audit/clinical_active_mdc_feedback?id=' . $id);
+        // Merge files and other post data
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        // Update database
+        $this->audit_model->update_nursing_ip_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/nursing_ip_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_nursing_ip_closed_feedback_byid($id);
+        $this->load->view('audit/edit_nursing_ip_closed_feedback', $data);
     }
+}
 
-    public function edit_clinical_closed_mdc_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+public function edit_nursing_ip_open_feedback_byid($id)
+{
+    if ($this->input->post()) {
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
+        $existing = $this->audit_model->get_nursing_ip_open_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_clinical_closed_mdc_feedback($id, $data);
-
-            redirect('audit/clinical_closed_mdc_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_nursing_ip_open_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/nursing_ip_open_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_nursing_ip_open_feedback_byid($id);
+        $this->load->view('audit/edit_nursing_ip_open_feedback', $data);
     }
+}
+
+public function edit_nursing_op_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_nursing_op_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_nursing_op_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/nursing_op_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_nursing_op_closed_feedback_byid($id);
+        $this->load->view('audit/edit_nursing_op_closed_feedback', $data);
+    }
+}
+
+public function edit_clinical_active_mdc_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_clinical_active_mdc_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_active_mdc_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_active_mdc_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_active_mdc_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_active_mdc_feedback', $data);
+    }
+}
+
+public function edit_clinical_closed_mdc_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_clinical_closed_mdc_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_closed_mdc_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_closed_mdc_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_closed_mdc_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_closed_mdc_feedback', $data);
+    }
+}
 
     public function edit_clinical_pharmacy_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+{
+    if ($this->input->post()) {
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
+        $existing = $this->audit_model->get_clinical_pharmacy_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_clinical_pharmacy_closed_feedback($id, $data);
-
-            redirect('audit/clinical_pharmacy_closed_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_clinical_pharmacy_op_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_clinical_pharmacy_op_feedback($id, $data);
-
-            redirect('audit/clinical_pharmacy_op_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_clinical_pharmacy_open_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_clinical_pharmacy_open_feedback($id, $data);
-
-            redirect('audit/clinical_pharmacy_open_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_pharmacy_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pharmacy_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pharmacy_closed_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pharmacy_closed_feedback', $data);
     }
+}
 
+public function edit_clinical_pharmacy_op_feedback_byid($id)
+{
+    if ($this->input->post()) {
 
-    public function edit_anesthesia_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pharmacy_op_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_anesthesia_active_feedback($id, $data);
-
-            redirect('audit/anesthesia_active_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_anesthesia_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_anesthesia_closed_feedback($id, $data);
-
-            redirect('audit/anesthesia_closed_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pharmacy_op_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pharmacy_op_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pharmacy_op_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pharmacy_op_feedback', $data);
     }
+}
+
+public function edit_clinical_pharmacy_open_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_clinical_pharmacy_open_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pharmacy_open_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pharmacy_open_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pharmacy_open_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pharmacy_open_feedback', $data);
+    }
+}
+
+public function edit_anesthesia_active_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_anesthesia_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_anesthesia_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/anesthesia_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_anesthesia_active_feedback_byid($id);
+        $this->load->view('audit/edit_anesthesia_active_feedback', $data);
+    }
+}
+
+public function edit_anesthesia_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->audit_model->get_anesthesia_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_anesthesia_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/anesthesia_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_anesthesia_closed_feedback_byid($id);
+        $this->load->view('audit/edit_anesthesia_closed_feedback', $data);
+    }
+}
+
 
     public function edit_ed_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ed_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_ed_active_feedback($id, $data);
-
-            redirect('audit/ed_active_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_ed_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_ed_closed_feedback($id, $data);
-
-            redirect('audit/ed_closed_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_icu_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_icu_active_feedback($id, $data);
-
-            redirect('audit/icu_active_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_ed_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ed_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ed_active_feedback_byid($id);
+        $this->load->view('audit/edit_ed_active_feedback', $data);
     }
+}
 
-    public function edit_icu_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+public function edit_ed_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ed_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_icu_closed_feedback($id, $data);
-
-            redirect('audit/icu_closed_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_primarycare_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_primarycare_active_feedback($id, $data);
-
-            redirect('audit/primarycare_active_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_primarycare_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_primarycare_closed_feedback($id, $data);
-
-            redirect('audit/primarycare_closed_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_ed_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ed_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ed_closed_feedback_byid($id);
+        $this->load->view('audit/edit_ed_closed_feedback', $data);
     }
+}
+
+public function edit_icu_active_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_icu_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_icu_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/icu_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_icu_active_feedback_byid($id);
+        $this->load->view('audit/edit_icu_active_feedback', $data);
+    }
+}
+
+public function edit_icu_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_icu_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_icu_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/icu_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_icu_closed_feedback_byid($id);
+        $this->load->view('audit/edit_icu_closed_feedback', $data);
+    }
+}
+
+public function edit_primarycare_active_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_primarycare_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_primarycare_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/primarycare_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_primarycare_active_feedback_byid($id);
+        $this->load->view('audit/edit_primarycare_active_feedback', $data);
+    }
+}
+
+public function edit_primarycare_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_primarycare_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_primarycare_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/primarycare_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_primarycare_closed_feedback_byid($id);
+        $this->load->view('audit/edit_primarycare_closed_feedback', $data);
+    }
+}
+
 
     public function edit_sedation_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_sedation_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_sedation_active_feedback($id, $data);
-
-            redirect('audit/sedation_active_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_sedation_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_sedation_closed_feedback($id, $data);
-
-            redirect('audit/sedation_closed_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_surgeons_active_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_surgeons_active_feedback($id, $data);
-
-            redirect('audit/surgeons_active_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_sedation_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/sedation_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_sedation_active_feedback_byid($id);
+        $this->load->view('audit/edit_sedation_active_feedback', $data);
     }
+}
 
-    public function edit_surgeons_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+public function edit_sedation_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_sedation_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_surgeons_closed_feedback($id, $data);
-
-            redirect('audit/surgeons_closed_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_sedation_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/sedation_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_sedation_closed_feedback_byid($id);
+        $this->load->view('audit/edit_sedation_closed_feedback', $data);
     }
+}
+
+public function edit_surgeons_active_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_surgeons_active_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_surgeons_active_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/surgeons_active_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_surgeons_active_feedback_byid($id);
+        $this->load->view('audit/edit_surgeons_active_feedback', $data);
+    }
+}
+
+public function edit_surgeons_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_surgeons_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_surgeons_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/surgeons_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_surgeons_closed_feedback_byid($id);
+        $this->load->view('audit/edit_surgeons_closed_feedback', $data);
+    }
+}
+
 
     public function edit_diet_consultation_op_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_diet_consultation_op_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_diet_consultation_op_feedback($id, $data);
-
-            redirect('audit/diet_consultation_op_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_physiotherapy_closed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_physiotherapy_closed_feedback($id, $data);
-
-            redirect('audit/physiotherapy_closed_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_physiotherapy_op_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_physiotherapy_op_feedback($id, $data);
-
-            redirect('audit/physiotherapy_op_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_diet_consultation_op_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/diet_consultation_op_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_diet_consultation_op_feedback_byid($id);
+        $this->load->view('audit/edit_diet_consultation_op_feedback', $data);
     }
+}
 
-    public function edit_physiotherapy_open_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+public function edit_physiotherapy_closed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_physiotherapy_closed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_physiotherapy_open_feedback($id, $data);
-
-            redirect('audit/physiotherapy_open_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
 
-    public function edit_mrd_ed_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_mrd_ed_feedback($id, $data);
-
-            redirect('audit/mrd_ed_feedback?id=' . $id);
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
 
-    public function edit_mrd_lama_feedback_byid($id)
-    {
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_mrd_lama_feedback($id, $data);
-
-            redirect('audit/mrd_lama_feedback?id=' . $id);
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_physiotherapy_closed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/physiotherapy_closed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_physiotherapy_closed_feedback_byid($id);
+        $this->load->view('audit/edit_physiotherapy_closed_feedback', $data);
     }
+}
 
-    public function edit_mrd_op_feedback_byid($id)
-    {
-        if ($this->input->post()) {
+public function edit_physiotherapy_op_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_physiotherapy_op_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
 
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-            $this->audit_model->update_mrd_op_feedback($id, $data);
-
-            redirect('audit/mrd_op_feedback?id=' . $id);
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_physiotherapy_op_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/physiotherapy_op_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_physiotherapy_op_feedback_byid($id);
+        $this->load->view('audit/edit_physiotherapy_op_feedback', $data);
     }
+}
+
+public function edit_physiotherapy_open_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_physiotherapy_open_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_physiotherapy_open_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/physiotherapy_open_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_physiotherapy_open_feedback_byid($id);
+        $this->load->view('audit/edit_physiotherapy_open_feedback', $data);
+    }
+}
+
+public function edit_mrd_ed_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_mrd_ed_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_mrd_ed_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/mrd_ed_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_mrd_ed_feedback_byid($id);
+        $this->load->view('audit/edit_mrd_ed_feedback', $data);
+    }
+}
+
+public function edit_mrd_lama_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_mrd_lama_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_mrd_lama_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/mrd_lama_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_mrd_lama_feedback_byid($id);
+        $this->load->view('audit/edit_mrd_lama_feedback', $data);
+    }
+}
+
+public function edit_mrd_op_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_mrd_op_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_mrd_op_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/mrd_op_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_mrd_op_feedback_byid($id);
+        $this->load->view('audit/edit_mrd_op_feedback', $data);
+    }
+}
+
 
     //edit page and to edit for Nursing & IPSG
     public function edit_accidental_delining_feedback()
@@ -7507,365 +9006,1025 @@ class Audit extends CI_Controller
     // To Edit audit by id Nursing & IPSG
 
     public function edit_accidental_delining_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_accidental_delining_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_accidental_delining_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/accidental_delining_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_admission_holding_area_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_admission_holding_area_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/admission_holding_area_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_cardio_pulmonary_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_cardio_pulmonary_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/cardio_pulmonary_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_accidental_delining_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/accidental_delining_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_accidental_delining_feedback_byid($id);
+        $this->load->view('audit/edit_accidental_delining_feedback', $data);
     }
-    public function edit_extravasation_audit_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_admission_holding_area_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_admission_holding_area_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_extravasation_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/extravasation_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_hapu_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_hapu_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/hapu_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_initial_assessment_ae_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_initial_assessment_ae_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/initial_assessment_ae_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_admission_holding_area_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/admission_holding_area_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_admission_holding_area_feedback_byid($id);
+        $this->load->view('audit/edit_admission_holding_area_feedback', $data);
     }
+}
+
+public function edit_cardio_pulmonary_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_cardio_pulmonary_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_cardio_pulmonary_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/cardio_pulmonary_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_cardio_pulmonary_feedback_byid($id);
+        $this->load->view('audit/edit_cardio_pulmonary_feedback', $data);
+    }
+}
+
+public function edit_extravasation_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_extravasation_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_extravasation_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/extravasation_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_extravasation_audit_feedback_byid($id);
+        $this->load->view('audit/edit_extravasation_audit_feedback', $data);
+    }
+}
+
+public function edit_hapu_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_hapu_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_hapu_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/hapu_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_hapu_audit_feedback_byid($id);
+        $this->load->view('audit/edit_hapu_audit_feedback', $data);
+    }
+}
+
+public function edit_initial_assessment_ae_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_initial_assessment_ae_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_initial_assessment_ae_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/initial_assessment_ae_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_initial_assessment_ae_feedback_byid($id);
+        $this->load->view('audit/edit_initial_assessment_ae_feedback', $data);
+    }
+}
+
     public function edit_initial_assessment_ipd_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_initial_assessment_ipd_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_initial_assessment_ipd_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/initial_assessment_ipd_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_initial_assessment_opd_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_initial_assessment_opd_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/initial_assessment_opd_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_ipsg1_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg1_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg1_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_initial_assessment_ipd_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/initial_assessment_ipd_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_initial_assessment_ipd_feedback_byid($id);
+        $this->load->view('audit/edit_initial_assessment_ipd_feedback', $data);
     }
+}
+
+public function edit_initial_assessment_opd_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_initial_assessment_opd_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_initial_assessment_opd_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/initial_assessment_opd_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_initial_assessment_opd_feedback_byid($id);
+        $this->load->view('audit/edit_initial_assessment_opd_feedback', $data);
+    }
+}
+
+public function edit_ipsg1_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg1_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_ipsg1_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg1_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg1_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg1_feedback', $data);
+    }
+}
+
     public function edit_ipsg2_ae_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg2_ae_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg2_ae_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_ipsg2_ipd_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg2_ipd_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg2_ipd_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_ipsg4_timeout_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg4_timeout_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg4_timeout_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_ipsg2_ae_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg2_ae_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg2_ae_feedback', $data);
     }
+}
+
+public function edit_ipsg2_ipd_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg2_ipd_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_ipsg2_ipd_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg2_ipd_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg2_ipd_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg2_ipd_feedback', $data);
+    }
+}
+
+public function edit_ipsg4_timeout_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg4_timeout_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_ipsg4_timeout_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg4_timeout_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg4_timeout_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg4_timeout_feedback', $data);
+    }
+}
+
     public function edit_ipsg6_ip_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg6_ip_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg6_ip_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg6_ip_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_ipsg6_opd_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_ipsg6_opd_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/ipsg6_opd_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_point_prevelance_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_point_prevelance_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/point_prevelance_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_ipsg6_ip_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg6_ip_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg6_ip_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg6_ip_feedback', $data);
     }
+}
+
+public function edit_ipsg6_opd_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_ipsg6_opd_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_ipsg6_opd_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/ipsg6_opd_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_ipsg6_opd_feedback_byid($id);
+        $this->load->view('audit/edit_ipsg6_opd_feedback', $data);
+    }
+}
+
+public function edit_point_prevelance_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_point_prevelance_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_point_prevelance_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/point_prevelance_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_point_prevelance_feedback_byid($id);
+        $this->load->view('audit/edit_point_prevelance_feedback', $data);
+    }
+}
+
 
     //edit page and to edit for Clinical Outcome
 
@@ -8497,629 +10656,1768 @@ class Audit extends CI_Controller
     // To Edit audit by id Clinical Outcome
 
     public function edit_clinical_audit_acl_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_audit_acl_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_audit_acl_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_audit_acl_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_allogenic_bone_marrow_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_allogenic_bone_marrow_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_allogenic_bone_marrow_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_aortic_value_replacement_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_aortic_value_replacement_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_aortic_value_replacement_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_audit_acl_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_audit_acl_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_audit_acl_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_audit_acl_feedback', $data);
     }
-    public function edit_clinical_autologous_bone_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_allogenic_bone_marrow_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_allogenic_bone_marrow_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_autologous_bone_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_autologous_bone_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_brain_tumour_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_brain_tumour_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_brain_tumour_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_allogenic_bone_marrow_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_allogenic_bone_marrow_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_allogenic_bone_marrow_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_allogenic_bone_marrow_feedback', $data);
     }
+}
+
+public function edit_clinical_aortic_value_replacement_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_aortic_value_replacement_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_aortic_value_replacement_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_aortic_value_replacement_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_aortic_value_replacement_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_aortic_value_replacement_feedback', $data);
+    }
+}
+
+public function edit_clinical_autologous_bone_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_autologous_bone_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_autologous_bone_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_autologous_bone_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_autologous_bone_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_autologous_bone_feedback', $data);
+    }
+}
+
+public function edit_clinical_brain_tumour_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_brain_tumour_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_brain_tumour_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_brain_tumour_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_brain_tumour_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_brain_tumour_feedback', $data);
+    }
+}
+
     public function edit_clinical_cabg_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_cabg_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_cabg_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_cabg_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_carotid_stenting_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_carotid_stenting_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_carotid_stenting_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_chemotherapy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_chemotherapy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_chemotherapy_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_cabg_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_cabg_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_cabg_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_cabg_feedback', $data);
     }
-    public function edit_clinical_colo_rectal_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_carotid_stenting_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_carotid_stenting_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_colo_rectal_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_colo_rectal_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_carotid_stenting_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_carotid_stenting_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_carotid_stenting_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_carotid_stenting_feedback', $data);
     }
+}
+
+public function edit_clinical_chemotherapy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_chemotherapy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_chemotherapy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_chemotherapy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_chemotherapy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_chemotherapy_feedback', $data);
+    }
+}
+
+public function edit_clinical_colo_rectal_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_colo_rectal_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_colo_rectal_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_colo_rectal_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_colo_rectal_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_colo_rectal_feedback', $data);
+    }
+}
+
     public function edit_clinical_endoscopy_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_endoscopy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_endoscopy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_endoscopy_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_epilepsy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_epilepsy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_epilepsy_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_herniorrhaphy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_herniorrhaphy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_herniorrhaphy_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_endoscopy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_endoscopy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_endoscopy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_endoscopy_feedback', $data);
     }
-    public function edit_clinical_holep_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_epilepsy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_epilepsy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_holep_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_holep_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_laparoscopic_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_laparoscopic_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_laparoscopic_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_mechanical_thrombectomy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+        $dataset['files_name'] = array_values($existingFiles);
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_mechanical_thrombectomy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_mechanical_thrombectomy_feedback?id=' . $id);
-        } else {
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_epilepsy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_epilepsy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_epilepsy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_epilepsy_feedback', $data);
     }
-    public function edit_clinical_mvr_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_herniorrhaphy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_herniorrhaphy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_mvr_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_mvr_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_herniorrhaphy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_herniorrhaphy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_herniorrhaphy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_herniorrhaphy_feedback', $data);
     }
+}
+
+public function edit_clinical_holep_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_holep_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_holep_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_holep_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_holep_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_holep_feedback', $data);
+    }
+}
+
+public function edit_clinical_laparoscopic_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_laparoscopic_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_laparoscopic_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_laparoscopic_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_laparoscopic_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_laparoscopic_feedback', $data);
+    }
+}
+
+public function edit_clinical_mechanical_thrombectomy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_mechanical_thrombectomy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_mechanical_thrombectomy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_mechanical_thrombectomy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_mechanical_thrombectomy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_mechanical_thrombectomy_feedback', $data);
+    }
+}
+
+public function edit_clinical_mvr_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_mvr_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Remove files if requested
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        // Merge POST data into dataset
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // Update database
+        $this->audit_model->update_clinical_mvr_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        // Redirect back
+        redirect('audit/clinical_mvr_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_mvr_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_mvr_feedback', $data);
+    }
+}
+
+           
+
     public function edit_clinical_ptca_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_ptca_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_ptca_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_ptca_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_renal_transplantation_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_renal_transplantation_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_renal_transplantation_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_scoliosis_correction_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_scoliosis_correction_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_scoliosis_correction_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_ptca_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_ptca_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_ptca_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_ptca_feedback', $data);
     }
-    public function edit_clinical_spinal_dysraphism_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_renal_transplantation_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_renal_transplantation_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_spinal_dysraphism_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_spinal_dysraphism_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_renal_transplantation_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_renal_transplantation_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_renal_transplantation_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_renal_transplantation_feedback', $data);
     }
+}
+
+public function edit_clinical_scoliosis_correction_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_scoliosis_correction_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_scoliosis_correction_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_scoliosis_correction_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_scoliosis_correction_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_scoliosis_correction_feedback', $data);
+    }
+}
+
+public function edit_clinical_spinal_dysraphism_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_spinal_dysraphism_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_spinal_dysraphism_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_spinal_dysraphism_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_spinal_dysraphism_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_spinal_dysraphism_feedback', $data);
+    }
+}
+
     public function edit_clinical_spine_disc_surgery_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_spine_disc_surgery_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_spine_disc_surgery_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_spine_disc_surgery_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_thoracotomy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_thoracotomy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_thoracotomy_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_tkr_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_tkr_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_tkr_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_spine_disc_surgery_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_spine_disc_surgery_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_spine_disc_surgery_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_spine_disc_surgery_feedback', $data);
     }
+}
+
+public function edit_clinical_thoracotomy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_thoracotomy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_thoracotomy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_thoracotomy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_thoracotomy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_thoracotomy_feedback', $data);
+    }
+}
+
+public function edit_clinical_tkr_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_tkr_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_tkr_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_tkr_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_tkr_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_tkr_feedback', $data);
+    }
+}
+
     public function edit_clinical_uro_oncology_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_uro_oncology_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_uro_oncology_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_uro_oncology_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_whipples_surgery_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_whipples_surgery_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_whipples_surgery_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_laparoscopic_cholecystectomy_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_laparoscopic_cholecystectomy_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_laparoscopic_cholecystectomy_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_uro_oncology_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_uro_oncology_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_uro_oncology_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_uro_oncology_feedback', $data);
     }
+}
+
+public function edit_clinical_whipples_surgery_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_whipples_surgery_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_whipples_surgery_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_whipples_surgery_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_whipples_surgery_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_whipples_surgery_feedback', $data);
+    }
+}
+
+public function edit_clinical_laparoscopic_cholecystectomy_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_laparoscopic_cholecystectomy_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_laparoscopic_cholecystectomy_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_laparoscopic_cholecystectomy_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_laparoscopic_cholecystectomy_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_laparoscopic_cholecystectomy_feedback', $data);
+    }
+}
 
     //edit page and to edit for Clinical KPI
 
@@ -9175,53 +12473,139 @@ class Audit extends CI_Controller
     // To Edit audit by id Clinical KPI
 
     public function edit_clinicalkpi_bronchodilators_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinicalkpi_bronchodilators_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinicalkpi_bronchodilators_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinicalkpi_bronchodilators_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinicalkpi_copd_protocol_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinicalkpi_copd_protocol_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinicalkpi_copd_protocol_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinicalkpi_bronchodilators_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinicalkpi_bronchodilators_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinicalkpi_bronchodilators_feedback_byid($id);
+        $this->load->view('audit/edit_clinicalkpi_bronchodilators_feedback', $data);
     }
+}
+
+public function edit_clinicalkpi_copd_protocol_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinicalkpi_copd_protocol_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinicalkpi_copd_protocol_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinicalkpi_copd_protocol_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinicalkpi_copd_protocol_feedback_byid($id);
+        $this->load->view('audit/edit_clinicalkpi_copd_protocol_feedback', $data);
+    }
+}
+
 
     //edit page and to edit for Infection Control
 
@@ -9637,413 +13021,1144 @@ class Audit extends CI_Controller
     // To Edit audit by id Infection Control
 
     public function edit_infection_control_biomedical_waste_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_biomedical_waste_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_biomedical_waste_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_biomedical_waste_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_infection_control_canteen_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_canteen_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_canteen_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_infection_control_cssd_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_cssd_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_cssd_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_infection_control_biomedical_waste_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_biomedical_waste_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_biomedical_waste_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_biomedical_waste_feedback', $data);
     }
-    public function edit_infection_control_hand_hygiene_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_infection_control_canteen_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_canteen_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_hand_hygiene_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_hand_hygiene_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_canteen_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_canteen_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_canteen_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_canteen_audit_feedback', $data);
     }
+}
+
+public function edit_infection_control_cssd_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_cssd_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_cssd_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_cssd_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_cssd_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_cssd_audit_feedback', $data);
+    }
+}
+
+public function edit_infection_control_hand_hygiene_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_hand_hygiene_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_hand_hygiene_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_hand_hygiene_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_hand_hygiene_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_hand_hygiene_feedback', $data);
+    }
+}
+
     public function edit_infection_control_bundle_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_bundle_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_bundle_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_bundle_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_infection_control_ot_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_ot_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_ot_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_infection_control_linen_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_linen_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_linen_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_infection_control_bundle_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_bundle_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_bundle_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_bundle_audit_feedback', $data);
     }
-    public function edit_infection_control_ambulance_audit_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_infection_control_ot_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_ot_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_ambulance_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_ambulance_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_ot_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_ot_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_ot_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_ot_audit_feedback', $data);
     }
+}
+
+public function edit_infection_control_linen_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_linen_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_linen_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_linen_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_linen_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_linen_audit_feedback', $data);
+    }
+}
+
+public function edit_infection_control_ambulance_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_ambulance_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_ambulance_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_ambulance_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_ambulance_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_ambulance_audit_feedback', $data);
+    }
+}
+
     public function edit_infection_control_coffee_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_coffee_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_coffee_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_coffee_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_infection_control_laboratory_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_laboratory_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_laboratory_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_infection_control_mortuary_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_mortuary_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_mortuary_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_infection_control_coffee_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_coffee_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_coffee_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_coffee_audit_feedback', $data);
     }
-    public function edit_infection_control_radiology_audit_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_infection_control_laboratory_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_laboratory_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_radiology_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_radiology_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_laboratory_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_laboratory_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_laboratory_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_laboratory_audit_feedback', $data);
     }
+}
+
+public function edit_infection_control_mortuary_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_mortuary_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_mortuary_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_mortuary_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_mortuary_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_mortuary_audit_feedback', $data);
+    }
+}
+
+public function edit_infection_control_radiology_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_radiology_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_radiology_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_radiology_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_radiology_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_radiology_audit_feedback', $data);
+    }
+}
+
     public function edit_infection_control_ssi_survelliance_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_ssi_survelliance_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_ssi_survelliance_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_ssi_survelliance_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_infection_control_peripheralivline_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_peripheralivline_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_peripheralivline_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_infection_control_personalprotective_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_personalprotective_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_personalprotective_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_infection_control_ssi_survelliance_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_ssi_survelliance_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_ssi_survelliance_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_ssi_survelliance_audit_feedback', $data);
     }
-    public function edit_infection_control_safe_injection_audit_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_infection_control_peripheralivline_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_peripheralivline_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_safe_injection_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_safe_injection_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_infection_control_surface_cleaning_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_infection_control_surface_cleaning_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/infection_control_surface_cleaning_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_peripheralivline_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_peripheralivline_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_peripheralivline_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_peripheralivline_audit_feedback', $data);
     }
+}
+
+public function edit_infection_control_personalprotective_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_personalprotective_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_personalprotective_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_personalprotective_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_personalprotective_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_personalprotective_audit_feedback', $data);
+    }
+}
+
+public function edit_infection_control_safe_injection_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_safe_injection_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_safe_injection_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_safe_injection_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_safe_injection_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_safe_injection_audit_feedback', $data);
+    }
+}
+
+public function edit_infection_control_surface_cleaning_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_infection_control_surface_cleaning_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_infection_control_surface_cleaning_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/infection_control_surface_cleaning_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_infection_control_surface_cleaning_audit_feedback_byid($id);
+        $this->load->view('audit/edit_infection_control_surface_cleaning_audit_feedback', $data);
+    }
+}
+
 
     //edit page and to edit for Clinical Pathways
 
@@ -10315,269 +14430,745 @@ class Audit extends CI_Controller
     // To Edit audit by id Clinical Pathways
 
     public function edit_clinical_pathway_arthroscopic_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_arthroscopic_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_arthroscopic_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_arthroscopic_audit_feedback?id=' . $id);
-        } else {
+        // Remove files if requested
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_pathway_breast_lump_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_breast_lump_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_breast_lump_audit_feedback?id=' . $id);
-        } else {
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_pathway_cardiac_arrest_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_cardiac_arrest_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_cardiac_arrest_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_pathway_arthroscopic_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_arthroscopic_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_arthroscopic_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_arthroscopic_audit_feedback', $data);
     }
+}
+
+public function edit_clinical_pathway_breast_lump_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_breast_lump_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_breast_lump_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_breast_lump_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_breast_lump_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_breast_lump_audit_feedback', $data);
+    }
+}
+
+public function edit_clinical_pathway_cardiac_arrest_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_cardiac_arrest_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_cardiac_arrest_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_cardiac_arrest_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_cardiac_arrest_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_cardiac_arrest_audit_feedback', $data);
+    }
+}
+
+
+
     public function edit_clinical_pathway_donor_hepatectomy_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_donor_hepatectomy_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_donor_hepatectomy_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_donor_hepatectomy_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_pathway_febrile_seizure_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_febrile_seizure_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_febrile_seizure_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_pathway_heart_transplant_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_heart_transplant_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_heart_transplant_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_pathway_donor_hepatectomy_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_donor_hepatectomy_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_donor_hepatectomy_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_donor_hepatectomy_audit_feedback', $data);
     }
-    public function edit_clinical_pathway_laproscopic_audit_feedback_byid($id)
-    {
+}
 
-        // Check if form is submitted
-        if ($this->input->post()) {
+public function edit_clinical_pathway_febrile_seizure_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_febrile_seizure_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_laproscopic_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_laproscopic_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_pathway_picc_line_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_picc_line_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_picc_line_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_febrile_seizure_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_febrile_seizure_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_febrile_seizure_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_febrile_seizure_audit_feedback', $data);
     }
+}
+
+public function edit_clinical_pathway_heart_transplant_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_heart_transplant_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_heart_transplant_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_heart_transplant_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_heart_transplant_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_heart_transplant_audit_feedback', $data);
+    }
+}
+
+public function edit_clinical_pathway_laproscopic_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_laproscopic_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_laproscopic_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_laproscopic_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_laproscopic_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_laproscopic_audit_feedback', $data);
+    }
+}
+
+public function edit_clinical_pathway_picc_line_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_picc_line_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_picc_line_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_picc_line_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_picc_line_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_picc_line_audit_feedback', $data);
+    }
+}
+
     public function edit_clinical_pathway_stroke_audit_feedback_byid($id)
-    {
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_stroke_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_stroke_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_stroke_audit_feedback?id=' . $id);
-        } else {
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
-    }
-    public function edit_clinical_pathway_urodynamics_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_urodynamics_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_urodynamics_audit_feedback?id=' . $id);
-        } else {
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
         }
-    }
-    public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
-    {
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-
-            $dataCollected = $this->input->post('dataCollected');
-
-            // Format the datetime and datet values
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-                'dataset' => json_encode($_POST)
-            );
-
-
-            // Update the data in the database
-            $this->audit_model->update_clinical_pathway_stemi_audit_feedback($id, $data);
-
-            // Redirect to individual page
-            redirect('audit/clinical_pathway_stemi_audit_feedback?id=' . $id);
-        } else {
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
         }
+
+        $this->audit_model->update_clinical_pathway_stroke_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_stroke_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_stroke_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_stroke_audit_feedback', $data);
     }
+}
+
+public function edit_clinical_pathway_urodynamics_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_urodynamics_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_urodynamics_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_urodynamics_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_urodynamics_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_urodynamics_audit_feedback', $data);
+    }
+}
+
+public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->audit_model->get_clinical_pathway_stemi_audit_feedback_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $this->audit_model->update_clinical_pathway_stemi_audit_feedback($id, [
+            'dataset'  => json_encode($dataset),
+            'datetime' => date('Y-m-d H:i:s')
+        ]);
+
+        redirect('audit/clinical_pathway_stemi_audit_feedback?id=' . $id);
+    } else {
+        $data['record'] = $this->audit_model->get_clinical_pathway_stemi_audit_feedback_byid($id);
+        $this->load->view('audit/edit_clinical_pathway_stemi_audit_feedback', $data);
+    }
+}
 
 
 
@@ -11056,15 +15647,15 @@ class Audit extends CI_Controller
                 $dataexport[$i]['food_portioning'] = ucfirst($data['food_portioning']) . "\r\nRemarks: " . $data['food_portioning_text'];
 
 
-                $dataexport[$i]['ab1']  = ucfirst($data['ab1'])  . "\r\nRemarks: " . $data['ab1_text'];
-                $dataexport[$i]['ab2']  = ucfirst($data['ab2'])  . "\r\nRemarks: " . $data['ab2_text'];
-                $dataexport[$i]['ab3']  = ucfirst($data['ab3'])  . "\r\nRemarks: " . $data['ab3_text'];
-                $dataexport[$i]['ab4']  = ucfirst($data['ab4'])  . "\r\nRemarks: " . $data['ab4_text'];
-                $dataexport[$i]['ab5']  = ucfirst($data['ab5'])  . "\r\nRemarks: " . $data['ab5_text'];
-                $dataexport[$i]['ab6']  = ucfirst($data['ab6'])  . "\r\nRemarks: " . $data['ab6_text'];
-                $dataexport[$i]['ab7']  = ucfirst($data['ab7'])  . "\r\nRemarks: " . $data['ab7_text'];
-                $dataexport[$i]['ab8']  = ucfirst($data['ab8'])  . "\r\nRemarks: " . $data['ab8_text'];
-                $dataexport[$i]['ab9']  = ucfirst($data['ab9'])  . "\r\nRemarks: " . $data['ab9_text'];
+                $dataexport[$i]['ab1'] = ucfirst($data['ab1']) . "\r\nRemarks: " . $data['ab1_text'];
+                $dataexport[$i]['ab2'] = ucfirst($data['ab2']) . "\r\nRemarks: " . $data['ab2_text'];
+                $dataexport[$i]['ab3'] = ucfirst($data['ab3']) . "\r\nRemarks: " . $data['ab3_text'];
+                $dataexport[$i]['ab4'] = ucfirst($data['ab4']) . "\r\nRemarks: " . $data['ab4_text'];
+                $dataexport[$i]['ab5'] = ucfirst($data['ab5']) . "\r\nRemarks: " . $data['ab5_text'];
+                $dataexport[$i]['ab6'] = ucfirst($data['ab6']) . "\r\nRemarks: " . $data['ab6_text'];
+                $dataexport[$i]['ab7'] = ucfirst($data['ab7']) . "\r\nRemarks: " . $data['ab7_text'];
+                $dataexport[$i]['ab8'] = ucfirst($data['ab8']) . "\r\nRemarks: " . $data['ab8_text'];
+                $dataexport[$i]['ab9'] = ucfirst($data['ab9']) . "\r\nRemarks: " . $data['ab9_text'];
                 $dataexport[$i]['ab10'] = ucfirst($data['ab10']) . "\r\nRemarks: " . $data['ab10_text'];
                 $dataexport[$i]['ab11'] = ucfirst($data['ab11']) . "\r\nRemarks: " . $data['ab11_text'];
                 $dataexport[$i]['ab12'] = ucfirst($data['ab12']) . "\r\nRemarks: " . $data['ab12_text'];
@@ -11127,26 +15718,26 @@ class Audit extends CI_Controller
                 $dataexport[$i]['ab69'] = ucfirst($data['ab69']) . "\r\nRemarks: " . $data['ab69_text'];
                 $dataexport[$i]['ab70'] = ucfirst($data['ab70']) . "\r\nRemarks: " . $data['ab70_text'];
 
-                $dataexport[$i]['ab71']  = ucfirst($data['ab71'])  . "\r\nRemarks: " . $data['ab71_text'];
-                $dataexport[$i]['ab72']  = ucfirst($data['ab72'])  . "\r\nRemarks: " . $data['ab72_text'];
-                $dataexport[$i]['ab73']  = ucfirst($data['ab73'])  . "\r\nRemarks: " . $data['ab73_text'];
-                $dataexport[$i]['ab74']  = ucfirst($data['ab74'])  . "\r\nRemarks: " . $data['ab74_text'];
-                $dataexport[$i]['ab75']  = ucfirst($data['ab75'])  . "\r\nRemarks: " . $data['ab75_text'];
-                $dataexport[$i]['ab76']  = ucfirst($data['ab76'])  . "\r\nRemarks: " . $data['ab76_text'];
-                $dataexport[$i]['ab77']  = ucfirst($data['ab77'])  . "\r\nRemarks: " . $data['ab77_text'];
-                $dataexport[$i]['ab78']  = ucfirst($data['ab78'])  . "\r\nRemarks: " . $data['ab78_text'];
-                $dataexport[$i]['ab79']  = ucfirst($data['ab79'])  . "\r\nRemarks: " . $data['ab79_text'];
-                $dataexport[$i]['ab80']  = ucfirst($data['ab80'])  . "\r\nRemarks: " . $data['ab80_text'];
-                $dataexport[$i]['ab81']  = ucfirst($data['ab81'])  . "\r\nRemarks: " . $data['ab81_text'];
-                $dataexport[$i]['ab82']  = ucfirst($data['ab82'])  . "\r\nRemarks: " . $data['ab82_text'];
-                $dataexport[$i]['ab83']  = ucfirst($data['ab83'])  . "\r\nRemarks: " . $data['ab83_text'];
-                $dataexport[$i]['ab84']  = ucfirst($data['ab84'])  . "\r\nRemarks: " . $data['ab84_text'];
-                $dataexport[$i]['ab85']  = ucfirst($data['ab85'])  . "\r\nRemarks: " . $data['ab85_text'];
-                $dataexport[$i]['ab86']  = ucfirst($data['ab86'])  . "\r\nRemarks: " . $data['ab86_text'];
-                $dataexport[$i]['ab87']  = ucfirst($data['ab87'])  . "\r\nRemarks: " . $data['ab87_text'];
-                $dataexport[$i]['ab88']  = ucfirst($data['ab88'])  . "\r\nRemarks: " . $data['ab88_text'];
-                $dataexport[$i]['ab89']  = ucfirst($data['ab89'])  . "\r\nRemarks: " . $data['ab89_text'];
-                $dataexport[$i]['ab90']  = ucfirst($data['ab90'])  . "\r\nRemarks: " . $data['ab90_text'];
+                $dataexport[$i]['ab71'] = ucfirst($data['ab71']) . "\r\nRemarks: " . $data['ab71_text'];
+                $dataexport[$i]['ab72'] = ucfirst($data['ab72']) . "\r\nRemarks: " . $data['ab72_text'];
+                $dataexport[$i]['ab73'] = ucfirst($data['ab73']) . "\r\nRemarks: " . $data['ab73_text'];
+                $dataexport[$i]['ab74'] = ucfirst($data['ab74']) . "\r\nRemarks: " . $data['ab74_text'];
+                $dataexport[$i]['ab75'] = ucfirst($data['ab75']) . "\r\nRemarks: " . $data['ab75_text'];
+                $dataexport[$i]['ab76'] = ucfirst($data['ab76']) . "\r\nRemarks: " . $data['ab76_text'];
+                $dataexport[$i]['ab77'] = ucfirst($data['ab77']) . "\r\nRemarks: " . $data['ab77_text'];
+                $dataexport[$i]['ab78'] = ucfirst($data['ab78']) . "\r\nRemarks: " . $data['ab78_text'];
+                $dataexport[$i]['ab79'] = ucfirst($data['ab79']) . "\r\nRemarks: " . $data['ab79_text'];
+                $dataexport[$i]['ab80'] = ucfirst($data['ab80']) . "\r\nRemarks: " . $data['ab80_text'];
+                $dataexport[$i]['ab81'] = ucfirst($data['ab81']) . "\r\nRemarks: " . $data['ab81_text'];
+                $dataexport[$i]['ab82'] = ucfirst($data['ab82']) . "\r\nRemarks: " . $data['ab82_text'];
+                $dataexport[$i]['ab83'] = ucfirst($data['ab83']) . "\r\nRemarks: " . $data['ab83_text'];
+                $dataexport[$i]['ab84'] = ucfirst($data['ab84']) . "\r\nRemarks: " . $data['ab84_text'];
+                $dataexport[$i]['ab85'] = ucfirst($data['ab85']) . "\r\nRemarks: " . $data['ab85_text'];
+                $dataexport[$i]['ab86'] = ucfirst($data['ab86']) . "\r\nRemarks: " . $data['ab86_text'];
+                $dataexport[$i]['ab87'] = ucfirst($data['ab87']) . "\r\nRemarks: " . $data['ab87_text'];
+                $dataexport[$i]['ab88'] = ucfirst($data['ab88']) . "\r\nRemarks: " . $data['ab88_text'];
+                $dataexport[$i]['ab89'] = ucfirst($data['ab89']) . "\r\nRemarks: " . $data['ab89_text'];
+                $dataexport[$i]['ab90'] = ucfirst($data['ab90']) . "\r\nRemarks: " . $data['ab90_text'];
                 $dataexport[$i]['ab100'] = ucfirst($data['ab100']) . "\r\nRemarks: " . $data['ab100_text'];
                 $dataexport[$i]['ab101'] = ucfirst($data['ab101']) . "\r\nRemarks: " . $data['ab101_text'];
                 $dataexport[$i]['ab102'] = ucfirst($data['ab102']) . "\r\nRemarks: " . $data['ab102_text'];
@@ -11396,15 +15987,15 @@ class Audit extends CI_Controller
                 $dataexport[$i]['cooked_food_cooling'] = ucfirst($data['cooked_food_cooling']) . "\r\nRemarks: " . $data['cooked_food_cooling_text'];
                 $dataexport[$i]['food_portioning'] = ucfirst($data['food_portioning']) . "\r\nRemarks: " . $data['food_portioning_text'];
 
-                $dataexport[$i]['ab1']  = ucfirst($data['ab1'])  . "\r\nRemarks: " . $data['ab1_text'];
-                $dataexport[$i]['ab2']  = ucfirst($data['ab2'])  . "\r\nRemarks: " . $data['ab2_text'];
-                $dataexport[$i]['ab3']  = ucfirst($data['ab3'])  . "\r\nRemarks: " . $data['ab3_text'];
-                $dataexport[$i]['ab4']  = ucfirst($data['ab4'])  . "\r\nRemarks: " . $data['ab4_text'];
-                $dataexport[$i]['ab5']  = ucfirst($data['ab5'])  . "\r\nRemarks: " . $data['ab5_text'];
-                $dataexport[$i]['ab6']  = ucfirst($data['ab6'])  . "\r\nRemarks: " . $data['ab6_text'];
-                $dataexport[$i]['ab7']  = ucfirst($data['ab7'])  . "\r\nRemarks: " . $data['ab7_text'];
-                $dataexport[$i]['ab8']  = ucfirst($data['ab8'])  . "\r\nRemarks: " . $data['ab8_text'];
-                $dataexport[$i]['ab9']  = ucfirst($data['ab9'])  . "\r\nRemarks: " . $data['ab9_text'];
+                $dataexport[$i]['ab1'] = ucfirst($data['ab1']) . "\r\nRemarks: " . $data['ab1_text'];
+                $dataexport[$i]['ab2'] = ucfirst($data['ab2']) . "\r\nRemarks: " . $data['ab2_text'];
+                $dataexport[$i]['ab3'] = ucfirst($data['ab3']) . "\r\nRemarks: " . $data['ab3_text'];
+                $dataexport[$i]['ab4'] = ucfirst($data['ab4']) . "\r\nRemarks: " . $data['ab4_text'];
+                $dataexport[$i]['ab5'] = ucfirst($data['ab5']) . "\r\nRemarks: " . $data['ab5_text'];
+                $dataexport[$i]['ab6'] = ucfirst($data['ab6']) . "\r\nRemarks: " . $data['ab6_text'];
+                $dataexport[$i]['ab7'] = ucfirst($data['ab7']) . "\r\nRemarks: " . $data['ab7_text'];
+                $dataexport[$i]['ab8'] = ucfirst($data['ab8']) . "\r\nRemarks: " . $data['ab8_text'];
+                $dataexport[$i]['ab9'] = ucfirst($data['ab9']) . "\r\nRemarks: " . $data['ab9_text'];
                 $dataexport[$i]['ab10'] = ucfirst($data['ab10']) . "\r\nRemarks: " . $data['ab10_text'];
 
 
@@ -11624,15 +16215,15 @@ class Audit extends CI_Controller
                 $dataexport[$i]['cooked_food_cooling'] = ucfirst($data['cooked_food_cooling']) . "\r\nRemarks: " . $data['cooked_food_cooling_text'];
                 $dataexport[$i]['food_portioning'] = ucfirst($data['food_portioning']) . "\r\nRemarks: " . $data['food_portioning_text'];
 
-                $dataexport[$i]['ab1']  = ucfirst($data['ab1'])  . "\r\nRemarks: " . $data['ab1_text'];
-                $dataexport[$i]['ab2']  = ucfirst($data['ab2'])  . "\r\nRemarks: " . $data['ab2_text'];
-                $dataexport[$i]['ab3']  = ucfirst($data['ab3'])  . "\r\nRemarks: " . $data['ab3_text'];
-                $dataexport[$i]['ab4']  = ucfirst($data['ab4'])  . "\r\nRemarks: " . $data['ab4_text'];
-                $dataexport[$i]['ab5']  = ucfirst($data['ab5'])  . "\r\nRemarks: " . $data['ab5_text'];
-                $dataexport[$i]['ab6']  = ucfirst($data['ab6'])  . "\r\nRemarks: " . $data['ab6_text'];
-                $dataexport[$i]['ab7']  = ucfirst($data['ab7'])  . "\r\nRemarks: " . $data['ab7_text'];
-                $dataexport[$i]['ab8']  = ucfirst($data['ab8'])  . "\r\nRemarks: " . $data['ab8_text'];
-                $dataexport[$i]['ab9']  = ucfirst($data['ab9'])  . "\r\nRemarks: " . $data['ab9_text'];
+                $dataexport[$i]['ab1'] = ucfirst($data['ab1']) . "\r\nRemarks: " . $data['ab1_text'];
+                $dataexport[$i]['ab2'] = ucfirst($data['ab2']) . "\r\nRemarks: " . $data['ab2_text'];
+                $dataexport[$i]['ab3'] = ucfirst($data['ab3']) . "\r\nRemarks: " . $data['ab3_text'];
+                $dataexport[$i]['ab4'] = ucfirst($data['ab4']) . "\r\nRemarks: " . $data['ab4_text'];
+                $dataexport[$i]['ab5'] = ucfirst($data['ab5']) . "\r\nRemarks: " . $data['ab5_text'];
+                $dataexport[$i]['ab6'] = ucfirst($data['ab6']) . "\r\nRemarks: " . $data['ab6_text'];
+                $dataexport[$i]['ab7'] = ucfirst($data['ab7']) . "\r\nRemarks: " . $data['ab7_text'];
+                $dataexport[$i]['ab8'] = ucfirst($data['ab8']) . "\r\nRemarks: " . $data['ab8_text'];
+                $dataexport[$i]['ab9'] = ucfirst($data['ab9']) . "\r\nRemarks: " . $data['ab9_text'];
                 $dataexport[$i]['ab10'] = ucfirst($data['ab10']) . "\r\nRemarks: " . $data['ab10_text'];
 
 
@@ -20830,7 +25421,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['identification_details'] = ucfirst($data['identification_details']) . "\r\nRemarks: " . $data['identification_details_remarks'];
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_remarks'];
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_remarks'];
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -21048,7 +25639,7 @@ class Audit extends CI_Controller
             $header[$j++] = 'Are Glass ware (ampoules, Vials, Glass bottles, nails, discarded metallic Body implants) discarded in BLUE CONTAINER?';
             $header[$j++] = 'Collection of waste by housekeeping staff- Is the segregation maintained during the collection process & transported in closed containers?';
             $header[$j++] = 'Are House-keeping staff wearing appropriate PPE (Hard gloves, Mask, Cap, shoes) while handling the biomedical waste, bags or containers?';
-            
+
 
 
             $header[$j++] = 'Additional comments';
@@ -21576,7 +26167,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['ab11'] = ucfirst($data['ab11']) . "\r\nRemarks: " . $data['ab11_text'];
                 $dataexport[$i]['ab12'] = ucfirst($data['ab12']) . "\r\nRemarks: " . $data['ab12_text'];
 
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -21724,7 +26315,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
                 $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
 
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -22005,7 +26596,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -23178,7 +27769,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -23466,7 +28057,7 @@ class Audit extends CI_Controller
 
                 $dataexport[$i]['identification_details'] = ucfirst($data['identification_details']) . "\r\nRemarks: " . $data['identification_details_text'];
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -23660,7 +28251,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['food_material_testing'] = ucfirst($data['food_material_testing']) . "\r\nRemarks: " . $data['food_material_testing_text'];
                 $dataexport[$i]['incoming_material'] = ucfirst($data['incoming_material']) . "\r\nRemarks: " . $data['incoming_material_text'];
 
-                
+
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -23780,7 +28371,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
-                
+
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -24167,7 +28758,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-                
+
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
 
@@ -24822,7 +29413,7 @@ class Audit extends CI_Controller
                 $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
                 $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
-                
+
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -25235,7 +29826,7 @@ class Audit extends CI_Controller
             $i++;
 
             $dataexport[$i]['row1'] = 'SATISFIED PATIENTS';
-            $dataexport[$i]['row2'] =  $ip_psat['satisfied_count'];
+            $dataexport[$i]['row2'] = $ip_psat['satisfied_count'];
             $dataexport[$i]['row3'] = '';
             $dataexport[$i]['row4'] = '';
             $i++;
@@ -25254,7 +29845,7 @@ class Audit extends CI_Controller
 
             //add here
             $dataexport[$i]['row1'] = 'NET PROMOTER SCORE';
-            $dataexport[$i]['row2'] =  $ip_nps['nps_score'] . '%';
+            $dataexport[$i]['row2'] = $ip_nps['nps_score'] . '%';
             $dataexport[$i]['row3'] = '';
             $dataexport[$i]['row4'] = '';
             $i++;
@@ -25386,7 +29977,7 @@ class Audit extends CI_Controller
             foreach ($choice_of_hospitals as $key => $object) {
 
                 $dataexport[$i]['row1'] = $object->title;
-                $dataexport[$i]['row2'] =  $object->percentage . '%';
+                $dataexport[$i]['row2'] = $object->percentage . '%';
                 $dataexport[$i]['row3'] = $object->count;
                 $dataexport[$i]['row4'] = '';
                 $i++;
@@ -26310,7 +30901,7 @@ class Audit extends CI_Controller
             }
             $i++;
 
-            $dataexport[$i]['name'] =  'NEGATIVE RATINGS RECIEVED';
+            $dataexport[$i]['name'] = 'NEGATIVE RATINGS RECIEVED';
             foreach ($arraydata as $k => $r) {
                 $dataexport[$i][$k] = $n[$k];
             }
@@ -26663,12 +31254,12 @@ class Audit extends CI_Controller
                             } else {
                                 $dataexport[$i]['row11'] = 'NA';
                             }
-                            $dataexport[$i]['row12'] =  $department->status;
+                            $dataexport[$i]['row12'] = $department->status;
                             if ($transfer_dep_desc) {
 
-                                $dataexport[$i]['row13'] =  $transfer_dep_desc;
+                                $dataexport[$i]['row13'] = $transfer_dep_desc;
                             } else {
-                                $dataexport[$i]['row13'] =  'NA';
+                                $dataexport[$i]['row13'] = 'NA';
                             }
                             $dataexport[$i]['row14'] = date('g:i a, d-m-y', strtotime($department->last_modified));
                         }
@@ -26808,12 +31399,12 @@ class Audit extends CI_Controller
                             } else {
                                 $dataexport[$i]['row11'] = 'NA';
                             }
-                            $dataexport[$i]['row12'] =  $department->status;
+                            $dataexport[$i]['row12'] = $department->status;
                             if ($transfer_dep_desc) {
 
-                                $dataexport[$i]['row13'] =  $transfer_dep_desc;
+                                $dataexport[$i]['row13'] = $transfer_dep_desc;
                             } else {
-                                $dataexport[$i]['row13'] =  'NA';
+                                $dataexport[$i]['row13'] = 'NA';
                             }
                             $dataexport[$i]['row14'] = date('g:i a, d-m-y', strtotime($department->last_modified));
                         }

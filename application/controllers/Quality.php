@@ -74,9 +74,10 @@ class Quality extends CI_Controller
 
         if ($this->session->userdata('isLogIn') == false)
             redirect('login');
+		
+		
         if (ismodule_active('QUALITY') === true) {
-            $dateInfo = get_from_to_date();
-
+            $dateInfo = get_from_to_date("QUALITY");
             $data['title'] = 'QUALITY INDICATOR MANAGER DASHBOARD';
             #------------------------------#
             $data['content'] = $this->load->view('quality_welcome_page', $data, true);
@@ -90,8 +91,7 @@ class Quality extends CI_Controller
     //main page for all KPI
     public function feedbacks_report_CQI3a1()
     {
-        
-
+        		
         if ($this->session->userdata('isLogIn') == false)
             redirect('login');
         if (ismodule_active('QUALITY') === true) {
@@ -1516,7 +1516,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of medication errors - Transcription Errors (IP)-(Clinical Pharmacy)';
+                $data['title'] = 'Medication Error';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c1', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1558,7 +1558,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of medication errors - Dispensing Errors (IP)-(Clinical Pharmacy)';
+                $data['title'] = 'Incidence of medication errors - Prescription Errors(IP) (As per NABH 4th edition) -(Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c2', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1600,7 +1600,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of medication errors - Administration Errors (IP)-(Clinical Pharmacy)';
+                $data['title'] = 'Incidence of medication errors - Dispensing Errors(IP) (As per NABH 4th edition) -(Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c3', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1641,7 +1641,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of medication errors - Prescription errors (IP)-(Clinical Pharmacy)';
+                $data['title'] = 'Percentage of admissions with ADR- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c4', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1683,7 +1683,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of Adverse Drug Events per 1000 patient days (IP)-(Clinical Pharmacy)';
+                $data['title'] = 'Percentage of medication charts with error prone abbreviations- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c5', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1725,7 +1725,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Blood and Blood components wastage rate (%) per month (Blood Bank)';
+                $data['title'] = 'Percentage of patients receiving high risk medication developing adverse drug event- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c6', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1767,7 +1767,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Percentage of Adverse transfusion reaction rate (Blood Bank)';
+                $data['title'] = 'Incidence of Medication Administering errors (NABH 4th edition)- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c7', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1809,7 +1809,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Percentage of patients who received blood and blood components after cross match within 30 minutes (Blood Bank)';
+                $data['title'] = 'Percentage of in-patients developing adverse drug reaction- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c8', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1851,7 +1851,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of Transfusion related infections (Blood Bank)';
+                $data['title'] = 'Incidence of Medication Administering errors- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c9', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1893,7 +1893,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Incidence of near miss events reported (Blood Bank)';
+                $data['title'] = 'Incidence of medication errors - Dispensing errors (IP)- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c10', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1935,7 +1935,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Cross match TAT (Blood Bank)';
+                $data['title'] = 'Incidence of medication errors - Prescription errors(IP)- (Clinical Pharmacy)';
                 $data['content']  = $this->load->view('qualitymodules/feedbacks_report_CQI3c11', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -1976,7 +1976,7 @@ class Quality extends CI_Controller
                     $titleSuffix = $pagetitle;
                 }
         
-                $data['title'] = 'Emperical Antibiotics therapy compliance rate for high risk infections(JCI8-MMU1.1)-(Clinical Pharmacy)';
+                $data['title'] = 'Empirical Antibiotics therapy compliance rate for high risk infections- (Clinical Pharmacy)';
                 $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3c12', $data, true);
                 $this->load->view('layout/main_wrapper', $data);
         
@@ -6838,7 +6838,7601 @@ class Quality extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+    public function feedbacks_report_CQI4f6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
     
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Incidence of blood body fluid exposure OPD (Infection Control - OPD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4f6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4f7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Adverse events related to SUDs (JCI8-PCI 3.1) (CSSD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4f7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of Medical records not having discharge summary (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of Medical records not having codification as per ICD (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of Medical records having improper or incomplete consent (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of missing medical records (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm (JCI8-COP 5) (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4g6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Monthly Abbreviation Compliance (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4g6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Total number of LAMA cases with Reasons (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Adverse events due to handover (Quality Office)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Inguinal herniorrhaphy with mesh (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Coronary artery bypass grafting (CABG) (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Laparoscopic cholecystectomy (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Monitoring the duration of antibiotic usage in surgical prophylaxis (After 48 hours) (Clinical Pharmacy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'De-escalation of antibiotics (Clinical Pharmacy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k8() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'High Alert Medication Segregation, storage & labelling Compliance rate (Pharmacy - Store)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k9() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average recovery time (OT-Post OP)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k10() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Door to thrombolysis time in ischemic stroke in ER (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k11() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Door to image time in Stroke patients (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k12() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average number of patients visiting Emergency per day (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k13() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Efficiency of code blue team (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k14() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Time for first defibrillation (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k15() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Door to Balloon time in PTCA (Cath Lab)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k15', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k16() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to diet order (Clinical Nutrition and Dietetics)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k16', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k17() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality 1 - CAD (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k17', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k18() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality 2 - Acute coronary syndrome (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k18', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k19() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality 3 - Cerebral infarction (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k19', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k20() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality 4 - MI (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k20', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k21() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality 5 - Heart failure (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k21', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k22() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliances in patient transfer and transportation process (External transfer) - (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k22', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k23() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Number of Adverse Events During Patient Transfers (Out Side) - (Emergency Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k23', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k24() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'ILC/EQAS compliance rate (Lab Services)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k24', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k25() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance with Biological Indicator (CSSD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k25', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k26() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to risk assessment in reprocessing of SUMD (CSSD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k26', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k27() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Non-compliance to Copy and Paste policy (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k27', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k28() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to POCT IQC Checking (Lab Services)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k28', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k29() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality - COVID 19 (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k29', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k30() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Case Fatality - Stroke (MRD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k30', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k31() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Post procedure complication rate - Colonoscopy (Endoscopy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k31', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k32() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k32', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k33() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Survival rate for living donor kidney transplants (Nephrology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k33', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k34() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'CAUTI Prevention Bundle compliance Rate (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k34', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k35() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Major Discrepancies between Preoperative and Post operative Diagnosis (OT)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k35', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k36() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Adverse Events Related to patient Identification (Quality Office)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k36', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k37() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'CLABSI Prevention Bundle compliance Rate (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k37', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k38() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'SSI Prevention Bundle compliance Rate (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k38', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k39() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'VAP Prevention Bundle compliance Rate (Infection Control)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k39', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k40() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Restraint related injuries among admitted patients (Nursing)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k40', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k41() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Rate of compliance for restraint consent policy (Nursing)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k41', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k42() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of Accidental removal of line (Nursing)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k42', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k43() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Significant hypotension necessitating termination of dialysis (Nursing)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k43', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k44() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'IPSG4 - Time out compliance in outside OT (Nursing)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k44', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k45() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of cases where Initial assessment done in physiotherapy within 24 hours (IPD) (Physical therapy and Rehabilitation Department - Medical records)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k45', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k46() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Radiology TAT orders for CT (Radiology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k46', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k47() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Radiology TAT orders for MRI (Radiology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k47', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k48() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Radiology TAT orders for USG (Radiology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k48', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k49() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Radiology TAT orders for X-ray (Radiology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k49', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k50() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Site Marking Compliance Rate (OT)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k50', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k51() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Time Out Compliance Rate (OT)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k51', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k52() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Sign Out Compliance Rate (OT)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k52', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k53() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Post transplant complication rate for Donor (Liver) (Transplant Unit)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k53', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k54() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Post transplant complication rate (Heart) (Transplant Unit)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k54', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k55() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of research activities approved by ethics committee (Research)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k55', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI3k56() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of patients withdrawing from the study (Research)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k56', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k57() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of protocol violations/deviations reported (Research)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k57', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k58() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k58', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k59() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of cases where Initial assessment done in physiotherapy within 24 hours OPD';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k59', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k60() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Survival rate for living donor Liver transplants (Gastrointestinal Surgery)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k60', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k61() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Return of spontaneous circulation (ROSC) achieving rate (JCI8-COP 4) - Emergency Department';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k61', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k62() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Timeliness of initiation of advanced cardiovascular life support (ACLS) within 5 Min (JCI8-COP 4) - Nursing';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k62', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k63() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Timeliness of staff response to cardiac arrest (JCI8-COP 4) - Emergency Department';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k63', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI3k64() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Rate to RRT response turn to Code blue (JCI8-COP 4) - Nursing';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k64', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Patient satisfaction index - Physiotherapy (Physical therapy and Rehabilitation Department)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for radiology STAT orders (Radiology - CT)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for radiology STAT orders (Radiology - MRI)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for radiology STAT orders (Radiology - USG)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'HAZMAT compliance in radiology';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TLD Reading Compliance (Radiology)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Variance in Financial counselling (Patient Care Services - IPD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h8() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Planned Discharge rate (Patient Care Services - IPD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h9() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Incident report rate (Quality Office)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h10() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for dispensing medicine - IP (Pharmacy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h11() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for STAT medicine (Pharmacy)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h12() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average number of Doctors on hospital rolls at any point of time (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h13() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average Number of Nurses on hospital rolls at any point of time (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h14() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Reason for staff exit (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h15() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to Internal complaints committee requirements (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h15', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h16() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Effectiveness in recruitment (MRF submission days - Staff onboarded time) (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h16', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h17() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to Employee Engagement activities (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h17', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h18() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Number of Mandatory training hours coverage / staff (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h18', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h19() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to ACLS training (HR)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h19', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h20() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average units of electricity consumed/Day (Units) (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h20', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h21() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for complaints on equipment/Utility/Facility (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h21', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h22() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Average units of water consumed/Day (L) (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h22', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h23() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Adherence to PPE usage in Engineering and Maintenance department (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h23', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h24() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to PM schedule (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h24', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h25() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to safe storage of chemicals (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h25', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h26() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Outsourced Security service Staff Attendance (Safety & Security - Security)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h26', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h27() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to reporting of critical values in Lab (within 30 min) (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h27', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h28() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to reporting of critical values in POCT (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h28', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h29() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for Lab tests (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h29', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h30() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TAT for Lab STAT (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h30', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h31() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to TAT for lab outsourced test (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h31', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h32() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Lab Specimen Rejection Rate (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h32', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h33() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Insurance Claims Rejection Rate (Insurance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h33', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h34() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'TPA TAT (Insurance) for the month';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h34', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h35() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Medical Waste Collection Rate (House Keeping)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h35', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI4h36() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to MSDS in Facility (House Keeping)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h36', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h37() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of Pest control Complaints rate (House Keeping)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h37', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h38() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Linen Quality - Compliance Rate (House Keeping)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h38', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h39() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Downtime of EMR (ITD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h39', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h40() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Outsourced staff manpower compliance rate (House Keeping)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h40', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4h41() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'ITD Preventive Maintenance compliance (ITD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h41', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h42() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Biomedical Preventive Maintenance Completion rate (Biomedical Engineering)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h42', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h43() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Quality of patient transportation by ambulance (Out-sourced) (Lab Service)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h43', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h44() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'F&B Patient complaints rate (Food and Beverage Services)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h44', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h45() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Delay in room services (Food and Beverage Services)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h45', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h46() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Compliance to PCRA (Engineering & Maintenance)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h46', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h47() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Compliances in patient room cleaning and hygiene practices (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h47', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h48() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Patient's Complaints Rate (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h48', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h49() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of renewable energy used against total energy used (JCI8-GHI 3) (Engineering & Maintenance)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h49', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h50() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "To Monitor the energy consumption (JCI8-GHI 3) (Engineering & Maintenance)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h50', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4h51() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h51', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h52() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of adherence to facility audit observation closure (Safety & Security)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h52', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h53() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Standardised Mortality Ratio for ICU - 1 (Nursing - ICU 1)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h53', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h54() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Standardised Mortality Ratio for ICU - 2 (Actual deaths in ICU-2)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h54', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h55() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Standardised Mortality Ratio for PICU (Actual deaths in PICU)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h55', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4h56() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Standardised Mortality Ratio for NICU (Actual deaths in NICU)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4h56', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CLOTCM1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Cardiology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - CVTS)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CLOTCM3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Gastro surgery)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Gastroenterology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - General Medicine)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - ICU)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Nephrology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM8() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Neuro Intervention)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM9() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Neurology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM10() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Neurosurgery)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CLOTCM11() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Ortho neuro integrated spine)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM12() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Ortho THR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM13() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Ortho TKR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM14() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Orthopaedics)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM15() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Pulmonology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM15', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM16() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average length of stay (MRD - Urology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM16', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM17() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Catheter associated urinary tract infection rate (Infection Control - ICU1)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM17', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM18() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Catheter associated urinary tract infection rate (Infection Control - ICU2)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM18', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM19() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Catheter associated urinary tract infection rate (Infection Control - ICU3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM19', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM20() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU1)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM20', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CLOTCM21() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU2)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM21', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM22() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM22', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM23() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Surgical Site Infection rate (Infection Control - Ortho THR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM23', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM24() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Surgical Site Infection rate (Infection Control - Ortho TKR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM24', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM25() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU1)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM25', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM26() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU2)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM26', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM27() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM27', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM28() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho THR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM28', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM29() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho TKR)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM29', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CLOTCM30() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Prevalence of transfusion reactions in Leuco depleted PRBC transfusions (Blood Center)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CLOTCM30', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4i1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Compliance to medical service requests - Heart, Lung transplantation (Medical Administration)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Compliance to medical service requests - Liver transplantation";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "TAT compliance for radiology outsourced test (Radiology)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Food waste collection rate (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4i5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Solid waste collection rate (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Outsourced GDA (General Duty Assistance) absenteeism rate (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Outsourced OPD Assistance attendance (Operation)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i8() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Outsourced UTIZ staff attendance (House Keeping)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i9() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Compliance to safe transportation of Oil waste (Engineering & Maintenance)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i10() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Number of laundry loads reduced by optimizing and sorting laundry (JCI8-GHI 3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i11() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of cleaning products used biodegradable (JCI8-GHI 3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i12() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average use of Ecofriendly catering supplies in a month (JCI8-GHI 3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i13() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Average quantity of Medical waste disposed per month in Kgs (JCI8-GHI 3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4i14() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Non-Recyclable Waste per Patient Day (Kg) (JCI8-GHI 3)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4i14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4j1() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to Physician ≤10 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j2() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to stroke team ≤15 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j3() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to CT/MRI initiation ≤20 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j4() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to CT/MRI interpretation ≤30 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j5() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Order to lab results ≤30 min, if ordered (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4j6() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to IV thrombolytic bolus (≥75% compliance) ≤60 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j7() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to IV thrombolytic bolus (≥50% compliance) ≤45 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j8() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Door to puncture time ≤90 min (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j9() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j10() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4j11() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of all stroke/TIA patients with a deficit at the time of initial note for whom an NIHSS score is documented (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j12() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_CQI4j13() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of patients treated for acute ischemic stroke with IV thrombolysis whose treatment is started within 60 minutes after arrival (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j14() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Time from arrival to start of initial imaging workup for patients arriving within 24 hours of last known well (Minutes) (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j15() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of ischemic stroke patients who develop symptomatic intracranial hemorrhage ≤36 hours after thrombolytic therapy or mechanical thrombectomy (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j15', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j16() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of patients undergoing CEA, carotid angioplasty or stenting having stroke or death within 30 days of the procedure (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j16', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j17() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of patients undergoing intracranial angioplasty and/or stenting for atherosclerotic disease having stroke or death within 30 days of the procedure (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j17', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j18() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j18', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j19() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of patients diagnosed with ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j19', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j20() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of ischemic stroke patients with post-treatment reperfusion grade of TICI 2B or higher after intra-arterial thrombolytic therapy or mechanical endovascular reperfusion (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j20', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j21() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of ischemic stroke patients with large vessel cerebral occlusion who receive mechanical endovascular reperfusion therapy within 120 minutes and achieve TICI 2B or higher (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j21', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function feedbacks_report_CQI4j22() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of ischemic stroke patients with large vessel cerebral occlusion who receive mechanical endovascular reperfusion therapy and achieve TICI 2B or higher ≤60 minutes from skin puncture (Stroke Unit)";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j22', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+
+
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8588,7 +16182,2844 @@ class Quality extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+    public function patient_feedback_CQI4a1()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4a1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
     
+    public function patient_feedback_CQI4a2()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4a2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    public function patient_feedback_CQI4a3()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4a3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    
+    // CQI4a4 - Percentage of drugs and consumables rejected before preparation of Goods Receipt Note(SCM-Store)
+    public function patient_feedback_CQI4a4()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4a4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4a5 - Percentage of variations from procurement process(SCM-Purchase)
+    public function patient_feedback_CQI4a5()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4a5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b1 - Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days)-(Nursing)
+    public function patient_feedback_CQI4b1()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b2 - Incidence of falls (in 1000 IPD days)-(Office-Quality)
+    public function patient_feedback_CQI4b2()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b3 - Number of variations observed in mock drill(Safety & Security)
+    public function patient_feedback_CQI4b3()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b4 - Percentage of staff provided with pre-exposure prophylaxis(Infection Control)
+    public function patient_feedback_CQI4b4()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b5 - Number of Fire Incidents (Safety & Security)
+    public function patient_feedback_CQI4b5()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b6 - Incidence of device associated pressure ulcer after admission(Nursing)
+    public function patient_feedback_CQI4b6()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b7 - Number of Extravasation (Nursing)
+    public function patient_feedback_CQI4b7()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4b8 - Monitoring of Clinical Errors (JCI8-PCC 2.3)-(Quality Office)
+    public function patient_feedback_CQI4b8()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4b8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    // CQI4c1 - Bed occupancy rate (MRD)
+    public function patient_feedback_CQI4c1()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c2 - Average length of stay (MRD)
+    public function patient_feedback_CQI4c2()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c3 - OT Utilisation Rate (OT)
+    public function patient_feedback_CQI4c3()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c4 - ICU equipment utilisation rate (Nursing - ICU1)
+    public function patient_feedback_CQI4c4()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c5 - ICU equipment utilisation rate (Nursing - ICU2)
+    public function patient_feedback_CQI4c5()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c6 - ICU equipment utilisation rate (Nursing - ICU3)
+    public function patient_feedback_CQI4c6()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c7 - ICU Bed utilisation rate (Nursing - ICU)
+    public function patient_feedback_CQI4c7()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c8 - Critical equipment downtime (Biomedical Engineering)
+    public function patient_feedback_CQI4c8()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c9 - Cath lab utilization rate (Cath Lab - Nursing)
+    public function patient_feedback_CQI4c9()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c10 - Nurse patient ratio for ICU Ventilated (Nursing-ICU)
+    public function patient_feedback_CQI4c10()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c11 - Nurse patient ratio for ICU Non Ventilated (Nursing-ICU)
+    public function patient_feedback_CQI4c11()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c12 - Nurse patient ratio for HDU (Nursing-HDU)
+    public function patient_feedback_CQI4c12()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c12', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c13 - Nurse patient ratio for Ward (Nursing-Ward)
+    public function patient_feedback_CQI4c13()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c13', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4c14 - Engineering Critical equipment downtime (Engineering & Maintenance)
+    public function patient_feedback_CQI4c14()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4c14', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    // CQI4d1 - Out patient satisfaction index (Patient Care Services - OPD)
+    public function patient_feedback_CQI4d1()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d2 - Inpatient satisfaction index (Patient Care Services - IPD)
+    public function patient_feedback_CQI4d2()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d2', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d3 - Time taken for discharge - Cash Patients (Patient Care Services - Cash)
+    public function patient_feedback_CQI4d3()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d3', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d4 - Time taken for discharge Cashless Patients (Patient Care Services - Cashless)
+    public function patient_feedback_CQI4d4()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d4', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d5 - Waiting time for diagnostic services (Radiology - CT)
+    public function patient_feedback_CQI4d5()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d5', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d6 - Waiting time for diagnostic services (Radiology - MRI)
+    public function patient_feedback_CQI4d6()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d6', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d7 - Waiting time for diagnostic services (Radiology - USG)
+    public function patient_feedback_CQI4d7()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d7', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d8 - Waiting Time for OPD appointments (Patient Care Services - OPD)
+    public function patient_feedback_CQI4d8()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d8', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d9 - Waiting Time for OPD Walkin (Patient Care Services - OPD)
+    public function patient_feedback_CQI4d9()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d9', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d10 - Patient Satisfaction Rate (Nursing - OBG)
+    public function patient_feedback_CQI4d10()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d10', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    
+    // CQI4d11 - Turn-around Time for Nursing call bell responds (Nursing)
+    public function patient_feedback_CQI4d11()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4d11', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    // ======================== CQI4e1 → CQI4e8 ========================
+
+// CQI4e1 - Employee satisfaction index (HR)
+    public function patient_feedback_CQI4e1()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title'] = 'QUALITY KPI ANALYSIS';
+            $data['content'] = $this->load->view('qualitymodules/patient_feedback_CQI4e1', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e2 - Employee attrition rate (HR)
+    public function patient_feedback_CQI4e2()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e3 - Employee absenteeism rate (HR)
+    public function patient_feedback_CQI4e3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e4 - Percentage of employees aware of rights, responsibility and welfare schemes (HR)
+    public function patient_feedback_CQI4e4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e5 - Average number of training hours (HR)
+    public function patient_feedback_CQI4e5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e6 - Nurses Attrition Rate (Nursing)
+    public function patient_feedback_CQI4e6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e7 - Outsourced employee absenteeism rate (Nursing Assistants - Patient Care Services - OPD)
+    public function patient_feedback_CQI4e7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4e8 - Average number of unpaid leave per month (HR)
+    public function patient_feedback_CQI4e8()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4e8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // ======================== CQI4f1 → CQI4f7 ========================
+    
+    // CQI4f1 - Incidence of needle stick injuries IPD area (in 1000 IPD days) (Infection Control - IPD)
+    public function patient_feedback_CQI4f1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f2 - Incidence of needle stick injuries OPD area (in 1000 OPD days) (Infection Control - OPD)
+    public function patient_feedback_CQI4f2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f3 - Percentage of sentinel events, reported, collected and analysed within the defined time frame (Quality Office)
+    public function patient_feedback_CQI4f3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f4 - Percentage of near misses (Quality Office)
+    public function patient_feedback_CQI4f4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f5 - Incidence of blood body fluid exposure IPD (Infection Control - IPD)
+    public function patient_feedback_CQI4f5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f6 - Incidence of blood body fluid exposure OPD (Infection Control - OPD)
+    public function patient_feedback_CQI4f6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4f7 - Adverse events related to SUDs (JCI8-PCI 3.1) (CSSD)
+    public function patient_feedback_CQI4f7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4f7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // ======================== CQI4g1 → CQI4g6 ========================
+    
+    // CQI4g1 - Percentage of Medical records not having discharge summary (MRD)
+    public function patient_feedback_CQI4g1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4g2 - Percentage of Medical records not having codification as per ICD (MRD)
+    public function patient_feedback_CQI4g2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4g3 - Percentage of Medical records having improper or incomplete consent (MRD)
+    public function patient_feedback_CQI4g3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4g4 - Percentage of missing medical records (MRD)
+    public function patient_feedback_CQI4g4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4g5 - Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm (JCI8-COP 5) (MRD)
+    public function patient_feedback_CQI4g5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4g6 - Monthly Abbreviation Compliance (MRD)
+    public function patient_feedback_CQI4g6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4g6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI3k1 → CQI3k20 ========================
+
+// CQI3k1 - Total number of LAMA cases with Reasons (MRD)
+    public function patient_feedback_CQI3k1()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k2 - Adverse events due to handover (Quality Office)
+    public function patient_feedback_CQI3k2()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k3 - Inguinal herniorrhaphy with mesh (Infection Control)
+    public function patient_feedback_CQI3k3()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k4 - Coronary artery bypass grafting (CABG) (Infection Control)
+    public function patient_feedback_CQI3k4()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k5 - Laparoscopic cholecystectomy (Infection Control)
+    public function patient_feedback_CQI3k5()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k6 - Monitoring the duration of antibiotic usage in surgical prophylaxis (After 48 hours) (Clinical Pharmacy)
+    public function patient_feedback_CQI3k6()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k7 - De-escalation of antibiotics (Clinical Pharmacy)
+    public function patient_feedback_CQI3k7()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k8 - High Alert Medication Segregation, storage & labelling Compliance rate (Pharmacy - Store)
+    public function patient_feedback_CQI3k8()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k9 - Average recovery time (OT-Post OP)
+    public function patient_feedback_CQI3k9()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k9',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k10 - Door to thrombolysis time in ischemic stroke in ER (Emergency Department)
+    public function patient_feedback_CQI3k10()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k10',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k11 - Door to image time in Stroke patients (Emergency Department)
+    public function patient_feedback_CQI3k11()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k11',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k12 - Average number of patients visiting Emergency per day (Emergency Department)
+    public function patient_feedback_CQI3k12()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k12',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k13 - Efficiency of code blue team (Emergency Department)
+    public function patient_feedback_CQI3k13()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k13',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k14 - Time for first defibrillation (Emergency Department)
+    public function patient_feedback_CQI3k14()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k14',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k15 - Door to Balloon time in PTCA (Cath Lab)
+    public function patient_feedback_CQI3k15()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k15',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k16 - Compliance to diet order (Clinical Nutrition and Dietetics)
+    public function patient_feedback_CQI3k16()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k16',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k17 - Case Fatality 1 - CAD (MRD)
+    public function patient_feedback_CQI3k17()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k17',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k18 - Case Fatality 2 - Acute coronary syndrome (MRD)
+    public function patient_feedback_CQI3k18()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k18',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k19 - Case Fatality 3 - Cerebral infarction (MRD)
+    public function patient_feedback_CQI3k19()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k19',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k20 - Case Fatality 4 - MI (MRD)
+    public function patient_feedback_CQI3k20()
+    {
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k20',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI3k21 → CQI3k40 ========================
+
+// CQI3k21 - Case Fatality 5 - Heart failure (MRD)
+    public function patient_feedback_CQI3k21()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k21',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k22 - Compliances in patient transfer and transportation process (External transfer) (Emergency Department)
+    public function patient_feedback_CQI3k22()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k22',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k23 - Number of Adverse Events During Patient Transfers (Out Side) (Emergency Department)
+    public function patient_feedback_CQI3k23()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k23',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k24 - ILC/EQAS compliance rate (Lab Services)
+    public function patient_feedback_CQI3k24()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k24',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k25 - Compliance with Biological Indicator (CSSD)
+    public function patient_feedback_CQI3k25()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k25',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k26 - Compliance to risk assessment in reprocessing of SUMD (CSSD)
+    public function patient_feedback_CQI3k26()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k26',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k27 - Non-compliance to Copy and paste policy (MRD)
+    public function patient_feedback_CQI3k27()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k27',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k28 - Compliance to POCT IQC Checking (Lab Services)
+    public function patient_feedback_CQI3k28()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k28',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k29 - Case Fatality - COVID 19 (MRD)
+    public function patient_feedback_CQI3k29()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k29',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k30 - Case Fatality - Stroke (MRD)
+    public function patient_feedback_CQI3k30()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k30',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k31 - Post procedure complication rate - Colonoscopy (Endoscopy)
+    public function patient_feedback_CQI3k31()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k31',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k32 - Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)
+    public function patient_feedback_CQI3k32()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k32',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k33 - Survival rate for living donor kidney transplants (Nephrology)
+    public function patient_feedback_CQI3k33()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k33',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k34 - CAUTI Prevention Bundle compliance Rate (Infection Control)
+    public function patient_feedback_CQI3k34()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k34',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k35 - Major Discrepancies between Preoperative and Post operative Diagnosis (OT)
+    public function patient_feedback_CQI3k35()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k35',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k36 - Adverse Events Related to patient Identification (Quality Office)
+    public function patient_feedback_CQI3k36()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k36',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k37 - CLABSI Prevention Bundle compliance Rate (Infection Control)
+    public function patient_feedback_CQI3k37()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k37',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k38 - SSI Prevention Bundle compliance Rate (Infection Control)
+    public function patient_feedback_CQI3k38()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k38',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k39 - VAP Prevention Bundle compliance Rate (Infection Control)
+    public function patient_feedback_CQI3k39()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k39',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k40 - Restraint related injuries among admitted patients (Nursing)
+    public function patient_feedback_CQI3k40()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k40',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI3k41 → CQI3k60 ========================
+
+// CQI3k41 - Rate of compliance for restraint consent policy (Nursing)
+    public function patient_feedback_CQI3k41()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k41',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k42 - Percentage of Accidental removal of line (Nursing)
+    public function patient_feedback_CQI3k42()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k42',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k43 - Significant hypotension necessitating termination of dialysis (Nursing)
+    public function patient_feedback_CQI3k43()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k43',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k44 - IPSG4 - Time out compliance in outside OT (Nursing)
+    public function patient_feedback_CQI3k44()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k44',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k45 - Percentage of cases where Initial assessment done in physiotherapy within 24 hours (IPD) (Physical therapy and Rehabilitation Department - Medical records)
+    public function patient_feedback_CQI3k45()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k45',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k46 - Radiology TAT orders for CT (Radiology)
+    public function patient_feedback_CQI3k46()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k46',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k47 - Radiology TAT orders for MRI (Radiology)
+    public function patient_feedback_CQI3k47()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k47',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k48 - Radiology TAT orders for USG (Radiology)
+    public function patient_feedback_CQI3k48()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k48',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k49 - Radiology TAT orders for X-ray (Radiology)
+    public function patient_feedback_CQI3k49()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k49',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k50 - Site Marking Compliance Rate (OT)
+    public function patient_feedback_CQI3k50()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k50',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k51 - Time Out Compliance Rate (OT)
+    public function patient_feedback_CQI3k51()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k51',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k52 - Sign Out Compliance Rate (OT)
+    public function patient_feedback_CQI3k52()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k52',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k53 - Post transplant complication rate for Donor (Liver) (Transplant Unit)
+    public function patient_feedback_CQI3k53()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k53',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k54 - Post transplant complication rate (Heart) (Transplant Unit)
+    public function patient_feedback_CQI3k54()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k54',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k55 - Percentage of research activities approved by ethics committee (Research)
+    public function patient_feedback_CQI3k55()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k55',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k56 - Percentage of patients withdrawing from the study (Research)
+    public function patient_feedback_CQI3k56()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k56',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k57 - Percentage of protocol violations/deviations reported (Research)
+    public function patient_feedback_CQI3k57()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k57',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k58 - Percentage of serious adverse events reported to ethics committee within defined timeframe (Research)
+    public function patient_feedback_CQI3k58()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k58',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k59 - Percentage of cases where Initial assessment done in physiotherapy within 24 hours OPD (Physical therapy and Rehabilitation Department - Medical records)
+    public function patient_feedback_CQI3k59()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k59',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k60 - Survival rate for living donor Liver transplants (Gastrointestinal Surgery)
+    public function patient_feedback_CQI3k60()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k60',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI3k61 → CQI4h25 ========================
+
+// CQI3k61 - Return of spontaneous circulation (ROSC) achieving rate (JCI8-COP 4) (Emergency Department)
+    public function patient_feedback_CQI3k61()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k61',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k62 - Timeliness of initiation of advanced cardiovascular life support (ACLS) within 5 Min (JCI8-COP 4) (Nursing)
+    public function patient_feedback_CQI3k62()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k62',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k63 - Timeliness of staff response to cardiac arrest (JCI8-COP 4) (Emergency Department)
+    public function patient_feedback_CQI3k63()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k63',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI3k64 - Rate to RRT response turn to Code blue (JCI8-COP 4) (Nursing)
+    public function patient_feedback_CQI3k64()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k64',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h1 - Patient satisfaction index - Physiotherapy (Physical therapy and Rehabilitation Department)
+    public function patient_feedback_CQI4h1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h2 - TAT for radiology STAT orders (Radiology - CT)
+    public function patient_feedback_CQI4h2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h3 - TAT for radiology STAT orders (Radiology - MRI)
+    public function patient_feedback_CQI4h3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h4 - TAT for radiology STAT orders (Radiology - USG)
+    public function patient_feedback_CQI4h4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h5 - HAZMAT compliance in radiology
+    public function patient_feedback_CQI4h5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h6 - TLD Reading Compliance (Radiology)
+    public function patient_feedback_CQI4h6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h7 - Variance in Financial counselling (Patient Care Services - IPD)
+    public function patient_feedback_CQI4h7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h8 - Planned Discharge rate (Patient Care Services - IPD)
+    public function patient_feedback_CQI4h8()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h9 - Incident report rate (Quality Office)
+    public function patient_feedback_CQI4h9()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h9',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h10 - TAT for dispensing medicine - IP (Pharmacy)
+    public function patient_feedback_CQI4h10()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h10',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h11 - TAT for STAT medicine (Pharmacy)
+    public function patient_feedback_CQI4h11()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h11',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h12 - Average number of Doctors on hospital rolls at any point of time (HR)
+    public function patient_feedback_CQI4h12()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h12',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h13 - Average Number of Nurses on hospital rolls at any point of time (HR)
+    public function patient_feedback_CQI4h13()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h13',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h14 - Reason for staff exit (HR)
+    public function patient_feedback_CQI4h14()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h14',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h15 - Compliance to Internal complaints committee requirements (HR)
+    public function patient_feedback_CQI4h15()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h15',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI4h16 → CQI4h40 ========================
+
+// CQI4h16 - Effectiveness in recruitment (MRF submission days - Staff onboarded time) (HR)
+    public function patient_feedback_CQI4h16()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h16',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h17 - Compliance to Employee Engagement activities (HR)
+    public function patient_feedback_CQI4h17()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h17',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h18 - Number of Mandatory training hours coverage / staff (HR)
+    public function patient_feedback_CQI4h18()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h18',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h19 - Compliance to ACLS training (HR)
+    public function patient_feedback_CQI4h19()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h19',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h20 - Average units of electricity consumed/Day (Units) (Engineering & Maintenance)
+    public function patient_feedback_CQI4h20()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h20',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h21 - TAT for complaints on equipment/Utility/Facility (Engineering & Maintenance)
+    public function patient_feedback_CQI4h21()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h21',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h22 - Average units of water consumed/Day (L) (Engineering & Maintenance)
+    public function patient_feedback_CQI4h22()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h22',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h23 - Adherence to PPE usage in Engineering and Maintenance department (Engineering & Maintenance)
+    public function patient_feedback_CQI4h23()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h23',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h24 - Compliance to PM schedule (Engineering & Maintenance)
+    public function patient_feedback_CQI4h24()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h24',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h25 - Compliance to safe storage of chemicals (Engineering & Maintenance)
+    public function patient_feedback_CQI4h25()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h25',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h26 - Outsourced Security service Staff Attendance (Safety & Security - Security)
+    public function patient_feedback_CQI4h26()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h26',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h27 - Compliance to reporting of critical values in Lab (within 30 min) (Lab Service)
+    public function patient_feedback_CQI4h27()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h27',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h28 - Compliance to reporting of critical values in POCT (Lab Service)
+    public function patient_feedback_CQI4h28()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h28',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h29 - TAT for Lab tests (Lab Service)
+    public function patient_feedback_CQI4h29()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h29',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h30 - TAT for Lab STAT (Lab Service)
+    public function patient_feedback_CQI4h30()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h30',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h31 - Compliance to TAT for lab outsourced test (Lab Service)
+    public function patient_feedback_CQI4h31()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h31',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h32 - Lab Specimen Rejection Rate (Lab Service)
+    public function patient_feedback_CQI4h32()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h32',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h33 - Insurance Claims Rejection Rate (Insurance)
+    public function patient_feedback_CQI4h33()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h33',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h34 - TPA TAT (Insurance) for the month
+    public function patient_feedback_CQI4h34()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h34',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h35 - Medical Waste Collection Rate (House Keeping)
+    public function patient_feedback_CQI4h35()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h35',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h36 - Compliance to MSDS in Facility (House Keeping)
+    public function patient_feedback_CQI4h36()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h36',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h37 - Percentage of Pest control Complaints rate (House Keeping)
+    public function patient_feedback_CQI4h37()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h37',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h38 - Linen Quality - Compliance Rate (House Keeping)
+    public function patient_feedback_CQI4h38()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h38',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h39 - Downtime of EMR (ITD)
+    public function patient_feedback_CQI4h39()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h39',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h40 - Outsourced staff manpower compliance rate (House Keeping)
+    public function patient_feedback_CQI4h40()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h40',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI4h41 → CQI4h56 ========================
+
+// CQI4h41 - ITD Preventive Maintenance compliance (ITD)
+    public function patient_feedback_CQI4h41()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h41',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h42 - Biomedical Preventive Maintenance Completion rate (Biomedical Engineering)
+    public function patient_feedback_CQI4h42()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h42',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h43 - Quality of patient transportation by ambulance (Out-sourced) (Lab Service)
+    public function patient_feedback_CQI4h43()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h43',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h44 - F&B Patient complaints rate (Food and Beverage Services)
+    public function patient_feedback_CQI4h44()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h44',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h45 - Delay in room services (Food and Beverage Services)
+    public function patient_feedback_CQI4h45()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h45',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h46 - Compliance to PCRA (Engineering & Maintenance)
+    public function patient_feedback_CQI4h46()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h46',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h47 - Compliances in patient room cleaning and hygiene practices (House Keeping)
+    public function patient_feedback_CQI4h47()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h47',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h48 - Patient's Complaints Rate (House Keeping)
+    public function patient_feedback_CQI4h48()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h48',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h49 - Percentage of renewable energy used against total energy used (JCI8-GHI 3) (Engineering & Maintenance)
+    public function patient_feedback_CQI4h49()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h49',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h50 - To Monitor the energy consumption (JCI8-GHI 3) (Engineering & Maintenance)
+    public function patient_feedback_CQI4h50()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h50',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h51 - Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)
+    public function patient_feedback_CQI4h51()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h51',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h52 - Percentage of adherence to facility audit observation closure (Safety & Security)
+    public function patient_feedback_CQI4h52()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h52',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h53 - Standardised Mortality Ratio for ICU - 1 (Nursing - ICU 1)
+    public function patient_feedback_CQI4h53()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h53',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h54 - Standardised Mortality Ratio for ICU - 2 (Actual deaths in ICU-2)
+    public function patient_feedback_CQI4h54()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h54',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h55 - Standardised Mortality Ratio for PICU (Actual deaths in PICU)
+    public function patient_feedback_CQI4h55()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h55',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4h56 - Standardised Mortality Ratio for NICU (Actual deaths in NICU)
+    public function patient_feedback_CQI4h56()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4h56',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CLOTCM1 → CLOTCM20 ========================
+
+// CLOTCM1 - Average length of stay (MRD - Cardiology)
+    public function patient_feedback_CLOTCM1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM2 - Average length of stay (MRD - CVTS)
+    public function patient_feedback_CLOTCM2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM3 - Average length of stay (MRD - Gastro surgery)
+    public function patient_feedback_CLOTCM3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM4 - Average length of stay (MRD - Gastroenterology)
+    public function patient_feedback_CLOTCM4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM5 - Average length of stay (MRD - General Medicine)
+    public function patient_feedback_CLOTCM5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM6 - Average length of stay (MRD - ICU)
+    public function patient_feedback_CLOTCM6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM7 - Average length of stay (MRD - Nephrology)
+    public function patient_feedback_CLOTCM7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM8 - Average length of stay (MRD - Neuro Intervention)
+    public function patient_feedback_CLOTCM8()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM9 - Average length of stay (MRD - Neurology)
+    public function patient_feedback_CLOTCM9()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM9',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM10 - Average length of stay (MRD - Neurosurgery)
+    public function patient_feedback_CLOTCM10()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM10',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM11 - Average length of stay (MRD - Ortho neuro integrated spine)
+    public function patient_feedback_CLOTCM11()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM11',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM12 - Average length of stay (MRD - Ortho THR)
+    public function patient_feedback_CLOTCM12()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM12',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM13 - Average length of stay (MRD - Ortho TKR)
+    public function patient_feedback_CLOTCM13()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM13',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM14 - Average length of stay (MRD - Orthopaedics)
+    public function patient_feedback_CLOTCM14()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM14',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM15 - Average length of stay (MRD - Pulmonology)
+    public function patient_feedback_CLOTCM15()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM15',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM16 - Average length of stay (MRD - Urology)
+    public function patient_feedback_CLOTCM16()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM16',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM17 - Catheter associated urinary tract infection rate (Infection Control - ICU1)
+    public function patient_feedback_CLOTCM17()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM17',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM18 - Catheter associated urinary tract infection rate (Infection Control - ICU2)
+    public function patient_feedback_CLOTCM18()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM18',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM19 - Catheter associated urinary tract infection rate (Infection Control - ICU3)
+    public function patient_feedback_CLOTCM19()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM19',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM20 - Central Line Associated Blood Stream Infection (CLABSI) - (Infection Control - ICU1)
+    public function patient_feedback_CLOTCM20()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM20',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CLOTCM21 → CLOTCM30 ========================
+
+// CLOTCM21 - Central Line Associated Blood Stream Infection (CLABSI) (Infection Control - ICU2)
+    public function patient_feedback_CLOTCM21()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM21',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM22 - Central Line Associated Blood Stream Infection (CLABSI) (Infection Control - ICU3)
+    public function patient_feedback_CLOTCM22()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM22',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM23 - Surgical Site Infection rate (Infection Control - Ortho THR)
+    public function patient_feedback_CLOTCM23()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM23',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM24 - Surgical Site Infection rate (Infection Control - Ortho TKR)
+    public function patient_feedback_CLOTCM24()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM24',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM25 - Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU1)
+    public function patient_feedback_CLOTCM25()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM25',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM26 - Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU2)
+    public function patient_feedback_CLOTCM26()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM26',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM27 - Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - ICU3)
+    public function patient_feedback_CLOTCM27()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM27',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM28 - Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho THR)
+    public function patient_feedback_CLOTCM28()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM28',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM29 - Ventilator associated pneumonias (VAP) in 1000 ventilator days (Infection Control - Ortho TKR)
+    public function patient_feedback_CLOTCM29()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM29',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CLOTCM30 - Prevalence of transfusion reactions in Leuco depleted PRBC transfusions (Blood Center)
+    public function patient_feedback_CLOTCM30()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CLOTCM30',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI4i1 → CQI4i14 ========================
+
+// CQI4i1 - Compliance to medical service requests - Heart, Lung transplantation (Medical Administration)
+    public function patient_feedback_CQI4i1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i2 - Compliance to medical service requests - Heart, Lung transplantation (Liver transplantation)
+    public function patient_feedback_CQI4i2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i3 - TAT compliance for radiology outsourced test (Radiology)
+    public function patient_feedback_CQI4i3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i4 - Food waste collection rate (House Keeping)
+    public function patient_feedback_CQI4i4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i5 - Solid waste collection rate (House Keeping)
+    public function patient_feedback_CQI4i5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i6 - Outsourced GDA (General Duty Assistance) absenteeism rate (House Keeping)
+    public function patient_feedback_CQI4i6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i7 - Outsourced OPD Assistance attendance (Operation)
+    public function patient_feedback_CQI4i7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i8 - Outsourced UTIZ staff attendance (House Keeping)
+    public function patient_feedback_CQI4i8()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i9 - Compliance to safe transportation of Oil waste (Engineering & Maintenance)
+    public function patient_feedback_CQI4i9()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i9',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i10 - Number of laundry loads reduced by optimizing and sorting laundry (GHI 3ME4) (JCI8-GHI 3) - (House Keeping)
+    public function patient_feedback_CQI4i10()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i10',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i11 - Percentage of cleaning products used biodegradable (GHI 3ME4) (JCI8-GHI 3) - (House Keeping)
+    public function patient_feedback_CQI4i11()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i11',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i12 - Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) - (House Keeping)
+    public function patient_feedback_CQI4i12()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i12',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i13 - Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact - JCI8-GHI 3) - (House Keeping)
+    public function patient_feedback_CQI4i13()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i13',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4i14 - Non-Recyclable Waste per Patient Day (Kg) - (JCI8-GHI 3) - (House Keeping)
+    public function patient_feedback_CQI4i14()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4i14',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    // ======================== CQI4j1 → CQI4j22 ========================
+
+// CQI4j1 - Door to Physician ≤10 min (Stroke Unit)
+    public function patient_feedback_CQI4j1()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j1',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j2 - Door to stroke team ≤15 min (Stroke Unit)
+    public function patient_feedback_CQI4j2()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j2',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j3 - Door to CT/MRI initiation ≤20 min (Stroke Unit)
+    public function patient_feedback_CQI4j3()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j3',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j4 - Door to CT/MRI interpretation ≤30 min (Stroke Unit)
+    public function patient_feedback_CQI4j4()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j4',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j5 - Order to lab results ≤30 min, if ordered (Stroke Unit)
+    public function patient_feedback_CQI4j5()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j5',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j6 - Door to IV thrombolytic bolus (≥75% compliance) ≤60 min (Stroke Unit)
+    public function patient_feedback_CQI4j6()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j6',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j7 - Door to IV thrombolytic bolus (≥50% compliance) ≤45 min (Stroke Unit)
+    public function patient_feedback_CQI4j7()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j7',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j8 - Door to puncture time ≤90 min (Stroke Unit)
+    public function patient_feedback_CQI4j8()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j8',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j9 - Periprocedural complication rates (Stroke Unit)
+    public function patient_feedback_CQI4j9()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j9',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j10 - Periprocedural mortality rate for surgical/interventional procedures (Stroke Unit)
+    public function patient_feedback_CQI4j10()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j10',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j11 - Percentage of all stroke/TIA patients with NIHSS score documented (Stroke Unit)
+    public function patient_feedback_CQI4j11()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j11',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j12 - Percentage of ischemic stroke patients receiving thrombolysis within time window (Stroke Unit)
+    public function patient_feedback_CQI4j12()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j12',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j13 - Percentage of patients treated for acute ischemic stroke with IV thrombolysis within 60 min (Stroke Unit)
+    public function patient_feedback_CQI4j13()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j13',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j14 - Time from arrival to start of initial imaging workup (Stroke Unit)
+    public function patient_feedback_CQI4j14()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j14',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j15 - Percentage of ischemic stroke patients developing symptomatic intracranial hemorrhage within 36h (Stroke Unit)
+    public function patient_feedback_CQI4j15()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j15',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j16 - Percentage of patients undergoing CEA or carotid interventions with stroke/death within 30 days (Stroke Unit)
+    public function patient_feedback_CQI4j16()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j16',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j17 - Percentage of patients undergoing intracranial angioplasty/stenting with stroke/death within 30 days (Stroke Unit)
+    public function patient_feedback_CQI4j17()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j17',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j18 - Percentage of patients with stroke/death within 24h of diagnostic cerebral-angiography (Stroke Unit)
+    public function patient_feedback_CQI4j18()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j18',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j19 - Percentage of ischemic stroke patients undergoing EVD developing ventriculitis (Stroke Unit)
+    public function patient_feedback_CQI4j19()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j19',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j20 - Percentage ischemic stroke patients with post-treatment reperfusion grade TICI 2B or higher (Stroke Unit)
+    public function patient_feedback_CQI4j20()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j20',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j21 - Percentage ischemic stroke patients with large vessel occlusion receiving MER within 120 min and achieving TICI 2B+ (Stroke Unit)
+    public function patient_feedback_CQI4j21()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j21',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+    
+    // CQI4j22 - Percentage ischemic stroke patients with large vessel occlusion achieving TICI 2B+ ≤60 min from skin puncture (Stroke Unit)
+    public function patient_feedback_CQI4j22()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j22',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
 
 
 

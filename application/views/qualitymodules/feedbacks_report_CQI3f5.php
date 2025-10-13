@@ -25,7 +25,7 @@
 	$feedbacktaken = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $desc_1PSQ3a);
 
 	if ($feedbacktaken) {
-		?>
+	?>
 
 		<div class="row">
 
@@ -36,14 +36,13 @@
 						<div style="float: right; margin-top: 10px; margin-right: 10px;">
 							<span style="font-size:17px"><strong>Download Chart:</strong></span>
 							<span style="margin-right: 10px;">
-								<i data-placement="bottom" class="fa fa-file-pdf-o"
-									style="font-size: 20px; color: red; cursor: pointer;" onclick="printChart()"
-									data-toggle="tooltip" title="Download Chart as PDF"></i>
+								<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
+									onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
 							</span>
 							<span>
-								<i data-placement="bottom" class="fa fa-file-image-o"
-									style="font-size: 20px; color: green; cursor: pointer;" onclick="downloadChartImage()"
-									data-toggle="tooltip" title="Download Chart as Image"></i>
+								<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
+									onclick="downloadChartImage()" data-toggle="tooltip"
+									title="Download Chart as Image"></i>
 							</span>
 						</div>
 
@@ -57,9 +56,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
-								title="Download detailed KPI report"
-								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3f5_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3f5_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -75,8 +72,7 @@
 
 								<th>Sum of time taken (in Hrs)</th>
 								<th>Total number of blood & blood components cross-matched/reserved (in Nos.)</th>
-								<th>Turn-around time for blood and blood components cross matched / reserved(Blood Center)
-									(in Hrs)</th>
+								<th>Turn-around time for blood and blood components cross matched / reserved(Blood Center) (in Hrs)</th>
 
 								<th>Bench Mark Time</th>
 
@@ -106,32 +102,29 @@
 									// print_r($param);
 									// echo '</pre>';
 									// exit;
-							
 
-									?>
 
-									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>"
-										onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'"
-										style="cursor: pointer;">
+								?>
+
+									<tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC"; ?>" onclick="window.location.href='<?php echo $patient_feedback_1PSQ3a . $id; ?>'" style="cursor: pointer;">
 										<td><?php echo $sl; ?></td>
 										<!-- <td>
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-											<?php if (!empty($r->datetime)) { ?>
-												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
-												<?php echo date('h:i A', strtotime($r->datetime)); ?>
-											<?php } else { ?>
-												-
-											<?php } ?>
-										</td>
+    <?php if (!empty($r->datetime)) { ?>
+        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+        <?php echo date('h:i A', strtotime($r->datetime)); ?>
+    <?php } else { ?>
+        -
+    <?php } ?>
+</td>
 
 
 										<td style="overflow: clip;">
 											<?php echo $r->name; ?>
 											<?php if (allfeedbacks_page('feedback_id') == false) { ?>
-												(<a
-													href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"><?php echo $r->patientid; ?></a>)
+												(<a href="<?php echo  $patient_feedback_1PSQ3a . $id; ?>"><?php echo $r->patientid; ?></a>)
 											<?php } else { ?>
 												(<?php echo $r->patientid; ?>)
 											<?php } ?>
@@ -205,7 +198,8 @@
 										</td> -->
 
 										<td>
-											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>" class="btn btn-info btn-sm">
+											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
+												class="btn btn-info btn-sm">
 												View Details
 											</a>
 										</td>
@@ -225,7 +219,7 @@
 			</div>
 			<!-- /.row -->
 		</div>
-	<?php } else { ?>
+	<?php } else {   ?>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -295,21 +289,21 @@
 				'Dec ' + reportYear
 			],
 			datasets: [{
-				label: 'Benchmark Time',
-				data: benchmarkSeconds,
-				backgroundColor: 'rgba(56, 133, 244, 0.2)', // Blue color for benchmark
-				borderColor: 'rgba(54, 162, 235, 1)',
-				borderWidth: 2, // Adjusted border width
-				fill: false, // No fill under the line
-			},
-			{
-				label: 'Avg.Time for initial assessment of in-patients (Doctors)-(Emergency Department)',
-				data: calculatedSeconds,
-				backgroundColor: 'rgba(52, 168, 83, 0.2)', // Dynamic color for calculated
-				borderColor: 'rgba(52, 168, 83, 1)',
-				borderWidth: 2, // Adjusted border width
-				fill: false, // No fill under the line
-			}
+					label: 'Benchmark Time',
+					data: benchmarkSeconds,
+					backgroundColor: 'rgba(56, 133, 244, 0.2)', // Blue color for benchmark
+					borderColor: 'rgba(54, 162, 235, 1)',
+					borderWidth: 2, // Adjusted border width
+					fill: false, // No fill under the line
+				},
+				{
+					label: 'Avg.Time for initial assessment of in-patients (Doctors)-(Emergency Department)',
+					data: calculatedSeconds,
+					backgroundColor: 'rgba(52, 168, 83, 0.2)', // Dynamic color for calculated
+					borderColor: 'rgba(52, 168, 83, 1)',
+					borderWidth: 2, // Adjusted border width
+					fill: false, // No fill under the line
+				}
 			]
 		},
 		options: {
@@ -323,7 +317,7 @@
 				},
 				y: {
 					ticks: {
-						callback: function (value) {
+						callback: function(value) {
 							return secondsToTime(value); // Convert seconds to time format (hh:mm:ss)
 						},
 						font: {
@@ -335,7 +329,7 @@
 			plugins: {
 				tooltip: {
 					callbacks: {
-						label: function (context) {
+						label: function(context) {
 							var value = context.raw;
 							return secondsToTime(value); // Convert seconds to time format (hh:mm:ss)
 						}
@@ -347,7 +341,7 @@
 </script>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function () {
+	document.addEventListener('DOMContentLoaded', function() {
 		var typed = new Typed(".typing-text", {
 			strings: ["<?php echo $text; ?>"],
 			// delay: 10,

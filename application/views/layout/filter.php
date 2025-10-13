@@ -500,43 +500,43 @@
                                              </a>
                                          <?php endif; ?>
 
-                                         <?php if (!in_array($this->uri->segment(1), ['audit', 'quality'])): ?>
-                                             <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?weekly=1" style="width:100%">
-                                                 <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
-                                                     <?php echo lang_loader('global', 'global_last_7_days'); ?>
-                                                 </button>
-                                             </a>
-                                         <?php endif; ?>
 
-                                         <?php if (!in_array($this->uri->segment(1), ['audit', 'quality'])): ?>
-                                             <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?yearm=<?php echo $y; ?>&mon=<?php echo date("n", time()); ?>" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
-                                                 <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
-                                                     <?php echo lang_loader('global', 'global_last_30_days'); ?>
-                                                 </button>
-                                             </a>
-                                         <?php endif; ?>
+                                         <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?weekly=1" style="width:100%">
+                                             <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
+                                                 <?php echo lang_loader('global', 'global_last_7_days'); ?>
+                                             </button>
+                                         </a>
+
+
+
+                                         <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?yearm=<?php echo $y; ?>&mon=<?php echo date("n", time()); ?>" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
+                                             <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
+                                                 <?php echo lang_loader('global', 'global_last_30_days'); ?>
+                                             </button>
+                                         </a>
+
 
                                          <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?quaterly=1" style="width:100%"><button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc; "><?php echo lang_loader('global', 'global_last_90_days'); ?></button></a>
                                          <div class="dropdown-divider"></div>
                                          <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?this_month=1" style="width:100%"> <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc; ">Current Month</button></a>
                                          <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?last_month=1" style="width:100%"> <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc; ">Previous Month</button></a>
 
-                                         <?php if (in_array($this->uri->segment(1), ['audit', 'quality'])): ?>
-                                             <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?current_quarter=1" style="width:100%">
-                                                 <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
-                                                     Current Quarter
-                                                 </button>
-                                             </a>
-                                         <?php endif; ?>
 
-                                         
-                                         <?php if (in_array($this->uri->segment(1), ['audit', 'quality'])): ?>
-                                             <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?current_year=1" style="width:100%">
-                                                 <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
-                                                     Current Year
-                                                 </button>
-                                             </a>
-                                         <?php endif; ?>
+                                         <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?current_quarter=1" style="width:100%">
+                                             <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
+                                                 Current Quarter
+                                             </button>
+                                         </a>
+
+
+
+
+                                         <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?current_year=1" style="width:100%">
+                                             <button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc;">
+                                                 Current Year
+                                             </button>
+                                         </a>
+
 
 
                                          <a class="dropdown-item" href="<?php echo base_url(); ?><?php echo $this->uri->segment(1); ?>/<?php echo $this->uri->segment(2); ?>/<?php echo $this->uri->segment(3); ?>?year=<?php echo $y; ?>" style="width:100%"><button class="btn btn-default" style="width:100%; border:0px; border-bottom:1px solid #ccc; "><?php echo lang_loader('global', 'global_last_365_days'); ?></button></a>
@@ -965,6 +965,7 @@
                              </style>
                          <?php } ?>
 
+
                          <?php if ((ismodule_active('ASSET') === true && $this->uri->segment(1) == 'asset')) {  ?>
                              <script>
                                  function changefloore(cward) {
@@ -1092,7 +1093,11 @@
                              <td>
                                  <div class="btn-group" style="margin: 2px 6px 5px 19px;">
                                      <button type="button" style="background: #62c52d;border: none; width:200px" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                         <?php echo lang_loader('global', 'global_all'); ?> <i class="fa fa-angle-down" aria-hidden="true" style="margin-right:0px;"></i>
+                                         <?php
+                                            $selectedSeverity = $_GET['depsec_severity'] ?? ($_SESSION['severity'] ?? lang_loader('global', 'global_all'));
+                                            echo htmlspecialchars($selectedSeverity);
+                                            ?>
+                                         <i class="fa fa-angle-down" aria-hidden="true" style="margin-right:0px;"></i>
                                      </button>
                                      <ul class="dropdown-menu" style="text-align: left; width:100%;">
                                          <?php
@@ -1118,7 +1123,7 @@
 
                              <script>
                                  function changepriority(priority) {
-                                     window.location = '<?php echo base_url(uri_string()); ?>?depsec_severity=' + priority;
+                                     window.location = '<?php echo base_url(uri_string()); ?>?depsec_priority=' + priority;
                                  }
                              </script>
 
@@ -1130,7 +1135,11 @@
                              <td>
                                  <div class="btn-group" style="margin: 2px 6px 5px 19px;">
                                      <button type="button" style="background: #62c52d;border: none; width:200px" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                         <?php echo lang_loader('global', 'global_all'); ?> <i class="fa fa-angle-down" aria-hidden="true" style="margin-right:0px;"></i>
+                                         <?php
+                                            $selectedPriority = $_GET['depsec_priority'] ?? ($_SESSION['priority'] ?? lang_loader('global', 'global_all'));
+                                            echo htmlspecialchars($selectedPriority);
+                                            ?>
+                                         <i class="fa fa-angle-down" aria-hidden="true" style="margin-right:0px;"></i>
                                      </button>
                                      <ul class="dropdown-menu" style="text-align: left; width:100%;">
                                          <?php
