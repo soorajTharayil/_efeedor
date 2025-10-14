@@ -347,7 +347,7 @@ class Ticketsincident extends CI_Controller
 					$action = 'Reopened by the user (' . $this->input->post('patient_reopen_name') . ')';
 					$message = $this->input->post('patient_reopen_name');
 				} else {
-					$action = 'Reopened by ' . $this->session->userdata['fullname']. ' (' . $this->session->userdata['designation'] . ')';
+					$action = 'Reopened by ' . $this->session->userdata['fullname'] . ' (' . $this->session->userdata['designation'] . ')';
 					$message = $this->session->userdata['fullname'];
 				}
 
@@ -403,7 +403,7 @@ class Ticketsincident extends CI_Controller
 			} elseif ($this->input->post('status') == 'Monitor') {
 				// print_r($_POST);
 				// exit;
-				$action = 'Commented by ' . $this->session->userdata['fullname']. ' (' . $this->session->userdata['designation'] . ')';
+				$action = 'Commented by ' . $this->session->userdata['fullname'] . ' (' . $this->session->userdata['designation'] . ')';
 				$message = $this->session->userdata['fullname'];
 
 
@@ -422,7 +422,7 @@ class Ticketsincident extends CI_Controller
 				// curl_setopt($curl, CURLOPT_URL, base_url() . 'api/curl.php');
 				// curl_exec($curl);
 				redirect('incident/alltickets');
-			}elseif ($this->input->post('status') == 'Assigned') {
+			} elseif ($this->input->post('status') == 'Assigned') {
 				// Get selected users
 				$assigned_user_ids = $this->input->post('users');
 				$assigned_user_ids_for_process_monitor = $this->input->post('users_for_process_monitor');
@@ -930,24 +930,25 @@ class Ticketsincident extends CI_Controller
 
 		// --- Map incoming POST fields to DB columns ---
 		$updateData = [
-			'rootcause_describe' => $this->input->post('Closure_RCA'),
-			'rca_tool_describe' => $this->input->post('Tool_Applied'),
-			'fivewhy_1_describe' => $this->input->post('WHY_1'),
-			'fivewhy_2_describe' => $this->input->post('WHY_2'),
-			'fivewhy_3_describe' => $this->input->post('WHY_3'),
-			'fivewhy_4_describe' => $this->input->post('WHY_4'),
-			'fivewhy_5_describe' => $this->input->post('WHY_5'),
-			'fivewhy2h_1_describe' => $this->input->post('What_happened'),
-			'fivewhy2h_2_describe' => $this->input->post('Why_did_it_happen'),
-			'fivewhy2h_3_describe' => $this->input->post('Where_did_it_happen'),
-			'fivewhy2h_4_describe' => $this->input->post('When_did_it_happen'),
-			'fivewhy2h_5_describe' => $this->input->post('Who_was_involved'),
-			'fivewhy2h_6_describe' => $this->input->post('How_did_it_happen'),
-			'fivewhy2h_7_describe' => $this->input->post('How_much_or_How_many_impact_cost'),
-			'corrective_describe' => $this->input->post('Corrective_Action'),
-			'preventive_describe' => $this->input->post('Preventive_Action'),
-			'verification_comment_describe' => $this->input->post('Lesson_Learned')
+			'rootcause_describe' => $this->input->post('rca_in_brief'),
+			'rca_tool_describe' => $this->input->post('tool_applied'),
+			'fivewhy_1_describe' => $this->input->post('why_1'),
+			'fivewhy_2_describe' => $this->input->post('why_2'),
+			'fivewhy_3_describe' => $this->input->post('why_3'),
+			'fivewhy_4_describe' => $this->input->post('why_4'),
+			'fivewhy_5_describe' => $this->input->post('why_5'),
+			'fivewhy2h_1_describe' => $this->input->post('what_happened'),
+			'fivewhy2h_2_describe' => $this->input->post('why_did_it_happen'),
+			'fivewhy2h_3_describe' => $this->input->post('where_did_it_happen'),
+			'fivewhy2h_4_describe' => $this->input->post('when_did_it_happen'),
+			'fivewhy2h_5_describe' => $this->input->post('who_was_involved'),
+			'fivewhy2h_6_describe' => $this->input->post('how_did_it_happen'),
+			'fivewhy2h_7_describe' => $this->input->post('how_much_how_many_impact_cost'),
+			'corrective_describe' => $this->input->post('corrective_action'),
+			'preventive_describe' => $this->input->post('preventive_action'),
+			'verification_comment_describe' => $this->input->post('lesson_learned')
 		];
+
 
 		// --- Normalize empty values to NULL ---
 		foreach ($updateData as $key => $val) {

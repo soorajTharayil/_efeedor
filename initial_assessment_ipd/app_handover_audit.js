@@ -567,7 +567,7 @@ $scope.user_id = ehandor.userid;
 		return calculatedSeconds <= benchmark ? 'green' : 'red';
 	};
 
-$scope.todayDateTime = new Date().toISOString().slice(0,16);
+
 
 
 	// re-size of textarea based on long text

@@ -77,7 +77,7 @@
 										<div class="text-end mb-2 action-buttons-<?php echo $r->id; ?>">
 											<button type="button" class="btn btn-sm btn-outline-primary edit-btn"
 												data-id="<?php echo $r->id; ?>">
-												<i class="fa fa-edit"></i> Edit
+												<i class="fa fa-edit"></i> Edit RCA / CAPA
 											</button>
 											<button type="button" class="btn btn-sm btn-success save-btn"
 												data-id="<?php echo $r->id; ?>" style="display:none;">
@@ -100,7 +100,7 @@
 											<div class="card-body" style="font-size: 14px; line-height:1.6;">
 
 												<?php if ($r->rootcause_describe) { ?>
-													<p><b>Closure RCA:</b> <?php echo $r->rootcause_describe; ?></p>
+													<p><b>RCA in brief:</b> <?php echo $r->rootcause_describe; ?></p>
 												<?php } ?>
 
 												<?php if ($r->rca_tool_describe) { ?>
@@ -161,42 +161,37 @@
 												<?php if ($r->verification_comment_describe) { ?>
 													<p><b>Lesson Learned :</b> <?php echo $r->verification_comment_describe; ?></p>
 												<?php } ?>
-
 												<?php if ($r->describe_picture):
 													$file_extension = pathinfo($r->describe_picture, PATHINFO_EXTENSION);
-													$file_url = base_url('assets/images/capaimage/' . $r->describe_picture);
-													?>
-													<div class="mt-3">
-														<b>Attached File:</b><br>
-														<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-															<img class="img-thumbnail mt-2" style="max-width:150px;"
-																src="<?php echo $file_url; ?>">
-															<br><a class="btn btn-sm btn-outline-primary mt-2"
+													$file_url = base_url('assets/images/describeimage/' . $r->describe_picture); ?>
+													<div class="mt-3"> <b>Attached File:</b><br>
+														<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?> <img
+																class="img-thumbnail mt-2" style="max-width:150px;"
+																src="<?php echo $file_url; ?>"> <br><a
+																class="btn btn-sm btn-outline-primary mt-2"
 																href="<?php echo $file_url; ?>" download>Download Image</a>
-														<?php elseif ($file_extension === 'pdf'): ?>
-															<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
-																height="200" class="mt-2">
-															<br><a class="btn btn-sm btn-outline-danger mt-2"
+														<?php elseif ($file_extension === 'pdf'): ?> <embed
+																src="<?php echo $file_url; ?>" type="application/pdf" width="250"
+																height="200" class="mt-2"> <br><a
+																class="btn btn-sm btn-outline-danger mt-2"
 																href="<?php echo $file_url; ?>" download>Download PDF</a>
-														<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
-															<a class="btn btn-sm btn-outline-success mt-2"
+														<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?> <a
+																class="btn btn-sm btn-outline-success mt-2"
 																href="<?php echo $file_url; ?>" download>Download
 																<?php echo strtoupper($file_extension); ?> File</a>
-														<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
-															<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
+														<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?> <a
+																class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
 																download>Download Word Document</a>
-														<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
-															<a class="btn btn-sm btn-outline-secondary mt-2"
+														<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?> <a
+																class="btn btn-sm btn-outline-secondary mt-2"
 																href="<?php echo $file_url; ?>" download>Download Compressed File</a>
 														<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
 															<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
-																download>Download Media File</a>
-														<?php else: ?>
-															<a class="btn btn-sm btn-outline-primary mt-2"
+																download>Download Media File</a> <?php else: ?> <a
+																class="btn btn-sm btn-outline-primary mt-2"
 																href="<?php echo $file_url; ?>" download>Download File</a>
 														<?php endif; ?>
-													</div>
-												<?php endif; ?>
+													</div> <?php endif; ?>
 
 											</div>
 										</div>
@@ -213,33 +208,52 @@
 											var id = $(this).data('id');
 											var section = $('#editable-' + id);
 
-											section.find('p, dd, li').each(function () {
+											// ✅ Handle <p>, <li>, and <dd>/<dt> pairs
+											section.find('p, li, dd').each(function () {
 												var $this = $(this);
-												var $bold = $this.find('b, strong').first();
-												var label = $bold.length ? $.trim($bold.text().replace(':', '')) : '';
-												var labelKey = label.replace(/\s+/g, '_'); // normalize spaces
-
-												var html = $this.html();
-												var parts = html.split('</b>');
+												var label = '';
 												var value = '';
-												if (parts.length > 1) {
-													value = parts[1]
-														.replace(/[:]/g, '')
-														.replace(/<\/?[^>]+(>|$)/g, '')
-														.replace(/&nbsp;/g, ' ')
-														.trim();
+
+												// CASE 1️⃣: Normal <p> or <li> with <b>Label:</b> Value
+												var $bold = $this.find('b, strong').first();
+												if ($bold.length) {
+													label = $.trim($bold.text().replace(':', ''));
+													var html = $this.html();
+													var parts = html.split('</b>');
+													if (parts.length > 1) {
+														value = parts[1]
+															.replace(/[:]/g, '')
+															.replace(/<\/?[^>]+(>|$)/g, '')
+															.replace(/&nbsp;/g, ' ')
+															.trim();
+													}
 												}
 
-												// 🛑 Skip converting "Tool Applied" field to input
+												// CASE 2️⃣: Definition list <dt>/<dd> (5W2H section)
+												else if ($this.is('dd')) {
+													var dt = $this.prev('dt').text().trim();
+													label = dt.replace(/\?/, '').trim();
+													value = $this.text().trim();
+												}
+
+												// Skip if no label or no value found
+												if (!label) return;
+
+												// 🔧 Normalize any label into a clean, safe field name
+												var labelKey = label
+													.replace(/[^a-zA-Z0-9]+/g, '_')  // replace everything not letter/number with "_"
+													.replace(/_+/g, '_')              // collapse multiple underscores
+													.replace(/^_+|_+$/g, '')          // trim underscores
+													.toLowerCase();                   // unify case
+
+												// 🛑 Skip "Tool Applied" field editing
 												if (label.toLowerCase() === 'tool applied') {
-													// Keep it as plain text
-													$this.html($bold.prop('outerHTML') + ': ' + value);
-													// Store the value in a hidden input (so it still gets submitted)
-													$this.append('<input type="hidden" class="editable-input" name="' + labelKey + '" value="' + value + '">');
-													return; // continue loop
+													$this.html('<b>' + label + ':</b> ' + value +
+														'<input type="hidden" class="editable-input" name="' + labelKey + '" value="' + value + '">');
+													return;
 												}
 
-												// Create editable field for all others
+												// Create input
 												var inputEl = (value.length > 80)
 													? $('<textarea class="form-control form-control-sm editable-input" rows="2"></textarea>')
 														.val(value)
@@ -248,7 +262,12 @@
 														.val(value)
 														.attr('name', labelKey);
 
-												$this.html($bold.prop('outerHTML') + ': ').append(inputEl);
+												// Replace inner HTML with editable input
+												if ($bold.length) {
+													$this.html($bold.prop('outerHTML') + ': ').append(inputEl);
+												} else if ($this.is('dd')) {
+													$this.html(inputEl);
+												}
 											});
 
 											$(".action-buttons-" + id + " .edit-btn").hide();

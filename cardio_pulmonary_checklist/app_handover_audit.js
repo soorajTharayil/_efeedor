@@ -541,7 +541,7 @@ $scope.user_id = ehandor.userid;
 
 
 
-$scope.todayDateTime = new Date().toISOString().slice(0,16);
+
 
 
 
