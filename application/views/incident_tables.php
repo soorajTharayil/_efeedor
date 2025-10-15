@@ -62,13 +62,13 @@ $ticket = $this->incident_model->tickets_recived_by_department_interim($type, $t
 $incalltickets = $this->ticketsincidents_model->alltickets();
 $incopentickets = $this->ticketsincidents_model->read();
 $incclosedtickets = $this->ticketsincidents_model->read_close();
-$incaddressed = $this->ticketsincidents_model->addressedtickets();
+// $incaddressed = $this->ticketsincidents_model->addressedtickets();
 
 
 $incident_department['alltickets'] = count($incalltickets);
 $incident_department['opentickets'] = count($incopentickets);
 $incident_department['closedtickets'] = count($incclosedtickets);
-$incident_department['addressedtickets'] = count($incaddressed);
+// $incident_department['addressedtickets'] = count($incaddressed);
 
 
 
