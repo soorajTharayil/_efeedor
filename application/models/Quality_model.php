@@ -1019,30 +1019,75 @@ class Quality_model extends CI_Model
 
 	//keep
 	public function patient_and_feedback($table_patient, $table_feedback, $sorttime)
-	{
+    {
+    	$fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
+    	$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
+    
+    	$tables = [
+    		'bf_feedback_CQI3a1','bf_feedback_CQI3a2','bf_feedback_CQI3a3','bf_feedback_CQI3a4','bf_feedback_CQI3a5','bf_feedback_CQI3a6','bf_feedback_CQI3a7','bf_feedback_CQI3a8','bf_feedback_CQI3a9','bf_feedback_CQI3a10','bf_feedback_CQI3a11','bf_feedback_CQI3a12','bf_feedback_CQI3a13','bf_feedback_CQI3a14','bf_feedback_CQI3a15','bf_feedback_CQI3a16','bf_feedback_CQI3a17','bf_feedback_CQI3a18','bf_feedback_CQI3a19','bf_feedback_CQI3a20','bf_feedback_CQI3a21','bf_feedback_CQI3a22',
+    		'bf_feedback_CQI3b1','bf_feedback_CQI3b2','bf_feedback_CQI3b3','bf_feedback_CQI3b4','bf_feedback_CQI3b5','bf_feedback_CQI3b6','bf_feedback_CQI3b7','bf_feedback_CQI3b8','bf_feedback_CQI3b9','bf_feedback_CQI3b10','bf_feedback_CQI3b11','bf_feedback_CQI3b12','bf_feedback_CQI3b13',
+    		'bf_feedback_CQI3c1','bf_feedback_CQI3c2','bf_feedback_CQI3c3','bf_feedback_CQI3c4','bf_feedback_CQI3c5','bf_feedback_CQI3c6','bf_feedback_CQI3c7','bf_feedback_CQI3c8','bf_feedback_CQI3c9','bf_feedback_CQI3c10','bf_feedback_CQI3c11','bf_feedback_CQI3c12','bf_feedback_CQI3c13','bf_feedback_CQI3c14',
+    		'bf_feedback_CQI3d1','bf_feedback_CQI3d2','bf_feedback_CQI3d3','bf_feedback_CQI3d4','bf_feedback_CQI3d5',
+    		'bf_feedback_CQI3e1','bf_feedback_CQI3e2','bf_feedback_CQI3e3','bf_feedback_CQI3e4','bf_feedback_CQI3e5','bf_feedback_CQI3e6','bf_feedback_CQI3e7','bf_feedback_CQI3e8','bf_feedback_CQI3e9',
+    		'bf_feedback_CQI3f1','bf_feedback_CQI3f2','bf_feedback_CQI3f3','bf_feedback_CQI3f4','bf_feedback_CQI3f5','bf_feedback_CQI3f6','bf_feedback_CQI3f7','bf_feedback_CQI3f8','bf_feedback_CQI3f9','bf_feedback_CQI3f10',
+    		'bf_feedback_CQI3g1','bf_feedback_CQI3g2','bf_feedback_CQI3g3','bf_feedback_CQI3g4','bf_feedback_CQI3g5','bf_feedback_CQI3g6',
+    		'bf_feedback_CQI3h1','bf_feedback_CQI3h2','bf_feedback_CQI3h3','bf_feedback_CQI3h4','bf_feedback_CQI3h5','bf_feedback_CQI3h6','bf_feedback_CQI3h7','bf_feedback_CQI3h8','bf_feedback_CQI3h9',
+    		'bf_feedback_CQI3j1','bf_feedback_CQI3j2','bf_feedback_CQI3j3','bf_feedback_CQI3j4','bf_feedback_CQI3j5','bf_feedback_CQI3j6','bf_feedback_CQI3j7','bf_feedback_CQI3j8','bf_feedback_CQI3j9','bf_feedback_CQI3j10','bf_feedback_CQI3j11','bf_feedback_CQI3j12','bf_feedback_CQI3j13','bf_feedback_CQI3j14','bf_feedback_CQI3j15','bf_feedback_CQI3j16','bf_feedback_CQI3j17','bf_feedback_CQI3j18','bf_feedback_CQI3j19','bf_feedback_CQI3j20','bf_feedback_CQI3j21','bf_feedback_CQI3j22','bf_feedback_CQI3j23','bf_feedback_CQI3j24','bf_feedback_CQI3j25','bf_feedback_CQI3j26','bf_feedback_CQI3j27','bf_feedback_CQI3j28','bf_feedback_CQI3j29','bf_feedback_CQI3j30','bf_feedback_CQI3j31','bf_feedback_CQI3j32','bf_feedback_CQI3j33','bf_feedback_CQI3j34',
+    		'bf_feedback_CQI4a1','bf_feedback_CQI4a2','bf_feedback_CQI4a3','bf_feedback_CQI4a4','bf_feedback_CQI4a5',
+    		'bf_feedback_CQI4b1','bf_feedback_CQI4b2','bf_feedback_CQI4b3','bf_feedback_CQI4b4','bf_feedback_CQI4b5','bf_feedback_CQI4b6','bf_feedback_CQI4b7','bf_feedback_CQI4b8',
+    		'bf_feedback_CQI4c1','bf_feedback_CQI4c2','bf_feedback_CQI4c3','bf_feedback_CQI4c4','bf_feedback_CQI4c5','bf_feedback_CQI4c6','bf_feedback_CQI4c7','bf_feedback_CQI4c8','bf_feedback_CQI4c9','bf_feedback_CQI4c10','bf_feedback_CQI4c11','bf_feedback_CQI4c12','bf_feedback_CQI4c13','bf_feedback_CQI4c14',
+    		'bf_feedback_CQI4d1','bf_feedback_CQI4d2','bf_feedback_CQI4d3','bf_feedback_CQI4d4','bf_feedback_CQI4d5','bf_feedback_CQI4d6','bf_feedback_CQI4d7','bf_feedback_CQI4d8','bf_feedback_CQI4d9','bf_feedback_CQI4d10','bf_feedback_CQI4d11',
+    		'bf_feedback_CQI4e1','bf_feedback_CQI4e2','bf_feedback_CQI4e3','bf_feedback_CQI4e4','bf_feedback_CQI4e5','bf_feedback_CQI4e6','bf_feedback_CQI4e7','bf_feedback_CQI4e8',
+    		'bf_feedback_CQI4f1','bf_feedback_CQI4f2','bf_feedback_CQI4f3','bf_feedback_CQI4f4','bf_feedback_CQI4f5','bf_feedback_CQI4f6','bf_feedback_CQI4f7',
+    		'bf_feedback_CQI4g1','bf_feedback_CQI4g2','bf_feedback_CQI4g3','bf_feedback_CQI4g4','bf_feedback_CQI4g5','bf_feedback_CQI4g6',
+    		'bf_feedback_CQI3k1','bf_feedback_CQI3k2','bf_feedback_CQI3k3','bf_feedback_CQI3k4','bf_feedback_CQI3k5','bf_feedback_CQI3k6','bf_feedback_CQI3k7','bf_feedback_CQI3k8','bf_feedback_CQI3k9','bf_feedback_CQI3k10','bf_feedback_CQI3k11','bf_feedback_CQI3k12','bf_feedback_CQI3k13','bf_feedback_CQI3k14','bf_feedback_CQI3k15','bf_feedback_CQI3k16','bf_feedback_CQI3k17','bf_feedback_CQI3k18','bf_feedback_CQI3k19','bf_feedback_CQI3k20','bf_feedback_CQI3k21','bf_feedback_CQI3k22','bf_feedback_CQI3k23','bf_feedback_CQI3k24','bf_feedback_CQI3k25','bf_feedback_CQI3k26','bf_feedback_CQI3k27','bf_feedback_CQI3k28','bf_feedback_CQI3k29','bf_feedback_CQI3k30','bf_feedback_CQI3k31','bf_feedback_CQI3k32','bf_feedback_CQI3k33','bf_feedback_CQI3k34','bf_feedback_CQI3k35','bf_feedback_CQI3k36','bf_feedback_CQI3k37','bf_feedback_CQI3k38','bf_feedback_CQI3k39','bf_feedback_CQI3k40','bf_feedback_CQI3k41','bf_feedback_CQI3k42','bf_feedback_CQI3k43','bf_feedback_CQI3k44','bf_feedback_CQI3k45','bf_feedback_CQI3k46','bf_feedback_CQI3k47','bf_feedback_CQI3k48','bf_feedback_CQI3k49','bf_feedback_CQI3k50','bf_feedback_CQI3k51','bf_feedback_CQI3k52','bf_feedback_CQI3k53','bf_feedback_CQI3k54','bf_feedback_CQI3k55','bf_feedback_CQI3k56','bf_feedback_CQI3k57','bf_feedback_CQI3k58','bf_feedback_CQI3k59','bf_feedback_CQI3k60','bf_feedback_CQI3k61','bf_feedback_CQI3k62','bf_feedback_CQI3k63','bf_feedback_CQI3k64',
+    		'bf_feedback_CQI4h1','bf_feedback_CQI4h2','bf_feedback_CQI4h3','bf_feedback_CQI4h4','bf_feedback_CQI4h5','bf_feedback_CQI4h6','bf_feedback_CQI4h7','bf_feedback_CQI4h8','bf_feedback_CQI4h9','bf_feedback_CQI4h10','bf_feedback_CQI4h11','bf_feedback_CQI4h12','bf_feedback_CQI4h13','bf_feedback_CQI4h14','bf_feedback_CQI4h15','bf_feedback_CQI4h16','bf_feedback_CQI4h17','bf_feedback_CQI4h18','bf_feedback_CQI4h19','bf_feedback_CQI4h20','bf_feedback_CQI4h21','bf_feedback_CQI4h22','bf_feedback_CQI4h23','bf_feedback_CQI4h24','bf_feedback_CQI4h25','bf_feedback_CQI4h26','bf_feedback_CQI4h27','bf_feedback_CQI4h28','bf_feedback_CQI4h29','bf_feedback_CQI4h30','bf_feedback_CQI4h31','bf_feedback_CQI4h32','bf_feedback_CQI4h33','bf_feedback_CQI4h34','bf_feedback_CQI4h35','bf_feedback_CQI4h36','bf_feedback_CQI4h37','bf_feedback_CQI4h38','bf_feedback_CQI4h39','bf_feedback_CQI4h40','bf_feedback_CQI4h41','bf_feedback_CQI4h42','bf_feedback_CQI4h43','bf_feedback_CQI4h44','bf_feedback_CQI4h45','bf_feedback_CQI4h46','bf_feedback_CQI4h47','bf_feedback_CQI4h48','bf_feedback_CQI4h49','bf_feedback_CQI4h50','bf_feedback_CQI4h51','bf_feedback_CQI4h52','bf_feedback_CQI4h53','bf_feedback_CQI4h54','bf_feedback_CQI4h55','bf_feedback_CQI4h56',
+    		'bf_feedback_CLOTCM1','bf_feedback_CLOTCM2','bf_feedback_CLOTCM3','bf_feedback_CLOTCM4','bf_feedback_CLOTCM5','bf_feedback_CLOTCM6','bf_feedback_CLOTCM7','bf_feedback_CLOTCM8','bf_feedback_CLOTCM9','bf_feedback_CLOTCM10','bf_feedback_CLOTCM11','bf_feedback_CLOTCM12','bf_feedback_CLOTCM13','bf_feedback_CLOTCM14','bf_feedback_CLOTCM15','bf_feedback_CLOTCM16','bf_feedback_CLOTCM17','bf_feedback_CLOTCM18','bf_feedback_CLOTCM19','bf_feedback_CLOTCM20','bf_feedback_CLOTCM21','bf_feedback_CLOTCM22','bf_feedback_CLOTCM23','bf_feedback_CLOTCM24','bf_feedback_CLOTCM25','bf_feedback_CLOTCM26','bf_feedback_CLOTCM27','bf_feedback_CLOTCM28','bf_feedback_CLOTCM29','bf_feedback_CLOTCM30',
+    		'bf_feedback_CQI4i1','bf_feedback_CQI4i2','bf_feedback_CQI4i3','bf_feedback_CQI4i4','bf_feedback_CQI4i5','bf_feedback_CQI4i6','bf_feedback_CQI4i7','bf_feedback_CQI4i8','bf_feedback_CQI4i9','bf_feedback_CQI4i10','bf_feedback_CQI4i11','bf_feedback_CQI4i12','bf_feedback_CQI4i13','bf_feedback_CQI4i14',
+    		'bf_feedback_CQI4j1','bf_feedback_CQI4j2','bf_feedback_CQI4j3','bf_feedback_CQI4j4','bf_feedback_CQI4j5','bf_feedback_CQI4j6','bf_feedback_CQI4j7','bf_feedback_CQI4j8','bf_feedback_CQI4j9','bf_feedback_CQI4j10','bf_feedback_CQI4j11','bf_feedback_CQI4j12','bf_feedback_CQI4j13','bf_feedback_CQI4j14','bf_feedback_CQI4j15','bf_feedback_CQI4j16','bf_feedback_CQI4j17','bf_feedback_CQI4j18','bf_feedback_CQI4j19','bf_feedback_CQI4j20','bf_feedback_CQI4j21','bf_feedback_CQI4j22'
+    	];
+    
+    	$kpi_feature_map = [];
+    	foreach ($tables as $index => $tbl) {
+    		$kpi_feature_map['QUALITY-KPI' . ($index + 1)] = $tbl;
+    	}
+    
+    	$allowed = false;
+    	if (isset($this->session->userdata['feature']) && is_array($this->session->userdata['feature'])) {
+    		foreach ($this->session->userdata['feature'] as $key => $val) {
+    			if ($val === true && isset($kpi_feature_map[$key]) && $kpi_feature_map[$key] === $table_feedback) {
+    				$allowed = true;
+    				break;
+    			}
+    		}
+    	}
+    
+    	if (!$allowed) {
+    		return [];
+    	}
+    
+    	$this->db->select($table_feedback . '.*');
+    	$this->db->from($table_feedback);
+    
+    	if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
+    		$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
+    	} elseif (
+    		isset($this->session->userdata['floor_ward']) &&
+    		is_array($this->session->userdata['floor_ward']) &&
+    		count($this->session->userdata['floor_ward']) > 0
+    	) {
+    		$this->db->where_in($table_feedback . '.ward', $this->session->userdata['floor_ward']);
+    	}
+    
+    	$this->db->where($table_feedback . '.datetime <=', $fdate);
+    	$this->db->where($table_feedback . '.datetime >=', $tdate);
+    	$this->db->order_by('datetime', $sorttime);
+    
+    	$query = $this->db->get();
+    	if (!$query) return [];
+    	return $query->result();
+    }
 
-		$fdate = date('Y-m-d', strtotime($_SESSION['from_date']));
-		$tdate = date('Y-m-d', strtotime($_SESSION['to_date']));
-		$this->db->select($table_feedback . '.*');
-		$this->db->from($table_feedback);
-	
-
-		// Check if floorwise exists and is an object
-		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
-			// Use ward only if floorwise doesn't exist
-			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
-		} elseif (count($this->session->userdata['floor_ward']) > 0) {
-			$floorwiseArray = $this->session->userdata['floor_ward'];
-			$this->db->where_in($table_feedback . '.ward', $floorwiseArray);
-		}
-
-		$this->db->where($table_feedback . '.datetime <=', $fdate);
-		$this->db->where($table_feedback . '.datetime >=', $tdate);
-		$this->db->order_by('datetime', $sorttime);
-
-		$query = $this->db->get();
-		return $patientandfeedback = $query->result();
-	}
 
 	public function patient_and_feedback_quality($table_feedback, $sorttime)
 	{

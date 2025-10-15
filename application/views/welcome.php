@@ -541,9 +541,9 @@ foreach ($feature as $key => $value) {
                 // $this->db->where('datetime <=', $fdate);
 
 
-                if (!empty($current_user_name)) {
-                    $this->db->where('name', $current_user_name);
-                }
+                // if (!empty($current_user_name)) {
+                //     $this->db->where('name', $current_user_name);
+                // }
 
                 $row_count = $this->db->count_all_results();
 

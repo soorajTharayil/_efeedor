@@ -208,12 +208,12 @@ $param = json_decode($row->dataset, true);
                                 if (!empty($param['discharge_date_time']) && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
                                     $dischargeDatetime = date('Y-m-d\TH:i', strtotime($param['discharge_date_time']));
                                 } else {
-                                    $dischargeDatetime = $maxDatetime; // Default current date-time
+                                    $dischargeDatetime = ''; // Leave empty if no valid value
                                 }
                                 ?>
                                 <input class="form-control datetime-picker" type="datetime-local" id="dischargeDatetime"
                                     name="discharge_date_time" value="<?php echo $dischargeDatetime; ?>"
-                                    max="<?php echo $maxDatetime; ?>">
+                                    max="<?php echo date('Y-m-d\TH:i'); ?>">
                             </td>
                         </tr>
 
@@ -223,12 +223,12 @@ $param = json_decode($row->dataset, true);
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
                                 pickers.forEach(function (input) {
-                                    // Disable future dates dynamically
+                                    // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
-                                    // Open the calendar/time picker when clicking anywhere in the box
+                                    // Auto-open picker on click (modern browsers)
                                     input.addEventListener("click", function () {
-                                        this.showPicker?.();
+                                        if (this.showPicker) this.showPicker();
                                     });
                                 });
                             });

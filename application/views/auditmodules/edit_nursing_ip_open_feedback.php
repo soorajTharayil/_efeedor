@@ -37,44 +37,11 @@ $param = json_decode($row->dataset, true);
                                 <b>Audit Details</b>
                             </td>
                             <td style="overflow: clip;">
-                                <label><b>Audit Name:</b></label>
-                                <input class="form-control" type="text" name="audit_type"
-                                    value="<?php echo isset($param['audit_type']) ? htmlspecialchars($param['audit_type'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    readonly>
+                                Audit Name: <?php echo $param['audit_type']; ?>
                                 <br>
-
-                                <!-- Date & Time of Audit -->
-                                <label><b>Date & Time of Audit:</b></label>
-                                <?php
-                                $datetimeValue = '';
-                                if (!empty($param['datetime']) && $param['datetime'] != '0000-00-00 00:00:00') {
-                                    $datetimeValue = date('Y-m-d\TH:i', strtotime($param['datetime'])); // use param datetime
-                                }
-
-                                // Set max to current date/time to disable future values
-                                $maxDatetime = date('Y-m-d\TH:i');
-                                ?>
-                                <input class="form-control" type="datetime-local" id="auditDatetime" name="datetime"
-                                    value="<?php echo $datetimeValue; ?>" max="<?php echo $maxDatetime; ?>"readonly>
-
-                                <script>
-                                    document.addEventListener("DOMContentLoaded", function () {
-                                        const datetimeInput = document.getElementById("auditDatetime");
-
-                                        // When user clicks anywhere in the input, open the date/time picker
-                                        datetimeInput.addEventListener("click", function () {
-                                            this.showPicker?.(); // âœ… supported in modern browsers
-                                        });
-
-                                        // Prevent future date/time selection dynamically
-                                        datetimeInput.max = new Date().toISOString().slice(0, 16);
-                                    });
-                                </script> <br>
-                                <!-- Audit By -->
-                                <label><b>Audit By:</b></label>
-                                <input class="form-control" type="text" name="audit_by"
-                                    value="<?php echo isset($param['audit_by']) ? htmlspecialchars($param['audit_by'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    readonly>
+                                Date & Time of Audit: <?php echo date('Y-m-d H:i', strtotime($row->datetime)); ?>
+                                <br>
+                                Audit by: <?php echo $param['audit_by']; ?>
 
                                 <!-- Hidden inputs -->
                                 <input class="form-control" type="hidden" name="audit_type"
@@ -209,12 +176,12 @@ $param = json_decode($row->dataset, true);
                                 if (!empty($param['discharge_date_time']) && $param['discharge_date_time'] != '1970-01-01 05:30:00') {
                                     $dischargeDatetime = date('Y-m-d\TH:i', strtotime($param['discharge_date_time']));
                                 } else {
-                                    $dischargeDatetime = $maxDatetime; // Default current date-time
+                                    $dischargeDatetime = ''; // Leave empty if no valid value
                                 }
                                 ?>
                                 <input class="form-control datetime-picker" type="datetime-local" id="dischargeDatetime"
                                     name="discharge_date_time" value="<?php echo $dischargeDatetime; ?>"
-                                    max="<?php echo $maxDatetime; ?>">
+                                    max="<?php echo date('Y-m-d\TH:i'); ?>">
                             </td>
                         </tr>
 
@@ -224,12 +191,12 @@ $param = json_decode($row->dataset, true);
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
                                 pickers.forEach(function (input) {
-                                    // Disable future dates dynamically
+                                    // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
-                                    // Open the calendar/time picker when clicking anywhere in the box
+                                    // Auto-open picker on click (modern browsers)
                                     input.addEventListener("click", function () {
-                                        this.showPicker?.();
+                                        if (this.showPicker) this.showPicker();
                                     });
                                 });
                             });
@@ -1380,7 +1347,7 @@ $param = json_decode($row->dataset, true);
                                 <input type="hidden" name="remove_files_json" id="remove_files_json" value="">
                             </td>
                         </tr>
-<script>
+                        <script>
                             document.addEventListener("DOMContentLoaded", function () {
 
                                 // 🗑️ Handle removing existing old files
