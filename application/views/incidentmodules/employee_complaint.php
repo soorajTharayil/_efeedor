@@ -45,19 +45,28 @@
 				? explode(',', $result->assign_to)
 				: [];
 
+			$assign_for_team_member_ids = !empty($result->assign_for_team_member)
+				? explode(',', $result->assign_for_team_member)
+				: []; // 🆕
+	
 			// Step 3: Map IDs → names
 			$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-				return $userMap[$id] ?? $id;
+				return isset($userMap[$id]) ? $userMap[$id] : $id;
 			}, $assign_for_process_monitor_ids);
 
 			$assign_to_names = array_map(function ($id) use ($userMap) {
-				return $userMap[$id] ?? $id;
+				return isset($userMap[$id]) ? $userMap[$id] : $id;
 			}, $assign_to_ids);
 
+			$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+				return isset($userMap[$id]) ? $userMap[$id] : $id;
+			}, $assign_for_team_member_ids); // 🆕
+	
 			// Step 4: Join into comma-separated strings
 			$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
 			$names = implode(', ', $assign_to_names);
-
+			$actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+	
 
 			$id = $result->id;
 			$param = json_decode($result->dataset, true);
@@ -498,6 +507,16 @@
 												</td>
 											</tr>
 										<?php } ?>
+
+										<?php if ($actionText_team_member) { ?>
+											<tr>
+												<td><strong>Assigned team member</strong></td>
+												<td>
+													<?php echo $actionText_team_member; ?>
+												</td>
+											</tr>
+										<?php } ?>
+
 										<?php if ($actionText_process_monitor) { ?>
 											<tr>
 												<td><strong>Assigned process monitor</strong></td>
@@ -506,6 +525,7 @@
 												</td>
 											</tr>
 										<?php } ?>
+
 
 
 										<?php

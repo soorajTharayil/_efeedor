@@ -104,6 +104,30 @@ Last updated on 05-03-23 -->
 			</div>
 		<?php } ?>
 
+		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('DESCRIBING-INCIDENTS') === true) { ?>
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+				<div class="panel panel-bd">
+					<div class="panel-body" style="height: 100px;">
+						<div class="statistic-box">
+							<h2><span class="count-number"><?php echo $inc_department['addressedtickets']; ?></span> <span
+									class="slight"><i class="fa fa-play fa-rotate-270 text-warning"> </i></span></h2>
+							<div class="small">Described Incidents <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $opentickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></div>
+							<div class="icon">
+								<i class="fa fa-reply"></i>
+							</div>
+							<a href="<?php echo $int_link_addressedtickets; ?>"
+								style="float: right;    margin-top: -9px;"><?php echo lang_loader('inc', 'inc_view_list'); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php } ?>
+
+		
+
 		<?php if (ismodule_active('INCIDENT') === true && isfeature_active('IN-REJECTED-INCIDENTS') === true) { ?>
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">

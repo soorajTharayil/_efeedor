@@ -31,7 +31,7 @@
 		$alltickets = $this->ticketsincidents_model->alltickets();
 		$opentickets = $this->ticketsincidents_model->read();
 		$closedtickets = $this->ticketsincidents_model->read_close();
-		$addressed = $this->ticketsincidents_model->addressedtickets();
+		$addressed = $this->ticketsincidents_model->describetickets();
 
 
 		$inc_department['alltickets'] = count($alltickets);

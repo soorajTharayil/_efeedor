@@ -81,6 +81,25 @@ class Incident extends CI_Controller
     }
 
 
+    public function escalation_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('INCIDENT') === true) {
+
+            $dates = get_from_to_date();
+            $data['title'] = 'ESCALATION REPORT-INCIDENTS';
+            #-------------------------------#
+            $data['departments'] = $this->ticketsincidents_model->alltickets();
+
+            $data['content'] = $this->load->view('incidentmodules/escalation_report', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+            $this->session->set_userdata('referred_from', NULL);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
     public function assignedtickets_individual_user()
     {
         $userName = $this->session->userdata['fullname'];
@@ -174,7 +193,7 @@ class Incident extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
-    public function download_capa_report_pdf()
+    public function download_capa_report_pdf($id = null)
     {
         if (ismodule_active('INCIDENT') === true) {
 
@@ -215,8 +234,17 @@ class Incident extends CI_Controller
 
             $dataexport = array();
             $i = 0;
-            $departments = $this->ticketsincidents_model->read_close();
+            // Fetch data based on id or all
+            if ($id) {
+                $departments = $this->ticketsincidents_model->read_by_id($id);
+            } else {
+                $departments = $this->ticketsincidents_model->read_close();
+            }
 
+            if (empty($departments)) {
+                show_error('No incident found for the given ID.');
+                return;
+            }
             // echo '<pre>';
             // print_r($departments);
             // echo '</pre>';
@@ -300,7 +328,7 @@ class Incident extends CI_Controller
 
 
 
-
+                    // Step 1: Build user_id → firstname map
                     $userss = $this->db->select('user_id, firstname')
                         ->where('user_id !=', 1)
                         ->get('user')
@@ -320,19 +348,27 @@ class Incident extends CI_Controller
                         ? explode(',', $department->assign_to)
                         : [];
 
+                    $assign_for_team_member_ids = !empty($department->assign_for_team_member)
+                        ? explode(',', $department->assign_for_team_member)
+                        : []; // 🆕
+
                     // Step 3: Map IDs → names
                     $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-                        return $userMap[$id] ?? $id;
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
                     }, $assign_for_process_monitor_ids);
 
                     $assign_to_names = array_map(function ($id) use ($userMap) {
-                        return $userMap[$id] ?? $id;
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
                     }, $assign_to_ids);
+
+                    $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
+                    }, $assign_for_team_member_ids); // 🆕
 
                     // Step 4: Join into comma-separated strings
                     $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
                     $names = implode(', ', $assign_to_names);
-
+                    $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
 
 
                     $assignee = $department->department->pname;
@@ -357,6 +393,7 @@ class Incident extends CI_Controller
                         'PRIORITY' => $department->priority,
                         'PROCESS MONITOR' => $actionText_process_monitor,
                         'TEAM LEADER' => $names,
+                        'TEAM MEMBER' => $actionText_team_member,
                         'RISK_LEVEL' => $department->feed->risk_matrix->level,
                         'RISK_IMPACT' => $department->feed->risk_matrix->impact,
                         'RISK_LIKELIHOOD' => $department->feed->risk_matrix->likelihood,
@@ -556,6 +593,10 @@ class Incident extends CI_Controller
     <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Team Leader</td>
     <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['TEAM LEADER'] . '</td>
 </tr>';
+       $html .= '<tr>
+    <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Team Member</td>
+    <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['TEAM MEMBER'] . '</td>
+</tr>';
                 $html .= '<tr>
     <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Process Monitor</td>
     <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['PROCESS MONITOR'] . '</td>
@@ -612,11 +653,14 @@ class Incident extends CI_Controller
 
                     if ($r->ticket_status == 'Assigned') {
                         $html .= '<strong>Action :</strong> ' . htmlspecialchars($r->action) . ' (Team Leader)<br>';
+            
+                        $html .= '<strong>Team Member :</strong> ' . htmlspecialchars($r->action_for_team_member) . '<br>';
                         $html .= '<strong>Process Monitor :</strong> ' . htmlspecialchars($r->action_for_process_monitor) . '<br>';
                         $html .= '<strong>Assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
                     }
 
                     if ($r->ticket_status == 'Re-assigned') {
+                        $html .= '<strong>Team Member :</strong> ' . htmlspecialchars($r->action_for_team_member) . '<br>';
                         $html .= '<strong>Process Monitor :</strong> ' . htmlspecialchars($r->action_for_process_monitor) . '<br>';
                         $html .= '<strong>Re-assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
                     }
@@ -627,8 +671,8 @@ class Incident extends CI_Controller
                             $html .= '<strong>Tool Applied :</strong> ' . htmlspecialchars($r->rca_tool_describe) . '<br>';
                         }
 
-                        if ($r->rca_tool_describe == 'DEFAULT') {
-                            $html .= '<strong>Closure RCA :</strong> ' . htmlspecialchars($r->rootcause_describe) . '<br>';
+                     if (!empty($r->rootcause_describe)) {
+                            $html .= '<strong>RCA in brief :</strong> ' . htmlspecialchars($r->rootcause_describe) . '<br>';
                         }
 
                         if ($r->rca_tool_describe == '5WHY') {
@@ -744,12 +788,6 @@ class Incident extends CI_Controller
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-
-        // Clear any stray output buffer
-        if (ob_get_length()) {
-            ob_end_clean();
-        }
-
         $fileName = 'EF- INCIDENT REPORT - ' . $tdate . ' to ' . $fdate . '.pdf';
         $pdf->Output($fileName, 'D');
     }
@@ -802,19 +840,19 @@ class Incident extends CI_Controller
     }
 
     //addressed ticket
-    public function addressedtickets()
+    public function describetickets()
     {
         if ($this->session->userdata('isLogIn') == false)
             redirect('login');
 
         if (ismodule_active('INCIDENT') === true) {
 
-            $data['title'] = 'INC- ADDRESSED INCIDENTS';
-            $data['departments'] = $this->ticketsincidents_model->addressedtickets();
+            $data['title'] = 'INC- DESCRIBED INCIDENTS';
+            $data['departments'] = $this->ticketsincidents_model->describetickets();
             if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) {
-                $data['content'] = $this->load->view('incidentmodules/addressedtickets', $data, true);
+                $data['content'] = $this->load->view('incidentmodules/describetickets', $data, true);
             } else {
-                $data['content'] = $this->load->view('incidentmodules/dephead/addressedtickets', $data, true);
+                $data['content'] = $this->load->view('incidentmodules/dephead/describetickets', $data, true);
             }
             $this->load->view('layout/main_wrapper', $data);
             // redirect('tickets/alltickets');
@@ -1065,7 +1103,7 @@ class Incident extends CI_Controller
                     }
                 }
 
-                  // ✅ Additional Fields
+                // ✅ Additional Fields
                 $incidentTime = $data['incident_occured_in'] ?? '';
                 if (!empty($incidentTime)) {
                     $formattedIncidentTime = date('d M, Y - g:i A', strtotime($incidentTime));
@@ -1085,7 +1123,7 @@ class Incident extends CI_Controller
                     }
                 }
 
-              
+
                 $dataexport[$i]['what_went_wrong'] = $data['what_went_wrong'] ?? 'N/A';
                 $dataexport[$i]['action_taken'] = $data['action_taken'] ?? 'N/A';
 
@@ -1169,27 +1207,6 @@ class Incident extends CI_Controller
             $this->load->view('layout/main_wrapper', $data);
         }
     }
-
-       public function escalation_report()
-    {
-        if ($this->session->userdata('isLogIn') == false)
-            redirect('login');
-        if (ismodule_active('INCIDENT') === true) {
-
-            $dates = get_from_to_date();
-            $data['title'] = 'ESCALATION REPORT-INCIDENTS';
-            #-------------------------------#
-            $data['departments'] = $this->ticketsincidents_model->alltickets();
-           
-                $data['content'] = $this->load->view('incidentmodules/escalation_report', $data, true);
-           
-            $this->load->view('layout/main_wrapper', $data);
-            $this->session->set_userdata('referred_from', NULL);
-        } else {
-            redirect('dashboard/noaccess');
-        }
-    }
-
 
     public function overall_department_excel()
     {
@@ -1345,20 +1362,14 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
             if (isset($dataexport[0])) {
                 $fp = fopen('php://output', 'w');
-
-                // use first row as header
-                fputcsv($fp, $dataexport[0], ',');
-
-                // output remaining rows
-                foreach (array_slice($dataexport, 1) as $values) {
-                    if (is_array($values)) {
-                        fputcsv($fp, $values, ',');
-                    }
+                //print_r($header);
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    //print_r($values); exit;
+                    fputcsv($fp, $values, ',');
                 }
-
                 fclose($fp);
             }
-
             ob_flush();
             exit;
         } else {
@@ -1449,14 +1460,15 @@ class Incident extends CI_Controller
 
             $dataexport[$i]['row15'] = 'PATIENT DETAILS';
             $dataexport[$i]['row16'] = 'ASSIGNED TEAM LEADER';
-            $dataexport[$i]['row17'] = 'ASSIGNED PROCESS MONITOR ';
+            $dataexport[$i]['row17'] = 'ASSIGNED TEAM MEMBER';
+            $dataexport[$i]['row18'] = 'ASSIGNED PROCESS MONITOR ';
 
 
-            $dataexport[$i]['row18'] = 'INCIDENT TIMELINE & HISTORY';
+            $dataexport[$i]['row19'] = 'INCIDENT TIMELINE & HISTORY';
 
-            $dataexport[$i]['row19'] = 'CLOSED ON';
+            $dataexport[$i]['row20'] = 'CLOSED ON';
 
-            $dataexport[$i]['row20'] = 'TURN AROUND TIME';
+            $dataexport[$i]['row21'] = 'TURN AROUND TIME';
 
             // $dataexport[$i]['row13'] = 'TAT STATUS';
 
@@ -1470,40 +1482,47 @@ class Incident extends CI_Controller
 
                 foreach ($departments as $department) {
 
-                    // Step 1: Build user_id → firstname map
-                    $userss = $this->db->select('user_id, firstname')
-                        ->where('user_id !=', 1)
-                        ->get('user')
-                        ->result();
+                  // Step 1: Build user_id → firstname map
+$userss = $this->db->select('user_id, firstname')
+    ->where('user_id !=', 1)
+    ->get('user')
+    ->result();
 
-                    $userMap = [];
-                    foreach ($userss as $u) {
-                        $userMap[$u->user_id] = $u->firstname;
-                    }
+$userMap = [];
+foreach ($userss as $u) {
+    $userMap[$u->user_id] = $u->firstname;
+}
 
-                    // Step 2: Convert comma-separated IDs into arrays
-                    $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
-                        ? explode(',', $department->assign_for_process_monitor)
-                        : [];
+// Step 2: Convert comma-separated IDs into arrays
+$assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+    ? explode(',', $department->assign_for_process_monitor)
+    : [];
 
-                    $assign_to_ids = !empty($department->assign_to)
-                        ? explode(',', $department->assign_to)
-                        : [];
+$assign_to_ids = !empty($department->assign_to)
+    ? explode(',', $department->assign_to)
+    : [];
 
-                    // Step 3: Map IDs → names
-                    $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-                        return $userMap[$id] ?? $id;
-                    }, $assign_for_process_monitor_ids);
+$assign_for_team_member_ids = !empty($department->assign_for_team_member)
+    ? explode(',', $department->assign_for_team_member)
+    : []; // 🆕
 
-                    $assign_to_names = array_map(function ($id) use ($userMap) {
-                        return $userMap[$id] ?? $id;
-                    }, $assign_to_ids);
+// Step 3: Map IDs → names
+$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+    return isset($userMap[$id]) ? $userMap[$id] : $id;
+}, $assign_for_process_monitor_ids);
 
-                    // Step 4: Join into comma-separated strings
-                    $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
-                    $names = implode(', ', $assign_to_names);
+$assign_to_names = array_map(function ($id) use ($userMap) {
+    return isset($userMap[$id]) ? $userMap[$id] : $id;
+}, $assign_to_ids);
 
+$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+    return isset($userMap[$id]) ? $userMap[$id] : $id;
+}, $assign_for_team_member_ids); // 🆕
 
+// Step 4: Join into comma-separated strings
+$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+$names = implode(', ', $assign_to_names);
+$actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
 
 
 
@@ -1658,7 +1677,8 @@ class Incident extends CI_Controller
 
                     $dataexport[$i]['row15'] = $department->feed->tag_name . '(' . $department->feed->tag_patientid . ')';
                     $dataexport[$i]['row16'] = $names;
-                    $dataexport[$i]['row17'] = $actionText_process_monitor;
+                    $dataexport[$i]['row17'] = $actionText_team_member;
+                    $dataexport[$i]['row18'] = $actionText_process_monitor;
 
                     usort($department->replymessage, function ($a, $b) {
                         return strtotime($a->created_on) - strtotime($b->created_on);
@@ -1677,11 +1697,13 @@ class Incident extends CI_Controller
                         }
 
                         if ($r->ticket_status == 'Assigned') {
+                            $reply_details .= "Team Member : " . strip_tags($r->action_for_team_member) . "\n";
                             $reply_details .= "Process Monitor : " . strip_tags($r->action_for_process_monitor) . "\n";
                             $reply_details .= "Assigned by : " . strip_tags($r->message) . "\n";
                         }
 
                         if ($r->ticket_status == 'Re-assigned') {
+                            $reply_details .= "Team Member : " . strip_tags($r->action_for_team_member) . "\n";
                             $reply_details .= "Process Monitor : " . strip_tags($r->action_for_process_monitor) . "\n";
                             $reply_details .= "Re-assigned by : " . strip_tags($r->message) . "\n";
                         }
@@ -1697,8 +1719,8 @@ class Incident extends CI_Controller
                                 $reply_details .= "Tool Applied : " . strip_tags($r->rca_tool_describe) . "\n";
                             }
 
-                            if ($r->rca_tool_describe == 'DEFAULT') {
-                                $reply_details .= "Closure RCA : " . strip_tags($r->rootcause_describe) . "\n";
+                            if ($r->rootcause_describe) {
+                                $reply_details .= "RCA in brief : " . strip_tags($r->rootcause_describe) . "\n";
                             }
 
                             if ($r->rca_tool_describe == '5WHY') {
@@ -1774,14 +1796,14 @@ class Incident extends CI_Controller
                         $reply_details .= "---------------------------------------\n";
                     }
 
-                    $dataexport[$i]['row18'] = $reply_details;
+                    $dataexport[$i]['row19'] = $reply_details;
 
 
 
 
-                    $dataexport[$i]['row19'] = date('g:i a, d-m-y', strtotime($department->last_modified));
+                    $dataexport[$i]['row20'] = date('g:i a, d-m-y', strtotime($department->last_modified));
 
-                    $dataexport[$i]['row20'] = $timetaken;
+                    $dataexport[$i]['row21'] = $timetaken;
 
                     // $dataexport[$i]['row13'] = $close;
 
@@ -1811,21 +1833,22 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
 
             if (isset($dataexport[0])) {
+
                 $fp = fopen('php://output', 'w');
 
-                // use first row as header
-                fputcsv($fp, $dataexport[0], ',');
+                //print_r($header);
 
-                // output remaining rows
-                foreach (array_slice($dataexport, 1) as $values) {
-                    if (is_array($values)) {
-                        fputcsv($fp, $values, ',');
-                    }
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
                 }
 
                 fclose($fp);
             }
-
 
             ob_flush();
 
@@ -1992,22 +2015,23 @@ class Incident extends CI_Controller
 
             header('Content-Disposition: attachment;filename=' . $fileName);
 
-           if (isset($dataexport[0])) {
-    $fp = fopen('php://output', 'w');
+            if (isset($dataexport[0])) {
 
-    // use first row as header
-    fputcsv($fp, $dataexport[0], ',');
+                $fp = fopen('php://output', 'w');
 
-    // output remaining rows
-    foreach (array_slice($dataexport, 1) as $values) {
-        if (is_array($values)) {
-            fputcsv($fp, $values, ',');
-        }
-    }
+                //print_r($header);
 
-    fclose($fp);
-}
+                fputcsv($fp, $header, ',');
 
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
+                }
+
+                fclose($fp);
+            }
 
             ob_flush();
 
@@ -2174,21 +2198,22 @@ class Incident extends CI_Controller
             header('Content-Disposition: attachment;filename=' . $fileName);
 
             if (isset($dataexport[0])) {
+
                 $fp = fopen('php://output', 'w');
 
-                // use first row as header
-                fputcsv($fp, $dataexport[0], ',');
+                //print_r($header);
 
-                // output remaining rows
-                foreach (array_slice($dataexport, 1) as $values) {
-                    if (is_array($values)) {
-                        fputcsv($fp, $values, ',');
-                    }
+                fputcsv($fp, $header, ',');
+
+                foreach ($dataexport as $values) {
+
+                    //print_r($values); exit;
+
+                    fputcsv($fp, $values, ',');
                 }
 
                 fclose($fp);
             }
-
 
             ob_flush();
 
@@ -2233,4 +2258,3 @@ class Incident extends CI_Controller
         }
     }
 }
-

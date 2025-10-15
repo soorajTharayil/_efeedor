@@ -17,10 +17,15 @@
 			$nodata = true;
 			?>
 			<div class="timeline">
-				<?php foreach ($department->replymessage as $index => $r): ?>
+				<?php foreach ($department->replymessage as $index => $r): 
+				// echo '<pre>';
+					// print_r($department->status);exit;
+					$tick_status = $department->status;
+					?>
 					<div class="timeline-item">
 						<div class="timeline-badge">
 							<span><?php echo date('d M, Y', strtotime($r->created_on)); ?></span>
+
 						</div>
 						<div class="timeline-panel">
 							<div class="timeline-heading">
@@ -29,7 +34,7 @@
 							</div>
 							<div class="timeline-body">
 
-
+								<!-- <a onclick="selectAndScroll()">Edit</a> -->
 								<?php if ($r->ticket_status != 'Assigned'): ?>
 									<?php if ($r->ticket_status != 'Re-assigned'): ?>
 										<p><strong>Action:</strong> <?php echo $r->action; ?></p>
@@ -38,6 +43,9 @@
 
 								<?php if ($r->process_monitor_note) { ?>
 									<p><strong>Notes : </strong> <?php echo $r->process_monitor_note; ?></p>
+								<?php } ?>
+								<?php if ($r->team_member_note) { ?>
+									<p><strong>Notes : </strong> <?php echo $r->team_member_note; ?></p>
 								<?php } ?>
 
 
@@ -53,24 +61,65 @@
 								<?php endif; ?>
 
 								<?php if ($r->ticket_status == 'Assigned'): ?>
+									<?php
+									if (
+										ismodule_active('INCIDENT') === true &&
+										isfeature_active('IN-EDIT-RCA-INCIDENTS') === true &&
+										$tick_status != 'Closed'
+									) {
+										?>
+										<!-- Edit/Save buttons -->
+										<div class="text-end mb-2">
+											<button type="button" class="btn btn-sm btn-outline-primary"
+												onclick="selectAndScroll()">
+												<i class="fa fa-edit"></i> Edit USER
+											</button>
+										</div>
+
+										<?php
+									}
+									?>
 									<p><strong>Action:</strong> <?php echo $r->action; ?><strong>(Team Leader)</strong></p>
 
+									<p><strong>Team Member:</strong> <?php echo $r->action_for_team_member; ?></p>
 									<p><strong>Process Monitor:</strong> <?php echo $r->action_for_process_monitor; ?></p>
 									<p><strong>Assigned by:</strong> <?php echo $r->message; ?></p>
+									<p>
+										<strong>TAT due date:</strong>
+										<?php
+										if (!empty($r->assign_tat_due_date)) {
+											echo date('d M, Y - g:i A', strtotime($r->assign_tat_due_date));
+										} else {
+											echo 'N/A';
+										}
+										?>
+									</p>
 								<?php endif; ?>
 
 								<?php if ($r->ticket_status == 'Re-assigned'): ?>
 									<p><strong>Action:</strong> <?php echo $r->action; ?><strong>(Team Leader)</strong></p>
+									<p><strong>Team Member:</strong> <?php echo $r->reassign_action_for_team_member; ?></p>
 									<p><strong>Process Monitor:</strong> <?php echo $r->reassign_action_for_process_monitor; ?>
 									</p>
 									<p><strong>Re-assigned by:</strong> <?php echo $r->message; ?></p>
+									<p>
+										<strong>TAT due date:</strong>
+										<?php
+										if (!empty($r->reassign_tat_due_date)) {
+											echo date('d M, Y - g:i A', strtotime($r->reassign_tat_due_date));
+										} else {
+											echo 'N/A';
+										}
+										?>
+									</p>
+
 								<?php endif; ?>
 								<?php if ($r->ticket_status == 'Described') { ?>
 									<?php
 									if (
 										ismodule_active('INCIDENT') === true &&
 										isfeature_active('IN-EDIT-RCA-INCIDENTS') === true &&
-										$r->ticket_status != 'Closed'
+										$tick_status != 'Closed'
 									) {
 										?>
 										<!-- Edit/Save buttons -->
@@ -347,6 +396,8 @@
 										text-align: right;
 									}
 								</style>
+
+
 
 								<?php if ($r->reply && $r->ticket_status != 'Described' && $r->ticket_status != 'Transfered') { ?>
 									<p class="inbox-item-text" style="overflow: clip; word-break: break-all;font-size: 14px;">
@@ -627,6 +678,25 @@
 		}
 	}
 </style>
+<script>
+	function selectAndScroll() {
+
+		// Select "Re-assigned" option and trigger change
+		$('#changeAction').val('reassign').trigger('change');
+
+		// Scroll to element only if it exists
+		var $target = $('#changeAction'); // replace with your actual ID
+		if ($target.length) {
+			$('html, body').animate({
+				scrollTop: $target.offset().top
+			}, 800); // smooth scroll
+		} else {
+			console.warn('Target element not found:', '#targetElementId');
+		}
+	}
+
+
+</script>
 
 
 <!-- /.row -->

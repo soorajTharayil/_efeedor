@@ -234,6 +234,8 @@ if (!function_exists('getRiskColor')) {
 
 												<?php
 
+
+												// Step 1: Build user_id → firstname map
 												$userss = $this->db->select('user_id, firstname')
 													->where('user_id !=', 1)
 													->get('user')
@@ -253,19 +255,28 @@ if (!function_exists('getRiskColor')) {
 													? explode(',', $department->assign_to)
 													: [];
 
+												$assign_for_team_member_ids = !empty($department->assign_for_team_member)
+													? explode(',', $department->assign_for_team_member)
+													: []; // 🆕
+									
 												// Step 3: Map IDs → names
 												$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-													return $userMap[$id] ?? $id;
+													return isset($userMap[$id]) ? $userMap[$id] : $id;
 												}, $assign_for_process_monitor_ids);
 
 												$assign_to_names = array_map(function ($id) use ($userMap) {
-													return $userMap[$id] ?? $id;
+													return isset($userMap[$id]) ? $userMap[$id] : $id;
 												}, $assign_to_ids);
 
+												$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+													return isset($userMap[$id]) ? $userMap[$id] : $id;
+												}, $assign_for_team_member_ids); // 🆕
+									
 												// Step 4: Join into comma-separated strings
 												$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
 												$names = implode(', ', $assign_to_names);
-
+												$actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+									
 												// Normalize and map color for Risk Priority
 												$priority = str_replace('–', '-', $department->priority);
 												switch ($priority) {
@@ -306,7 +317,7 @@ if (!function_exists('getRiskColor')) {
 													echo '<div><strong>Incident Short Name : </strong> ' . htmlspecialchars($department->department->description) . '</div>';
 												}
 
-												
+
 
 												if (!empty($department->feed->other)) {
 													echo '<div><strong>Description : </strong> ' . htmlspecialchars($department->feed->other) . '</div>';
@@ -337,9 +348,9 @@ if (!function_exists('getRiskColor')) {
 												}
 
 												if (!empty($department->created_on)) {
-													echo '<div><strong>Reported On : </strong> ' 
-   . date('d M, Y - g:i A', strtotime($department->created_on)) 
-   . '</div>';
+													echo '<div><strong>Reported On : </strong> '
+														. date('d M, Y - g:i A', strtotime($department->created_on))
+														. '</div>';
 
 												}
 
@@ -350,7 +361,7 @@ if (!function_exists('getRiskColor')) {
 														. '</div>';
 												}
 
-												
+
 
 												if (!empty($level) && !empty($impact) && !empty($likelihood)) {
 													echo '<div><strong>Assigned Risk : 
@@ -360,7 +371,7 @@ if (!function_exists('getRiskColor')) {
     </div>';
 												}
 
-											
+
 
 												if (!empty($priority)) {
 													echo '<div><strong>Assigned Priority : </strong> <span style="color:'
@@ -368,7 +379,7 @@ if (!function_exists('getRiskColor')) {
 														. '; font-weight:600;">'
 														. htmlspecialchars($priority) . '</span></div>';
 												}
-													if (!empty($department->incident_type)) {
+												if (!empty($department->incident_type)) {
 													$severity = $department->incident_type;
 
 													// Map severity levels to colors
@@ -397,12 +408,17 @@ if (!function_exists('getRiskColor')) {
 
 
 												if (!empty($names)) {
-													echo '<div><strong>Team Leader : </strong> <span >'
+													echo '<div><strong>Team Leader : </strong> <span>'
 														. htmlspecialchars($names) . '</span></div>';
 												}
 
+												if (!empty($actionText_team_member)) {
+													echo '<div><strong>Team Member : </strong> <span>'
+														. htmlspecialchars($actionText_team_member) . '</span></div>';
+												}
+
 												if (!empty($actionText_process_monitor)) {
-													echo '<div><strong>Process Monitor : </strong> <span >'
+													echo '<div><strong>Process Monitor : </strong> <span>'
 														. htmlspecialchars($actionText_process_monitor) . '</span></div>';
 												}
 
@@ -412,7 +428,7 @@ if (!function_exists('getRiskColor')) {
 													echo '<div><strong>Closed On : </strong> ' . htmlspecialchars($department->last_modified) . '</div>';
 												}
 
-												
+
 
 												if (!empty($timetaken)) {
 													echo '<div><strong>TAT : </strong> ' . htmlspecialchars($timetaken) . '</div>';
@@ -507,11 +523,13 @@ if (!function_exists('getRiskColor')) {
 
 													if ($r->ticket_status == 'Assigned') {
 														echo '<div><b>Action:</b> ' . htmlspecialchars($r->action) . ' <b>(Team Leader)</b></div>';
+														echo '<div><b>Team Member:</b> ' . htmlspecialchars($r->action_for_team_member) . '</div>';
 														echo '<div><b>Process Monitor:</b> ' . htmlspecialchars($r->action_for_process_monitor) . '</div>';
 														echo '<div><b>Assigned by:</b> ' . htmlspecialchars($r->message) . '</div>';
 													}
 
 													if ($r->ticket_status == 'Re-assigned') {
+														echo '<div><b>Team Member:</b> ' . htmlspecialchars($r->action_for_team_member) . '</div>';
 														echo '<div><b>Process Monitor:</b> ' . htmlspecialchars($r->action_for_process_monitor) . '</div>';
 														echo '<div><b>Re-assigned by:</b> ' . htmlspecialchars($r->message) . '</div>';
 													}
@@ -522,8 +540,8 @@ if (!function_exists('getRiskColor')) {
 															echo '<div><b>Tool Applied:</b> ' . htmlspecialchars($r->rca_tool_describe) . '</div>';
 														}
 
-														if ($r->rca_tool_describe == 'DEFAULT') {
-															echo '<div><b>Closure RCA:</b> ' . htmlspecialchars($r->rootcause_describe) . '</div>';
+														if (!empty($r->rootcause_describe)) {
+															echo '<div><b>RCA in brief:</b> ' . htmlspecialchars($r->rootcause_describe) . '</div>';
 														}
 
 														if ($r->rca_tool_describe == '5WHY') {

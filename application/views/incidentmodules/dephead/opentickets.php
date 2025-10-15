@@ -131,9 +131,11 @@
 									<th style="width:17%;">Risk / Priority / Category</th>
 									<th style="width:15%;">Assigned to</th>
 									<th style="width:10%; text-align: center;">
-										<?php echo lang_loader('inc', 'inc_status'); ?></th>
+										<?php echo lang_loader('inc', 'inc_status'); ?>
+									</th>
 								</tr>
 							</thead>
+
 							<tbody>
 								<?php if (!empty($departments)) {
 
@@ -162,19 +164,28 @@
 											? explode(',', $department->assign_to)
 											: [];
 
+										$assign_for_team_member_ids = !empty($department->assign_for_team_member)
+											? explode(',', $department->assign_for_team_member)
+											: []; // 🆕
+							
 										// Step 3: Map IDs → names
 										$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-											return $userMap[$id] ?? $id;
+											return isset($userMap[$id]) ? $userMap[$id] : $id;
 										}, $assign_for_process_monitor_ids);
 
 										$assign_to_names = array_map(function ($id) use ($userMap) {
-											return $userMap[$id] ?? $id;
+											return isset($userMap[$id]) ? $userMap[$id] : $id;
 										}, $assign_to_ids);
 
+										$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+											return isset($userMap[$id]) ? $userMap[$id] : $id;
+										}, $assign_for_team_member_ids); // 🆕
+							
 										// Step 4: Join into comma-separated strings
 										$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
 										$names = implode(', ', $assign_to_names);
-
+										$actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+							
 
 										if ($department->status == 'Transfered') {
 											$this->db->where('ticketid', $department->id)->where('ticket_status', 'Transfered');
@@ -454,9 +465,13 @@
 												<b><strong> Team Leader :</strong></b>
 												<?php echo !empty($names) ? $names : 'Unassigned'; ?><br>
 
-												<b><strong> Process Monitor :</strong></b>
-												<?php echo !empty($actionText_process_monitor) ? $actionText_process_monitor : 'Unassigned'; ?>
+												<!-- <b><strong> Team Member :</strong></b>
+												<?php echo !empty($actionText_team_member) ? $actionText_team_member : 'Unassigned'; ?><br> -->
+
+												<!-- <b><strong> Process Monitor :</strong></b>
+												<?php echo !empty($actionText_process_monitor) ? $actionText_process_monitor : 'Unassigned'; ?> -->
 											</td>
+
 
 
 
@@ -482,66 +497,70 @@
 											<?php } ?>
 
 											<?php
-											// Set default values for $tool and $color
-											$tool = '';
-											$color = 'btn-info'; // Default to a Bootstrap class if status doesn't match
-											$tooldelete = 'Click to delete the incident.';
-											// Determine the tooltip and color based on the department status
-											if ($department->status == 'Addressed') {
-												$tool = 'Click to close this ticket.';
-												$color = 'btn-warning';
-											} elseif ($department->status == 'Open') {
-												$tool = 'Click to change the status.';
-												$color = 'btn-danger';
-												$status_icon = 'fa fa-envelope-open-o';
-											} elseif ($department->status == 'Rejected') {
-												$tool = 'Click to change the status.';
-												$color = 'btn-yellow'; // Changed color to btn-yellow for Rejected
-												$status_icon = 'fa fa-reply';
-											} elseif ($department->status == 'Closed') {
-												$tool = 'Ticket is closed';
-												$color = 'btn-success';
-												$status_icon = 'fa fa-check-circle';
-											} elseif ($department->status == 'Reopen') {
-												$tool = 'Click to close this ticket.';
-												$color = 'btn-primary';
-											} elseif ($department->status == 'Transfered') {
-												$tool = 'Click to close this ticket.';
-												$color = 'btn-info';
-											} elseif ($department->status == 'Assigned') {
-												$tool = 'Click to change the status.';
-												$color = 'btn-orange'; // Added this condition for Assigned
-												$status_icon = 'fa fa-hand-paper-o';
-											} elseif ($department->status == 'Re-assigned') {
-												$tool = 'Click to change the status.';
-												$color = 'btn-bluee'; // Added this condition for Assigned
-												$status_icon = '';
-											} elseif ($department->status == 'Described') {
-												$tool = 'Click to change the status.';
-												$color = 'btn-reddd'; // Added this condition for Assigned
-												$status_icon = '';
-											} else {
-												$tool = 'Unknown status';
-												$color = 'btn-info';
-											}
-											?>
+                                            // Set default values for $tool and $color
+                                            $tool = '';
+                                            $color = 'btn-info'; // Default to a Bootstrap class if status doesn't match
+                                            $tooldelete = 'Click to delete the incident.';
+                                            // Determine the tooltip and color based on the department status
+                                            if ($department->status == 'Addressed') {
+                                                $tool = 'Click to close this ticket.';
+                                                $color = 'btn-warning';
+                                            } elseif ($department->status == 'Open') {
+                                                $tool = 'Click to change the status.';
+                                                $color = 'btn-danger';
+                                                $tick_status = 'Open';
+                                                $status_icon = 'fa fa-envelope-open-o';
+                                            } elseif ($department->status == 'Rejected') {
+                                                $tool = 'Click to change the status.';
+                                                $tick_status = 'Rejected';
+                                                $color = 'btn-yellow'; // Changed color to btn-yellow for Rejected
+                                                $status_icon = 'fa fa-reply';
+                                            } elseif ($department->status == 'Closed') {
+                                                $tool = 'Ticket is closed';
+                                                $tick_status = 'Closed';
+                                                $color = 'btn-success';
+                                                $status_icon = 'fa fa-check-circle';
+                                            } elseif ($department->status == 'Reopen') {
+                                                $tool = 'Click to close this ticket.';
+                                                $tick_status = 'Reopen';
+                                                $color = 'btn-primary';
+                                            } elseif ($department->status == 'Transfered') {
+                                                $tool = 'Click to close this ticket.';
+                                                $tick_status = 'Transfered';
+                                                $color = 'btn-info';
+                                            } elseif ($department->status == 'Assigned') {
+                                                $tool = 'Click to change the status.';
+                                                $tick_status = 'Assigned';
+                                                $color = 'btn-orange'; // Added this condition for Assigned
+                                                $status_icon = 'fa fa-hand-paper-o';
+                                            } elseif ($department->status == 'Re-assigned') {
+                                                $tool = 'Click to change the status.';
+                                                $tick_status = 'Assigned';
+                                                $color = 'btn-orange'; // Added this condition for Assigned
+                                                $status_icon = 'fa fa-hand-paper-o';
+                                            } elseif ($department->status == 'Described') {
+                                                $tool = 'Click to change the status.';
+                                                $tick_status = 'Described';
+                                                $color = 'btn-reddd'; // Added this condition for Assigned
+                                                $status_icon = '';
+                                            } else {
+                                                $tool = 'Unknown status';
+                                                $color = 'btn-info';
+                                            }
+                                            ?>
 
 											<td style="vertical-align: middle; padding: 5px;">
-												<div
-													style="display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%;">
+												<div style="display: flex; align-items: center; gap: 10px; width: 100%;">
 													<!-- 1st Button (Status) -->
 													<?php if ($department->status != 'Verified') { ?>
 														<a style="font-size: 17px; width: 140px;"
 															href="<?php echo base_url($this->uri->segment(1) . "/track/$department->id") ?>"
 															data-placement="bottom" data-toggle="tooltip" title="<?php echo $tool; ?>"
 															class="btn btn-sm btn-block <?php echo $color; ?>">
-															<?php echo $department->status; ?> <i
-																style="font-size:15px;margin-left:5px;"
+															<?php echo $tick_status; ?>
+															<i style="font-size:15px;margin-left:5px;"
 																class="<?php echo $status_icon; ?>"></i>
 														</a>
-													<?php } else { ?>
-														<!-- Keep an empty placeholder for alignment -->
-														<div style="width: 140px;"></div>
 													<?php } ?>
 
 													<!-- 2nd Button (Verified Icon) -->
@@ -549,9 +568,6 @@
 														<i style="font-size: 25px; color: green;" class="fa fa-check-circle-o"
 															data-toggle="tooltip" data-placement="bottom"
 															title="Incident is verified"></i>
-													<?php } else { ?>
-														<!-- Placeholder for alignment -->
-														<div style="width: 25px;"></div>
 													<?php } ?>
 
 													<!-- 3rd Button (Delete Icon) -->
@@ -567,9 +583,9 @@
 														</a>
 														<?php echo form_close(); ?>
 													<?php } ?>
-
 												</div>
 											</td>
+
 
 										</tr>
 										<?php $sl++; ?>
@@ -622,7 +638,6 @@
 		var url = "<?php echo base_url($this->uri->segment(1) . '/opentickets?depsec_assigned_risk=') ?>" + type;
 		window.location.href = url;
 	}
-
 </script>
 <style>
 	.btn-orange {
@@ -659,5 +674,4 @@
 			document.getElementById('deleteForm_' + id).submit();
 		}
 	}
-
 </script>

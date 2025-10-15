@@ -58,6 +58,7 @@ foreach ($users as $user) {
             // echo '</pre>';
             // exit;
             
+
             // Step 1: Build user_id → firstname map
             $userss = $this->db->select('user_id, firstname')
                 ->where('user_id !=', 1)
@@ -78,19 +79,28 @@ foreach ($users as $user) {
                 ? explode(',', $department->assign_to)
                 : [];
 
+            $assign_for_team_member_ids = !empty($department->assign_for_team_member)
+                ? explode(',', $department->assign_for_team_member)
+                : []; // 🆕
+            
             // Step 3: Map IDs → names
             $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-                return $userMap[$id] ?? $id;
+                return isset($userMap[$id]) ? $userMap[$id] : $id;
             }, $assign_for_process_monitor_ids);
 
             $assign_to_names = array_map(function ($id) use ($userMap) {
-                return $userMap[$id] ?? $id;
+                return isset($userMap[$id]) ? $userMap[$id] : $id;
             }, $assign_to_ids);
 
+            $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+                return isset($userMap[$id]) ? $userMap[$id] : $id;
+            }, $assign_for_team_member_ids); // 🆕
+            
             // Step 4: Join into comma-separated strings
             $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
             $names = implode(', ', $assign_to_names);
-
+            $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+            
             // Debug output
             
 
@@ -361,6 +371,16 @@ foreach ($users as $user) {
                                 </td>
                             </tr>
                         <?php } ?>
+
+                        <?php if ($actionText_team_member) { ?>
+                            <tr>
+                                <td><strong>Assigned team member</strong></td>
+                                <td>
+                                    <?php echo $actionText_team_member; ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
                         <?php if ($actionText_process_monitor) { ?>
                             <tr>
                                 <td><strong>Assigned process monitor</strong></td>
@@ -568,7 +588,7 @@ foreach ($users as $user) {
                                 <?php //if (($this->session->userdata['user_role'] == 4 && $this->session->userdata['email'] == $department->department->email) || $this->session->userdata['user_role'] <= 3) { 
                                     ?>
                                 <select class="form-control" onchange="ticket_options(this.value)"
-                                    style="max-width: 300px;" required>
+                                    style="max-width: 300px;" id="changeAction" required>
                                     <option value="<?php echo $department->status; ?>" selected>
                                         <?php echo $department->status; ?>
                                     </option>
@@ -689,7 +709,7 @@ foreach ($users as $user) {
 
         <div class="col-sm-12">
             <div class="form-group row">
-                <textarea class="form-control" rows="5"  id="comment" name="process_monitor_note"
+                <textarea class="form-control" rows="5" minlength="15" id="comment" name="process_monitor_note"
                     placeholder="Add notes" required></textarea>
                 <input type="hidden" name="reply_by" value="Admin">
                 <input type="hidden" name="status" value="Monitor">
@@ -711,6 +731,47 @@ foreach ($users as $user) {
         <?php } ?>
         <?php } ?>
         <?php } ?>
+
+        <?php
+        $assignedUserss = explode(',', $department->assign_for_team_member); // convert to array
+        $currentUserIds = $this->session->userdata('user_id');
+
+        if (in_array($currentUserIds, $assignedUserss)) { ?>
+        <?php if ($department->status != 'Closed') { ?>
+        <?php if ($this->session->userdata['isLogIn'] == true) { ?>
+        <?php echo form_open('ticketsincident/create', 'class="form-inner"') ?>
+        <?php echo form_hidden('id', $department->id) ?>
+        <div class="form-group row">
+            <!-- <label for="name" class="col-xs-3 col-form-label">Addressed</label> -->
+            <!-- <div class="col-xs-9"> -->
+            <!-- </div> -->
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group row">
+                <textarea class="form-control" rows="5" minlength="15" id="comment" name="team_member_note"
+                    placeholder="Add notes" required></textarea>
+                <input type="hidden" name="reply_by" value="Admin">
+                <input type="hidden" name="status" value="Member">
+            </div>
+        </div>
+
+        <br>
+        <!--Radio-->
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <div class="ui buttons">
+                    <button class="ui positive button">
+                        <?php echo lang_loader('inc', 'inc_submit'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php echo form_close() ?>
+        <?php } ?>
+        <?php } ?>
+        <?php } ?>
+
 
 
         <?php if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true && ($department->status == 'Closed')) {
@@ -737,7 +798,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5"  id="comment" name="reply"
+                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
                                 placeholder="Reason to reopen incident" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Reopen">
@@ -777,7 +838,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5"  id="comment" name="reply"
+                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
                                 placeholder="Reason for verifying incident" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Verified">
@@ -825,7 +886,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5"  id="comment" name="reply"
+                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
                                 placeholder="Please enter your initial response message" required></textarea>
                             <input type="hidden" name="reply_by" value="Admin">
                             <input type="hidden" name="status" value="Addressed">
@@ -865,7 +926,7 @@ foreach ($users as $user) {
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group row">
-                            <textarea class="form-control" rows="5"  id="comment" name="reply"
+                            <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
                                 placeholder="Please enter your input here" required></textarea>
                             <input type="hidden" name="rejected_by" value="Admin">
                             <input type="hidden" name="status" value="Rejected">
@@ -953,7 +1014,7 @@ foreach ($users as $user) {
                     <div id="rca_DEFAULT">
                         <div class="col-sm-12" style="margin-bottom:21px;">
                             <br>
-                            <textarea class="form-control" style="margin-left: -16px;" rows="5" 
+                            <textarea class="form-control" style="margin-left: -16px;" rows="5" minlength="15"
                                 id="rootcause" name="rootcause"
                                 placeholder="Enter the Root Cause Analysis (RCA) for incident closure:"
                                 required></textarea>
@@ -1081,7 +1142,7 @@ foreach ($users as $user) {
                 <!-- <div class="col-sm-12">
                     <div class="form-group " id="correctiveid">
                         <br>
-                        <textarea class="form-control" rows="5"  id="corrective" name="corrective"
+                        <textarea class="form-control" rows="5" minlength="15" id="corrective" name="corrective"
                             placeholder="Enter the Corrective Action for incident closure:" required></textarea>
 
                         <input type="hidden" name="status" value="Closed">
@@ -1090,7 +1151,7 @@ foreach ($users as $user) {
                 <div class="col-sm-12">
                     <div class="form-group " id="correctiveid">
 
-                        <textarea class="form-control" rows="5"  id="preventive" name="preventive"
+                        <textarea class="form-control" rows="5" minlength="15" id="preventive" name="preventive"
                             placeholder="Enter the Preventive Action for incident closure:" required></textarea>
 
                        
@@ -1166,7 +1227,7 @@ foreach ($users as $user) {
                     <label for="name"
                         class="col-xs-3 col-form-label"><?php echo lang_loader('inc', 'inc_comment'); ?></label>
                     <div class="col-xs-9">
-                        <textarea class="form-control" rows="5"  id="comment" name="reply"
+                        <textarea class="form-control" rows="5" minlength="15" id="comment" name="reply"
                             placeholder="Enter the reason for incident transfer" required></textarea>
                         <input type="hidden" name="reply_by" value="Admin">
                         <input type="hidden" name="reply_departmen"
@@ -1196,7 +1257,10 @@ foreach ($users as $user) {
                 <?php echo form_hidden('feedbackid', $department->feedbackid) ?>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Select Team Leader to input RCA/ CAPA</label>
+                    <label for="name" class="col-xs-3 col-form-label">Select Team Leader to input RCA/ CAPA <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList">
@@ -1206,18 +1270,51 @@ foreach ($users as $user) {
                                     id="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     name="users[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
                                     checked>
                                 <label for="user_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
+
+                <!-- 🟩 NEW TEAM MEMBER SECTION -->
+                <div class="form-group row">
+                    <label for="name" class="col-xs-3 col-form-label">Select Team Members to monitor incident <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
+                    <div class="col-xs-9">
+                        <input type="text" id="userSearch_tm" class="form-control"
+                            placeholder="Search for team members..">
+                        <div class="checkbox-container" id="userList_tm">
+                            <?php foreach ($users as $user): ?>
+                            <div class="checkbox">
+                                <input type="checkbox"
+                                    id="user_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    name="users_for_team_member[]"
+                                    value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    checked>
+                                <label
+                                    for="user_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                </label>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident</label>
+                        incident <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_pm" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_pm">
@@ -1227,10 +1324,11 @@ foreach ($users as $user) {
                                     id="user_for_process_monitor<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     name="users_for_process_monitor[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
                                     checked>
                                 <label
                                     for="user_for_process_monitor<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>
@@ -1239,7 +1337,10 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
                             placeholder="Your inputs here"></textarea>
@@ -1247,6 +1348,56 @@ foreach ($users as $user) {
 
                     </div>
                 </div> <!--Radio-->
+                <div class="form-group row" style="margin-top: 15px;">
+                    <label for="due_date" class="col-xs-3">TAT Due Date <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
+                    <div class="col-xs-9">
+                        <input type="datetime-local" class="form-control" id="assign_due_date" name="assign_due_date"
+                            value="" required onclick="this.showPicker && this.showPicker();">
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Get current date/time
+                        const now = new Date();
+
+                        // Add 48 hours (2 days)
+                        const futureDate = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+                        // Format as "YYYY-MM-DDTHH:MM" for datetime-local input
+                        function formatDateTime(date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const hours = String(date.getHours()).padStart(2, '0');
+                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                            return `${year}-${month}-${day}T${hours}:${minutes}`;
+                        }
+
+                        const formattedFuture = formatDateTime(futureDate);
+                        const formattedNow = formatDateTime(now);
+
+                        // Get input field
+                        const field = document.getElementById('assign_due_date');
+
+                        if (field) {
+                            // Set default value to +48 hours
+                            field.value = formattedFuture;
+
+                            // Disable past dates
+                            field.min = formattedNow;
+                        }
+                    });
+                </script>
+
+
+
+
+                <!-- Include Font Awesome for calendar icon -->
+
                 <div class="form-group row">
                     <div class="col-sm-offset-3 col-sm-6">
                         <div class="ui buttons"> <button
@@ -1275,22 +1426,37 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">
-                        Select Team Leader(s) for RCA/ CAPA
+                        Select Team Leader(s) for RCA/ CAPA <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a>
                     </label>
                     <div class="col-xs-9" style="position: relative;">
                         <input type="text" id="userSearch_reassign" class="form-control"
                             placeholder="Search for names..">
 
+                        <?php
+                        $assign_source = !empty($department->reassign_to) ? $department->reassign_to : $department->assign_to;
+                        $preselected_users_assign_to = explode(',', $assign_source); // IDs of users to pre-select
+            
+                        ?>
+                        <?php foreach ($preselected_users_assign_to as $oldUserId): ?>
+                        <input type="hidden" name="users_reassign[]"
+                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php endforeach; ?>
                         <div class="checkbox-container" id="userList_reassign">
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
                                 <input type="checkbox"
                                     id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     name="users_reassign[]"
-                                    value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                    value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked' : ''; ?>>
+
                                 <label
                                     for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>
@@ -1298,22 +1464,72 @@ foreach ($users as $user) {
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="name" class="col-xs-3 col-form-label">
+                        Select Team Member to monitor incident <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a>
+                    </label>
+                    <div class="col-xs-9" style="position: relative;">
+                        <input type="text" id="userSearch_reassign_tm" class="form-control"
+                            placeholder="Search for team members..">
+
+                        <div class="checkbox-container" id="userList_reassign_tm">
+                            <?php
+                            $assign_source = !empty($department->reassign_for_team_member) ? $department->reassign_for_team_member : $department->assign_for_team_member;
+                            $preselected_users_assign_for_team_member = explode(',', $assign_source);
+                            ?>
+                            <?php foreach ($preselected_users_assign_for_team_member as $oldUserId): ?>
+                            <input type="hidden" name="users_reassign_for_team_member[]"
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                            <?php endforeach; ?>
+                            <?php foreach ($users as $user): ?>
+                            <div class="checkbox">
+                                <input type="checkbox"
+                                    id="user_reassign_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    name="users_reassign_for_team_member[]"
+                                    value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_team_member) ? 'checked' : ''; ?>>
+                                <label
+                                    for="user_reassign_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                </label>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident</label>
+                        incident <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_reassign_pm" class="form-control"
                             placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_reassign_pm">
+                            <?php
+                            $assign_source = !empty($department->reassign_for_process_monitor) ? $department->reassign_for_process_monitor : $department->assign_for_process_monitor;
+                            $preselected_users_assign_for_process_monitor = explode(',',$assign_source); // IDs of users to pre-select
+                            ?>
+                            <?php foreach ($preselected_users_assign_for_process_monitor as $oldUserId): ?>
+                            <input type="hidden" name="users_reassign_for_process_monitor[]"
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                            <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
                                 <input type="checkbox"
                                     id="user_reassign_for_process_monitor<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     name="users_reassign_for_process_monitor[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
-                                    checked>
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_process_monitor) ? 'checked' : ''; ?>>
                                 <label
                                     for="user_reassign_for_process_monitor<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
                                 </label>
                             </div>
                             <?php endforeach; ?>
@@ -1322,14 +1538,62 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
-                            placeholder="Your inputs here"></textarea>
+                            placeholder="Your inputs here"><?php echo $department->replymessage[0]->reply; ?></textarea>
                         <input type="hidden" name="status" value="Re-assigned">
 
                     </div>
                 </div> <!--Radio-->
+                <div class="form-group row" style="margin-top: 15px;">
+                    <label for="due_date" class="col-xs-3">TAT Due Date <a
+									href="javascript:void()" data-toggle="tooltip"
+									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+										aria-hidden="true"></i></i></a></label>
+                    <div class="col-xs-9">
+                        <input type="datetime-local" class="form-control" id="reassign_due_date"
+                            name="reassign_due_date" value="" required onclick="this.showPicker && this.showPicker();">
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Get current date/time
+                        const now = new Date();
+
+                        // Add 48 hours (2 days)
+                        const futureDate = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+                        // Format as "YYYY-MM-DDTHH:MM" for datetime-local input
+                        function formatDateTime(date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const hours = String(date.getHours()).padStart(2, '0');
+                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                            return `${year}-${month}-${day}T${hours}:${minutes}`;
+                        }
+
+                        const formattedFuture = formatDateTime(futureDate);
+                        const formattedNow = formatDateTime(now);
+
+                        // Get input field
+                        const field = document.getElementById('reassign_due_date');
+
+                        if (field) {
+                            // Set default value to +48 hours
+                            field.value = formattedFuture;
+
+                            // Disable past dates
+                            field.min = formattedNow;
+                        }
+                    });
+                </script>
+
                 <div class="form-group row">
                     <div class="col-sm-offset-3 col-sm-6">
                         <div class="ui buttons"> <button
@@ -1357,8 +1621,7 @@ foreach ($users as $user) {
 
                     <div class="col-sm-12" style="margin-bottom:10px;">
                         <br>
-                        <textarea class="form-control" rows="5"  id="rootcause_describe"
-                            name="rootcause_describe"
+                        <textarea class="form-control" rows="5" id="rootcause_describe" name="rootcause_describe"
                             placeholder="Enter the Root Cause Analysis (RCA) for incident in brief:"
                             required></textarea>
                     </div>
@@ -1424,7 +1687,7 @@ foreach ($users as $user) {
                     <!-- <div id="rca_DEFAULT_describe">
                         <div class="col-sm-12" style="margin-bottom:30px;margin-left:-25px;">
                             <br>
-                            <textarea class="form-control" rows="5"  id="rootcause_describe"
+                            <textarea class="form-control" rows="5" minlength="15" id="rootcause_describe"
                                 name="rootcause_describe"
                                 placeholder="Enter the Root Cause Analysis (RCA) for incident closure:"
                                 required></textarea>
@@ -1575,16 +1838,16 @@ foreach ($users as $user) {
             <div class="col-sm-12">
                 <div class="form-group " id="correctiveid">
                     <br>
-                    <textarea class="form-control" rows="5"  id="corrective_describe"
-                        name="corrective_describe" placeholder="Enter the Corrective Action" required></textarea>
+                    <textarea class="form-control" rows="5" id="corrective_describe" name="corrective_describe"
+                        placeholder="Enter the Corrective Action" required></textarea>
 
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group " id="correctiveid">
 
-                    <textarea class="form-control" rows="5"  id="preventive_describe"
-                        name="preventive_describe" placeholder="Enter the Preventive Action" required></textarea>
+                    <textarea class="form-control" rows="5" id="preventive_describe" name="preventive_describe"
+                        placeholder="Enter the Preventive Action" required></textarea>
 
                     <input type="hidden" name="status" value="Described">
                 </div>
@@ -1637,7 +1900,12 @@ foreach ($users as $user) {
 ?>
 <?php if ($this->session->userdata('isLogIn') == true) { ?>
 <?php if ($department->status == 'Closed' || $department->status == 'Reopen' || $department->status == 'Addressed' || $department->status == 'Transfered' || $department->status == 'Rejected' || $department->status == 'Assigned' || $department->status == 'Described' || $department->status == 'Verified' || $department->status == 'Re-assigned') { ?>
-<?php include 'ticket_convo.php'; ?>
+
+<?php
+                $department->reply[0] = $department->reply[count($department->reply) - 1];
+                include 'ticket_convo.php';
+
+                ?>
 
 <?php } ?>
 <?php } ?>
@@ -1647,6 +1915,56 @@ foreach ($users as $user) {
 
 
 </div>
+
+
+
+
+<style>
+    .checkbox-container {
+        display: none;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+        background: #fff;
+        position: absolute;
+        z-index: 1000;
+        width: 100%;
+    }
+
+    .checkbox {
+        margin: 0;
+        padding: 5px 8px;
+        cursor: pointer;
+    }
+
+    .checkbox:hover {
+        background: #f1f1f1;
+    }
+
+    .selected-users {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .tag {
+        background: #007bff;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 16px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+    }
+
+    .tag span {
+        margin-left: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
 
 
 <style>
@@ -1798,125 +2116,10 @@ foreach ($users as $user) {
 </style>
 
 <script>
-    const searchInput = document.getElementById('userSearch_reassign');
-    const container = document.getElementById('userList_reassign');
-    const checkboxes = container.getElementsByClassName('checkbox');
-    const selectedContainer = document.createElement("div");
-    selectedContainer.classList.add("selected-users");
-    searchInput.parentNode.appendChild(selectedContainer);
-
-    // Filter on keyup
-    searchInput.addEventListener('keyup', function () {
-        var filter = this.value.toLowerCase();
-        var anyVisible = false;
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            var label = checkboxes[i].getElementsByTagName('label')[0];
-            var text = label.textContent || label.innerText;
-
-            if (text.toLowerCase().indexOf(filter) > -1 && filter !== "") {
-                checkboxes[i].style.display = '';
-                anyVisible = true;
-            } else {
-                checkboxes[i].style.display = 'none';
-            }
-        }
-
-        container.style.display = (anyVisible ? 'block' : 'none');
-    });
-
-    // Handle selecting users
-    container.addEventListener('change', function (e) {
-        if (e.target && e.target.type === "checkbox") {
-            const label = e.target.nextElementSibling.innerText.trim();
-
-            if (e.target.checked) {
-                // Add tag below input
-                const tag = document.createElement("div");
-                tag.classList.add("tag");
-                tag.dataset.userId = e.target.value;
-                tag.innerHTML = label + " <span>&times;</span>";
-                selectedContainer.appendChild(tag);
-
-                // Allow removing tag
-                tag.querySelector("span").addEventListener("click", () => {
-                    tag.remove();
-                    e.target.checked = false;
-                });
-            } else {
-                // Remove tag if unchecked
-                const tag = selectedContainer.querySelector(`.tag[data-user-id="${e.target.value}"]`);
-                if (tag) tag.remove();
-            }
-
-            // Clear search input & keep it ready for next search
-            searchInput.value = "";
-            container.style.display = 'none';
-        }
-    });
-
-    // Hide dropdown when clicking outside
-    document.addEventListener('click', function (e) {
-        if (!container.contains(e.target) && e.target !== searchInput) {
-            container.style.display = 'none';
-        }
-    });
-</script>
-
-
-
-
-<style>
-    .checkbox-container {
-        display: none;
-        max-height: 200px;
-        overflow-y: auto;
-        border: 1px solid #ccc;
-        margin-top: 5px;
-        background: #fff;
-        position: absolute;
-        z-index: 1000;
-        width: 100%;
-    }
-
-    .checkbox {
-        margin: 0;
-        padding: 5px 8px;
-        cursor: pointer;
-    }
-
-    .checkbox:hover {
-        background: #f1f1f1;
-    }
-
-    .selected-users {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    .tag {
-        background: #007bff;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 16px;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-    }
-
-    .tag span {
-        margin-left: 8px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-</style>
-
-<script>
     function enableMultiSelect(searchId, listId) {
         const searchInput = document.getElementById(searchId);
         const container = document.getElementById(listId);
+        if (!searchInput || !container) return; // safety check if element not found
         const checkboxes = container.getElementsByClassName('checkbox');
 
         // Create tag container
@@ -1926,14 +2129,16 @@ foreach ($users as $user) {
 
         // Filter on keyup
         searchInput.addEventListener('keyup', function () {
-            var filter = this.value.toLowerCase();
-            var anyVisible = false;
+            const filter = this.value.toLowerCase();
+            let anyVisible = false;
 
-            for (var i = 0; i < checkboxes.length; i++) {
-                var label = checkboxes[i].getElementsByTagName('label')[0];
-                var text = label.textContent || label.innerText;
+            for (let i = 0; i < checkboxes.length; i++) {
+                const checkbox = checkboxes[i].getElementsByTagName('input')[0];
+                const email = (checkbox.getAttribute("data-email") || "").toLowerCase();
+                const label = checkboxes[i].getElementsByTagName('label')[0];
+                const text = (label.textContent || "").toLowerCase();
 
-                if (text.toLowerCase().indexOf(filter) > -1 && filter !== "") {
+                if ((text.includes(filter) || email.includes(filter)) && filter !== "") {
                     checkboxes[i].style.display = '';
                     anyVisible = true;
                 } else {
@@ -1944,7 +2149,7 @@ foreach ($users as $user) {
             container.style.display = (anyVisible ? 'block' : 'none');
         });
 
-        // Handle selecting users
+        // Handle selecting users (add/remove tags)
         container.addEventListener('change', function (e) {
             if (e.target && e.target.type === "checkbox") {
                 const label = e.target.nextElementSibling.innerText.trim();
@@ -1968,7 +2173,7 @@ foreach ($users as $user) {
                     if (tag) tag.remove();
                 }
 
-                // Clear search input
+                // Clear search box & hide list
                 searchInput.value = "";
                 container.style.display = 'none';
             }
@@ -1982,8 +2187,95 @@ foreach ($users as $user) {
         });
     }
 
-    // Enable multi-select for all your inputs
-    enableMultiSelect("userSearch", "userList");
-    enableMultiSelect("userSearch_pm", "userList_pm");
-    enableMultiSelect("userSearch_reassign_pm", "userList_reassign_pm");
+    // ✅ Initialize for all your selectors
+    enableMultiSelect("userSearch", "userList");                // Team Leader
+    enableMultiSelect("userSearch_tm", "userList_tm");          // Team Member
+    enableMultiSelect("userSearch_pm", "userList_pm");          // Process Monitor
+    //enableMultiSelect("userSearch_reassign", "userList_reassign"); // Reassign
+    //enableMultiSelect("userSearch_reassign_pm", "userList_reassign_pm"); // Reassign (PM)
+    //enableMultiSelect("userSearch_reassign_tm", "userList_reassign_tm");
+
+</script>
+<script>
+    function enableMultiSelectAll(searchId, listId) {
+        const searchInput = document.getElementById(searchId);
+        const container = document.getElementById(listId);
+        if (!searchInput || !container) return;
+        const checkboxes = container.getElementsByClassName('checkbox');
+
+        // Create tag container
+        const selectedContainer = document.createElement("div");
+        selectedContainer.classList.add("selected-users");
+        searchInput.parentNode.appendChild(selectedContainer);
+
+        // Preselect checked checkboxes on load
+        for (let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i].getElementsByTagName('input')[0];
+            if (checkbox.checked) {
+                createTag(checkbox, selectedContainer);
+            }
+        }
+
+        // Filter on keyup
+        searchInput.addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            let anyVisible = false;
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                const checkbox = checkboxes[i].getElementsByTagName('input')[0];
+                const email = (checkbox.getAttribute("data-email") || "").toLowerCase();
+                const label = checkboxes[i].getElementsByTagName('label')[0];
+                const text = (label.textContent || "").toLowerCase();
+
+                if ((text.includes(filter) || email.includes(filter)) && filter !== "") {
+                    checkboxes[i].style.display = '';
+                    anyVisible = true;
+                } else {
+                    checkboxes[i].style.display = 'none';
+                }
+            }
+            container.style.display = (anyVisible ? 'block' : 'none');
+        });
+
+        // Handle selecting/unselecting users
+        container.addEventListener('change', function (e) {
+            if (e.target && e.target.type === "checkbox") {
+                if (e.target.checked) {
+                    createTag(e.target, selectedContainer);
+                } else {
+                    const tag = selectedContainer.querySelector(`.tag[data-user-id="${e.target.value}"]`);
+                    if (tag) tag.remove();
+                }
+                searchInput.value = "";
+                container.style.display = 'none';
+            }
+        });
+
+        // Hide dropdown on outside click
+        document.addEventListener('click', function (e) {
+            if (!container.contains(e.target) && e.target !== searchInput) {
+                container.style.display = 'none';
+            }
+        });
+    }
+
+    // Helper to create a tag for a checkbox
+    function createTag(checkbox, container) {
+        const label = checkbox.nextElementSibling.innerText.trim();
+        const tag = document.createElement("div");
+        tag.classList.add("tag");
+        tag.dataset.userId = checkbox.value;
+        tag.innerHTML = label + " <span>&times;</span>";
+        container.appendChild(tag);
+
+        tag.querySelector("span").addEventListener("click", () => {
+            tag.remove();
+            checkbox.checked = false;
+        });
+    }
+
+    // Initialize
+    enableMultiSelectAll("userSearch_reassign", "userList_reassign");
+    enableMultiSelectAll("userSearch_reassign_pm", "userList_reassign_pm"); // Reassign (PM)
+    enableMultiSelectAll("userSearch_reassign_tm", "userList_reassign_tm");
 </script>

@@ -24,18 +24,18 @@
             <!--  table area -->
             <div class="col-lg-12">
                 <div class="panel panel-default ">
-                <div class="panel-heading" style="text-align: right;">
+                    <div class="panel-heading" style="text-align: right;">
                         <div class="btn-group">
                             <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
                                 title="Incident form"
-                                href="<?php echo base_url('imf?user_id=' . $this->session->userdata['user_id']); ?>"
+                                href="<?php echo base_url($this->uri . '/inn?user_id=' . $this->session->userdata['user_id']); ?>"
                                 target="_blank">
                                 <i class="fa fa-pencil"></i> Report incidents
                             </a>
 
                         </div>
                         <div class="btn-group">
-                            <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" 
+                            <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
                                 title="<?php echo lang_loader('inc', 'inc_download_all_incident_report'); ?>"
                                 href="<?php echo base_url($this->uri->segment(1)) . '/download_' . ($this->uri->segment(2)) ?>">
                                 <i class="fa fa-file-text"></i>
@@ -86,8 +86,8 @@
                                             <?php } ?>
                                         </select>
                                     <?php } ?>
-                                       <select name="depsec_assigned_risk" class="form-control" id="subsecid" onchange="gotonextdepartment_assigned_risk(this.value)" style="width:200px; margin:0px 0px 20px 20px;">
-                                    <option value="1" selected>Assigned Risk</option>
+                                    <select name="depsec_assigned_risk" class="form-control" id="subsecid" onchange="gotonextdepartment_assigned_risk(this.value)" style="width:200px; margin:0px 0px 20px 20px;">
+                                        <option value="1" selected>Assigned Risk</option>
                                         <?php
                                         $this->db->order_by('title');
                                         $query = $this->db->get('assigned_risk');
@@ -103,9 +103,9 @@
 
                                         <?php } ?>
                                     </select>
-                                  
+
                                     <select name="dep" class="form-control" id="subsecid" onchange="gotonextdepartment_priority(this.value)" style="width:200px; margin:0px 0px 20px 20px;">
-                                    <option value="1" selected>Action Priority</option>
+                                        <option value="1" selected>Action Priority</option>
                                         <?php
                                         $this->db->order_by('title');
                                         $query = $this->db->get('priority');
@@ -122,7 +122,7 @@
                                         <?php } ?>
                                     </select>
                                     <select name="dep" class="form-control" id="subsecid" onchange="gotonextdepartment_severity(this.value)" style="width:200px; margin:0px 0px 20px 20px;">
-                                    <option value="1" selected>Incident Category</option>
+                                        <option value="1" selected>Incident Category</option>
                                         <?php
                                         $this->db->order_by('title');
 
@@ -146,7 +146,7 @@
 
                         <table class="incticketsall table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                             <thead>
-                             <tr>
+                                <tr>
                                     <th style="width:5%"><?php echo lang_loader('inc', 'inc_slno'); ?></th>
                                     <th style="width:20%;">Incident details</th>
                                     <th style="width:15%;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
@@ -158,44 +158,59 @@
                                     <?php } ?>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <?php if (!empty($departments)) {        ?>
                                     <?php $sl = 1; ?>
                                     <?php foreach ($departments as $department) {
 
-                                          
-            // Step 1: Build user_id → firstname map
-            $userss = $this->db->select('user_id, firstname')
-                ->where('user_id !=', 1)
-                ->get('user')
-                ->result();
+                                        // echo '<pre>';
+                                        // print_r($department);
+                                        // echo '</pre>';
+                                        // exit;
 
-            $userMap = [];
-            foreach ($userss as $u) {
-                $userMap[$u->user_id] = $u->firstname;
-            }
+                                        // Step 1: Build user_id → firstname map
+                                        $userss = $this->db->select('user_id, firstname')
+                                            ->where('user_id !=', 1)
+                                            ->get('user')
+                                            ->result();
 
-            // Step 2: Convert comma-separated IDs into arrays
-            $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
-                ? explode(',', $department->assign_for_process_monitor)
-                : [];
+                                        $userMap = [];
+                                        foreach ($userss as $u) {
+                                            $userMap[$u->user_id] = $u->firstname;
+                                        }
 
-            $assign_to_ids = !empty($department->assign_to)
-                ? explode(',', $department->assign_to)
-                : [];
+                                        // Step 2: Convert comma-separated IDs into arrays
+                                        $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+                                            ? explode(',', $department->assign_for_process_monitor)
+                                            : [];
 
-            // Step 3: Map IDs → names
-            $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-                return $userMap[$id] ?? $id;
-            }, $assign_for_process_monitor_ids);
+                                        $assign_to_ids = !empty($department->assign_to)
+                                            ? explode(',', $department->assign_to)
+                                            : [];
 
-            $assign_to_names = array_map(function ($id) use ($userMap) {
-                return $userMap[$id] ?? $id;
-            }, $assign_to_ids);
+                                        $assign_for_team_member_ids = !empty($department->assign_for_team_member)
+                                            ? explode(',', $department->assign_for_team_member)
+                                            : []; // 🆕
 
-            // Step 4: Join into comma-separated strings
-            $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
-            $names = implode(', ', $assign_to_names);
+                                        // Step 3: Map IDs → names
+                                        $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+                                            return isset($userMap[$id]) ? $userMap[$id] : $id;
+                                        }, $assign_for_process_monitor_ids);
+
+                                        $assign_to_names = array_map(function ($id) use ($userMap) {
+                                            return isset($userMap[$id]) ? $userMap[$id] : $id;
+                                        }, $assign_to_ids);
+
+                                        $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+                                            return isset($userMap[$id]) ? $userMap[$id] : $id;
+                                        }, $assign_for_team_member_ids); // 🆕
+
+                                        // Step 4: Join into comma-separated strings
+                                        $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+                                        $names = implode(', ', $assign_to_names);
+                                        $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+
 
                                         if ($department->status == 'Addressed') {
                                             $this->db->where('ticketid', $department->id)->where('ticket_status', 'Addressed');
@@ -231,6 +246,7 @@
                                     ?>
                                         <tr class="<?php echo ($sl & 1) ? "odd gradeX" : "even gradeC" ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $rowmessage; ?>">
                                             <td><?php echo $sl; ?></td>
+
                                             <td style="overflow-wrap: break-word; word-break: normal; white-space: normal;">
                                                 <strong>Incident ID:</strong> <?php echo $department->id; ?><br>
 
@@ -266,6 +282,7 @@
                                                 }
                                                 ?>
                                             </td>
+
                                             <td style="overflow: clip; word-break: break-all;">
 
 
@@ -298,8 +315,7 @@
                                                 <?php } ?>
                                             </td>
 
-
-                                         <td style="overflow: clip; word-break: break-all;">
+                                            <td style="overflow: clip; word-break: break-all;">
                                                 <strong>Reported on:</strong><br>
                                                 <?php echo date('g:i A', strtotime($department->created_on)); ?><br>
                                                 <?php echo date('d-m-Y', strtotime($department->created_on)); ?><br><br>
@@ -314,129 +330,167 @@
                                                 }
                                                 ?>
                                             </td>
+
+
+
+
                                             <?php
-$priority = !empty($department->feed->priority) 
-    ? str_replace('–', '-', $department->feed->priority) 
-    : 'Unassigned';
+                                            $priority = !empty($department->feed->priority)
+                                                ? str_replace('–', '-', $department->feed->priority)
+                                                : 'Unassigned';
 
-switch ($priority) {
-    case 'P1-Critical': $colors = '#ff4d4d'; break;
-    case 'P2-High':     $colors = '#ff9800'; break;
-    case 'P3-Medium':   $colors = '#fbc02d'; break;
-    case 'P4-Low':      $colors = '#1c8e42ff'; break;
-    case 'Unassigned':$colors = '#6c757d'; break; 
-    default:            $colors = '#000'; 
-}
-?>
- <?php
-$incident_type = !empty($department->feed->incident_type) 
-    ? str_replace('–', '-', $department->feed->incident_type) 
-    : 'Unassigned';
+                                            switch ($priority) {
+                                                case 'P1-Critical':
+                                                    $colors = '#ff4d4d';
+                                                    break;
+                                                case 'P2-High':
+                                                    $colors = '#ff9800';
+                                                    break;
+                                                case 'P3-Medium':
+                                                    $colors = '#fbc02d';
+                                                    break;
+                                                case 'P4-Low':
+                                                    $colors = '#1c8e42ff';
+                                                    break;
+                                                case 'Unassigned':
+                                                    $colors = '#6c757d';
+                                                    break;
+                                                default:
+                                                    $colors = '#000';
+                                            }
+                                            ?>
+                                            <?php
+                                            $incident_type = !empty($department->feed->incident_type)
+                                                ? str_replace('–', '-', $department->feed->incident_type)
+                                                : 'Unassigned';
 
-switch ($incident_type) {
-    case 'Sentinel': $color = '#ff4d4d'; break;
-    case 'Hazardous Condition': $color = '#ff9800'; break;
-    case 'Adverse':     $color = '#fbc02d'; break;
-    case 'No-harm':   $color = '#1c36b4ff'; break;
-    case 'Near miss':      $color = '#1c8e42ff'; break;
-    case 'Unassigned':$color = '#6c757d'; break; 
-    default:            $color = '#000'; 
-}
-?>
-<?php 
-$rm = !empty($department->feed->risk_matrix) ? (array) $department->feed->risk_matrix : [];
-$level = $rm['level'] ?? '';
-$impact = $rm['impact'] ?? '';
-$likelihood = $rm['likelihood'] ?? '';
+                                            switch ($incident_type) {
+                                                case 'Sentinel':
+                                                    $color = '#ff4d4d';
+                                                    break;
+                                                case 'Hazardous Condition':
+                                                    $color = '#ff9800';
+                                                    break;
+                                                case 'Adverse':
+                                                    $color = '#fbc02d';
+                                                    break;
+                                                case 'No-harm':
+                                                    $color = '#1c36b4ff';
+                                                    break;
+                                                case 'Near miss':
+                                                    $color = '#1c8e42ff';
+                                                    break;
+                                                case 'Unassigned':
+                                                    $color = '#6c757d';
+                                                    break;
+                                                default:
+                                                    $color = '#000';
+                                            }
+                                            ?>
+                                            <?php
+                                            $rm = !empty($department->feed->risk_matrix) ? (array) $department->feed->risk_matrix : [];
+                                            $level = $rm['level'] ?? '';
+                                            $impact = $rm['impact'] ?? '';
+                                            $likelihood = $rm['likelihood'] ?? '';
 
-$riskColors = [
-    'High'   => '#d9534f',
-    'Medium' => '#f0ad4e',
-    'Low'    => '#1c8e42ff',
-    'default'=> '#6c757d'
-];
+                                            $riskColors = [
+                                                'High'   => '#d9534f',
+                                                'Medium' => '#f0ad4e',
+                                                'Low'    => '#1c8e42ff',
+                                                'default' => '#6c757d'
+                                            ];
 
-$getColor = function($value) use ($riskColors) {
-    return $riskColors[$value] ?? $riskColors['default'];
-};
-?>
+                                            $getColor = function ($value) use ($riskColors) {
+                                                return $riskColors[$value] ?? $riskColors['default'];
+                                            };
+                                            ?>
 
-<td>
-    <table style="width:100%; border-collapse: collapse; font-size:14px; line-height:1.6;">
-        <!-- Risk -->
-        <tr>
-            <td style="width:30px;  font-weight:bold;">Risk</td>
-            <td style="width:10px; text-align:center;">:</td>
-            <td style="padding-left:6px;">
-                <?php if (!empty($level)) : ?>
-                    <span style="color: <?php echo $getColor($level); ?>;">
-                        <strong><?php echo htmlspecialchars($level); ?></strong>
-                    </span>
-                <?php else: ?>
-                    <span style="color:#6c757d; font-style:italic;"><strong>Unassigned</strong></span>
-                <?php endif; ?>
-            </td>
-            <td style="width:40px; padding-left:10px;">
-                <?php if (!empty($department->feed->patientid) && $department->status != 'Closed' 
-                          && ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS') 
-                          && $department->verified_status != 1): ?>
-                    <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
-                        <i class="fa fa-edit" style="font-size:16px; color:green;"></i>
-                    </a>
-                <?php endif; ?>
-            </td>
-        </tr>
+                                            <td>
+                                                <table style="width:100%; border-collapse: collapse; font-size:14px; line-height:1.6;">
+                                                    <!-- Risk -->
+                                                    <tr>
+                                                        <td style="width:30px;  font-weight:bold;">Risk</td>
+                                                        <td style="width:10px; text-align:center;">:</td>
+                                                        <td style="padding-left:6px;">
+                                                            <?php if (!empty($level)) : ?>
+                                                                <span style="color: <?php echo $getColor($level); ?>;">
+                                                                    <strong><?php echo htmlspecialchars($level); ?></strong>
+                                                                </span>
+                                                            <?php else: ?>
+                                                                <span style="color:#6c757d; font-style:italic;"><strong>Unassigned</strong></span>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td style="width:40px; padding-left:10px;">
+                                                            <?php if (
+                                                                !empty($department->feed->patientid) && $department->status != 'Closed'
+                                                                && ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS')
+                                                                && $department->verified_status != 1
+                                                            ): ?>
+                                                                <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
+                                                                    <i class="fa fa-edit" style="font-size:16px; color:green;"></i>
+                                                                </a>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
 
-        <!-- Priority -->
-        <tr>
-            <td style="font-weight:bold;">Priority</td>
-            <td style="text-align:center;">:</td>
-            <td style="padding-left:6px;">
-                <span style="color: <?php echo $colors; ?>; 
-                             font-style:<?php echo ($priority=='Unassigned') ? 'italic' : 'normal'; ?>;">
-                    <strong><?php echo $priority; ?></strong>
-                </span>
-            </td>
-            <td style="padding-left:10px;">
-                <?php if (!empty($department->feed->patientid) && $department->status != 'Closed' 
-                          && ismodule_active('INCIDENT') && isfeature_active('EDIT-PRIORITY-INCIDENTS') 
-                          && $department->verified_status != 1): ?>
-                    <!-- <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
+                                                    <!-- Priority -->
+                                                    <tr>
+                                                        <td style="font-weight:bold;">Priority</td>
+                                                        <td style="text-align:center;">:</td>
+                                                        <td style="padding-left:6px;">
+                                                            <span style="color: <?php echo $colors; ?>; 
+                             font-style:<?php echo ($priority == 'Unassigned') ? 'italic' : 'normal'; ?>;">
+                                                                <strong><?php echo $priority; ?></strong>
+                                                            </span>
+                                                        </td>
+                                                        <td style="padding-left:10px;">
+                                                            <?php if (
+                                                                !empty($department->feed->patientid) && $department->status != 'Closed'
+                                                                && ismodule_active('INCIDENT') && isfeature_active('EDIT-PRIORITY-INCIDENTS')
+                                                                && $department->verified_status != 1
+                                                            ): ?>
+                                                                <!-- <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
                         <i class="fa fa-edit" style="font-size:16px; color:green;"></i>
                     </a> -->
-                <?php endif; ?>
-            </td>
-        </tr>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
 
-        <!-- Severity -->
-        <tr>
-            <td style="font-weight:bold;">Category</td>
-            <td style="text-align:center;">:</td>
-            <td style="padding-left:6px;">
-                <span style="color:<?php echo empty($incident_type) ? '#6c757d' : $color; ?>; 
-                             font-style:<?php echo ($incident_type=='Unassigned') ? 'italic' : 'normal'; ?>;">
-                    <strong><?php echo $incident_type ?? 'Unassigned'; ?></strong>
-                </span>
-            </td>
-            <td style="padding-left:10px;">
-                <?php if (!empty($department->feed->patientid) && $department->status != 'Closed' 
-                          && ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS') 
-                          && $department->verified_status != 1): ?>
-                    <!-- <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
+                                                    <!-- Severity -->
+                                                    <tr>
+                                                        <td style="font-weight:bold;">Category</td>
+                                                        <td style="text-align:center;">:</td>
+                                                        <td style="padding-left:6px;">
+                                                            <span style="color:<?php echo empty($incident_type) ? '#6c757d' : $color; ?>; 
+                             font-style:<?php echo ($incident_type == 'Unassigned') ? 'italic' : 'normal'; ?>;">
+                                                                <strong><?php echo $incident_type ?? 'Unassigned'; ?></strong>
+                                                            </span>
+                                                        </td>
+                                                        <td style="padding-left:10px;">
+                                                            <?php if (
+                                                                !empty($department->feed->patientid) && $department->status != 'Closed'
+                                                                && ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS')
+                                                                && $department->verified_status != 1
+                                                            ): ?>
+                                                                <!-- <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
                         <i class="fa fa-edit" style="font-size:16px; color:green;"></i>
                     </a> -->
-                <?php endif; ?>
-            </td>
-        </tr>
-    </table>
-</td>
-<td>
-  <b><strong> Team Leader :</strong></b>  
-  <?php echo !empty($names) ? $names : 'Unassigned'; ?><br>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td>
+                                                <b><strong> Team Leader :</strong></b>
+                                                <?php echo !empty($names) ? $names : 'Unassigned'; ?><br>
 
-  <b><strong> Process Monitor :</strong></b>  
-  <?php echo !empty($actionText_process_monitor) ? $actionText_process_monitor : 'Unassigned'; ?>
-</td>
+                                                <!-- <b><strong> Team Member :</strong></b>
+                                                <?php echo !empty($actionText_team_member) ? $actionText_team_member : 'Unassigned'; ?><br> -->
+
+                                                <!-- <b><strong> Process Monitor :</strong></b>
+                                                <?php echo !empty($actionText_process_monitor) ? $actionText_process_monitor : 'Unassigned'; ?> -->
+                                            </td>
+
 
 
                                             <!-- <td style="overflow: clip; word-break: break-all;">
@@ -456,31 +510,39 @@ $getColor = function($value) use ($riskColors) {
                                             } elseif ($department->status == 'Open') {
                                                 $tool = 'Click to change the status.';
                                                 $color = 'btn-danger';
+                                                $tick_status = 'Open';
                                                 $status_icon = 'fa fa-envelope-open-o';
                                             } elseif ($department->status == 'Rejected') {
                                                 $tool = 'Click to change the status.';
+                                                $tick_status = 'Rejected';
                                                 $color = 'btn-yellow'; // Changed color to btn-yellow for Rejected
                                                 $status_icon = 'fa fa-reply';
                                             } elseif ($department->status == 'Closed') {
                                                 $tool = 'Ticket is closed';
+                                                $tick_status = 'Closed';
                                                 $color = 'btn-success';
                                                 $status_icon = 'fa fa-check-circle';
                                             } elseif ($department->status == 'Reopen') {
                                                 $tool = 'Click to close this ticket.';
+                                                $tick_status = 'Reopen';
                                                 $color = 'btn-primary';
                                             } elseif ($department->status == 'Transfered') {
                                                 $tool = 'Click to close this ticket.';
+                                                $tick_status = 'Transfered';
                                                 $color = 'btn-info';
                                             } elseif ($department->status == 'Assigned') {
                                                 $tool = 'Click to change the status.';
+                                                $tick_status = 'Assigned';
                                                 $color = 'btn-orange'; // Added this condition for Assigned
                                                 $status_icon = 'fa fa-hand-paper-o';
                                             } elseif ($department->status == 'Re-assigned') {
                                                 $tool = 'Click to change the status.';
-                                                $color = 'btn-bluee'; // Added this condition for Assigned
-                                                $status_icon = '';
+                                                $tick_status = 'Assigned';
+                                                $color = 'btn-orange'; // Added this condition for Assigned
+                                                $status_icon = 'fa fa-hand-paper-o';
                                             } elseif ($department->status == 'Described') {
                                                 $tool = 'Click to change the status.';
+                                                $tick_status = 'Described';
                                                 $color = 'btn-reddd'; // Added this condition for Assigned
                                                 $status_icon = '';
                                             } else {
@@ -491,45 +553,53 @@ $getColor = function($value) use ($riskColors) {
 
                                             <?php if (ismodule_active('INCIDENT') === true && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
                                                 <td style="vertical-align: middle; padding: 5px;">
-                                                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%;">
+                                                    <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
                                                         <!-- 1st Button (Status) -->
                                                         <?php if ($department->status != 'Verified' && $department->verified_status != 1) { ?>
-														<a style="font-size: 17px; width: 115px;" href="<?php echo base_url($this->uri->segment(1) . "/track/$department->id") ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $tool; ?>" class="btn btn-sm btn-block <?php echo $color; ?>">
-															<?php echo $department->status; ?> <i style="font-size:15px;margin-left:5px;" class="<?php echo $status_icon; ?>"></i>
-														</a>
-													<?php } else { ?>
-														<a style="font-size: 17px; width: 115px;" href="<?php echo base_url($this->uri->segment(1) . "/track/$department->id") ?>" data-placement="bottom" data-toggle="tooltip" title="<?php echo $tool; ?>" class="btn btn-sm btn-block <?php echo $color; ?>">
-															<?php echo 'Verified' ; ?> <i style="font-size:15px;margin-left:5px;" class="<?php echo $status_icon; ?>"></i>
-														</a>
-														<!-- Keep an empty placeholder for alignment -->
-														
-													<?php } ?>
+                                                            <a style="font-size: 17px; width: 115px;"
+                                                                href="<?php echo base_url($this->uri->segment(1) . "/track/$department->id") ?>"
+                                                                data-placement="bottom" data-toggle="tooltip"
+                                                                title="<?php echo $tool; ?>"
+                                                                class="btn btn-sm btn-block <?php echo $color; ?>">
+                                                                <?php echo $tick_status; ?>
+                                                                <i style="font-size:15px;margin-left:5px;" class="<?php echo $status_icon; ?>"></i>
+                                                            </a>
+                                                        <?php } else { ?>
+                                                            <a style="font-size: 17px; width: 115px;"
+                                                                href="<?php echo base_url($this->uri->segment(1) . "/track/$department->id") ?>"
+                                                                data-placement="bottom" data-toggle="tooltip"
+                                                                title="<?php echo $tool; ?>"
+                                                                class="btn btn-sm btn-block <?php echo $color; ?>">
+                                                                Verified
+                                                                <i style="font-size:15px;margin-left:5px;" class="<?php echo $status_icon; ?>"></i>
+                                                            </a>
+                                                        <?php } ?>
 
                                                         <!-- 2nd Button (Verified Icon) -->
                                                         <?php if (isfeature_active('IN-VERIFY-INCIDENTS') === true && $department->status == 'Closed' && $department->verified_status == 1) { ?>
-                                                            <i style="font-size: 25px; color: green;" class="fa fa-check-circle-o" data-toggle="tooltip" data-placement="bottom" title="Incident is verified"></i>
-                                                        <?php } else { ?>
-                                                            <!-- Placeholder for alignment -->
-                                                            <div style="width: 25px;"></div>
+                                                            <i style="font-size: 25px; color: green;"
+                                                                class="fa fa-check-circle-o"
+                                                                data-toggle="tooltip" data-placement="bottom"
+                                                                title="Incident is verified"></i>
                                                         <?php } ?>
 
                                                         <!-- 3rd Button (Delete Icon) -->
-                                                       <?php if (isfeature_active('IN-DELETE-INCIDENTS') === true) { ?>
-    <?php echo form_open('ticketsincident/create', ['class' => 'form-inner', 'id' => 'deleteForm_' . $department->id]) ?>
-        <input type="hidden" name="status" value="Delete">
-        <input type="hidden" name="id" value="<?php echo $department->id; ?>">
-        <a style="font-size: 14px; width: 50px;" href="#" 
-           onclick="submitDeleteForm(event, '<?php echo $department->id; ?>');" 
-           data-placement="bottom" data-toggle="tooltip" 
-           title="<?php echo $tooldelete; ?>" 
-           class="btn btn-sm btn-block btn-danger">
-            <i style="font-size: 15px;" class="fa fa-trash"></i>
-        </a>
-    <?php echo form_close(); ?>
-<?php } ?>
-
+                                                        <?php if (isfeature_active('IN-DELETE-INCIDENTS') === true) { ?>
+                                                            <?php echo form_open('ticketsincident/create', ['class' => 'form-inner', 'id' => 'deleteForm_' . $department->id]) ?>
+                                                            <input type="hidden" name="status" value="Delete">
+                                                            <input type="hidden" name="id" value="<?php echo $department->id; ?>">
+                                                            <a style="font-size: 14px; width: 50px;" href="#"
+                                                                onclick="submitDeleteForm(event, '<?php echo $department->id; ?>');"
+                                                                data-placement="bottom" data-toggle="tooltip"
+                                                                title="<?php echo $tooldelete; ?>"
+                                                                class="btn btn-sm btn-block btn-danger">
+                                                                <i style="font-size: 15px;" class="fa fa-trash"></i>
+                                                            </a>
+                                                            <?php echo form_close(); ?>
+                                                        <?php } ?>
                                                     </div>
                                                 </td>
+
 
 
                                             <?php } ?>
@@ -605,20 +675,20 @@ $getColor = function($value) use ($riskColors) {
         var url = "<?php echo base_url($this->uri->segment(1) . "/alltickets?depsec_priority=") ?>" + type;
         window.location.href = url;
     }
-     function gotonextdepartment_assigned_risk(type) {
+
+    function gotonextdepartment_assigned_risk(type) {
         var url = "<?php echo base_url($this->uri->segment(1) . "/alltickets?depsec_assigned_risk=") ?>" + type;
         window.location.href = url;
     }
 </script>
 <script>
-  function submitDeleteForm(event, id) {
-    event.preventDefault();
+    function submitDeleteForm(event, id) {
+        event.preventDefault();
 
-    const confirmDelete = confirm("This incident will be permanently deleted from the application. Are you sure you want to proceed?");
+        const confirmDelete = confirm("This incident will be permanently deleted from the application. Are you sure you want to proceed?");
 
-    if (confirmDelete) {
-        document.getElementById('deleteForm_' + id).submit();
+        if (confirmDelete) {
+            document.getElementById('deleteForm_' + id).submit();
+        }
     }
-}
-
 </script>
