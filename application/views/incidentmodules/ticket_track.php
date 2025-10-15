@@ -1258,9 +1258,9 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Team Leader to input RCA/ CAPA <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                            href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList">
@@ -1284,9 +1284,9 @@ foreach ($users as $user) {
                 <!-- 🟩 NEW TEAM MEMBER SECTION -->
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Team Members to monitor incident <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                            href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_tm" class="form-control"
                             placeholder="Search for team members..">
@@ -1311,10 +1311,9 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                        incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_pm" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_pm">
@@ -1337,10 +1336,9 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a href="javascript:void()"
+                            data-toggle="tooltip" title="<?php echo $totaltickect_tooltip; ?>"><i
+                                class="fa fa-info-circle" aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
                             placeholder="Your inputs here"></textarea>
@@ -1349,10 +1347,9 @@ foreach ($users as $user) {
                     </div>
                 </div> <!--Radio-->
                 <div class="form-group row" style="margin-top: 15px;">
-                    <label for="due_date" class="col-xs-3">TAT Due Date <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                    <label for="due_date" class="col-xs-3">TAT Due Date <a href="javascript:void()"
+                            data-toggle="tooltip" title="<?php echo $totaltickect_tooltip; ?>"><i
+                                class="fa fa-info-circle" aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="datetime-local" class="form-control" id="assign_due_date" name="assign_due_date"
                             value="" required onclick="this.showPicker && this.showPicker();">
@@ -1426,10 +1423,9 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">
-                        Select Team Leader(s) for RCA/ CAPA <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a>
+                        Select Team Leader(s) for RCA/ CAPA <a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a>
                     </label>
                     <div class="col-xs-9" style="position: relative;">
                         <input type="text" id="userSearch_reassign" class="form-control"
@@ -1465,10 +1461,9 @@ foreach ($users as $user) {
                 </div>
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">
-                        Select Team Member to monitor incident <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a>
+                        Select Team Member to monitor incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a>
                     </label>
                     <div class="col-xs-9" style="position: relative;">
                         <input type="text" id="userSearch_reassign_tm" class="form-control"
@@ -1503,17 +1498,16 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                        incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_reassign_pm" class="form-control"
                             placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_reassign_pm">
                             <?php
                             $assign_source = !empty($department->reassign_for_process_monitor) ? $department->reassign_for_process_monitor : $department->assign_for_process_monitor;
-                            $preselected_users_assign_for_process_monitor = explode(',',$assign_source); // IDs of users to pre-select
+                            $preselected_users_assign_for_process_monitor = explode(',', $assign_source); // IDs of users to pre-select
                             ?>
                             <?php foreach ($preselected_users_assign_for_process_monitor as $oldUserId): ?>
                             <input type="hidden" name="users_reassign_for_process_monitor[]"
@@ -1538,10 +1532,9 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes <a href="javascript:void()"
+                            data-toggle="tooltip" title="<?php echo $totaltickect_tooltip; ?>"><i
+                                class="fa fa-info-circle" aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
                             placeholder="Your inputs here"><?php echo $department->replymessage[0]->reply; ?></textarea>
@@ -1550,10 +1543,9 @@ foreach ($users as $user) {
                     </div>
                 </div> <!--Radio-->
                 <div class="form-group row" style="margin-top: 15px;">
-                    <label for="due_date" class="col-xs-3">TAT Due Date <a
-									href="javascript:void()" data-toggle="tooltip"
-									title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
-										aria-hidden="true"></i></i></a></label>
+                    <label for="due_date" class="col-xs-3">TAT Due Date <a href="javascript:void()"
+                            data-toggle="tooltip" title="<?php echo $totaltickect_tooltip; ?>"><i
+                                class="fa fa-info-circle" aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="datetime-local" class="form-control" id="reassign_due_date"
                             name="reassign_due_date" value="" required onclick="this.showPicker && this.showPicker();">
@@ -1902,7 +1894,16 @@ foreach ($users as $user) {
 <?php if ($department->status == 'Closed' || $department->status == 'Reopen' || $department->status == 'Addressed' || $department->status == 'Transfered' || $department->status == 'Rejected' || $department->status == 'Assigned' || $department->status == 'Described' || $department->status == 'Verified' || $department->status == 'Re-assigned') { ?>
 
 <?php
-                $department->reply[0] = $department->reply[count($department->reply) - 1];
+                // Check if $department->reply exists, is countable, and not empty
+                if (isset($department->reply) && is_countable($department->reply) && count($department->reply) > 0) {
+
+                    // Assign the last reply item to index 0 safely
+                    $department->reply[0] = $department->reply[count($department->reply) - 1];
+
+                } else {
+                    // If reply is null, not an array, or empty — initialize it safely
+                    $department->reply = [];
+                }
                 include 'ticket_convo.php';
 
                 ?>

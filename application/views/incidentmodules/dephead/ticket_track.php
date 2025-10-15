@@ -588,7 +588,7 @@ foreach ($users as $user) {
                                 <?php //if (($this->session->userdata['user_role'] == 4 && $this->session->userdata['email'] == $department->department->email) || $this->session->userdata['user_role'] <= 3) { 
                                     ?>
                                 <select class="form-control" onchange="ticket_options(this.value)"
-                                    style="max-width: 300px;"  id="changeAction" required>
+                                    style="max-width: 300px;" id="changeAction" required>
                                     <option value="<?php echo $department->status; ?>" selected>
                                         <?php echo $department->status; ?>
                                     </option>
@@ -732,7 +732,7 @@ foreach ($users as $user) {
         <?php } ?>
         <?php } ?>
 
-          <?php
+        <?php
         $assignedUserss = explode(',', $department->assign_for_team_member); // convert to array
         $currentUserIds = $this->session->userdata('user_id');
 
@@ -1370,30 +1370,32 @@ foreach ($users as $user) {
                         <input type="text" id="userSearch_reassign" class="form-control"
                             placeholder="Search for names..">
 
-                           <?php
-                       
-                            $preselected_users_assign_to = explode(',',$department->assign_to); // IDs of users to pre-select
-                           
-                            ?>
-                            <?php foreach ($preselected_users_assign_to as $oldUserId): ?>
-                                <input type="hidden" name="users_reassign[]" value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
-                            <?php endforeach; ?>
-                            <div class="checkbox-container" id="userList_reassign">
-                                <?php foreach ($users as $user): ?>
-                                    <div class="checkbox">
-                                        <input type="checkbox"
-                                               id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
-                                               name="users_reassign[]"
-                                               value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
-                                               data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
-                                               <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked' : ''; ?>>
-                            
-                                        <label for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
-                                            <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
-                                        </label>
-                                    </div>
-                                <?php endforeach; ?>
+                        <?php
+
+                        $preselected_users_assign_to = explode(',', $department->assign_to); // IDs of users to pre-select
+            
+                        ?>
+                        <?php foreach ($preselected_users_assign_to as $oldUserId): ?>
+                        <input type="hidden" name="users_reassign[]"
+                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php endforeach; ?>
+                        <div class="checkbox-container" id="userList_reassign">
+                            <?php foreach ($users as $user): ?>
+                            <div class="checkbox">
+                                <input type="checkbox"
+                                    id="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    name="users_reassign[]"
+                                    value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked' : ''; ?>>
+
+                                <label
+                                    for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
+                                </label>
                             </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -1406,11 +1408,12 @@ foreach ($users as $user) {
 
                         <div class="checkbox-container" id="userList_reassign_tm">
                             <?php
-                            
-                            $preselected_users_assign_for_team_member = explode(',',$department->assign_for_team_member); 
+
+                            $preselected_users_assign_for_team_member = explode(',', $department->assign_for_team_member);
                             ?>
                             <?php foreach ($preselected_users_assign_for_team_member as $oldUserId): ?>
-                                <input type="hidden" name="users_reassign_for_team_member[]" value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="users_reassign_for_team_member[]"
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -1418,9 +1421,8 @@ foreach ($users as $user) {
                                     id="user_reassign_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     name="users_reassign_for_team_member[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
-                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>" 
-                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_team_member) ? 'checked' : ''; ?>
-                                    >
+                                    data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_team_member) ? 'checked' : ''; ?>>
                                 <label
                                     for="user_reassign_for_team_member<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
@@ -1439,10 +1441,11 @@ foreach ($users as $user) {
                             placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_reassign_pm">
                             <?php
-                            $preselected_users_assign_for_process_monitor = explode(',',$department->assign_for_process_monitor); // IDs of users to pre-select
+                            $preselected_users_assign_for_process_monitor = explode(',', $department->assign_for_process_monitor); // IDs of users to pre-select
                             ?>
                             <?php foreach ($preselected_users_assign_for_process_monitor as $oldUserId): ?>
-                                <input type="hidden" name="users_reassign_for_process_monitor[]" value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="users_reassign_for_process_monitor[]"
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -1451,8 +1454,7 @@ foreach ($users as $user) {
                                     name="users_reassign_for_process_monitor[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
-                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_process_monitor) ? 'checked' : ''; ?>
-                                    >
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_for_process_monitor) ? 'checked' : ''; ?>>
                                 <label
                                     for="user_reassign_for_process_monitor<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
                                     <?php echo htmlspecialchars($user->firstname . ' , ' . $user->designation . ' ( ' . $user->lastname . ' ) ' . ' ( ' . $user->email . ' ) ', ENT_QUOTES, 'UTF-8'); ?>
@@ -1779,11 +1781,20 @@ foreach ($users as $user) {
 <?php if ($this->session->userdata('isLogIn') == true) { ?>
 <?php if ($department->status == 'Closed' || $department->status == 'Reopen' || $department->status == 'Addressed' || $department->status == 'Transfered' || $department->status == 'Rejected' || $department->status == 'Assigned' || $department->status == 'Described' || $department->status == 'Verified' || $department->status == 'Re-assigned') { ?>
 
-<?php 
-$department->reply[0] = $department->reply[count($department->reply)-1];
-include 'ticket_convo.php';
+<?php
+                // Check if $department->reply exists, is countable, and not empty
+                if (isset($department->reply) && is_countable($department->reply) && count($department->reply) > 0) {
 
-?>
+                    // Assign the last reply item to index 0 safely
+                    $department->reply[0] = $department->reply[count($department->reply) - 1];
+
+                } else {
+                    // If reply is null, not an array, or empty — initialize it safely
+                    $department->reply = [];
+                }
+                include 'ticket_convo.php';
+
+                ?>
 
 <?php } ?>
 <?php } ?>
@@ -2076,84 +2087,84 @@ include 'ticket_convo.php';
 </script>
 <script>
     function enableMultiSelectAll(searchId, listId) {
-    const searchInput = document.getElementById(searchId);
-    const container = document.getElementById(listId);
-    if (!searchInput || !container) return;
-    const checkboxes = container.getElementsByClassName('checkbox');
+        const searchInput = document.getElementById(searchId);
+        const container = document.getElementById(listId);
+        if (!searchInput || !container) return;
+        const checkboxes = container.getElementsByClassName('checkbox');
 
-    // Create tag container
-    const selectedContainer = document.createElement("div");
-    selectedContainer.classList.add("selected-users");
-    searchInput.parentNode.appendChild(selectedContainer);
+        // Create tag container
+        const selectedContainer = document.createElement("div");
+        selectedContainer.classList.add("selected-users");
+        searchInput.parentNode.appendChild(selectedContainer);
 
-    // Preselect checked checkboxes on load
-    for (let i = 0; i < checkboxes.length; i++) {
-        const checkbox = checkboxes[i].getElementsByTagName('input')[0];
-        if (checkbox.checked) {
-            createTag(checkbox, selectedContainer);
-        }
-    }
-
-    // Filter on keyup
-    searchInput.addEventListener('keyup', function () {
-        const filter = this.value.toLowerCase();
-        let anyVisible = false;
-
+        // Preselect checked checkboxes on load
         for (let i = 0; i < checkboxes.length; i++) {
             const checkbox = checkboxes[i].getElementsByTagName('input')[0];
-            const email = (checkbox.getAttribute("data-email") || "").toLowerCase();
-            const label = checkboxes[i].getElementsByTagName('label')[0];
-            const text = (label.textContent || "").toLowerCase();
-
-            if ((text.includes(filter) || email.includes(filter)) && filter !== "") {
-                checkboxes[i].style.display = '';
-                anyVisible = true;
-            } else {
-                checkboxes[i].style.display = 'none';
+            if (checkbox.checked) {
+                createTag(checkbox, selectedContainer);
             }
         }
-        container.style.display = (anyVisible ? 'block' : 'none');
-    });
 
-    // Handle selecting/unselecting users
-    container.addEventListener('change', function (e) {
-        if (e.target && e.target.type === "checkbox") {
-            if (e.target.checked) {
-                createTag(e.target, selectedContainer);
-            } else {
-                const tag = selectedContainer.querySelector(`.tag[data-user-id="${e.target.value}"]`);
-                if (tag) tag.remove();
+        // Filter on keyup
+        searchInput.addEventListener('keyup', function () {
+            const filter = this.value.toLowerCase();
+            let anyVisible = false;
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                const checkbox = checkboxes[i].getElementsByTagName('input')[0];
+                const email = (checkbox.getAttribute("data-email") || "").toLowerCase();
+                const label = checkboxes[i].getElementsByTagName('label')[0];
+                const text = (label.textContent || "").toLowerCase();
+
+                if ((text.includes(filter) || email.includes(filter)) && filter !== "") {
+                    checkboxes[i].style.display = '';
+                    anyVisible = true;
+                } else {
+                    checkboxes[i].style.display = 'none';
+                }
             }
-            searchInput.value = "";
-            container.style.display = 'none';
-        }
-    });
+            container.style.display = (anyVisible ? 'block' : 'none');
+        });
 
-    // Hide dropdown on outside click
-    document.addEventListener('click', function (e) {
-        if (!container.contains(e.target) && e.target !== searchInput) {
-            container.style.display = 'none';
-        }
-    });
-}
+        // Handle selecting/unselecting users
+        container.addEventListener('change', function (e) {
+            if (e.target && e.target.type === "checkbox") {
+                if (e.target.checked) {
+                    createTag(e.target, selectedContainer);
+                } else {
+                    const tag = selectedContainer.querySelector(`.tag[data-user-id="${e.target.value}"]`);
+                    if (tag) tag.remove();
+                }
+                searchInput.value = "";
+                container.style.display = 'none';
+            }
+        });
 
-// Helper to create a tag for a checkbox
-function createTag(checkbox, container) {
-    const label = checkbox.nextElementSibling.innerText.trim();
-    const tag = document.createElement("div");
-    tag.classList.add("tag");
-    tag.dataset.userId = checkbox.value;
-    tag.innerHTML = label + " <span>&times;</span>";
-    container.appendChild(tag);
+        // Hide dropdown on outside click
+        document.addEventListener('click', function (e) {
+            if (!container.contains(e.target) && e.target !== searchInput) {
+                container.style.display = 'none';
+            }
+        });
+    }
 
-    tag.querySelector("span").addEventListener("click", () => {
-        tag.remove();
-        checkbox.checked = false;
-    });
-}
+    // Helper to create a tag for a checkbox
+    function createTag(checkbox, container) {
+        const label = checkbox.nextElementSibling.innerText.trim();
+        const tag = document.createElement("div");
+        tag.classList.add("tag");
+        tag.dataset.userId = checkbox.value;
+        tag.innerHTML = label + " <span>&times;</span>";
+        container.appendChild(tag);
 
-// Initialize
-enableMultiSelectAll("userSearch_reassign", "userList_reassign");
-enableMultiSelectAll("userSearch_reassign_pm", "userList_reassign_pm"); // Reassign (PM)
-enableMultiSelectAll("userSearch_reassign_tm", "userList_reassign_tm");
+        tag.querySelector("span").addEventListener("click", () => {
+            tag.remove();
+            checkbox.checked = false;
+        });
+    }
+
+    // Initialize
+    enableMultiSelectAll("userSearch_reassign", "userList_reassign");
+    enableMultiSelectAll("userSearch_reassign_pm", "userList_reassign_pm"); // Reassign (PM)
+    enableMultiSelectAll("userSearch_reassign_tm", "userList_reassign_tm");
 </script>
