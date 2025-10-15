@@ -386,19 +386,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
@@ -569,19 +569,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
@@ -692,19 +692,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -751,16 +751,16 @@ class Ticketsincidents_model extends CI_Model
 				$dataset[$i] = $row;
 
 
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
@@ -770,16 +770,16 @@ class Ticketsincidents_model extends CI_Model
 				}
 			} elseif ($role <= 3 || $role == 11) {
 				//$slug = $row->feedbackid.preg_replace('/[^A-Za-z0-9-]+/', '-', $department[0]->name);
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
@@ -889,19 +889,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -960,16 +960,16 @@ class Ticketsincidents_model extends CI_Model
 				$dataset[$i] = $row;
 
 
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
@@ -979,16 +979,16 @@ class Ticketsincidents_model extends CI_Model
 				}
 			} elseif ($role <= 3 || $role == 11) {
 				//$slug = $row->feedbackid.preg_replace('/[^A-Za-z0-9-]+/', '-', $department[0]->name);
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
@@ -1098,20 +1098,20 @@ class Ticketsincidents_model extends CI_Model
 
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
-		}else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+		} else {
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1154,16 +1154,16 @@ class Ticketsincidents_model extends CI_Model
 			$dataset[$i] = $row;
 
 
-			  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+			$dataset[$i] = $row;
+			$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+			$feed = json_decode($feedback[0]->dataset);
+			$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+			$dataset[$i]->patinet->name = $feed->name ?? null;
+			$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+			$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+			$dataset[$i]->patinet->ward = $feed->ward ?? null;
+			$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+			$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 			$dataset[$i]->department = $department[0];
 
@@ -1244,19 +1244,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1307,16 +1307,16 @@ class Ticketsincidents_model extends CI_Model
 				|| in_array($currentUserId, $assignToArray_for_process_monitor)
 				|| in_array($currentUserId, $assignToArray_for_team_member)
 			) {	 //$slug = $row->feedbackid.preg_replace('/[^A-Za-z0-9-]+/', '-', $department[0]->dprt_id);
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
 					$dataset[$i]->ratingt = 'Poor';
@@ -1331,16 +1331,16 @@ class Ticketsincidents_model extends CI_Model
 				$dataset[$i]->replymessage = $closed;
 			} elseif ($role <= 3 || $role == 11) {
 				//$slug = $row->feedbackid.preg_replace('/[^A-Za-z0-9-]+/', '-', $department[0]->name);
-				  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+				$dataset[$i] = $row;
+				$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+				$feed = json_decode($feedback[0]->dataset);
+				$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+				$dataset[$i]->patinet->name = $feed->name ?? null;
+				$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+				$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+				$dataset[$i]->patinet->ward = $feed->ward ?? null;
+				$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+				$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 				$dataset[$i]->department = $department[0];
 				if ($row->rating == 2) {
 					$dataset[$i]->ratingt = 'Poor';
@@ -1431,19 +1431,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-            if (count($datasetnew ?? []) > 0) {
-                $this->db->where_in('departmentid', $datasetnew);
-            }
-            if (count($datasetnew_severity ?? []) > 0) {
-                $this->db->where_in('incident_type', $datasetnew_severity);
-            }
-            if (count($datasetnew_priority ?? []) > 0) {
-                $this->db->where_in('priority', $datasetnew_priority);
-            }
-            if (count($datasetnew_assigned_risk ?? []) > 0) {
-                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-            }
-        }
+			if (count($datasetnew ?? []) > 0) {
+				$this->db->where_in('departmentid', $datasetnew);
+			}
+			if (count($datasetnew_severity ?? []) > 0) {
+				$this->db->where_in('incident_type', $datasetnew_severity);
+			}
+			if (count($datasetnew_priority ?? []) > 0) {
+				$this->db->where_in('priority', $datasetnew_priority);
+			}
+			if (count($datasetnew_assigned_risk ?? []) > 0) {
+				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+		}
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1478,16 +1478,16 @@ class Ticketsincidents_model extends CI_Model
 
 
 			//$slug = $row->feedbackid.preg_replace('/[^A-Za-z0-9-]+/', '-', $department[0]->dprt_id);
-		  $dataset[$i] = $row;
-                $dataset[$i]->feed = json_decode($feedback[0]->dataset);
-                $feed = json_decode($feedback[0]->dataset);
-                $dataset[$i]->patinet = new stdClass();  // initialize as empty object
-                $dataset[$i]->patinet->name = $feed->name ?? null;
-                $dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
-                $dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
-                $dataset[$i]->patinet->ward = $feed->ward ?? null;
-                $dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
-                $dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
+			$dataset[$i] = $row;
+			$dataset[$i]->feed = json_decode($feedback[0]->dataset);
+			$feed = json_decode($feedback[0]->dataset);
+			$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+			$dataset[$i]->patinet->name = $feed->name ?? null;
+			$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+			$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+			$dataset[$i]->patinet->ward = $feed->ward ?? null;
+			$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+			$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 
 			$i++;
 		}
@@ -1529,13 +1529,16 @@ class Ticketsincidents_model extends CI_Model
 			$query = $this->db->get('bf_feedback_incident');
 			$feedback = $query->result();
 
+			$dataset[$i] = $row;
+			$dataset[$i]->feed = json_decode($feedback[0]->dataset);
 			$feed = json_decode($feedback[0]->dataset);
-			$dataset[$i]->patinet->bed_no = $feed->bedno;
-			$dataset[$i]->patinet->admissiondate = $feed->admissiondate;
-			$dataset[$i]->patinet->name = $feed->name;
-			$dataset[$i]->patinet->patient_id = $feed->patientid;
-			$dataset[$i]->patinet->mobile = $feed->contactnumber;
-			$dataset[$i]->patinet->ward = $feed->ward;
+			$dataset[$i]->patinet = new stdClass();  // initialize as empty object
+			$dataset[$i]->patinet->name = $feed->name ?? null;
+			$dataset[$i]->patinet->patient_id = $feed->patientid ?? null;
+			$dataset[$i]->patinet->mobile = $feed->contactnumber ?? null;
+			$dataset[$i]->patinet->ward = $feed->ward ?? null;
+			$dataset[$i]->patinet->bed_no = $feed->bedno ?? null;
+			$dataset[$i]->patinet->admissiondate = $feed->admissiondate ?? null;
 			$dataset[$i]->feedback = json_decode($feedback[0]->dataset);
 			if ($row->rating == 2) {
 				$dataset[$i]->ratingt = 'Poor';
@@ -1594,7 +1597,7 @@ class Ticketsincidents_model extends CI_Model
 		return $this->db->update('ticket_incident_message', $data);
 	}
 
-public function addressedtickets()
+	public function addressedtickets()
 	{
 
 	}
