@@ -50,6 +50,19 @@ function ismodule_active($module)
 	}
 }
 
+function getChieldStatus($groupedFeatures,$featureIds){
+    //print($featureIds);
+    $checked = 'checked';
+    foreach($groupedFeatures as $featureRow){
+        if (!in_array($featureRow['feature_id'], $featureIds)) continue;
+       
+        if($featureRow['status'] === false){
+            $checked = '';
+        }
+    }
+ 
+    return $checked;
+}
 
 function get_from_to_date($requestFrom = null)
 {

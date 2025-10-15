@@ -239,7 +239,7 @@
 									
 									
 									<tr>
-										<td>Is Nutritional Assessment done?</td>
+										<td>Is Patient and Family Education (PFE) provided?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['nutri'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['nutri_text']); ?>
@@ -247,7 +247,7 @@
 									</tr>
 									
 									<tr>
-										<td>Is Spiritual support provided when required?</td>
+										<td>Is the use of abbreviations as per guidelines?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['spiritual'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['spiritual_text']); ?>

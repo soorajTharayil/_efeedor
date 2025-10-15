@@ -386,7 +386,7 @@ $mobile = $user->mobile;
                                                                             <input id="master<?php echo md5($module . $type . $subTitle); ?>"
                                                                                 type="checkbox"
                                                                                 class="master-toggle"
-                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" />
+                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" <?php echo getChieldStatus($groupedFeatures[$type],$featureIds); ?> />
                                                                             <label for="master<?php echo md5($module . $type . $subTitle); ?>" class="label-success"></label>
                                                                         </div>
                                                                     </h4>
@@ -492,7 +492,7 @@ $mobile = $user->mobile;
                                                                             <input id="master<?php echo md5($module . $type . $subTitle); ?>"
                                                                                 type="checkbox"
                                                                                 class="master-toggle"
-                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" />
+                                                                                data-target="subCollapse<?php echo md5($module . $type . $subTitle); ?>" <?php echo getChieldStatus($groupedFeatures[$type],$featureIds); ?> />
                                                                             <label for="master<?php echo md5($module . $type . $subTitle); ?>" class="label-success"></label>
                                                                         </div>
                                                                     </h4>

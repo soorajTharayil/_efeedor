@@ -602,7 +602,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is Nutritional Assessment done?</b></td>
+                            <td><b>Is Patient and Family Education (PFE) provided?</b></td>
                             <td>
                                 <?php $val = isset($param['nutri']) ? strtolower(trim($param['nutri'])) : ''; ?>
                                 <select class="form-control" name="nutri">
@@ -625,7 +625,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is Spiritual support provided when required?</b></td>
+                            <td><b>Is the use of abbreviations as per guidelines?</b></td>
                             <td>
                                 <?php $val = isset($param['spiritual']) ? strtolower(trim($param['spiritual'])) : ''; ?>
                                 <select class="form-control" name="spiritual">

@@ -243,9 +243,11 @@
 										</td>
 
 										<td>
-											<?php echo !empty($param->discharge_date_time)
-												? date("d-m-Y H:i", strtotime($param->discharge_date_time))
-												: ''; ?>
+											<?php
+											echo ($param->discharge_date_time && strtotime($param->discharge_date_time))
+												? date('d-m-Y H:i', strtotime($param->discharge_date_time))
+												: '';
+											?>
 										</td>
 
 
