@@ -28,7 +28,8 @@
                         <div class="btn-group">
                             <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
                                 title="Incident form"
-                                href="<?php echo base_url($this->uri->uri_string() . '/inn?user_id=' . $this->session->userdata('user_id')); ?>" target="_blank">
+                                href="<?php echo base_url('inn?user_id=' . $this->session->userdata['user_id']); ?>"
+                                target="_blank">
                                 <i class="fa fa-pencil"></i> Report incidents
                             </a>
 
