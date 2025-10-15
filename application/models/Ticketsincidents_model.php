@@ -386,19 +386,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-			if (count($datasetnew_assigned_risk) > 0) {
-				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
@@ -569,16 +569,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
@@ -689,16 +692,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -883,19 +889,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-			if (count($datasetnew_assigned_risk) > 0) {
-				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1092,17 +1098,20 @@ class Ticketsincidents_model extends CI_Model
 
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
-		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-		}
+		}else {
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1235,16 +1244,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
@@ -1419,16 +1431,19 @@ class Ticketsincidents_model extends CI_Model
 		if ($this->input->get('type') != 1 && $this->input->get('type') != '') {
 			$this->db->where('departmentid', $this->input->get('type'));
 		} else {
-			if (count($datasetnew) > 0) {
-				$this->db->where_in('departmentid', $datasetnew);
-			}
-			if (count($datasetnew_severity) > 0) {
-				$this->db->where_in('incident_type', $datasetnew_severity);
-			}
-			if (count($datasetnew_priority) > 0) {
-				$this->db->where_in('priority', $datasetnew_priority);
-			}
-		}
+            if (count($datasetnew ?? []) > 0) {
+                $this->db->where_in('departmentid', $datasetnew);
+            }
+            if (count($datasetnew_severity ?? []) > 0) {
+                $this->db->where_in('incident_type', $datasetnew_severity);
+            }
+            if (count($datasetnew_priority ?? []) > 0) {
+                $this->db->where_in('priority', $datasetnew_priority);
+            }
+            if (count($datasetnew_assigned_risk ?? []) > 0) {
+                $this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+            }
+        }
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get();
 		$result = $query->result();
