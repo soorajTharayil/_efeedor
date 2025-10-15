@@ -1594,4 +1594,8 @@ class Ticketsincidents_model extends CI_Model
 		return $this->db->update('ticket_incident_message', $data);
 	}
 
+public function addressedtickets()
+	{
+
+	}
 }
