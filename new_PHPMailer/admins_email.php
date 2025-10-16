@@ -852,20 +852,12 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             $k = '';
         }
         $TID = $department_object->id;
-        $occured_in = $department_object->incident_occured_in;
         $admins_incident_link = $config_set['BASE_URL'] . 'incident/track/' . $TID;
 
         $keys = array();
         $res = array();
         $titles = array();
         $zz = array();
-        $rawDate = $param_incident->incident_occured_in;
-
-        // Convert ISO string to timestamp
-        $timestamp = strtotime($rawDate);
-
-        // Format as dd-mm-YYYY, h:i AM/PM
-        $formattedDate = date('d-m-Y, h:i A', $timestamp);
         //message1 will insert when there is only ONE TIKECT
         $message1 = 'Dear Team, <br /><br />';
         $message1 .= 'We would like to bring to your attention a recent incident reported by an employee at ' . $hospitalname . '. Below are the incident details: <br /><br />';
@@ -884,18 +876,17 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
              <tr>
                  <td colspan="2" style="text-align:center;"><b>Incident details</b></td>
              </tr>
-               <tr>
-                 <td width="40%">Incident Short Name</td>
-                 <td width="60%">' . $department . '</td>
-             </tr>
               <tr>
                  <td width="40%">Incident</td>
                  <td width="60%">' . $department_object->name . '</td>
              </tr>
-            
+              <tr>
+                 <td width="40%">Category</td>
+                 <td width="60%">' . $department . '</td>
+             </tr>
               <tr>
                  <td width="40%">Incident Occured On</td>
-                 <td width="60%">' . $occured_in . '</td>
+                 <td width="60%">' . $param_incident->incident_occured_in . '</td>
              </tr>
             
               <tr>
@@ -907,7 +898,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td width="60%">' . $param_incident->priority . '</td>
              </tr>
              <tr>
-                 <td width="40%">Assigned Category</td>
+                 <td width="40%">Assigned Severity</td>
                  <td width="60%">' . $param_incident->incident_type . '</td>
              </tr>
             
@@ -920,7 +911,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                  <td width="60%">' . $param_incident->other . '</td>
              </tr>';
         }
-
+       
 
         $message1 .= '
              <tr>
