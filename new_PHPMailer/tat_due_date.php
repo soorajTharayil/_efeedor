@@ -1,7 +1,7 @@
 <?php
 
 include('../api/db.php');
-include('/home/efeedor/globalconfig.php');
+include('/var/www/html/globalconfig.php');
 include('get_user.php');
 
 echo 'gg';
