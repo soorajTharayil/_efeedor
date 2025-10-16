@@ -587,11 +587,14 @@ class Dashboard extends CI_Controller
         if ($picture === false) {
             $this->session->set_flashdata('exception', display('invalid_picture'));
         }
+        if ($this->input->post('userrole')) {
+			$roleFeature = $this->db->where('role_id', $this->input->post('userrole'))->get('roles')->result();
+			$last_name = $roleFeature[0]->role_name;
+		}
         #-------------------------------#
         $data['doctor'] = (object) $postData = [
             'user_id' => $this->input->post('user_id', true),
             'firstname' => $this->input->post('firstname', true),
-            'lastname' => '',
             'designation' => $this->input->post('designation', true),
             'department_id' => $this->input->post('department_id', true),
             'address' => $this->input->post('address', true),
@@ -610,6 +613,9 @@ class Dashboard extends CI_Controller
             'created_by' => $this->session->userdata('user_id'),
             'create_date' => date('Y-m-d'),
             'status' => $this->input->post('status', true),
+			'lastname'             => $last_name,
+            'departmentpermission' => json_encode($_POST),
+
         ];
         #-------------------------------#
 
@@ -630,7 +636,8 @@ class Dashboard extends CI_Controller
                     'fullname' => $postData['firstname'] . ' ' . $postData['lastname']
                 ]);
             }
-
+            # ✅ REFRESH DATA FROM DATABASE (added line)
+            $data['doctor'] = $this->dashboard_model->profile($user_id);
             redirect('dashboard/form/');
         } else {
 
@@ -641,6 +648,7 @@ class Dashboard extends CI_Controller
             $this->load->view('layout/main_wrapper', $data);
         }
     }
+
 
 
 
