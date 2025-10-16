@@ -593,7 +593,7 @@ class Incident extends CI_Controller
     <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Team Leader</td>
     <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['TEAM LEADER'] . '</td>
 </tr>';
-       $html .= '<tr>
+                $html .= '<tr>
     <td style="width: 30%; font-weight:bold; background:#fafafa; border:1px solid #ccc; padding:8px;">Assigned Team Member</td>
     <td style="border:1px solid #ccc; padding:8px; tex-color: red;">' . $data['TEAM MEMBER'] . '</td>
 </tr>';
@@ -653,7 +653,7 @@ class Incident extends CI_Controller
 
                     if ($r->ticket_status == 'Assigned') {
                         $html .= '<strong>Action :</strong> ' . htmlspecialchars($r->action) . ' (Team Leader)<br>';
-            
+
                         $html .= '<strong>Team Member :</strong> ' . htmlspecialchars($r->action_for_team_member) . '<br>';
                         $html .= '<strong>Process Monitor :</strong> ' . htmlspecialchars($r->action_for_process_monitor) . '<br>';
                         $html .= '<strong>Assigned by :</strong> ' . htmlspecialchars($r->message) . '<br>';
@@ -671,7 +671,7 @@ class Incident extends CI_Controller
                             $html .= '<strong>Tool Applied :</strong> ' . htmlspecialchars($r->rca_tool_describe) . '<br>';
                         }
 
-                     if (!empty($r->rootcause_describe)) {
+                        if (!empty($r->rootcause_describe)) {
                             $html .= '<strong>RCA in brief :</strong> ' . htmlspecialchars($r->rootcause_describe) . '<br>';
                         }
 
@@ -1482,47 +1482,47 @@ class Incident extends CI_Controller
 
                 foreach ($departments as $department) {
 
-                  // Step 1: Build user_id → firstname map
-$userss = $this->db->select('user_id, firstname')
-    ->where('user_id !=', 1)
-    ->get('user')
-    ->result();
+                    // Step 1: Build user_id → firstname map
+                    $userss = $this->db->select('user_id, firstname')
+                        ->where('user_id !=', 1)
+                        ->get('user')
+                        ->result();
 
-$userMap = [];
-foreach ($userss as $u) {
-    $userMap[$u->user_id] = $u->firstname;
-}
+                    $userMap = [];
+                    foreach ($userss as $u) {
+                        $userMap[$u->user_id] = $u->firstname;
+                    }
 
-// Step 2: Convert comma-separated IDs into arrays
-$assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
-    ? explode(',', $department->assign_for_process_monitor)
-    : [];
+                    // Step 2: Convert comma-separated IDs into arrays
+                    $assign_for_process_monitor_ids = !empty($department->assign_for_process_monitor)
+                        ? explode(',', $department->assign_for_process_monitor)
+                        : [];
 
-$assign_to_ids = !empty($department->assign_to)
-    ? explode(',', $department->assign_to)
-    : [];
+                    $assign_to_ids = !empty($department->assign_to)
+                        ? explode(',', $department->assign_to)
+                        : [];
 
-$assign_for_team_member_ids = !empty($department->assign_for_team_member)
-    ? explode(',', $department->assign_for_team_member)
-    : []; // 🆕
+                    $assign_for_team_member_ids = !empty($department->assign_for_team_member)
+                        ? explode(',', $department->assign_for_team_member)
+                        : []; // 🆕
 
-// Step 3: Map IDs → names
-$assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
-    return isset($userMap[$id]) ? $userMap[$id] : $id;
-}, $assign_for_process_monitor_ids);
+                    // Step 3: Map IDs → names
+                    $assign_for_process_monitor_names = array_map(function ($id) use ($userMap) {
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
+                    }, $assign_for_process_monitor_ids);
 
-$assign_to_names = array_map(function ($id) use ($userMap) {
-    return isset($userMap[$id]) ? $userMap[$id] : $id;
-}, $assign_to_ids);
+                    $assign_to_names = array_map(function ($id) use ($userMap) {
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
+                    }, $assign_to_ids);
 
-$assign_for_team_member_names = array_map(function ($id) use ($userMap) {
-    return isset($userMap[$id]) ? $userMap[$id] : $id;
-}, $assign_for_team_member_ids); // 🆕
+                    $assign_for_team_member_names = array_map(function ($id) use ($userMap) {
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
+                    }, $assign_for_team_member_ids); // 🆕
 
-// Step 4: Join into comma-separated strings
-$actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
-$names = implode(', ', $assign_to_names);
-$actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
+                    // Step 4: Join into comma-separated strings
+                    $actionText_process_monitor = implode(', ', $assign_for_process_monitor_names);
+                    $names = implode(', ', $assign_to_names);
+                    $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
 
 
 
@@ -1833,24 +1833,26 @@ $actionText_team_member = implode(', ', $assign_for_team_member_names); // 🆕
             header('Content-Disposition: attachment;filename=' . $fileName);
 
             if (isset($dataexport[0])) {
-
                 $fp = fopen('php://output', 'w');
 
-                //print_r($header);
-
+                // Write header
                 fputcsv($fp, $header, ',');
 
                 foreach ($dataexport as $values) {
-
-                    //print_r($values); exit;
-
-                    fputcsv($fp, $values, ',');
+                    // Ensure $values is an array
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    } else {
+                        // Optionally log or skip invalid row
+                        // error_log("Invalid CSV row: " . print_r($values, true));
+                        continue;
+                    }
                 }
 
                 fclose($fp);
             }
-
             ob_flush();
+
 
             exit;
         } else {
