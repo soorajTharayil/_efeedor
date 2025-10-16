@@ -1292,23 +1292,16 @@ class Incident extends CI_Controller
 
 
             $dataexport[$i]['row1'] = 'OPEN INCIDENTS';
-            $dataexport[$i]['row2'] = count($int_open_tickets);
-            $dataexport[$i]['row3'] = '';
-            $dataexport[$i]['row4'] = '';
-            $i++;
-
-            $dataexport[$i]['row1'] = 'ADDRESSED INCIDENTS';
-            $dataexport[$i]['row2'] = count($int_addressed_tickets);
+            $dataexport[$i]['row2'] = is_countable($int_open_tickets) ? count($int_open_tickets) : 0;
             $dataexport[$i]['row3'] = '';
             $dataexport[$i]['row4'] = '';
             $i++;
 
             $dataexport[$i]['row1'] = 'CLOSED INCIDENTS';
-            $dataexport[$i]['row2'] = count($int_closed_tickets);
+            $dataexport[$i]['row2'] = is_countable($int_closed_tickets) ? count($int_closed_tickets) : 0;
             $dataexport[$i]['row3'] = '';
             $dataexport[$i]['row4'] = '';
             $i++;
-
 
             $dataexport[$i]['row1'] = 'INCIDENT RESOLUTION RATE';
             $dataexport[$i]['row2'] = $ticket_resolution_rate . '%';
