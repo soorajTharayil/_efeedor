@@ -64,7 +64,7 @@
 									<?php
 									if (
 										ismodule_active('INCIDENT') === true &&
-										isfeature_active('IN-EDIT-RCA-INCIDENTS') === true &&
+										isfeature_active('IN-EDIT-USERS-INCIDENTS') === true &&
 										$tick_status != 'Closed'
 									) {
 										?>
@@ -72,7 +72,7 @@
 										<div class="text-end mb-2">
 											<button type="button" class="btn btn-sm btn-outline-primary"
 												onclick="selectAndScroll()">
-												<i class="fa fa-edit"></i> Edit USER
+												<i class="fa fa-edit"></i> Edit User
 											</button>
 										</div>
 

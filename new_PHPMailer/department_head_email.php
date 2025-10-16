@@ -2243,6 +2243,18 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
                 $conn_g->query($query1);
             }
         }
+        $users = get_user_by_sms_activity('IN-EMAIL-RCA-INCIDENTS', $con);
+        if (!empty($users)) {
+          
+            foreach ($users as $user_object) {
+                // Check if $patient_ward matches any value in $floor_wards
+            $email = $user_object->email;
+    
+                $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
+                $conn_g->query($query1);
+
+            }
+        }
         $update_query = 'UPDATE tickets_incident SET describe_email = 1 WHERE id=' . $feedback_incident_object->id;
         mysqli_query($con, $update_query);
     }
