@@ -155,12 +155,7 @@ $html .= '<table border="1" cellpadding="5" >
         <td width="20%">' . count($ip_open_tickets) . '</td>
     </tr>';
 
-if (ticket_addressal('incident_addressal') === true) {
-	$html .= '<tr>
-        <td width="80%">ADDRESSED INCIDENTS</td>
-        <td width="20%">' . count($ip_addressed_tickets) . '</td>
-    </tr>';
-}
+
 
 $html .= '<tr>
         <td width="80%">CLOSED INCIDENTS</td>
