@@ -1145,16 +1145,29 @@ class Incident extends CI_Controller
             header('Cache-Control: private', false);
             header('Content-Type: text/csv');
             header('Content-Disposition: attachment;filename=' . $fileName);
-            if (isset($dataexport[0])) {
+            if (!empty($dataexport) && is_array($dataexport)) {
                 $fp = fopen('php://output', 'w');
-                //print_r($header);
-                fputcsv($fp, $header, ',');
-                foreach ($dataexport as $values) {
-                    //print_r($values); exit;
-                    fputcsv($fp, $values, ',');
+
+                // Write header row safely
+                if (!empty($header) && is_array($header)) {
+                    fputcsv($fp, $header, ',');
                 }
+
+                foreach ($dataexport as $values) {
+                    // Convert object to array if needed
+                    if (is_object($values)) {
+                        $values = (array) $values;
+                    }
+
+                    // Skip if still not array or empty
+                    if (is_array($values) && !empty($values)) {
+                        fputcsv($fp, $values, ',');
+                    }
+                }
+
                 fclose($fp);
             }
+
             ob_flush();
             exit;
         } else {
@@ -1360,16 +1373,28 @@ class Incident extends CI_Controller
             header('Cache-Control: private', false);
             header('Content-Type: text/csv');
             header('Content-Disposition: attachment;filename=' . $fileName);
-            if (isset($dataexport[0])) {
+            if (!empty($dataexport) && is_array($dataexport)) {
                 $fp = fopen('php://output', 'w');
-                //print_r($header);
-                fputcsv($fp, $header, ',');
-                foreach ($dataexport as $values) {
-                    //print_r($values); exit;
-                    fputcsv($fp, $values, ',');
+
+                // Write header safely
+                if (!empty($header) && is_array($header)) {
+                    fputcsv($fp, $header, ',');
                 }
+
+                foreach ($dataexport as $values) {
+                    // PHP 8 strict type-safe check
+                    if (is_object($values)) {
+                        $values = (array) $values;
+                    }
+
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    }
+                }
+
                 fclose($fp);
             }
+
             ob_flush();
             exit;
         } else {
@@ -1832,20 +1857,22 @@ class Incident extends CI_Controller
 
             header('Content-Disposition: attachment;filename=' . $fileName);
 
-            if (isset($dataexport[0])) {
+            if (!empty($dataexport) && is_array($dataexport)) {
                 $fp = fopen('php://output', 'w');
 
-                // Write header
-                fputcsv($fp, $header, ',');
+                // Write header safely
+                if (!empty($header) && is_array($header)) {
+                    fputcsv($fp, $header, ',');
+                }
 
                 foreach ($dataexport as $values) {
-                    // Ensure $values is an array
+                    // PHP 8 strict type-safe check
+                    if (is_object($values)) {
+                        $values = (array) $values;
+                    }
+
                     if (is_array($values)) {
                         fputcsv($fp, $values, ',');
-                    } else {
-                        // Optionally log or skip invalid row
-                        // error_log("Invalid CSV row: " . print_r($values, true));
-                        continue;
                     }
                 }
 
@@ -2210,17 +2237,30 @@ class Incident extends CI_Controller
 
                 //print_r($header);
 
-                fputcsv($fp, $header, ',');
+                if (!empty($header) && is_array($header)) {
+                    fputcsv($fp, $header, ',');
+                }
 
                 foreach ($dataexport as $values) {
 
                     //print_r($values); exit;
 
-                    fputcsv($fp, $values, ',');
+                    // Ensure $values is an array (PHP 8 strict type check)
+                    if (is_object($values)) {
+                        $values = (array) $values;
+                    }
+
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    } else {
+                        // Skip invalid rows safely
+                        continue;
+                    }
                 }
 
                 fclose($fp);
             }
+
 
             ob_flush();
 
