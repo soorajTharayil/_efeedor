@@ -2017,23 +2017,28 @@ class Incident extends CI_Controller
 
             header('Content-Disposition: attachment;filename=' . $fileName);
 
-            if (isset($dataexport[0])) {
+            if (!empty($dataexport) && is_array($dataexport)) {
 
                 $fp = fopen('php://output', 'w');
 
-                //print_r($header);
-
-                fputcsv($fp, $header, ',');
+                // Write CSV header if it exists and is an array
+                if (!empty($header) && is_array($header)) {
+                    fputcsv($fp, $header, ',');
+                }
 
                 foreach ($dataexport as $values) {
-
-                    //print_r($values); exit;
-
-                    fputcsv($fp, $values, ',');
+                    // Ensure each row is a valid array before writing
+                    if (is_array($values)) {
+                        fputcsv($fp, $values, ',');
+                    } else {
+                        // Optionally log invalid rows for debugging
+                        error_log('Invalid CSV row: ' . print_r($values, true));
+                    }
                 }
 
                 fclose($fp);
             }
+
 
             ob_flush();
 
