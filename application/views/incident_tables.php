@@ -43,12 +43,15 @@ $incident_reopen_tickets = $this->incident_model->tickets_feeds($table_feedback,
 $incident_transfered_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $transferd);
 
 
-$incident_allopenticket_count = count($incident_open_tickets) + count($incident_reopen_tickets) + count($incident_transferd_tickets);
+$incident_allopenticket_count =
+	count($incident_open_tickets ?? []) +
+	count($incident_reopen_tickets ?? []) +
+	count($incident_transferd_tickets ?? []);
 
 
 $incident_closed_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $closed);
 $incident_addressed_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $addressed);
-$incident_tickets_tool = "Open Incidents: " . count($incident_open_tickets) . ', ' . "Closed Incidents: " . count($incident_closed_tickets) . ', '  . "Reopen : " . count($incident_reopen_tickets);
+$incident_tickets_tool = "Open Incidents: " . count($incident_open_tickets) . ', ' . "Closed Incidents: " . count($incident_closed_tickets) . ', ' . "Reopen : " . count($incident_reopen_tickets);
 $ticket_resolution_rate_incident = $this->incident_model->ticket_resolution_rate($table_tickets, $closed, $table_feedback);
 
 $close_rate_incident = $this->incident_model->ticket_rate($table_tickets, $status, $table_feedback, $table_ticket_action);
@@ -62,13 +65,13 @@ $ticket = $this->incident_model->tickets_recived_by_department_interim($type, $t
 $incalltickets = $this->ticketsincidents_model->alltickets();
 $incopentickets = $this->ticketsincidents_model->read();
 $incclosedtickets = $this->ticketsincidents_model->read_close();
-// $incaddressed = $this->ticketsincidents_model->describetickets();
+$incaddressed = $this->ticketsincidents_model->describetickets();
 
 
 $incident_department['alltickets'] = count($incalltickets);
 $incident_department['opentickets'] = count($incopentickets);
 $incident_department['closedtickets'] = count($incclosedtickets);
-// $incident_department['addressedtickets'] = count($incaddressed);
+$incident_department['addressedtickets'] = count($incaddressed);
 
 
 
@@ -94,9 +97,9 @@ foreach ($ticket as $item) {
 		}
 	} else {
 		$maxPercentage = NULL;
-		$maxDepartment =  NULL;
-		$minPercentage =  NULL;
-		$minDepartment =  NULL;
+		$maxDepartment = NULL;
+		$minPercentage = NULL;
+		$minDepartment = NULL;
 	}
 }
 
@@ -116,8 +119,8 @@ $incident_link_patient_feedback = base_url('incident/patient_complaint?patientid
 $incident_link_feedback_report = base_url('incident/feedbacks_report');
 
 // psat analysis
-$incident_link_satisfied_list =  base_url('incident/psat_satisfied_list');
-$incident_link_unsatisfied_list =  base_url('incident/psat_unsatisfied_list');
+$incident_link_satisfied_list = base_url('incident/psat_satisfied_list');
+$incident_link_unsatisfied_list = base_url('incident/psat_unsatisfied_list');
 $incident_link_psat_page = base_url('incident/psat_page');
 
 // nps analysis
