@@ -198,4 +198,60 @@ class Analytics_incidents extends CI_Controller
         $data['total_selection'] = $total_selection;
         return $data;
     }
+     public function tickets_recived_by_department_set() {
+		$type = $_GET['settype'];
+
+		$departmentList = $this->db->select('dprt_id, name, slug')
+			->from('department')
+			->where('setkey', $type)
+			->where('type', 'incident')
+			->get()->result();
+
+		$alltickets = $this->ticketsincidents_model->alltickets();
+
+		$result = [];
+
+		foreach ($departmentList as $department) {
+			$data_field_count = 0;
+			$closed_tickets = 0;
+			$open_tickets = 0;
+			$addressed_tickets = 0;
+
+			foreach ($alltickets as $ticket) {
+				if ($type !== $ticket->department->setkey) continue;
+
+				if (isset($ticket->feed->reason->{$department->slug}) &&
+					$ticket->feed->reason->{$department->slug} == 1) {
+
+					$data_field_count++;
+
+					if ($ticket->status === 'Closed') {
+						$closed_tickets++;
+					} elseif ($ticket->status === 'Open') {
+						$open_tickets++;
+					}
+
+					if (!empty($ticket->feed->addressed_by)) {
+						$addressed_tickets++;
+					}
+				}
+			}
+
+			$tr_rate = ($data_field_count > 0) ? round((($closed_tickets) / $data_field_count) * 100) : 0;
+
+			$result[] = [
+				'label_field' => $department->name . " (" . $data_field_count . ")",
+				'data_field' => $data_field_count,
+				'data_field_count' => $data_field_count,
+				'closed_tickets' => $closed_tickets,
+				'open_tickets' => $open_tickets,
+				'addressed_tickets' => $addressed_tickets,
+				'tr_rate' => $tr_rate
+			];
+		}
+
+		header('Content-Type: application/json');
+		echo json_encode($result);
+		exit;
+	}
 }

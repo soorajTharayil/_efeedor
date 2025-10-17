@@ -113,6 +113,21 @@ function ticketsRecivedByDepartment(apiData) {
   });
 }
 
+/*why_patient_choose*/
+function tickets_recived_by_department_set(type,value) {
+  $('#selectedDepartment').html(value)
+  var xhr = new XMLHttpRequest();
+  var apiUrl = "https://" + domain + "/analytics_incidents/tickets_recived_by_department_set?settype="+type; // Replace with your API endpoint
+  xhr.open("GET", apiUrl, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var responseData = JSON.parse(xhr.responseText);
+      ticketsRecivedByDepartment(responseData); // Call the callback function with the API data
+    }
+  };
+  xhr.send();
+}
+
 // Example usage with your provided apiData
 // whyPatientChoose(apiData);
 
