@@ -22,7 +22,7 @@ $desc = 'desc';
 $table_tickets = 'tickets_incident';
 $open = 'Open';
 $closed = 'Closed';
-$addressed = 'Addressed';
+$addressed = 'Described';
 $table_ticket_action = 'ticket_incident_message';
 $reopen = 'Reopen';
 $type = 'incident';
@@ -43,12 +43,12 @@ $incident_reopen_tickets = $this->incident_model->tickets_feeds($table_feedback,
 $incident_transfered_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $transferd);
 
 
-$incident_allopenticket_count = count($incident_open_tickets) + count($incident_reopen_tickets) + count($incident_transfered_tickets);
+$incident_allopenticket_count = count($incident_open_tickets) + count($incident_reopen_tickets) + count($incident_transferd_tickets);
 
 
 $incident_closed_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $closed);
 $incident_addressed_tickets = $this->incident_model->tickets_feeds($table_feedback, $table_tickets, $sorttime, $addressed);
-$incident_tickets_tool = "Open Incidents: " . count($incident_open_tickets) . ', ' . "Closed Incidents: " . count($incident_closed_tickets) . ', ' . "Addressed Incidents: " . count($incident_addressed_tickets) . ',' . "Reopen : " . count($incident_reopen_tickets);
+$incident_tickets_tool = "Open Incidents: " . count($incident_open_tickets) . ', ' . "Closed Incidents: " . count($incident_closed_tickets) . ', '  . "Reopen : " . count($incident_reopen_tickets);
 $ticket_resolution_rate_incident = $this->incident_model->ticket_resolution_rate($table_tickets, $closed, $table_feedback);
 
 $close_rate_incident = $this->incident_model->ticket_rate($table_tickets, $status, $table_feedback, $table_ticket_action);
@@ -62,13 +62,13 @@ $ticket = $this->incident_model->tickets_recived_by_department_interim($type, $t
 $incalltickets = $this->ticketsincidents_model->alltickets();
 $incopentickets = $this->ticketsincidents_model->read();
 $incclosedtickets = $this->ticketsincidents_model->read_close();
-// $incaddressed = $this->ticketsincidents_model->addressedtickets();
+$incaddressed = $this->ticketsincidents_model->describetickets();
 
 
 $incident_department['alltickets'] = count($incalltickets);
 $incident_department['opentickets'] = count($incopentickets);
 $incident_department['closedtickets'] = count($incclosedtickets);
-// $incident_department['addressedtickets'] = count($incaddressed);
+$incident_department['addressedtickets'] = count($incaddressed);
 
 
 
@@ -129,7 +129,7 @@ $incident_link_passives_list = base_url('incident/nps_passive_list');
 // tickets
 $incident_link_ticket_dashboard = base_url('incident/ticket_dashboard');
 $incident_link_opentickets = base_url('incident/opentickets');
-$incident_link_addressedtickets = base_url('incident/addressedtickets');
+$incident_link_addressedtickets = base_url('incident/describetickets');
 $incident_link_closedtickets = base_url('incident/closedtickets');
 $incident_link_alltickets = base_url('incident/alltickets');
 
