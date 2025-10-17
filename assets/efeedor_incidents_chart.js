@@ -117,7 +117,7 @@ function ticketsRecivedByDepartment(apiData) {
 function tickets_recived_by_department_set(type,value) {
   $('#selectedDepartment').html(value)
   var xhr = new XMLHttpRequest();
-  var apiUrl = "https://" + domain + "/analytics_incidents/tickets_recived_by_department_set?settype="+type; // Replace with your API endpoint
+  var apiUrl = "http://" + domain + "/analytics_incidents/tickets_recived_by_department_set?settype="+type; // Replace with your API endpoint
   xhr.open("GET", apiUrl, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
