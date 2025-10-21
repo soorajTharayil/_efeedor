@@ -1440,6 +1440,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         $userMap[$row['user_id']] = $row['firstname'];
     }
     while ($tickets_incident_object = mysqli_fetch_object($tickets_incident_result)) {
+    echo 'iiiii';
 
         $tickets_incident_generate = true;
         $number = $tickets_incident_object->mobile;
@@ -1454,6 +1455,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         } else {
             $k = '';
         }
+    echo 'kkkkk';
 
 
         // Step 2: Convert comma-separated IDs into arrays
@@ -1904,6 +1906,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
 
 
+    echo 'hiiiiii';
 
 
 
