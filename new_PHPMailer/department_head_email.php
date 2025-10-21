@@ -1947,6 +1947,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
 
     }
+    echo 'hoooo';
     $update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
     mysqli_query($con, $update_query);
 }
