@@ -1424,7 +1424,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
     $Subject3 = 'Action Required: Incident Re-Assigned to You as Team Member at ' . $hospitalname . '';
     $param_incident = json_decode($feedback_incident_object->dataset);
 
-    $tickets_incident_query = 'SELECT * FROM  tickets_incident  inner JOIN department ON department.dprt_id = tickets_incident.departmentid   WHERE  feedbackid = ' . $feedback_incident_object->id . ' GROUP BY  department.description';
+    $tickets_incident_query = "SELECT * FROM tickets_incident INNER JOIN department ON department.dprt_id = tickets_incident.departmentid INNER JOIN bf_feedback_incident ON bf_feedback_incident.id = tickets_incident.feedbackid WHERE tickets_incident.feedbackid = " . $feedback_incident_object->id . " GROUP BY department.description";
     $tickets_incident_result = mysqli_query($con, $tickets_incident_query);
     $tickets_incident_rowcount = mysqli_num_rows($tickets_incident_result);
     $tickets_incident_generate = false;
@@ -1456,7 +1456,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         }
 
 
-         // Step 2: Convert comma-separated IDs into arrays
+        // Step 2: Convert comma-separated IDs into arrays
         $assign_for_process_monitor_ids = !empty($department_object->assign_for_process_monitor)
             ? explode(',', $department_object->assign_for_process_monitor)
             : [];
@@ -1945,9 +1945,10 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
             }
         }
 
-        $update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
-        mysqli_query($con, $update_query);
+
     }
+    $update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
+    mysqli_query($con, $update_query);
 }
 
 //Email for assigned user for isr
@@ -2245,11 +2246,11 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         }
         $users = get_user_by_sms_activity('IN-EMAIL-RCA-INCIDENTS', $con);
         if (!empty($users)) {
-          
+
             foreach ($users as $user_object) {
                 // Check if $patient_ward matches any value in $floor_wards
-            $email = $user_object->email;
-    
+                $email = $user_object->email;
+
                 $query1 = 'INSERT INTO `notification`(`type`, `message`, `status`, `mobile_email`, `subject`, `HID`) VALUES ("email", "' . $conn_g->real_escape_string($message1) . '", 0, "' . $email . '", "' . $conn_g->real_escape_string($Subject) . '", "' . $HID . '")';
                 $conn_g->query($query1);
 
