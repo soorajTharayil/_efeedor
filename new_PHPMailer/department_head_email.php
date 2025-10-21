@@ -1455,7 +1455,7 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
         } else {
             $k = '';
         }
-    echo 'kkkkk';
+    echo 'hoooo';
 
 
         // Step 2: Convert comma-separated IDs into arrays
@@ -1908,13 +1908,13 @@ while ($feedback_incident_object = mysqli_fetch_object($feedback_incident_result
 
     echo 'hiiiiii';
 
-// Get the list of assigned users
-if (!empty($feedback_incident_object->reassign_to)) {
-    $assign_to_users = explode(',', $feedback_incident_object->reassign_to);
 
-    foreach ($assign_to_users as $user_id) {
-        $user_id = trim($user_id);
-        if (!empty($user_id)) {
+
+        // Get the list of assigned users
+        $assign_to_users = explode(',', $feedback_incident_object->reassign_to);
+
+
+        foreach ($assign_to_users as $user_id) {
             $user_query = "SELECT * FROM user WHERE user_id = $user_id";
             $user_result = mysqli_query($con, $user_query);
 
@@ -1924,16 +1924,8 @@ if (!empty($feedback_incident_object->reassign_to)) {
                 $conn_g->query($query1);
             }
         }
-    }
-}
-
-// For process monitor
-if (!empty($tickets_incident_object->reassign_for_process_monitor)) {
-    $assign_to_users_assign_for_process_monitor = explode(',', $tickets_incident_object->reassign_for_process_monitor);
-
-    foreach ($assign_to_users_assign_for_process_monitor as $user_id) {
-        $user_id = trim($user_id);
-        if (!empty($user_id)) {
+        $assign_to_users_assign_for_process_monitor = explode(',', $tickets_incident_object->reassign_for_process_monitor);
+        foreach ($assign_to_users_assign_for_process_monitor as $user_id) {
             $user_query = "SELECT * FROM user WHERE user_id = $user_id";
             $user_result = mysqli_query($con, $user_query);
 
@@ -1943,16 +1935,9 @@ if (!empty($tickets_incident_object->reassign_for_process_monitor)) {
                 $conn_g->query($query1);
             }
         }
-    }
-}
 
-// For team member
-if (!empty($tickets_incident_object->reassign_for_team_member)) {
-    $assign_to_users_assign_for_team_member = explode(',', $tickets_incident_object->reassign_for_team_member);
-
-    foreach ($assign_to_users_assign_for_team_member as $user_id) {
-        $user_id = trim($user_id);
-        if (!empty($user_id)) {
+        $assign_to_users_assign_for_team_member = explode(',', $tickets_incident_object->reassign_for_team_member);
+        foreach ($assign_to_users_assign_for_team_member as $user_id) {
             $user_query = "SELECT * FROM user WHERE user_id = $user_id";
             $user_result = mysqli_query($con, $user_query);
 
@@ -1962,15 +1947,12 @@ if (!empty($tickets_incident_object->reassign_for_team_member)) {
                 $conn_g->query($query1);
             }
         }
+
+
     }
-}
-
-echo 'hoooo';
-
-// ✅ Update query always executes, even if above are empty
-$update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
-mysqli_query($con, $update_query);
-
+    echo 'hoooo';
+    $update_query = 'UPDATE tickets_incident SET reassigned_email = 1 WHERE id=' . $feedback_incident_object->id;
+    mysqli_query($con, $update_query);
 }
 
 //Email for assigned user for isr
