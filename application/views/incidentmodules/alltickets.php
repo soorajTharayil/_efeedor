@@ -152,7 +152,7 @@
                                     <th style="width:15%;"><?php echo lang_loader('inc', 'inc_incident_reported_by'); ?></th>
                                     <th style="width:13%;"><?php echo lang_loader('inc', 'inc_reported_on'); ?> / Occurred on</th>
                                     <th style="width:17%;">Risk / Priority / Category</th>
-                                    <th style="width:15%;">Assigned to</th>
+                                    <th style="width:15%;">Assigned details </th>
                                     <?php if (ismodule_active('INCIDENT') === true  && isfeature_active('TOTAL-INCIDENTS') === true) { ?>
                                         <th style="width:15%; text-align:center;"><?php echo lang_loader('inc', 'inc_status'); ?></th>
                                     <?php } ?>
@@ -489,6 +489,106 @@
 
                                                 <!-- <b><strong> Process Monitor :</strong></b>
                                                 <?php echo !empty($actionText_process_monitor) ? $actionText_process_monitor : 'Unassigned'; ?> -->
+                                                <br>
+                                                <?php
+                                                // Show Assigned Date for all relevant statuses
+                                                if (
+                                                    $department->status == 'Assigned' ||
+                                                    $department->status == 'Re-assigned' ||
+                                                    $department->status == 'Described'
+                                                ) {
+                                                    $assignedDate = null;
+                                                    $ticketId = $department->id ?? null;
+
+                                                    if (!empty($ticketId)) {
+                                                        // Build base query
+                                                        $this->db->select('created_on')
+                                                            ->from('ticket_incident_message')
+                                                            ->where('ticketid', $ticketId);
+
+                                                        // ✅ Logic based on current status
+                                                        if ($department->status == 'Re-assigned') {
+                                                            // Get the latest Re-assigned record
+                                                            $this->db->where('ticket_status', 'Re-assigned')
+                                                                ->order_by('created_on', 'DESC')
+                                                                ->limit(1);
+                                                        } else {
+                                                            // Get the first Assigned record
+                                                            $this->db->where('ticket_status', 'Assigned')
+                                                                ->order_by('created_on', 'ASC')
+                                                                ->limit(1);
+                                                        }
+
+                                                        $query = $this->db->get();
+                                                        $result = $query->row();
+
+                                                        if (!empty($result)) {
+                                                            $assignedDate = $result->created_on;
+                                                        }
+                                                    }
+
+                                                    // Display the label and date
+                                                    echo '<b><strong>Assigned On :</strong></b> ';
+                                                    if (!empty($assignedDate)) {
+                                                        echo date('d M, Y - g:i A', strtotime($assignedDate));
+                                                    } else {
+                                                        echo 'Unassigned';
+                                                    }
+                                                    echo '<br>';
+                                                }
+                                                ?>
+
+
+                                                <br>
+
+                                                <?php
+                                                if (
+                                                    $department->status == 'Assigned' ||
+                                                    $department->status == 'Re-assigned' ||
+                                                    $department->status == 'Described'
+                                                ) {
+                                                ?>
+                                                    <div>
+                                                        <b><strong>TAT Due :</strong></b>
+                                                        <?php
+                                                        date_default_timezone_set('Asia/Kolkata'); // Set your timezone
+
+                                                        // Determine which date field to use
+                                                        if ($department->status == 'Described') {
+                                                            $targetDate = $department->assign_tat_due_date ?? null;
+                                                        } else {
+                                                            $targetDate = $department->assign_tat_due_date ?? null;
+                                                        }
+
+                                                        if (!empty($targetDate)) {
+                                                            $dueDate = strtotime($targetDate);
+                                                            $now = time();
+
+                                                            // Display formatted due date first
+                                                            echo date('d M, Y - g:i A', $dueDate) . '<br>';
+
+                                                            if ($dueDate > $now) {
+                                                                // ✅ Within TAT (green)
+                                                                // echo '<span style="color:green; font-weight:bold;">Within TAT</span><br>';
+                                                            } else {
+                                                                // ❌ TAT Overdue (red)
+                                                                $diff = $now - $dueDate;
+                                                                $days = floor($diff / (60 * 60 * 24));
+                                                                $hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+
+                                                                // echo '<span style="color:red; font-weight:bold;">TAT due by ';
+                                                                // if ($days > 0) echo $days . ' days ';
+                                                                // if ($hours > 0) echo $hours . ' hrs';
+                                                                echo '</span><br>';
+                                                            }
+                                                        } else {
+                                                            echo 'Unassigned';
+                                                        }
+                                                        ?>
+                                                        <br>
+                                                    </div>
+                                                <?php } ?>
+
                                             </td>
 
 
@@ -598,6 +698,83 @@
                                                             <?php echo form_close(); ?>
                                                         <?php } ?>
                                                     </div>
+                                                    <br>
+                                                    <?php
+                                                    if (
+                                                        $department->status == 'Assigned' ||
+                                                        $department->status == 'Re-assigned' ||
+                                                        $department->status == 'Described'
+                                                    ) {
+                                                    ?>
+                                                        <div>
+                                                            <?php
+                                                            date_default_timezone_set('Asia/Kolkata'); // Set timezone
+
+                                                            $targetDate = $department->assign_tat_due_date ?? null;
+
+                                                            if (!empty($targetDate)) {
+                                                                $dueDate = strtotime($targetDate);
+                                                                $now = time();
+                                                                $ticketId = $department->id ?? null;
+                                                                $describedDate = null;
+
+                                                                // ✅ If status is "Described", fetch described time from DB
+                                                                if ($department->status == 'Described' && !empty($ticketId)) {
+                                                                    $this->db->select('created_on')
+                                                                        ->from('ticket_incident_message')
+                                                                        ->where('ticketid', $ticketId)
+                                                                        ->where('ticket_status', 'Described')
+                                                                        ->order_by('created_on', 'DESC')
+                                                                        ->limit(1);
+                                                                    $query = $this->db->get();
+                                                                    $result = $query->row();
+
+                                                                    if (!empty($result)) {
+                                                                        $describedDate = strtotime($result->created_on);
+                                                                    }
+                                                                }
+
+                                                                // ✅ If Described, compare described date vs due date
+                                                                if ($department->status == 'Described' && !empty($describedDate)) {
+                                                                    if ($describedDate <= $dueDate) {
+                                                                        // Described within TAT ✅
+                                                                        echo '<span style="color:green; font-weight:bold;">Within TAT</span><br>';
+                                                                    } else {
+                                                                        // Described after due date ❌
+                                                                        $diff = $describedDate - $dueDate;
+                                                                        $days = floor($diff / (60 * 60 * 24));
+                                                                        $hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+
+                                                                        echo '<span style="color:red; font-weight:bold;">TAT Exceeded by ';
+                                                                        if ($days > 0) echo $days . ' days ';
+                                                                        if ($hours > 0) echo $hours . ' hrs';
+                                                                        echo '</span><br>';
+                                                                    }
+                                                                } else {
+                                                                    // ✅ For all other statuses, compare current time vs due date
+                                                                    if ($dueDate > $now) {
+                                                                        echo '<span style="color:green; font-weight:bold;">Within TAT</span><br>';
+                                                                    } else {
+                                                                        $diff = $now - $dueDate;
+                                                                        $days = floor($diff / (60 * 60 * 24));
+                                                                        $hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+
+                                                                        echo '<span style="color:orange; font-weight:bold;">TAT Due by ';
+                                                                        if ($days > 0) echo $days . ' days ';
+                                                                        if ($hours > 0) echo $hours . ' hrs';
+                                                                        echo '</span><br>';
+                                                                    }
+                                                                }
+                                                            } else {
+                                                                echo 'Unassigned';
+                                                            }
+                                                            ?>
+                                                            <br>
+                                                        </div>
+
+
+                                                    <?php } ?>
+
                                                 </td>
 
 

@@ -1437,8 +1437,8 @@ foreach ($users as $user) {
             
                         ?>
                         <?php foreach ($preselected_users_assign_to as $oldUserId): ?>
-                        <input type="hidden" name="users_reassign[]"
-                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" checked="true" name="users_reassign[]"
+                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>" id="rem_user_reassign_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                         <?php endforeach; ?>
                         <div class="checkbox-container" id="userList_reassign">
                             <?php foreach ($users as $user): ?>
@@ -1448,7 +1448,7 @@ foreach ($users as $user) {
                                     name="users_reassign[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
-                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked' : ''; ?>>
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked="true"' : ''; ?>>
 
                                 <label
                                     for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
@@ -1476,7 +1476,7 @@ foreach ($users as $user) {
                             ?>
                             <?php foreach ($preselected_users_assign_for_team_member as $oldUserId): ?>
                             <input type="hidden" name="users_reassign_for_team_member[]"
-                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>" id="rem_users_reassign_for_team_member_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -1511,7 +1511,7 @@ foreach ($users as $user) {
                             ?>
                             <?php foreach ($preselected_users_assign_for_process_monitor as $oldUserId): ?>
                             <input type="hidden" name="users_reassign_for_process_monitor[]"
-                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>"  id="rem_users_reassign_for_process_monitor_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -2214,6 +2214,7 @@ foreach ($users as $user) {
             const checkbox = checkboxes[i].getElementsByTagName('input')[0];
             if (checkbox.checked) {
                 createTag(checkbox, selectedContainer);
+                
             }
         }
 
@@ -2240,7 +2241,9 @@ foreach ($users as $user) {
 
         // Handle selecting/unselecting users
         container.addEventListener('change', function (e) {
+            console.log(e.target.type)
             if (e.target && e.target.type === "checkbox") {
+               
                 if (e.target.checked) {
                     createTag(e.target, selectedContainer);
                 } else {
@@ -2268,11 +2271,25 @@ foreach ($users as $user) {
         tag.dataset.userId = checkbox.value;
         tag.innerHTML = label + " <span>&times;</span>";
         container.appendChild(tag);
-
+       
         tag.querySelector("span").addEventListener("click", () => {
             tag.remove();
             checkbox.checked = false;
+            // Remove corresponding hidden input if exists
+            const hiddenInputId = "rem_user_reassign_" + checkbox.value;
+            const hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
+            hiddenInputId = "rem_users_reassign_for_team_member_" + checkbox.value;
+            hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
+            hiddenInputId = "rem_users_reassign_for_process_monitor_" + checkbox.value;
+            hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
         });
+        
     }
 
     // Initialize

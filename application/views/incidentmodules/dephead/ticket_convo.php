@@ -105,8 +105,8 @@
 									<p>
 										<strong>TAT due date:</strong>
 										<?php
-										if (!empty($r->reassign_tat_due_date)) {
-											echo date('d M, Y - g:i A', strtotime($r->reassign_tat_due_date));
+										if (!empty($r->assign_tat_due_date)) {
+											echo date('d M, Y - g:i A', strtotime($r->assign_tat_due_date));
 										} else {
 											echo 'N/A';
 										}

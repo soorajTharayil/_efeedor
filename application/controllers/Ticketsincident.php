@@ -114,9 +114,7 @@ class Ticketsincident extends CI_Controller
 
 	public function create($dprt_id = null)
 	{
-		// print_r($_POST);
-		// exit;
-
+		
 		if ($this->input->post('deparment') != 0) {
 			$this->db->where('dprt_id', $this->input->post('deparment'));
 
@@ -455,9 +453,9 @@ class Ticketsincident extends CI_Controller
 				// ✅ Validate only Team Leader(s)
 				if (empty($assigned_user_ids)) {
 					echo "<script>
-        alert('Please select Team Leader(s) before assigning.');
-        window.history.back();
-    </script>";
+                         alert('Please select Team Leader(s) before assigning.');
+                         window.history.back();
+                    </script>";
 					exit;
 				}
 
@@ -625,7 +623,8 @@ class Ticketsincident extends CI_Controller
 						'reassign_by' => $this->session->userdata('user_id'),
 						'reassigned_message' => 0,
 						'describe_message' => -1,
-						'reassign_tat_due_date' => $this->input->post('reassign_due_date'),
+						'assign_tat_due_date_status' => 0,
+						'assign_tat_due_date' => $this->input->post('reassign_due_date'),
 						'reassigned_email' => 0,
 						'reassign_to' => implode(',', $assigned_user_ids),
 						'reassign_for_team_member' => implode(',', $assigned_user_ids_for_team_member),
@@ -646,7 +645,7 @@ class Ticketsincident extends CI_Controller
 						'reply' => $this->input->post('reply'),
 						'message' => $message,
 						'action' => $action,
-						'reassign_tat_due_date' => $this->input->post('reassign_due_date'),
+						'assign_tat_due_date' => $this->input->post('reassign_due_date'),
 						'reassign_action_for_team_member' => $assigned_user_names_str_for_team_member, // 🆕
 						'reassign_action_for_process_monitor' => $action_for_process_monitor,
 						'ticket_status' => 'Re-assigned',
