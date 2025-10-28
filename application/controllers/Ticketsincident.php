@@ -114,7 +114,7 @@ class Ticketsincident extends CI_Controller
 
 	public function create($dprt_id = null)
 	{
-		
+
 		if ($this->input->post('deparment') != 0) {
 			$this->db->where('dprt_id', $this->input->post('deparment'));
 
@@ -975,18 +975,25 @@ class Ticketsincident extends CI_Controller
 	}
 	public function update_described_rca()
 	{
-		// --- Safety & headers ---
-		ob_clean(); // Clear stray output (fixes JSON parse errors)
-		header('Content-Type: application/json; charset=utf-8');
+		// 🧹 Clean any previous output (headers, spaces, etc.)
+		if (ob_get_length()) {
+			@ob_end_clean();
+		}
 
-		// --- Get ID ---
+		// Force plain JSON output
+		header('Content-Type: application/json; charset=utf-8');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Pragma: no-cache');
+
 		$id = $this->input->post('id');
 		if (empty($id)) {
 			echo json_encode(['status' => 'error', 'message' => 'Missing ID']);
-			exit;
+			return;
 		}
 
-		// --- Map incoming POST fields to DB columns ---
+		$this->load->model('ticketsincidents_model');
+
+		// --- Map form fields to DB columns ---
 		$updateData = [
 			'rootcause_describe' => $this->input->post('rca_in_brief'),
 			'rca_tool_describe' => $this->input->post('tool_applied'),
@@ -1007,23 +1014,50 @@ class Ticketsincident extends CI_Controller
 			'verification_comment_describe' => $this->input->post('lesson_learned')
 		];
 
-
-		// --- Normalize empty values to NULL ---
-		foreach ($updateData as $key => $val) {
-			$updateData[$key] = ($val === '' || $val === null) ? null : trim($val);
+		// Trim and normalize nulls
+		foreach ($updateData as $k => $v) {
+			$updateData[$k] = (isset($v) && trim($v) !== '') ? trim($v) : null;
 		}
 
-		// --- Model call ---
-		$this->load->model('ticketsincidents_model');
+		// --- FILE UPLOAD HANDLING ---
+		$this->load->library('upload');
+
+		$config = [
+			'upload_path' => FCPATH . 'assets/images/describeimage/',
+			'allowed_types' => 'jpg|jpeg|png|gif|pdf|doc|docx|xls|xlsx|txt|csv|zip|rar|bmp|tiff|mp4|avi|mov|m4a|wav|wma',
+			'max_size' => 10240, // 10 MB
+			'file_name' => time() . '_' . ($_FILES['describe_picture']['name'] ?? '')
+		];
+
+		$this->upload->initialize($config);
+
+		// --- Handle file removal ---
+		if ($this->input->post('remove_file') == '1') {
+			$updateData['describe_picture'] = null;
+		}
+
+		// --- Handle file upload ---
+		if (!empty($_FILES['describe_picture']['name'])) {
+			if (!$this->upload->do_upload('describe_picture')) {
+				log_message('error', '❌ File Upload Error: ' . $this->upload->display_errors('', ''));
+			} else {
+				$uploadData = $this->upload->data();
+				$updateData['describe_picture'] = $uploadData['file_name'];
+			}
+		}
+
+		// --- Update database ---
 		$ok = $this->ticketsincidents_model->update_rca_details($id, $updateData);
 
-		// --- Logging for debugging (safe, won’t break JSON) ---
-		log_message('debug', '🟢 update_described_rca(): POST=' . json_encode($_POST));
-		log_message('debug', '🟢 update_described_rca(): Data=' . json_encode($updateData));
-		log_message('debug', '🟢 update_described_rca(): SQL=' . $this->db->last_query());
+		log_message('debug', '🟢 update_described_rca() data: ' . json_encode($updateData));
 
-		// --- JSON Response ---
-		echo json_encode(['status' => $ok ? 'success' : 'error']);
-		exit;
+		// --- Return clean JSON ---
+		echo json_encode([
+			'status' => $ok ? 'success' : 'error',
+			'message' => $ok ? 'RCA updated successfully' : 'Database update failed'
+		]);
+
+		return; // do NOT call exit(); lets CI finish cleanly
 	}
+
 }

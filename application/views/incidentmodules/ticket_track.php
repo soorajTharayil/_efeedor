@@ -1166,14 +1166,14 @@ foreach ($users as $user) {
                     </div>
                 </div>
 
-                <!-- <div class="form-group ">
+                <div class="form-group ">
                     <label for="picture" class="col-xs-3 col-form-label">Upload supporting file (Max limit
                         10MB)</label><br>
                     <div class="col-sm-12">
                         <input type="file" name="picture" id="picture">
                         <input type="hidden" name="old_picture">
                     </div>
-                </div> -->
+                </div>
 
 
 

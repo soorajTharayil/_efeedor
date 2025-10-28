@@ -17,8 +17,8 @@
 			$nodata = true;
 			?>
 			<div class="timeline">
-				<?php foreach ($department->replymessage as $index => $r): 
-				// echo '<pre>';
+				<?php foreach ($department->replymessage as $index => $r):
+					// echo '<pre>';
 					// print_r($department->status);exit;
 					$tick_status = $department->status;
 					?>
@@ -240,7 +240,8 @@
 																class="btn btn-sm btn-outline-primary mt-2"
 																href="<?php echo $file_url; ?>" download>Download File</a>
 														<?php endif; ?>
-													</div> <?php endif; ?>
+													</div>
+												<?php endif; ?>
 
 											</div>
 										</div>
@@ -257,7 +258,7 @@
 											var id = $(this).data('id');
 											var section = $('#editable-' + id);
 
-											// ✅ Handle <p>, <li>, and <dd>/<dt> pairs
+											// ✅ Convert text to editable inputs
 											section.find('p, li, dd').each(function () {
 												var $this = $(this);
 												var label = '';
@@ -278,31 +279,31 @@
 													}
 												}
 
-												// CASE 2️⃣: Definition list <dt>/<dd> (5W2H section)
+												// CASE 2️⃣: Definition list <dt>/<dd>
 												else if ($this.is('dd')) {
 													var dt = $this.prev('dt').text().trim();
 													label = dt.replace(/\?/, '').trim();
 													value = $this.text().trim();
 												}
 
-												// Skip if no label or no value found
+												// Skip if no label or value found
 												if (!label) return;
 
-												// 🔧 Normalize any label into a clean, safe field name
+												// 🔧 Normalize label into safe field name
 												var labelKey = label
-													.replace(/[^a-zA-Z0-9]+/g, '_')  // replace everything not letter/number with "_"
-													.replace(/_+/g, '_')              // collapse multiple underscores
-													.replace(/^_+|_+$/g, '')          // trim underscores
-													.toLowerCase();                   // unify case
+													.replace(/[^a-zA-Z0-9]+/g, '_')
+													.replace(/_+/g, '_')
+													.replace(/^_+|_+$/g, '')
+													.toLowerCase();
 
-												// 🛑 Skip "Tool Applied" field editing
+												// 🛑 Skip "Tool Applied"
 												if (label.toLowerCase() === 'tool applied') {
 													$this.html('<b>' + label + ':</b> ' + value +
 														'<input type="hidden" class="editable-input" name="' + labelKey + '" value="' + value + '">');
 													return;
 												}
 
-												// Create input
+												// Create editable input
 												var inputEl = (value.length > 80)
 													? $('<textarea class="form-control form-control-sm editable-input" rows="2"></textarea>')
 														.val(value)
@@ -311,7 +312,7 @@
 														.val(value)
 														.attr('name', labelKey);
 
-												// Replace inner HTML with editable input
+												// Replace element with input
 												if ($bold.length) {
 													$this.html($bold.prop('outerHTML') + ': ').append(inputEl);
 												} else if ($this.is('dd')) {
@@ -319,8 +320,54 @@
 												}
 											});
 
+											// Hide Edit, show Save
 											$(".action-buttons-" + id + " .edit-btn").hide();
 											$(".action-buttons-" + id + " .save-btn").show();
+
+											// 🟦 Add file upload section
+											var fileSection = `
+	  <div class="file-upload-section mt-3" id="file-section-${id}">
+		<hr>
+		<label><b>Attached File:</b></label>
+		<div class="current-file mt-2"></div>
+		<div class="new-file mt-2">
+		  <input type="file" name="describe_picture" class="form-control form-control-sm upload-input" accept="*/*">
+		</div>
+	  </div>
+	`;
+
+											if ($('#file-section-' + id).length === 0) {
+												section.append(fileSection);
+											}
+
+											// 🟨 Load existing file (if any)
+											var currentFile = <?php echo json_encode($r->describe_picture ?? null); ?>;
+											if (currentFile) {
+												var fileUrl = "<?php echo base_url('assets/images/describeimage/'); ?>" + currentFile;
+												var ext = currentFile.split('.').pop().toLowerCase();
+												var previewHtml = '';
+
+												if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+													previewHtml = `<img src="${fileUrl}" class="img-thumbnail" style="max-width:120px;">
+					   <button type="button" class="btn btn-sm btn-danger ms-2 remove-old-file">Remove</button>`;
+												} else if (ext === 'pdf') {
+													previewHtml = `<embed src="${fileUrl}" width="150" height="120">
+					   <button type="button" class="btn btn-sm btn-danger ms-2 remove-old-file">Remove</button>`;
+												} else {
+													previewHtml = `<a href="${fileUrl}" target="_blank" class="btn btn-sm btn-outline-primary">${currentFile}</a>
+					   <button type="button" class="btn btn-sm btn-danger ms-2 remove-old-file">Remove</button>`;
+												}
+
+												$('#file-section-' + id + ' .current-file').html(previewHtml);
+											}
+
+										});
+
+										// 🟥 Handle remove old file button
+										$(document).off('click', '.remove-old-file').on('click', '.remove-old-file', function () {
+											var container = $(this).closest('.current-file');
+											container.html('<p class="text-muted">Old file removed.</p>');
+											$('<input type="hidden" name="remove_file" value="1">').appendTo(container.closest('.file-upload-section'));
 										});
 
 										// 🟨 SAVE button click
@@ -334,48 +381,59 @@
 
 											var id = $(this).data('id');
 											var section = $('#editable-' + id);
-											var dataToSend = { id: id };
+											var formData = new FormData();
+											formData.append('id', id);
 
+											// Collect text inputs
 											section.find('.editable-input').each(function () {
-												var name = $(this).attr('name');
-												var val = $.trim($(this).val());
-												dataToSend[name] = val;
+												formData.append($(this).attr('name'), $(this).val());
 											});
 
-											var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>';
-											var csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
-											dataToSend[csrfName] = csrfHash;
+											// Collect uploaded file
+											var fileInput = section.find('input[type="file"][name="describe_picture"]')[0];
+											if (fileInput && fileInput.files.length > 0) {
+												formData.append('describe_picture', fileInput.files[0]);
+											}
 
-											console.log("🟢 Sending to backend:", dataToSend);
+											// Check if file removed
+											var removeFileInput = section.find('input[name="remove_file"]');
+											if (removeFileInput.length > 0) {
+												formData.append('remove_file', '1');
+											}
 
+											// CSRF token
+											formData.append('<?php echo $this->security->get_csrf_token_name(); ?>', '<?php echo $this->security->get_csrf_hash(); ?>');
+
+											// Show loading indicator
+											var saveBtn = $(".action-buttons-" + id + " .save-btn");
+											saveBtn.prop('disabled', true).text('Saving...');
+
+											// AJAX Request with FormData
 											$.ajax({
 												url: "<?php echo base_url('ticketsincident/update_described_rca'); ?>",
 												type: "POST",
-												data: dataToSend,
-												dataType: "text",
+												data: formData,
+												contentType: false,
+												processData: false,
 												success: function (responseText) {
-													try {
-														var cleanText = responseText.trim();
-														var response = JSON.parse(cleanText);
-														console.log('✅ Clean parsed response:', response);
+													saveBtn.prop('disabled', false).text('Save');
 
+													try {
+														var response = JSON.parse(responseText.trim());
 														if (response.status === 'success') {
-															alert('✅ RCA details updated successfully!');
-															setTimeout(function () {
-																location.reload();
-															}, 500);
+															alert('✅ RCA details and file updated successfully!');
+															setTimeout(() => location.reload(), 500);
 														} else {
-															alert('⚠️ Failed to update RCA. Please try again.');
+															alert('⚠️ Failed to update RCA.');
 														}
 													} catch (e) {
-														console.warn('⚠️ Could not parse JSON. Raw:', responseText);
-														alert('✅ RCA details updated successfully!');
-														setTimeout(function () {
-															location.reload();
-														}, 500);
+														console.warn('⚠️ Could not parse response, raw:', responseText);
+														alert('✅ RCA updated successfully!');
+														setTimeout(() => location.reload(), 500);
 													}
 												},
 												error: function (xhr, status, error) {
+													saveBtn.prop('disabled', false).text('Save');
 													console.error('❌ AJAX Error:', status, error);
 													console.error('Response text:', xhr.responseText);
 													alert('⚠️ Error while saving. Please try again.');
@@ -385,7 +443,6 @@
 
 									});
 								</script>
-
 
 								<style>
 									.editable-input {
@@ -469,34 +526,31 @@
 
 										<?php if ($r->picture):
 											$file_extension = pathinfo($r->picture, PATHINFO_EXTENSION);
-											$file_url = base_url('assets/images/capaimage/' . $r->picture);
-											?>
-											<div class="mt-3">
-												<b>Attached File:</b><br>
-												<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-													<img class="img-thumbnail mt-2" style="max-width:150px;"
-														src="<?php echo $file_url; ?>">
-													<br><a class="btn btn-sm btn-outline-primary mt-2"
-														href="<?php echo $file_url; ?>" download>Download Image</a>
-												<?php elseif ($file_extension === 'pdf'): ?>
-													<embed src="<?php echo $file_url; ?>" type="application/pdf" width="250"
-														height="200" class="mt-2">
-													<br><a class="btn btn-sm btn-outline-danger mt-2"
+											$file_url = base_url('assets/images/capaimage/' . $r->picture); ?>
+											<div class="mt-3"> <b>Attached File:</b><br>
+												<?php if (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?> <img
+														class="img-thumbnail mt-2" style="max-width:150px;"
+														src="<?php echo $file_url; ?>"> <br><a
+														class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
+														download>Download Image</a>
+												<?php elseif ($file_extension === 'pdf'): ?> <embed
+														src="<?php echo $file_url; ?>" type="application/pdf" width="250"
+														height="200" class="mt-2"> <br><a class="btn btn-sm btn-outline-danger mt-2"
 														href="<?php echo $file_url; ?>" download>Download PDF</a>
-												<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?>
-													<a class="btn btn-sm btn-outline-success mt-2" href="<?php echo $file_url; ?>"
-														download>Download <?php echo strtoupper($file_extension); ?> File</a>
-												<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?>
-													<a class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
+												<?php elseif (in_array($file_extension, ['xls', 'xlsx', 'csv'])): ?> <a
+														class="btn btn-sm btn-outline-success mt-2" href="<?php echo $file_url; ?>"
+														download>Download
+														<?php echo strtoupper($file_extension); ?> File</a>
+												<?php elseif (in_array($file_extension, ['doc', 'docx'])): ?> <a
+														class="btn btn-sm btn-outline-info mt-2" href="<?php echo $file_url; ?>"
 														download>Download Word Document</a>
-												<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?>
-													<a class="btn btn-sm btn-outline-secondary mt-2" href="<?php echo $file_url; ?>"
-														download>Download Compressed File</a>
+												<?php elseif (in_array($file_extension, ['zip', 'rar'])): ?> <a
+														class="btn btn-sm btn-outline-secondary mt-2"
+														href="<?php echo $file_url; ?>" download>Download Compressed File</a>
 												<?php elseif (in_array($file_extension, ['mp4', 'avi', 'mov', 'm4a', 'wav', 'wma'])): ?>
 													<a class="btn btn-sm btn-outline-dark mt-2" href="<?php echo $file_url; ?>"
-														download>Download Media File</a>
-												<?php else: ?>
-													<a class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
+														download>Download Media File</a> <?php else: ?> <a
+														class="btn btn-sm btn-outline-primary mt-2" href="<?php echo $file_url; ?>"
 														download>Download File</a>
 												<?php endif; ?>
 											</div>
