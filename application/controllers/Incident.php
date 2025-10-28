@@ -1908,29 +1908,207 @@ class Incident extends CI_Controller
             $dataexport[$i]['row4'] = 'REPORTED BY';
             $dataexport[$i]['row5'] = 'EMPLOYEE ID';
             $dataexport[$i]['row6'] = 'PHONE NUMBER';
-            $dataexport[$i]['row7'] = 'FLOOR/WARD';
-            $dataexport[$i]['row8'] = 'SITE';
-            $dataexport[$i]['row9'] = 'INCIDENT CATEGORY';
-            $dataexport[$i]['row10'] = 'ACTION PRIORITY';
-            $dataexport[$i]['row11'] = 'ASSIGNED RISK';
-            $dataexport[$i]['row12'] = 'INCIDENT';
-            $dataexport[$i]['row13'] = 'INCIDENT SHORT NAME';
-            $dataexport[$i]['row14'] = 'ASSIGNEE';
-            $dataexport[$i]['row15'] = 'STATUS';
-            $dataexport[$i]['row16'] = 'TRANSFERRED TO';
-            $dataexport[$i]['row17'] = 'LAST MODIFIED';
-            $dataexport[$i]['row18'] = 'TAGGED PATIENT TYPE';
-            $dataexport[$i]['row19'] = 'TAGGED PATIENT NAME';
-            $dataexport[$i]['row20'] = 'TAGGED PATIENT ID';
-            $dataexport[$i]['row21'] = 'PRIMARY CONSULTANT';
+            $dataexport[$i]['row7'] = 'INCIDENT';
+            $dataexport[$i]['row8'] = 'INCIDENT SHORT NAME';
+            $dataexport[$i]['row9'] = 'INCIDENT DESCRIPTION';
+            $dataexport[$i]['row10'] = 'INCIDENT OCCURED ON';
+
+            $dataexport[$i]['row11'] = 'FLOOR/WARD';
+            $dataexport[$i]['row12'] = 'SITE';
+
+            $dataexport[$i]['row13'] = 'ASSIGNED RISK';
+            $dataexport[$i]['row14'] = 'ASSIGNED PRIORITY';
+            $dataexport[$i]['row15'] = 'ASSIGNED CATEGORY';
+
+
+            $dataexport[$i]['row16'] = 'TAGGED PATIENT NAME';
+            $dataexport[$i]['row17'] = 'TAGGED PATIENT ID';
+
+
+            $dataexport[$i]['row18'] = 'ASSIGNEE TO';
+            $dataexport[$i]['row19'] = 'TAT DUE DATE';
+            $dataexport[$i]['row20'] = 'TAT DESCRIBED STATUS';
+            $dataexport[$i]['row21'] = 'ROOT CAUSE ANALYSIS';
+            $dataexport[$i]['row22'] = 'CORRECTIVE ACTION';
+            $dataexport[$i]['row23'] = 'PREVENTIVE ACTION';
+            $dataexport[$i]['row24'] = 'CLOSURE VERIFICATION REMARK';
+
+            $dataexport[$i]['row25'] = 'STATUS';
+
             $i++;
             if (!empty($departments)) {
 
-
-
-
                 $sl = 1;
                 foreach ($departments as $department) {
+                    $rca_details = '';
+                    $corrective_describe = '';
+                    $preventive_describe = '';
+                    $closedverifycomment = '';
+                    $display = '';
+                    $tat_due_date = '';
+
+                    date_default_timezone_set('Asia/Kolkata');
+
+                    // --- Build user map ---
+                    $userss = $this->db->select('user_id, firstname')
+                        ->where('user_id !=', 1)
+                        ->get('user')
+                        ->result();
+
+                    $userMap = [];
+                    foreach ($userss as $u) {
+                        $userMap[$u->user_id] = $u->firstname;
+                    }
+
+                    // --- Convert assigned IDs ---
+                    $assign_to_ids = !empty($department->assign_to)
+                        ? explode(',', $department->assign_to)
+                        : [];
+
+                    $assign_to_names = array_map(function ($id) use ($userMap) {
+                        return isset($userMap[$id]) ? $userMap[$id] : $id;
+                    }, $assign_to_ids);
+
+                    $names = implode(',', $assign_to_names);
+
+                    // --- Determine due date ---
+                    $targetDate = $department->assign_tat_due_date ?? null;
+                    $dueDate = '';
+                    $tat_due_date = '';
+                    $now = time();
+
+
+                    if (!empty($targetDate) && strtolower($targetDate) != 'unassigned' && strtolower($targetDate) != 'na') {
+                        $dueDate = strtotime($targetDate);
+                        $tat_due_date = date('d M, Y - g:i A', $dueDate);
+                    }
+
+                    // --- Get described date (if applicable) ---
+                    $describedDate = null;
+                    $ticketId = $department->id ?? null;
+
+                    if (!empty($ticketId) && $department->status == 'Described') {
+                        $result = $this->db->select('created_on')
+                            ->from('ticket_incident_message')
+                            ->where('ticketid', $ticketId)
+                            ->where('ticket_status', 'Described')
+                            ->order_by('created_on', 'DESC')
+                            ->limit(1)
+                            ->get()
+                            ->row();
+
+                        if (!empty($result)) {
+                            $describedDate = strtotime($result->created_on);
+                        }
+                    }
+
+                    // --- Determine display status ---
+                    if (empty($dueDate)) {
+                        $display = 'Unassigned';
+                    } else if ($department->status == 'Described' && !empty($describedDate)) {
+                        if ($describedDate <= $dueDate) {
+                            $display = 'Within TAT';
+                        } else {
+                            $diff = $describedDate - $dueDate;
+                            $days = floor($diff / (60 * 60 * 24));
+                            $hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+                            $display = 'TAT Exceeded by ';
+                            if ($days > 0)
+                                $display .= $days . ' days ';
+                            if ($hours > 0)
+                                $display .= $hours . ' hrs';
+                        }
+                    } else {
+                        if ($dueDate > $now) {
+                            $display = 'Within TAT';
+                        } else {
+                            $diff = $now - $dueDate;
+                            $days = floor($diff / (60 * 60 * 24));
+                            $hours = floor(($diff % (60 * 60 * 24)) / (60 * 60));
+                            $display = 'TAT Due by ';
+                            if ($days > 0)
+                                $display .= $days . ' days ';
+                            if ($hours > 0)
+                                $display .= $hours . ' hrs';
+                        }
+                    }
+
+                    // --- Fetch closed verification comment ---
+                    if (!empty($ticketId) && $department->status == 'Closed') {
+                        $result = $this->db->select('verification_comment')
+                            ->from('ticket_incident_message')
+                            ->where('ticketid', $ticketId)
+                            ->where('ticket_status', 'Closed')
+                            ->order_by('created_on', 'DESC')
+                            ->limit(1)
+                            ->get()
+                            ->row();
+                        if (!empty($result)) {
+                            $closedverifycomment = $result->verification_comment;
+                        }
+                    }
+
+
+                    // ✅ If status is "Described", fetch described time from DB
+                    if ($department->status == 'Described' || $department->status == 'Closed') {
+
+                        $this->db->select('*')
+                            ->from('ticket_incident_message')
+                            ->where('ticketid', $ticketId)
+                            ->where('ticket_status', 'Described')
+                            ->order_by('created_on', 'DESC')
+                            ->limit(1);
+                        $query = $this->db->get();
+                        $result = $query->row();
+
+                        if (!empty($result)) {
+                            $corrective_describe = $result->corrective_describe;
+                            $preventive_describe = $result->preventive_describe;
+
+                            // Tool applied
+                            if (!empty($result->rca_tool_describe)) {
+                                $rca_details .= "Tool Applied: " . $result->rca_tool_describe . "\n";
+                            }
+                            // RCA in brief
+                            if (!empty($result->rootcause_describe)) {
+                                $rca_details .= "RCA in brief: " . $result->rootcause_describe . "\n";
+                            }
+
+                            // 5 WHY format
+                            if ($result->rca_tool_describe == '5WHY') {
+                                for ($w = 1; $w <= 5; $w++) {
+                                    $why_field = 'fivewhy_' . $w . '_describe';
+                                    if (!empty($result->$why_field)) {
+                                        $rca_details .= "WHY $w: " . $result->$why_field . "\n";
+                                    }
+                                }
+                            }
+
+                            // 5W2H format
+                            if ($result->rca_tool_describe == '5W2H') {
+                                $map = [
+                                    'fivewhy2h_1_describe' => 'What happened?',
+                                    'fivewhy2h_2_describe' => 'Why did it happen?',
+                                    'fivewhy2h_3_describe' => 'Where did it happen?',
+                                    'fivewhy2h_4_describe' => 'When did it happen?',
+                                    'fivewhy2h_5_describe' => 'Who was involved?',
+                                    'fivewhy2h_6_describe' => 'How did it happen?',
+                                    'fivewhy2h_7_describe' => 'How much / How many (impact/cost)?'
+                                ];
+
+                                foreach ($map as $field => $label) {
+                                    if (!empty($result->$field)) {
+                                        $rca_details .= $label . ': ' . $result->$field . "\n";
+                                    }
+                                }
+                            }
+
+                        }
+
+
+
+                    }
+
                     $rm = (array) $department->feed->risk_matrix;
 
                     $level = $rm['level'] ?? 'Unassigned';
@@ -1963,6 +2141,14 @@ class Incident extends CI_Controller
                             $query = $this->db->get();
                             $moved_to_arr = $query->result();
                         }
+                        $incidentTime = $department->feed->incident_occured_in;
+
+                        // If it's not empty, format it
+                        if (!empty($incidentTime)) {
+                            $formatted = date('d M, Y - g:i A', strtotime($incidentTime));
+                        } else {
+                            $formatted = 'N/A';
+                        }
                         $transfer_dep_desc = $moved_to_arr[0]->description;
                         if (!empty($department)) {
                             $dataexport[$i]['row1'] = $sl;
@@ -1971,47 +2157,65 @@ class Incident extends CI_Controller
                             $dataexport[$i]['row4'] = $department->feed->name;
                             $dataexport[$i]['row5'] = $department->feed->patientid;
                             $dataexport[$i]['row6'] = $department->feed->contactnumber;
-                            $dataexport[$i]['row7'] = $department->feed->ward;
-                            $dataexport[$i]['row8'] = $department->feed->bedno;
-                            $dataexport[$i]['row9'] = $department->feed->incident_type;
-                            $dataexport[$i]['row10'] = $department->feed->priority;
-                            $dataexport[$i]['row11'] = $level . ' (' . $impact . ' Impact × ' . $likelihood . ' Likelihood)';
-                            $dataexport[$i]['row12'] = $issue;
-                            $dataexport[$i]['row13'] = $department->department->description;
-                            if ($department->department->pname != '' && $department->department->pname != NULL) {
-                                $dataexport[$i]['row14'] = $department->department->pname;
-                            } else {
-                                $dataexport[$i]['row14'] = 'NA';
-                            }
-                            $dataexport[$i]['row15'] = $department->status;
-                            if ($transfer_dep_desc) {
-
-                                $dataexport[$i]['row16'] = $transfer_dep_desc;
+                            $dataexport[$i]['row7'] = $issue;
+                            $dataexport[$i]['row8'] = $department->department->description;
+                            $dataexport[$i]['row9'] = $department->feed->other;
+                            $dataexport[$i]['row10'] = $formatted;
+                            $dataexport[$i]['row11'] = $department->feed->ward;
+                            $dataexport[$i]['row12'] = $department->feed->bedno;
+                            $dataexport[$i]['row13'] = $level . ' (' . $impact . ' Impact × ' . $likelihood . ' Likelihood)';
+                            $dataexport[$i]['row14'] = $department->feed->priority;
+                            $dataexport[$i]['row15'] = $department->feed->incident_type;
+                            if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
+                                $dataexport[$i]['row16'] = $department->feed->tag_name;
                             } else {
                                 $dataexport[$i]['row16'] = 'NA';
                             }
-                            $dataexport[$i]['row17'] = date('g:i a, d-m-y', strtotime($department->last_modified));
-
-                            if ($department->feed->tag_patient_type != '' && $department->feed->tag_patient_type != NULL) {
-                                $dataexport[$i]['row18'] = $department->feed->tag_patient_type;
+                            if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
+                                $dataexport[$i]['row17'] = $department->feed->tag_patientid;
+                            } else {
+                                $dataexport[$i]['row17'] = 'NA';
+                            }
+                            if ($names != '' && $names != NULL) {
+                                $dataexport[$i]['row18'] = $names;
                             } else {
                                 $dataexport[$i]['row18'] = 'NA';
                             }
-                            if ($department->feed->tag_name != '' && $department->feed->tag_name != NULL) {
-                                $dataexport[$i]['row19'] = $department->feed->tag_name;
+                            if ($tat_due_date != '' && $tat_due_date != NULL) {
+                                $dataexport[$i]['row19'] = $tat_due_date;
                             } else {
-                                $dataexport[$i]['row19'] = 'NA';
+                                $dataexport[$i]['row19'] = 'Unassigned';
                             }
-                            if ($department->feed->tag_patientid != '' && $department->feed->tag_patientid != NULL) {
-                                $dataexport[$i]['row20'] = $department->feed->tag_patientid;
+                            if ($display != '' && $display != NULL) {
+                                $dataexport[$i]['row20'] = $display;
                             } else {
                                 $dataexport[$i]['row20'] = 'NA';
                             }
-                            if ($department->feed->tag_consultant != '' && $department->feed->tag_consultant != NULL) {
-                                $dataexport[$i]['row21'] = $department->feed->tag_consultant;
+                            if ($rca_details != '') {
+                                $dataexport[$i]['row21'] = $rca_details;
                             } else {
                                 $dataexport[$i]['row21'] = 'NA';
                             }
+                            if ($corrective_describe != '' && $corrective_describe != NULL) {
+                                $dataexport[$i]['row22'] = $corrective_describe;
+                            } else {
+                                $dataexport[$i]['row22'] = 'NA';
+                            }
+                            if ($preventive_describe != '' && $preventive_describe != NULL) {
+                                $dataexport[$i]['row23'] = $preventive_describe;
+                            } else {
+                                $dataexport[$i]['row23'] = 'NA';
+                            }
+                            if ($closedverifycomment != '' && $closedverifycomment != NULL) {
+                                $dataexport[$i]['row24'] = $closedverifycomment;
+                            } else {
+                                $dataexport[$i]['row24'] = 'NA';
+                            }
+                            $dataexport[$i]['row25'] = ($department->status == 'Re-assigned') ? 'Assigned' : $department->status;
+
+
+
+
                         }
                     }
                     $i++;
