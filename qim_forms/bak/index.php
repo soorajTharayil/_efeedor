@@ -7,15 +7,15 @@
 	<title>Quality KPI Management Software - Efeedor Healthcare Experience Management Platform</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="dist/css/bootstrap.min.css">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<link rel="stylesheet" href="style.css?<?php echo time(); ?>">
-	<script src="dist/js/jquery.min.js"></script>
-	<script src="dist/js/popper.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
-	<script src="dist/js/angular.min.js"></script>
-	<script src="dist/js/angular-sanitize.min.js"></script>
-	<script src="dist/js/load-image.all.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.7.9/angular-sanitize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-load-image/2.21.0/load-image.all.min.js"></script>
 
 	<script src="app_grievance.js?<?php echo time(); ?>"></script>
 </head>
@@ -24,7 +24,7 @@
 
 <!-- body part start -->
 
-<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" id="body" ng-cloak>
+<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" id="body">
 
 	<body>
 		<div class="container">
@@ -40,7 +40,7 @@
 					<form class="the-form">
 						<div style="text-align: center; margin-top:-22px;">
 							<a class="navbar-brand" href="#"><img src="{{setting_data.logo}}"
-									style="height: 100px; width:100%" title="LOGO" alt="-"></a>
+									style="height: 100px; width:100%"></a>
 						</div>
 						<br>
 						<div ng-cloak style="color: red; text-align: center;" class="alert-error"
@@ -7628,6 +7628,6 @@
 	}
 </style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
 
 </html>
