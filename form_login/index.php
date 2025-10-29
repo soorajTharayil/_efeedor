@@ -8,32 +8,34 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="dist/js/jquery.min.js"></script>
+	<script src="dist/js/popper.min.js"></script>
+	<script src="dist/js/bootstrap.min.js"></script>
+	<script src="dist/js/angular.min.js"></script>
+	<script src="dist/js/angular-sanitize.min.js"></script>
+	<script src="dist/js/load-image.all.min.js"></script>
   <script src="app.js?<?php echo time(); ?>"></script>
 
 </head>
 
-<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" ng-show="lang">
+<body ng-app="ehandorApp" ng-controller="PatientFeedbackCtrl" ng-show="lang" ng-cloak>
   <fieldset ng-cloak ng-show="step0 == true">
     <div class="main-container">
       <div class="form-container" style="margin-top: 100px;">
 
 
         <div class="form-body" style="align-items:center;">
-          <form class="the-form">
+          <!-- <form class="the-form">
             <div style="text-align: center; margin-top:-22px;">
               <a class="navbar-brand" href="#"><img src="{{setting_data.logo}}" style="height: 100px; width:100%"></a>
             </div>
             <br>
             <div ng-cloak style="color: red; text-align: center;" class="alert-error" ng-show="loginerror.length > 3">
               {{loginerror}}</div>
-            <!-- <label for="text">Email / Mobile Number</label> -->
+            
             <input type="text" name="email" id="email" class="input-field" placeholder="Enter email/ mobile no."
               ng-model="loginvar.userid">
-            <!-- <label for="password">Password</label> -->
+            
             <div class="password-container">
               <input type="password" name="password" id="password" class="input-field" placeholder="Enter password"
                 ng-model="loginvar.password">
@@ -41,12 +43,10 @@
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
               </span>
             </div>
-            <div style=" display: flex;
-        justify-content: center; /* horizontally center */
-        align-items: center; ">
+            <div style=" display: flex; justify-content: center; /* horizontally center */align-items: center; ">
               <input ng-click="login()" type="submit" value="LOGIN" style="width: 100px; height:45px;">
             </div>
-          </form>
+          </form> -->
         </div>
         <!-- FORM BODY-->
         <br><br><br>
@@ -89,95 +89,7 @@
       </div>
     </nav>
 
-    <div ng-cloak class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
-      <div class="user-info"
-        style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
-        <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
-        <div>
-          <div style="font-weight: bold; font-size: 14px;">{{ profilen.name }}</div>
-          <div style="font-size: 12px; font-weight: bold;">{{ profilen.email }}</div>
-        </div>
-      </div>
-      <ul style="margin-left: -5px;">
-        <li><a href="#" ng-click="showAllContent()"><i class="fa fa-home"></i> Home</a></li>
-        <li><a href="#" ng-click="showDashboard()"><i class="fa fa-globe"></i> Web Dashboard Access</a></li>
-        <li><a href="/login/?userid={{ adminId }}&redirectType=userActivity"><i class="fa fa-user"></i> User
-            Activity</a></li>
-        <li><a href="#" ng-click="showAppDown()"><i class="fa fa-download"></i> App Download</a></li>
-        <li><a href="#" ng-click="showSupport()"><i class="fa fa-phone"></i> Support</a></li>
-        <li><a href="#" ng-click="showAbout()"><i class="fa fa-info-circle"></i> About</a></li>
-        <li><a href="/form_login"><i class="fa fa-sign-out"></i> Logout</a></li>
-      </ul>
-    </div>
-
-    <!-- About Content Section -->
-    <div ng-cloak ng-show="aboutVisible" class="about-section"
-      style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-      <h2>About</h2>
-      <!-- <img src="/Efeedor_logo.png" alt="Colorful Image" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
-      <p><strong>Version:</strong> 8.01.05</p>
-      <p>
-        The Efeedor Mobile App is an extension of Efeedor's Healthcare Experience Management Suite, developed by ITATONE
-        POINT CONSULTING LLP, a global health tech company specializing in enterprise applications for healthcare
-        experience management. Designed for healthcare staff on the go, the app simplifies tasks like collecting patient
-        feedback, addressing concerns, and reporting incidents or internal tickets. With its intuitive interface, you
-        can easily track and manage activities and tickets.
-      </p>
-      <p>
-        Record patient feedback, concerns, and requests, report incidents and grievances, and raise internal tickets
-        effortlessly. The Efeedor Mobile App puts healthcare experience management at your fingertips, streamlining
-        operations for better care delivery.
-      </p>
-      <p><i class="fa fa-globe"></i> <a href="https://www.efeedor.com" target="_blank">www.efeedor.com</a></p>
-      <p><i class="fa fa-envelope"></i> <a href="mailto:contact@efeedor.com">contact@efeedor.com</a></p>
-    </div>
-
-    <!-- Support Content Section -->
-    <div ng-cloak ng-show="supportVisible" class="support-section"
-      style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-      <h2>Support</h2>
-      <p>
-        For dedicated assistance ensuring your satisfaction and success with our software, please complete the details
-        below to create your support ticket.
-      </p>
-
-      <iframe width="500" height="650" src="https://crm.efeedor.com/forms/ticket" frameborder="0"
-        allowfullscreen></iframe>
-    </div>
-
-    <!-- App Download Section -->
-    <div ng-cloak ng-show="appDownloadVisible" class="app-download-section"
-      style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-      <h2>App Download</h2>
-      <p>
-        Download the Efeedor Mobile App to enhance your healthcare experience management. Click the button below to get
-        the latest version of the APK.
-      </p>
-
-      <!-- Button for APK Download -->
-      <button ng-click="downloadApk()" ng-disabled="!setting_data.android_apk"
-        style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
-        <i class="fa fa-download"></i> Download APK
-      </button>
-    </div>
-
-    <!-- Web Dashboard section -->
-    <div ng-cloak ng-show="dashboardVisible" class="dashboard-section"
-      style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-      <h2>Explore Web Dashboard</h2>
-      <p>
-        To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin
-        role, you will have access to view reports and analytics based on the permissions granted. If you are a
-        department head or in charge of a department, you will be able to access the dashboard to view reports and
-        analytics specific to your department and take action on the tickets assigned to you or your team.
-      </p>
-
-      <!-- Button for APK Download -->
-      <a href="/login/?userid={{ adminId }}"
-        style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;">
-        <i class="fa fa-globe"></i> Click here to open the link
-      </a>
-    </div>
+    
 
 
 
@@ -268,8 +180,7 @@
       </div>
     </div>
 
-    <div class="container" id="grad1"
-      ng-show="!aboutVisible && !supportVisible && !appDownloadVisible && !dashboardVisible">
+    <div class="container" id="grad1">
 
       <div class="row justify-content-center">
 
@@ -392,7 +303,7 @@
     }
   </script>
 
-  <style>
+  <!-- <style>
     .menu-dropdown {
       position: absolute;
       right: 10px;
@@ -515,7 +426,7 @@
         font-size: 14px;
       }
     }
-  </style>
+  </style> -->
   
   <style>
       [ng-cloak] {
