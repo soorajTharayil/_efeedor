@@ -10,6 +10,8 @@ app.controller(
     $scope.toplogo = false;
 
     $scope.AnonymousIncident_show = true;
+    console.log("Clearing localStorage...");
+    $window.localStorage.clear();
     var ehandor = JSON.parse($window.localStorage.getItem("ehandor"));
     if (ehandor) {
       // Assign the data to scope variables
@@ -501,7 +503,7 @@ app.controller(
                         //alert(value.guid);
                         if (
                           value.guid.toLowerCase() ==
-                          $scope.loginvar.userid.toLowerCase() &&
+                            $scope.loginvar.userid.toLowerCase() &&
                           value.password == $scope.loginvar.password
                         ) {
                           //	alert(2);
@@ -565,12 +567,12 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/esr_mobile_number.php?mobile=" +
-          $scope.feedback.contactnumber +
-          "&email=" +
-          $scope.feedback.contactnumber +
-          "&pin=" +
-          $scope.feedback.pin,
+            "/esr_mobile_number.php?mobile=" +
+            $scope.feedback.contactnumber +
+            "&email=" +
+            $scope.feedback.contactnumber +
+            "&pin=" +
+            $scope.feedback.pin,
           { timeout: 20000 }
         )
         .then(
@@ -626,8 +628,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/mobile_patientfrom_admission.php?mobile=" +
-          $scope.feedback.patient_number,
+            "/mobile_patientfrom_admission.php?mobile=" +
+            $scope.feedback.patient_number,
           { timeout: 20000 }
         )
         .then(
@@ -674,10 +676,10 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/forgotten_pin.php?mobile=" +
-          $scope.feedback.pin_contactnumber +
-          "&email=" +
-          $scope.feedback.pin_contactnumber,
+            "/forgotten_pin.php?mobile=" +
+            $scope.feedback.pin_contactnumber +
+            "&email=" +
+            $scope.feedback.pin_contactnumber,
           { timeout: 20000 }
         )
         .then(
@@ -996,7 +998,7 @@ app.controller(
       $scope.selectedParameterObject = {
         title: "Others",
         question: "Other incidents",
-        shortkey: "incident160"
+        shortkey: "incident160",
       };
       $scope.feedback.other = $scope.searchTextmain;
       $scope.activeStep("step4");
@@ -1175,7 +1177,6 @@ app.controller(
         }, 100);
         return false;
       }
-
 
       if (
         $scope.feedback.tag_name == "" ||
@@ -1446,10 +1447,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-          "/savepatientfeedback_incident.php?patient_id=" +
-          $scope.feedback.patientid +
-          "&administratorId=" +
-          $rootScope.adminId,
+            "/savepatientfeedback_incident.php?patient_id=" +
+            $scope.feedback.patientid +
+            "&administratorId=" +
+            $rootScope.adminId,
           $scope.feedback
         )
         .then(

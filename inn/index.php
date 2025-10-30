@@ -1,3 +1,10 @@
+<?php
+// Disable caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <!-- head part start -->
@@ -6,6 +13,9 @@
 <head>
 	<title>Efeedor Healthcare Experience Management Platform</title>
 	<meta charset="utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -270,7 +280,8 @@
 									<br> -->
 
 									<div class="card" style=" border: 2px solid #000;">
-										<div class="" ng-click="language('lang3')" style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
+										<div class="" ng-click="language('lang3')"
+											style="padding: 5px; height:100px; width:200px; " data-dismiss="modal">
 											<span style="margin-left: -100px; color: #4b4c4d;">
 												മലയാളം
 											</span><br>
@@ -324,8 +335,9 @@
 													</a>
 												</div>
 												<br>
-												<div ng-cloak style="color: red; text-align: center;" class="alert-error"
-													ng-show="loginerror.length > 3">{{loginerror}}</div>
+												<div ng-cloak style="color: red; text-align: center;"
+													class="alert-error" ng-show="loginerror.length > 3">{{loginerror}}
+												</div>
 
 												<input type="text" name="email" id="email" class="input-field"
 													placeholder="Enter email/ mobile no." ng-model="loginvar.userid"
@@ -385,8 +397,7 @@
 														<input class="form-control" id="employee_name"
 															placeholder="{{lang.employee_name_placeholder}}"
 															oninput="restrictToAlphabets(event)" maxlength="25"
-															name="name" type="text"
-															ng-model="feedback.name"
+															name="name" type="text" ng-model="feedback.name"
 															onblur="this.value = this.value.toUpperCase();"
 															autocomplete="off" />
 														<label for="emailid"></label>
@@ -695,7 +706,8 @@
 												style="display: flex; flex-direction: column; position: relative;">
 
 												<label for="comment"><b
-														style="margin-left: -6px;">{{lang.incident_occurred}}<sup style="color:red">*</sup></b><br></label>
+														style="margin-left: -6px;">{{lang.incident_occurred}}<sup
+															style="color:red">*</sup></b><br></label>
 
 
 												<div
@@ -733,7 +745,8 @@
 											<!-- <h4 style="font-size: 18px; margin-bottom: 22px;">
 												<b>{{lang.add_details_to_incident}}</b>
 											</h4> -->
-											<label for="comment"><b>{{lang.describe_incident}}<sup style="color:red">*</sup></b><br></label>
+											<label for="comment"><b>{{lang.describe_incident}}<sup
+														style="color:red">*</sup></b><br></label>
 											<textarea placeholder="{{lang.describe_incident_placeholder}}"
 												style="border: 2px solid #ccc;margin-top:7px" class="form-control"
 												ng-model="feedback.other" rows="5" id="comment"></textarea>
@@ -928,7 +941,8 @@
 
 										<br />
 										<div class="form-group" style="margin-left: 13px; margin-right:13px;">
-											<label for="comment"><b>{{lang.floor}}</b><sup style="color:red">*</sup><br></label>
+											<label for="comment"><b>{{lang.floor}}</b><sup
+													style="color:red">*</sup><br></label>
 
 											<div class="row">
 												<div class="col-xs-12 col-sm-12 col-md-12">
@@ -954,15 +968,16 @@
 										<br />
 										<div class="form-group"
 											style="margin-left: 13px; margin-right:13px;margin-top:-15px;">
-											<label for="comment"><b>{{lang.location}}</b><sup style="color:red">*</sup><br></label>
+											<label for="comment"><b>{{lang.location}}</b><sup
+													style="color:red">*</sup><br></label>
 
 											<div class="row">
 												<div class="col-xs-12 col-sm-12 col-md-12">
 													<div class="form-group"
 														style="margin-left: 13px; margin-right:13px;">
 														<span class="has-float-label">
-															<select class="form-control" ng-model="feedback.bedno" id="bedno"
-																style=" width: 100%;  margin-left: -16px; ">
+															<select class="form-control" ng-model="feedback.bedno"
+																id="bedno" style=" width: 100%;  margin-left: -16px; ">
 																<option value="" disabled>{{lang.select_location}}
 																</option>
 																<option ng-repeat="x in bed_no" value="{{x}}" required>
@@ -1007,10 +1022,10 @@
 													<span class="addon"
 														style="    font-size: 16px;">{{lang.tag_id}}</span>
 													<span class="has-float-label">
-														<input class="form-control" placeholder="{{lang.tag_id}}" type="text"
-															maxlength="10" id="contactnumber" ng-required="true"
-															ng-model="feedback.tag_patientid" autocomplete="off"
-															placeholder="Numerical digits only"
+														<input class="form-control" placeholder="{{lang.tag_id}}"
+															type="text" maxlength="10" id="contactnumber"
+															ng-required="true" ng-model="feedback.tag_patientid"
+															autocomplete="off" placeholder="Numerical digits only"
 															style="padding-top:0px;" />
 														<label for="contactnumber"></label>
 													</span>
@@ -1077,7 +1092,8 @@
 
 											<!-- Display the list of uploaded files -->
 											<div ng-if="feedback.files_name && feedback.files_name.length > 0">
-												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}</h3>
+												<h3 style="font-size: 18px; margin-top:16px;">{{lang.uploaded_files}}
+												</h3>
 												<ul style="margin-left: 19px;">
 													<li ng-repeat="files_name in feedback.files_name track by $index"
 														style="display: flex; align-items: center;">
@@ -1429,8 +1445,7 @@
 												</style>
 
 												<div class="thankyou-buttons" style="margin-top: 40px;">
-													<a ng-href="/form_login"
-														class="btn btn-secondary"
+													<a ng-href="/form_login" class="btn btn-secondary"
 														style="margin-left: 15px;">
 														Incident Home Page
 													</a>
@@ -1578,16 +1593,16 @@
 
 <!-- Activate popover on click -->
 <script>
-	$(document).ready(function() {
+	$(document).ready(function () {
 		$('#questionMark').popover({
 			trigger: 'manual'
 		});
 
-		$('#questionMark').on('click', function() {
+		$('#questionMark').on('click', function () {
 			$(this).popover('toggle');
 
 			// Hide the popover after 2 seconds
-			setTimeout(function() {
+			setTimeout(function () {
 				$('#questionMark').popover('hide');
 			}, 2000);
 		});
@@ -1595,7 +1610,7 @@
 </script>
 
 <script>
-	setTimeout(function() {
+	setTimeout(function () {
 
 		$('#body').show();
 
@@ -1619,7 +1634,7 @@
 		}
 	}
 
-	document.getElementById("refreshBtn").addEventListener("click", function() {
+	document.getElementById("refreshBtn").addEventListener("click", function () {
 		location.reload(); // This will refresh the page when the button is clicked
 	});
 </script>

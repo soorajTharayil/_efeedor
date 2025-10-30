@@ -1,19 +1,29 @@
+<?php
+// Disable caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <title>Efeedor Healthcare Experience Management Platform</title>
   <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <link rel="stylesheet" href="style.css">
   <script src="dist/js/jquery.min.js"></script>
-	<script src="dist/js/popper.min.js"></script>
-	<script src="dist/js/bootstrap.min.js"></script>
-	<script src="dist/js/angular.min.js"></script>
-	<script src="dist/js/angular-sanitize.min.js"></script>
-	<script src="dist/js/load-image.all.min.js"></script>
+  <script src="dist/js/popper.min.js"></script>
+  <script src="dist/js/bootstrap.min.js"></script>
+  <script src="dist/js/angular.min.js"></script>
+  <script src="dist/js/angular-sanitize.min.js"></script>
+  <script src="dist/js/load-image.all.min.js"></script>
   <script src="app.js?<?php echo time(); ?>"></script>
 
 </head>
@@ -89,7 +99,7 @@
       </div>
     </nav>
 
-    
+
 
 
 
@@ -427,12 +437,12 @@
       }
     }
   </style> -->
-  
+
   <style>
-      [ng-cloak] {
-        display: none !important;
-      }
-   </style>
+    [ng-cloak] {
+      display: none !important;
+    }
+  </style>
 
 
 </body>

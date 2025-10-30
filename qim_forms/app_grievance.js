@@ -8,7 +8,8 @@ app.controller(
     $scope.typel = "english";
     $scope.type2 = "English";
     $scope.step2 = false;
-
+    console.log("Clearing localStorage...");
+    $window.localStorage.clear();
     var ehandor = JSON.parse($window.localStorage.getItem("ehandor"));
     if (ehandor) {
       // Assign the data to scope variables
@@ -106,7 +107,7 @@ app.controller(
                     function (value) {
                       if (
                         value.guid.toLowerCase() ==
-                        $scope.loginvar.userid.toLowerCase() &&
+                          $scope.loginvar.userid.toLowerCase() &&
                         value.password == $scope.loginvar.password
                       ) {
                         value.userid = $scope.loginvar.userid;
@@ -160,9 +161,8 @@ app.controller(
       }
     };
 
-
     // On init, check if URL hash asks for step2
-    if (window.location.hash === '#step2') {
+    if (window.location.hash === "#step2") {
       $scope.step0 = false;
       $scope.step2 = true;
     }
@@ -206,54 +206,80 @@ app.controller(
       return { month: $scope.months[month], year: year };
     }
 
-
     // Define KPI groups with their KPI IDs (sorted or unsorted)
     $scope.kpiGroups = {
-      "MRD": [1, 2, 4, 6, 14, 80, 95, 96, 99, 100, 104, 105, 136, 137, 176, 177, 178, 179, 180, 181, 182, 198, 199, 200, 201, 202, 208, 210, 211, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317],
-      "Nursing": [8, 9, 22, 32, 61, 78, 81, 82, 83, 85, 86, 87, 88, 89, 90, 91, 97, 101, 102, 103, 106, 107, 108, 112, 113, 116, 128, 133, 134, 139, 140, 141, 142, 144, 145, 146, 147, 148, 159, 160, 166, 221, 222, 223, 224, 225, 243, 245, 298, 299, 300, 301],
-      "Emergency Department": [3, 7, 11, 12, 19, 84, 191, 192, 193, 194, 195, 203, 204, 242, 244],
+      MRD: [
+        1, 2, 4, 6, 14, 80, 95, 96, 99, 100, 104, 105, 136, 137, 176, 177, 178,
+        179, 180, 181, 182, 198, 199, 200, 201, 202, 208, 210, 211, 302, 303,
+        304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317,
+      ],
+      Nursing: [
+        8, 9, 22, 32, 61, 78, 81, 82, 83, 85, 86, 87, 88, 89, 90, 91, 97, 101,
+        102, 103, 106, 107, 108, 112, 113, 116, 128, 133, 134, 139, 140, 141,
+        142, 144, 145, 146, 147, 148, 159, 160, 166, 221, 222, 223, 224, 225,
+        243, 245, 298, 299, 300, 301,
+      ],
+      "Emergency Department": [
+        3, 7, 11, 12, 19, 84, 191, 192, 193, 194, 195, 203, 204, 242, 244,
+      ],
       "Clinical Nutrition & Dietetics": [5, 197],
-      "Lab Service": [10, 23, 24, 25, 26, 33, 34, 35, 205, 209, 272, 273, 274, 275, 276, 277, 288],
+      "Lab Service": [
+        10, 23, 24, 25, 26, 33, 34, 35, 205, 209, 272, 273, 274, 275, 276, 277,
+        288,
+      ],
       "Pulmonary Medicine": [15],
-      "Pediatrics": [16],
+      Pediatrics: [16],
       "Gastro Surgery": [17, 241],
-      "Radiology": [18, 26, 27, 28, 29, 30, 98, 154, 155, 156, 227, 228, 229, 230, 247, 248, 249, 250, 251, 334],
-      "Nephrology": [20, 214],
+      Radiology: [
+        18, 26, 27, 28, 29, 30, 98, 154, 155, 156, 227, 228, 229, 230, 247, 248,
+        249, 250, 251, 334,
+      ],
+      Nephrology: [20, 214],
       "Medical Administration": [21, 117, 332, 333],
-      "OT": [31, 55, 56, 57, 59, 60, 62, 63, 138, 190, 216, 231, 232, 233],
-      "Clinical Pharmacy": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 54, 58, 94, 187, 188],
-      "Anesthesia": [50, 51, 52, 53],
+      OT: [31, 55, 56, 57, 59, 60, 62, 63, 138, 190, 216, 231, 232, 233],
+      "Clinical Pharmacy": [
+        36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 54, 58, 94, 187,
+        188,
+      ],
+      Anesthesia: [50, 51, 52, 53],
       "Blood Center": [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 331],
-      "Infection Control": [74, 75, 76, 77, 93, 115, 131, 169, 170, 173, 174, 184, 185, 186, 215, 218, 219, 220, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328, 329, 330],
+      "Infection Control": [
+        74, 75, 76, 77, 93, 115, 131, 169, 170, 173, 174, 184, 185, 186, 215,
+        218, 219, 220, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328,
+        329, 330,
+      ],
       // Newly Added Groups
-      "Housekeeping": [79, 280, 281, 282, 283, 285, 292, 293, 335, 336, 337, 339, 341, 342, 343, 344, 345],
+      Housekeeping: [
+        79, 280, 281, 282, 283, 285, 292, 293, 335, 336, 337, 339, 341, 342,
+        343, 344, 345,
+      ],
       "Quality Office": [92, 109, 110, 111, 129, 135, 171, 172, 183, 217, 254],
-      "Physiotherapy": [114, 118, 119, 226, 240, 246],
+      Physiotherapy: [114, 118, 119, 226, 240, 246],
       "Security & Safety": [120, 121, 122, 130, 132, 271, 297],
-      "Pharmacy": [123, 124, 125, 189, 255, 256],
+      Pharmacy: [123, 124, 125, 189, 255, 256],
       "SCM-Store": [126],
       "SCM-Purchase": [127],
       "Biomedical Engineering": [143, 287],
-      "Engineering & Maintenance": [149, 265, 266, 267, 268, 269, 270, 291, 294, 295, 340],
+      "Engineering & Maintenance": [
+        149, 265, 266, 267, 268, 269, 270, 291, 294, 295, 340,
+      ],
       "Patient Care Services": [150, 151, 152, 153, 157, 158, 167, 252, 253],
-      "HR": [161, 162, 163, 164, 165, 168, 257, 258, 259, 260, 261, 262, 263, 264],
-      "CSSD": [175, 206, 207],
-      "Endoscopy": [212, 213],
+      HR: [
+        161, 162, 163, 164, 165, 168, 257, 258, 259, 260, 261, 262, 263, 264,
+      ],
+      CSSD: [175, 206, 207],
+      Endoscopy: [212, 213],
       "Transplant Unit": [234, 235],
-      "Research": [236, 237, 238, 239],
-      "Insurance": [278, 279],
-      "ITD": [284, 286],
+      Research: [236, 237, 238, 239],
+      Insurance: [278, 279],
+      ITD: [284, 286],
       "F & B Services": [289, 290, 296],
-      "Stroke Unit": [346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367],
-      "Other": [13, 196, 338]
+      "Stroke Unit": [
+        346, 347, 348, 349, 350, 351, 352, 353, 354, 355, 356, 357, 358, 359,
+        360, 361, 362, 363, 364, 365, 366, 367,
+      ],
+      Other: [13, 196, 338],
     };
-
-
-
-
-
-
-
 
     // Function to check if any KPI in that group is visible
     $scope.hasKPIInGroup = function (groupName) {
@@ -261,10 +287,11 @@ app.controller(
       if (!list || list.length === 0) return false;
 
       for (let i = 0; i < list.length; i++) {
-        let key = 'KPI' + list[i];
+        let key = "KPI" + list[i];
         if ($scope.profilen[key]) {
-          let label = $scope.lang[key.toLowerCase()] || '';
-          if (!$scope.searchAudit || $scope.searchAudit.trim() === '') return true;
+          let label = $scope.lang[key.toLowerCase()] || "";
+          if (!$scope.searchAudit || $scope.searchAudit.trim() === "")
+            return true;
           if ($scope.matchSearch(label)) return true;
         }
       }
@@ -275,9 +302,10 @@ app.controller(
     $scope.matchSearch = function (text) {
       if (!$scope.searchAudit || $scope.searchAudit.trim() === "") return true;
       if (!text) return false;
-      return text.toLowerCase().indexOf($scope.searchAudit.toLowerCase()) !== -1;
+      return (
+        text.toLowerCase().indexOf($scope.searchAudit.toLowerCase()) !== -1
+      );
     };
-
 
     // Save selected values
     $scope.saveSelection = function () {
@@ -319,12 +347,12 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/esr_mobile_number.php?mobile=" +
-          $scope.feedback.contactnumber +
-          "&email=" +
-          $scope.feedback.contactnumber +
-          "&pin=" +
-          $scope.feedback.pin,
+            "/esr_mobile_number.php?mobile=" +
+            $scope.feedback.contactnumber +
+            "&email=" +
+            $scope.feedback.contactnumber +
+            "&pin=" +
+            $scope.feedback.pin,
           { timeout: 20000 }
         )
         .then(
@@ -379,8 +407,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/mobile_patientfrom_admission.php?mobile=" +
-          $scope.feedback.patient_number,
+            "/mobile_patientfrom_admission.php?mobile=" +
+            $scope.feedback.patient_number,
           { timeout: 20000 }
         )
         .then(
@@ -519,10 +547,10 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-          "/forgotten_pin.php?mobile=" +
-          $scope.feedback.pin_contactnumber +
-          "&email=" +
-          $scope.feedback.pin_contactnumber,
+            "/forgotten_pin.php?mobile=" +
+            $scope.feedback.pin_contactnumber +
+            "&email=" +
+            $scope.feedback.pin_contactnumber,
           { timeout: 20000 }
         )
         .then(
@@ -1108,10 +1136,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-          "/savepatientfeedback_grievance.php?patient_id=" +
-          $scope.feedback.patientid +
-          "&administratorId=" +
-          $rootScope.adminId,
+            "/savepatientfeedback_grievance.php?patient_id=" +
+            $scope.feedback.patientid +
+            "&administratorId=" +
+            $rootScope.adminId,
           $scope.feedback
         )
         .then(
