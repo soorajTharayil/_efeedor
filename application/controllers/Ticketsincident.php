@@ -627,6 +627,7 @@ class Ticketsincident extends CI_Controller
 						'assign_tat_due_date' => $this->input->post('reassign_due_date'),
 						'reassigned_email' => 0,
 						'reassign_to' => implode(',', $assigned_user_ids),
+						'assign_to' => implode(',', $assigned_user_ids),
 						'reassign_for_team_member' => implode(',', $assigned_user_ids_for_team_member),
 						'reassign_for_process_monitor' => implode(',', $assigned_user_ids_for_process_monitor)
 					);
