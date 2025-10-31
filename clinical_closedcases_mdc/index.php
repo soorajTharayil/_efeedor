@@ -272,14 +272,14 @@
                   <div class="form-card">
 
                     <div class="row">
-                       
+
                       <!-- Audit Type -->
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
                         <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
                         <div class="form-group">
                           <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color: red;">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled />
                           </span>
                         </div>
 
@@ -314,8 +314,8 @@
                         <!--    <input class="form-control" type="text" ng-model="feedback.audit_shortname" placeholder="Enter short name" maxlength="30" autocomplete="off" />-->
                         <!--  </span>-->
                         <!--</div>-->
-                        
-                          <!-- Audit By -->
+
+                        <!-- Audit By -->
 
                         <div class="form-group">
                           <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color: red;">*</sup></span>
@@ -369,9 +369,9 @@
                             </select>
                           </span>
                         </div>
-                        
-                      <!-- Location -->
-                    <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
+
+                        <!-- Location -->
+                        <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
                           click-outside="locationOpen=false">
 
                           <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
@@ -407,36 +407,37 @@
 
 
 
-                        
-                    <!-- Department -->
-                    <div class="form-group" ng-init="depOpen=false; depSearch='';" click-outside="closeDepartment()">
-                      <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup style="color: red;">*</sup></span>
-                    
-                      <div style="position:relative; margin-top:8px;">
-                        <!-- Trigger -->
-                        <div class="form-control" ng-click="depOpen = !depOpen">
-                          {{ feedback.department || lang.seldep }}
-                        </div>
-                    
-                        <!-- Dropdown -->
-                        <div ng-show="depOpen"
-                             style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
-                          
-                          <!-- Search box -->
-                          <input class="form-control" placeholder="Search Department" ng-model="depSearch" style="margin-bottom:8px;" />
-                    
-                          <!-- Options -->
-                          <div style="max-height:200px; overflow:auto;">
-                            <div ng-repeat="x in auditdept.auditdept | filter:depSearch"
-                                 ng-if="x.title !== 'ALL'"
-                                 ng-click="selectDepartment(x.title)"
-                                 style="padding:8px; cursor:pointer;">
-                              {{x.title}}
+
+                        <!-- Department -->
+                        <div class="form-group" ng-init="depOpen=false; depSearch='';"
+                          click-outside="closeDepartment()">
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup
+                              style="color: red;">*</sup></span>
+
+                          <div style="position:relative; margin-top:8px;">
+                            <!-- Trigger -->
+                            <div class="form-control" ng-click="depOpen = !depOpen">
+                              {{ feedback.department || lang.seldep }}
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div ng-show="depOpen"
+                              style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
+
+                              <!-- Search box -->
+                              <input class="form-control" placeholder="Search Department" ng-model="depSearch"
+                                style="margin-bottom:8px;" />
+
+                              <!-- Options -->
+                              <div style="max-height:200px; overflow:auto;">
+                                <div ng-repeat="x in auditdept.auditdept | filter:depSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectDepartment(x.title)" style="padding:8px; cursor:pointer;">
+                                  {{x.title}}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
 
 
 
@@ -462,9 +463,9 @@
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-if="x.title !== 'ALL'"
-                                  ng-click="selectDoctor(x.title)" style="padding:8px; cursor:pointer;">
-                                  {{x.title}}
+                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-click="selectDoctor(x)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x}}
                                 </div>
 
                                 <!-- If no match found -->
@@ -478,7 +479,6 @@
                             </div>
                           </div>
                         </div>
-
 
 
                         <!-- Admission Date -->
@@ -508,7 +508,7 @@
                             {{lang.discha}}<sup style="color:red"></sup><br>
                             <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
                           </span>
-                        
+
                           <!-- Input -->
                           <div style="position: relative; width: 100%;">
                             <input class="form-control"
@@ -524,14 +524,14 @@
                           </div>
                         </div>
 
-                      
-                      
-                                
 
-                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
 
-                  <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
-                
+
+
+                        <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
+
+                        <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+
                 </fieldset>
 
 
@@ -544,423 +544,423 @@
                     <div class="form-group" style="text-align: left;">
                       <h6 style="font-size: 18px;margin-left:-6px;margin-top:15px;"><b>Nutritional Initial assessment</b></h6>
                       <div style="margin-top: 12px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.identification_details}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.identification_details" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.identification_details" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.identification_details" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                      <span class="has-float-label">
-                            <input type="text" class="form-cont"ng-model="feedback.identification_details_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
-                          </span>
-                    </div>
-                    
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.identification_details}}</p>
 
-                    <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.vital_signs" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.vital_signs" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.vital_signs" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.vital_signs_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                    
-                       <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Nursing Initial assessment - OPD</b></h6>-->
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                          <p style="font-size: 18px; margin-bottom: 6px;">{{lang.surgery}}</p>
-                        
-                          <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.surgery" value="yes" />
-                              <span style="margin-left: 5px;">Yes</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.surgery" value="no" />
-                              <span style="margin-left: 5px;">No</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.surgery" value="N/A" />
-                              <span style="margin-left: 5px;">N/A</span>
-                            </label>
-                          </div>
-                          <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.surgery_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
-                          </span>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
                         </div>
-                        
-                        
-
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.complaints_communicated" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.complaints_communicated" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.complaints_communicated" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                        <span class="has-float-label">
+                          <input type="text" class="form-cont" ng-model="feedback.identification_details_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                    
-                       <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Blood Transfusion monitoring record</b></h6>-->
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.intake}}</p>
 
-                          <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.intake" value="yes" />
-                              <span style="margin-left: 5px;">Yes</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.intake" value="no" />
-                              <span style="margin-left: 5px;">No</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.intake" value="N/A" />
-                              <span style="margin-left: 5px;">N/A</span>
-                            </label>
-                          </div>
-                          <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.intake_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
                         </div>
-                        
-
-                        <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Cathlab Flow sheet</b></h6>-->
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.output}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.output" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.output" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.output" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.vital_signs_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.output_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                        
 
-                      
+                      <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Nursing Initial assessment - OPD</b></h6>-->
                       <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.focus}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.focus" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.focus" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.focus" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.focus_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                    
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.surgery}}</p>
 
-                    
-                    <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                  <p style="font-size: 18px; margin-bottom: 6px;">{{lang.meti}}</p>
-                
-                  <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                    <label style="display: flex; align-items: center;">
-                      <input type="radio" ng-model="feedback.meti" value="yes" />
-                      <span style="margin-left: 5px;">Yes</span>
-                    </label>
-                    <label style="display: flex; align-items: center;">
-                      <input type="radio" ng-model="feedback.meti" value="no" />
-                      <span style="margin-left: 5px;">No</span>
-                    </label>
-                    <label style="display: flex; align-items: center;">
-                      <input type="radio" ng-model="feedback.meti" value="N/A" />
-                      <span style="margin-left: 5px;">N/A</span>
-                    </label>
-                  </div>
-                  <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.meti_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                </div>
-                <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.diagnostic}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.diagnostic" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.diagnostic" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.diagnostic" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                       <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.diagnostic_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                   
-
-                         <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>IP notes</b></h6>-->
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.lab_results}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.lab_results" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.lab_results" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.lab_results" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.lab_results_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                     
-
-
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                          <p style="font-size: 18px; margin-bottom: 6px;">{{lang.pending_investigation}}</p>
-                        
-                          <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.pending_investigation" value="yes" />
-                              <span style="margin-left: 5px;">Yes</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.pending_investigation" value="no" />
-                              <span style="margin-left: 5px;">No</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.pending_investigation" value="N/A" />
-                              <span style="margin-left: 5px;">N/A</span>
-                            </label>
-                          </div>
-                          <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
                         </div>
-                        
-
-                        <h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Diet Progress note</b></h6>
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.medicine_order}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.medicine_order" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.medicine_order" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.medicine_order" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.surgery_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.medicine_order_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                     
+
 
 
                       <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.psychological}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.psychological" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.psychological" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.psychological" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
-                      </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.psychological_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                    </div>
-                   
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
 
-
-                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                          <p style="font-size: 18px; margin-bottom: 6px;">{{lang.vulnerab}}</p>
-                        
-                          <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.vulnerab" value="yes" />
-                              <span style="margin-left: 5px;">Yes</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.vulnerab" value="no" />
-                              <span style="margin-left: 5px;">No</span>
-                            </label>
-                            <label style="display: flex; align-items: center;">
-                              <input type="radio" ng-model="feedback.vulnerab" value="N/A" />
-                              <span style="margin-left: 5px;">N/A</span>
-                            </label>
-                          </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.vulnerab_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
                         </div>
-                      
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.complaints_communicated_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
 
-                        <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician documentation:</b></h6>-->
+                      <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Blood Transfusion monitoring record</b></h6>-->
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.intake}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.intake_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+                      <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Cathlab Flow sheet</b></h6>-->
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.output}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.output_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.focus}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.focus" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.focus" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.focus" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.focus_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.meti}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.meti" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.meti" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.meti" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.meti_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.diagnostic}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.diagnostic" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.diagnostic" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.diagnostic" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.diagnostic_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+                      <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>IP notes</b></h6>-->
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.lab_results}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.lab_results" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.lab_results" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.lab_results" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.lab_results_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.pending_investigation}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pending_investigation" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pending_investigation" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pending_investigation" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.pending_investigation_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:16px;"><b>Diet Progress note</b></h6>
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.medicine_order}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.medicine_order" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.medicine_order" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.medicine_order" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.medicine_order_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.psychological}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.psychological" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.psychological" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.psychological" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.psychological_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+
+                      <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.vulnerab}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vulnerab" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vulnerab" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vulnerab" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.vulnerab_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+
+                      <!--<h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician documentation:</b></h6>-->
                       <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.social}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.social" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.social" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.social" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.social}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.social" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.social" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.social" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.social_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" class="form-cont" ng-model="feedback.social_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                          </span>
-                        </div>  
-                       <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.nutri}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.nutri" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.nutri" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.nutri" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.nutri}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.nutri_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      
-                      <span class="has-float-label" style="margin-top: 5px;">
-                        <input type="text" class="form-cont" ng-model="feedback.nutri_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                      </span>
-                    </div>
-                    <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.spiritual}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.spiritual" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.spiritual" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.spiritual" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.spiritual}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.spiritual_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      
-                      <span class="has-float-label" style="margin-top: 5px;">
-                        <input type="text" class="form-cont" ng-model="feedback.spiritual_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                      </span>
-                    </div>
-                    <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                      <p style="font-size: 18px; margin-bottom: 6px;">{{lang.suicide}}</p>
-                    
-                      <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.suicide" value="yes" />
-                          <span style="margin-left: 5px;">Yes</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.suicide" value="no" />
-                          <span style="margin-left: 5px;">No</span>
-                        </label>
-                        <label style="display: flex; align-items: center;">
-                          <input type="radio" ng-model="feedback.suicide" value="N/A" />
-                          <span style="margin-left: 5px;">N/A</span>
-                        </label>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.suicide}}</p>
+
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.suicide_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
                       </div>
-                      
-                      <span class="has-float-label" style="margin-top: 5px;">
-                        <input type="text" class="form-cont" ng-model="feedback.suicide_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;"/>
-                      </span>
-                    </div>
- 
+
                       <!-- <div class="col-xs-12 col-sm-12 col-md-12">
 
                             <div class="form-group" style="margin-top: 15px; margin-left: -16px;">
@@ -980,49 +980,49 @@
                           </div> -->
 
 
-                    
-                  </div>
 
-                  <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 2px; margin-left: -5px; margin-top: 13px;">
-                    <p style="font-size: 18px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
-                    <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
-                  </div>
-                  <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
-                  <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
-												{{lang.attach_file}}
-											</label>
+                    </div>
 
-											<!-- File Input for Document Upload -->
-											<input style="border-bottom: 0px;" type="file" accept="*" multiple onchange="angular.element(this).scope().encodeFiles(this)" />
-											<br>
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 2px; margin-left: -5px; margin-top: 13px;">
+                      <p style="font-size: 18px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
+                      <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                    </div>
+                    <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
+                      <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
+                        {{lang.attach_file}}
+                      </label>
 
-											<!-- Display the list of uploaded files -->
-											<div ng-if="feedback.files_name && feedback.files_name.length > 0">
-												<h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
-												<ul style="margin-left: 19px;">
-													<li ng-repeat="files_name in feedback.files_name track by $index" style="display: flex; align-items: center;">
-														<a href="{{files_name.url}}" target="_blank" style="margin-right: 8px;">{{files_name.name}}</a>
-														<span style="cursor: pointer; color: red; font-weight: bold;" ng-click="removeFile($index)">&#10060;</span>
-													</li>
-												</ul>
-											</div>
-											</div>
+                      <!-- File Input for Document Upload -->
+                      <input style="border-bottom: 0px;" type="file" accept="*" multiple onchange="angular.element(this).scope().encodeFiles(this)" />
+                      <br>
+
+                      <!-- Display the list of uploaded files -->
+                      <div ng-if="feedback.files_name && feedback.files_name.length > 0">
+                        <h3 style="font-size: 18px; margin-top:16px;">Uploaded Files:</h3>
+                        <ul style="margin-left: 19px;">
+                          <li ng-repeat="files_name in feedback.files_name track by $index" style="display: flex; align-items: center;">
+                            <a href="{{files_name.url}}" target="_blank" style="margin-right: 8px;">{{files_name.name}}</a>
+                            <span style="cursor: pointer; color: red; font-weight: bold;" ng-click="removeFile($index)">&#10060;</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 
 
-                  <!-- submit button -->
-                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:-6px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />
+                    <!-- submit button -->
+                    <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:-6px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />
 
-                  <div>
-                    <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
-                    <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
-                  </div>
+                    <div>
+                      <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                      <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                    </div>
 
                 </fieldset>
 
 
 
 
-                                <fieldset ng-show="step4 == true">
+                <fieldset ng-show="step4 == true">
                   <div class="form-card">
                     <!-- unhappy customer code start -->
                     <div class="row justify-content-center">

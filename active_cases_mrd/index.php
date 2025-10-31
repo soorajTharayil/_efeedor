@@ -62,8 +62,7 @@
 
 
         <!-- Dashboard button with icon -->
-        <a ng-href="/login/?user_id={{ user_id }}"
-          class="btn btn-light dashboard-btn"
+        <a ng-href="/login/?user_id={{ user_id }}" class="btn btn-light dashboard-btn"
           style="width: 120px; height: 32px; font-size: 14px; font-weight: bold; text-align: left; display: flex; align-items: center; padding-left: 10px;">
           <i class="fa fa-tachometer" style="margin-right: 6px;"></i> Dashboard
         </a>
@@ -85,7 +84,8 @@
   </nav>
 
   <div class="menu-dropdown" ng-show="menuVisible" style="margin-top: 32px; margin-right: 10px;">
-    <div class="user-info" style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
+    <div class="user-info"
+      style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #ddd; background: #f5f5f5;">
       <i class="fa fa-user-circle" style="font-size: 24px; margin-right: 10px; color: #333;"></i>
       <div>
         <div style="font-weight: bold; font-size: 14px;">{{ loginname }}</div>
@@ -95,25 +95,32 @@
     <ul style="margin-left: -5px;">
       <li><a href="#" ng-click="showAllContent()"><i class="fa fa-home"></i> Home</a></li>
       <li><a href="#" ng-click="showDashboard()"><i class="fa fa-globe"></i> Web Dashboard Access</a></li>
-      <li><a href="/login/?user_id={{ user_id }}&redirectType=userActivity"><i class="fa fa-user"></i> User Activity</a></li>
+      <li><a href="/login/?user_id={{ user_id }}&redirectType=userActivity"><i class="fa fa-user"></i> User Activity</a>
+      </li>
       <li><a href="#" ng-click="showAbout()"><i class="fa fa-info-circle"></i> About</a></li>
       <li><a href="/audit_forms"><i class="fa fa-sign-out"></i> Logout</a></li>
     </ul>
   </div>
 
   <!-- About Content Section -->
-  <div ng-show="aboutVisible" class="about-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <div ng-show="aboutVisible" class="about-section"
+    style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <h2>About</h2>
     <!-- <img src="/Efeedor_logo.png" alt="Efeedor Logo" style="max-width: 100%; height: auto; margin-bottom: 20px;"> -->
     <p><strong>Version:</strong> 8.01.10</p>
     <p>
-      The Efeedor Quality Management Software (QMS) is an extension of Efeedor's Healthcare Experience Management Suite, developed by ITATONE POINT CONSULTING LLP, a global health-tech company specializing in enterprise applications for hospitals.
+      The Efeedor Quality Management Software (QMS) is an extension of Efeedor's Healthcare Experience Management Suite,
+      developed by ITATONE POINT CONSULTING LLP, a global health-tech company specializing in enterprise applications
+      for hospitals.
     </p>
     <p>
-      Designed for healthcare staff on the go, the QMS application simplifies essential tasks such as reporting incidents, performing audits, and recording monthly KPIs, while enabling healthcare institutions to efficiently analyze quality parameters to enhance healthcare quality and patient safety.
+      Designed for healthcare staff on the go, the QMS application simplifies essential tasks such as reporting
+      incidents, performing audits, and recording monthly KPIs, while enabling healthcare institutions to efficiently
+      analyze quality parameters to enhance healthcare quality and patient safety.
     </p>
     <p>
-      Efeedor’s software tools are widely recognized for their simple, intuitive interface and exceptional user experience, making them the preferred choice for modern hospitals.
+      Efeedor’s software tools are widely recognized for their simple, intuitive interface and exceptional user
+      experience, making them the preferred choice for modern hospitals.
     </p>
     <p>For more information, visit: <a href="https://www.efeedor.com" target="_blank">www.efeedor.com</a></p>
     <p>For support, contact: <a href="mailto:support@efeedor.com">support@efeedor.com</a></p>
@@ -121,10 +128,14 @@
 
 
   <!-- Web Dashboard section -->
-  <div ng-show="dashboardVisible" class="dashboard-section" style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+  <div ng-show="dashboardVisible" class="dashboard-section"
+    style="background-color: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <h2>Explore Web Dashboard</h2>
     <p>
-      To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin role, you will have access to view reports and analytics based on the permissions granted. If you are a department head or in charge of a department, you will be able to access the dashboard to view reports and analytics specific to your department and take action on the tickets assigned to you or your team.
+      To access the web dashboard, please log in with your credentials using the following link. If you hold an Admin
+      role, you will have access to view reports and analytics based on the permissions granted. If you are a department
+      head or in charge of a department, you will be able to access the dashboard to view reports and analytics specific
+      to your department and take action on the tickets assigned to you or your team.
     </p>
 
     <!-- Button for APK Download -->
@@ -397,10 +408,8 @@
                                 style="margin-bottom:8px;" autofocus />
 
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in area | filter:locationSearch"
-                                  ng-if="x.title !== 'ALL'"
-                                  ng-click="selectLocation(x.title)"
-                                  style="padding:8px; cursor:pointer;">
+                                <div ng-repeat="x in area | filter:locationSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectLocation(x.title)" style="padding:8px; cursor:pointer;">
                                   {{x.title}}
                                 </div>
 
@@ -470,9 +479,9 @@
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-if="x.title !== 'ALL'"
-                                  ng-click="selectDoctor(x.title)" style="padding:8px; cursor:pointer;">
-                                  {{x.title}}
+                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-click="selectDoctor(x)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x}}
                                 </div>
 
                                 <!-- If no match found -->
@@ -486,6 +495,7 @@
                             </div>
                           </div>
                         </div>
+
 
 
 
@@ -921,32 +931,6 @@
                         </span>
 
 
-
-
-
-
-
-
-
-                        <!-- <div class="col-xs-12 col-sm-12 col-md-12">
-
-                            <div class="form-group" style="margin-top: 15px; margin-left: -16px;">
-
-                              <span class="addon" style="font-size: 16px; margin-top:10px;">{{lang.audited_by}}<sup style="color:red">*</sup></span>
-
-                              <span class="has-float-label">
-
-                                <input class="form-control" placeholder="{{lang.audited_by_placeholder}}" maxlength="20" type="text" id="contactnumber" ng-required="true" ng-model="feedback.auditedBy" autocomplete="off" style="padding-top:0px;" />
-
-                                <label for="contactnumber"></label>
-
-                              </span>
-
-                            </div>
-
-                          </div> -->
-
-
                       </div>
                     </div>
 
@@ -985,21 +969,335 @@
                     </div>
 
 
-                    <!-- submit button -->
+
                     <input type="button" name="previous" class="previous action-button-previous"
                       style=" font-size:small;margin-left:-6px;margin-top:35px;" ng-click="prev1()"
                       value="{{lang.previous}}" />
 
-                    <div>
+                    <!-- New next button -->
+                    <input type="button" name="next" ng-click="next2()"
+                      style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button"
+                      value="{{lang.next}}" />
+
+
+                    <!-- <div>
                       <input type="button" ng-show="loader == false"
                         style="background: #4285F4 ; font-size:small; margin-right:12px;margin-top:35px;"
                         name="make_payment" class="next action-button" ng-click="savefeedback()"
                         value="{{lang.submit}}" />
                       <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
-                    </div>
+                    </div> -->
 
                 </fieldset>
 
+
+                <fieldset ng-show="step2 == true">
+                  <div class="form-card">
+                    <div class="text-left details-section" style="background: white; margin: 10px 10px 0 10px;">
+                      <label for="comment"><b style="font-size: 18px;">Review your details before
+                          submission:</b></label>
+
+                      <table class="details-content"
+                        style="border-spacing: 10px; border-collapse: collapse; width: 100%; margin-bottom: 0px; border: 1px solid #dddddd;">
+
+                        <!-- Common audit and patient details for all START-->
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Audit Details</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.name}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.audit_type}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.dtandtym}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_hr2 |
+                            date:'yyyy-MM-dd HH:mm'}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.audby}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.audit_by}}</td>
+                        </tr>
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Patient Information</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.mid}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.mid_no}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.patname}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.patient_name}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.patage}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.patient_age}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.patgen}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.patient_gender}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.location}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.location}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.dep}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.department}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.atdoc}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.attended_doctor}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.admidat}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_hr6 |
+                            date:'yyyy-MM-dd HH:mm'}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.discha}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.discharge_date_time |
+                            date:'yyyy-MM-dd HH:mm'}}</td>
+                        </tr>
+
+                        <!-- Common audit and patient details for all END-->
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Doctors documentation - Admission note</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.identification_details}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.identification_details}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.identification_details_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.vital_signs}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.vital_signs}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.vital_signs_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.surgery}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.surgery}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.surgery_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.complaints_communicated}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.complaints_communicated}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.complaints_communicated_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.intake}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.intake}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.intake_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.output}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.output}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.output_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.focus}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.focus}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.focus_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.meti}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.meti}}</div>
+                            <div style="margin-top: 5px; color: #555;">
+                              Remarks: {{feedback.meti_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Nurses documentation - Initial assessment IPD</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.diagnostic}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.diagnostic}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.diagnostic_text}}</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.lab_results}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.lab_results}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.lab_results_text}}</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.pending_investigation}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.pending_investigation}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.pending_investigation_text}}
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.medicine_order}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.medicine_order}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.medicine_order_text}}</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.psychological}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.psychological}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.psychological_text}}</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.vulnerab}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.vulnerab}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.vulnerab_text}}</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>General dietician documentation</b></td>
+                        </tr>
+
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.social}}
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.social}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.social_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- Common section for all START-->
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;"></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            {{lang.data_analysis}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.dataAnalysis}}</td>
+                        </tr>
+
+
+                        <tr ng-show="feedback.files_name && feedback.files_name.length > 0">
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Uploaded files
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <ul style="padding-left: 15px; margin: 0;">
+                              <li ng-repeat="file in feedback.files_name">
+                                <a ng-href="{{file.url}}" download="{{file.name}}">{{file.name}}</a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+
+                        <!-- Common section for all END-->
+
+
+
+                      </table>
+
+                      <br>
+
+                      <br><br>
+                      <input type="button" name="previous" style="font-size:small;"
+                        class="previous action-button-previous" ng-click="prev2()" value="{{lang.previous}}" />
+
+                      <div>
+                        <input type="button" ng-show="loader == false"
+                          style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment"
+                          class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                        <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                      </div>
+
+                    </div>
+                  </div>
+                </fieldset>
 
 
 
@@ -1337,7 +1635,7 @@
     return `${currentMonth} ${currentYear}`;
   }
 
-  setTimeout(function() {
+  setTimeout(function () {
 
 
 

@@ -2,8 +2,8 @@
    "patient_info": "IPSG-1 - AUDIT CHECKLIST REPORT",
    "patientname": "Patient Name",
    "patient_name": "Enter Name",
-   "patientid": "Patient UHID",
-   "patient_name_placeholder": "Enter UHID",
+   "patientid": "Patient MID",
+   "patient_name_placeholder": "Enter MID",
    "age": "Age",
    "test_name_placeholder": "Enter age",
    "department": "Designation",
@@ -29,7 +29,7 @@
     "dep":"Department",
     "seldep":"Select department",
     "audby":"Audited by",
-    "mid":"Patient UHID",
+    "mid":"Patient MID",
     "patname":"Patient name",
     "patage":"Patient age",
     "patgen":"Patient gender",
@@ -44,14 +44,16 @@
 
 
 
-  "identification_details": "Are patient ID bands present?",
-  "vital_signs": "Is the ID band appropriate according to patient status (orange - vulnerable, blue - allergy, white - general)?",
-  "surgery": "Is the ID band complete and readable (includes MID, name, age, sex)?",
-  "complaints_communicated": "Is the treatment/procedure order correctly verified in EMR?",
-  "intake": "Was verbal reconfirmation of patient identification performed if applicable?",
+  "identification_details": "Is the patient ID band clear and readable?",
+  "vital_signs": "Is the patient’s identity confirmed before administering high-alert medications?",
+  "surgery": "Are two identifiers consistently checked before administering medication, diagnostic tests, or procedures?",
+  "complaints_communicated": "Is family or caregiver confirmation obtained if the patient is unconscious, pediatric, or unable to respond?",
+  "intake": "Is a new ID band provided immediately if the previous one is lost or damaged?",
+
+
   "output": "Are the patient and family aware of correct patient identification?",
-   "allergies": "Is smoking prohibited in the kitchen area?",
-   "medication": "Is personal hygiene training regularly provided to new and existing staff?",
+  "allergies": "Is smoking prohibited in the kitchen area?",
+  "medication": "Is personal hygiene training regularly provided to new and existing staff?",
 
 
    "diagnostic": "Are all small equipment and utensils, including cutting boards, thoroughly cleaned between uses?",

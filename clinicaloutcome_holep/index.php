@@ -374,8 +374,7 @@
                             <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
                           click-outside="locationOpen=false">
 
-                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
-                              style="color: red;">*</sup></span>
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}</span>
 
                           <div style="margin-top:8px; position:relative;">
                             <!-- Trigger -->
@@ -409,39 +408,40 @@
     
     
                             <!-- Department -->
-                            <div class="form-group" ng-init="depOpen=false; depSearch='';" click-outside="closeDepartment()">
-                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup style="color: red;">*</sup></span>
-    
-                              <div style="position:relative; margin-top:8px;">
-                                <!-- Trigger -->
-                                <div class="form-control" ng-click="depOpen = !depOpen">
-                                  {{ feedback.department || lang.seldep }}
-                                </div>
-    
-                                <!-- Dropdown -->
-                                <div ng-show="depOpen"
-                                  style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
-    
-                                  <!-- Search box -->
-                                  <input class="form-control" placeholder="Search Department" ng-model="depSearch" style="margin-bottom:8px;" />
-    
-                                  <!-- Options -->
-                                  <div style="max-height:200px; overflow:auto;">
-                                    <div ng-repeat="x in auditdept.auditdept | filter:depSearch"
-                                      ng-if="x.title !== 'ALL'"
-                                      ng-click="selectDepartment(x.title)"
-                                      style="padding:8px; cursor:pointer;">
-                                      {{x.title}}
-                                    </div>
-                                  </div>
+                        <div class="form-group" ng-init="depOpen=false; depSearch='';"
+                          click-outside="closeDepartment()">
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup
+                              style="color: red;">*</sup></span>
+
+                          <div style="position:relative; margin-top:8px;">
+                            <!-- Trigger -->
+                            <div class="form-control" ng-click="depOpen = !depOpen">
+                              {{ feedback.department || lang.seldep }}
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div ng-show="depOpen"
+                              style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
+
+                              <!-- Search box -->
+                              <input class="form-control" placeholder="Search Department" ng-model="depSearch"
+                                style="margin-bottom:8px;" />
+
+                              <!-- Options -->
+                              <div style="max-height:200px; overflow:auto;">
+                                <div ng-repeat="x in auditdept.auditdept | filter:depSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectDepartment(x.title)" style="padding:8px; cursor:pointer;">
+                                  {{x.title}}
                                 </div>
                               </div>
                             </div>
-    
-    
-    
-    
-                            <!-- Attended Doctor -->
+                          </div>
+                        </div>
+
+
+
+
+                        <!-- Attended Doctor -->
                         <div class="form-group" ng-init="docOpen=false; docSearch='';" click-outside="closeDoctor()">
                           <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}<sup
                               style="color: red;">*</sup></span>
@@ -462,9 +462,9 @@
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-if="x.title !== 'ALL'"
-                                  ng-click="selectDoctor(x.title)" style="padding:8px; cursor:pointer;">
-                                  {{x.title}}
+                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-click="selectDoctor(x)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x}}
                                 </div>
 
                                 <!-- If no match found -->

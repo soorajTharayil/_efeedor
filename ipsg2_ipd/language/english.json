@@ -44,18 +44,21 @@
 
 
 
-   "identification_details": "Was the patient greeted and informed about the shift hand off?",
-   "vital_signs": "Was the patient Introduced to incoming staff?",
-   "surgery": "Is the patient Identified by using 2 identifiers (Full Name & MID)",
-   "complaints_communicated": "Is the IV cannula checked and in order?",
-   "intake": "Are other lines & tubes checked and found in order?",
-   "output": "Is a skin sssessment is done?",
-   "allergies": "Are checks done for bedside medications & locked as required?",
+   "identification_details": "Is the handover conducted face to face at the bedside or designated area?",
+   "vital_signs": "Are critical findings, NEWS score, and pain status communicated along with the management plan?",
+   "surgery": "Are conditions of skin integrity, restraint site, and fall risk status communicated during handover?",
+   "complaints_communicated": "Is information documented appropriately in the handover notes?",
+   "intake": "Is the staff able to summarize the patient’s condition without referring back to records?",
+   "output": "Was the handover completed within a reasonable time, without interruptions such as phone calls, distractions, or multitasking?",
+   "allergies": "Is the transfer order verified and documented in the transfer form?",
+
+   
    "medication": "Are goal set and plan of care discussed with the patient?",
-
-
    "diagnostic": "Is it ensured that sensitive information are discussed outside the room?",
    "lab_results": "Is the handoff communication record (ISBAR)- communicated & documented and in order?",
+
+
+
    "pending_investigation": "Are work surfaces clean?",
    "medicine_order": "Are drawers and racks clean?",
 

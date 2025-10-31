@@ -46,15 +46,18 @@
 
    "identification_details": "Name of procedure",
    "vital_signs": "Date and time of procedure",
-   "surgery": "Are site markings present as applicable and per policy ?",
-   "complaints_communicated": "Does time out contain correct  patient details?",
-   "intake": "Does time out contain correct procedure details?",
-   "output": "Does time out contain correct site  details as applicable?",
-   "allergies": "Are all the elements of time out documented, timely & accurately ?",
+
+   "surgery": "Is the procedure name confirmed against the consent form and physician order?",
+   "complaints_communicated": "Are emergency drugs, resuscitation equipment, and oxygen available at the bedside?",
+   "intake": "Are the required equipment, implants, and instruments checked and ready before the procedure?",
+   "output": "Is a “time-out” pause performed with the full team to confirm the correct patient, procedure, site, and consent?",
+   "allergies": "Does the “sign-out” record include the procedure performed, specimens sent, and any complications?",
+
+   
    "medication": "Does sign out record contain name of procedure?",
-
-
    "diagnostic": "Does sign out record contain labelling the specimen as applicable?",
+
+
    "lab_results": "Are fall risk assessment completed?",
    "pending_investigation": "Is general information recorded?",
    "medicine_order": "Is current medication ascertained?",

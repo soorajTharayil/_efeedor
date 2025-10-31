@@ -116,6 +116,7 @@
    "initial_assessment_ipd": "Initial Assessment IPD",
    "initial_assessment_opd": "Initial Assessment OPD",
    "ipsg_1": "IPSG-1",
+   "ipsg2_er":"IPSG 2- ER AUDIT",
    "ipsg_2_ae": "IPSG-2-A&E",
    "ipsg_2_ipd": "IPSG-2-IPD",
    "ipsg_4_timeout_outside_ot": "IPSG4-Timeout- Outside OT Audit",
@@ -181,7 +182,10 @@
    "clinical_pathway_picc_line_audit":"PICC LINE Insertion",
    "clinical_pathway_stroke_audit":"Stroke",
    "clinical_pathway_urodynamics_audit":"Urodynamics",
-   "clinical_pathway_stemi_audit":"STEMI-Primary PCI Clinical Pathway "
+   "clinical_pathway_stemi_audit":"STEMI-Primary PCI Clinical Pathway",
+   
+   "biomedical_Waste":"Biomedical Waste Collection Audit",
+   "pest_control":"Pest Control Audit"
 
    
    

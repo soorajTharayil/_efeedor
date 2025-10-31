@@ -325,78 +325,96 @@ $scope.user_id = ehandor.userid;
 
 
 	// Select Department
-	$scope.selectDepartment = function (dep) {
-		$scope.feedback.department = dep;
-		$scope.depOpen = false;   // close dropdown
-		$scope.depSearch = "";    // clear search
-	};
+    $scope.selectDepartment = function (dep) {
+      $scope.feedback.department = dep;
+      $scope.depOpen = false; // close dropdown
+      $scope.depSearch = ""; // clear search
 
-	// Close dropdown on outside click
-	$scope.closeDepartment = function () {
-		$scope.depOpen = false;
-	};
+      // 🔥 New Logic: Filter doctors for selected department
+      var foundDepartment = $scope.auditdept.auditdept.find(function (dept) {
+        return dept.title === dep;
+      });
 
-	// Select Doctor
-	$scope.selectDoctor = function (doc) {
-		$scope.feedback.attended_doctor = doc;
-		$scope.docOpen = false;   // close dropdown
-		$scope.docSearch = "";    // clear search
-	};
+      // Assuming doctor list is inside same structure as bed_no (like ward.bedno)
+      // i.e., foundDepartment.doctor contains doctor names
+      if (foundDepartment && foundDepartment.bedno) {
+        // 'bedno' here represents doctors in backend data (as you mentioned)
+        $scope.doctor = { doctor: foundDepartment.bedno };
+      } else {
+        // If no doctors found, empty list
+        $scope.doctor = { doctor: [] };
+      }
 
-	// Close on outside click
-	$scope.closeDoctor = function () {
-		$scope.docOpen = false;
-	};
+      console.log("Doctors under " + dep + ":", $scope.doctor.doctor);
+    };
 
+    // Close dropdown on outside click
+    $scope.closeDepartment = function () {
+      $scope.depOpen = false;
+    };
 
+    // Select Doctor
+    $scope.selectDoctor = function (doc) {
+      $scope.feedback.attended_doctor = doc;
+      $scope.docOpen = false; // close dropdown
+      $scope.docSearch = ""; // clear search
+    };
 
-	
+    // Close on outside click
+    $scope.closeDoctor = function () {
+      $scope.docOpen = false;
+    };
 
-	
+    //load doctor list
+    $scope.setupapplication = function () {
+      //$rootScope.loader = true;
+      var url = window.location.href;
+      //console.log(url);
+      var id = url.substring(url.lastIndexOf("=") + 1);
+      //alert(id);
+      $http
+        .get(
+          $rootScope.baseurl_main + "/audit_load_doctor.php?patientid=" + id,
+          { timeout: 20000 }
+        )
+        .then(
+          function (responsedata) {
+            $scope.doctor = responsedata.data;
+            console.log($scope.doctor);
+          },
+          function myError(response) {
+            $rootScope.loader = false;
+          }
+        );
+    };
 
-	
-	
-	//load doctor list
-	$scope.setupapplication = function () {
-		//$rootScope.loader = true;
-		var url = window.location.href;
-		//console.log(url);
-		var id = url.substring(url.lastIndexOf('=') + 1);
-		//alert(id);
-		$http.get($rootScope.baseurl_main + '/audit_load_doctor.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
-			$scope.doctor = responsedata.data;
-			console.log($scope.doctor);
-		},
-			function myError(response) {
-				$rootScope.loader = false;
+    $scope.setupapplication();
 
-			}
-		);
+    $scope.setupapplication1 = function () {
+      //$rootScope.loader = true;
+      var url = window.location.href;
+      //console.log(url);
+      var id = url.substring(url.lastIndexOf("=") + 1);
+      //alert(id);
+      $http
+        .get(
+          $rootScope.baseurl_main +
+            "/audit_load_department.php?patientid=" +
+            id,
+          { timeout: 20000 }
+        )
+        .then(
+          function (responsedata) {
+            $scope.auditdept = responsedata.data;
+            console.log($scope.auditdept);
+          },
+          function myError(response) {
+            $rootScope.loader = false;
+          }
+        );
+    };
 
-	}
-
-	$scope.setupapplication();
-	
-	
-	$scope.setupapplication1 = function () {
-		//$rootScope.loader = true;
-		var url = window.location.href;
-		//console.log(url);
-		var id = url.substring(url.lastIndexOf('=') + 1);
-		//alert(id);
-		$http.get($rootScope.baseurl_main + '/audit_load_department.php?patientid=' + id, { timeout: 20000 }).then(function (responsedata) {
-			$scope.auditdept = responsedata.data;
-			console.log($scope.auditdept);
-		},
-			function myError(response) {
-				$rootScope.loader = false;
-
-			}
-		);
-
-	}
-
-	$scope.setupapplication1();
+    $scope.setupapplication1();
 
 	
 	$scope.setupapplication2 = function () {

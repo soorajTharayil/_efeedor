@@ -263,115 +263,115 @@
 
                 <!-- PATIENT INFORMATION page start -->
                 <fieldset ng-show="step0 == true">
-    
-                      <!--<h4><strong>AUDIT & PATIENT INFORMATION</strong></h4>-->
-                      <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
-    
-                      <!--<p>Fill all form field to go to next step</p>-->
-                      <br>
-                      <div class="form-card">
-    
-                        <div class="row">
-    
-                          <!-- Audit Type -->
-                          <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
-                            <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color: red;">*</sup></span>
-                              <span class="has-float-label">
-                                <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled/>
-                              </span>
-                            </div>
-    
-    
-    
-                            <!-- Date of Audit -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
-                                {{lang.dtandtym}}<sup style="color:red">*</sup><br>
-                                <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
-                                  {{lang.format}}
-                                </p>
-                              </span>
-    
-                              <!-- Input -->
-                              <div style="position: relative; width: 100%;">
-                                <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
-                                  autocomplete="off" onclick="this.showPicker && this.showPicker()"
-                                  onfocus="this.showPicker && this.showPicker()"
-                                  style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
-                              </div>
-                            </div>
-    
-    
-    
-                            <!-- Audit Short Name -->
-    
-                            <!--<div class="form-group">-->
-                            <!--  <span class="addon" style="font-size: 18px; margin-bottom: 6px;">{{lang.stname}}</span>-->
-                            <!--  <span class="has-float-label" style="margin-top: 8px;">-->
-                            <!--    <input class="form-control" type="text" ng-model="feedback.audit_shortname" placeholder="Enter short name" maxlength="30" autocomplete="off" />-->
-                            <!--  </span>-->
-                            <!--</div>-->
-    
-                            <!-- Audit By -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color: red;">*</sup></span>
-                              <span class="has-float-label">
-                                <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
-                              </span>
-                            </div>
-    
-    
-                            <h6 style="font-size: 18px;margin-left:1px;margin-top:30px;"><b>Patient Information</b></h6>
-                            <!-- MID No -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}<sup style="color: red;">*</sup></span>
-                              <span class="has-float-label" style="margin-top: 12px;">
-                                <input type="text" class="form-control" maxlength="20" ng-model="feedback.mid_no" placeholder="Enter Patient MID" autocomplete="off" />
-                              </span>
-                            </div>
-    
-    
-                            <!-- Patient Name -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}<sup style="color: red;">*</sup></span>
-                              <span class="has-float-label" style="margin-top: 8px;">
-                                <input type="text" class="form-control" ng-model="feedback.patient_name" placeholder="Enter Patient Name" maxlength="50" autocomplete="off" />
-                              </span>
-                            </div>
-    
-    
-                            <!-- Patient Age (Numbers Only) -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patage}}</span>
-                              <span class="has-float-label" style="margin-top: 8px;">
-                                <input type="number" class="form-control" ng-model="feedback.patient_age" placeholder="Enter Age" min="0" max="120" />
-                              </span>
-                            </div>
-    
-    
-                            <!-- Patient Gender -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patgen}}</span>
-                              <span class="has-float-label">
-                                <select class="form-control" style="margin-top: 8px;" ng-model="feedback.patient_gender">
-                                  <option value="" disabled selected>{{lang.selgen}}</option>
-                                  <option value="Male">Male</option>
-                                  <option value="Female">Female</option>
-                                  <option value="Other">Other</option>
-                                </select>
-                              </span>
-                            </div>
-    
-                            <!-- Location -->
-                            <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
+
+                  <!--<h4><strong>AUDIT & PATIENT INFORMATION</strong></h4>-->
+                  <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
+
+                  <!--<p>Fill all form field to go to next step</p>-->
+                  <br>
+                  <div class="form-card">
+
+                    <div class="row">
+
+                      <!-- Audit Type -->
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin: 0px 0px 0 0px;">
+                        <h6 style="font-size: 18px;margin-left:1px;margin-top:0px;"><b>Audit Details</b></h6>
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 0px;">{{lang.name}}<sup style="color: red;">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_type" placeholder="Enter audit name" ng-required="true" style="margin-top: 0px;" disabled />
+                          </span>
+                        </div>
+
+
+
+                        <!-- Date of Audit -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.dtandtym}}<sup style="color:red">*</sup><br>
+                            <p style="font-size: 14px; margin: 4px 0 0 0; color:#6c757d;">
+                              {{lang.format}}
+                            </p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control" ng-model="feedback.initial_assessment_hr2" type="datetime-local" id="formula_para1_hr" ng-required="true" min="{{minDateTime}}" max="{{todayDateTime}}"
+                              autocomplete="off" onclick="this.showPicker && this.showPicker()"
+                              onfocus="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+
+
+
+                        <!-- Audit Short Name -->
+
+                        <!--<div class="form-group">-->
+                        <!--  <span class="addon" style="font-size: 18px; margin-bottom: 6px;">{{lang.stname}}</span>-->
+                        <!--  <span class="has-float-label" style="margin-top: 8px;">-->
+                        <!--    <input class="form-control" type="text" ng-model="feedback.audit_shortname" placeholder="Enter short name" maxlength="30" autocomplete="off" />-->
+                        <!--  </span>-->
+                        <!--</div>-->
+
+                        <!-- Audit By -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 2px;">{{lang.audby}}<sup style="color: red;">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" type="text" ng-model="feedback.audit_by" placeholder="Enter auditor name" ng-required="true" style="margin-top: 2px;" />
+                          </span>
+                        </div>
+
+
+                        <h6 style="font-size: 18px;margin-left:1px;margin-top:30px;"><b>Patient Information</b></h6>
+                        <!-- MID No -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px; ">{{lang.mid}}<sup style="color: red;">*</sup></span>
+                          <span class="has-float-label" style="margin-top: 12px;">
+                            <input type="text" class="form-control" maxlength="20" ng-model="feedback.mid_no" placeholder="Enter Patient MID" autocomplete="off" />
+                          </span>
+                        </div>
+
+
+                        <!-- Patient Name -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patname}}<sup style="color: red;">*</sup></span>
+                          <span class="has-float-label" style="margin-top: 8px;">
+                            <input type="text" class="form-control" ng-model="feedback.patient_name" placeholder="Enter Patient Name" maxlength="50" autocomplete="off" />
+                          </span>
+                        </div>
+
+
+                        <!-- Patient Age (Numbers Only) -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patage}}</span>
+                          <span class="has-float-label" style="margin-top: 8px;">
+                            <input type="number" class="form-control" ng-model="feedback.patient_age" placeholder="Enter Age" min="0" max="120" />
+                          </span>
+                        </div>
+
+
+                        <!-- Patient Gender -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px;margin-bottom: 6px;">{{lang.patgen}}</span>
+                          <span class="has-float-label">
+                            <select class="form-control" style="margin-top: 8px;" ng-model="feedback.patient_gender">
+                              <option value="" disabled selected>{{lang.selgen}}</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </span>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="form-group" ng-init="locationOpen=false; locationSearch='';"
                           click-outside="locationOpen=false">
 
                           <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.location}}<sup
@@ -402,46 +402,47 @@
                           </div>
 
                         </div>
-    
-    
-    
-    
-    
-    
-                            <!-- Department -->
-                            <div class="form-group" ng-init="depOpen=false; depSearch='';" click-outside="closeDepartment()">
-                              <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup style="color: red;">*</sup></span>
-    
-                              <div style="position:relative; margin-top:8px;">
-                                <!-- Trigger -->
-                                <div class="form-control" ng-click="depOpen = !depOpen">
-                                  {{ feedback.department || lang.seldep }}
-                                </div>
-    
-                                <!-- Dropdown -->
-                                <div ng-show="depOpen"
-                                  style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
-    
-                                  <!-- Search box -->
-                                  <input class="form-control" placeholder="Search Department" ng-model="depSearch" style="margin-bottom:8px;" />
-    
-                                  <!-- Options -->
-                                  <div style="max-height:200px; overflow:auto;">
-                                    <div ng-repeat="x in auditdept.auditdept | filter:depSearch"
-                                      ng-if="x.title !== 'ALL'"
-                                      ng-click="selectDepartment(x.title)"
-                                      style="padding:8px; cursor:pointer;">
-                                      {{x.title}}
-                                    </div>
-                                  </div>
+
+
+
+
+
+
+                         <!-- Department -->
+                        <div class="form-group" ng-init="depOpen=false; depSearch='';"
+                          click-outside="closeDepartment()">
+                          <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.dep}}<sup
+                              style="color: red;">*</sup></span>
+
+                          <div style="position:relative; margin-top:8px;">
+                            <!-- Trigger -->
+                            <div class="form-control" ng-click="depOpen = !depOpen">
+                              {{ feedback.department || lang.seldep }}
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div ng-show="depOpen"
+                              style="position:absolute; left:0; right:0; z-index:1000; margin-top:4px; background:#fff; border:1px solid #ccc; border-radius:6px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,.1);">
+
+                              <!-- Search box -->
+                              <input class="form-control" placeholder="Search Department" ng-model="depSearch"
+                                style="margin-bottom:8px;" />
+
+                              <!-- Options -->
+                              <div style="max-height:200px; overflow:auto;">
+                                <div ng-repeat="x in auditdept.auditdept | filter:depSearch" ng-if="x.title !== 'ALL'"
+                                  ng-click="selectDepartment(x.title)" style="padding:8px; cursor:pointer;">
+                                  {{x.title}}
                                 </div>
                               </div>
                             </div>
-    
-    
-    
-    
-                            <!-- Attended Doctor -->
+                          </div>
+                        </div>
+
+
+
+
+                        <!-- Attended Doctor -->
                         <div class="form-group" ng-init="docOpen=false; docSearch='';" click-outside="closeDoctor()">
                           <span class="addon" style="font-size:18px; margin-bottom:6px;">{{lang.atdoc}}<sup
                               style="color: red;">*</sup></span>
@@ -462,9 +463,9 @@
 
                               <!-- Options -->
                               <div style="max-height:200px; overflow:auto;">
-                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-if="x.title !== 'ALL'"
-                                  ng-click="selectDoctor(x.title)" style="padding:8px; cursor:pointer;">
-                                  {{x.title}}
+                                <div ng-repeat="x in doctor.doctor | filter:docSearch" ng-click="selectDoctor(x)"
+                                  style="padding:8px; cursor:pointer;">
+                                  {{x}}
                                 </div>
 
                                 <!-- If no match found -->
@@ -478,224 +479,224 @@
                             </div>
                           </div>
                         </div>
-    
-    
-    
-                            <!-- Admission Date -->
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
-                                {{lang.admidat}}<sup style="color: red;">*</sup><br>
-                                <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
-                              </span>
-    
-                              <!-- Input -->
-                              <div style="position: relative; width: 100%;">
-                                <input class="form-control"
-                                  ng-model="feedback.initial_assessment_hr6"
-                                  type="datetime-local"
-                                  id="formula_para1_hr6"
-                                  ng-required="true"
-                                  autocomplete="off"
-                                  max="{{todayDateTime}}"
-                                  onclick="this.showPicker && this.showPicker()"
-                                  style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
-                              </div>
-                            </div>
-    
-    
-                            <div class="form-group">
-                              <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
-                                {{lang.discha}}<sup style="color:red"></sup><br>
-                                <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
-                              </span>
-    
-                              <!-- Input -->
-                              <div style="position: relative; width: 100%;">
-                                <input class="form-control"
-                                  ng-model="feedback.discharge_date_time"
-                                  type="datetime-local"
-                                  id="formula_para1_discharge"
-                                  ng-required="true"
-                                  autocomplete="off"
-                                  max="{{todayDateTime}}"
-                                  onclick="this.showPicker && this.showPicker()"
-                                  style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
-                              </div>
-                            </div>
-                            </div>
-    
-    
+
+
+
+                        <!-- Admission Date -->
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.admidat}}<sup style="color: red;">*</sup><br>
+                            <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control"
+                              ng-model="feedback.initial_assessment_hr6"
+                              type="datetime-local"
+                              id="formula_para1_hr6"
+                              ng-required="true"
+                              autocomplete="off"
+                              max="{{todayDateTime}}"
+                              onclick="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
                         </div>
+
+
+                        <div class="form-group">
+                          <span class="addon" style="font-size: 18px; margin-bottom: 6px;">
+                            {{lang.discha}}<sup style="color:red"></sup><br>
+                            <p style="font-size: 14px; margin: 0px 0 0 0; color:#6c757d;">{{lang.format}}</p>
+                          </span>
+
+                          <!-- Input -->
+                          <div style="position: relative; width: 100%;">
+                            <input class="form-control"
+                              ng-model="feedback.discharge_date_time"
+                              type="datetime-local"
+                              id="formula_para1_discharge"
+                              ng-required="true"
+                              autocomplete="off"
+                              max="{{todayDateTime}}"
+                              onclick="this.showPicker && this.showPicker()"
+                              style="padding: 6px 8px; border: 1px solid #ced4da; border-radius: 4px; margin-top: 8px; width: 100%;" />
+                          </div>
+                        </div>
+                      </div>
+
+
                     </div>
-    
-    
-                            <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
-    
-                            <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
-    
+                  </div>
+
+
+                  <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small; margin-top: 30px;" ng-click="prev()" value="{{lang.previous}}" />
+
+                  <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+
                 </fieldset>
 
 
                 <!-- PATIENT INFORMATION page end -->
                 <fieldset ng-show="step1 == true">
-                    
-                    <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
 
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:7px; top: 10px;">
-                        <div class="form-group">
-                          <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b></b></h6>
-                          <div style="margin-top: 30px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.identification_details}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.identification_details" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.identification_details" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.identification_details" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.identification_details_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vital_signs" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vital_signs" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.vital_signs" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.vital_signs_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.surgery}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surgery" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surgery" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.surgery" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.surgery_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.complaints_communicated" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.complaints_communicated" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.complaints_communicated" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.complaints_communicated_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.intake}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.intake" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.intake" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.intake" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.intake_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
+                  <h4 style="font-size:22px;"><strong>{{lang.patient_info}}</strong></h4>
 
-                          <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
-                            <p style="font-size: 16px; margin-bottom: 6px;">{{lang.output}}</p>
-                            <div style="display: flex; gap: 20px; align-items: center;">
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.output" value="yes" />
-                                <span style="margin-left: 5px;">Yes</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.output" value="no" />
-                                <span style="margin-left: 5px;">No</span>
-                              </label>
-                              <label style="display: flex; align-items: center;">
-                                <input type="radio" ng-model="feedback.output" value="N/A" />
-                                <span style="margin-left: 5px;">N/A</span>
-                              </label>
-                            </div>
-                            <span class="has-float-label" style="margin-top: 5px;">
-                            <input type="text" 
-                                   class="form-cont" 
-                                   ng-model="feedback.output_text" 
-                                   placeholder="Remarks" 
-                                   style="margin-left:-2px; margin-top:5px;" />
-                          </span>
-                          </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:7px; top: 10px;">
+                    <div class="form-group">
+                      <h6 style="font-size: 16px;margin-left:-6px;margin-top:13px;"><b></b></h6>
+                      <div style="margin-top: 30px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.identification_details}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.identification_details" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.identification_details_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.vital_signs}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.vital_signs" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.vital_signs_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.surgery}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.surgery" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.surgery_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.complaints_communicated}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.complaints_communicated" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.complaints_communicated_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.intake}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.intake" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.intake_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div>
 
-                         
+                      <!-- <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 16px; margin-bottom: 6px;">{{lang.output}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.output" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text"
+                            class="form-cont"
+                            ng-model="feedback.output_text"
+                            placeholder="Remarks"
+                            style="margin-left:-2px; margin-top:5px;" />
+                        </span>
+                      </div> -->
 
-                          
-                        
-                          <!-- <div class="col-xs-12 col-sm-12 col-md-12">
+
+
+
+
+                      <!-- <div class="col-xs-12 col-sm-12 col-md-12">
 
                             <div class="form-group" style="margin-top: 15px; margin-left: -16px;">
 
@@ -714,13 +715,13 @@
                           </div> -->
 
 
-                        </div>
-                      </div>
+                    </div>
+                  </div>
 
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 25px;">
-                        <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
-                        <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
-                       <div style="margin-top: 8px;text-align:left;">
+                  <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 25px;">
+                    <p style="font-size: 16px; text-align:left; margin-bottom: 6px; margin-left: -2px;">{{lang.data_analysis}}</p>
+                    <textarea style="border:1px solid #ced4da; margin-left: -2px; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
+                    <div style="margin-top: 8px;text-align:left;">
                       <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:18px;">
                         {{lang.attach_file}}
                       </label>
@@ -740,11 +741,11 @@
                         </ul>
                       </div>
                     </div>
-                    </div>
+                  </div>
 
 
 
-                
+
 
                   <!-- submit button -->
                   <input type="button" name="previous" class="previous action-button-previous" style=" font-size:small;margin-left:12px;margin-top:35px;" ng-click="prev1()" value="{{lang.previous}}" />

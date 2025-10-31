@@ -1476,6 +1476,34 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
+											<div class="row" ng-if="profilen['AUDIT101'] == true"
+												ng-show="matchSearch(lang.ipsg2_er)">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../ipsg2_er" class="card"
+																	style="text-decoration: none;">
+																	<div class="card product-card"
+																		style="margin-bottom: 10px;">
+																		<div class="card-body"
+																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color: #5c5959;font-size: 36px;">
+																			</p>
+																			<p class="text">{{lang.ipsg2_er}} <i
+																					class="fa fa-info-circle"
+																					aria-hidden="true"
+																					style="margin-left:6px;color:#6c757d;"
+																					title=""></i></p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 
 											<div class="row" ng-if="profilen['AUDIT39'] == true"
 												ng-show="matchSearch(lang.ipsg_2_ae)">
@@ -3390,6 +3418,74 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
+											<div class="row" ng-if="hasAuditInRange(102,103)">
+												<div class="col-12">
+													<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+														House Keeping</h4>
+												</div>
+											</div>
+											<div class="row" ng-if="profilen['AUDIT102'] == true"
+												ng-show="matchSearch(lang.biomedical_Waste)">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../bmw_audit"
+																	class="card" style="text-decoration: none;">
+																	<div class="card product-card"
+																		style="margin-bottom: 10px;">
+																		<div class="card-body"
+																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">
+																				{{lang.biomedical_Waste}}
+																				<i class="fa fa-info-circle"
+																					aria-hidden="true"
+																					style="margin-left:6px;color:#6c757d;"
+																					title=""></i>
+																			</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row" ng-if="profilen['AUDIT103'] == true"
+												ng-show="matchSearch(lang.pest_control)">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../pest_control_audit" class="card"
+																	style="text-decoration: none;">
+																	<div class="card product-card"
+																		style="margin-bottom: 10px;">
+																		<div class="card-body"
+																			style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">
+																				{{lang.pest_control}}
+																				<i class="fa fa-info-circle"
+																					aria-hidden="true"
+																					style="margin-left:6px;color:#6c757d;"
+																					title=""></i>
+																			</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
 
 
 
