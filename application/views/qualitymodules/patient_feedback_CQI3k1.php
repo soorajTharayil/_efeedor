@@ -30,7 +30,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Total number of LAMA cases with Reasons (MRD)- <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Percentage of Care-plan is documented for inpatients(MRD)  <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
@@ -43,21 +43,9 @@
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
 									<tr>
-										<td><b>Total number of LAMA cases with Reasons*</b></td>
-
-										<td><?php echo $param['initial_assessment_hr']; ?></td>
+										<td><b>Number of case sheets where care plan is documented </b></td>
+											<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
-									<tr>
-										<td><b></b></td>
-
-									<td><?php echo $param['total_admission']; ?></td>
-									</tr>
-									<tr>
-										<td><b>Total number of LAMA cases with Reasons (MRD) </b></td>
-										<td><?php echo $param['calculatedResult']; ?></td>
-										</td>
-									</tr>
-
 									<tr>
 										<td><b>Data analysis</b></td>
 										<td><?php echo $param['dataAnalysis']; ?></td>
@@ -81,6 +69,23 @@
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 
 
@@ -152,32 +157,32 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="panel panel-default">
+				<!--<div class="row">-->
+				<!--	<div class="col-sm-12">-->
+				<!--		<div class="panel panel-default">-->
 
-							<div style="float: right; margin-top: 10px; margin-right: 10px;">
-								<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>
-								<span class="no-print" style="margin-right: 10px;">
-									<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"
-										onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>
-								</span>
-								<span class="no-print">
-									<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"
-										onclick="downloadChartImage()" data-toggle="tooltip"
-										title="Download Chart as Image"></i>
-								</span>
-							</div>
+				<!--			<div style="float: right; margin-top: 10px; margin-right: 10px;">-->
+				<!--				<span class="no-print" style="font-size:17px"><strong>Download Chart:</strong></span>-->
+				<!--				<span class="no-print" style="margin-right: 10px;">-->
+				<!--					<i data-placement="bottom" class="fa fa-file-pdf-o" style="font-size: 20px; color: red; cursor: pointer;"-->
+				<!--						onclick="printChart()" data-toggle="tooltip" title="Download Chart as PDF"></i>-->
+				<!--				</span>-->
+				<!--				<span class="no-print">-->
+				<!--					<i data-placement="bottom" class="fa fa-file-image-o" style="font-size: 20px; color: green; cursor: pointer;"-->
+				<!--						onclick="downloadChartImage()" data-toggle="tooltip"-->
+				<!--						title="Download Chart as Image"></i>-->
+				<!--				</span>-->
+				<!--			</div>-->
 
-							<canvas id="barChart" width="400" height="200" style="width: 50%;padding:50px;"></canvas>
+				<!--			<canvas id="barChart" width="400" height="200" style="width: 50%;padding:50px;"></canvas>-->
 
-						</div>
-					</div>
-				</div>
+				<!--		</div>-->
+				<!--	</div>-->
+				<!--</div>-->
 
 
 
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+				<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>-->
 
 				<style>
 					ul.feedback {
@@ -221,9 +226,9 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo  $result->no_medication_errors; ?>"; // Benchmark value
-					var calculated = "<?php echo $result->no_opportunity_errors; ?>"; // Calculated value
-					var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
+				// 	var benchmark = "<?php echo  $param['initial_assessment_hr']; ?>"; // Benchmark value
+				// 	var calculated = "<?php echo $param['total_admission']; ?>"; // Calculated value
+				// 	var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
 
 					// Parse times to seconds
 					var benchmarkSeconds = parseTimeToSeconds(benchmark);
@@ -309,10 +314,10 @@
 					}
 				</script>
 				<script>
-					function printChart() {
-						const canvas = document.getElementById('barChart');
-						const dataUrl = canvas.toDataURL(); // Get image data of canvas
-						const windowContent = `
+				// 	function printChart() {
+				// 		const canvas = document.getElementById('barChart');
+				// 		const dataUrl = canvas.toDataURL(); // Get image data of canvas
+				// 		const windowContent = `
 		<html>
 		<head>
 			<title>Print Chart</title>
@@ -350,8 +355,8 @@
 				</script>
 				<script>
 					function downloadChartImage() {
-						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+				// 		const canvas = document.getElementById('barChart');
+				// 		const image = canvas.toDataURL('image/png'); // Convert canvas to image data
 
 						// Create a temporary link element
 						const link = document.createElement('a');

@@ -50,18 +50,19 @@ function ismodule_active($module)
 	}
 }
 
-function getChieldStatus($groupedFeatures,$featureIds){
-    //print($featureIds);
-    $checked = 'checked';
-    foreach($groupedFeatures as $featureRow){
-        if (!in_array($featureRow['feature_id'], $featureIds)) continue;
-       
-        if($featureRow['status'] === false){
-            $checked = '';
-        }
-    }
- 
-    return $checked;
+function getChieldStatus($groupedFeatures, $featureIds)
+{
+	//print($featureIds);
+	$checked = 'checked';
+	foreach ($groupedFeatures as $featureRow) {
+		if (!in_array($featureRow['feature_id'], $featureIds)) continue;
+
+		if ($featureRow['status'] === false) {
+			$checked = '';
+		}
+	}
+
+	return $checked;
 }
 
 function get_from_to_date($requestFrom = null)
@@ -69,8 +70,8 @@ function get_from_to_date($requestFrom = null)
 	$y = date('Y');
 
 	$pagetitle = 'NO TITLE';
-	
-	if(!isset($_SESSION['quality_date']) && $requestFrom == "QUALITY"){
+
+	if (!isset($_SESSION['quality_date']) && $requestFrom == "QUALITY") {
 		$tdate = date('Y-m-01'); // First day of the current month
 		$fdate = date('Y-m-d'); // Current date
 		$_SESSION['from_date'] = $fdate;
@@ -93,7 +94,7 @@ function get_from_to_date($requestFrom = null)
 	}
 
 	//$pagetitle = 'Last 90 Days';
-	$pagetitle = 'Last 30 Days'; //change for default time 30 days
+	// $pagetitle = 'Last 30 Days'; //change for default time 30 days
 	if (isset($_GET['today'])) {
 		$pagetitle = "Last 24 Hours";
 	}
@@ -153,12 +154,26 @@ function get_from_to_date($requestFrom = null)
 	if (isset($_GET['fdate']) && isset($_GET['tdate'])) {
 		$fdate = $_GET['fdate'];
 		$tdate = $_GET['tdate'];
+
+		// Convert to Y-m-d if it contains slashes
+		if (strpos($fdate, '/') !== false) {
+			$fdate = DateTime::createFromFormat('d/m/Y', $fdate)->format('Y-m-d');
+		}
+		if (strpos($tdate, '/') !== false) {
+			$tdate = DateTime::createFromFormat('d/m/Y', $tdate)->format('Y-m-d');
+		}
+
 		$_SESSION['from_date'] = $fdate;
 		$_SESSION['to_date'] = $tdate;
-		if ($fdate != $tdate) {
+
+		// $pagetitle = ($fdate !== $tdate) ? 'Custom' : 'Last 24 Hours';
+
+		if (isset($_GET['filtertype']) && $_GET['filtertype'] === 'admission') {
+			$pagetitle = 'Filter by Admission Date';
+		} elseif ($fdate !== $tdate) {
 			$pagetitle = 'Custom';
 		} else {
-			$pagetitle = "Last 24 Hours";
+			$pagetitle = 'Last 24 Hours';
 		}
 	}
 	if (isset($_GET['this_month'])) {
@@ -176,7 +191,7 @@ function get_from_to_date($requestFrom = null)
 		$_SESSION['to_date'] = $tdate;
 		$pagetitle = "Today";
 	}
-	
+
 	// Current Quarter
 	if (isset($_GET['current_quarter'])) {
 		$currentMonth = date('n');

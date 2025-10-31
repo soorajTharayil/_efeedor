@@ -30,7 +30,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Nurse patient ratio for Ward (Nursing-Ward)  <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Nurse patient ratio for Ward (Nursing-Ward)   <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
@@ -43,7 +43,7 @@
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
 									<tr>
-										<td><b>Number of nursing staff</b></td>
+										<td><b>Number of nursing staff </b></td>
 
 										<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
@@ -81,6 +81,23 @@
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 
 
@@ -222,7 +239,7 @@
 				<script>
 					// Data
 					var benchmark = "<?php echo  $param['initial_assessment_hr']; ?>"; // Benchmark value
-					var calculated = "<?php echo  $param['total_admission'; ?>"; // Calculated value
+					var calculated = "<?php echo $param['total_admission']; ?>"; // Calculated value
 					var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
 
 					// Parse times to seconds

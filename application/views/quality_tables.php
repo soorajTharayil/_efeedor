@@ -342,6 +342,9 @@ $feedbacks_report_CQI3k61 = base_url('quality/feedbacks_report_CQI3k61');
 $feedbacks_report_CQI3k62 = base_url('quality/feedbacks_report_CQI3k62');
 $feedbacks_report_CQI3k63 = base_url('quality/feedbacks_report_CQI3k63');
 $feedbacks_report_CQI3k64 = base_url('quality/feedbacks_report_CQI3k64');
+$feedbacks_report_CQI3k65 = base_url('quality/feedbacks_report_CQI3k65');
+$feedbacks_report_CQI3k66 = base_url('quality/feedbacks_report_CQI3k66');
+
 
 // ======================== CQI4h1 → CQI4h55 ========================
 $feedbacks_report_CQI4h1 = base_url('quality/feedbacks_report_CQI4h1');
@@ -399,6 +402,7 @@ $feedbacks_report_CQI4h52 = base_url('quality/feedbacks_report_CQI4h52');
 $feedbacks_report_CQI4h53 = base_url('quality/feedbacks_report_CQI4h53');
 $feedbacks_report_CQI4h54 = base_url('quality/feedbacks_report_CQI4h54');
 $feedbacks_report_CQI4h55 = base_url('quality/feedbacks_report_CQI4h55');
+$feedbacks_report_CQI4h56 = base_url('quality/feedbacks_report_CQI4h56');
 
 // ======================== CLOTCM1 → CLOTCM30 ========================
 $feedbacks_report_CLOTCM1 = base_url('quality/feedbacks_report_CLOTCM1');

@@ -1396,6 +1396,34 @@ require_once 'audit_tables.php';
             </div>
         <?php } ?>
 
+        <?php if (isfeature_active('AUDIT-FORM101') === true) {
+            $table_feedback_1PSQ3a = 'bf_ma_ipsg2_er';
+            $ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+        ?>
+            <div class="audit-card col-xs-12 col-sm-6 col-md-6 col-lg-6"
+                style="margin-top: 10px; cursor:pointer;"
+                onclick="window.location.href='<?php echo $feedbacks_report_ipsg2_er; ?>';"
+                data-title="<?php echo strtolower('IPSG-2- ER'); ?>">
+                <div class="panel panel-bd">
+                    <div class="panel-body" style="height: 100px;">
+                        <div class="statistic-box">
+                            <h2 style="font-size: 25px;">
+                                <span class="count-number"><?php echo count($ip_feedbacks_count3); ?></span>
+                                <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
+                            </h2>
+                            <div class="small" style="font-size: 18px;">IPSG-2- ER
+                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>">
+                                    <i class="0" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="icon large-screen-only"><i class="fa-solid fa-heart-pulse fa-4x"></i></div>
+                            <a href="<?php echo $feedbacks_report_ipsg2_er; ?>" style="float: right; font-size:18px; margin-top: -12px;">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
 
         <?php if (isfeature_active('AUDIT-FORM39') === true) {
             $table_feedback_1PSQ3a = 'bf_ma_ipsg2_ae';
@@ -1843,7 +1871,7 @@ require_once 'audit_tables.php';
         ?>
             <div class="audit-card col-xs-12 col-sm-6 col-md-6 col-lg-6"
                 style="margin-top:10px; cursor:pointer;"
-                data-title="holep"
+                data-title="HoLEP"
                 onclick="window.location.href='<?php echo $feedbacks_report_clinical_holep; ?>'">
                 <div class="panel panel-bd">
                     <div class="panel-body" style="height:100px;">
@@ -2824,6 +2852,58 @@ require_once 'audit_tables.php';
                             </div>
                             <div class="icon large-screen-only"><i class="fa-solid fa-heart-pulse fa-4x"></i></div>
                             <a href="<?php echo $feedbacks_report_clinical_pathway_stemi_audit; ?>" style="float:right; font-size:18px; margin-top: -12px;">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+    </div>
+    <div class="row">
+        <div class="col-12 heading-block">
+            <div class="heading">
+                <h2 style="margin-top: 20px;margin-bottom:20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 7px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Housekeeping</h2>
+            </div>
+        </div>
+        <?php if (isfeature_active('AUDIT-FORM102') === true) {
+            $table_feedback_1PSQ3a = 'bf_ma_bmw_audit';
+            $ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+        ?>
+            <div class="audit-card col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top:10px; cursor:pointer;" data-title="Biomedical Waste Collection Audit"
+                onclick="window.location.href='<?php echo $feedbacks_report_bmw_audit; ?>'">
+                <div class="panel panel-bd">
+                    <div class="panel-body" style="height:100px;">
+                        <div class="statistic-box">
+                            <h2 style="font-size:25px;"><span class="count-number"><?php echo count($ip_feedbacks_count3); ?></span>
+                                <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
+                            </h2>
+                            <div class="small" style="font-size:18px;">Biomedical Waste Collection Audit
+                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="0"></i></a>
+                            </div>
+                            <div class="icon large-screen-only"><i class="fa-solid fa-heart-pulse fa-4x"></i></div>
+                            <a href="<?php echo $feedbacks_report_bmw_audit; ?>" style="float:right; font-size:18px; margin-top: -12px;">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if (isfeature_active('AUDIT-FORM103') === true) {
+            $table_feedback_1PSQ3a = 'bf_ma_pest_control_audit';
+            $ip_feedbacks_count3 = $this->audit_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
+        ?>
+            <div class="audit-card col-xs-12 col-sm-6 col-md-6 col-lg-6" style="margin-top:10px; cursor:pointer;" data-title="pest_control_audit"
+                onclick="window.location.href='<?php echo $feedbacks_report_pest_control_audit; ?>'">
+                <div class="panel panel-bd">
+                    <div class="panel-body" style="height:100px;">
+                        <div class="statistic-box">
+                            <h2 style="font-size:25px;"><span class="count-number"><?php echo count($ip_feedbacks_count3); ?></span>
+                                <span class="slight"><i class="fa fa-play fa-rotate-270 text-warning"></i></span>
+                            </h2>
+                            <div class="small" style="font-size:18px;">Pest Control Audit
+                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $safety_precautions_info_tooltip; ?>"><i class="0"></i></a>
+                            </div>
+                            <div class="icon large-screen-only"><i class="fa-solid fa-heart-pulse fa-4x"></i></div>
+                            <a href="<?php echo $feedbacks_report_pest_control_audit; ?>" style="float:right; font-size:18px; margin-top: -12px;">Explore</a>
                         </div>
                     </div>
                 </div>

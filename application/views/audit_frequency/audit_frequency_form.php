@@ -68,7 +68,7 @@
                             <?php
                             // Define all audit features
                             $audit_features = [];
-                            for ($i = 1; $i <= 44; $i++) {
+                            for ($i = 1; $i <= 110; $i++) {
                                 $audit_features[] = "AUDIT-FORM" . $i;
                             }
 
@@ -135,7 +135,7 @@
                                 'MRD Audit- ED' => 'AUDIT-FORM27',
                                 'MRD Audit- LAMA' => 'AUDIT-FORM28',
                                 'MRD Audit- OP' => 'AUDIT-FORM29',
-                                // 'Nursing & IPSG' is just a heading, skipped
+                                // 'Nursing & IPSG'
                                 'Accidental Delining Audit' => 'AUDIT-FORM30',
                                 'Admission Holding Area Audit' => 'AUDIT-FORM31',
                                 'CPR Analysis Record' => 'AUDIT-FORM32',
@@ -145,18 +145,86 @@
                                 'Initial Assessment IPD' => 'AUDIT-FORM36',
                                 'Initial Assessment OPD' => 'AUDIT-FORM37',
                                 'IPSG-1' => 'AUDIT-FORM38',
+                                'IPSG2- ER' => 'AUDIT-FORM101',
                                 'IPSG2- A&E' => 'AUDIT-FORM39',
                                 'IPSG2- IPD' => 'AUDIT-FORM40',
                                 'IPSG4-Timeout- Outside OT Audit' => 'AUDIT-FORM41',
                                 'IPSG6- IP' => 'AUDIT-FORM42',
                                 'IPSG6- OPD' => 'AUDIT-FORM43',
                                 'Point Prevalence Audit' => 'AUDIT-FORM44',
+
+                                // --- Clinical Outcome ---
+                                'ACL' => 'AUDIT-FORM45',
+                                'Allogenic Bone-marrow Transplantation' => 'AUDIT-FORM46',
+                                'Aortic Valve Replacement (AVR)' => 'AUDIT-FORM47',
+                                'Autologous Bone-marrow transplantation' => 'AUDIT-FORM48',
+                                'Brain Tumour Surgery' => 'AUDIT-FORM49',
+                                'CABG' => 'AUDIT-FORM50',
+                                'Carotid Stenting' => 'AUDIT-FORM51',
+                                'Chemotherapy (Medical oncology)' => 'AUDIT-FORM52',
+                                'Colo-Rectal Surgeries' => 'AUDIT-FORM53',
+                                'Endoscopy' => 'AUDIT-FORM54',
+                                'Epilepsy' => 'AUDIT-FORM55',
+                                'Herniorrhaphy' => 'AUDIT-FORM56',
+                                'HoLEP' => 'AUDIT-FORM57',
+                                'Laparoscopic Appendicectomy' => 'AUDIT-FORM58',
+                                'Mechanical Thrombectomy' => 'AUDIT-FORM59',
+                                'MVR (Mitral Valve replacement)' => 'AUDIT-FORM60',
+                                'PTCA' => 'AUDIT-FORM61',
+                                'Renal Transplantation' => 'AUDIT-FORM62',
+                                'Scoliosis correction surgery' => 'AUDIT-FORM63',
+                                'Spinal Dysraphism' => 'AUDIT-FORM64',
+                                'Spine and Disc Surgery-Fusion procedures' => 'AUDIT-FORM65',
+                                'Thoracotomy' => 'AUDIT-FORM66',
+                                'TKR' => 'AUDIT-FORM67',
+                                'Uro-oncology procedures' => 'AUDIT-FORM68',
+                                'Whipples Surgery' => 'AUDIT-FORM69',
+                                'Laparoscopic Cholecystectomy' => 'AUDIT-FORM70',
+
+                                // --- Clinical KPI ---
+                                'Bronchodilators Audit' => 'AUDIT-FORM71',
+                                'COPD Protocol Audit' => 'AUDIT-FORM72',
+
+                                // --- Infection Control & PCI ---
+                                'Biomedical Waste Management Audit' => 'AUDIT-FORM73',
+                                'Canteen Audit checklist' => 'AUDIT-FORM74',
+                                'CSSD audit checklist' => 'AUDIT-FORM75',
+                                'Hand Hygiene Audit' => 'AUDIT-FORM76',
+                                'Infection control bundle audit' => 'AUDIT-FORM77',
+                                'Infection Control OT audit checklist' => 'AUDIT-FORM78',
+                                'Linen Audit' => 'AUDIT-FORM79',
+                                'Ambulance PCI Audit' => 'AUDIT-FORM80',
+                                'CoffeeShop PCI Audit' => 'AUDIT-FORM81',
+                                'Laboratory PCI Audit' => 'AUDIT-FORM82',
+                                'Mortuary PCI Audit' => 'AUDIT-FORM83',
+                                'Radiology PCI Audit' => 'AUDIT-FORM84',
+                                'SSI Surveillance checklist' => 'AUDIT-FORM85',
+                                'IV cannula audit' => 'AUDIT-FORM86',
+                                'Personal Protective Equipment Usage audit' => 'AUDIT-FORM87',
+                                'Safe Injection and Infusion Audit' => 'AUDIT-FORM88',
+                                'Surface cleaning and disinfection effectiveness monitoring record' => 'AUDIT-FORM89',
+
+                                // --- Clinical Pathways ---
+                                'Arthroscopic Anterior Cruciate Ligament Reconstruction Surgery' => 'AUDIT-FORM90',
+                                'Breast Lump Consensus Guidelines' => 'AUDIT-FORM91',
+                                'Cardiac Arrest' => 'AUDIT-FORM92',
+                                'Donor Hepatectomy' => 'AUDIT-FORM93',
+                                'Febrile Seizure' => 'AUDIT-FORM94',
+                                'Heart Transplant Recipient' => 'AUDIT-FORM95',
+                                'Laparoscopic Donor Nephrectomy' => 'AUDIT-FORM96',
+                                'PICC LINE Insertion' => 'AUDIT-FORM97',
+                                'Stroke' => 'AUDIT-FORM98',
+                                'Urodynamics' => 'AUDIT-FORM99',
+                                'STEMI-Primary PCI Clinical Pathway' => 'AUDIT-FORM100',
+
+                                // --- Housekeeping ---
+                                'Biomedical Waste Collection Audit' => 'AUDIT-FORM102',
+                                'Pest Control Audit' => 'AUDIT-FORM103',
                             ];
 
 
                             $current_feature = isset($title_to_feature[$department->title]) ? $title_to_feature[$department->title] : '';
 
-                            // Show only custodians for the current audit
                             if ($current_feature && isset($audit_custodians[$current_feature])) {
                                 $default_custodians = implode(', ', $audit_custodians[$current_feature]);
                             } else {

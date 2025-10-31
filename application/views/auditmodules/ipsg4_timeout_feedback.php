@@ -127,7 +127,7 @@
 									
 
 									<tr>
-										<td>Are site markings present as applicable and per policy ?</td>
+										<td>Is the procedure name confirmed against the consent form and physician order?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['surgery'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['surgery_text']); ?>
@@ -135,7 +135,7 @@
 									</tr>
 
 									<tr>
-										<td>Does time out contain correct patient details?</td>
+										<td>Are emergency drugs, resuscitation equipment, and oxygen available at the bedside?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['complaints_communicated'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['complaints_communicated_text']); ?>
@@ -144,7 +144,7 @@
 									
 
 									<tr>
-										<td>Does time out contain correct procedure details?</td>
+										<td>Are the required equipment, implants, and instruments checked and ready before the procedure?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['intake'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['intake_text']); ?>
@@ -153,45 +153,20 @@
 									
 
 									<tr>
-										<td>Does time out contain correct site details as applicable?</td>
+										<td>Is a “time-out” pause performed with the full team to confirm the correct patient, procedure, site, and consent?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['output'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['output_text']); ?>
 										</td>
 									</tr>
 									<tr>
-										<td>Are all the elements of time out documented, timely & accurately ?</td>
+										<td>Does the “sign-out” record include the procedure performed, specimens sent, and any complications?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['allergies'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['allergies_text']); ?>
 										</td>
 									</tr>
-									<tr>
-										<td>Does sign out record contain name of procedure?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['medication'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['medication_text']); ?>
-										</td>
-									</tr>
-									<tr>
-										<td>Does sign out record contain labelling the specimen as applicable?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['diagnostic'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['diagnostic_text']); ?>
-										</td>
-									</tr>
 									
-
-									
-									
-
-
-								
-									
-									
-									
-									
-
 
 									<!-- Audit other details -->
 									<tr>

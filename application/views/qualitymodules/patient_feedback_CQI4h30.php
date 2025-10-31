@@ -106,6 +106,23 @@
 									</tr>
 
 									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
+									<tr>
 										<td><b>KPI Submission Status</b></td>
 										<td>
 											<?php
@@ -267,8 +284,8 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo $param->initial_assessment_tota; ?>"; // Benchmark value
-					var calculated = "<?php echo $param->total_admission; ?>"; // Calculated value
+					var benchmark = "<?php echo $param->benchmark; ?>"; // Benchmark value
+					var calculated = "<?php echo $param->calculatedResult; ?>"; // Calculated value
 					var monthyear = "<?php echo date('M-Y', strtotime($result->datetime)); ?>"; // Date value
 
 					// Parse times to seconds

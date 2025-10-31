@@ -16,13 +16,13 @@
 
 	//individual link
 	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI4d11?id=');
-	$table_feedback_1PSQ3a = 'bf_feedback_CQI4d11';
+	$table_feedback_2PSQ3a = 'bf_feedback_CQI4d11';
 	$table_patients_1PSQ3a = 'bf_patients';
 	$desc_1PSQ3a = 'desc';
 	$sorttime = 'asc';
 	$setup = 'setup';
-	$ip_feedbacks_count = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $sorttime, $setup);
-	$feedbacktaken = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_1PSQ3a, $desc_1PSQ3a);
+	$ip_feedbacks_count = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_2PSQ3a, $sorttime, $setup);
+	$feedbacktaken = $this->quality_model->patient_and_feedback($table_patients_1PSQ3a, $table_feedback_2PSQ3a, $desc_1PSQ3a);
 
 	if ($feedbacktaken) {
 	?>
@@ -199,9 +199,20 @@
 
 										<td>
 											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
-												class="btn btn-info btn-sm">
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
 												View Details
 											</a>
+
+											<?php if (isfeature_active('DELETE-KPI') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this KPI record?');"
+													title="Delete the KPI record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
 										</td>
 
 

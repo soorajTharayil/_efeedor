@@ -170,9 +170,19 @@
 							<strong>Active Cases MRD Audit(IP) - Audit Summary</strong>
 						</div>
 						<div>
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed audit report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_active_cases_mrd' ?>">
-								<i class="fa fa-download"></i>
-							</a>
+							<?php if (isset($_GET['filtertype']) && $_GET['filtertype'] === 'admission') { ?>
+								<a class="btn btn-success" target="_blank" data-toggle="tooltip" title="Download detailed audit report"
+									href="<?= base_url($this->uri->segment(1)) . '/overall_active_cases_mrd?fdate=' . ($_GET['fdate'] ?? '') . '&tdate=' . ($_GET['tdate'] ?? '') . '&filtertype=admission' ?>">
+									<i class="fa fa-download"></i>
+								</a>
+							<?php } else { ?>
+								<a class="btn btn-success" target="_blank" data-toggle="tooltip" title="Download detailed audit report"
+									href="<?= base_url($this->uri->segment(1)) . '/overall_active_cases_mrd' ?>">
+									<i class="fa fa-download"></i>
+								</a>
+							<?php } ?>
+
+
 						</div>
 					</div>
 
@@ -253,12 +263,21 @@
 
 										<td>
 											<a href="<?php echo $active_cases_mrd_feedback . $id; ?>"
-												class="btn btn-info btn-sm">
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
 												View Details
 											</a>
+
+											<?php if (isfeature_active('DELETE-AUDIT') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_audit/' . $id . '?table=' . urlencode($table_feedback) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this audit record?');"
+													title="Delete the audit record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
 										</td>
-
-
 
 
 									</tr>

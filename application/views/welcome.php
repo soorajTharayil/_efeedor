@@ -360,6 +360,10 @@ $tables = [
     'bf_feedback_CQI3k62',
     'bf_feedback_CQI3k63',
     'bf_feedback_CQI3k64',
+    'bf_feedback_CQI3k65',
+    'bf_feedback_CQI3k66',
+
+
 
     
     // CQI4h
@@ -606,6 +610,7 @@ $audit_array = [
     'bf_ma_assessment_ipd',
     'bf_ma_assessment_opd',
     'bf_ma_ipsg1_audit',
+    'bf_ma_ipsg2_er',
     'bf_ma_ipsg2_ae',
     'bf_ma_ipsg2_ipd',
     'bf_ma_ipsg4_timeout',
@@ -667,7 +672,9 @@ $audit_array = [
     'bf_ma_clinical_pathway_picc_line_audit',
     'bf_ma_clinical_pathway_stroke_audit',
     'bf_ma_clinical_pathway_urodynamics_audit',
-    'bf_ma_clinical_pathway_stemi_audit'
+    'bf_ma_clinical_pathway_stemi_audit',
+    'bf_ma_bmw_audit',
+    'bf_ma_pest_control_audit'
 ];
 
 // Mapping

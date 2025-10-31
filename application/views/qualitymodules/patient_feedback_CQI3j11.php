@@ -48,7 +48,7 @@
 										<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Number of handover opportunities Doctors </b></td>
+										<td><b>Number of handover opportunities Doctors</b></td>
 
 									<td><?php echo $param['total_admission']; ?></td>
 									</tr>
@@ -81,6 +81,23 @@
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 
 
@@ -221,8 +238,8 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo   $param['initial_assessment_hr']; ?>"; // Benchmark value
-					var calculated = "<?php echo ; $param['total_admission']?>"; // Calculated value
+					var benchmark = "<?php echo  $param['initial_assessment_hr']; ?>"; // Benchmark value
+					var calculated = "<?php echo $param['total_admission']; ?>"; // Calculated value
 					var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
 
 					// Parse times to seconds

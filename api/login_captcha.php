@@ -112,7 +112,7 @@ if ($recaptchaData && isset($recaptchaData['success']) && $recaptchaData['succes
             $response['KPI62'] = get_user_by_access('QUALITY-KPI62', $con, $result->user_id, $result->user_role);
             $response['KPI63'] = get_user_by_access('QUALITY-KPI63', $con, $result->user_id, $result->user_role);
 
-            for ($i = 64; $i <= 300; $i++) {
+            for ($i = 64; $i <= 370; $i++) {
                 $response["KPI{$i}"] = get_user_by_access("QUALITY-KPI{$i}", $con, $result->user_id, $result->user_role);
             }
 

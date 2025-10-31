@@ -24,18 +24,13 @@ class Quality extends CI_Controller
             )
         );
 
-        // $fdate = date('Y-m-d'); // today
-        // $tdate = date('Y-m-01'); // first day of current month
-        // $_SESSION['from_date'] = $fdate;
-        // $_SESSION['to_date'] = $tdate;
-
-        // $dates = get_from_to_date();
+        $dates = get_from_to_date();
         if (isset($_SESSION['from_date']) && isset($_SESSION['to_date'])) {
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
         } else {
-            $fdate = date('Y-m-d'); // today
-            $tdate = date('Y-m-01'); // first day of current month
+            $fdate = date('Y-m-d', time());
+            $tdate = date('Y-m-d', strtotime('-365 days'));
             $_SESSION['from_date'] = $fdate;
             $_SESSION['to_date'] = $tdate;
         }
@@ -77,7 +72,7 @@ class Quality extends CI_Controller
 		
 		
         if (ismodule_active('QUALITY') === true) {
-            $dateInfo = get_from_to_date("QUALITY");
+            $dateInfo = get_from_to_date();
             $data['title'] = 'QUALITY INDICATOR MANAGER DASHBOARD';
             #------------------------------#
             $data['content'] = $this->load->view('quality_welcome_page', $data, true);
@@ -86,6 +81,453 @@ class Quality extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+    public function delete_kpi($id)
+    {
+        $table = $this->input->get('table');
+
+        if (empty($table)) {
+            $this->session->set_flashdata('error', 'No table specified for deletion.');
+            redirect($_SERVER['HTTP_REFERER']);
+            return;
+        }
+
+        $tables = [
+        // CQI3a
+        'bf_feedback_CQI3a1',
+        'bf_feedback_CQI3a2',
+        'bf_feedback_CQI3a3',
+        'bf_feedback_CQI3a4',
+        'bf_feedback_CQI3a5',
+        'bf_feedback_CQI3a6',
+        'bf_feedback_CQI3a7',
+        'bf_feedback_CQI3a8',
+        'bf_feedback_CQI3a9',
+        'bf_feedback_CQI3a10',
+        'bf_feedback_CQI3a11',
+        'bf_feedback_CQI3a12',
+        'bf_feedback_CQI3a13',
+        'bf_feedback_CQI3a14',
+        'bf_feedback_CQI3a15',
+        'bf_feedback_CQI3a16',
+        'bf_feedback_CQI3a17',
+        'bf_feedback_CQI3a18',
+        'bf_feedback_CQI3a19',
+        'bf_feedback_CQI3a20',
+        'bf_feedback_CQI3a21',
+        'bf_feedback_CQI3a22',
+
+        // CQI3b
+        'bf_feedback_CQI3b1',
+        'bf_feedback_CQI3b2',
+        'bf_feedback_CQI3b3',
+        'bf_feedback_CQI3b4',
+        'bf_feedback_CQI3b5',
+        'bf_feedback_CQI3b6',
+        'bf_feedback_CQI3b7',
+        'bf_feedback_CQI3b8',
+        'bf_feedback_CQI3b9',
+        'bf_feedback_CQI3b10',
+        'bf_feedback_CQI3b11',
+        'bf_feedback_CQI3b12',
+        'bf_feedback_CQI3b13',
+
+        // CQI3c
+        'bf_feedback_CQI3c1',
+        'bf_feedback_CQI3c2',
+        'bf_feedback_CQI3c3',
+        'bf_feedback_CQI3c4',
+        'bf_feedback_CQI3c5',
+        'bf_feedback_CQI3c6',
+        'bf_feedback_CQI3c7',
+        'bf_feedback_CQI3c8',
+        'bf_feedback_CQI3c9',
+        'bf_feedback_CQI3c10',
+        'bf_feedback_CQI3c11',
+        'bf_feedback_CQI3c12',
+        'bf_feedback_CQI3c13',
+        'bf_feedback_CQI3c14',
+
+        // CQI3d
+        'bf_feedback_CQI3d1',
+        'bf_feedback_CQI3d2',
+        'bf_feedback_CQI3d3',
+        'bf_feedback_CQI3d4',
+        'bf_feedback_CQI3d5',
+
+        // CQI3e
+        'bf_feedback_CQI3e1',
+        'bf_feedback_CQI3e2',
+        'bf_feedback_CQI3e3',
+        'bf_feedback_CQI3e4',
+        'bf_feedback_CQI3e5',
+        'bf_feedback_CQI3e6',
+        'bf_feedback_CQI3e7',
+        'bf_feedback_CQI3e8',
+        'bf_feedback_CQI3e9',
+
+        // CQI3f
+        'bf_feedback_CQI3f1',
+        'bf_feedback_CQI3f2',
+        'bf_feedback_CQI3f3',
+        'bf_feedback_CQI3f4',
+        'bf_feedback_CQI3f5',
+        'bf_feedback_CQI3f6',
+        'bf_feedback_CQI3f7',
+        'bf_feedback_CQI3f8',
+        'bf_feedback_CQI3f9',
+        'bf_feedback_CQI3f10',
+
+        // CQI3g
+        'bf_feedback_CQI3g1',
+        'bf_feedback_CQI3g2',
+        'bf_feedback_CQI3g3',
+        'bf_feedback_CQI3g4',
+        'bf_feedback_CQI3g5',
+        'bf_feedback_CQI3g6',
+
+        // CQI3h
+        'bf_feedback_CQI3h1',
+        'bf_feedback_CQI3h2',
+        'bf_feedback_CQI3h3',
+        'bf_feedback_CQI3h4',
+        'bf_feedback_CQI3h5',
+        'bf_feedback_CQI3h6',
+        'bf_feedback_CQI3h7',
+        'bf_feedback_CQI3h8',
+        'bf_feedback_CQI3h9',
+
+        // CQI3j
+        'bf_feedback_CQI3j1',
+        'bf_feedback_CQI3j2',
+        'bf_feedback_CQI3j3',
+        'bf_feedback_CQI3j4',
+        'bf_feedback_CQI3j5',
+        'bf_feedback_CQI3j6',
+        'bf_feedback_CQI3j7',
+        'bf_feedback_CQI3j8',
+        'bf_feedback_CQI3j9',
+        'bf_feedback_CQI3j10',
+        'bf_feedback_CQI3j11',
+        'bf_feedback_CQI3j12',
+        'bf_feedback_CQI3j13',
+        'bf_feedback_CQI3j14',
+        'bf_feedback_CQI3j15',
+        'bf_feedback_CQI3j16',
+        'bf_feedback_CQI3j17',
+        'bf_feedback_CQI3j18',
+        'bf_feedback_CQI3j19',
+        'bf_feedback_CQI3j20',
+        'bf_feedback_CQI3j21',
+        'bf_feedback_CQI3j22',
+        'bf_feedback_CQI3j23',
+        'bf_feedback_CQI3j24',
+        'bf_feedback_CQI3j25',
+        'bf_feedback_CQI3j26',
+        'bf_feedback_CQI3j27',
+        'bf_feedback_CQI3j28',
+        'bf_feedback_CQI3j29',
+        'bf_feedback_CQI3j30',
+        'bf_feedback_CQI3j31',
+        'bf_feedback_CQI3j32',
+        'bf_feedback_CQI3j33',
+        'bf_feedback_CQI3j34',
+
+        // CQI4a
+        'bf_feedback_CQI4a1',
+        'bf_feedback_CQI4a2',
+        'bf_feedback_CQI4a3',
+        'bf_feedback_CQI4a4',
+        'bf_feedback_CQI4a5',
+
+        // CQI4b
+        'bf_feedback_CQI4b1',
+        'bf_feedback_CQI4b2',
+        'bf_feedback_CQI4b3',
+        'bf_feedback_CQI4b4',
+        'bf_feedback_CQI4b5',
+        'bf_feedback_CQI4b6',
+        'bf_feedback_CQI4b7',
+        'bf_feedback_CQI4b8',
+
+        // CQI4c
+        'bf_feedback_CQI4c1',
+        'bf_feedback_CQI4c2',
+        'bf_feedback_CQI4c3',
+        'bf_feedback_CQI4c4',
+        'bf_feedback_CQI4c5',
+        'bf_feedback_CQI4c6',
+        'bf_feedback_CQI4c7',
+        'bf_feedback_CQI4c8',
+        'bf_feedback_CQI4c9',
+        'bf_feedback_CQI4c10',
+        'bf_feedback_CQI4c11',
+        'bf_feedback_CQI4c12',
+        'bf_feedback_CQI4c13',
+        'bf_feedback_CQI4c14',
+
+        // CQI4d
+        'bf_feedback_CQI4d1',
+        'bf_feedback_CQI4d2',
+        'bf_feedback_CQI4d3',
+        'bf_feedback_CQI4d4',
+        'bf_feedback_CQI4d5',
+        'bf_feedback_CQI4d6',
+        'bf_feedback_CQI4d7',
+        'bf_feedback_CQI4d8',
+        'bf_feedback_CQI4d9',
+        'bf_feedback_CQI4d10',
+        'bf_feedback_CQI4d11',
+
+        // CQI4e
+        'bf_feedback_CQI4e1',
+        'bf_feedback_CQI4e2',
+        'bf_feedback_CQI4e3',
+        'bf_feedback_CQI4e4',
+        'bf_feedback_CQI4e5',
+        'bf_feedback_CQI4e6',
+        'bf_feedback_CQI4e7',
+        'bf_feedback_CQI4e8',
+
+        // CQI4f
+        'bf_feedback_CQI4f1',
+        'bf_feedback_CQI4f2',
+        'bf_feedback_CQI4f3',
+        'bf_feedback_CQI4f4',
+        'bf_feedback_CQI4f5',
+        'bf_feedback_CQI4f6',
+        'bf_feedback_CQI4f7',
+
+        // CQI4g
+        'bf_feedback_CQI4g1',
+        'bf_feedback_CQI4g2',
+        'bf_feedback_CQI4g3',
+        'bf_feedback_CQI4g4',
+        'bf_feedback_CQI4g5',
+        'bf_feedback_CQI4g6',
+
+        // CQI3k
+        'bf_feedback_CQI3k1',
+        'bf_feedback_CQI3k2',
+        'bf_feedback_CQI3k3',
+        'bf_feedback_CQI3k4',
+        'bf_feedback_CQI3k5',
+        'bf_feedback_CQI3k6',
+        'bf_feedback_CQI3k7',
+        'bf_feedback_CQI3k8',
+        'bf_feedback_CQI3k9',
+        'bf_feedback_CQI3k10',
+        'bf_feedback_CQI3k11',
+        'bf_feedback_CQI3k12',
+        'bf_feedback_CQI3k13',
+        'bf_feedback_CQI3k14',
+        'bf_feedback_CQI3k15',
+        'bf_feedback_CQI3k16',
+        'bf_feedback_CQI3k17',
+        'bf_feedback_CQI3k18',
+        'bf_feedback_CQI3k19',
+        'bf_feedback_CQI3k20',
+        'bf_feedback_CQI3k21',
+        'bf_feedback_CQI3k22',
+        'bf_feedback_CQI3k23',
+        'bf_feedback_CQI3k24',
+        'bf_feedback_CQI3k25',
+        'bf_feedback_CQI3k26',
+        'bf_feedback_CQI3k27',
+        'bf_feedback_CQI3k28',
+        'bf_feedback_CQI3k29',
+        'bf_feedback_CQI3k30',
+        'bf_feedback_CQI3k31',
+        'bf_feedback_CQI3k32',
+        'bf_feedback_CQI3k33',
+        'bf_feedback_CQI3k34',
+        'bf_feedback_CQI3k35',
+        'bf_feedback_CQI3k36',
+        'bf_feedback_CQI3k37',
+        'bf_feedback_CQI3k38',
+        'bf_feedback_CQI3k39',
+        'bf_feedback_CQI3k40',
+        'bf_feedback_CQI3k41',
+        'bf_feedback_CQI3k42',
+        'bf_feedback_CQI3k43',
+        'bf_feedback_CQI3k44',
+        'bf_feedback_CQI3k45',
+        'bf_feedback_CQI3k46',
+        'bf_feedback_CQI3k47',
+        'bf_feedback_CQI3k48',
+        'bf_feedback_CQI3k49',
+        'bf_feedback_CQI3k50',
+        'bf_feedback_CQI3k51',
+        'bf_feedback_CQI3k52',
+        'bf_feedback_CQI3k53',
+        'bf_feedback_CQI3k54',
+        'bf_feedback_CQI3k55',
+        'bf_feedback_CQI3k56',
+        'bf_feedback_CQI3k57',
+        'bf_feedback_CQI3k58',
+        'bf_feedback_CQI3k59',
+        'bf_feedback_CQI3k60',
+        'bf_feedback_CQI3k61',
+        'bf_feedback_CQI3k62',
+        'bf_feedback_CQI3k63',
+        'bf_feedback_CQI3k64',
+        'bf_feedback_CQI3k65',
+        'bf_feedback_CQI3k66',
+
+
+
+        
+        // CQI4h
+        'bf_feedback_CQI4h1',
+        'bf_feedback_CQI4h2',
+        'bf_feedback_CQI4h3',
+        'bf_feedback_CQI4h4',
+        'bf_feedback_CQI4h5',
+        'bf_feedback_CQI4h6',
+        'bf_feedback_CQI4h7',
+        'bf_feedback_CQI4h8',
+        'bf_feedback_CQI4h9',
+        'bf_feedback_CQI4h10',
+        'bf_feedback_CQI4h11',
+        'bf_feedback_CQI4h12',
+        'bf_feedback_CQI4h13',
+        'bf_feedback_CQI4h14',
+        'bf_feedback_CQI4h15',
+        'bf_feedback_CQI4h16',
+        'bf_feedback_CQI4h17',
+        'bf_feedback_CQI4h18',
+        'bf_feedback_CQI4h19',
+        'bf_feedback_CQI4h20',
+        'bf_feedback_CQI4h21',
+        'bf_feedback_CQI4h22',
+        'bf_feedback_CQI4h23',
+        'bf_feedback_CQI4h24',
+        'bf_feedback_CQI4h25',
+        'bf_feedback_CQI4h26',
+        'bf_feedback_CQI4h27',
+        'bf_feedback_CQI4h28',
+        'bf_feedback_CQI4h29',
+        'bf_feedback_CQI4h30',
+        'bf_feedback_CQI4h31',
+        'bf_feedback_CQI4h32',
+        'bf_feedback_CQI4h33',
+        'bf_feedback_CQI4h34',
+        'bf_feedback_CQI4h35',
+        'bf_feedback_CQI4h36',
+        'bf_feedback_CQI4h37',
+        'bf_feedback_CQI4h38',
+        'bf_feedback_CQI4h39',
+        'bf_feedback_CQI4h40',
+        'bf_feedback_CQI4h41',
+        'bf_feedback_CQI4h42',
+        'bf_feedback_CQI4h43',
+        'bf_feedback_CQI4h44',
+        'bf_feedback_CQI4h45',
+        'bf_feedback_CQI4h46',
+        'bf_feedback_CQI4h47',
+        'bf_feedback_CQI4h48',
+        'bf_feedback_CQI4h49',
+        'bf_feedback_CQI4h50',
+        'bf_feedback_CQI4h51',
+        'bf_feedback_CQI4h52',
+        'bf_feedback_CQI4h53',
+        'bf_feedback_CQI4h54',
+        'bf_feedback_CQI4h55',
+        'bf_feedback_CQI4h56',
+
+        // CLOTCM
+        'bf_feedback_CLOTCM1',
+        'bf_feedback_CLOTCM2',
+        'bf_feedback_CLOTCM3',
+        'bf_feedback_CLOTCM4',
+        'bf_feedback_CLOTCM5',
+        'bf_feedback_CLOTCM6',
+        'bf_feedback_CLOTCM7',
+        'bf_feedback_CLOTCM8',
+        'bf_feedback_CLOTCM9',
+        'bf_feedback_CLOTCM10',
+        'bf_feedback_CLOTCM11',
+        'bf_feedback_CLOTCM12',
+        'bf_feedback_CLOTCM13',
+        'bf_feedback_CLOTCM14',
+        'bf_feedback_CLOTCM15',
+        'bf_feedback_CLOTCM16',
+        'bf_feedback_CLOTCM17',
+        'bf_feedback_CLOTCM18',
+        'bf_feedback_CLOTCM19',
+        'bf_feedback_CLOTCM20',
+        'bf_feedback_CLOTCM21',
+        'bf_feedback_CLOTCM22',
+        'bf_feedback_CLOTCM23',
+        'bf_feedback_CLOTCM24',
+        'bf_feedback_CLOTCM25',
+        'bf_feedback_CLOTCM26',
+        'bf_feedback_CLOTCM27',
+        'bf_feedback_CLOTCM28',
+        'bf_feedback_CLOTCM29',
+        'bf_feedback_CLOTCM30',
+
+        // CQI4i
+        'bf_feedback_CQI4i1',
+        'bf_feedback_CQI4i2',
+        'bf_feedback_CQI4i3',
+        'bf_feedback_CQI4i4',
+        'bf_feedback_CQI4i5',
+        'bf_feedback_CQI4i6',
+        'bf_feedback_CQI4i7',
+        'bf_feedback_CQI4i8',
+        'bf_feedback_CQI4i9',
+        'bf_feedback_CQI4i10',
+        'bf_feedback_CQI4i11',
+        'bf_feedback_CQI4i12',
+        'bf_feedback_CQI4i13',
+        'bf_feedback_CQI4i14',
+
+        // CQI4j
+        'bf_feedback_CQI4j1',
+        'bf_feedback_CQI4j2',
+        'bf_feedback_CQI4j3',
+        'bf_feedback_CQI4j4',
+        'bf_feedback_CQI4j5',
+        'bf_feedback_CQI4j6',
+        'bf_feedback_CQI4j7',
+        'bf_feedback_CQI4j8',
+        'bf_feedback_CQI4j9',
+        'bf_feedback_CQI4j10',
+        'bf_feedback_CQI4j11',
+        'bf_feedback_CQI4j12',
+        'bf_feedback_CQI4j13',
+        'bf_feedback_CQI4j14',
+        'bf_feedback_CQI4j15',
+        'bf_feedback_CQI4j16',
+        'bf_feedback_CQI4j17',
+        'bf_feedback_CQI4j18',
+        'bf_feedback_CQI4j19',
+        'bf_feedback_CQI4j20',
+        'bf_feedback_CQI4j21',
+        'bf_feedback_CQI4j22'
+    ];
+
+        if (!in_array($table, $tables)) {
+            $this->session->set_flashdata('error', 'Invalid table specified for deletion.');
+            redirect($_SERVER['HTTP_REFERER']);
+            return;
+        }
+
+        $this->db->trans_start();
+        $this->db->where('id', $id);
+        $deleted = $this->db->delete($table);
+        $this->db->trans_complete();
+
+        if ($deleted) {
+            $this->session->set_flashdata('message', 'KPI record deleted successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to delete the KPI record.');
+        }
+
+        redirect($_SERVER['HTTP_REFERER']); // back to same KPI page
+    }
+
 
 
     //main page for all KPI
@@ -4282,7 +4724,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'IPSG 2.2 - Hand off communication interdepartmental Shift (Doctors) - (MRD - Ward)';
+            $data['title'] = 'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing - Emergency Department)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j18', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -4320,7 +4762,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'IPSG 2.2 - Hand off communication interdepartmental Shift (Nurses) - (Nursing - Emergency Department)';
+            $data['title'] = 'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing -ICU)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j19', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -4358,7 +4800,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'IPSG 2.2 - Hand off communication interdepartmental Shift (Nurses) - (Nursing - ICU)';
+            $data['title'] = 'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing -Ward)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j20', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -9629,6 +10071,84 @@ class Quality extends CI_Controller
     
             $data['title'] = 'Rate to RRT response turn to Code blue (JCI8-COP 4) - Nursing';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k64', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI3k65() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Percentage of patient Identification Errors for Diet patients (IPD)';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k65', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function feedbacks_report_CQI3k66() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = 'Number of Patient safety events or patterns of events during procedural sedation';
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3k66', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
             redirect('dashboard/noaccess');
@@ -17654,6 +18174,26 @@ class Quality extends CI_Controller
             $this->load->view('layout/main_wrapper',$data);
         } else { redirect('dashboard/noaccess'); }
     }
+
+    public function patient_feedback_CQI3k65()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k65',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
+
+    public function patient_feedback_CQI3k66()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI3k66',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
     
     // CQI4h1 - Patient satisfaction index - Physiotherapy (Physical therapy and Rehabilitation Department)
     public function patient_feedback_CQI4h1()
@@ -19064,51 +19604,4294 @@ class Quality extends CI_Controller
 
 
     public function edit_feedback_CQI3a1_byid($id)
-    {
+{
+    // Check if form is submitted
+    if ($this->input->post()) {
 
+        // 1️⃣ Handle time formatting
+        $hr = intval($this->input->post('initial_assessment_hr')) ?: 0;
+        $min = intval($this->input->post('initial_assessment_min')) ?: 0;
+        $sec = intval($this->input->post('initial_assessment_sec')) ?: 0;
+        $timeString = sprintf('%02d:%02d:%02d', $hr, $min, $sec);
 
-        // Check if form is submitted
-        if ($this->input->post()) {
-            // Capture the hour, minute, and second values from the form input
-            $hr = intval($this->input->post('initial_assessment_hr')) ?: 0;
-            $min = intval($this->input->post('initial_assessment_min')) ?: 0;
-            $sec = intval($this->input->post('initial_assessment_sec')) ?: 0;
+        // 2️⃣ Format datetime
+        $dataCollected = $this->input->post('dataCollected');
+        $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
+        $formattedDatet = date('Y-m-d', strtotime($dataCollected));
 
-            // Format hr, min, and sec into the desired string format "HH:MM:SS"
-            $timeString = sprintf('%02d:%02d:%02d', $hr, $min, $sec);
+        // 3️⃣ Fetch existing dataset and files
+        
+        $existing = $this->quality_model->get_feedback_CQI3a1_byid($id);
+        $dataset = json_decode($existing->dataset ?? '{}', true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
 
-            // Capture other form data
-            $dataCollected = $this->input->post('dataCollected');
-            $formattedDatetime = date('Y-m-d H:i:s', strtotime($dataCollected));
-            $formattedDatet = date('Y-m-d', strtotime($dataCollected));
-            $data = array(
-
-
-                'time_taken_initial_assessment' => $timeString,
-                'number_of_admission' => $this->input->post('total_admission'),
-                'average_time_taken_initial_assessment' => $this->input->post('calculatedResult'),
-                'bench_mark_time' => $this->input->post('benchmark'),
-                'data_analysis' => $this->input->post('dataAnalysis'),
-                'corrective_action' => $this->input->post('correctiveAction'),
-                'preventive_action' => $this->input->post('preventiveAction'),
-                'datetime' => $formattedDatetime, // Correctly formatted datetime
-                'datet' => $formattedDatet,       // Correctly formatted date
-                'dataset'             => json_encode($_POST)
-            );
-
-
-
-            // Update the data in the database
-            $this->quality_model->update_feedback_CQI3a1($id, $data);
-
-            // Redirect to a success page or wherever you need to go after the update
-            redirect('quality/patient_feedback_CQI3a1?id=' . $id);
-        } else {
-            // Load the view with the form
-            $data['param'] = $this->quality_model->get_feedback_1PSQ3a_byid($id);
-            $this->load->view('qualitymodules/dephead/patient_feedback_CQI3a1', $data);
+        // 4️⃣ Remove files if requested
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
         }
+
+        // 5️⃣ Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 6️⃣ Update other form fields into dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 7️⃣ Prepare final data for DB update
+        $data = [
+            'time_taken_initial_assessment' => $timeString,
+            'number_of_admission'           => $this->input->post('total_admission'),
+            'average_time_taken_initial_assessment' => $this->input->post('calculatedResult'),
+            'bench_mark_time'               => $this->input->post('benchmark'),
+            'data_analysis'                 => $this->input->post('dataAnalysis'),
+            'corrective_action'             => $this->input->post('correctiveAction'),
+            'preventive_action'             => $this->input->post('preventiveAction'),
+            'datetime'                      => $formattedDatetime,
+            'datet'                          => $formattedDatet,
+            'dataset'                        => json_encode($dataset)
+        ];
+
+        // 8️⃣ Update database
+        $this->quality_model->update_feedback_CQI3a1($id, $data);
+
+        // 9️⃣ Redirect after update
+        redirect('quality/patient_feedback_CQI3a1?id=' . $id);
+    } else {
+        // Load the view with the form and existing record
+        $data['param'] = $this->quality_model->get_feedback_CQI3a1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a1', $data);
     }
+}
+
+    public function edit_feedback_CQI3a4()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a4', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a2()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a2', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a2_byid($id)
+{
+    if ($this->input->post()) {
+
+        // Get existing record
+        $existing = $this->quality_model->get_feedback_CQI3a2_byid($id);
+
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
+        }
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // Handle file removal
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Handle file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Add/Update form fields to dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // Compute KPI (average time or percentage)
+        $numerator = intval($this->input->post('initial_assessment_hr')) ?: 0;
+        $denominator = intval($this->input->post('total_admission')) ?: 0;
+        $percentage = ($denominator > 0) ? ($numerator / $denominator) * 100 : 0;
+
+        $data = [
+            'dataset' => json_encode($dataset),
+        ];
+
+        log_message('debug', 'POST data: ' . json_encode($_POST));
+        log_message('debug', 'Updating ID: ' . $id);
+        log_message('debug', 'Data being saved: ' . json_encode($data));
+
+        $this->quality_model->update_feedback_CQI3a2($id, $data);
+
+        if ($this->db->affected_rows() > 0) {
+            log_message('debug', 'CQI3a2 record updated successfully for ID: ' . $id);
+        } else {
+            log_message('error', 'CQI3a2 update failed or no changes detected for ID: ' . $id);
+        }
+
+        redirect('quality/patient_feedback_CQI3a2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a2', $data);
+    }
+}
+public function edit_feedback_CQI3a3()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a3', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a3_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->quality_model->get_feedback_CQI3a3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // Remove old files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset fields
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI computation (example)
+        $numerator = intval($this->input->post('initial_assessment_hr')) ?: 0;
+        $denominator = intval($this->input->post('total_emergency_patients')) ?: 0;
+        $percentage = ($denominator > 0) ? ($numerator / $denominator) * 100 : 0;
+
+        $data = [
+            'dataset' => json_encode($dataset),
+        ];
+
+        log_message('debug', 'Updating CQI3a3 ID: ' . $id);
+        $this->quality_model->update_feedback_CQI3a3($id, $data);
+
+        redirect('quality/patient_feedback_CQI3a3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a3', $data);
+    }
+}
+
+
+
+
+public function edit_feedback_CQI3a4_byid($id)
+{
+    if ($this->input->post()) {
+
+        
+        $existing = $this->quality_model->get_feedback_CQI3a4_byid($id);
+
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
+        }
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $numerator = intval($this->input->post('initial_assessment_hr')) ?: 0;
+        $denominator = intval($this->input->post('total_admission')) ?: 0;
+        $percentage = ($denominator > 0) ? ($numerator / $denominator) * 100 : 0;
+
+        $data = [
+            'dataset' => json_encode($dataset),
+        ];
+
+        log_message('debug', 'POST data: ' . json_encode($_POST));
+        log_message('debug', 'Updating ID: ' . $id);
+        log_message('debug', 'Data being saved: ' . json_encode($data));
+
+        $this->quality_model->update_feedback_CQI3a4($id, $data);
+
+        if ($this->db->affected_rows() > 0) {
+            log_message('debug', 'CQI3a4 record updated successfully for ID: ' . $id);
+        } else {
+            log_message('error', 'CQI3a4 update failed or no changes detected for ID: ' . $id);
+        }
+
+        redirect('quality/patient_feedback_CQI3a4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a4', $data);
+    }
+}
+public function edit_feedback_CQI3a5()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a5', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a5_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation
+        $numerator = intval($this->input->post('nutritional_assessment_done')) ?: 0;
+        $denominator = intval($this->input->post('total_inpatients')) ?: 0;
+        $percentage = ($denominator > 0) ? ($numerator / $denominator) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+
+        $this->quality_model->update_feedback_CQI3a5($id, $data);
+        redirect('quality/patient_feedback_CQI3a5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a5', $data);
+    }
+}
+public function edit_feedback_CQI3a6()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a6', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a6_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation
+        $numerator = intval($this->input->post('nursing_care_documented')) ?: 0;
+        $denominator = intval($this->input->post('total_inpatients')) ?: 0;
+        $percentage = ($denominator > 0) ? ($numerator / $denominator) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a6($id, $data);
+        redirect('quality/patient_feedback_CQI3a6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a6', $data);
+    }
+}
+public function edit_feedback_CQI3a7()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a7', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a7', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a7_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a7_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation - Average time (minutes)
+        $total_time = floatval($this->input->post('total_time_assessment')) ?: 0;
+        $total_patients = intval($this->input->post('total_patients_assessed')) ?: 0;
+        $avg_time = ($total_patients > 0) ? ($total_time / $total_patients) : 0;
+        $dataset['average_time'] = round($avg_time, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a7($id, $data);
+        redirect('quality/patient_feedback_CQI3a7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a7', $data);
+    }
+}
+// =============================
+// 🧩 CQI3a8 – Avg. Time for Initial Assessment of Inpatients (Nursing-ICU)
+// =============================
+public function edit_feedback_CQI3a8()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a8', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a8', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a8_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->quality_model->get_feedback_CQI3a8_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🧹 Remove files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧾 Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Average Time)
+        $sum_time = floatval($this->input->post('sum_time')) ?: 0;
+        $total_patients = intval($this->input->post('total_patients')) ?: 0;
+        $average_time = ($total_patients > 0) ? ($sum_time / $total_patients) : 0;
+        $dataset['average_time'] = round($average_time, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a8($id, $data);
+        redirect('quality/patient_feedback_CQI3a8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a8', $data);
+    }
+}
+
+
+
+// =============================
+// 🧩 CQI3a9 – Avg. Time for Initial Assessment of Inpatients (Nursing-Ward)
+// =============================
+public function edit_feedback_CQI3a9()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a9', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a9', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a9_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->quality_model->get_feedback_CQI3a9_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🧹 Remove files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧾 Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Average Time)
+        $sum_time = floatval($this->input->post('sum_time')) ?: 0;
+        $total_patients = intval($this->input->post('total_patients')) ?: 0;
+        $average_time = ($total_patients > 0) ? ($sum_time / $total_patients) : 0;
+        $dataset['average_time'] = round($average_time, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a9($id, $data);
+        redirect('quality/patient_feedback_CQI3a9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a9', $data);
+    }
+}
+
+
+
+// =============================
+// 🧩 CQI3a10 – % Blood Culture Contamination Rate (Lab Services)
+// =============================
+public function edit_feedback_CQI3a10()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a10', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a10', $data, true);
+        }
+
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a10_byid($id)
+{
+    if ($this->input->post()) {
+
+        $existing = $this->quality_model->get_feedback_CQI3a10_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🧹 Remove files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧾 Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Contamination %)
+        $contaminated = intval($this->input->post('contaminated_samples')) ?: 0;
+        $total_samples = intval($this->input->post('total_samples')) ?: 0;
+        $percentage = ($total_samples > 0) ? ($contaminated / $total_samples) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a10($id, $data);
+        redirect('quality/patient_feedback_CQI3a10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a10', $data);
+    }
+}
+// 🩺 CQI3a11 - Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF
+public function edit_feedback_CQI3a11()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a11', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a11', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a11_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a11_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $patients = intval($this->input->post('patients_with_beta_blocker')) ?: 0;
+        $total_chf = intval($this->input->post('total_chf_patients')) ?: 0;
+        $percentage = ($total_chf > 0) ? ($patients / $total_chf) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a11($id, $data);
+        redirect('quality/patient_feedback_CQI3a11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a11', $data);
+    }
+}
+public function edit_feedback_CQI3a12()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a12', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a12', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a12_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a12_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $achieved = intval($this->input->post('target_achieved_patients')) ?: 0;
+        $total = intval($this->input->post('total_hypoglycemia_patients')) ?: 0;
+        $percentage = ($total > 0) ? ($achieved / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a12($id, $data);
+        redirect('quality/patient_feedback_CQI3a12?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a12_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a12', $data);
+    }
+}
+public function edit_feedback_CQI3a13()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a13', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a13', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a13_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a13_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        $tears = intval($this->input->post('spontaneous_tears')) ?: 0;
+        $deliveries = intval($this->input->post('total_vaginal_deliveries')) ?: 0;
+        $percentage = ($deliveries > 0) ? ($tears / $deliveries) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a13($id, $data);
+        redirect('quality/patient_feedback_CQI3a13?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a13_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a13', $data);
+    }
+}
+public function edit_feedback_CQI3a14()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a14', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a14', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a14_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a14_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (Sepsis patients received HOUR-1 care / Total sepsis patients) * 100
+        $hour1 = intval($this->input->post('hour1_care_patients')) ?: 0;
+        $total = intval($this->input->post('total_sepsis_patients')) ?: 0;
+        $percentage = ($total > 0) ? ($hour1 / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a14($id, $data);
+        redirect('quality/patient_feedback_CQI3a14?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a14_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a14', $data);
+    }
+}
+public function edit_feedback_CQI3a15()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a15', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a15', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a15_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a15_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (COPD patients with action plan / Total COPD discharged patients) * 100
+        $action_plan = intval($this->input->post('copd_with_action_plan')) ?: 0;
+        $total = intval($this->input->post('total_copd_discharges')) ?: 0;
+        $percentage = ($total > 0) ? ($action_plan / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a15($id, $data);
+        redirect('quality/patient_feedback_CQI3a15?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a15_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a15', $data);
+    }
+}
+public function edit_feedback_CQI3a16()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a16', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a16', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a16_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a16_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (Inappropriately treated / Total bronchiolitis patients) * 100
+        $inappropriate = intval($this->input->post('inappropriate_treatments')) ?: 0;
+        $total = intval($this->input->post('total_bronchiolitis_patients')) ?: 0;
+        $percentage = ($total > 0) ? ($inappropriate / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a16($id, $data);
+        redirect('quality/patient_feedback_CQI3a16?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a16_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a16', $data);
+    }
+}
+public function edit_feedback_CQI3a17()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a17', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a17', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a17_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a17_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Percentage of oncology patients initiated after MDM
+        $initiated = intval($this->input->post('patients_initiated_after_mdm')) ?: 0;
+        $total = intval($this->input->post('total_oncology_patients')) ?: 0;
+        $percentage = ($total > 0) ? ($initiated / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a17($id, $data);
+        redirect('quality/patient_feedback_CQI3a17?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a17_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a17', $data);
+    }
+}
+public function edit_feedback_CQI3a18()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a18', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a18', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a18_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a18_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Percentage of Extravasation
+        $extravasation = intval($this->input->post('extravasation_cases')) ?: 0;
+        $total_cases = intval($this->input->post('total_contrast_cases')) ?: 0;
+        $percentage = ($total_cases > 0) ? ($extravasation / $total_cases) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a18($id, $data);
+        redirect('quality/patient_feedback_CQI3a18?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a18_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a18', $data);
+    }
+}
+public function edit_feedback_CQI3a19()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a19', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a19', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a19_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a19_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // ⏱ KPI: Average Time Taken
+        $total_time = floatval($this->input->post('total_time_minutes')) ?: 0;
+        $total_patients = intval($this->input->post('total_patients')) ?: 0;
+        $average = ($total_patients > 0) ? ($total_time / $total_patients) : 0;
+        $dataset['average_time'] = round($average, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a19($id, $data);
+        redirect('quality/patient_feedback_CQI3a19?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a19_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a19', $data);
+    }
+}
+public function edit_feedback_CQI3a20()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a20', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a20', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a20_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a20_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Percentage of patients at target Hb
+        $achieved = intval($this->input->post('patients_achieved_target')) ?: 0;
+        $total = intval($this->input->post('total_dialysis_patients')) ?: 0;
+        $percentage = ($total > 0) ? ($achieved / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a20($id, $data);
+        redirect('quality/patient_feedback_CQI3a20?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a20_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a20', $data);
+    }
+}
+// ==================== CQI3a21 ====================
+public function edit_feedback_CQI3a21()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a21', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a21', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a21_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a21_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🗑️ File Removal
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation
+        $responded = intval($this->input->post('responded_on_time')) ?: 0;
+        $reported = intval($this->input->post('reported_cases')) ?: 0;
+        $percentage = ($reported > 0) ? ($responded / $reported) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a21($id, $data);
+        redirect('quality/patient_feedback_CQI3a21?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a21_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a21', $data);
+    }
+}
+
+
+
+// ==================== CQI3a22 ====================
+public function edit_feedback_CQI3a22()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3a22', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a22', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3a22_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3a22_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🗑️ File Removal
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation
+        $compliant = intval($this->input->post('compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $percentage = ($total > 0) ? ($compliant / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3a22($id, $data);
+        redirect('quality/patient_feedback_CQI3a22?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3a22_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a22', $data);
+    }
+}
+public function edit_feedback_CQI3b1()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b1_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 📁 Handle existing + new files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // File Uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation: Number of reporting errors per 1000 investigations
+        $errors = intval($this->input->post('reporting_errors')) ?: 0;
+        $total = intval($this->input->post('total_investigations')) ?: 0;
+        $rate = ($total > 0) ? ($errors / $total) * 1000 : 0;
+        $dataset['rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b1($id, $data);
+        redirect('quality/patient_feedback_CQI3b1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b1', $data);
+    }
+}
+public function edit_feedback_CQI3b2()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b2_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload New Files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation: Rate of redo in 1000 tests
+        $redo = intval($this->input->post('redo_tests')) ?: 0;
+        $total = intval($this->input->post('total_tests')) ?: 0;
+        $rate = ($total > 0) ? ($redo / $total) * 1000 : 0;
+        $dataset['rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b2($id, $data);
+        redirect('quality/patient_feedback_CQI3b2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b2', $data);
+    }
+}
+public function edit_feedback_CQI3b3()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b3_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload New Files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation: Percentage of reports correlating to clinical diagnosis
+        $correlated = intval($this->input->post('correlated_reports')) ?: 0;
+        $total = intval($this->input->post('total_reports')) ?: 0;
+        $percentage = ($total > 0) ? ($correlated / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b3($id, $data);
+        redirect('quality/patient_feedback_CQI3b3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b3', $data);
+    }
+}
+public function edit_feedback_CQI3b4()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b4_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // File Upload Handling
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation: Percentage of employees adhering to safety precautions
+        $adhered = intval($this->input->post('employees_adhered')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $percentage = ($total > 0) ? ($adhered / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b4($id, $data);
+        redirect('quality/patient_feedback_CQI3b4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b4', $data);
+    }
+}
+public function edit_feedback_CQI3b5()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b5_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File logic (same pattern)
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation: Rate of redo per 1000 tests
+        $redo = intval($this->input->post('redo_tests')) ?: 0;
+        $total = intval($this->input->post('total_tests')) ?: 0;
+        $rate = ($total > 0) ? ($redo / $total) * 1000 : 0;
+        $dataset['rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b5($id, $data);
+        redirect('quality/patient_feedback_CQI3b5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b5', $data);
+    }
+}
+// ✅ CQI3b6 - Number of reporting errors per 1000 investigations (Radiology)
+public function edit_feedback_CQI3b6()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b6', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b6_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🧾 Handle file uploads/removals
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Number of reporting errors per 1000 investigations
+        $errors = intval($this->input->post('reporting_errors')) ?: 0;
+        $total = intval($this->input->post('total_investigations')) ?: 0;
+        $rate = ($total > 0) ? ($errors / $total) * 1000 : 0;
+        $dataset['rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b6($id, $data);
+        redirect('quality/patient_feedback_CQI3b6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b6', $data);
+    }
+}
+// ✅ CQI3b7 - Percentage of reports correlating to clinical diagnosis (Radiology)
+public function edit_feedback_CQI3b7()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b7', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b7', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b7_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b7_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Percentage of reports correlating to clinical diagnosis
+        $correlated = intval($this->input->post('correlated_reports')) ?: 0;
+        $total = intval($this->input->post('total_reports')) ?: 0;
+        $percentage = ($total > 0) ? ($correlated / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b7($id, $data);
+        redirect('quality/patient_feedback_CQI3b7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b7', $data);
+    }
+}
+// ✅ CQI3b8 - Percentage of employees in diagnostics adhering to safety precautions (Radiology)
+public function edit_feedback_CQI3b8()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b8', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b8', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b8_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b8_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI: Percentage of employees adhering to safety precautions
+        $compliant = intval($this->input->post('employees_following_safety')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $percentage = ($total > 0) ? ($compliant / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b8($id, $data);
+        redirect('quality/patient_feedback_CQI3b8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b8', $data);
+    }
+}
+// ✅ CQI3b9 - Percentage of employees in diagnostics adhering to safety precautions (Radiology - OT)
+public function edit_feedback_CQI3b9()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b9', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b9', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b9_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b9_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation
+        $compliant = intval($this->input->post('employees_following_safety')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $percentage = ($total > 0) ? ($compliant / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b9($id, $data);
+        redirect('quality/patient_feedback_CQI3b9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b9', $data);
+    }
+}
+// ✅ CQI3b10 - Percentage of employees in diagnostics adhering to safety precautions (Radiology - Nursing)
+public function edit_feedback_CQI3b10()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b10', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b10', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b10_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b10_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation
+        $compliant = intval($this->input->post('employees_following_safety')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $percentage = ($total > 0) ? ($compliant / $total) * 100 : 0;
+        $dataset['percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b10($id, $data);
+        redirect('quality/patient_feedback_CQI3b10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b10', $data);
+    }
+}
+// CQI3b11 - Number of reporting errors before dispatch (Lab)
+public function edit_feedback_CQI3b11()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b11', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b11', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b11_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b11_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Rate per 1000 samples)
+        $errors = intval($this->input->post('reporting_errors')) ?: 0;
+        $total = intval($this->input->post('total_tests')) ?: 0;
+        $rate = ($total > 0) ? ($errors / $total) * 1000 : 0;
+        $dataset['rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b11($id, $data);
+        redirect('quality/patient_feedback_CQI3b11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b11', $data);
+    }
+}
+// CQI3b12 - Waiting time for Laboratory services
+public function edit_feedback_CQI3b12()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b12', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b12', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b12_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b12_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Average waiting time)
+        $total_wait_time = floatval($this->input->post('total_wait_time')) ?: 0;
+        $patients = intval($this->input->post('total_patients')) ?: 0;
+        $average = ($patients > 0) ? ($total_wait_time / $patients) : 0;
+        $dataset['average_waiting_time'] = round($average, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b12($id, $data);
+        redirect('quality/patient_feedback_CQI3b12?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b12_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b12', $data);
+    }
+}
+// CQI3b13 - Patient safety events or errors related to pathology samples (JCI8-QPS 3.04) - (Lab Services)
+public function edit_feedback_CQI3b13()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3b13', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b13', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3b13_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3b13_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Error rate per 1000 samples)
+        $errors = intval($this->input->post('safety_events')) ?: 0;
+        $total_samples = intval($this->input->post('total_samples')) ?: 0;
+        $rate = ($total_samples > 0) ? ($errors / $total_samples) * 1000 : 0;
+        $dataset['error_rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3b13($id, $data);
+        redirect('quality/patient_feedback_CQI3b13?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3b13_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3b13', $data);
+    }
+}
+// ✅ CQI3c1 - Medication errors Rate (Clinical Pharmacy)
+public function edit_feedback_CQI3c1()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c1_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Medication error rate per 1000 prescriptions)
+        $errors = intval($this->input->post('medication_errors')) ?: 0;
+        $total_prescriptions = intval($this->input->post('total_prescriptions')) ?: 0;
+        $rate = ($total_prescriptions > 0) ? ($errors / $total_prescriptions) * 1000 : 0;
+        $dataset['medication_error_rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c1($id, $data);
+        redirect('quality/patient_feedback_CQI3c1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c1', $data);
+    }
+}
+// ✅ CQI3c2 - Incidence of medication errors - Prescription errors (IP)
+public function edit_feedback_CQI3c2()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c2_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Prescription Error Rate per 100 prescriptions)
+        $errors = intval($this->input->post('prescription_errors')) ?: 0;
+        $total = intval($this->input->post('total_prescriptions_checked')) ?: 0;
+        $rate = ($total > 0) ? ($errors / $total) * 100 : 0;
+        $dataset['prescription_error_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c2($id, $data);
+        redirect('quality/patient_feedback_CQI3c2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c2', $data);
+    }
+}
+// ✅ CQI3c3 - Incidence of medication errors - Dispensing errors (IP)
+public function edit_feedback_CQI3c3()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c3_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Dispensing Error Rate per 1000 prescriptions)
+        $dispensing_errors = intval($this->input->post('dispensing_errors')) ?: 0;
+        $total_dispensed = intval($this->input->post('total_doses_dispensed')) ?: 0;
+        $rate = ($total_dispensed > 0) ? ($dispensing_errors / $total_dispensed) * 1000 : 0;
+        $dataset['dispensing_error_rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c3($id, $data);
+        redirect('quality/patient_feedback_CQI3c3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c3', $data);
+    }
+}
+// ✅ CQI3c4 - Percentage of admissions with ADR (Adverse Drug Reaction)
+public function edit_feedback_CQI3c4()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c4_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (ADR %)
+        $adr_cases = intval($this->input->post('adr_cases')) ?: 0;
+        $total_admissions = intval($this->input->post('total_admissions')) ?: 0;
+        $percentage = ($total_admissions > 0) ? ($adr_cases / $total_admissions) * 100 : 0;
+        $dataset['adr_percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c4($id, $data);
+        redirect('quality/patient_feedback_CQI3c4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c4', $data);
+    }
+}
+// ✅ CQI3c5 - Percentage of medication charts with error prone abbreviations
+public function edit_feedback_CQI3c5()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c5_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📁 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Error-Prone Abbreviation %)
+        $charts_with_errors = intval($this->input->post('charts_with_error_abbreviations')) ?: 0;
+        $total_charts = intval($this->input->post('total_charts_reviewed')) ?: 0;
+        $percentage = ($total_charts > 0) ? ($charts_with_errors / $total_charts) * 100 : 0;
+        $dataset['error_prone_abbreviation_percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c5($id, $data);
+        redirect('quality/patient_feedback_CQI3c5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c5', $data);
+    }
+}
+// CQI3c6 - Percentage of patients receiving high-risk medication developing adverse drug event (Clinical Pharmacy)
+public function edit_feedback_CQI3c6()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c6', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c6_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 📁 Handle File Upload and Removal (common logic)
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Adverse event %)
+        $adverse_cases = intval($this->input->post('adverse_cases')) ?: 0;
+        $total_high_risk_patients = intval($this->input->post('total_high_risk_patients')) ?: 0;
+        $percentage = ($total_high_risk_patients > 0) ? ($adverse_cases / $total_high_risk_patients) * 100 : 0;
+        $dataset['adverse_event_percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c6($id, $data);
+        redirect('quality/patient_feedback_CQI3c6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c6', $data);
+    }
+}
+// CQI3c7 - Incidence of Medication Administering Errors (As per NABH 4th edition) - (Clinical Pharmacy)
+public function edit_feedback_CQI3c7()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c7', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c7', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c7_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c7_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 📁 File Handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value)
+            if (!in_array($key, ['uploaded_files', 'remove_files_json']))
+                $dataset[$key] = $value;
+
+        // 📊 KPI Formula (Incidence rate per 1000 administrations)
+        $errors = intval($this->input->post('admin_errors')) ?: 0;
+        $total_admins = intval($this->input->post('total_admins')) ?: 0;
+        $rate = ($total_admins > 0) ? ($errors / $total_admins) * 1000 : 0;
+        $dataset['admin_error_rate_per_1000'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c7($id, $data);
+        redirect('quality/patient_feedback_CQI3c7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c7', $data);
+    }
+}
+// CQI3c8 - Percentage of in-patients developing adverse drug reaction (PSQ3a) (Clinical Pharmacy)
+public function edit_feedback_CQI3c8()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c8', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c8', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c8_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c8_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload and cleanup
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+        foreach ($_POST as $key => $value)
+            if (!in_array($key, ['uploaded_files', 'remove_files_json']))
+                $dataset[$key] = $value;
+
+        // 📊 KPI Calculation
+        $adr_cases = intval($this->input->post('adr_cases')) ?: 0;
+        $total_inpatients = intval($this->input->post('total_inpatients')) ?: 0;
+        $percentage = ($total_inpatients > 0) ? ($adr_cases / $total_inpatients) * 100 : 0;
+        $dataset['adr_percentage'] = round($percentage, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c8($id, $data);
+        redirect('quality/patient_feedback_CQI3c8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c8', $data);
+    }
+}
+// CQI3c9 - Incidence of Medication Administering Errors (Clinical Pharmacy)
+public function edit_feedback_CQI3c9()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c9', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c9', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c9_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c9_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 📁 Handle File Upload and Removal
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Incidence Rate)
+        $admin_error_cases = intval($this->input->post('admin_error_cases')) ?: 0;
+        $total_administered = intval($this->input->post('total_administered')) ?: 0;
+        $incidence_rate = ($total_administered > 0) ? ($admin_error_cases / $total_administered) * 100 : 0;
+        $dataset['admin_error_rate'] = round($incidence_rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c9($id, $data);
+        redirect('quality/patient_feedback_CQI3c9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c9', $data);
+    }
+}
+// CQI3c10 - Incidence of medication errors - Dispensing errors (IP) (Clinical Pharmacy)
+public function edit_feedback_CQI3c10()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c10', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c10', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c10_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c10_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 📁 File Upload and Removal Logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 📊 KPI Calculation (Dispensing Error Rate)
+        $dispense_errors = intval($this->input->post('dispense_errors')) ?: 0;
+        $total_dispenses = intval($this->input->post('total_dispenses')) ?: 0;
+        $error_rate = ($total_dispenses > 0) ? ($dispense_errors / $total_dispenses) * 100 : 0;
+        $dataset['dispensing_error_rate'] = round($error_rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c10($id, $data);
+        redirect('quality/patient_feedback_CQI3c10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c10', $data);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //START REPORTS
@@ -19148,14 +23931,13 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Sum of time taken for initial assessment';
-            $header[4] = 'Total number of in-patients';
-            $header[5] = 'Avg. time taken for initial assessment';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for initial assessment of in-patients in MRD-ICU (in Hrs)';
+            $header[3] = 'Total number of in-patients (in No.s)';
+            $header[4] = 'Avg. time taken for initial assessment of in-patients in MRD-ICU (in Hrs)';
 
-            $j = 6;
+            $j = 5;
 
             $header[$j++] = 'Benchmark time';
             $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -19168,11 +23950,7 @@ class Quality extends CI_Controller
                 $data = json_decode($row->dataset, true);
 
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
                 $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
@@ -19245,14 +24023,13 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Sum of time taken for assessment of in-patients';
-            $header[4] = 'Total number of in-patients';
-            $header[5] = 'Avg. time taken for initial assessment';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for initial assessment of in-patients in MRD-WARD (in Hrs)';
+            $header[3] = 'Total number of in-patients (in No.s)';
+            $header[4] = 'Avg. time taken for initial assessment of in-patients in MRD-WARD (in Hrs)';
 
-            $j = 6;
+            $j = 5;
 
             $header[$j++] = 'Benchmark time';
             $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -19265,11 +24042,7 @@ class Quality extends CI_Controller
                 $data = json_decode($row->dataset, true);
 
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
                 $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
@@ -19285,7 +24058,7 @@ class Quality extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- Average Time for initial assessment of in-patients (Doctors) in MRD(Ward) - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Average Time for initial assessment of in-patients (Doctors)- (MRI WARD) - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19341,14 +24114,13 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Sum of time taken for initial assessment of emergency patients';
-            $header[4] = 'Total number of emergency patients';
-            $header[5] = 'Avg.Time for initial assessment of in-patients- (Emergency Department)';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for initial assessment emergency patients (in Hrs)';
+            $header[3] = 'Total number of emergency patients (in No.s)';
+            $header[4] = 'Avg.Time for initial assessment of in-patients (in Hrs)';
 
-            $j = 6;
+            $j = 5;
 
             $header[$j++] = 'Benchmark time';
             $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -19361,11 +24133,7 @@ class Quality extends CI_Controller
                 $data = json_decode($row->dataset, true);
 
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
                 $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
@@ -19405,7 +24173,8 @@ class Quality extends CI_Controller
         }
     }
 
-    public function overall_2psq3a_report()
+
+    public function overall_CQI3a4_report()
     {
 
         if ($this->session->userdata('isLogIn') == false)
@@ -19413,7 +24182,7 @@ class Quality extends CI_Controller
         if (ismodule_active('QUALITY') === true) {
 
 
-            $table_feedback = 'bf_feedback_2PSQ3a';
+            $table_feedback = 'bf_feedback_CQI3a4';
             $table_patients = 'bf_patients';
             $desc = 'desc';
             $setup = 'setup';
@@ -19437,17 +24206,16 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Number of reporting errors';
-            $header[4] = 'Number of tests performed';
-            $header[5] = 'No. of reporting errors per 1000 investigations';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of case sheets where care plan is documented (in No.s)';
+            $header[3] = 'Total number of in-patients for the month (in No.s)';
+            $header[4] = 'Percentage of Care-plan is documented for inpatients(MRD) (in %)';
 
-            $j = 6;
+            $j = 5;
 
-
-            $header[$j++] = 'Data analysis';
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
             $header[$j++] = 'Corrective action';
             $header[$j++] = 'Preventive action';
 
@@ -19456,20 +24224,12 @@ class Quality extends CI_Controller
             foreach ($feedbacktaken as $row) {
                 $data = json_decode($row->dataset, true);
 
-                // echo '<pre>';
-                // print_r($data);
-                // echo '</pre>';
-                // exit;
-
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
-                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                //$dataexport[$i]['benchmark'] = $data['benchmark'];
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
                 $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
                 $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -19481,7 +24241,7 @@ class Quality extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- 2.PSQ3a- Number of reporting errors per 1000 investigations - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Percentage of Care-plan is documented for inpatients (MRD) - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19505,8 +24265,7 @@ class Quality extends CI_Controller
         }
     }
 
-
-    public function overall_3psq3a_report()
+    public function overall_CQI3a5_report()
     {
 
         if ($this->session->userdata('isLogIn') == false)
@@ -19514,7 +24273,7 @@ class Quality extends CI_Controller
         if (ismodule_active('QUALITY') === true) {
 
 
-            $table_feedback = 'bf_feedback_3PSQ3a';
+            $table_feedback = 'bf_feedback_CQI3a5';
             $table_patients = 'bf_patients';
             $desc = 'desc';
             $setup = 'setup';
@@ -19538,17 +24297,16 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Number of staff adhering to safety precautions';
-            $header[4] = 'Number of staff audited';
-            $header[5] = 'Percentage of adherence to safety precautions';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of case sheets where care plan is documented (in No.s)';
+            $header[3] = 'Total number of in-patients for the month (in No.s)';
+            $header[4] = 'Percentage of Care-plan is documented for inpatients(MRD) (in %)';
 
-            $j = 6;
+            $j = 5;
 
-
-            $header[$j++] = 'Data analysis';
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
             $header[$j++] = 'Corrective action';
             $header[$j++] = 'Preventive action';
 
@@ -19557,20 +24315,12 @@ class Quality extends CI_Controller
             foreach ($feedbacktaken as $row) {
                 $data = json_decode($row->dataset, true);
 
-                // echo '<pre>';
-                // print_r($data);
-                // echo '</pre>';
-                // exit;
-
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
-                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                //$dataexport[$i]['benchmark'] = $data['benchmark'];
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
                 $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
                 $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -19582,7 +24332,7 @@ class Quality extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- 3.PSQ3a- Percentage of adherence to safety precautions by diagnostics staffs - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Percentage of Nutritional assessment is documented for inpatients (Clinical Nutrition and Dietetics) - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19606,7 +24356,7 @@ class Quality extends CI_Controller
         }
     }
 
-    public function overall_4psq3a_report()
+    public function overall_CQI3a6_report()
     {
 
         if ($this->session->userdata('isLogIn') == false)
@@ -19614,7 +24364,7 @@ class Quality extends CI_Controller
         if (ismodule_active('QUALITY') === true) {
 
 
-            $table_feedback = 'bf_feedback_4PSQ3a';
+            $table_feedback = 'bf_feedback_CQI3a6';
             $table_patients = 'bf_patients';
             $desc = 'desc';
             $setup = 'setup';
@@ -19638,17 +24388,16 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Number of medication errors';
-            $header[4] = 'Number of opportunities of medication errors';
-            $header[5] = 'Percentage of medication error';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of case sheets where nursing plan is documented (in No.s)';
+            $header[3] = 'Total number of in-patients for the month (in No.s)';
+            $header[4] = 'Percentage of Nursing care is documented for inpatients(MRD - Nursing) (in %)';
 
-            $j = 6;
+            $j = 5;
 
-
-            $header[$j++] = 'Data analysis';
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
             $header[$j++] = 'Corrective action';
             $header[$j++] = 'Preventive action';
 
@@ -19657,20 +24406,12 @@ class Quality extends CI_Controller
             foreach ($feedbacktaken as $row) {
                 $data = json_decode($row->dataset, true);
 
-                // echo '<pre>';
-                // print_r($data);
-                // echo '</pre>';
-                // exit;
-
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
-                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                //$dataexport[$i]['benchmark'] = $data['benchmark'];
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
                 $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
                 $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -19682,7 +24423,7 @@ class Quality extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- 4.PSQ3a- Medication errors rate - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Percentage of Nursing care is documented for inpatients (MRD - Nursing) - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19706,7 +24447,7 @@ class Quality extends CI_Controller
         }
     }
 
-    public function overall_5psq3a_report()
+    public function overall_CQI3a7_report()
     {
 
         if ($this->session->userdata('isLogIn') == false)
@@ -19714,7 +24455,7 @@ class Quality extends CI_Controller
         if (ismodule_active('QUALITY') === true) {
 
 
-            $table_feedback = 'bf_feedback_5PSQ3a';
+            $table_feedback = 'bf_feedback_CQI3a7';
             $table_patients = 'bf_patients';
             $desc = 'desc';
             $setup = 'setup';
@@ -19738,17 +24479,16 @@ class Quality extends CI_Controller
             }
 
 
-            $header[0] = 'Recorded by';
-            $header[1] = 'Month - Year';
-            $header[2] = 'Employee details';
-            $header[3] = 'Number of medication charts with error prone abbreviation';
-            $header[4] = 'Number of medication charts reviewed';
-            $header[5] = 'Percentage of medication chart with error-prone abbreviations';
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for initial assessment Emergency patients';
+            $header[3] = 'Total number of emergency patients (in No.s)';
+            $header[4] = 'Avg.Time for initial assessment of Emergency patients(Nurses)-(Emergency Department)';
 
-            $j = 6;
+            $j = 5;
 
-
-            $header[$j++] = 'Data analysis';
+            $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
             $header[$j++] = 'Corrective action';
             $header[$j++] = 'Preventive action';
 
@@ -19757,20 +24497,12 @@ class Quality extends CI_Controller
             foreach ($feedbacktaken as $row) {
                 $data = json_decode($row->dataset, true);
 
-                // echo '<pre>';
-                // print_r($data);
-                // echo '</pre>';
-                // exit;
-
                 $dataexport[$i]['name'] = $data['name'];
-                $dataexport[$i]['date'] = date('M-Y', strtotime($row->datetime));
-                $dataexport[$i]['patient_id'] = $data['name'] . "<" . $data['patientid'] . ">\n" .
-                    $data['contactnumber'] . "\n" .
-                    $data['email'];
-
-                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                $dataexport[$i]['benchmark'] = $data['benchmark'];
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
                 $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
                 $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -19782,7 +24514,7 @@ class Quality extends CI_Controller
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- 5.PSQ3a- Percentage of medication charts with error-prone abbreviations - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- Average Time for initial assessment of Emergency patients(Nurses)-(Emergency Department) - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -19805,6 +24537,10651 @@ class Quality extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+    public function overall_CQI3a8_report()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+
+            $table_feedback = 'bf_feedback_CQI3a8';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for assessment in patients';
+            $header[3] = 'Total number of in-patients (in No.s)';
+            $header[4] = 'Avg. Time for initial assessment of in-patients (Nurses)-(Nursing-ICU) (in Hrs)';
+
+            $j = 5;
+
+            $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+                $i++;
+            }
+
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Average Time for initial assessment of in-patients (Nurses)-(Nursing-ICU) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                //print_r($header);
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    //print_r($values); exit;
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a9_report()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+
+            $table_feedback = 'bf_feedback_CQI3a9';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Sum of time taken for assessment in patients (in Hrs)';
+            $header[3] = 'Total number of in-patients  (in No.s)';
+            $header[4] = 'Avg. Time for initial assessment of in-patients (Nurses)-(Nursing-Ward) (in Hrs)';
+
+            $j = 5;
+
+            $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+                $i++;
+            }
+
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Average Time for initial assessment of in-patients (Nurses)-(Nursing-Ward) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                //print_r($header);
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    //print_r($values); exit;
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a10_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a10';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Total number of Contaminated blood culture (in No.s)';
+            $header[3] = 'Total number of blood culture test Performed (in No.s)';
+            $header[4] = 'Percentage of Blood culture contamination rate(Lab Service) (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of Blood culture contamination rate (Lab Service) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a11_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a11';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge (in No.s)';
+            $header[3] = 'Number of patients discharged with a diagnosis of CHF (in No.s)';
+            $header[4] = 'Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF (Cardiology - Emergency Department) (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF (Cardiology - Emergency Department) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a12_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a12';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of patients with hypoglycemic events where the target glucose level was achieved post-treatment (in No.s)';
+            $header[3] = 'Number of patients with Hypoglycemic events (in No.s)';
+            $header[4] = 'Percentage of Hospitalized patients with hypoglycemia who achieved targeted blood glucose level(Endocrinology and Diabetes - Emergency Department) (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of Hospitalized patients with hypoglycemia who achieved targeted blood glucose level (Endocrinology and Diabetes - Emergency Department) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a13_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a13';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of cases where a spontaneous perineal tear occurs (in No.s)';
+            $header[3] = 'Total number of Vaginal deliveries (in No.s)';
+            $header[4] = 'Percentage of Spontaneous perineal Tear Rate (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of Spontaneous perineal Tear Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a14_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a14';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of sepsis patients who receive care as per the hour-1 sepsis bundle (in No.s)';
+            $header[3] = 'Total number of sepsis cases (in No.s)';
+            $header[4] = 'Percentage of sepsis patients who receive care as per the HOUR-1 sepsis bundle(Critical Care Medicine - Medical records) (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of sepsis patients who receive care as per the HOUR-1 sepsis bundle (Critical Care Medicine - Medical records) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_CQI3a15_report()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('QUALITY') === true) {
+
+            $table_feedback = 'bf_feedback_CQI3a15';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->quality_model->setup_result($setup);
+
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+            $header[0] = 'KPI Recorded by';
+            $header[1] = 'KPI Recorded on';
+            $header[2] = 'Number of COPD patients provided with a COPD action plan at the time of discharge (in No.s)';
+            $header[3] = 'Number of COPD patients discharged (in No.s)';
+            $header[4] = 'Percentage of COPD patients receiving COPD Action plan at the time of discharge (Pulmonary Medicine) (in %)';
+            $j = 5;
+
+            // $header[$j++] = 'Benchmark time';
+            $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+            $header[$j++] = 'Corrective action';
+            $header[$j++] = 'Preventive action';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                $dataexport[$i]['name'] = $data['name'];
+                $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['total_admission'] = $data['total_admission'];
+                $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+                // $dataexport[$i]['benchmark'] = $data['benchmark'];
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+                $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+                $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+                $i++;
+            }
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- Percentage of COPD patients receiving COPD Action plan at the time of discharge (Pulmonary Medicine) - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function overall_CQI3a16_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a16';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of bronchiolitis patients treated inappropriately (in No.s)';
+        $header[3] = 'Total bronchiolitis patients (in No.s)';
+        $header[4] = 'Percentage of patients treated inappropriately (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of bronchiolitis patients treated inappropriately (Pediatrics) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3a17_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a17';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of oncology patients who had treatment initiated after tumour board (in No.s)';
+        $header[3] = 'Total oncology patients discussed (in No.s)';
+        $header[4] = 'Percentage with treatment initiated after tumour board (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of oncology patients who had treatment initiated following multidisciplinary meeting (Oncology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3a18_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a18';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of Intravenous Contrast Media Extravasation events (in No.s)';
+        $header[3] = 'Total contrast administrations (in No.s)';
+        $header[4] = 'Percentage of extravasation events (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of Intravenous Contrast Media Extravasation (Radiology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3a19_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a19';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Sum of time taken for triage (in Mins)';
+        $header[3] = 'Total number of triage cases (in No.s)';
+        $header[4] = 'Average time taken for triage (in Mins)';
+
+        $j = 5;
+        $header[$j++] = 'Benchmark time';
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['benchmark'] = isset($data['benchmark']) ? $data['benchmark'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Average Time taken for triage (Emergency Department) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3a20_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a20';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of dialysis patients achieving target hemoglobin (in No.s)';
+        $header[3] = 'Total dialysis patients (in No.s)';
+        $header[4] = 'Percentage achieving target hemoglobin (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of patients undergoing dialysis achieving target hemoglobin levels (Nephrology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3a21_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a21';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of critical results responded by physician within time (in No.s)';
+        $header[3] = 'Total critical results reported (in No.s)';
+        $header[4] = 'Percentage compliance of timely physician response (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of Compliance rate of timeliness of physician responding to critical results (Medical Administration) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3a22_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3a22';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number complying with Holding area care (in No.s)';
+        $header[3] = 'Total patients requiring Holding area care (in No.s)';
+        $header[4] = 'Percentage compliance to Holding area care (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of compliance to Holding area care (Nursing) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3b1_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of reporting errors (in No.s)';
+        $header[3] = 'Number of investigations (in No.s)';
+        $header[4] = 'Reporting errors per 1000 investigations';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Number of reporting errors per 1000 investigations (Lab) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b2_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of redo tests (in No.s)';
+        $header[3] = 'Total tests performed (in No.s)';
+        $header[4] = 'Rate of redo per 1000 tests';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Rate of redo in 1000 tests (Lab) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b3_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of reports correlating to clinical diagnosis (in No.s)';
+        $header[3] = 'Total reports (in No.s)';
+        $header[4] = 'Percentage reports correlating to clinical diagnosis (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of reports correlating to clinical diagnosis (Lab) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b4_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of employees adhering to safety precautions (in No.s)';
+        $header[3] = 'Total employees observed (in No.s)';
+        $header[4] = 'Percentage adherence to safety precautions (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of employees in diagnostics adhering to safety precautions (Lab) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b5_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of redo tests (in No.s)';
+        $header[3] = 'Total radiology tests (in No.s)';
+        $header[4] = 'Rate of redo per 1000 tests (Radiology)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Rate of redo in 1000 tests (Radiology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b6_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of reporting errors (in No.s)';
+        $header[3] = 'Number of radiology investigations (in No.s)';
+        $header[4] = 'Reporting errors per 1000 investigations (Radiology)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Number of reporting errors per 1000 investigations (Radiology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b7_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of reports correlating to clinical diagnosis (in No.s)';
+        $header[3] = 'Total radiology reports (in No.s)';
+        $header[4] = 'Percentage reports correlating to clinical diagnosis (Radiology)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of reports correlating to clinical diagnosis (Radiology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3b8_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of employees adhering to safety precautions (in No.s)';
+        $header[3] = 'Total employees observed (in No.s)';
+        $header[4] = 'Percentage adherence to safety precautions (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of employees in diagnostics adhering to safety precautions (Radiology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b9_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of employees adhering to safety precautions (OT) (in No.s)';
+        $header[3] = 'Total employees observed (OT) (in No.s)';
+        $header[4] = 'Percentage adherence to safety precautions (OT) (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of employees in diagnostics adhering to safety precautions (Radiology-OT) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b10_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of employees adhering to safety precautions (Nursing) (in No.s)';
+        $header[3] = 'Total employees observed (Nursing) (in No.s)';
+        $header[4] = 'Percentage adherence to safety precautions (Nursing) (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Percentage of employees in diagnostics adhering to safety precautions (Radiology-Nursing) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b11_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b11';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of reporting errors before dispatch (in No.s)';
+        $header[3] = 'Total reports dispatched (in No.s)';
+        $header[4] = 'Reporting errors before dispatch (in No.s)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Number of reporting errors before dispatch (Lab) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b12_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b12';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Total waiting time for laboratory services (in Mins)';
+        $header[3] = 'Number of patients served (in No.s)';
+        $header[4] = 'Average waiting time (in Mins)';
+
+        $j = 5;
+        $header[$j++] = 'Benchmark time';
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['benchmark'] = isset($data['benchmark']) ? $data['benchmark'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Waiting time for Laboratory services - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3b13_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3b13';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of patient safety events related to pathology samples (in No.s)';
+        $header[3] = 'Total relevant specimens handled (in No.s)';
+        $header[4] = 'Number/Percentage of patient safety events';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
+            $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
+            $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
+            $dataexport[$i]['correctiveAction'] = isset($data['correctiveAction']) ? $data['correctiveAction'] : '';
+            $dataexport[$i]['preventiveAction'] = isset($data['preventiveAction']) ? $data['preventiveAction'] : '';
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Patient safety events related to pathology samples (Lab Services) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3c1_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of Medication Errors (in No.s)';
+        $header[3] = 'Total number of Prescriptions/Dispensations (in No.s)';
+        $header[4] = 'Medication Errors Rate (in %)';
+
+        $j = 5;
+
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- Medication errors Rate (Clinical Pharmacy) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3c2_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of cases';
+        $header[3] = 'Total prescriptions';
+        $header[4] = 'Percentage / Rate';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c2 - Incidence of medication errors -Prescription errors(IP) (Clinical Pharmacy) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c3_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Number of cases';
+        $header[3] = 'Total dispensing';
+        $header[4] = 'Percentage / Rate';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c3 - Incidence of medication errors -Dispensing errors(IP) (Clinical Pharmacy) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3c4_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Total admissions';
+        $header[3] = 'Number of ADR cases';
+        $header[4] = 'Percentage of admissions with ADR (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['adr_cases'] = $data['adr_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c4 - Percentage of admissions with ADR (Clinical Pharmacy) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c5_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+        $setarray = array();
+        $questioarray = array();
+        foreach ($sresult as $r) {
+            $setarray[$r->type] = $r->title;
+        }
+        foreach ($sresult as $r) {
+            $questioarray[$r->type][$r->shortkey] = $r->shortname;
+        }
+
+        $arraydata = array();
+        foreach ($questioarray as $setr) {
+            foreach ($setr as $k => $v) {
+                $arraydata[$k] = $v;
+            }
+        }
+
+        $header[0] = 'KPI Recorded by';
+        $header[1] = 'KPI Recorded on';
+        $header[2] = 'Total medication charts';
+        $header[3] = 'Number of charts with error-prone abbreviations';
+        $header[4] = 'Percentage of medication charts with error-prone abbreviations (in %)';
+
+        $j = 5;
+        $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
+        $header[$j++] = 'Corrective action';
+        $header[$j++] = 'Preventive action';
+
+        $dataexport = [];
+        $i = 0;
+        foreach ($feedbacktaken as $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_charts'] = $data['total_charts'];
+            $dataexport[$i]['error_charts'] = $data['error_charts'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+
+            $i++;
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c5 - Percentage of medication charts with error-prone abbreviations (Clinical Pharmacy) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (isset($dataexport[0])) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c6_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $sresult = $this->quality_model->setup_result($setup);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total patients receiving high-risk medications',
+            'Number developing adverse drug events',
+            'Percentage developing adverse drug events (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_patients'] = $data['total_patients'];
+            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c6 - Percentage of patients receiving high-risk medication developing adverse drug events - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c7_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $setup = 'setup';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total medication administrations',
+            'Number of administering errors',
+            'Percentage of administering errors (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_administration'] = $data['total_administration'];
+            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c7 - Incidence of Medication Administering errors - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c8_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total in-patients',
+            'Number developing adverse drug reactions',
+            'Percentage of patients developing ADR (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_inpatients'] = $data['total_inpatients'];
+            $dataexport[$i]['adr_cases'] = $data['adr_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c8 - Percentage of in-patients developing adverse drug reaction - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c9_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total medication administrations',
+            'Number of administering errors',
+            'Percentage of administering errors (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_administration'] = $data['total_administration'];
+            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c9 - Incidence of Medication Administering errors - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c10_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total medication dispensed',
+            'Number of dispensing errors',
+            'Percentage of dispensing errors (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_dispensed'] = $data['total_dispensed'];
+            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c10 - Incidence of medication errors - Dispensing errors(IP) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c11_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c11';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total prescriptions',
+            'Number of prescription errors',
+            'Percentage of prescription errors (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_prescriptions'] = $data['total_prescriptions'];
+            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c11 - Incidence of medication errors - Prescription errors(IP) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c12_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c12';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total high-risk infections',
+            'Number of cases compliant with empirical antibiotics therapy',
+            'Compliance rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['compliant_cases'] = $data['compliant_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c12 - Empirical Antibiotics therapy compliance rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c13_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c13';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total restricted antibiotics prescribed',
+            'Number of compliant cases',
+            'Compliance rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['compliant_cases'] = $data['compliant_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c13 - Restricted antibiotics usage compliance rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+
+public function overall_CQI3c14_report()
+{
+    if ($this->session->userdata('isLogIn') == false)
+        redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+
+        $table_feedback = 'bf_feedback_CQI3c14';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total new drug prescriptions',
+            'Number with appropriate indication',
+            'Appropriateness rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3c14 - Monitor appropriateness of indication for new drugs - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) {
+                fputcsv($fp, $values, ',');
+            }
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else {
+        redirect('dashboard/noaccess');
+    }
+}
+public function overall_CQI3d1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3d1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total anaesthesia cases',
+            'Number of modifications of anaesthesia plan',
+            'Percentage of modifications (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['modified_cases'] = $data['modified_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3d1 - Percentage of modification of anaesthesia plan - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3d2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3d2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total anaesthesia cases',
+            'Number of unplanned ventilations',
+            'Percentage of unplanned ventilations (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['unplanned_ventilation'] = $data['unplanned_ventilation'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3d2 - Percentage of unplanned ventilation following anaesthesia - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3d3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3d3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total anaesthesia cases',
+            'Number of adverse anaesthesia events',
+            'Percentage of adverse events (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3d3 - Percentage of adverse anaesthesia events - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3d4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3d4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total anaesthesia cases',
+            'Number of anaesthesia-related deaths',
+            'Anaesthesia mortality rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['deaths'] = $data['deaths'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3d4 - Anaesthesia related mortality rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3d5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3d5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total prescriptions',
+            'Number of safe and rational prescriptions',
+            'Percentage of safe prescriptions (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_prescriptions'] = $data['total_prescriptions'];
+            $dataexport[$i]['safe_prescriptions'] = $data['safe_prescriptions'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3d5 - Percentage of safe and rational prescriptions - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3e1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total OT cases',
+            'Number of unplanned returns to OT',
+            'Percentage of unplanned returns (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['unplanned_return'] = $data['unplanned_return'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e1 - Percentage of unplanned return to OT - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total OT cases',
+            'Number of rescheduled surgeries',
+            'Percentage of rescheduled surgeries (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['rescheduled_cases'] = $data['rescheduled_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e2 - Percentage of rescheduling of surgeries - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3e3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total OT cases',
+            'Number of cases with adherence to surgery error prevention procedure',
+            'Percentage adherence (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['adherence_cases'] = $data['adherence_cases'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e3 - Adherence to surgery error prevention procedure - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total cases receiving surgery',
+            'Number of cases receiving prophylactic antibiotics on time',
+            'Percentage compliance (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['on_time_antibiotics'] = $data['on_time_antibiotics'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e4 - Prophylactic antibiotics compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total planned surgeries',
+            'Number of surgeries changed intraoperatively',
+            'Percentage changed (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_surgeries'] = $data['total_surgeries'];
+            $dataexport[$i]['changed_surgeries'] = $data['changed_surgeries'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e5 - Surgeries changed intraoperatively - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total OT cases',
+            'Number of re-explorations',
+            'Re-exploration rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['reexplorations'] = $data['reexplorations'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e6 - Re-exploration rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total deliveries',
+            'Number of primary cesareans',
+            'Primary Cesarean Rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_deliveries'] = $data['total_deliveries'];
+            $dataexport[$i]['primary_cesareans'] = $data['primary_cesareans'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e7 - Primary Cesarean Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total implant cases',
+            'Number of adverse events related to implant devices',
+            'Adverse event rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e8 - Adverse events related to implant devices - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3e9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3e9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total surgical cases',
+            'Number of major patient safety events',
+            'Event rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_cases'] = $data['total_cases'];
+            $dataexport[$i]['major_events'] = $data['major_events'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3e9 - Major patient safety events in surgical procedures - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3f1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total transfusions',
+            'Number of transfusion reactions',
+            'Percentage of transfusion reactions (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_transfusions'] = $data['total_transfusions'];
+            $dataexport[$i]['reactions'] = $data['reactions'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f1 - Percentage of transfusion reactions - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total blood units issued',
+            'Number of wasted units among issued',
+            'Percentage waste among issued (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_units_issued'] = $data['total_units_issued'];
+            $dataexport[$i]['wasted_units'] = $data['wasted_units'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f2 - Percentage of waste among issued blood units - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3f3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total blood units stored',
+            'Number of wasted units among stored',
+            'Percentage waste among stored (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_units_stored'] = $data['total_units_stored'];
+            $dataexport[$i]['wasted_units_stored'] = $data['wasted_units_stored'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f3 - Percentage of waste among stored blood units - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total blood component units used',
+            'Total patients receiving transfusions',
+            'Percentage of blood component units used (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['total_units_used'] = $data['total_units_used'];
+            $dataexport[$i]['total_patients'] = $data['total_patients'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f4 - Percentage of blood component units used - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Sum of turnaround time for cross matched/reserved blood (in Hrs)',
+            'Total number of requests',
+            'Average turnaround time (in Hrs)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
+            $dataexport[$i]['total_requests'] = $data['total_requests'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f5 - Turnaround time for cross matched/reserved blood - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3f6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of adverse/near miss events in blood/transfusion services',
+            'Total transfusions/units',
+            'Percentage of adverse/near miss events (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
+            $dataexport[$i]['total_units'] = $data['total_units'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f6 - Adverse/Near miss events in blood/transfusion - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total blood units required',
+            'Total units available',
+            'Blood availability rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['units_required'] = $data['units_required'];
+            $dataexport[$i]['units_available'] = $data['units_available'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f7 - Blood availability rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total units cross matched',
+            'Total units transfused',
+            'CT Ratio (cross match to transfusion)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['units_cross_matched'] = $data['units_cross_matched'];
+            $dataexport[$i]['units_transfused'] = $data['units_transfused'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f8 - CT Ratio (Cross match to transfusion) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Sum of turnaround time for Platelet Apheresis (in Hrs)',
+            'Total number of procedures',
+            'Average turnaround time (in Hrs)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
+            $dataexport[$i]['total_procedures'] = $data['total_procedures'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f9 - Turnaround time for Platelet Apheresis - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3f10_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3f10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Sum of turnaround time for blood donation (in Hrs)',
+            'Total donors',
+            'Average turnaround time (in Hrs)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
+            $dataexport[$i]['total_donors'] = $data['total_donors'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3f10 - Turnaround time for blood donation - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3g1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of catheter-associated UTIs',
+            'Total catheter-days',
+            'CAUTI Rate (per 1000 catheter days)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_infections'] = $data['num_infections'];
+            $dataexport[$i]['total_catheter_days'] = $data['total_catheter_days'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g1 - Catheter associated UTI rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3g2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of ventilator-associated pneumonias',
+            'Total ventilator days',
+            'VAP Rate (per 1000 ventilator days)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_vap'] = $data['num_vap'];
+            $dataexport[$i]['total_vent_days'] = $data['total_vent_days'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g2 - VAP rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3g3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of CLABSI events',
+            'Total central line days',
+            'CLABSI Rate (per 1000 central line days)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_clabsi'] = $data['num_clabsi'];
+            $dataexport[$i]['total_central_line_days'] = $data['total_central_line_days'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g3 - CLABSI rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3g4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of surgical site infections',
+            'Total number of surgeries',
+            'SSI Rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_ssi'] = $data['num_ssi'];
+            $dataexport[$i]['total_surgeries'] = $data['total_surgeries'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g4 - Surgical Site Infection rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3g5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of late onset sepsis cases (>72 hrs)',
+            'Total NICU admissions',
+            'Late Onset Sepsis Rate (in %)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_late_sepsis'] = $data['num_late_sepsis'];
+            $dataexport[$i]['total_nicu'] = $data['total_nicu'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g5 - Late Onset Sepsis Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3g6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3g6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of environmental cleaning audits conducted',
+            'Total cleaning audits planned',
+            'Compliance rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_audits'] = $data['num_audits'];
+            $dataexport[$i]['total_audits'] = $data['total_audits'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3g6 - Environmental cleaning & disinfection compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3h1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of deaths',
+            'Total in-patients (MRD)',
+            'Mortality rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_deaths'] = $data['num_deaths'];
+            $dataexport[$i]['total_inpatients'] = $data['total_inpatients'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h1 - Mortality rate (MRD) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of ICU1 readmissions within 48 hours',
+            'Total ICU1 discharges',
+            'Return to ICU within 48 hours (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
+            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h2 - Return to ICU within 48 hours (ICU1) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of ICU2 readmissions within 48 hours',
+            'Total ICU2 discharges',
+            'Return to ICU 2 within 48 hours (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
+            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h3 - Return to ICU 2 within 48 hours (ICU2) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of CICU readmissions within 48 hours',
+            'Total CICU discharges',
+            'Return to ICU 3 within 48 hours (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
+            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h4 - Return to ICU 3 within 48 hours (CICU) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of ED returns after 72 hours',
+            'Total ED discharges',
+            'Return to emergency dept. after 72 hours (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_returns'] = $data['num_returns'];
+            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h5 - Return to emergency department after 72 hours - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of reintubations ICU1',
+            'Total extubations ICU1',
+            'Reintubation rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
+            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h6 - Reintubation rate ICU1 - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of reintubations ICU2',
+            'Total extubations ICU2',
+            'Reintubation rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
+            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h7 - Reintubation rate ICU2 - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of reintubations CICU',
+            'Total extubations CICU',
+            'Reintubation rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
+            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h8 - Reintubation rate CICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3h9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3h9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of NICU readmissions',
+            'Total NICU discharges',
+            'Re Admission Rate (%)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
+            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3h9 - Re Admission Rate NICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3j1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Nurses) ED/ICU/Ward',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j1 - Shift change handover communication (Nurses ED/ICU/Ward) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Nurses) ED/ICU/Ward - ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j2 - Shift change handover communication (Nurses ICU) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Nurses) ED/ICU/Ward - Ward',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j3 - Shift change handover communication (Nurses Ward) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of patient identification error (Quality Office)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['error_incidence'] = $data['error_incidence'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j4 - Incidence of patient identification error - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of missed hand hygiene opportunities (Infection Control - Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['missed_hygiene'] = $data['missed_hygiene'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j5 - Missed hand hygiene opportunities - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance rate to medication prescription in capitals (Clinical Pharmacy)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['compliance'] = $data['compliance'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j6 - Compliance to medication prescription - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Doctors) (MRD - Emergency Department)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j7 - Shift change handover (Doctors ED) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Doctors) - MRD ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j8 - Shift change handover (Doctors ICU) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance to patient identification - IPD (Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['compliance'] = $data['compliance'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j9 - Compliance to patient identification - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j10_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance rate of timeliness of reporting Critical results in Radiology (within 30 min)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['timeliness'] = $data['timeliness'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j10 - Timeliness of reporting Critical results in Radiology - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3j11_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j11';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication interdepartmental shift (MRD - Emergency Department)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j11 - IPSG 2.2 Hand off MRD-ED - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j12_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j12';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication interdepartmental shift (MRD - ICU)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j12 - IPSG 2.2 Hand off MRD-ICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j13_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j13';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - Emergency Department',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j13 - IPSG 2.2 Hand off ED Nurses - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j14_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j14';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j14 - IPSG 2.2 Hand off ICU Nurses - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j15_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j15';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - Ward',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j15 - IPSG 2.2 Hand off Ward Nurses - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j16_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j16';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication among doctors (During shift change) - MRD - Emergency Department',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j16 - Hand off Doctors ED - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j17_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j17';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication among doctors (During shift change) - MRD - ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j17 - Hand off Doctors ICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j18_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j18';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - Emergency Department',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j18 - Hand off Nurses ED - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j19_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j19';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j19 - Hand off Nurses ICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j20_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j20';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - Ward',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j20 - Hand off Nurses Ward - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3j21_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j21';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - Endoscopy',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j21 - Correct site surgery Endoscopy - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j22_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j22';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - ICU',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j22 - Correct site surgery ICU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j23_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j23';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - OT',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j23 - Correct site surgery OT - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j24_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j24';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'PSG 6 - Compliance to Fall prevention measures in IPD - Nursing - IPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j24 - Fall prevention IPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j25_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j25';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'PSG 6 - Compliance to Fall prevention measures in OPD - Nursing - OPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j25 - Fall prevention OPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3j26_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j26';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j26 - Fall prevention Physiotherapy OP - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j27_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j27';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance to hand hygiene practice (New) - Infection Control - Nursing',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j27 - Hand hygiene compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j28_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j28';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance to patient identification OPD - Nursing - OPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j28 - Patient ID compliance OPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j29_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j29';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Shift change handover communication (Doctors - ward) - Medical Administration',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j29 - Handover Doctors Ward - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j30_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j30';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of Adverse events in Physiotherapy (IPD) - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j30 - Adverse events Physiotherapy IPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI3j31_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j31';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of Adverse events in Physiotherapy (OPD) - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j31 - Adverse events Physiotherapy OPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j32_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j32';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - OT',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j32 - Correct site procedure OT - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j33_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j33';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Security incidents rate (JCI8-FMS 4.0) - Safety & Security',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j33 - Security incidents rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+public function overall_CQI3j34_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3j34';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Safety incidents rate (JCI8-FMS 3.0)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3j34 - Safety incidents rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4a1 - Percentage of drugs and consumables procured by local purchases within the formulary (Pharmacy)
+public function overall_CQI4a1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4a1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of drugs and consumables procured by local purchases within the formulary (Pharmacy)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4a1 - Local purchases within formulary - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4a2 - Percentage of drugs and consumables procured by local purchase outside the formulary (Pharmacy)
+public function overall_CQI4a2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4a2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of drugs and consumables procured by local purchase outside the formulary (Pharmacy)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4a2 - Local purchases outside formulary - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4a3 - Stock out rate of emergency medications (Pharmacy)
+public function overall_CQI4a3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4a3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Stock out rate of emergency medications (Pharmacy)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4a3 - Stock out rate of emergency medications - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4a4 - Percentage of drugs and consumables rejected before preparation of Goods Receipt Note (SCM-Store)
+public function overall_CQI4a4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4a4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of drugs and consumables rejected before preparation of Goods Receipt Note (SCM-Store)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4a4 - Rejected drugs/consumables before GRN - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4a5 - Percentage of variations from procurement process (SCM-Purchase)
+public function overall_CQI4a5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4a5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of variations from procurement process (SCM-Purchase)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4a5 - Variations from procurement process - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4b1 - Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days) - Nursing
+public function overall_CQI4b1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days) - Nursing',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b1 - Incidence of bed sores - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b2 - Incidence of falls (in 1000 IPD days) - Office-Quality
+public function overall_CQI4b2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of falls (in 1000 IPD days) - Office-Quality',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b2 - Incidence of falls - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b3 - Number of variations observed in mock drill (Safety & Security)
+public function overall_CQI4b3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of variations observed in mock drill (Safety & Security)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b3 - Mock drill variations - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b4 - Percentage of staff provided with pre-exposure prophylaxis (Infection Control)
+public function overall_CQI4b4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of staff provided with pre-exposure prophylaxis (Infection Control)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b4 - Pre-exposure prophylaxis - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b5 - Number of Fire Incidents (Safety & Security)
+public function overall_CQI4b5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of Fire Incidents (Safety & Security)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b5 - Fire Incidents - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b6 - Incidence of device associated pressure ulcer after admission (Nursing)
+public function overall_CQI4b6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of device associated pressure ulcer after admission (Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b6 - Device associated pressure ulcer - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b7 - Number of Extravasation (Nursing)
+public function overall_CQI4b7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of Extravasation (Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b7 - Extravasation - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4b8 - Monitoring of Clinical Errors (JCI8-PCC 2.3) - Quality Office
+public function overall_CQI4b8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4b8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Monitoring of Clinical Errors (JCI8-PCC 2.3) - Quality Office',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4b8 - Clinical Errors Monitoring - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4c1 - Bed occupancy rate (MRD)
+public function overall_CQI4c1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Bed occupancy rate (MRD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c1 - Bed occupancy rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c2 - Average length of stay (MRD)
+public function overall_CQI4c2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Average length of stay (MRD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c2 - Average length of stay - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c3 - OT Utilisation Rate (OT)
+public function overall_CQI4c3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'OT Utilisation Rate (OT)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c3 - OT Utilisation Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4c4 - ICU equipment utilisation rate (Nursing - ICU1)
+public function overall_CQI4c4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'ICU equipment utilisation rate (Nursing - ICU1)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c4 - ICU equipment utilisation rate (ICU1) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c5 - ICU equipment utilisation rate (Nursing - ICU2)
+public function overall_CQI4c5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'ICU equipment utilisation rate (Nursing - ICU2)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c5 - ICU equipment utilisation rate (ICU2) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c6 - ICU equipment utilisation rate (Nursing - ICU3)
+public function overall_CQI4c6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'ICU equipment utilisation rate (Nursing - ICU3)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c6 - ICU equipment utilisation rate (ICU3) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c7 - ICU Bed utilisation rate (Nursing - ICU)
+public function overall_CQI4c7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'ICU Bed utilisation rate (Nursing - ICU)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c7 - ICU Bed utilisation rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4c8 - Critical equipment downtime (Biomedical Engineering)
+public function overall_CQI4c8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Critical equipment downtime (Biomedical Engineering)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c8 - Critical equipment downtime - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c9 - Cath lab utilization rate (Cath Lab - Nursing)
+public function overall_CQI4c9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Cath lab utilization rate (Cath Lab - Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c9 - Cath lab utilization rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c10 - Nurse patient ratio for ICU Ventilated (Nursing-ICU)
+public function overall_CQI4c10_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Nurse patient ratio for ICU Ventilated (Nursing-ICU)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c10 - Nurse patient ratio for ICU Ventilated - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c11 - Nurse patient ratio for ICU Non Ventilated (Nursing-ICU)
+public function overall_CQI4c11_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c11';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Nurse patient ratio for ICU Non Ventilated (Nursing-ICU)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c11 - Nurse patient ratio for ICU Non Ventilated - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c12 - Nurse patient ratio for HDU (Nursing-HDU)
+public function overall_CQI4c12_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c12';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Nurse patient ratio for HDU (Nursing-HDU)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c12 - Nurse patient ratio for HDU - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c13 - Nurse patient ratio for Ward (Nursing-Ward)
+public function overall_CQI4c13_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c13';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Nurse patient ratio for Ward (Nursing-Ward)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c13 - Nurse patient ratio for Ward - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4c14 - Engineering Critical equipment downtime (Engineering & Maintenance)
+public function overall_CQI4c14_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4c14';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Engineering Critical equipment downtime',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4c14 - Engineering Critical equipment downtime - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4d1 - Out patient satisfaction index (Patient Care Services - OPD)
+public function overall_CQI4d1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Out patient satisfaction index (Patient Care Services - OPD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d1 - Out patient satisfaction index - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d2 - Inpatient satisfaction index (Patient Care Services - IPD)
+public function overall_CQI4d2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Inpatient satisfaction index (Patient Care Services - IPD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d2 - Inpatient satisfaction index - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d3 - Time taken for discharge - Cash Patients (Patient Care Services - Cash)
+public function overall_CQI4d3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Time taken for discharge - Cash Patients (Patient Care Services - Cash)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d3 - Time taken for discharge - Cash Patients - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d4 - Time taken for discharge Cashless Patients (Patient Care Services - Cashless)
+public function overall_CQI4d4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Time taken for discharge Cashless Patients (Patient Care Services - Cashless)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d4 - Time taken for discharge Cashless Patients - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4d5 - Waiting time for diagnostic services (Radiology - CT)
+public function overall_CQI4d5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Waiting time for diagnostic services (Radiology - CT)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d5 - Waiting time for diagnostic services (CT) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d6 - Waiting time for diagnostic services (Radiology - MRI)
+public function overall_CQI4d6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Waiting time for diagnostic services (Radiology - MRI)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d6 - Waiting time for diagnostic services (MRI) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d7 - Waiting time for diagnostic services (Radiology - USG)
+public function overall_CQI4d7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Waiting time for diagnostic services (Radiology - USG)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d7 - Waiting time for diagnostic services (USG) - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d8 - Waiting Time for OPD appointments (Patient Care Services - OPD)
+public function overall_CQI4d8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Waiting Time for OPD appointments (Patient Care Services - OPD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d8 - Waiting Time for OPD appointments - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d9 - Waiting Time for OPD Walkin (Patient Care Services - OPD)
+public function overall_CQI4d9_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d9';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Waiting Time for OPD Walkin (Patient Care Services - OPD)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d9 - Waiting Time for OPD Walkin - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d10 - Patient Satisfaction Rate (Nursing - OBG)
+public function overall_CQI4d10_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d10';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Patient Satisfaction Rate (Nursing - OBG)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d10 - Patient Satisfaction Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4d11 - Turn-around Time for Nursing call bell responds (Nursing)
+public function overall_CQI4d11_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4d11';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Turn-around Time for Nursing call bell responds (Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4d11 - Turn-around Time for Nursing call bell responds - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4e1 - Employee satisfaction index (HR)
+public function overall_CQI4e1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Employee satisfaction index (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e1 - Employee satisfaction index - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e2 - Employee attrition rate (HR)
+public function overall_CQI4e2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Employee attrition rate (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e2 - Employee attrition rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e3 - Employee absenteeism rate (HR)
+public function overall_CQI4e3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Employee absenteeism rate (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e3 - Employee absenteeism rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e4 - Percentage of employees aware of rights, responsibility and welfare schemes (HR)
+public function overall_CQI4e4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of employees aware of rights, responsibility and welfare schemes (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e4 - Employees aware of rights & welfare - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e5 - Average number of training hours (HR)
+public function overall_CQI4e5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Average number of training hours (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e5 - Average training hours - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e6 - Nurses Attrition Rate (Nursing)
+public function overall_CQI4e6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Nurses Attrition Rate (Nursing)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e6 - Nurses Attrition Rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e7 - Outsourced employee absenteeism rate (Nursing Assistants) (Patient Care Services - OPD)
+public function overall_CQI4e7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Outsourced employee absenteeism rate (Nursing Assistants) - OPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e7 - Outsourced absenteeism rate - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4e8 - Average number of unpaid leave per month (HR)
+public function overall_CQI4e8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4e8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Average number of unpaid leave per month (HR)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4e8 - Average unpaid leave - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4f1 - Incidence of needle stick injuries IPD area (in 1000 IPD days) (Infection Control - IPD)
+public function overall_CQI4f1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of needle stick injuries IPD area (in 1000 IPD days)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f1 - Needle Stick Injuries IPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f2 - Incidence of needle stick injuries OPD area (in 1000 OPD days) (Infection Control - OPD)
+public function overall_CQI4f2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of needle stick injuries OPD area (in 1000 OPD days)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f2 - Needle Stick Injuries OPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f3 - Percentage of sentinel events, reported, collected and analysed within defined time frame (Quality Office)
+public function overall_CQI4f3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of sentinel events reported, collected & analysed',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f3 - Sentinel Events - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f4 - Percentage of near misses (Quality Office)
+public function overall_CQI4f4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of near misses',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f4 - Near Misses - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f5 - Incidence of blood body fluid exposure IPD (Infection Control - IPD)
+public function overall_CQI4f5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of blood body fluid exposure IPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f5 - Blood Body Fluid Exposure IPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f6 - Incidence of blood body fluid exposure OPD (Infection Control - OPD)
+public function overall_CQI4f6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Incidence of blood body fluid exposure OPD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f6 - Blood Body Fluid Exposure OPD - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4f7 - Adverse events related to SUDs (JCI8-PCI 3.1) (CSSD)
+public function overall_CQI4f7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4f7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Adverse events related to SUDs (JCI8-PCI 3.1)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4f7 - Adverse Events SUDs - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4g1 - Percentage of Medical records not having discharge summary (MRD)
+public function overall_CQI4g1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of Medical records not having discharge summary',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g1 - Discharge Summary Missing - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4g2 - Percentage of Medical records not having codification as per ICD (MRD)
+public function overall_CQI4g2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of Medical records not having codification as per ICD',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g2 - ICD Codification Missing - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4g3 - Percentage of Medical records having improper or incomplete consent (MRD)
+public function overall_CQI4g3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of Medical records having improper or incomplete consent',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g3 - Incomplete Consent - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI4g4 - Percentage of missing medical records (MRD)
+public function overall_CQI4g4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Percentage of missing medical records',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g4 - Missing Medical Records - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4g5 - Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm (JCI8-COP 5) (MRD)
+public function overall_CQI4g5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g5 - Suicide/Self-Harm Policy Compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI4g6 - Monthly Abbreviation Compliance(MRD)
+public function overall_CQI4g6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4g6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Monthly Abbreviation Compliance',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI4g6 - Monthly Abbreviation Compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k1 - Total number of LAMA cases with Reasons (MRD)
+public function overall_CQI3k1_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k1';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Total number of LAMA cases with Reasons',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k1 - Total LAMA Cases with Reasons - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k2 - Adverse events due to handover(Quality Office)
+public function overall_CQI3k2_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k2';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Adverse events due to handover',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k2 - Adverse Events due to Handover - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+// CQI3k3 - Inguinal herniorrhaphy with mesh (Infection Control)
+public function overall_CQI3k3_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k3';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Inguinal herniorrhaphy with mesh',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k3 - Inguinal Herniorrhaphy with Mesh - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k4 - Coronary artery bypass grafting (CABG) (Infection Control)
+public function overall_CQI3k4_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k4';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Coronary artery bypass grafting (CABG)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k4 - CABG - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k5 - Laparoscopic cholecystectomy (Infection Control)
+public function overall_CQI3k5_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k5';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Laparoscopic cholecystectomy',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k5 - Laparoscopic Cholecystectomy - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k6 - Monitoring the duration of antibiotic usage in surgical prophylaxis (After 48 hours) (Clinical Pharmacy)
+public function overall_CQI3k6_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k6';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Monitoring the duration of antibiotic usage in surgical prophylaxis (After 48 hours)',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k6 - Antibiotic Usage Monitoring - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k7 - De-escalation of antibiotics (Clinical Pharmacy)
+public function overall_CQI3k7_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k7';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'De-escalation of antibiotics',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k7 - De-escalation of Antibiotics - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+// CQI3k8 - High Alert Medication Segregation, storage & labelling Compliance rate (Pharmacy - Store)
+public function overall_CQI3k8_report()
+{
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI3k8';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'High Alert Medication Segregation, Storage & Labelling Compliance rate',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+        ob_end_clean();
+        $fileName = 'EF- CQI3k8 - High Alert Medication Compliance - ' . $tdate . ' to ' . $fdate . '.csv';
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
 
     public function overall_6psq3a_report()
     {

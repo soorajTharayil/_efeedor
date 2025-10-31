@@ -25,18 +25,14 @@ class Audit extends CI_Controller
             )
         );
 
-        // $fdate = date('Y-m-d'); // today
-        // $tdate = date('Y-m-01'); // first day of current month
-        // $_SESSION['from_date'] = $fdate;
-        // $_SESSION['to_date'] = $tdate;
-
-        // $dates = get_from_to_date();
+        
+        $dates = get_from_to_date();
         if (isset($_SESSION['from_date']) && isset($_SESSION['to_date'])) {
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
         } else {
-            $fdate = date('Y-m-d'); // today
-            $tdate = date('Y-m-01'); // first day of current month
+            $fdate = date('Y-m-d', time());
+            $tdate = date('Y-m-d', strtotime('-365 days'));
             $_SESSION['from_date'] = $fdate;
             $_SESSION['to_date'] = $tdate;
         }
@@ -85,6 +81,142 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+
+    public function delete_audit($id)
+    {
+        $table = $this->input->get('table');
+
+        if (empty($table)) {
+            $this->session->set_flashdata('error', 'No table specified for deletion.');
+            redirect($_SERVER['HTTP_REFERER']); // back to same page
+            return;
+        }
+
+        $audit_array = [
+            'bf_ma_active_cases_mrdip',
+            'bf_ma_dischargedpatients_mrd_audit',
+            'bf_ma_nursingip_closed_cases',
+            'bf_ma_nursingip_open_cases',
+            'bf_ma_nursingop_closed_cases',
+            'bf_ma_clinical_active_mdc',
+            'bf_ma_clinical_closedcases_mdc',
+            'bf_ma_clinical_pharmacy_closed',
+            'bf_ma_clinical_pharmacy_op',
+            'bf_ma_clinical_pharmacy_open',
+            'bf_ma_anesthesia_active_mdc',
+            'bf_ma_anesthesia_closed_mdc',
+            'bf_ma_ed_active_mdc',
+            'bf_ma_ed_closed_mdc',
+            'bf_ma_icu_active_mdc',
+            'bf_ma_icu_closed_mdc',
+            'bf_ma_primarycare_active_mdc',
+            'bf_ma_primarycare_closed_mdc',
+            'bf_ma_sedation_active_mdc',
+            'bf_ma_sedation_closed_mdc',
+            'bf_ma_surgeons_active_mdc',
+            'bf_ma_surgeons_closed_mdc',
+            'bf_ma_dietconsultation_op_mdc',
+            'bf_ma_physiotherapy_closed_mdc',
+            'bf_ma_physiotherapy_op_mdc',
+            'bf_ma_physiotherapy_open_mdc',
+            'bf_ma_mrd_ed_audit',
+            'bf_ma_mrd_lama_audit',
+            'bf_ma_mrd_op_audit',
+            'bf_ma_accidental_delining_audit',
+            'bf_ma_admission_area_audit',
+            'bf_ma_cardio_pulmonary_audit',
+            'bf_ma_extravasation_audit',
+            'bf_ma_hapu_audit',
+            'bf_ma_assessment_ae',
+            'bf_ma_assessment_ipd',
+            'bf_ma_assessment_opd',
+            'bf_ma_ipsg1_audit',
+            'bf_ma_ipsg2_er',
+            'bf_ma_ipsg2_ae',
+            'bf_ma_ipsg2_ipd',
+            'bf_ma_ipsg4_timeout',
+            'bf_ma_ipsg6_ip',
+            'bf_ma_ipsg6_opd',
+            'bf_ma_point_prevlance_audit',
+            'bf_ma_clinicaloutcome_audit_acl',
+            'bf_ma_clinicaloutcome_allogenic_bone_marrow',
+            'bf_ma_clinicaloutcome_aortic_value_replacement',
+            'bf_ma_clinicaloutcome_autologous_bone',
+            'bf_ma_clinicaloutcome_brain_tumour',
+            'bf_ma_clinicaloutcome_cabg',
+            'bf_ma_clinicaloutcome_carotid_stenting',
+            'bf_ma_clinicaloutcome_chemotherapy',
+            'bf_ma_clinicaloutcome_colo_rectal',
+            'bf_ma_clinicaloutcome_endoscopy',
+            'bf_ma_clinicaloutcome_epilepsy',
+            'bf_ma_clinicaloutcome_herniorrhaphy',
+            'bf_ma_clinicaloutcome_holep',
+            'bf_ma_clinicaloutcome_laparoscopic_appendicectomy',
+            'bf_ma_clinicaloutcome_mechanical_thrombectomy',
+            'bf_ma_clinicaloutcome_mvr',
+            'bf_ma_clinicaloutcome_ptca',
+            'bf_ma_clinicaloutcome_renal_transplantation',
+            'bf_ma_clinicaloutcome_scoliosis_correction',
+            'bf_ma_clinicaloutcome_spinal_dysraphism',
+            'bf_ma_clinicaloutcome_spine_disc_surgery',
+            'bf_ma_clinicaloutcome_thoracotomy',
+            'bf_ma_clinicaloutcome_tkr',
+            'bf_ma_clinicaloutcome_uro_oncology',
+            'bf_ma_clinicaloutcome_whipples_surgery',
+            'bf_ma_clinicaloutcome_laparoscopic_cholecystectomy',
+            'bf_ma_clinicalkpi_bronchodilators_audit',
+            'bf_ma_clinicalkpi_copd_protocol_audit',
+            'bf_ma_infection_control_biomedical_waste',
+            'bf_ma_infection_control_canteen_audit',
+            'bf_ma_infection_control_cssd_audit',
+            'bf_ma_infection_control_hand_hygiene',
+            'bf_ma_infection_control_bundle_audit',
+            'bf_ma_infection_control_ot_audit',
+            'bf_ma_infection_control_linen_audit',
+            'bf_ma_infection_control_ambulance_audit',
+            'bf_ma_infection_control_coffee_audit',
+            'bf_ma_infection_control_laboratory_audit',
+            'bf_ma_infection_control_mortuary_audit',
+            'bf_ma_infection_control_radiology_audit',
+            'bf_ma_infection_control_ssi_survelliance_audit',
+            'bf_ma_infection_control_peripheralivline_audit',
+            'bf_ma_infection_control_personalprotective_audit',
+            'bf_ma_infection_control_safe_injection_audit',
+            'bf_ma_infection_control_surface_cleaning_audit',
+            'bf_ma_clinical_pathway_arthroscopic_audit',
+            'bf_ma_clinical_pathway_breast_lump_audit',
+            'bf_ma_clinical_pathway_cardiac_arrest_audit',
+            'bf_ma_clinical_pathway_donor_hepatectomy_audit',
+            'bf_ma_clinical_pathway_febrile_seizure_audit',
+            'bf_ma_clinical_pathway_heart_transplant_audit',
+            'bf_ma_clinical_pathway_laproscopic_audit',
+            'bf_ma_clinical_pathway_picc_line_audit',
+            'bf_ma_clinical_pathway_stroke_audit',
+            'bf_ma_clinical_pathway_urodynamics_audit',
+            'bf_ma_clinical_pathway_stemi_audit'
+        ];
+
+        if (!in_array($table, $audit_array)) {
+            $this->session->set_flashdata('error', 'Invalid table specified for deletion.');
+            redirect($_SERVER['HTTP_REFERER']); // back to same page
+            return;
+        }
+
+        $this->db->trans_start();
+        $this->db->where('id', $id);
+        $deleted = $this->db->delete($table);
+        $this->db->trans_complete();
+
+        if ($deleted) {
+            $this->session->set_flashdata('message', 'Audit Record deleted successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Unable to delete the record.');
+        }
+
+        redirect($_SERVER['HTTP_REFERER']); // back to same audit page
+    }
+
+
 
 
     public function audit_master()
@@ -2162,6 +2294,42 @@ class Audit extends CI_Controller
         }
     }
 
+    public function feedbacks_report_ipsg2_er()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+
+            $data['title'] = 'IPSG-2- ER';
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_ipsg2_er', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/feedbacks_report');
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
 
     public function feedbacks_report_ipsg2_ae()
     {
@@ -2581,6 +2749,28 @@ class Audit extends CI_Controller
                 $data['content'] = $this->load->view('auditmodules/ipsg1_feedback', $data, true);
             } else {
                 $data['content'] = $this->load->view('auditmodules/dephead/ipsg1_feedback', $data, true);
+            }
+
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/ip_patient_feedback');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function ipsg2_er_feedback()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+
+            $data['title'] = 'QUALITY AUDIT FORM';
+            #------------------------------#
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/ipsg2_er_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/ipsg2_er_feedback', $data, true);
             }
 
             $this->load->view('layout/main_wrapper', $data);
@@ -5939,6 +6129,121 @@ class Audit extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+    //main page for House Keeping
+    public function feedbacks_report_bmw_audit()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+
+            $data['title'] = 'Biomedical Waste Collection Audit';
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_bmw_audit', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/feedbacks_report');
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function feedbacks_report_pest_control_audit()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+
+            $data['title'] = 'Pest Control Audit';
+            $data['content'] = $this->load->view('auditmodules/feedbacks_report_pest_control_audit', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/feedbacks_report');
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    //Individual page for House Keeping
+    public function bmw_audit_feedback()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+
+            $data['title'] = 'QUALITY AUDIT FORM';
+            #------------------------------#
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/bmw_audit_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/bmw_audit_feedback', $data, true);
+            }
+
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/ip_patient_feedback');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+    public function pest_control_audit_feedback()
+    {
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+
+            $data['title'] = 'QUALITY AUDIT FORM';
+            #------------------------------#
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/pest_control_audit_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/pest_control_audit_feedback', $data, true);
+            }
+
+            $this->load->view('layout/main_wrapper', $data);
+            // redirect('report/ip_patient_feedback');
+
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
 
 
 
@@ -6593,6 +6898,265 @@ class Audit extends CI_Controller
             $this->load->view('layout/main_wrapper', $data);
         }
     }
+
+    //edit page for House Keeping
+    public function edit_bmw_audit_feedback()
+    {
+
+        if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+            $this->session->set_userdata('referred_from', current_url());
+        } else {
+            $this->session->set_userdata('referred_from', NULL);
+        }
+
+
+        $LOAD = pagetoload($this->module);
+        if ($LOAD == 'inpatient_modules') {
+            $data['title'] = 'EDIT AUDIT FORM';
+            $data['departments'] = $this->tickets_model->read_by_id($this->uri->segment(3));
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/edit_bmw_audit_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/edit_bmw_audit_feedback', $data, true);
+            }
+            //    $data['content'] = $this->load->view('qualitymodules/ticket_track', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        }
+    }
+
+    public function edit_pest_control_audit_feedback()
+    {
+
+        if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+            $this->session->set_userdata('referred_from', current_url());
+        } else {
+            $this->session->set_userdata('referred_from', NULL);
+        }
+
+
+        $LOAD = pagetoload($this->module);
+        if ($LOAD == 'inpatient_modules') {
+            $data['title'] = 'EDIT AUDIT FORM';
+            $data['departments'] = $this->tickets_model->read_by_id($this->uri->segment(3));
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/edit_pest_control_audit_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/edit_pest_control_audit_feedback', $data, true);
+            }
+            //    $data['content'] = $this->load->view('qualitymodules/ticket_track', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        }
+    }
+
+    //To Edit audit by id for House Keeping
+    public function edit_bmw_audit_feedback_byid($id)
+{
+    // Check if form submitted
+    if ($this->input->post()) {
+
+        // 🧾 Get existing record
+        $existing = $this->audit_model->get_biomedical_waste_collection_audit_feedback_byid($id);
+
+        // Decode existing dataset JSON
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
+        }
+
+        // Get existing files from dataset
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🗑️ Handle removed files (from remove_files_json hidden field)
+        $removeIndexesJson = $this->input->post('remove_files_json');
+        $removeIndexes = !empty($removeIndexesJson) ? json_decode($removeIndexesJson, true) : [];
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+
+                    // Optionally delete physical file
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) {
+                        @unlink($absolutePath);
+                    }
+
+                    unset($existingFiles[$index]);
+                }
+            }
+
+            // Reindex after removal
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📤 Handle multiple new file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+
+            $filesCount = count($_FILES['uploaded_files']['name']);
+
+            $config['upload_path']   = './api/file_uploads/';
+            $config['allowed_types'] = 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx';
+            $config['max_size']      = 50000;
+            $config['encrypt_name']  = FALSE;
+
+            $this->load->library('upload');
+
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file']['name']     = $_FILES['uploaded_files']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['uploaded_files']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['uploaded_files']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['uploaded_files']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['uploaded_files']['size'][$i];
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+
+                    $newFile = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+
+                    // Add new file to existing array
+                    $existingFiles[] = $newFile;
+                }
+            }
+        }
+
+        // 🧠 Merge updated file list back into dataset
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧩 Merge other post data (excluding upload fields)
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🕒 Save updated data
+        $data = [
+            'dataset' => json_encode($dataset),
+        ];
+
+        // Update in database
+        $this->audit_model->update_biomedical_waste_collection_audit_feedback($id, $data);
+
+        // Redirect back
+        redirect('audit/bmw_audit_feedback?id=' . $id);
+    } 
+    else {
+        // 🧭 Load existing record for edit view
+        $data['record'] = $this->audit_model->get_biomedical_waste_collection_audit_feedback_byid($id);
+        $this->load->view('audit/edit_bmw_audit_feedback', $data);
+    }
+}
+
+public function edit_pest_control_audit_feedback_byid($id)
+{
+    // Check if form submitted
+    if ($this->input->post()) {
+
+        // 🧾 Get existing record
+        $existing = $this->audit_model->get_pest_control_audit_feedback_byid($id);
+
+        // Decode existing dataset JSON
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) {
+            $dataset = [];
+        }
+
+        // Get existing files from dataset
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+
+        // 🗑️ Handle removed files (from remove_files_json hidden field)
+        $removeIndexesJson = $this->input->post('remove_files_json');
+        $removeIndexes = !empty($removeIndexesJson) ? json_decode($removeIndexesJson, true) : [];
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+
+                    // Optionally delete physical file
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) {
+                        @unlink($absolutePath);
+                    }
+
+                    unset($existingFiles[$index]);
+                }
+            }
+
+            // Reindex after removal
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📤 Handle multiple new file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+
+            $filesCount = count($_FILES['uploaded_files']['name']);
+
+            $config['upload_path']   = './api/file_uploads/';
+            $config['allowed_types'] = 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx';
+            $config['max_size']      = 50000;
+            $config['encrypt_name']  = FALSE;
+
+            $this->load->library('upload');
+
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file']['name']     = $_FILES['uploaded_files']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['uploaded_files']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['uploaded_files']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['uploaded_files']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['uploaded_files']['size'][$i];
+
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+
+                    $newFile = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+
+                    // Add new file to existing array
+                    $existingFiles[] = $newFile;
+                }
+            }
+        }
+
+        // 🧠 Merge updated file list back into dataset
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🧩 Merge other post data (excluding upload fields)
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🕒 Save updated data
+        $data = [
+            'dataset' => json_encode($dataset),
+        ];
+
+        // Update in database
+        $this->audit_model->update_pest_control_audit_feedback($id, $data);
+
+        // Redirect back
+        redirect('audit/pest_control_audit_feedback?id=' . $id);
+    } 
+    else {
+        // 🧭 Load existing record for edit view
+        $data['record'] = $this->audit_model->get_pest_control_audit_feedback_byid($id);
+        $this->load->view('audit/edit_pest_control_audit_feedback', $data);
+    }
+}
+
 
 
     // To Edit audit by id
@@ -8858,6 +9422,32 @@ public function edit_mrd_op_feedback_byid($id)
             $this->load->view('layout/main_wrapper', $data);
         }
     }
+
+    public function edit_ipsg2_er_feedback()
+    {
+
+        if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+            $this->session->set_userdata('referred_from', current_url());
+        } else {
+            $this->session->set_userdata('referred_from', NULL);
+        }
+
+
+        $LOAD = pagetoload($this->module);
+        if ($LOAD == 'inpatient_modules') {
+            $data['title'] = 'EDIT AUDIT FORM';
+            $data['departments'] = $this->tickets_model->read_by_id($this->uri->segment(3));
+            if (isfeature_active('AUDIT-DASHBOARD') === true) {
+                $data['content'] = $this->load->view('auditmodules/edit_ipsg2_er_feedback', $data, true);
+            } else {
+                $data['content'] = $this->load->view('auditmodules/dephead/edit_ipsg2_er_feedback', $data, true);
+            }
+            //    $data['content'] = $this->load->view('qualitymodules/ticket_track', $data, true);
+
+            $this->load->view('layout/main_wrapper', $data);
+        }
+    }
+
     public function edit_ipsg2_ae_feedback()
     {
 
@@ -8882,6 +9472,7 @@ public function edit_mrd_op_feedback_byid($id)
             $this->load->view('layout/main_wrapper', $data);
         }
     }
+
     public function edit_ipsg2_ipd_feedback()
     {
 
@@ -9617,73 +10208,141 @@ public function edit_ipsg1_feedback_byid($id)
     }
 }
 
-    public function edit_ipsg2_ae_feedback_byid($id)
-{
-    if ($this->input->post()) {
-        $existing = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
-        $dataset = json_decode($existing->dataset, true) ?: [];
-        $existingFiles = $dataset['files_name'] ?? [];
+    public function edit_ipsg2_er_feedback_byid($id)
+    {
+            if ($this->input->post()) {
+                $existing = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
+                $dataset = json_decode($existing->dataset, true) ?: [];
+                $existingFiles = $dataset['files_name'] ?? [];
 
-        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
-        if (!empty($removeIndexes)) {
-            foreach ($removeIndexes as $index) {
-                if (isset($existingFiles[$index])) {
-                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
-                    $absolutePath = FCPATH . $oldFilePath;
-                    if (file_exists($absolutePath)) @unlink($absolutePath);
-                    unset($existingFiles[$index]);
+                $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+                if (!empty($removeIndexes)) {
+                    foreach ($removeIndexes as $index) {
+                        if (isset($existingFiles[$index])) {
+                            $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                            $absolutePath = FCPATH . $oldFilePath;
+                            if (file_exists($absolutePath)) @unlink($absolutePath);
+                            unset($existingFiles[$index]);
+                        }
+                    }
+                    $existingFiles = array_values($existingFiles);
                 }
-            }
-            $existingFiles = array_values($existingFiles);
-        }
 
-        if (!empty($_FILES['uploaded_files']['name'][0])) {
-            $filesCount = count($_FILES['uploaded_files']['name']);
-            $config = [
-                'upload_path'  => './api/file_uploads/',
-                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
-                'max_size'     => 50000,
-                'encrypt_name' => FALSE
-            ];
-            $this->load->library('upload');
-            for ($i = 0; $i < $filesCount; $i++) {
-                $_FILES['file'] = [
-                    'name'     => $_FILES['uploaded_files']['name'][$i],
-                    'type'     => $_FILES['uploaded_files']['type'][$i],
-                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
-                    'error'    => $_FILES['uploaded_files']['error'][$i],
-                    'size'     => $_FILES['uploaded_files']['size'][$i]
-                ];
-                $this->upload->initialize($config);
-                if ($this->upload->do_upload('file')) {
-                    $uploadData = $this->upload->data();
-                    $existingFiles[] = [
-                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
-                        'name' => $uploadData['file_name']
+                if (!empty($_FILES['uploaded_files']['name'][0])) {
+                    $filesCount = count($_FILES['uploaded_files']['name']);
+                    $config = [
+                        'upload_path'  => './api/file_uploads/',
+                        'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                        'max_size'     => 50000,
+                        'encrypt_name' => FALSE
                     ];
+                    $this->load->library('upload');
+                    for ($i = 0; $i < $filesCount; $i++) {
+                        $_FILES['file'] = [
+                            'name'     => $_FILES['uploaded_files']['name'][$i],
+                            'type'     => $_FILES['uploaded_files']['type'][$i],
+                            'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                            'error'    => $_FILES['uploaded_files']['error'][$i],
+                            'size'     => $_FILES['uploaded_files']['size'][$i]
+                        ];
+                        $this->upload->initialize($config);
+                        if ($this->upload->do_upload('file')) {
+                            $uploadData = $this->upload->data();
+                            $existingFiles[] = [
+                                'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                                'name' => $uploadData['file_name']
+                            ];
+                        }
+                    }
+                }
+
+                $dataset['files_name'] = array_values($existingFiles);
+
+                foreach ($_POST as $key => $value) {
+                    if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                        $dataset[$key] = $value;
+                    }
+                }
+
+                $this->audit_model->update_ipsg2_er_feedback($id, [
+                    'dataset'  => json_encode($dataset),
+                    
+                ]);
+
+                redirect('audit/ipsg2_er_feedback?id=' . $id);
+            } else {
+                $data['record'] = $this->audit_model->get_ipsg2_er_feedback_byid($id);
+                $this->load->view('audit/edit_ipsg2_er_feedback', $data);
+            }
+        }
+
+    public function edit_ipsg2_ae_feedback_byid($id)
+    {
+        if ($this->input->post()) {
+            $existing = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
+            $dataset = json_decode($existing->dataset, true) ?: [];
+            $existingFiles = $dataset['files_name'] ?? [];
+
+            $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+            if (!empty($removeIndexes)) {
+                foreach ($removeIndexes as $index) {
+                    if (isset($existingFiles[$index])) {
+                        $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                        $absolutePath = FCPATH . $oldFilePath;
+                        if (file_exists($absolutePath)) @unlink($absolutePath);
+                        unset($existingFiles[$index]);
+                    }
+                }
+                $existingFiles = array_values($existingFiles);
+            }
+
+            if (!empty($_FILES['uploaded_files']['name'][0])) {
+                $filesCount = count($_FILES['uploaded_files']['name']);
+                $config = [
+                    'upload_path'  => './api/file_uploads/',
+                    'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                    'max_size'     => 50000,
+                    'encrypt_name' => FALSE
+                ];
+                $this->load->library('upload');
+                for ($i = 0; $i < $filesCount; $i++) {
+                    $_FILES['file'] = [
+                        'name'     => $_FILES['uploaded_files']['name'][$i],
+                        'type'     => $_FILES['uploaded_files']['type'][$i],
+                        'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                        'error'    => $_FILES['uploaded_files']['error'][$i],
+                        'size'     => $_FILES['uploaded_files']['size'][$i]
+                    ];
+                    $this->upload->initialize($config);
+                    if ($this->upload->do_upload('file')) {
+                        $uploadData = $this->upload->data();
+                        $existingFiles[] = [
+                            'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                            'name' => $uploadData['file_name']
+                        ];
+                    }
                 }
             }
-        }
 
-        $dataset['files_name'] = array_values($existingFiles);
+            $dataset['files_name'] = array_values($existingFiles);
 
-        foreach ($_POST as $key => $value) {
-            if (!in_array($key, ['uploaded_files','remove_files_json'])) {
-                $dataset[$key] = $value;
+            foreach ($_POST as $key => $value) {
+                if (!in_array($key, ['uploaded_files','remove_files_json'])) {
+                    $dataset[$key] = $value;
+                }
             }
+
+            $this->audit_model->update_ipsg2_ae_feedback($id, [
+                'dataset'  => json_encode($dataset),
+                
+            ]);
+
+            redirect('audit/ipsg2_ae_feedback?id=' . $id);
+        } else {
+            $data['record'] = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
+            $this->load->view('audit/edit_ipsg2_ae_feedback', $data);
         }
-
-        $this->audit_model->update_ipsg2_ae_feedback($id, [
-            'dataset'  => json_encode($dataset),
-            
-        ]);
-
-        redirect('audit/ipsg2_ae_feedback?id=' . $id);
-    } else {
-        $data['record'] = $this->audit_model->get_ipsg2_ae_feedback_byid($id);
-        $this->load->view('audit/edit_ipsg2_ae_feedback', $data);
     }
-}
 
 public function edit_ipsg2_ipd_feedback_byid($id)
 {
@@ -15301,7 +15960,13 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- Active Cases MRD Audit (IP) - ' . $tdate . ' to ' . $fdate . '.csv';
+
+            if (isset($_GET['filtertype']) && $_GET['filtertype'] === 'admission') {
+                $fileName = 'EF- Active Cases MRD Audit (IP) - Filtered by Admission Date - ' . $tdate . ' to ' . $fdate . '.csv';
+            } else {
+                $fileName = 'EF- Active Cases MRD Audit (IP) - ' . $tdate . ' to ' . $fdate . '.csv';
+            }
+
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21105,12 +21770,134 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             $header[$j++] = 'Admission Date & Time';
             $header[$j++] = 'Discharge Date & Time';
 
-            $header[$j++] = 'Are patient ID bands present?';
-            $header[$j++] = 'Is the ID band appropriate according to patient status (orange - vulnerable, blue - allergy, white - general)?';
-            $header[$j++] = 'Is the ID band complete and readable (includes MID, name, age, sex)?';
-            $header[$j++] = 'Is the treatment/procedure order correctly verified in EMR?';
-            $header[$j++] = 'Was verbal reconfirmation of patient identification performed if applicable?';
-            $header[$j++] = 'Are the patient and family aware of correct patient identification?';
+            $header[$j++] = 'Is the patient ID band clear and readable?';
+            $header[$j++] = 'Is the patient’s identity confirmed before administering high-alert medications?';
+            $header[$j++] = 'Are two identifiers consistently checked before administering medication, diagnostic tests, or procedures?';
+            $header[$j++] = 'Is family or caregiver confirmation obtained if the patient is unconscious, pediatric, or unable to respond?';
+            $header[$j++] = 'Is a new ID band provided immediately if the previous one is lost or damaged?';
+            
+
+            $header[$j++] = 'Additional comments';
+
+            $dataexport = [];
+            $i = 0;
+            foreach ($feedbacktaken as $row) {
+                $data = json_decode($row->dataset, true);
+
+                // echo '<pre>';
+                // print_r($data);
+                // echo '</pre>';
+                // exit;
+
+                $dataexport[$i]['audit_type'] = $data['audit_type'];
+                $dataexport[$i]['date'] = date('Y-m-d H:i', strtotime($row->datetime));
+                $dataexport[$i]['audit_by'] = $data['audit_by'];
+
+                $dataexport[$i]['mid_no'] = $data['mid_no'];
+                $dataexport[$i]['patient_name'] = $data['patient_name'];
+                $dataexport[$i]['patient_age'] = $data['patient_age'];
+                $dataexport[$i]['patient_gender'] = $data['patient_gender'];
+                $dataexport[$i]['location'] = $data['location'];
+                $dataexport[$i]['department'] = $data['department'];
+                $dataexport[$i]['attended_doctor'] = $data['attended_doctor'];
+                $dataexport[$i]['initial_assessment_hr6'] = date('Y-m-d H:i', strtotime($data['initial_assessment_hr6']));
+                $dataexport[$i]['discharge_date_time'] = date('Y-m-d H:i', strtotime($data['discharge_date_time']));
+
+                $dataexport[$i]['identification_details'] = ucfirst($data['identification_details']) . "\r\nRemarks: " . $data['identification_details_text'];
+                $dataexport[$i]['vital_signs'] = ucfirst($data['vital_signs']) . "\r\nRemarks: " . $data['vital_signs_text'];
+                $dataexport[$i]['surgery'] = ucfirst($data['surgery']) . "\r\nRemarks: " . $data['surgery_text'];
+                $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
+                $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
+                
+
+                $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+
+
+                $i++;
+            }
+
+
+            $fdate = $_SESSION['from_date'];
+            $tdate = $_SESSION['to_date'];
+            ob_end_clean();
+            $fileName = 'EF- IPSG-1 - ' . $tdate . ' to ' . $fdate . '.csv';
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Cache-Control: private', false);
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment;filename=' . $fileName);
+            if (isset($dataexport[0])) {
+                $fp = fopen('php://output', 'w');
+                //print_r($header);
+                fputcsv($fp, $header, ',');
+                foreach ($dataexport as $values) {
+                    //print_r($values); exit;
+                    fputcsv($fp, $values, ',');
+                }
+                fclose($fp);
+            }
+            ob_flush();
+            exit;
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
+
+    public function overall_ipsg2_er()
+    {
+
+        if ($this->session->userdata('isLogIn') == false)
+            redirect('login');
+        if (ismodule_active('AUDIT') === true) {
+
+
+            $table_feedback = 'bf_ma_ipsg2_er';
+            $table_patients = 'bf_patients';
+            $desc = 'desc';
+            $setup = 'setup';
+
+            $feedbacktaken = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+            $sresult = $this->audit_model->setup_result($setup);
+            $setarray = array();
+            $questioarray = array();
+            foreach ($sresult as $r) {
+                $setarray[$r->type] = $r->title;
+            }
+            foreach ($sresult as $r) {
+                $questioarray[$r->type][$r->shortkey] = $r->shortname;
+            }
+
+            $arraydata = array();
+            foreach ($questioarray as $setr) {
+                foreach ($setr as $k => $v) {
+                    $arraydata[$k] = $v;
+                }
+            }
+
+
+            $header[0] = 'Audit Name';
+            $header[1] = 'Date & Time of Audit';
+            $header[2] = 'Audit by';
+            $header[3] = 'Patient MID';
+            $header[4] = 'Patient Name';
+            $header[5] = 'Patient Age';
+            $header[6] = 'Patient Gender';
+
+            $j = 7;
+
+            $header[$j++] = 'Area';
+            $header[$j++] = 'Department';
+            $header[$j++] = 'Attended Doctor';
+            $header[$j++] = 'Admission Date & Time';
+            $header[$j++] = 'Discharge Date & Time';
+
+            $header[$j++] = 'Is ISBAR format used during handover between staff/units?';
+            $header[$j++] = 'Are interdepartmental transfers (ED → Ward/ICU/OT) documented using a transfer checklist?';
+            $header[$j++] = 'Are critical content of hand over, investigation and pending procedures clearly mentioned during hand over?';
+            $header[$j++] = 'Is medication handover complete (time, dose, high-alert drugs, infusions, etc.)?';
+            $header[$j++] = 'Is family/patient education documented (diagnosis, plan, transfer, safety measures)?';
+            $header[$j++] = 'Are shift handovers done at bedside with active participation of incoming team?';
 
 
             $header[$j++] = 'Additional comments';
@@ -21157,7 +21944,7 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
             ob_end_clean();
-            $fileName = 'EF- IPSG-1 - ' . $tdate . ' to ' . $fdate . '.csv';
+            $fileName = 'EF- IPSG-2-ER - ' . $tdate . ' to ' . $fdate . '.csv';
             header('Pragma: public');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -21360,16 +22147,14 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             $header[$j++] = 'Admission Date & Time';
             $header[$j++] = 'Discharge Date & Time';
 
-            $header[$j++] = 'Was the patient greeted and informed about the shift hand off?';
-            $header[$j++] = 'Was the patient Introduced to incoming staff?';
-            $header[$j++] = 'Is the patient Identified by using 2 identifiers (Full Name & MID)';
-            $header[$j++] = 'Is the IV cannula checked and in order?';
-            $header[$j++] = 'Are other lines & tubes checked and found in order?';
-            $header[$j++] = 'Is a skin sssessment is done?';
-            $header[$j++] = 'Are checks done for bedside medications & locked as required?';
-            $header[$j++] = 'Are goal set and plan of care discussed with the patient?';
-            $header[$j++] = 'Is it ensured that sensitive information are discussed outside the room?';
-            $header[$j++] = 'Is the handoff communication record (ISBAR)- communicated & documented and in order?';
+            $header[$j++] = 'Is the handover conducted face to face at the bedside or designated area?';
+            $header[$j++] = 'Are critical findings, NEWS score, and pain status communicated along with the management plan?';
+            $header[$j++] = 'Are conditions of skin integrity, restraint site, and fall risk status communicated during handover?';
+            $header[$j++] = 'Is information documented appropriately in the handover notes?';
+            $header[$j++] = 'Is the staff able to summarize the patient’s condition without referring back to records?';
+            $header[$j++] = 'Was the handover completed within a reasonable time, without interruptions such as phone calls, distractions, or multitasking?';
+            $header[$j++] = 'Is the transfer order verified and documented in the transfer form?';
+            
 
 
             $header[$j++] = 'Additional comments';
@@ -21404,13 +22189,8 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
-
-                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
-                $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
-
+                
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -21499,13 +22279,12 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             $header[$j++] = 'Date and Time of Procedure';
 
 
-            $header[$j++] = 'Are site markings present as applicable and per policy ?';
-            $header[$j++] = 'Does time out contain correct patient details?';
-            $header[$j++] = 'Does time out contain correct procedure details?';
-            $header[$j++] = 'Does time out contain correct site details as applicable?';
-            $header[$j++] = 'Are all the elements of time out documented, timely & accurately ?';
-            $header[$j++] = 'Does sign out record contain name of procedure?';
-            $header[$j++] = 'Does sign out record contain labelling the specimen as applicable?';
+            $header[$j++] = 'Is the procedure name confirmed against the consent form and physician order?';
+            $header[$j++] = 'Are emergency drugs, resuscitation equipment, and oxygen available at the bedside?';
+            $header[$j++] = 'Are the required equipment, implants, and instruments checked and ready before the procedure?';
+            $header[$j++] = 'Is a “time-out” pause performed with the full team to confirm the correct patient, procedure, site, and consent?';
+            $header[$j++] = 'Does the “sign-out” record include the procedure performed, specimens sent, and any complications?';
+            
 
 
             $header[$j++] = 'Additional comments';
@@ -21543,12 +22322,8 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
                 $dataexport[$i]['complaints_communicated'] = ucfirst($data['complaints_communicated']) . "\r\nRemarks: " . $data['complaints_communicated_text'];
                 $dataexport[$i]['intake'] = ucfirst($data['intake']) . "\r\nRemarks: " . $data['intake_text'];
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
-
                 $dataexport[$i]['allergies'] = ucfirst($data['allergies']) . "\r\nRemarks: " . $data['allergies_text'];
-                $dataexport[$i]['medication'] = ucfirst($data['medication']) . "\r\nRemarks: " . $data['medication_text'];
-
-                $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
-
+                
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
 
@@ -29612,6 +30387,202 @@ public function edit_clinical_pathway_stemi_audit_feedback_byid($id)
             redirect('dashboard/noaccess');
         }
     }
+    //Download Reports for HouseKeeping audits
+    public function overall_bmw_audit()
+{
+	if ($this->session->userdata('isLogIn') == false)
+		redirect('login');
+
+	if (ismodule_active('AUDIT') === true) {
+
+		$table_feedback = 'bf_ma_bmw_audit'; // your feedback table
+		$table_patients = 'bf_patients';
+		$desc = 'desc';
+
+		// Get audit feedback data
+		$feedbacktaken = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+		// Define CSV Header
+		$header = [
+			'Audit Name',
+			'Date & Time of Audit',
+			'Audit By',
+			'Department',
+			'Area',
+			'Staff MID',
+			'Officer Name',
+			'Supervisor Name',
+			'Driver Name',
+			'Picker Name',
+			'No. of Yellow Bags',
+			'No. of Red Bags',
+			'No. of White Bags',
+			'No. of Brownish Yellow Bags',
+			'No. of Blue Bags',
+			'Total Bags',
+			'Total Bags Processed',
+			'Total Quantity (Kg)',
+			'Uploaded Files'
+		];
+
+		// Prepare export data
+		$dataexport = [];
+		$i = 0;
+
+		foreach ($feedbacktaken as $row) {
+			$data = json_decode($row->dataset, true);
+
+			$dataexport[$i]['audit_type'] = isset($data['audit_type']) ? $data['audit_type'] : '';
+			$dataexport[$i]['datetime'] = date('Y-m-d H:i', strtotime($row->datetime ?? ''));
+			$dataexport[$i]['audit_by'] = isset($data['audit_by']) ? $data['audit_by'] : '';
+
+			$dataexport[$i]['department'] = isset($data['department']) ? $data['department'] : '';
+			$dataexport[$i]['location'] = isset($data['location']) ? $data['location'] : '';
+			$dataexport[$i]['mid_no'] = isset($data['mid_no']) ? $data['mid_no'] : '';
+			$dataexport[$i]['patient_name'] = isset($data['patient_name']) ? $data['patient_name'] : '';
+			$dataexport[$i]['supervisor_name'] = isset($data['supervisor_name']) ? $data['supervisor_name'] : '';
+			$dataexport[$i]['driver_name'] = isset($data['driver_name']) ? $data['driver_name'] : '';
+			$dataexport[$i]['picker_name'] = isset($data['picker_name']) ? $data['picker_name'] : '';
+
+			$dataexport[$i]['yellow_bags'] = isset($data['yellow_bags']) ? $data['yellow_bags'] : '';
+			$dataexport[$i]['red_bags'] = isset($data['red_bags']) ? $data['red_bags'] : '';
+			$dataexport[$i]['white_bags'] = isset($data['white_bags']) ? $data['white_bags'] : '';
+			$dataexport[$i]['brownish_yellow_bags'] = isset($data['brownish_yellow_bags']) ? $data['brownish_yellow_bags'] : '';
+			$dataexport[$i]['blue_bags'] = isset($data['blue_bags']) ? $data['blue_bags'] : '';
+			$dataexport[$i]['total_bags'] = isset($data['total_bags']) ? $data['total_bags'] : '';
+			$dataexport[$i]['total_bags_processed'] = isset($data['total_bags_processed']) ? $data['total_bags_processed'] : '';
+			$dataexport[$i]['total_quantity'] = isset($data['total_quantity']) ? $data['total_quantity'] : '';
+
+			// File list (comma separated)
+			if (!empty($data['files_name']) && is_array($data['files_name'])) {
+				$fileNames = array_column($data['files_name'], 'name');
+				$dataexport[$i]['files'] = implode(', ', $fileNames);
+			} else {
+				$dataexport[$i]['files'] = 'No Files';
+			}
+
+			$i++;
+		}
+
+		// Prepare CSV output
+		$fdate = $_SESSION['from_date'];
+		$tdate = $_SESSION['to_date'];
+
+		ob_end_clean();
+		$fileName = 'EF-Biomedical-Waste-Audit-' . $tdate . '-to-' . $fdate . '.csv';
+		header('Pragma: public');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Cache-Control: private', false);
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment;filename=' . $fileName);
+
+		if (isset($dataexport[0])) {
+			$fp = fopen('php://output', 'w');
+			fputcsv($fp, $header, ',');
+			foreach ($dataexport as $values) {
+				fputcsv($fp, $values, ',');
+			}
+			fclose($fp);
+		}
+		ob_flush();
+		exit;
+
+	} else {
+		redirect('dashboard/noaccess');
+	}
+}
+
+public function overall_pest_control_audit()
+{
+	if ($this->session->userdata('isLogIn') == false)
+		redirect('login');
+
+	if (ismodule_active('AUDIT') === true) {
+
+		$table_feedback = 'bf_ma_pest_control_audit'; // pest control feedback table
+		$table_patients = 'bf_patients';
+		$desc = 'desc';
+
+		// Get audit feedback data
+		$feedbacktaken = $this->audit_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+
+		// Define CSV Header
+		$header = [
+			'Audit Name',
+			'Date & Time of Audit',
+			'Audit By',
+			'Department',
+			'Location',
+			'Is Pest Control Visit Planned/Scheduled?',
+			'Planned Remarks',
+			'Is Pest Control Visit Executed?',
+			'Executed Remarks',
+			'Files Uploaded'
+		];
+
+		// Prepare export data
+		$dataexport = [];
+		$i = 0;
+
+		foreach ($feedbacktaken as $row) {
+			$data = json_decode($row->dataset, true);
+
+			$dataexport[$i]['audit_type'] = isset($data['audit_type']) ? $data['audit_type'] : '';
+			$dataexport[$i]['datetime'] = date('Y-m-d H:i', strtotime($row->datetime ?? ''));
+			$dataexport[$i]['audit_by'] = isset($data['audit_by']) ? $data['audit_by'] : '';
+			$dataexport[$i]['department'] = isset($data['department']) ? $data['department'] : '';
+			$dataexport[$i]['location'] = isset($data['location']) ? $data['location'] : '';
+
+			
+
+			// Visit details
+			$dataexport[$i]['pest_planned'] = isset($data['pest_planned']) ? $data['pest_planned'] : '';
+			$dataexport[$i]['pest_planned_remarks'] = isset($data['pest_planned_remarks']) ? $data['pest_planned_remarks'] : '';
+			$dataexport[$i]['pest_executed'] = isset($data['pest_executed']) ? $data['pest_executed'] : '';
+			$dataexport[$i]['pest_executed_remarks'] = isset($data['pest_executed_remarks']) ? $data['pest_executed_remarks'] : '';
+
+			// Uploaded files
+			if (!empty($data['files_name']) && is_array($data['files_name'])) {
+				$fileNames = array_column($data['files_name'], 'name');
+				$dataexport[$i]['files'] = implode(', ', $fileNames);
+			} else {
+				$dataexport[$i]['files'] = 'No Files';
+			}
+
+			$i++;
+		}
+
+		// Prepare CSV output
+		$fdate = $_SESSION['from_date'] ?? date('Y-m-d');
+		$tdate = $_SESSION['to_date'] ?? date('Y-m-d');
+
+		ob_end_clean();
+		$fileName = 'EF-Pest-Control-Audit-' . $tdate . '-to-' . $fdate . '.csv';
+		header('Pragma: public');
+		header('Expires: 0');
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+		header('Cache-Control: private', false);
+		header('Content-Type: text/csv');
+		header('Content-Disposition: attachment;filename=' . $fileName);
+
+		if (isset($dataexport[0])) {
+			$fp = fopen('php://output', 'w');
+			fputcsv($fp, $header, ',');
+			foreach ($dataexport as $values) {
+				fputcsv($fp, $values, ',');
+			}
+			fclose($fp);
+		}
+		ob_flush();
+		exit;
+
+	} else {
+		redirect('dashboard/noaccess');
+	}
+}
+
+
 
 
 

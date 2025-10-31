@@ -361,13 +361,14 @@ $mobile = $user->mobile;
                                                         <?php
                                                         // Map Subsections into feature_id
                                                         $manualSubSections = [
-                                                            'AUDIT MANAGER DASHBOARD' => [265, 299],
+                                                            'AUDIT MANAGER DASHBOARD' => [265, 299, 857],
                                                             'MRD & MDC' => range(266, 294),
-                                                            'Nursing & IPSG' => array_merge(range(295, 297), [300], range(403, 413)),
+                                                            'Nursing & IPSG' => array_merge(range(295, 297), [300], range(403, 413), [859]),
                                                             'Clinical Outcome' => range(434, 459),
                                                             'Clinical KPI' => range(460, 461),
                                                             'Infection Control & PCI' => range(475, 501),
-                                                            'Clinical Pathways' => range(502, 512)
+                                                            'Clinical Pathways' => range(502, 512),
+                                                            'Housekeeping' => range(860, 861)
                                                         ];
 
                                                         foreach ($manualSubSections as $subTitle => $featureIds) { ?>
@@ -437,11 +438,11 @@ $mobile = $user->mobile;
                                                         <?php
                                                         // Map Subsections into feature_id
                                                         $manualSubSections = [
-                                                            'QUALITY KPI SETTINGS' => [227, 298, 433],
+                                                            'QUALITY KPI SETTINGS' => [227, 298, 433, 858],
                                                             'MRD' => array_merge(range(228, 229), [231], [233], [241], [519], range(534, 535), range(538, 539), range(543, 544), range(575, 576), range(615, 621), range(637, 641), [647], range(649, 650), [665], range(741, 756)),
                                                             'Nursing' => array_merge(range(235, 236), [249, 263, 471, 517], range(520, 522), range(524, 530), [536], range(540, 542), range(545, 547), range(551, 552), [555, 567], range(572, 573), range(578, 581), range(583, 587), range(598, 599), [605], range(660, 664), [682], [684], range(737, 740)),
                                                             'Emergency Department' => array_merge([230], [234], range(238, 239), [246], [523], [528], range(630, 634), range(642, 643), [681], [683]),
-                                                            'Clinical Nutrition & Dietetics' => array_merge([232], [636]),
+                                                            'Clinical Nutrition & Dietetics' => array_merge([232], [636], [862]),
                                                             'Lab Service' => array_merge([237], [250], range(255, 257), [264], range(358, 359), [644], [648], range(711, 716), [727]),
                                                             'Pulmonary Medicine' => [242],
                                                             'Pediatrics' => [243],
@@ -449,7 +450,7 @@ $mobile = $user->mobile;
                                                             'Radiology' => array_merge([245], range(258, 261), [537], range(593, 595), range(666, 669), range(686, 690), [820]),
                                                             'Nephrology' => array_merge([247], [653]),
                                                             'Medical Administration' => array_merge([248, 556], range(818, 819)),
-                                                            'OT' => array_merge([262], range(465, 467), range(469, 470), [472], [473], [577], [629], [655], range(670, 672)),
+                                                            'OT' => array_merge([262], range(465, 467), range(469, 470), [472], [473], [577], [629], [655], range(670, 672), [863]),
                                                             'Clinical Pharmacy' => array_merge(range(360, 373), [464], [468], [533], range(626, 627)),
                                                             'Anasthesia' => array_merge(range(374, 375), range(462, 463)),
                                                             'Blood Center' => array_merge(range(476, 485), [817]),

@@ -236,7 +236,7 @@ $param = json_decode($row->dataset, true);
 
 
                         <tr>
-                            <td><b>Are site markings present as applicable and per policy?</b></td>
+                            <td><b>Is the procedure name confirmed against the consent form and physician order?</b></td>
                             <td>
                                 <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
                                 <select class="form-control" name="surgery">
@@ -259,7 +259,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Does time out contain correct patient details?</b></td>
+                            <td><b>Are emergency drugs, resuscitation equipment, and oxygen available at the bedside?</b></td>
                             <td>
                                 <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
                                 <select class="form-control" name="complaints_communicated">
@@ -282,7 +282,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Does time out contain correct procedure details?</b></td>
+                            <td><b>Are the required equipment, implants, and instruments checked and ready before the procedure?</b></td>
                             <td>
                                 <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
                                 <select class="form-control" name="intake">
@@ -305,7 +305,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Does time out contain correct site details as applicable?</b></td>
+                            <td><b>Is a “time-out” pause performed with the full team to confirm the correct patient, procedure, site, and consent?</b></td>
                             <td>
                                 <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
                                 <select class="form-control" name="output">
@@ -328,7 +328,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are all the elements of time out documented, timely & accurately?</b></td>
+                            <td><b>Does the “sign-out” record include the procedure performed, specimens sent, and any complications?</b></td>
                             <td>
                                 <?php $val = isset($param['allergies']) ? strtolower(trim($param['allergies'])) : ''; ?>
                                 <select class="form-control" name="allergies">
@@ -350,51 +350,7 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
-                        <tr>
-                            <td><b>Does sign out record contain name of procedure?</b></td>
-                            <td>
-                                <?php $val = isset($param['medication']) ? strtolower(trim($param['medication'])) : ''; ?>
-                                <select class="form-control" name="medication">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="medication_text"
-                                        value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><b>Does sign out record contain labelling the specimen as applicable?</b></td>
-                            <td>
-                                <?php $val = isset($param['diagnostic']) ? strtolower(trim($param['diagnostic'])) : ''; ?>
-                                <select class="form-control" name="diagnostic">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="diagnostic_text"
-                                        value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>

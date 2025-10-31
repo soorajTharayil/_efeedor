@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 include('db.php');
 include('../new_messages/get_user.php');
 $time = time();
@@ -159,7 +156,7 @@ if ($result) {
 
     // Existing lines: KPI1 to KPI63 are already defined above
 
-    for ($i = 64; $i <= 300; $i++) {
+    for ($i = 64; $i <= 370; $i++) {
         $response["KPI{$i}"] = get_user_by_access("QUALITY-KPI{$i}", $con, $result->user_id, $result->user_role);
     }
 

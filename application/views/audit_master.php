@@ -747,6 +747,22 @@ require_once 'audit_tables.php';
                         </tr>
                     <?php } ?>
 
+                    <?php if (isfeature_active('AUDIT-FORM101') === true) {
+                        $title = 'IPSG2- ER';
+                        $meta  = metaFor($title, $audit_frequency_by_title);
+                        $cnt   = $this->audit_model->patient_and_feedback($table_patients, 'bf_ma_ipsg2_er', $sorttime, $setup);
+                    ?>
+                        <tr onclick="window.location='<?php echo $feedbacks_report_ipsg2_er; ?>'" style="cursor:pointer;">
+                            <td><?php echo $title; ?></td>
+                            <!-- <td><?php echo $meta['audit_type']; ?></td>
+                            <td><?php echo $meta['bed_no']; ?></td> -->
+                            <td><?php echo count($cnt); ?></td>
+                            <td>
+                                <a href="<?php echo $feedbacks_report_ipsg2_er; ?>" class="btn btn-info btn-sm">View Details</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
 
                     <?php if (isfeature_active('AUDIT-FORM39') === true) {
                         $title = 'IPSG2- A&E';
@@ -1801,6 +1817,38 @@ require_once 'audit_tables.php';
                             <td><?php echo count($cnt); ?></td>
                             <td>
                                 <a href="<?php echo $feedbacks_report_clinical_pathway_stemi_audit; ?>" class="btn btn-info btn-sm">View Details</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+                    <?php if (isfeature_active('AUDIT-FORM102') === true) {
+                        $title = 'Biomedical Waste Collection Audit';
+                        $meta  = metaFor($title, $audit_frequency_by_title);
+                        $cnt   = $this->audit_model->patient_and_feedback($table_patients, 'bf_ma_bmw_audit', $sorttime, $setup);
+                    ?>
+                        <tr onclick="window.location='<?php echo $feedbacks_report_bmw_audit; ?>'" style="cursor:pointer;">
+                            <td><?php echo $title; ?></td>
+                            <!-- <td><?php echo $meta['audit_type']; ?></td>
+                            <td><?php echo $meta['bed_no']; ?></td> -->
+                            <td><?php echo count($cnt); ?></td>
+                            <td>
+                                <a href="<?php echo $feedbacks_report_bmw_audit; ?>" class="btn btn-info btn-sm">View Details</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+                    <?php if (isfeature_active('AUDIT-FORM103') === true) {
+                        $title = 'Pest Control Audit';
+                        $meta  = metaFor($title, $audit_frequency_by_title);
+                        $cnt   = $this->audit_model->patient_and_feedback($table_patients, 'bf_ma_pest_control_audit', $sorttime, $setup);
+                    ?>
+                        <tr onclick="window.location='<?php echo $feedbacks_report_pest_control_audit; ?>'" style="cursor:pointer;">
+                            <td><?php echo $title; ?></td>
+                            <!-- <td><?php echo $meta['audit_type']; ?></td>
+                            <td><?php echo $meta['bed_no']; ?></td> -->
+                            <td><?php echo count($cnt); ?></td>
+                            <td>
+                                <a href="<?php echo $feedbacks_report_pest_control_audit; ?>" class="btn btn-info btn-sm">View Details</a>
                             </td>
                         </tr>
                     <?php } ?>

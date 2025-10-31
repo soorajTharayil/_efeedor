@@ -13,9 +13,9 @@
 	$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
 	$days = $dates['days'];
 	/* END DATE AND CALENDER */
-	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI4h56?id=');
+	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI3h9?id=');
 
-	$table_feedback_2PSQ3a = 'bf_feedback_CQI4h56';
+	$table_feedback_2PSQ3a = 'bf_feedback_CQI3h9';
 	$table_patients_1PSQ3a = 'bf_patients';
 	$desc_1PSQ3a = 'desc';
 	$sorttime = 'asc';
@@ -50,7 +50,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI4h56_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3h9_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -145,9 +145,20 @@
 
 										<td>
 											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
-												class="btn btn-info btn-sm">
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
 												View Details
 											</a>
+
+											<?php if (isfeature_active('DELETE-KPI') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this KPI record?');"
+													title="Delete the KPI record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
 										</td>
 
 

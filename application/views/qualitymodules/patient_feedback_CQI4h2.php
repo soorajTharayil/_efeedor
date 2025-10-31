@@ -11,18 +11,18 @@
 			$id = $this->input->get('id');
 		}
 		$this->db->where('id', $id);
-		$query = $this->db->get('bf_feedback_CQI4h2');
+		$query = $this->db->get('bf_feedback_CQI3a4');
 		$results = $query->result();
 
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
-				$param = json_decode($result->dataset);
+				$param = json_decode($result->dataset, true);
+				// 	echo '<pre>';
+				// 	print_r($param);
+				// 	echo '</pre>';
+				// 	exit;
 
-				// echo '<pre>';
-				// print_r($param);
-				// echo '</pre>';
-				// exit;
-
+										
 
 	?>
 
@@ -30,11 +30,11 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="QUALITY INDICATOR MANAGER <KPI ID>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>TAT for radiology STAT orders(Radiology - CT)  - <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Percentage of Care-plan is documented for inpatients(MRD)   <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
-									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI4h2/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
+									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQi3a4/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
 							<div class="panel-body" style="background: #fff;">
@@ -43,92 +43,62 @@
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
 									<tr>
-										<td><b>Numerator: Sum of total time (in Hrs)</b></td>
-										<td><?php echo $param->initial_assessment_total; ?></td>
+										<td><b>Number of case sheets where care plan is documented </b></td>
+
+										<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Denominator: Total sample size (in No.s)</b></td>
-										<td><?php echo $param->total_admission; ?></td>
+										<td><b>Total number of in-patients for the month  </b></td>
+
+									<td><?php echo $param['total_admission']; ?></td>
 									</tr>
 									<tr>
-										<td><b>TAT for radiology STAT orders(Radiology - CT)  (in Hrs)</b></td>
+										<td><b>Percentage of Care-plan is documented for inpatients(MRD)  </b></td>
+										<td><?php echo $param['calculatedResult']; ?></td>
+										</td>
+									</tr>
+
+									<tr>
+										<td><b>Data analysis</b></td>
+										<td><?php echo $param['dataAnalysis']; ?></td>
+									</tr>
+									<tr>
+										<td><b>Corrective action</b></td>
+										<td><?php echo $param['correctiveAction']; ?></td>
+									</tr>
+									<tr>
+										<td><b>Preventive action</b></td>
+										<td><?php echo $param['preventiveAction']; ?></td>
+									</tr>
+									<tr>
+										<td><b>KPI recorded by</b></td>
 										<td>
-											<?php
-											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $param->benchmark * 60 * 60;
-
-											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
-											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
-
-											// Check if calculatedResult is less than benchmark
-											$color = ($calculatedTotalSeconds < $benchmarkSeconds) ? 'green' : 'red';
-
-											// Output the calculatedResult with appropriate color
-											?>
-											<span style="color: <?php echo $color; ?>">
-												<b><?php echo $param->calculatedResult; ?></b>
-											</span>
+											<?php echo $param['name']; ?> ,
+											<?php echo $param['patientid']; ?>
 
 										</td>
 									</tr>
-									<tr>
-                                        <td><b>Benchmark Time</b></td>
-                                        <td><?php echo $param->benchmark; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
-                                        <td><?php echo $param->dataAnalysis; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Corrective action</b></td>
-                                        <td><?php echo $param->correctiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Preventive action</b></td>
-                                        <td><?php echo $param->preventiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>KPI recorded by</b></td>
-                                        <td>
-                                            <?php echo $param->name; ?> ,
-                                            <?php echo $param->patientid; ?>
-                                        </td>
-                                    </tr>
-
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
 
 									<tr>
-										<td><b>KPI Submission Status</b></td>
+										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											$period = new DateTime($result->datetime); // KPI period
-											$submitted = new DateTime($result->datet); // actual submission
-
-											// compute deadline = 10th of next month
-											$deadline = clone $period;
-											$deadline->modify('first day of next month');
-											$deadline->setDate($deadline->format('Y'), $deadline->format('m'), 10);
-											$deadline->setTime(23, 59, 59);
-
-											if ($submitted <= $deadline) {
-												echo "<span style='color:green;font-weight:bold;'>Within TAT</span>";
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
 											} else {
-												echo "<span style='color:red;font-weight:bold;'>Exceeded TAT</span>";
+												echo 'No files uploaded';
 											}
-
-											echo " (Deadline: " . $deadline->format('d-M-Y') . ", Submitted on: " . $submitted->format('d-M-Y') . ")";
 											?>
 										</td>
 									</tr>
-
 
 
 
@@ -224,6 +194,7 @@
 
 
 
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 
 				<style>
 					ul.feedback {
@@ -267,9 +238,9 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo $param->benchmark; ?>"; // Benchmark value
-					var calculated = "<?php echo $param->calculatedResult; ?>"; // Calculated value
-					var monthyear = "<?php echo date('M-Y', strtotime($result->datetime)); ?>"; // Date value
+					var benchmark = "<?php echo  $param['initial_assessment_hr']; ?>"; // Benchmark value
+					var calculated = "<?php echo $param['total_admission']; ?>"; // Calculated value
+					var monthyear = "<?php echo date('d-M-Y', strtotime($result->datetime)); ?>"; // Calculated value
 
 					// Parse times to seconds
 					var benchmarkSeconds = parseTimeToSeconds(benchmark);
@@ -285,10 +256,10 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Benchmark Time', 'Avg. time for initial assessment of in-patient in MRD (ICU)'],
+							labels: ['Number of case sheets where care plan is documented', 'Total number of in-patients for the month'],
 							datasets: [{
-								label: 'Benchmark Time compared with Avg. time for initial assessment of in-patient in MRD (ICU)',
-								data: [benchmarkSeconds, calculatedSeconds],
+								label: 'Number of case sheets where care plan is documented compare with Total number of in-patients for the month',
+								data: [benchmark, calculated],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
 						},
@@ -298,13 +269,13 @@
 									callbacks: {
 										label: function(context) {
 											var value = context.raw;
-											return secondsToTime(value); // Convert seconds to time format (hh:mm:ss)
+											return value + ''; // Show only the seconds value
 										}
 									}
 								},
 								legend: {
 									labels: {
-										boxWidth: 30, // Adjust the legend color box size
+										boxWidth: 30, // Hide the legend color box
 										font: {
 											size: 16 // Adjust label font size if needed
 										}
@@ -312,7 +283,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Avg. time for initial assessment of in-patient in MRD (ICU) for ' + monthyear,
+									text: 'Percentage of Care-plan is documented for inpatients  ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -327,22 +298,12 @@
 									ticks: {
 										callback: function(value, index) {
 											const label = this.getLabelForValue(value);
-											const timeValue = index === 0 ? benchmarkSeconds : calculatedSeconds;
-											return [label, '(' + secondsToTime(timeValue) + ')'];
+											const timeValue = index === 0 ? benchmark : calculated;
+											return [label, '(Count: ' + timeValue + ')'];
 										},
 										font: {
 											size: 20,
 											family: 'vazir'
-										}
-									}
-								},
-								y: {
-									ticks: {
-										callback: function(value) {
-											return secondsToTime(value); // Convert seconds to time format (hh:mm:ss)
-										},
-										font: {
-											size: 16 // Adjust y-axis label font size if needed
 										}
 									}
 								}
@@ -364,7 +325,6 @@
 						return hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + remainingSeconds.toString().padStart(2, '0');
 					}
 				</script>
-
 				<script>
 					function printChart() {
 						const canvas = document.getElementById('barChart');
@@ -387,7 +347,7 @@
 			</style>
 		</head>
 		<body>
-			<h3>Avg. time for initial assessment of in-patient in MRD (ICU)</h3>
+			<h3>4.PSQ3a- Medication errors rate</h3>
 			<img src="${dataUrl}" alt="Chart">
 		</body>
 		</html>
@@ -413,7 +373,7 @@
 						// Create a temporary link element
 						const link = document.createElement('a');
 						link.href = image;
-						link.download = 'Avg. time for initial assessment of in-patient in MRD (ICU).png'; // Name of downloaded file
+						link.download = '4.PSQ3a- Medication errors rate.png'; // Name of downloaded file
 						link.click(); // Trigger download
 					}
 				</script>

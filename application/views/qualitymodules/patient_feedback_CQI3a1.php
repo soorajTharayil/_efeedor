@@ -44,7 +44,7 @@
 
 									<tr>
 										<td><b>Numerator: Sum of time taken for initial assessment of in-patients in MRD-ICU (in Hrs)</b></td>
-										<td><?php echo $param->initial_assessment_total; ?></td>
+										<td><?php echo $param->formattedTime; ?></td>
 									</tr>
 									<tr>
 										<td><b>Denominator: Total number of in-patients (in No.s)</b></td>
@@ -73,37 +73,56 @@
 										</td>
 									</tr>
 									<tr>
-                                        <td><b>Benchmark Time</b></td>
-                                        <td><?php echo $param->benchmark; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
-                                        <td><?php echo $param->dataAnalysis; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Corrective action</b></td>
-                                        <td><?php echo $param->correctiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Preventive action</b></td>
-                                        <td><?php echo $param->preventiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>KPI recorded by</b></td>
-                                        <td>
-                                            <?php echo $param->name; ?> ,
-                                            <?php echo $param->patientid; ?>
-                                        </td>
-                                    </tr>
+										<td><b>Benchmark Time</b></td>
+										<td><?php echo $param->benchmark; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
+										<td><?php echo $param->dataAnalysis; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Corrective action</b></td>
+										<td><?php echo $param->correctiveAction; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Preventive action</b></td>
+										<td><?php echo $param->preventiveAction; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>KPI recorded by</b></td>
+										<td>
+											<?php echo $param->name; ?> ,
+											<?php echo $param->patientid; ?>
+										</td>
+									</tr>
 
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
 									</tr>
+
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
+									</tr>
+
 
 									<tr>
 										<td><b>KPI Submission Status</b></td>
@@ -128,8 +147,6 @@
 											?>
 										</td>
 									</tr>
-
-
 
 
 								</table>

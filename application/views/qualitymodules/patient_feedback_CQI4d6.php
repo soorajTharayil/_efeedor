@@ -11,7 +11,7 @@
 			$id = $this->input->get('id');
 		}
 		$this->db->where('id', $id);
-		$query = $this->db->get('bf_feedback_CQI4d1');
+		$query = $this->db->get('bf_feedback_CQI4d6');
 		$results = $query->result();
 
 		if (count($results) >= 1) {
@@ -34,7 +34,7 @@
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
-									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI4d1/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
+									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI4d6/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
 							<div class="panel-body" style="background: #fff;">
@@ -103,6 +103,23 @@
 									<tr>
 										<td><b>KPI Recorded on</b></td>
 										<td><?php echo date('g:i a, d-M-Y', strtotime($result->datetime)); ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Uploaded files</b></td>
+										<td>
+											<?php
+											if (!empty($param->files_name) && is_array($param->files_name)) {
+												foreach ($param->files_name as $file) {
+													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
+														. htmlspecialchars($file->name)
+														. '</a><br>';
+												}
+											} else {
+												echo 'No files uploaded';
+											}
+											?>
+										</td>
 									</tr>
 
 									<tr>
@@ -267,8 +284,8 @@
 
 				<script>
 					// Data
-					var benchmark = "<?php echo  $param->initial_assessment_total; ?>"; // Benchmark value
-					var calculated = "<?php echo  $param->total_admission; ?>"; // Calculated value
+					var benchmark = "<?php echo  $param->benchmark; ?>"; // Benchmark value
+					var calculated = "<?php echo  $param->CalculatedResult; ?>"; // Calculated value
 					var monthyear = "<?php echo date('M-Y', strtotime($result->datetime)); ?>"; // Date value
 
 					// Parse times to seconds

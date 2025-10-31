@@ -67,7 +67,7 @@
 
 								<th>Total No of days medical waste discarded (in Nos.)</th>
 
-								<th>Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact -JCI8-GHI 3)-(House Keeping) </th>
+								<th>Average quantity of Medical waste disposed per month in Kgs- (House Keeping) </th>
 
 								<th>View</th>
 
@@ -79,10 +79,10 @@
 									$id = $r->id;
 
 									$param = json_decode($r->dataset);
-										// echo '<pre>';
-										// print_r($param);
-										// echo '</pre>';
-										// exit;
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
 
 
 								?>
@@ -93,13 +93,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-    <?php if (!empty($r->datetime)) { ?>
-        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
-        <?php echo date('h:i A', strtotime($r->datetime)); ?>
-    <?php } else { ?>
-        -
-    <?php } ?>
-</td>
+											<?php if (!empty($r->datetime)) { ?>
+												<?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+												<?php echo date('h:i A', strtotime($r->datetime)); ?>
+											<?php } else { ?>
+												-
+											<?php } ?>
+										</td>
 
 
 										<td style="overflow: clip;">
@@ -145,9 +145,20 @@
 
 										<td>
 											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
-												class="btn btn-info btn-sm">
+												class="btn btn-info btn-sm"
+												style="padding: 6px 14px; font-size: 13px;">
 												View Details
 											</a>
+
+											<?php if (isfeature_active('DELETE-KPI') === true) { ?>
+												<a class="btn btn-sm btn-danger"
+													href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
+													onclick="return confirm('Are you sure you want to delete this KPI record?');"
+													title="Delete the KPI record"
+													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+												</a>
+											<?php } ?>
 										</td>
 
 
@@ -280,7 +291,7 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_CQI3a4"; // Replace with your API endpoint
+		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_CQI4i13"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4 && xhr.status === 200) {

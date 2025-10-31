@@ -82,14 +82,14 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <select class="form-control" name="patient_gender">
                                     <option value="" <?php if (empty($param['patient_gender']))
-                                        echo 'selected'; ?>>
+                                                            echo 'selected'; ?>>
                                     </option>
                                     <option value="Male" <?php if ($param['patient_gender'] == 'Male')
-                                        echo 'selected'; ?>>Male</option>
+                                                                echo 'selected'; ?>>Male</option>
                                     <option value="Female" <?php if ($param['patient_gender'] == 'Female')
-                                        echo 'selected'; ?>>Female</option>
+                                                                echo 'selected'; ?>>Female</option>
                                     <option value="Other" <?php if ($param['patient_gender'] == 'Other')
-                                        echo 'selected'; ?>>Other</option>
+                                                                echo 'selected'; ?>>Other</option>
                                 </select>
                             </td>
                         </tr>
@@ -129,13 +129,20 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Attended Doctor</b></td>
                             <td>
-                                <select class="form-control" name="attended_doctor">
-                                    <option value="">Select Doctor</option>
+                                <select class="form-control" name="attended_doctor" id="attended_doctor">
+                                    <option value=''>Select Doctor</option>
                                     <?php
-                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
-                                    foreach ($doctors as $doc) {
-                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
-                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    if (!empty($param['department'])) {
+                                        $this->db->where('title', $param['department']);
+                                        $dept = $this->db->get('bf_audit_department')->row_array();
+                                        if (!empty($dept['bed_no'])) {
+                                            $doctors = explode(',', $dept['bed_no']);
+                                            foreach ($doctors as $doc) {
+                                                $doc = trim($doc);
+                                                $selected = ($param['attended_doctor'] == $doc) ? 'selected' : '';
+                                                echo "<option value='{$doc}' $selected>{$doc}</option>";
+                                            }
+                                        }
                                     }
                                     ?>
                                 </select>
@@ -148,7 +155,7 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 🟩 Admission Date & Time (Editable) -->
                         <tr>
-                            <td><b>Admission Date & Time</b></td>
+                            <td><b>Admission / Visit Date & Time</b></td>
                             <td>
                                 <?php
                                 $admissionDatetime = '';
@@ -183,16 +190,16 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <script>
-                            document.addEventListener("DOMContentLoaded", function () {
+                            document.addEventListener("DOMContentLoaded", function() {
                                 // Select all datetime pickers
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
-                                pickers.forEach(function (input) {
+                                pickers.forEach(function(input) {
                                     // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
                                     // Auto-open picker on click (modern browsers)
-                                    input.addEventListener("click", function () {
+                                    input.addEventListener("click", function() {
                                         if (this.showPicker) this.showPicker();
                                     });
                                 });
@@ -203,8 +210,8 @@ $param = json_decode($row->dataset, true);
 
                         <script>
                             // Force open calendar picker when clicking anywhere in the input box
-                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
-                                input.addEventListener('click', function () {
+                            document.querySelectorAll('.datetime-picker').forEach(function(input) {
+                                input.addEventListener('click', function() {
                                     this.showPicker(); // Opens the native calendar/clock popup
                                 });
                             });
@@ -261,13 +268,13 @@ $param = json_decode($row->dataset, true);
                                 ?>
                                 <select class="form-control" name="identification_details">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -285,13 +292,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
                                 <select class="form-control" name="vital_signs">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -309,13 +316,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
                                 <select class="form-control" name="surgery">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -333,13 +340,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
                                 <select class="form-control" name="complaints_communicated">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -357,13 +364,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
                                 <select class="form-control" name="intake">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -381,13 +388,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
                                 <select class="form-control" name="output">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -405,13 +412,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['focus']) ? strtolower(trim($param['focus'])) : ''; ?>
                                 <select class="form-control" name="focus">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -429,13 +436,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['meti']) ? strtolower(trim($param['meti'])) : ''; ?>
                                 <select class="form-control" name="meti">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -457,13 +464,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['diagnostic']) ? strtolower(trim($param['diagnostic'])) : ''; ?>
                                 <select class="form-control" name="diagnostic">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -481,13 +488,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['lab_results']) ? strtolower(trim($param['lab_results'])) : ''; ?>
                                 <select class="form-control" name="lab_results">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -505,13 +512,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['pending_investigation']) ? strtolower(trim($param['pending_investigation'])) : ''; ?>
                                 <select class="form-control" name="pending_investigation">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -529,13 +536,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['medicine_order']) ? strtolower(trim($param['medicine_order'])) : ''; ?>
                                 <select class="form-control" name="medicine_order">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -553,13 +560,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['psychological']) ? strtolower(trim($param['psychological'])) : ''; ?>
                                 <select class="form-control" name="psychological">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -577,13 +584,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['vulnerab']) ? strtolower(trim($param['vulnerab'])) : ''; ?>
                                 <select class="form-control" name="vulnerab">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -605,13 +612,13 @@ $param = json_decode($row->dataset, true);
                                 <?php $val = isset($param['social']) ? strtolower(trim($param['social'])) : ''; ?>
                                 <select class="form-control" name="social">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -690,14 +697,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function () {
+                            document.addEventListener("DOMContentLoaded", function() {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function () {
+                                    btn.addEventListener("click", function() {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -713,7 +720,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function () {
+                                addMoreBtn.addEventListener("click", function() {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -728,7 +735,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function () {
+                                    removeBtn.addEventListener("click", function() {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -801,7 +808,7 @@ $param = json_decode($row->dataset, true);
 
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function () {
+    document.getElementById('saveButton').addEventListener('click', function() {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

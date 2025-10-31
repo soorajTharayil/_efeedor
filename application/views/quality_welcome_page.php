@@ -2879,6 +2879,31 @@ require_once 'quality_tables.php';
                     </div>
                 </div>
             <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI368') === true) { ?>
+                <?php
+                $table_feedback_KPI198 = 'bf_feedback_CQI3k65';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI198, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                    style="margin-top: 0px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k65; ?>'"
+                    data-title="Percentage of patient Identification Errors for Diet patients (IPD)">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of patient Identification Errors for Diet patients (IPD)
+                                    <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
+                                        <i class="0" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k65; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
     <div class="row">
@@ -4349,6 +4374,27 @@ require_once 'quality_tables.php';
                                     style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
                                     Explore
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <?php if (isfeature_active('QUALITY-KPI369') === true) { ?>
+                    <?php $table_feedback_KPI233 = 'bf_feedback_CQI3k66';
+                    $ip_feedbacks_count233 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI233, $sorttime, $setup); ?>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                        style="margin-top: 0px;"
+                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k66; ?>'"
+                        data-title="Time Out Compliance Rate (OT)">
+                        <div class="panel panel-bd">
+                            <div class="panel-body" style="height: 100px; padding-top:0px;">
+                                <div class="statistic-box" style="padding-top: 44px;">
+                                    <div class="small" style="font-size: 20px;">Number of Patient safety events or patterns of events during procedural sedation</div>
+                                    <a href="<?php echo $feedbacks_report_CQI3k66; ?>"
+                                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
+                                        Explore
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -6436,7 +6482,7 @@ require_once 'quality_tables.php';
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 44px;">
                                 <div class="small" style="font-size: 20px;">
-                                    IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients- (Physical therapy and Rehabilitation Department - Physiotherapy)
+                                    IPSG 6 – Compliance with fall prevention in Physiotherapy OPD patients.
                                 </div>
                                 <a href="<?php echo $feedbacks_report_CQI3j26; ?>"
                                     style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
@@ -7900,1326 +7946,1327 @@ require_once 'quality_tables.php';
                 <?php } ?>
                 </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">CSSD</h2>
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI175') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4f7';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4f7; ?>'"
-                        data-title="<?php echo strtolower('Adverse events related to SUDs (JCI8-PCI 3.1) - (CSSD)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Adverse events related to SUDs (JCI8-PCI 3.1) - (CSSD)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4f7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI206') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k25';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k25; ?>'"
-                        data-title="<?php echo strtolower('Compliance with Biological Indicator (CSSD)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Compliance with Biological Indicator (CSSD)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k25; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI207') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k26';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k26; ?>'"
-                        data-title="<?php echo strtolower('Compliance to risk assessment in reprocessing of SUMD (CSSD)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Compliance to risk assessment in reprocessing of SUMD (CSSD)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k26; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">CSSD</h2>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Endoscopy</h2>
-
+            <?php if (isfeature_active('QUALITY-KPI175') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4f7';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4f7; ?>'"
+                    data-title="<?php echo strtolower('Adverse events related to SUDs (JCI8-PCI 3.1) - (CSSD)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Adverse events related to SUDs (JCI8-PCI 3.1) - (CSSD)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4f7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <?php if (isfeature_active('QUALITY-KPI212') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k31';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k31; ?>'"
-                        data-title="<?php echo strtolower('Post procedure complication rate - Colonoscopy (Endoscopy)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Post procedure complication rate - Colonoscopy (Endoscopy)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k31; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI206') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k25';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k25; ?>'"
+                    data-title="<?php echo strtolower('Compliance with Biological Indicator (CSSD)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Compliance with Biological Indicator (CSSD)
                                 </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k25; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI213') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k32';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k32; ?>'"
-                        data-title="<?php echo strtolower('Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k32; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Transplant Unit</h2>
-
                 </div>
-                <?php if (isfeature_active('QUALITY-KPI234') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k53';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k53; ?>'"
-                        data-title="<?php echo strtolower('Post transplant complication rate for Donor (Liver) - Transplant Unit'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Post transplant complication rate for Donor (Liver) - Transplant Unit
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k53; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI207') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k26';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k26; ?>'"
+                    data-title="<?php echo strtolower('Compliance to risk assessment in reprocessing of SUMD (CSSD)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Compliance to risk assessment in reprocessing of SUMD (CSSD)
                                 </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k26; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI235') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k54';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k54; ?>'"
-                        data-title="<?php echo strtolower('Post transplant complication rate (Heart) - Transplant Unit'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Post transplant complication rate (Heart) - Transplant Unit
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k54; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Research</h2>
-
                 </div>
-                <?php if (isfeature_active('QUALITY-KPI236') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k55';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count4 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k55; ?>'"
-                        data-title="<?php echo strtolower('Percentage of research activities approved by ethics committee (Research)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of research activities approved by ethics committee (Research)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k55; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI237') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k56';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k56; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients withdrawing from the study (Research)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of patients withdrawing from the study (Research)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k56; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI238') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k57';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k57; ?>'"
-                        data-title="<?php echo strtolower('Percentage of protocol violations/deviations reported (Research)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of protocol violations/deviations reported (Research)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k57; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI239') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k58';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k58; ?>'"
-                        data-title="<?php echo strtolower('Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k58; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
         </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Insurance</h2>
-
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI278') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h33';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h33; ?>'"
-                        data-title="<?php echo strtolower('Insurance Claims Rejection Rate (Insurance)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Insurance Claims Rejection Rate (Insurance)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h33; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI279') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h34';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h34; ?>'"
-                        data-title="<?php echo strtolower('TPA TAT (Insurance) for the month'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        TPA TAT (Insurance) for the month
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h34; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">ITD</h2>
-
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI284') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h39';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h39; ?>'"
-                        data-title="<?php echo strtolower('Downtime of EMR (ITD)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Downtime of EMR (ITD)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h39; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI286') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h41';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h41; ?>'"
-                        data-title="<?php echo strtolower('ITD Preventive Maintenance compliance (ITD)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        ITD Preventive Maintenance compliance (ITD)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h41; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">F & B Services</h2>
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI289') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h44';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h44; ?>'"
-                        data-title="<?php echo strtolower('F&B Patient complaints rate (Food and Beverage Services)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        F&B Patient complaints rate (Food and Beverage Services)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h44; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI290') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h45';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h45; ?>'"
-                        data-title="<?php echo strtolower('Delay in room services (Food and Beverage Services)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Delay in room services (Food and Beverage Services)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h45; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI296') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4h51';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h51; ?>'"
-                        data-title="<?php echo strtolower('Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h51; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Stroke Unit</h2>
-
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI346') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j1';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j1; ?>'"
-                        data-title="<?php echo strtolower('Door to Physician ≤10 min (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to Physician ≤10 min (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j1; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI347') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j2';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j2; ?>'"
-                        data-title="<?php echo strtolower('Door to stroke team ≤15 min (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to stroke team ≤15 min (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j2; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI348') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j3';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j3; ?>'"
-                        data-title="<?php echo strtolower('Door to CT/MRI initiation ≤20 min (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to CT/MRI initiation ≤20 min (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j3; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI349') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j4';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count4 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j4; ?>'"
-                        data-title="<?php echo strtolower('Door to CT/MRI interpretation ≤30 min (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to CT/MRI interpretation ≤30 min (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j4; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI350') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j5';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count5 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j5; ?>'"
-                        data-title="<?php echo strtolower('Order to lab results ≤30 min, if ordered (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Order to lab results ≤30 min, if ordered (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j5; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI351') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j6';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count6 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j6; ?>'"
-                        data-title="<?php echo strtolower('Door to IV thrombolytic bolus (≥75% compliance) ≤60 min [Achieving Door to needle times within 60 min in ≥75% of acute ischemic stroke] (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to IV thrombolytic bolus ≤60 mins (≥75% compliance) (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j6; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI352') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j7';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count7 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j7; ?>'"
-                        data-title="<?php echo strtolower('Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times within 45 min in ≥50% of acute ischemic stroke patients] (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to IV thrombolytic bolus ≤45 mins (≥50% compliance) (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI353') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j8';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count8 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j8; ?>'"
-                        data-title="<?php echo strtolower('Door to puncture time ≤90 min (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to puncture time ≤90 min (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j8; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI354') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j9';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count9 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j9; ?>'"
-                        data-title="<?php echo strtolower('The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j9; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI355') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j10';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count10 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j10; ?>'"
-                        data-title="<?php echo strtolower('The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j10; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI356') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j11';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count11 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j11; ?>'"
-                        data-title="<?php echo strtolower('Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Stroke/TIA patients with NIHSS score documented (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j11; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI357') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j12';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count12 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j12; ?>'"
-                        data-title="<?php echo strtolower('Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Ischemic stroke patients receiving IV thrombolysis on time (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j12; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI358') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j13';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count13 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j13; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients treated for acute ischemic stroke with intravenous thrombolysis whose treatment is started within 60 minutes after arrival (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Stroke patients treated with IV thrombolysis within 60 mins of arrival (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j13; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI359') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j14';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count14 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j14; ?>'"
-                        data-title="<?php echo strtolower('Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well (In Minutes) (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Arrival to start of imaging workup time (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j14; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI360') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j15';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count15 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j15; ?>'"
-                        data-title="<?php echo strtolower('Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage within ≤36 hours after onset of IV or IA thrombolytic therapy, or mechanical endovascular reperfusion procedure (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Ischemic stroke patients developing intracranial hemorrhage ≤36 hrs (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j15; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI361') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j16';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count16 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j16; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients undergoing CEA, or carotid angioplasty or stenting, having stroke or death within 30 days of the procedure (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Patients undergoing carotid procedures with stroke/death ≤30 days (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j16; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI362') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j17';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count17 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j17; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients undergoing intracranial angioplasty and/or stenting for atherosclerotic disease having stroke or death within 30 days of the procedure (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Patients undergoing intracranial stenting/angioplasty with stroke/death ≤30 days (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j17; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI363') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j18';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count18 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j18; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j18; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI364') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j19';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count19 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j19; ?>'"
-                        data-title="<?php echo strtolower('Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j19; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI365') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j20';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count20 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j20; ?>'"
-                        data-title="<?php echo strtolower('Percentage of ischemic stroke patients with post-treatment reperfusion grade of TICI 2B or higher at the end of IA thrombolytic and/or mechanical endovascular reperfusion therapy (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j20; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI366') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j21';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count21 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j21; ?>'"
-                        data-title="<?php echo strtolower('Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy within 120 minutes of hospital arrival achieving TICI 2B or higher (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j21; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI367') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4j22';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count22 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j22; ?>'"
-                        data-title="<?php echo strtolower('Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy and achieving TICI 2B or higher ≤60 minutes from skin puncture (Stroke Unit)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4j22; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php } ?>
-                    </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="heading heading-block">
-                    <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Other</h2>
-
-                </div>
-                <?php if (isfeature_active('QUALITY-KPI13') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3a13';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count13 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3a13; ?>'"
-                        data-title="<?php echo strtolower('Percentage of Spontaneous perineal Tear Rate'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Percentage of Spontaneous perineal Tear Rate
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3a13; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI196') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI3k15';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count15 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3k15; ?>'"
-                        data-title="<?php echo strtolower('Door to Balloon time in PTCA (Cath Lab)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Door to Balloon time in PTCA (Cath Lab)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3k15; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if (isfeature_active('QUALITY-KPI338') === true) { ?>
-                    <?php
-                    $table_feedback = 'bf_feedback_CQI4i7';
-                    $sorttime = 'asc';
-                    $setup = 'setup';
-                    $ip_feedbacks_count7 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4i7; ?>'"
-                        data-title="<?php echo strtolower('Outsourced OPD Assistance attendance (Operation)'); ?>">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Outsourced OPD Assistance attendance (Operation)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4i7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-
-
-
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Endoscopy</h2>
 
             </div>
-
-
+            <?php if (isfeature_active('QUALITY-KPI212') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k31';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k31; ?>'"
+                    data-title="<?php echo strtolower('Post procedure complication rate - Colonoscopy (Endoscopy)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Post procedure complication rate - Colonoscopy (Endoscopy)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k31; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI213') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k32';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k32; ?>'"
+                    data-title="<?php echo strtolower('Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Polyp retrieval rate after colonoscopic polypectomy (Endoscopy)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k32; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
         </div>
-
-
-
-
-        <!-- Close Metric Boxes-->
-
-        <?php
-
-
-
-        ?>
-
-
-
-
-        <!-- Close Why choose the hospital and patient comments -->
-
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="<?php echo base_url(); ?>assets/efeedor_chart.js"></script>
     </div>
 
-    <style>
-        .icon .fa {
-            font-size: 60px;
-        }
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Transplant Unit</h2>
 
-        .chart-container {
-            justify-content: center;
-            /* Align the chart horizontally in the center */
-            align-items: center;
-            /* Align the chart vertically in the center */
-            width: 460px !important;
-            margin: 0px auto;
-            height: 450px;
-            width: 200px;
-        }
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI234') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k53';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k53; ?>'"
+                    data-title="<?php echo strtolower('Post transplant complication rate for Donor (Liver) - Transplant Unit'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Post transplant complication rate for Donor (Liver) - Transplant Unit
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k53; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
 
-        .coment-cloud {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: auto;
-            /* width: 100%;
+            <?php if (isfeature_active('QUALITY-KPI235') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k54';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k54; ?>'"
+                    data-title="<?php echo strtolower('Post transplant complication rate (Heart) - Transplant Unit'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Post transplant complication rate (Heart) - Transplant Unit
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k54; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Research</h2>
+
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI236') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k55';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count4 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k55; ?>'"
+                    data-title="<?php echo strtolower('Percentage of research activities approved by ethics committee (Research)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of research activities approved by ethics committee (Research)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k55; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI237') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k56';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k56; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients withdrawing from the study (Research)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of patients withdrawing from the study (Research)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k56; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI238') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k57';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k57; ?>'"
+                    data-title="<?php echo strtolower('Percentage of protocol violations/deviations reported (Research)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of protocol violations/deviations reported (Research)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k57; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI239') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k58';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k58; ?>'"
+                    data-title="<?php echo strtolower('Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of serious adverse events reported to the ethics committee within the defined timeframe (Research)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k58; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Insurance</h2>
+
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI278') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h33';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h33; ?>'"
+                    data-title="<?php echo strtolower('Insurance Claims Rejection Rate (Insurance)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Insurance Claims Rejection Rate (Insurance)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h33; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI279') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h34';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h34; ?>'"
+                    data-title="<?php echo strtolower('TPA TAT (Insurance) for the month'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    TPA TAT (Insurance) for the month
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h34; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">ITD</h2>
+
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI284') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h39';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h39; ?>'"
+                    data-title="<?php echo strtolower('Downtime of EMR (ITD)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Downtime of EMR (ITD)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h39; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI286') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h41';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h41; ?>'"
+                    data-title="<?php echo strtolower('ITD Preventive Maintenance compliance (ITD)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    ITD Preventive Maintenance compliance (ITD)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h41; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">F & B Services</h2>
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI289') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h44';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h44; ?>'"
+                    data-title="<?php echo strtolower('F&B Patient complaints rate (Food and Beverage Services)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    F&B Patient complaints rate (Food and Beverage Services)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h44; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI290') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h45';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h45; ?>'"
+                    data-title="<?php echo strtolower('Delay in room services (Food and Beverage Services)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Delay in room services (Food and Beverage Services)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h45; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI296') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4h51';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4h51; ?>'"
+                    data-title="<?php echo strtolower('Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of Wrong food Delivery for Patients & Bystanders (Food and Beverage Services)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4h51; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Stroke Unit</h2>
+
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI346') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j1';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j1; ?>'"
+                    data-title="<?php echo strtolower('Door to Physician ≤10 min (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to Physician ≤10 min (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j1; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI347') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j2';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count2 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j2; ?>'"
+                    data-title="<?php echo strtolower('Door to stroke team ≤15 min (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to stroke team ≤15 min (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j2; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI348') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j3';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count3 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j3; ?>'"
+                    data-title="<?php echo strtolower('Door to CT/MRI initiation ≤20 min (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to CT/MRI initiation ≤20 min (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j3; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI349') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j4';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count4 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j4; ?>'"
+                    data-title="<?php echo strtolower('Door to CT/MRI interpretation ≤30 min (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to CT/MRI interpretation ≤30 min (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j4; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI350') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j5';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count5 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j5; ?>'"
+                    data-title="<?php echo strtolower('Order to lab results ≤30 min, if ordered (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Order to lab results ≤30 min, if ordered (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j5; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI351') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j6';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count6 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j6; ?>'"
+                    data-title="<?php echo strtolower('Door to IV thrombolytic bolus (≥75% compliance) ≤60 min [Achieving Door to needle times within 60 min in ≥75% of acute ischemic stroke] (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to IV thrombolytic bolus ≤60 mins (≥75% compliance) (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j6; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI352') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j7';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count7 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j7; ?>'"
+                    data-title="<?php echo strtolower('Door to IV thrombolytic bolus (≥50% compliance) ≤45 min [Achieving Door to needle times within 45 min in ≥50% of acute ischemic stroke patients] (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to IV thrombolytic bolus ≤45 mins (≥50% compliance) (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI353') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j8';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count8 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j8; ?>'"
+                    data-title="<?php echo strtolower('Door to puncture time ≤90 min (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to puncture time ≤90 min (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j8; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI354') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j9';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count9 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j9; ?>'"
+                    data-title="<?php echo strtolower('The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    The periprocedural complication rates after correcting for various comorbidities (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j9; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI355') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j10';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count10 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j10; ?>'"
+                    data-title="<?php echo strtolower('The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    The periprocedural mortality rate for surgical or interventional procedures (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j10; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI356') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j11';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count11 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j11; ?>'"
+                    data-title="<?php echo strtolower('Percentage of all stroke/TIA patients who have a deficit at the time of the initial note, ED Physician or Neurology consultation note for whom an NIHSS score is documented (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Stroke/TIA patients with NIHSS score documented (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j11; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI357') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j12';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count12 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j12; ?>'"
+                    data-title="<?php echo strtolower('Percentage of ischemic stroke patients eligible for intravenous thrombolysis who receive it within the appropriate time window (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Ischemic stroke patients receiving IV thrombolysis on time (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j12; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI358') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j13';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count13 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j13; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients treated for acute ischemic stroke with intravenous thrombolysis whose treatment is started within 60 minutes after arrival (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Stroke patients treated with IV thrombolysis within 60 mins of arrival (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j13; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI359') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j14';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count14 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j14; ?>'"
+                    data-title="<?php echo strtolower('Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well (In Minutes) (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Arrival to start of imaging workup time (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j14; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI360') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j15';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count15 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j15; ?>'"
+                    data-title="<?php echo strtolower('Percentage of ischemic stroke patients who develop a symptomatic intracranial hemorrhage within ≤36 hours after onset of IV or IA thrombolytic therapy, or mechanical endovascular reperfusion procedure (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Ischemic stroke patients developing intracranial hemorrhage ≤36 hrs (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j15; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI361') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j16';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count16 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j16; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients undergoing CEA, or carotid angioplasty or stenting, having stroke or death within 30 days of the procedure (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Patients undergoing carotid procedures with stroke/death ≤30 days (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j16; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI362') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j17';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count17 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j17; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients undergoing intracranial angioplasty and/or stenting for atherosclerotic disease having stroke or death within 30 days of the procedure (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Patients undergoing intracranial stenting/angioplasty with stroke/death ≤30 days (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j17; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI363') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j18';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count18 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j18; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of patients with stroke or death within 24 hours of diagnostic cerebral-angiography (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j18; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI364') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j19';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count19 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j19; ?>'"
+                    data-title="<?php echo strtolower('Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of patients who have a diagnosis of ischemic stroke who undergo EVD and then develop ventriculitis (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j19; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI365') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j20';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count20 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j20; ?>'"
+                    data-title="<?php echo strtolower('Percentage of ischemic stroke patients with post-treatment reperfusion grade of TICI 2B or higher at the end of IA thrombolytic and/or mechanical endovascular reperfusion therapy (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j20; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI366') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j21';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count21 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j21; ?>'"
+                    data-title="<?php echo strtolower('Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy within 120 minutes of hospital arrival achieving TICI 2B or higher (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j21; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI367') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4j22';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count22 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4j22; ?>'"
+                    data-title="<?php echo strtolower('Percentage of ischemic stroke patients with a large vessel cerebral occlusion receiving MER therapy and achieving TICI 2B or higher ≤60 minutes from skin puncture (Stroke Unit)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Ischemic stroke patients achieving TICI 2B+ post reperfusion therapy (Stroke Unit)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4j22; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php } ?>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="heading heading-block">
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Other</h2>
+
+            </div>
+            <?php if (isfeature_active('QUALITY-KPI13') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3a13';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count13 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3a13; ?>'"
+                    data-title="<?php echo strtolower('Percentage of Spontaneous perineal Tear Rate'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of Spontaneous perineal Tear Rate
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3a13; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <?php if (isfeature_active('QUALITY-KPI196') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI3k15';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count15 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3k15; ?>'"
+                    data-title="<?php echo strtolower('Door to Balloon time in PTCA (Cath Lab)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Door to Balloon time in PTCA (Cath Lab)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3k15; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+            <?php if (isfeature_active('QUALITY-KPI338') === true) { ?>
+                <?php
+                $table_feedback = 'bf_feedback_CQI4i7';
+                $sorttime = 'asc';
+                $setup = 'setup';
+                $ip_feedbacks_count7 = $this->quality_model->patient_and_feedback_quality($table_feedback, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 20px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI4i7; ?>'"
+                    data-title="<?php echo strtolower('Outsourced OPD Assistance attendance (Operation)'); ?>">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 40px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Outsourced OPD Assistance attendance (Operation)
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI4i7; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-right: 12px;">
+                                    Explore
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <!-- Close Metric Boxes-->
+
+    <?php
+
+
+
+    ?>
+
+
+
+
+    <!-- Close Why choose the hospital and patient comments -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="<?php echo base_url(); ?>assets/efeedor_chart.js"></script>
+</div>
+
+<style>
+    .icon .fa {
+        font-size: 60px;
+    }
+
+    .chart-container {
+        justify-content: center;
+        /* Align the chart horizontally in the center */
+        align-items: center;
+        /* Align the chart vertically in the center */
+        width: 460px !important;
+        margin: 0px auto;
+        height: 450px;
+        width: 200px;
+    }
+
+    .coment-cloud {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+        /* width: 100%;
 			height: 50%; */
-            margin-bottom: 5px;
-            margin-top: 0px;
+        margin-bottom: 5px;
+        margin-top: 0px;
+    }
+
+
+    .progress {
+        margin-bottom: 10px;
+    }
+
+    .mybarlength {
+        text-align: right;
+        margin-right: 18px;
+        font-weight: bold;
+    }
+
+    .panel-body {
+        height: 531px;
+    }
+
+    .bar_chart {
+        justify-content: center;
+        /* Align the chart horizontally in the center */
+        align-items: center;
+        /* Align the chart vertically in the center */
+        /* width: 460px !important; */
+        margin: 0px auto;
+        height: 500px;
+        width: 1024px;
+    }
+
+
+    .line_chart {
+        justify-content: center;
+        /* Align the chart horizontally in the center */
+        align-items: center;
+        /* Align the chart vertically in the center */
+        /* width: 460px !important; */
+        margin: 0px auto;
+        height: 270px;
+        width: 200px;
+    }
+
+    .dropdown-menu>li>a {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        display: block;
+        /* Ensure the anchor element takes up full width */
+    }
+
+
+
+    .dropdown-menu>.li {
+        width: 100%;
+        border: 0px;
+        border-bottom: 1px solid #ccc;
+        text-align: left;
+    }
+
+    @media screen and (max-width: 1024px) {
+        #pie_donut {
+            overflow-x: scroll;
         }
 
-
-        .progress {
-            margin-bottom: 10px;
+        #bar {
+            overflow-x: scroll;
         }
 
-        .mybarlength {
-            text-align: right;
-            margin-right: 18px;
-            font-weight: bold;
+        #word {
+            overflow-x: scroll;
         }
 
-        .panel-body {
-            height: 531px;
+        #line {
+            overflow-x: scroll;
+            overflow-y: scroll;
         }
+    }
 
-        .bar_chart {
-            justify-content: center;
-            /* Align the chart horizontally in the center */
-            align-items: center;
-            /* Align the chart vertically in the center */
-            /* width: 460px !important; */
-            margin: 0px auto;
-            height: 500px;
-            width: 1024px;
-        }
+    /* Default: hide the icon */
+    .icon.large-screen-only {
+        display: none;
+    }
 
-
-        .line_chart {
-            justify-content: center;
-            /* Align the chart horizontally in the center */
-            align-items: center;
-            /* Align the chart vertically in the center */
-            /* width: 460px !important; */
-            margin: 0px auto;
-            height: 270px;
-            width: 200px;
-        }
-
-        .dropdown-menu>li>a {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-            display: block;
-            /* Ensure the anchor element takes up full width */
-        }
-
-
-
-        .dropdown-menu>.li {
-            width: 100%;
-            border: 0px;
-            border-bottom: 1px solid #ccc;
-            text-align: left;
-        }
-
-        @media screen and (max-width: 1024px) {
-            #pie_donut {
-                overflow-x: scroll;
-            }
-
-            #bar {
-                overflow-x: scroll;
-            }
-
-            #word {
-                overflow-x: scroll;
-            }
-
-            #line {
-                overflow-x: scroll;
-                overflow-y: scroll;
-            }
-        }
-
-        /* Default: hide the icon */
+    /* Show the icon only on large screens */
+    @media (min-width: 992px) {
         .icon.large-screen-only {
-            display: none;
+            display: block;
+        }
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchKPI");
+        const allHeadings = document.querySelectorAll(".heading-block");
+
+        // 🧩 Helper to get all KPI cards under a given heading
+        function getKPICardsUnderHeading(headingBlock) {
+            const cards = [];
+            let next = headingBlock.nextElementSibling;
+            while (next && !next.classList.contains("heading-block")) {
+                if (next.classList.contains("kpi-card")) cards.push(next);
+                next = next.nextElementSibling;
+            }
+            return cards;
         }
 
-        /* Show the icon only on large screens */
-        @media (min-width: 992px) {
-            .icon.large-screen-only {
-                display: block;
-            }
+        // 🔍 Function to update visibility of headings based on content
+        function updateHeadings(searchQuery = "") {
+            allHeadings.forEach(block => {
+                const kpis = getKPICardsUnderHeading(block);
+                let hasVisibleCard = false;
+
+                kpis.forEach(card => {
+                    const title = (card.dataset.title || "").toLowerCase();
+                    if (!searchQuery || title.includes(searchQuery)) {
+                        card.style.display = "block";
+                        hasVisibleCard = true;
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+
+                // Show or hide heading based on visible KPI cards
+                block.style.display = hasVisibleCard ? "block" : "none";
+            });
         }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const searchInput = document.getElementById("searchKPI");
-            const allHeadings = document.querySelectorAll(".heading-block");
 
-            // 🧩 Helper to get all KPI cards under a given heading
-            function getKPICardsUnderHeading(headingBlock) {
-                const cards = [];
-                let next = headingBlock.nextElementSibling;
-                while (next && !next.classList.contains("heading-block")) {
-                    if (next.classList.contains("kpi-card")) cards.push(next);
-                    next = next.nextElementSibling;
-                }
-                return cards;
-            }
+        // 🏁 Initial check after DOM load
+        updateHeadings();
 
-            // 🔍 Function to update visibility of headings based on content
-            function updateHeadings(searchQuery = "") {
-                allHeadings.forEach(block => {
-                    const kpis = getKPICardsUnderHeading(block);
-                    let hasVisibleCard = false;
-
-                    kpis.forEach(card => {
-                        const title = (card.dataset.title || "").toLowerCase();
-                        if (!searchQuery || title.includes(searchQuery)) {
-                            card.style.display = "block";
-                            hasVisibleCard = true;
-                        } else {
-                            card.style.display = "none";
-                        }
-                    });
-
-                    // Show or hide heading based on visible KPI cards
-                    block.style.display = hasVisibleCard ? "block" : "none";
-                });
-            }
-
-            // 🏁 Initial check after DOM load
-            updateHeadings();
-
-            // ✨ Handle search filter dynamically
-            if (searchInput) {
-                searchInput.addEventListener("input", function() {
-                    const query = searchInput.value.toLowerCase().trim();
-                    updateHeadings(query);
-                });
-            }
-        });
-    </script>
+        // ✨ Handle search filter dynamically
+        if (searchInput) {
+            searchInput.addEventListener("input", function() {
+                const query = searchInput.value.toLowerCase().trim();
+                updateHeadings(query);
+            });
+        }
+    });
+</script>

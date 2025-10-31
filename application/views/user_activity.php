@@ -460,6 +460,7 @@ $welcometext = "This page provides an overview of each user's activities across 
             'bf_ma_assessment_ipd',
             'bf_ma_assessment_opd',
             'bf_ma_ipsg1_audit',
+            'bf_ma_ipsg2_er',
             'bf_ma_ipsg2_ae',
             'bf_ma_ipsg2_ipd',
             'bf_ma_ipsg4_timeout',
@@ -550,7 +551,9 @@ $welcometext = "This page provides an overview of each user's activities across 
             'bf_ma_clinical_pathway_picc_line_audit',
             'bf_ma_clinical_pathway_stroke_audit',
             'bf_ma_clinical_pathway_urodynamics_audit',
-            'bf_ma_clinical_pathway_stemi_audit'
+            'bf_ma_clinical_pathway_stemi_audit',
+            'bf_ma_bmw_audit',
+            'bf_ma_pest_control_audit'
         ];
 
 

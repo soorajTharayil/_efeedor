@@ -112,7 +112,7 @@
 									
 
 									<tr>
-										<td>Are patient ID bands present?</td>
+										<td>Is the patient ID band clear and readable?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['identification_details'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['identification_details_text']); ?>
@@ -120,7 +120,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the ID band appropriate according to patient status (orange - vulnerable, blue - allergy, white - general)?</td>
+										<td>Is the patient’s identity confirmed before administering high-alert medications?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['vital_signs'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['vital_signs_text']); ?>
@@ -129,7 +129,7 @@
 									
 
 									<tr>
-										<td>Is the ID band complete and readable (includes MID, name, age, sex)?</td>
+										<td>Are two identifiers consistently checked before administering medication, diagnostic tests, or procedures?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['surgery'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['surgery_text']); ?>
@@ -137,7 +137,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the treatment/procedure order correctly verified in EMR?</td>
+										<td>Is family or caregiver confirmation obtained if the patient is unconscious, pediatric, or unable to respond?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['complaints_communicated'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['complaints_communicated_text']); ?>
@@ -146,30 +146,12 @@
 									
 
 									<tr>
-										<td>Was verbal reconfirmation of patient identification performed if applicable?</td>
+										<td>Is a new ID band provided immediately if the previous one is lost or damaged?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['intake'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['intake_text']); ?>
 										</td>
 									</tr>
-									
-
-									<tr>
-										<td>Are the patient and family aware of correct patient identification?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['output'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['output_text']); ?>
-										</td>
-									</tr>
-
-									
-									
-
-
-								
-									
-									
-									
 									
 
 

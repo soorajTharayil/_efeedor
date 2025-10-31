@@ -56,7 +56,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI4h4_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a1_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -72,7 +72,7 @@
 
 								<th>Sum of total time (in Hrs)</th>
 								<th>Total sample size (in Nos.)</th>
-								<th>TAT for radiology STAT orders(Radiology - USG) (in Hrs)</th>
+								<th>TAT for radiology STAT orders(Radiology -USG) (in Hrs)</th>
 
 								<th>Bench Mark Time</th>
 

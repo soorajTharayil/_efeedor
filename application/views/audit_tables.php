@@ -248,6 +248,7 @@ $feedbacks_report_initial_assessment_ae = base_url('audit/feedbacks_report_initi
 $feedbacks_report_initial_assessment_ipd = base_url('audit/feedbacks_report_initial_assessment_ipd');
 $feedbacks_report_initial_assessment_opd = base_url('audit/feedbacks_report_initial_assessment_opd');
 $feedbacks_report_ipsg1 = base_url('audit/feedbacks_report_ipsg1');
+$feedbacks_report_ipsg2_er = base_url('audit/feedbacks_report_ipsg2_er');
 $feedbacks_report_ipsg2_ae = base_url('audit/feedbacks_report_ipsg2_ae');
 $feedbacks_report_ipsg2_ipd = base_url('audit/feedbacks_report_ipsg2_ipd');
 $feedbacks_report_ipsg4_timeout = base_url('audit/feedbacks_report_ipsg4_timeout');
@@ -267,6 +268,7 @@ $initial_assessment_ae_feedback = base_url('audit/initial_assessment_ae_feedback
 $initial_assessment_ipd_feedback = base_url('audit/initial_assessment_ipd_feedback?id=');
 $initial_assessment_opd_feedback = base_url('audit/initial_assessment_opd_feedback?id=');
 $ipsg1_feedback = base_url('audit/ipsg1_feedback?id=');
+$ipsg2_er_feedback = base_url('audit/ipsg2_er_feedback?id=');
 $ipsg2_ae_feedback = base_url('audit/ipsg2_ae_feedback?id=');
 $ipsg2_ipd_feedback = base_url('audit/ipsg2_ipd_feedback?id=');
 $ipsg4_timeout_feedback = base_url('audit/ipsg4_timeout_feedback?id=');
@@ -413,6 +415,15 @@ $clinical_pathway_picc_line_audit_feedback = base_url('audit/clinical_pathway_pi
 $clinical_pathway_stroke_audit_feedback = base_url('audit/clinical_pathway_stroke_audit_feedback?id=');
 $clinical_pathway_urodynamics_audit_feedback = base_url('audit/clinical_pathway_urodynamics_audit_feedback?id=');
 $clinical_pathway_stemi_audit_feedback = base_url('audit/clinical_pathway_stemi_audit_feedback?id=');
+
+//Main page link for House Keeping
+$feedbacks_report_bmw_audit = base_url('audit/feedbacks_report_bmw_audit');
+$feedbacks_report_pest_control_audit = base_url('audit/feedbacks_report_pest_control_audit');
+
+//Individual page for House keeping
+$bmw_audit_feedback = base_url('audit/bmw_audit_feedback?id=');
+$pest_control_audit_feedback = base_url('audit/pest_control_audit_feedback?id=');
+
 
 
 

@@ -218,7 +218,7 @@ $param = json_decode($row->dataset, true);
 
 
                         <tr>
-                            <td><b>Was the patient greeted and informed about the shift hand off?</b></td>
+                            <td><b>Is the handover conducted face to face at the bedside or designated area?</b></td>
                             <td>
                                 <?php $val = isset($param['identification_details']) ? strtolower(trim($param['identification_details'])) : ''; ?>
                                 <select class="form-control" name="identification_details">
@@ -239,7 +239,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Was the patient Introduced to incoming staff?</b></td>
+                            <td><b>Are critical findings, NEWS score, and pain status communicated along with the management plan?</b></td>
                             <td>
                                 <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
                                 <select class="form-control" name="vital_signs">
@@ -260,7 +260,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the patient Identified by using 2 identifiers (Full Name & MID)</b></td>
+                            <td><b>Are conditions of skin integrity, restraint site, and fall risk status communicated during handover?</b></td>
                             <td>
                                 <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
                                 <select class="form-control" name="surgery">
@@ -281,7 +281,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the IV cannula checked and in order?</b></td>
+                            <td><b>Is information documented appropriately in the handover notes?</b></td>
                             <td>
                                 <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
                                 <select class="form-control" name="complaints_communicated">
@@ -302,7 +302,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are other lines & tubes checked and found in order?</b></td>
+                            <td><b>Is the staff able to summarize the patient’s condition without referring back to records?</b></td>
                             <td>
                                 <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
                                 <select class="form-control" name="intake">
@@ -323,7 +323,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is a skin assessment done?</b></td>
+                            <td><b>Was the handover completed within a reasonable time, without interruptions such as phone calls, distractions, or multitasking?</b></td>
                             <td>
                                 <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
                                 <select class="form-control" name="output">
@@ -344,7 +344,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Are checks done for bedside medications & locked as required?</b></td>
+                            <td><b>Is the transfer order verified and documented in the transfer form?</b></td>
                             <td>
                                 <?php $val = isset($param['allergies']) ? strtolower(trim($param['allergies'])) : ''; ?>
                                 <select class="form-control" name="allergies">
@@ -364,69 +364,7 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
-                        <tr>
-                            <td><b>Are goal set and plan of care discussed with the patient?</b></td>
-                            <td>
-                                <?php $val = isset($param['medication']) ? strtolower(trim($param['medication'])) : ''; ?>
-                                <select class="form-control" name="medication">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                Remarks:
-                                <input type="text" class="form-control" name="medication_text"
-                                    value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><b>Is it ensured that sensitive information are discussed outside the room?</b></td>
-                            <td>
-                                <?php $val = isset($param['diagnostic']) ? strtolower(trim($param['diagnostic'])) : ''; ?>
-                                <select class="form-control" name="diagnostic">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                Remarks:
-                                <input type="text" class="form-control" name="diagnostic_text"
-                                    value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><b>Is the handoff communication record (ISBAR)- communicated & documented and in
-                                    order?</b></td>
-                            <td>
-                                <?php $val = isset($param['lab_results']) ? strtolower(trim($param['lab_results'])) : ''; ?>
-                                <select class="form-control" name="lab_results">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                Remarks:
-                                <input type="text" class="form-control" name="lab_results_text"
-                                    value="<?php echo isset($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                    placeholder="Remarks">
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>

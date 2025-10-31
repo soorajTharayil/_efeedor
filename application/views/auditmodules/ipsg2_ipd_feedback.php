@@ -112,7 +112,7 @@
 									
 
 									<tr>
-										<td>Was the patient greeted and informed about the shift hand off?</td>
+										<td>Is the handover conducted face to face at the bedside or designated area?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['identification_details'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['identification_details_text']); ?>
@@ -120,7 +120,7 @@
 									</tr>
 
 									<tr>
-										<td>Was the patient Introduced to incoming staff?</td>
+										<td>Are critical findings, NEWS score, and pain status communicated along with the management plan?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['vital_signs'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['vital_signs_text']); ?>
@@ -129,7 +129,7 @@
 									
 
 									<tr>
-										<td>Is the patient Identified by using 2 identifiers (Full Name & MID)</td>
+										<td>Are conditions of skin integrity, restraint site, and fall risk status communicated during handover?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['surgery'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['surgery_text']); ?>
@@ -137,7 +137,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the IV cannula checked and in order?</td>
+										<td>Is information documented appropriately in the handover notes?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['complaints_communicated'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['complaints_communicated_text']); ?>
@@ -146,7 +146,7 @@
 									
 
 									<tr>
-										<td>Are other lines & tubes checked and found in order?</td>
+										<td>Is the staff able to summarize the patient’s condition without referring back to records?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['intake'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['intake_text']); ?>
@@ -155,52 +155,20 @@
 									
 
 									<tr>
-										<td>Is a skin sssessment is done?</td>
+										<td>Was the handover completed within a reasonable time, without interruptions such as phone calls, distractions, or multitasking?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['output'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['output_text']); ?>
 										</td>
 									</tr>
 									<tr>
-										<td>Are checks done for bedside medications & locked as required?</td>
+										<td>Is the transfer order verified and documented in the transfer form?</td>
 										<td>
 											<?php echo ucfirst(htmlspecialchars($param['allergies'])); ?><br>
 											Remarks: <?php echo htmlspecialchars($param['allergies_text']); ?>
 										</td>
 									</tr>
-									<tr>
-										<td>Are goal set and plan of care discussed with the patient?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['medication'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['medication_text']); ?>
-										</td>
-									</tr>
-									<tr>
-										<td>Is it ensured that sensitive information are discussed outside the room?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['diagnostic'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['diagnostic_text']); ?>
-										</td>
-									</tr>
-									<tr>
-										<td>Is the handoff communication record (ISBAR)- communicated & documented and in order?</td>
-										<td>
-											<?php echo ucfirst(htmlspecialchars($param['lab_results'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['lab_results_text']); ?>
-										</td>
-									</tr>
-
 									
-									
-
-
-								
-									
-									
-									
-									
-
-
 									<!-- Audit other details -->
 									<tr>
 										<th colspan="2" style="background-color: #f5f5f5; text-align: left;"></th>

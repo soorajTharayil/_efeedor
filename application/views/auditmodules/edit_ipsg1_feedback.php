@@ -218,7 +218,7 @@ $param = json_decode($row->dataset, true);
 
 
                         <tr>
-                            <td><b>Are patient ID bands present?</b></td>
+                            <td><b>Is the patient ID band clear and readable?</b></td>
                             <td>
                                 <?php $val = isset($param['identification_details']) ? strtolower(trim($param['identification_details'])) : ''; ?>
                                 <select class="form-control" name="identification_details">
@@ -241,8 +241,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the ID band appropriate according to patient status (orange - vulnerable, blue -
-                                    allergy, white - general)?</b></td>
+                            <td><b>Is the patient’s identity confirmed before administering high-alert medications?</b></td>
                             <td>
                                 <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
                                 <select class="form-control" name="vital_signs">
@@ -265,7 +264,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the ID band complete and readable (includes MID, name, age, sex)?</b></td>
+                            <td><b>Are two identifiers consistently checked before administering medication, diagnostic tests, or procedures?</b></td>
                             <td>
                                 <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
                                 <select class="form-control" name="surgery">
@@ -288,7 +287,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Is the treatment/procedure order correctly verified in EMR?</b></td>
+                            <td><b>Is family or caregiver confirmation obtained if the patient is unconscious, pediatric, or unable to respond?</b></td>
                             <td>
                                 <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
                                 <select class="form-control" name="complaints_communicated">
@@ -311,7 +310,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <tr>
-                            <td><b>Was verbal reconfirmation of patient identification performed if applicable?</b></td>
+                            <td><b>Is a new ID band provided immediately if the previous one is lost or damaged?</b></td>
                             <td>
                                 <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
                                 <select class="form-control" name="intake">
@@ -333,28 +332,7 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
-                        <tr>
-                            <td><b>Are the patient and family aware of correct patient identification?</b></td>
-                            <td>
-                                <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
-                                <select class="form-control" name="output">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input type="text" class="form-control" name="output_text"
-                                        value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td><b>Uploaded Files</b></td>
                             <td>

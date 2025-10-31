@@ -1122,6 +1122,7 @@ class UserManagement_model extends CI_Model
 			'Initial Assessment IPD' => 'AUDIT-FORM36',
 			'Initial Assessment OPD' => 'AUDIT-FORM37',
 			'IPSG-1' => 'AUDIT-FORM38',
+			'IPSG2- ER' => 'AUDIT-FORM101',
 			'IPSG2- A&E' => 'AUDIT-FORM39',
 			'IPSG2- IPD' => 'AUDIT-FORM40',
 			'IPSG4-Timeout- Outside OT Audit' => 'AUDIT-FORM41',
@@ -1192,6 +1193,10 @@ class UserManagement_model extends CI_Model
 			'Stroke' => 'AUDIT-FORM98',
 			'Urodynamics' => 'AUDIT-FORM99',
 			'STEMI-Primary PCI Clinical Pathway' => 'AUDIT-FORM100',
+
+			// --- Housekeeping ---
+			'Biomedical Waste Collection Audit' => 'AUDIT-FORM102',
+			'Pest Control Audit' => 'AUDIT-FORM103',
 		];
 
 		// Get all audit departments
