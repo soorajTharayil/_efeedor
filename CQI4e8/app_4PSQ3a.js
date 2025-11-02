@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -105,26 +105,26 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 	}, 0);
 
-// 	$scope.setupapplication = function () {
-// 		//$rootScope.loader = true;
-// 		var url = window.location.href;
-// 		//console.log(url);
-// 		var id = url.substring(url.lastIndexOf('=') + 1);
-// 		//alert(id);
-// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
-// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
-// 			$scope.feedback.total_admission = responsedata.data.incident_count
-// 			console.log($scope.medication_errors_count);
+	// 	$scope.setupapplication = function () {
+	// 		//$rootScope.loader = true;
+	// 		var url = window.location.href;
+	// 		//console.log(url);
+	// 		var id = url.substring(url.lastIndexOf('=') + 1);
+	// 		//alert(id);
+	// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
+	// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
+	// 			$scope.feedback.total_admission = responsedata.data.incident_count
+	// 			console.log($scope.medication_errors_count);
 
-// 		},
-// 			function myError(response) {
-// 				$rootScope.loader = false;
+	// 		},
+	// 			function myError(response) {
+	// 				$rootScope.loader = false;
 
-// 			}
-// 		);
+	// 			}
+	// 		);
 
-// 	}
-// 	$scope.setupapplication();
+	// 	}
+	// 	$scope.setupapplication();
 
 	var ehandor = JSON.parse($window.localStorage.getItem('ehandor'));
 	if (ehandor) {
@@ -133,7 +133,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -169,28 +169,28 @@ $scope.user_id = ehandor.userid;
 
 		// Validate inputs for medication errors and opportunities for errors
 		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of unpaid leave per month  ");
+			alert("Please enter number of unpaid leave per month");
 			return;
 		}
 
 		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of employee at the beginning of the month plus newly joined ");
+			alert("Please enter number of employees at the beginning of the month plus newly joined");
 			return;
 		}
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of unpaid leave per month  be less than number of employee at the beginning of the month plus newly joined ");
+		if (medicationErrors < opportunitiesForErrors) {
+			alert("Number of unpaid leaves per month should be greater than or equal to number of employees at the beginning of the month plus newly joined");
 			return;
 		}
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+		// Calculate the average unpaid leave per employee
+		var averageLeave = medicationErrors / opportunitiesForErrors;
 
 		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
+		if (averageLeave % 1 === 0) {
+			$scope.calculatedResult = averageLeave.toString() + " leaves/employee";
 		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
+			$scope.calculatedResult = averageLeave.toFixed(2) + " leaves/employee";
 		}
 
 		// Store the result in the feedback object for further use
@@ -202,7 +202,8 @@ $scope.user_id = ehandor.userid;
 
 
 
-		$scope.encodeFiles = function (element) {
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -241,9 +242,9 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -298,7 +299,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {

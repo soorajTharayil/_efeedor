@@ -437,8 +437,8 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if ($scope.valuesEdited) {
-			alert('Please calculate before submitting the form.');
+		if ($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined) {
+			alert('Please enter total downtime of EMR.');
 			return false;
 		}
 		

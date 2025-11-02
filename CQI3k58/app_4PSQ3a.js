@@ -396,7 +396,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 
 					// $scope.feedback.questioset = $scope.questioset;
-					$http.post($rootScope.baseurl_main + '/save_CQIk58.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
+					$http.post($rootScope.baseurl_main + '/save_CQI3k58.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
 						if (responsedata.status = "success") {
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');

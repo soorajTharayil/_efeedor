@@ -25,12 +25,12 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="form-group row">
-                                <label for="description" class="col-xs-3 col-form-label">Site<i class="text-danger">*</i></label>
+                            <div class="form-group row">
+                                <label for="description" class="col-xs-3 col-form-label">Doctors<i class="text-danger">*</i></label>
                                 <div class="col-xs-9">
-                                    <textarea name="description" class="form-control" placeholder="Enter Site using comma(,)" rows="7"><?php echo $department->bed_no ?></textarea>
+                                    <textarea name="description" class="form-control" placeholder="Enter Doctors name using comma(,)" rows="7"><?php echo $department->bed_no ?></textarea>
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <div class="ui buttons">

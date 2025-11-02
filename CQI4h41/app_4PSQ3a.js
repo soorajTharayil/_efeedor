@@ -379,7 +379,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 		}
 
 		// First check for duplicates
-		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h40'
+		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h41'
 		)
 			.then(function (response) {
 				if (response.data.status === "exists") {
@@ -396,7 +396,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 
 					// $scope.feedback.questioset = $scope.questioset;
-					$http.post($rootScope.baseurl_main + '/save_CQI4h40.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
+					$http.post($rootScope.baseurl_main + '/save_CQI4h41.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
 						if (responsedata.status = "success") {
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');

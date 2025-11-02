@@ -105,28 +105,54 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 	}, 0);
 
-	// $scope.setupapplication = function () {
-	// 	//$rootScope.loader = true;
-	// 	var url = window.location.href;
-	// 	//console.log(url);
-	// 	var id = url.substring(url.lastIndexOf('=') + 1);
-	// 	//alert(id);
-	// 	$http.get($rootScope.baseurl_main + '/api_1PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
-	// 		$scope.feedback.initial_assessment_hr = responsedata.data.totalHours;
-	// 		$scope.feedback.initial_assessment_min = responsedata.data.totalMinutes;
-	// 		$scope.feedback.initial_assessment_sec = responsedata.data.totalSeconds;
-	// 		$scope.feedback.total_admission = responsedata.data.totalAdmission;
-	// 		console.log($scope.feedback.initial_assessment_hr);
+	$scope.setupapplication = function () {
+		var url = window.location.href;
+		var id = url.substring(url.lastIndexOf('=') + 1);
 
-	// 	},
-	// 		function myError(response) {
-	// 			$rootScope.loader = false;
+		// Get selected month & year from localStorage
+		var selectedMonthName = $window.localStorage.getItem('selectedMonth');
+		var selectedYear = parseInt($window.localStorage.getItem('selectedYear'));
 
-	// 		}
-	// 	);
+		// Convert month name to number
+		var monthNames = ["January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"];
+		var monthIndex = monthNames.indexOf(selectedMonthName);
 
-	// }
-	// $scope.setupapplication();
+		// Calculate previous month and year
+		var prevMonthIndex = monthIndex - 1;
+		if (prevMonthIndex < 0) {
+			prevMonthIndex = 11;
+			selectedYear -= 1;
+		}
+
+		var prevMonthName = monthNames[prevMonthIndex];
+		console.log("Selected:", selectedMonthName, selectedYear + 1);
+		console.log("Previous:", prevMonthName, selectedYear);
+
+		// Call API with previous month and year
+		$http.get($rootScope.baseurl_main + '/get_CQI3a1.php?patientid=' + id + '&month=' + prevMonthName + '&year=' + selectedYear, { timeout: 20000 }).then(function (responsedata) {
+			$scope.feedback.totalHours = responsedata.data.totalHours;
+			$scope.feedback.totalMinutes = responsedata.data.totalMinutes;
+			$scope.feedback.totalSeconds = responsedata.data.totalSeconds;
+			$scope.feedback.totalAdmission = responsedata.data.totalAdmission;
+			$scope.feedback.result = responsedata.data.calculatedResult;
+
+			console.log($scope.feedback.initial_assessment_hr);
+			console.log($scope.feedback.initial_assessment_min);
+			console.log($scope.feedback.initial_assessment_sec);
+			console.log($scope.feedback.total_admission);
+			console.log($scope.feedback.calculatedResult);
+
+
+		},
+			function myError(response) {
+				console.error("Error loading previous month data", response);
+			});
+	};
+
+	// Call the function on load
+	$scope.setupapplication();
+
 
 
 	$scope.setupapplication1 = function () {
@@ -374,7 +400,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {
@@ -383,12 +409,42 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	});
 
 
-    
+
 
 	// Navigate to a specific page
 	$scope.prev = function () {
 		window.location.href = '/qim_forms#step2';
 	};
+
+
+	$scope.prev1 = function () {
+
+		$scope.step2 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
+
+	$scope.next1 = function () {
+
+		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
+			alert('Please enter data analysis');
+			return false;
+		}
+
+		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
+			alert('Please enter corrective action');
+			return false;
+		}
+
+		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
+			alert('Please enter preventive action');
+			return false;
+		}
+
+		$scope.step1 = false;
+		$scope.step2 = true;
+		$(window).scrollTop(0);
+	}
 
 
 	function convertToSeconds(timeStr) {
@@ -444,20 +500,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			return false;
 		}
 
-		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
-			alert('Please enter data analysis');
-			return false;
-		}
-
-		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
-			alert('Please enter corrective action');
-			return false;
-		}
-
-		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
-			alert('Please enter preventive action');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3a1')
@@ -478,7 +521,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 						.then(function (responsedata) {
 							$rootScope.loader = false;
 							if (responsedata.data.status === "success") {
-								$scope.step1 = false;
+								$scope.step2 = false;
 								$scope.step4 = true;
 								$(window).scrollTop(0);
 							} else {

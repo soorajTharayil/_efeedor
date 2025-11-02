@@ -304,7 +304,7 @@
 
 
 
-                      <button type="button" class="btn btn-primary" ng-click="calculateMedicationErrorRate()" style="margin-left:20px;">
+                      <button type="button" class="btn btn-primary" ng-click="calculateMedicalWasteAverage()" style="margin-left:20px;">
                         Compute KPI
                       </button>
 
@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact -JCI8-GHI 3)-(House Keeping): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Average quantity of Medical waste disposed: <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

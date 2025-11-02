@@ -279,6 +279,32 @@
 
                     <div class="row">
 
+                      <!-- KPI Previous Month Summary -->
+                      <div style="margin-left: 20px; width: 90%; border:1px solid #ccc; border-radius:8px; background:#fff; margin-bottom: 20px;">
+                        <div style="background:#f4f6f8; font-weight:600; color:#222; padding:8px 15px; border-bottom:1px solid #e0e0e0; border-top-left-radius:8px; border-top-right-radius:8px;">
+                          <i class="fa fa-clock-o" style="color:#555; margin-right:6px;"></i> Previous Month Summary
+                        </div>
+                        <table style="width:100%; border-collapse:collapse; font-size:15px; color:#222;">
+                          <tr>
+                            <td style="padding:10px 15px; border-bottom:1px solid #eee; border-right:1px solid #ddd; width:70%;">Sum of time taken for assessment in patients (Numerator):</td>
+                            <td style="padding:10px 15px; text-align:left; border-bottom:1px solid #eee;">{{feedback.totalHours}} hr {{feedback.totalMinutes}} min {{feedback.totalSeconds}} sec</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 15px; border-bottom:1px solid #eee; border-right:1px solid #ddd;">Total number of in-patients (Denominator):</td>
+                            <td style="padding:10px 15px; text-align:left; border-bottom:1px solid #eee;">{{feedback.totalAdmission}}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 15px; border-right:1px solid #ddd;">Result:</td>
+                            <td style="padding:10px 15px; text-align:left;">{{feedback.result}}</td>
+                          </tr>
+                        </table>
+                      </div>
+
+
+
+
+
+
                       <!-- KPI Name -->
 
                       <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
@@ -318,12 +344,40 @@
                           </span>
                         </div>
                       </div>
+                      
+                      
+
+                      
+                    <div style="width:100%; display:block;">
+                    
+                      <!-- Result Section -->
+                      <div ng-if="calculatedResult" style="margin-left:22px; margin-top:-10px; display:block; width:auto;">
+                    
+                        <div style="border:1px solid grey; background-color:#f0f7ff; border-radius:8px; width:95%; padding:8px 10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:fit-content; font-size:17px;
+                          font-weight:600;
+                          color:#333;
+                          display:inline-block;
+                        ">
+                          {{lang.resultee}} 
+                          <span style="font-weight:bold; color:#0056b3; margin-left:5px;">
+                            {{calculatedResult}}
+                          </span>
+                        </div>
+                      </div>
+                    
+                      <!-- Button Section -->
+                      <div style="margin-top:20px; margin-left:20px; display:block; width:100%;">
+                        <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()">
+                          Compute KPI
+                        </button>
+                      </div>
+                    
+                    </div>
 
 
 
-                      <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
-                        Compute KPI
-                      </button>
+
+
 
 
                     </div>
@@ -333,11 +387,7 @@
 
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
-                    <div style="margin-left:15px;">
-                      <strong> Avg.Time for initial assessment of in-patients (Doctors)-(MRD-ICU) : <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
-                      <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> -->
-                    </div>
-
+        
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
@@ -390,13 +440,88 @@
                   <br><br>
 
                   <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
-                  <!-- submit button -->
-                  <div ng-if="calculatedResult">
 
-                    <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
-                    <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                  <!-- New next button -->
+                  <div ng-if="calculatedResult">
+                    <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+                  </div>
+
+
+                </fieldset>
+
+                <!-- New Preview Page Section-->
+
+                <fieldset ng-show="step2 == true">
+                  <div class="form-card">
+                    <div class="text-left details-section" style="background: white; margin: 10px 10px 0 10px;">
+                      <label for="comment"><b style="font-size: 18px;">Review your details before submission:</b></label>
+
+                      <table class="details-content" style="border-spacing: 10px; border-collapse: collapse; width: 100%; margin-bottom: 0px; border: 1px solid #dddddd;">
+
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;"><b>KPI Details</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para1}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_total}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para2}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.total_admission}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Avg.Time for initial assessment of in-patients (Doctors)- (MRD-ICU)</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.calculatedResult}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.data_analysis}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.dataAnalysis}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.corrective_action}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.correctiveAction}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.preventive_action}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.preventiveAction}}</td>
+                        </tr>
+
+                        <tr ng-show="feedback.files_name && feedback.files_name.length > 0">
+                          <td class="details-label"
+                            style="border: 1px solid #dddddd; padding: 10px;">Uploaded files
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <ul style="padding-left: 15px; margin: 0;">
+                              <li ng-repeat="file in feedback.files_name">
+                                <a ng-href="{{file.url}}"
+                                  download="{{file.name}}">{{file.name}}</a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+
+                      </table>
+
+                      <br>
+
+                      <br><br>
+                      <input type="button" name="previous" style="font-size:small;" class="previous action-button-previous" ng-click="prev1()" value="{{lang.previous}}" />
+
+                      <div>
+                        <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                        <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                      </div>
+
+                    </div>
                   </div>
                 </fieldset>
+
+
                 <fieldset ng-show="step4 == true">
 
                   <div class="form-card">

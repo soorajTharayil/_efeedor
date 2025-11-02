@@ -353,8 +353,8 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if ($scope.valuesEdited) {
-			alert('Please calculate before submitting the form.');
+		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
+			alert('Please enter Total number of Extravasation');
 			return false;
 		}
 
@@ -379,7 +379,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 		}
 
 		// First check for duplicates
-		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4b6')
+		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4b7')
 			.then(function (response) {
 				if (response.data.status === "exists") {
 					alert("The KPI is already recorded for this month");
@@ -395,7 +395,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 
 					// $scope.feedback.questioset = $scope.questioset;
-					$http.post($rootScope.baseurl_main + '/save_CQI4b6.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
+					$http.post($rootScope.baseurl_main + '/save_CQI4b7.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + selectedMonths + '&year=' + selectedYears, $scope.feedback).then(function (responsedata) {
 						if (responsedata.status = "success") {
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');

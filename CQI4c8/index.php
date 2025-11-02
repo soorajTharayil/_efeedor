@@ -32,7 +32,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
-  <script src="app_4PSQ3a.js?<?php echo time(); ?>"></script>
+  <script src="app_1PSQ3a.js?<?php echo time(); ?>"></script>
 
 </head>
 
@@ -265,7 +265,9 @@
 
                 <fieldset ng-show="step1 == true">
 
-                  <h4 style="font-size:18px"><strong>{{lang.kpi_info}} {{selectedMonths}} {{selectedYears}}</strong></h4>
+                  <h4 style="font-size:18px; margin-left: 5px;"><strong>{{lang.kpi_info}} {{selectedMonths}} {{selectedYears}}
+                      
+                    </strong></h4>
 
                   <!--<p>Fill all form field to go to next step</p>-->
                   <br>
@@ -275,38 +277,49 @@
 
                       <!-- KPI Name -->
 
-                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>Submission Deadline: </b> {{ formatKPIDate(kpiDeadline, false) }}</p>
-
-
-                      <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px; margin-top: -20px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
+                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
-                        <div class="form-group transparent-placeholder">
-                          <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
-                          <span class="has-float-label">
-                            <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.formula_para1_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
-                            <label for="para1"></label>
-                          </span>
+                        <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
+                          <span class="addon" style="font-size: 16px; margin-bottom: 1px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
+
+                          <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                            <span class="has-float-label" style="display: flex; align-items: center; ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.hr_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1_hr" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px; margin-right: 9px;">hr </span>
+                              <label for="para1"></label>
+                            </span>
+                            <span class="has-float-label" style="display: flex; align-items: center;  ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.min_placeholder}}" ng-model="feedback.initial_assessment_min" type="number" id="formula_para1_min" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px; margin-right: 9px;">min </span>
+                              <label for="para1"></label>
+                            </span>
+                            <span class="has-float-label" style="display: flex; align-items: center; ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.sec_placeholder}}" ng-model="feedback.initial_assessment_sec" type="number" id="formula_para1_sec" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px;">sec</span>
+                              <label for="para1"></label>
+                            </span>
+                          </div>
                         </div>
                       </div>
 
                       <!-- <p>&nbsp;</p> -->
 
-                      <!--<div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">-->
-                      <!--  <div class="form-group transparent-placeholder">-->
-                      <!--    <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>-->
-                      <!--    <span class="has-float-label">-->
-                      <!--      <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />-->
-                      <!--      <label for="para2"></label>-->
-                      <!--    </span>-->
-                      <!--  </div>-->
-                      <!--</div>-->
+                      <!-- <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
+                        <div class="form-group transparent-placeholder">
+                          <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 52%;" />
+                            <label for="para2"></label>
+                          </span>
+                        </div>
+                      </div> -->
 
 
 
-                      <!--<button type="button" class="btn btn-primary" ng-click="calculateMedicationErrorRate()" style="margin-left:20px;">-->
-                      <!--  Compute KPI-->
-                      <!--</button>-->
+                      <!-- <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
+                        Compute KPI
+                      </button> -->
 
 
                     </div>
@@ -314,16 +327,14 @@
                   </div>
 
 
+                  <div style="margin-top: 5px;text-align:left;"><br>
 
+                    <!-- <div style="margin-left:15px;">
+                      <strong>turnaround time for blood donation(Blood Center): <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
+                      <strong>Bench Mark Time: {{ feedback.benchmark }}</strong>
+                    </div> -->
 
-                  <div style="margin-top: 0px;text-align:left;"><br>
-
-                    <!--<div style="margin-left:15px;">-->
-                    <!--  <strong>Primary Cesarean Rate(OT)-((Nursing - OBG) <span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>-->
-                      <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
-                    <!--</div>-->
-
-                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: -20px;">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 5px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
@@ -375,7 +386,7 @@
 
                   <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
                   <!-- submit button -->
-                  <div >
+                  <div>
 
                     <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
                     <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
@@ -630,256 +641,6 @@
 
     font-size: 15px;
 
-  }
-</style>
-
-<style>
-  .menu-dropdown {
-    position: absolute;
-    right: 10px;
-    top: 50px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    width: 200px;
-    display: none;
-    z-index: 1000;
-  }
-
-  .menu-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .menu-dropdown ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .menu-dropdown ul li a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  .menu-dropdown ul li a i {
-    margin-right: 10px;
-  }
-
-  .menu-dropdown ul li:last-child {
-    border-bottom: none;
-  }
-
-  .menu-toggle {
-    cursor: pointer;
-  }
-
-  [ng-show="menuVisible"] {
-    display: block !important;
-  }
-
-  .menu-dropdown ul li a:hover {
-    color: #555;
-  }
-
-
-  .input-field {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    /* Add border */
-    border-radius: 25px;
-    /* Add border radius */
-    margin-bottom: 15px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #000;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    /* Add box shadow */
-  }
-
-  .password-container {
-    position: relative;
-  }
-
-  .password-input {
-    width: calc(100% - 40px);
-    /* Adjust width to accommodate the show/hide button */
-  }
-
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 39%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-
-
-  @media (max-width: 768px) {
-    .navbar {
-      flex-wrap: nowrap;
-    }
-
-    .navbar .navbar-brand {
-      flex-shrink: 0;
-      margin-right: 10px;
-    }
-
-    .navbar .ml-auto {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .navbar .left-buttons a,
-    .navbar .right-buttons button {
-      flex-shrink: 0;
-      white-space: nowrap;
-    }
-
-    .navbar .right-buttons {
-      margin-left: -5px;
-      /* Adjust the position of the language button */
-    }
-
-    .navbar .btn {
-      padding: 5px 10px;
-      font-size: 14px;
-    }
-  }
-</style>
-
-<style>
-  .menu-dropdown {
-    position: absolute;
-    right: 10px;
-    top: 50px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    width: 200px;
-    display: none;
-    z-index: 1000;
-  }
-
-  .menu-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .menu-dropdown ul li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .menu-dropdown ul li a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-  }
-
-  .menu-dropdown ul li a i {
-    margin-right: 10px;
-  }
-
-  .menu-dropdown ul li:last-child {
-    border-bottom: none;
-  }
-
-  .menu-toggle {
-    cursor: pointer;
-  }
-
-  [ng-show="menuVisible"] {
-    display: block !important;
-  }
-
-  .menu-dropdown ul li a:hover {
-    color: #555;
-  }
-
-
-  .input-field {
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    /* Add border */
-    border-radius: 25px;
-    /* Add border radius */
-    margin-bottom: 15px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #000;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    /* Add box shadow */
-  }
-
-  .password-container {
-    position: relative;
-  }
-
-  .password-input {
-    width: calc(100% - 40px);
-    /* Adjust width to accommodate the show/hide button */
-  }
-
-  .password-toggle {
-    position: absolute;
-    right: 10px;
-    top: 39%;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-
-
-  @media (max-width: 768px) {
-    .navbar {
-      flex-wrap: nowrap;
-    }
-
-    .navbar .navbar-brand {
-      flex-shrink: 0;
-      margin-right: 10px;
-    }
-
-    .navbar .ml-auto {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .navbar .left-buttons a,
-    .navbar .right-buttons button {
-      flex-shrink: 0;
-      white-space: nowrap;
-    }
-
-    .navbar .right-buttons {
-      margin-left: -5px;
-      /* Adjust the position of the language button */
-    }
-
-    .navbar .btn {
-      padding: 5px 10px;
-      font-size: 14px;
-    }
   }
 </style>
 

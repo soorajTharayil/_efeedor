@@ -458,7 +458,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 		}
 
 		// First check for duplicates
-		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3a19')
+		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3f5')
 			.then(function (response) {
 				if (response.data.status === "exists") {
 					alert("The KPI is already recorded for this month");
@@ -472,7 +472,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 					$scope.feedback.contactnumber = $scope.loginnumber;
 					$scope.feedback.email = $scope.loginemail;
 
-					$http.post($rootScope.baseurl_main + '/save_CQI3a19.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears, $scope.feedback)
+					$http.post($rootScope.baseurl_main + '/save_CQI3f5.php?patient_id=' + $rootScope.patientid + '&administratorId=' + $rootScope.adminId + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears, $scope.feedback)
 						.then(function (responsedata) {
 							$rootScope.loader = false;
 							if (responsedata.data.status === "success") {

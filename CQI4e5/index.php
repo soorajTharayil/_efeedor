@@ -281,7 +281,7 @@
 
                       <!-- KPI Name -->
 
-                      <!-- <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> --> -->
+                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
@@ -348,7 +348,7 @@
 
                     <div style="margin-left:15px;">
                       <strong>Average number of training hours(HR) <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
-                      <!-- <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> --> -->
+                      <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> -->
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">

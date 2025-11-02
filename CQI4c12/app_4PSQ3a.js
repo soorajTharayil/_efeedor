@@ -183,17 +183,22 @@ $scope.user_id = ehandor.userid;
 			return;
 		}
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+		// Calculate ratio
+		var ratio, roundedRatio, ratioString;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
+		if (medicationErrors < opportunitiesForErrors) {
+			ratio = opportunitiesForErrors / medicationErrors;
+			roundedRatio = Math.round(ratio);
+			ratioString = "1:" + roundedRatio;
+			explanation = " means 1 nurse is assigned to " + roundedRatio + " patients.";
 		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
+			ratio = medicationErrors / opportunitiesForErrors;
+			roundedRatio = Math.round(ratio);
+			ratioString = roundedRatio + ":1";
+			explanation = " means " + roundedRatio + " nurses are assigned to 1 patient.";
 		}
 
-		// Store the result in the feedback object for further use
+		$scope.calculatedResult = ratioString + explanation;
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
 		console.log("Calculated result", $scope.calculatedResult);

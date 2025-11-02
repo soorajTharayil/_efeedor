@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average length of stay(MRD - Pulmonology):</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Average length of stay(MRD - Pulmonology): <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

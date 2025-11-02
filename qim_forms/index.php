@@ -3339,6 +3339,33 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
+											
+											<div class="row" ng-if="profilen['KPI368'] == true"
+												ng-show="matchSearch('Percentage of patient Identification Errors for Diet patients (IPD)')">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI3k65" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">Percentage of patient Identification Errors for Diet patients (IPD)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											
 
 											<div class="row" ng-if="hasKPIInGroup('Lab Service')">
 												<div class="col-12">
@@ -4904,6 +4931,31 @@ header("Expires: 0");
 																			</p>
 																			<p class="text">Sign Out Compliance Rate-
 																				(OT)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row" ng-if="profilen['KPI369'] == true"
+												ng-show="matchSearch('Number of Patient safety events or patterns of events during procedural sedation')">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI3k66" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">Number of Patient safety events or patterns of events during procedural sedation</p>
 																		</div>
 																	</div>
 																</a>
