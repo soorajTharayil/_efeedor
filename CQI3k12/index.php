@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average number of patients visiting Emergency per day(Emergency Department): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Average number of patients visiting Emergency per day(Emergency Department): <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

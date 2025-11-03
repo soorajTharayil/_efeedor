@@ -1557,7 +1557,8 @@ header("Expires: 0");
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
 																			<p class="text">
-																				{{lang.transfusion_reactions}}</p>
+																				{{lang.transfusion_reactions}}
+																			</p>
 																		</div>
 																	</div>
 																</a>
@@ -1850,7 +1851,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI89'] == true"
-												ng-show="matchSearch('Shift change handover communication (Nurses) (ED, ICU, Ward)- (Nursing - Emergency Department)')">
+												ng-show="matchSearch('Shift change handover communication (Nurses) - (Nursing - Emergency Department)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -1864,9 +1865,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Shift change handover
-																				communication (Nurses) (ED, ICU, Ward)-
-																				(Nursing - Emergency Department)</p>
+																			<p class="text">Shift change handover communication (Nurses) - (Nursing - Emergency Department)</p>
 																		</div>
 																	</div>
 																</a>
@@ -1877,7 +1876,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI90'] == true"
-												ng-show="matchSearch('Shift change handover communication (Nurses) (ED, ICU, Ward)- (Nursing - ICU)')">
+												ng-show="matchSearch('Shift change handover communication (Nurses) - (Nursing - ICU)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -1891,9 +1890,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Shift change handover
-																				communication (Nurses) (ED, ICU, Ward)-
-																				(Nursing - ICU)</p>
+																			<p class="text">Shift change handover communication (Nurses) - (Nursing - ICU)</p>
 																		</div>
 																	</div>
 																</a>
@@ -1904,7 +1901,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI91'] == true"
-												ng-show="matchSearch('Shift change handover communication (Nurses) (ED, ICU, Ward)- (Nursing - Ward)')">
+												ng-show="matchSearch('Shift change handover communication (Nurses) - (Nursing - Ward)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -1918,9 +1915,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Shift change handover
-																				communication (Nurses) (ED, ICU, Ward)-
-																				(Nursing - Ward)</p>
+																			<p class="text">Shift change handover communication (Nurses) - (Nursing - Ward)</p>
 																		</div>
 																	</div>
 																</a>
@@ -2936,30 +2931,6 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI11'] == true"
-												ng-show="matchSearch(lang.theemergency)">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI3a11" class="card"
-																	style="text-decoration:none;">
-																	<div class="card product-card"
-																		style="margin-bottom:10px;">
-																		<div class="card-body"
-																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color:#5c5959;font-size:36px;">
-																			</p>
-																			<p class="text">{{lang.theemergency}}</p>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
 
 											<div class="row" ng-if="profilen['KPI12'] == true"
 												ng-show="matchSearch(lang.ulcers)">
@@ -3281,6 +3252,38 @@ header("Expires: 0");
 												</div>
 											</div>
 
+											<div class="row" ng-if="hasKPIInGroup('Cardiology')">
+												<div class="col-12">
+													<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+														Cardiology</h4>
+												</div>
+											</div>
+
+											<div class="row" ng-if="profilen['KPI11'] == true"
+												ng-show="matchSearch(lang.theemergency)">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI3a11" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">{{lang.theemergency}}</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
 											<div class="row" ng-if="hasKPIInGroup('Clinical Nutrition & Dietetics')">
 												<div class="col-12">
 													<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">
@@ -3339,7 +3342,7 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
-											
+
 											<div class="row" ng-if="profilen['KPI368'] == true"
 												ng-show="matchSearch('Percentage of patient Identification Errors for Diet patients (IPD)')">
 												<div class="col-12">
@@ -3364,8 +3367,8 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
-											
-											
+
+
 
 											<div class="row" ng-if="hasKPIInGroup('Lab Service')">
 												<div class="col-12">
@@ -4939,7 +4942,7 @@ header("Expires: 0");
 													</div>
 												</div>
 											</div>
-											
+
 											<div class="row" ng-if="profilen['KPI369'] == true"
 												ng-show="matchSearch('Number of Patient safety events or patterns of events during procedural sedation')">
 												<div class="col-12">
@@ -5134,7 +5137,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI42'] == true"
-												ng-show="matchSearch('Incidence of Medication Administering errors (NABH 4th edition) (Clinical Pharmacy)')">
+												ng-show="matchSearch('Incidence of Medication Administering errors (Clinical Pharmacy)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -5148,9 +5151,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Incidence of Medication
-																				Administering errors (NABH 4th edition)
-																				(Clinical Pharmacy)</p>
+																			<p class="text">Incidence of Medication Administering errors (Clinical Pharmacy)</p>
 																		</div>
 																	</div>
 																</a>
@@ -5214,7 +5215,7 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI45'] == true"
+											<!-- <div class="row" ng-if="profilen['KPI45'] == true"
 												ng-show="matchSearch('Incidence of medication errors - Dispensing errors (IP) (Clinical Pharmacy)')">
 												<div class="col-12">
 													<div class="card">
@@ -5266,7 +5267,7 @@ header("Expires: 0");
 														</div>
 													</div>
 												</div>
-											</div>
+											</div> -->
 
 											<div class="row" ng-if="profilen['KPI47'] == true"
 												ng-show="matchSearch('Empirical Antibiotics therapy compliance rate for high risk infections (Clinical Pharmacy)')">
@@ -8429,7 +8430,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI150'] == true"
-												ng-show="matchSearch('Out patient satisfaction index (Patient Care Services - OPD)')">
+												ng-show="matchSearch('Out-patient satisfaction index (OPD)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -8443,8 +8444,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Out patient satisfaction
-																				index (Patient Care Services - OPD)</p>
+																			<p class="text">Out-patient satisfaction index (OPD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -8455,7 +8455,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI151'] == true"
-												ng-show="matchSearch('Inpatient satisfaction index (Patient Care Services - IPD)')">
+												ng-show="matchSearch('Inpatient satisfaction index (IPD)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -8469,8 +8469,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Inpatient satisfaction index
-																				(Patient Care Services - IPD)</p>
+																			<p class="text">Inpatient satisfaction index (IPD)</p>
 																		</div>
 																	</div>
 																</a>
@@ -8481,7 +8480,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI152'] == true"
-												ng-show="matchSearch('Time taken for discharge - Cash Patients (Patient Care Services - Cash)')">
+												ng-show="matchSearch('Time taken for discharge - Cash Patients')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -8495,9 +8494,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Time taken for discharge -
-																				Cash Patients (Patient Care Services -
-																				Cash)</p>
+																			<p class="text">Time taken for discharge - Cash Patients</p>
 																		</div>
 																	</div>
 																</a>
@@ -8508,7 +8505,7 @@ header("Expires: 0");
 											</div>
 
 											<div class="row" ng-if="profilen['KPI153'] == true"
-												ng-show="matchSearch('Time taken for discharge - Cashless Patients (Patient Care Services - Cashless)')">
+												ng-show="matchSearch('Time taken for discharge - Insurance Patients')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -8522,9 +8519,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Time taken for discharge -
-																				Cashless Patients (Patient Care Services
-																				- Cashless)</p>
+																			<p class="text">Time taken for discharge - Insurance Patients</p>
 																		</div>
 																	</div>
 																</a>
@@ -10109,7 +10104,7 @@ header("Expires: 0");
 
 <!-- script code start  -->
 <script>
-	setTimeout(function () {
+	setTimeout(function() {
 
 		$('#body').show();
 

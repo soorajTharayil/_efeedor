@@ -4081,7 +4081,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Emergency Department)';
+            $data['title'] = 'Shift change handover communication (Nurses) - (Nursing - Emergency Department)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j1', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -4119,7 +4119,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - ICU)';
+            $data['title'] = 'Shift change handover communication (Nurses) - (Nursing - ICU)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j2', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -4157,7 +4157,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Ward)';
+            $data['title'] = 'Shift change handover communication (Nurses) - (Nursing - Ward)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI3j3', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -6390,7 +6390,7 @@ class Quality extends CI_Controller
             $titleSuffix = $pagetitle;
         }
 
-        $data['title'] = 'Out patient satisfaction index (Patient Care Services - OPD)';
+        $data['title'] = 'Out-patient satisfaction index (OPD)';
         $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4d1', $data, true);
         $this->load->view('layout/main_wrapper', $data);
     } else {
@@ -6428,7 +6428,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Inpatient satisfaction index (Patient Care Services - IPD)';
+            $data['title'] = 'Inpatient satisfaction index (IPD)';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4d2', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -6466,7 +6466,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Time taken for discharge - Cash Patients (Patient Care Services - Cash)';
+            $data['title'] = 'Time taken for discharge - Cash Patients';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4d3', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -6504,7 +6504,7 @@ class Quality extends CI_Controller
                 $titleSuffix = $pagetitle;
             }
     
-            $data['title'] = 'Time taken for discharge - Cashless Patients (Patient Care Services - Cashless)';
+            $data['title'] = 'Time taken for discharge - Insurance Patients';
             $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4d4', $data, true);
             $this->load->view('layout/main_wrapper', $data);
         } else {
@@ -23879,6 +23879,10627 @@ public function edit_feedback_CQI3c10_byid($id)
         $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c10', $data);
     }
 }
+// CQI3c11 - Incidence of medication errors - Prescription errors (IP) (Clinical Pharmacy)
+public function edit_feedback_CQI3c11()
+{
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c11', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c11', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c11_byid($id)
+{
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c11_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Prescription Error Rate
+        $prescription_errors = intval($this->input->post('prescription_errors')) ?: 0;
+        $total_prescriptions = intval($this->input->post('total_prescriptions')) ?: 0;
+        $error_rate = ($total_prescriptions > 0) ? ($prescription_errors / $total_prescriptions) * 100 : 0;
+        $dataset['prescription_error_rate'] = round($error_rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c11($id, $data);
+        redirect('quality/patient_feedback_CQI3c11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c11', $data);
+    }
+}
+// CQI3c12 - Empirical Antibiotics therapy compliance rate (Clinical Pharmacy)
+public function edit_feedback_CQI3c12() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c12', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c12', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c12_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c12_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Empirical Antibiotic Compliance Rate
+        $compliant_cases = intval($this->input->post('compliant_cases')) ?: 0;
+        $total_cases = intval($this->input->post('total_cases')) ?: 0;
+        $rate = ($total_cases > 0) ? ($compliant_cases / $total_cases) * 100 : 0;
+        $dataset['empirical_compliance_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c12($id, $data);
+        redirect('quality/patient_feedback_CQI3c12?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c12_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c12', $data);
+    }
+}
+// CQI3c13 - Restricted antibiotics usage compliance rate (JCI8-MMU1.1) (Clinical Pharmacy)
+public function edit_feedback_CQI3c13() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c13', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c13', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c13_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c13_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Restricted Antibiotics Compliance Rate
+        $restricted_compliant_cases = intval($this->input->post('restricted_compliant_cases')) ?: 0;
+        $total_restricted_cases = intval($this->input->post('total_restricted_cases')) ?: 0;
+        $rate = ($total_restricted_cases > 0) ? ($restricted_compliant_cases / $total_restricted_cases) * 100 : 0;
+        $dataset['restricted_compliance_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c13($id, $data);
+        redirect('quality/patient_feedback_CQI3c13?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c13_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c13', $data);
+    }
+}
+
+
+// CQI3c14 - Monitor data related to appropriateness of indication for the new drugs (JCI8-MMU2.0) (Clinical Pharmacy)
+public function edit_feedback_CQI3c14() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3c14', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c14', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3c14_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3c14_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Appropriateness Rate for New Drugs
+        $appropriate_cases = intval($this->input->post('appropriate_cases')) ?: 0;
+        $total_new_drugs = intval($this->input->post('total_new_drugs')) ?: 0;
+        $rate = ($total_new_drugs > 0) ? ($appropriate_cases / $total_new_drugs) * 100 : 0;
+        $dataset['appropriateness_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3c14($id, $data);
+        redirect('quality/patient_feedback_CQI3c14?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3c14_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3c14', $data);
+    }
+}
+
+
+// CQI3d1 - Percentage of modification of anaesthesia plan (OT - Anaesthesia)
+public function edit_feedback_CQI3d1() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3d1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3d1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3d1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Modification of Anaesthesia Plan Rate
+        $modified_cases = intval($this->input->post('modified_cases')) ?: 0;
+        $total_anaesthesia_cases = intval($this->input->post('total_anaesthesia_cases')) ?: 0;
+        $rate = ($total_anaesthesia_cases > 0) ? ($modified_cases / $total_anaesthesia_cases) * 100 : 0;
+        $dataset['modification_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3d1($id, $data);
+        redirect('quality/patient_feedback_CQI3d1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3d1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d1', $data);
+    }
+}
+
+
+// CQI3d2 - Percentage of unplanned ventilation following anaesthesia (OT - Anaesthesia)
+public function edit_feedback_CQI3d2() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3d2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3d2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3d2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Unplanned Ventilation Rate
+        $unplanned_ventilations = intval($this->input->post('unplanned_ventilations')) ?: 0;
+        $total_anaesthesia_cases = intval($this->input->post('total_anaesthesia_cases')) ?: 0;
+        $rate = ($total_anaesthesia_cases > 0) ? ($unplanned_ventilations / $total_anaesthesia_cases) * 100 : 0;
+        $dataset['unplanned_ventilation_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3d2($id, $data);
+        redirect('quality/patient_feedback_CQI3d2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3d2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d2', $data);
+    }
+}
+
+
+// CQI3d3 - Percentage of adverse anaesthesia events following anaesthesia (OT - Anaesthesia)
+public function edit_feedback_CQI3d3() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3d3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3d3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3d3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Adverse Anaesthesia Event Rate
+        $adverse_events = intval($this->input->post('adverse_events')) ?: 0;
+        $total_anaesthesia_cases = intval($this->input->post('total_anaesthesia_cases')) ?: 0;
+        $rate = ($total_anaesthesia_cases > 0) ? ($adverse_events / $total_anaesthesia_cases) * 100 : 0;
+        $dataset['adverse_event_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3d3($id, $data);
+        redirect('quality/patient_feedback_CQI3d3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3d3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d3', $data);
+    }
+}
+
+
+// CQI3d4 - Anaesthesia related mortality rate (OT - Anaesthesia)
+public function edit_feedback_CQI3d4() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3d4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3d4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3d4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Anaesthesia Mortality Rate
+        $anaesthesia_deaths = intval($this->input->post('anaesthesia_deaths')) ?: 0;
+        $total_anaesthesia_cases = intval($this->input->post('total_anaesthesia_cases')) ?: 0;
+        $rate = ($total_anaesthesia_cases > 0) ? ($anaesthesia_deaths / $total_anaesthesia_cases) * 100 : 0;
+        $dataset['anaesthesia_mortality_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3d4($id, $data);
+        redirect('quality/patient_feedback_CQI3d4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3d4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d4', $data);
+    }
+}
+
+
+// CQI3d5 - Percentage of safe and rational prescriptions (Clinical Pharmacy - IP-Pharmacy)
+public function edit_feedback_CQI3d5() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3d5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3d5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3d5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Safe & Rational Prescription Rate
+        $safe_prescriptions = intval($this->input->post('safe_prescriptions')) ?: 0;
+        $total_prescriptions = intval($this->input->post('total_prescriptions')) ?: 0;
+        $rate = ($total_prescriptions > 0) ? ($safe_prescriptions / $total_prescriptions) * 100 : 0;
+        $dataset['safe_prescription_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3d5($id, $data);
+        redirect('quality/patient_feedback_CQI3d5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3d5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3d5', $data);
+    }
+}
+// CQI3e1 - Percentage of unplanned return to OT (OT)
+public function edit_feedback_CQI3e1() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Percentage of unplanned return to OT
+        $unplanned_return_cases = intval($this->input->post('unplanned_return_cases')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($unplanned_return_cases / $total_surgeries) * 100 : 0;
+        $dataset['unplanned_return_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e1($id, $data);
+        redirect('quality/patient_feedback_CQI3e1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e1', $data);
+    }
+}
+
+
+// CQI3e2 - Percentage of rescheduling of surgeries (OT)
+public function edit_feedback_CQI3e2() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic same as above
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Percentage of rescheduled surgeries
+        $rescheduled_cases = intval($this->input->post('rescheduled_cases')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($rescheduled_cases / $total_surgeries) * 100 : 0;
+        $dataset['rescheduled_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e2($id, $data);
+        redirect('quality/patient_feedback_CQI3e2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e2', $data);
+    }
+}
+// CQI3e3 - Percentage of cases where organisation’s procedure to prevent surgery errors (wrong site, wrong procedure, wrong patient) have been adhered (OT)
+public function edit_feedback_CQI3e3() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Percentage of cases adhering to surgery error prevention protocol
+        $cases_adhered = intval($this->input->post('cases_adhered')) ?: 0;
+        $total_cases = intval($this->input->post('total_cases')) ?: 0;
+        $rate = ($total_cases > 0) ? ($cases_adhered / $total_cases) * 100 : 0;
+        $dataset['adherence_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e3($id, $data);
+        redirect('quality/patient_feedback_CQI3e3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e3', $data);
+    }
+}
+
+
+// CQI3e4 - Percentage of cases receiving appropriate prophylactic antibiotics within specified time frame (Clinical Pharmacy)
+public function edit_feedback_CQI3e4() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Percentage of appropriate prophylactic antibiotic administration
+        $appropriate_cases = intval($this->input->post('appropriate_cases')) ?: 0;
+        $total_cases = intval($this->input->post('total_cases')) ?: 0;
+        $rate = ($total_cases > 0) ? ($appropriate_cases / $total_cases) * 100 : 0;
+        $dataset['appropriate_antibiotic_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e4($id, $data);
+        redirect('quality/patient_feedback_CQI3e4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e4', $data);
+    }
+}
+
+
+// CQI3e5 - Percentage of cases where the planned surgery was changed intraoperatively (OT)
+public function edit_feedback_CQI3e5() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Percentage of cases with intraoperative change in planned surgery
+        $changed_cases = intval($this->input->post('changed_cases')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($changed_cases / $total_surgeries) * 100 : 0;
+        $dataset['intraoperative_change_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e5($id, $data);
+        redirect('quality/patient_feedback_CQI3e5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e5', $data);
+    }
+}
+// CQI3e6 - Re-exploration rate (OT)
+public function edit_feedback_CQI3e6() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e6', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Re-exploration rate = (Re-explorations / Total Surgeries) * 100
+        $re_explorations = intval($this->input->post('re_explorations')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($re_explorations / $total_surgeries) * 100 : 0;
+        $dataset['re_exploration_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e6($id, $data);
+        redirect('quality/patient_feedback_CQI3e6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e6', $data);
+    }
+}
+// CQI3e7 - Primary Cesarean Rate (Nursing - OBG)
+public function edit_feedback_CQI3e7() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e7', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e7', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e7_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic (same as above)
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Primary Cesarean Rate = (Primary Cesarean Deliveries / Total Deliveries) * 100
+        $primary_cesareans = intval($this->input->post('primary_cesareans')) ?: 0;
+        $total_deliveries = intval($this->input->post('total_deliveries')) ?: 0;
+        $rate = ($total_deliveries > 0) ? ($primary_cesareans / $total_deliveries) * 100 : 0;
+        $dataset['primary_cesarean_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e7($id, $data);
+        redirect('quality/patient_feedback_CQI3e7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e7', $data);
+    }
+}
+// CQI3e8 - Adverse events related to implant devices (JCI8-ASC 4.4) - (OT)
+public function edit_feedback_CQI3e8() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e8', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e8', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e8_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Adverse events related to implant devices = (Adverse Implant Events / Total Implant Cases) * 100
+        $adverse_events = intval($this->input->post('adverse_events')) ?: 0;
+        $total_implant_cases = intval($this->input->post('total_implant_cases')) ?: 0;
+        $rate = ($total_implant_cases > 0) ? ($adverse_events / $total_implant_cases) * 100 : 0;
+        $dataset['adverse_implant_event_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e8($id, $data);
+        redirect('quality/patient_feedback_CQI3e8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e8', $data);
+    }
+}
+// CQI3e9 - All major patient safety events or errors related to surgical procedures (JCI8-QPS 3.04)
+public function edit_feedback_CQI3e9() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3e9', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e9', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3e9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3e9_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File upload/removal logic
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: Surgical safety event rate = (No. of Surgical Safety Events / Total Surgeries) * 100
+        $safety_events = intval($this->input->post('safety_events')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($safety_events / $total_surgeries) * 100 : 0;
+        $dataset['surgical_safety_event_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3e9($id, $data);
+        redirect('quality/patient_feedback_CQI3e9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3e9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3e9', $data);
+    }
+}
+// ---------------------------------------------------------------------
+// CQI3f1 - Percentage of transfusion reactions (PSQ3a) - (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f1() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation: (No. of Transfusion Reactions / Total Transfusions) * 100
+        $reactions = intval($this->input->post('transfusion_reactions')) ?: 0;
+        $total_transfusions = intval($this->input->post('total_transfusions')) ?: 0;
+        $rate = ($total_transfusions > 0) ? ($reactions / $total_transfusions) * 100 : 0;
+        $dataset['transfusion_reaction_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f1($id, $data);
+        redirect('quality/patient_feedback_CQI3f1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f1', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3f2 - Percentage of waste of blood and blood components among those issued (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f2() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation: (Wasted Blood Units / Total Blood Units Issued) * 100
+        $wasted_units = intval($this->input->post('wasted_units')) ?: 0;
+        $issued_units = intval($this->input->post('issued_units')) ?: 0;
+        $rate = ($issued_units > 0) ? ($wasted_units / $issued_units) * 100 : 0;
+        $dataset['blood_waste_rate_issued'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f2($id, $data);
+        redirect('quality/patient_feedback_CQI3f2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f2', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3f3 - Percentage of waste of blood and blood components among those stored (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f3() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle files (same as above)
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Calculation: (Wasted Blood Units / Total Stored Units) * 100
+        $wasted_stored_units = intval($this->input->post('wasted_stored_units')) ?: 0;
+        $total_stored_units = intval($this->input->post('total_stored_units')) ?: 0;
+        $rate = ($total_stored_units > 0) ? ($wasted_stored_units / $total_stored_units) * 100 : 0;
+        $dataset['blood_waste_rate_stored'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f3($id, $data);
+        redirect('quality/patient_feedback_CQI3f3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f3', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3f4 - Percentage of number of blood component units used (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f4() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: (Blood Units Used / Total Blood Units Available) * 100
+        $used_units = intval($this->input->post('used_units')) ?: 0;
+        $available_units = intval($this->input->post('available_units')) ?: 0;
+        $rate = ($available_units > 0) ? ($used_units / $available_units) * 100 : 0;
+        $dataset['blood_use_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f4($id, $data);
+        redirect('quality/patient_feedback_CQI3f4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f4', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3f5 - Percentage of discard of blood components due to expiry (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f5() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: (Units Discarded Due to Expiry / Total Units Prepared) * 100
+        $expired_units = intval($this->input->post('expired_units')) ?: 0;
+        $prepared_units = intval($this->input->post('prepared_units')) ?: 0;
+        $rate = ($prepared_units > 0) ? ($expired_units / $prepared_units) * 100 : 0;
+        $dataset['expiry_discard_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f5($id, $data);
+        redirect('quality/patient_feedback_CQI3f5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f5', $data);
+    }
+}
+// ---------------------------------------------------------------------
+// CQI3f6 - Adverse events and near miss events involving blood bank and/or transfusion services (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f6() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f6', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File Handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: (No. of Adverse/Near Miss Events / Total Transfusions) * 100
+        $events = intval($this->input->post('events')) ?: 0;
+        $transfusions = intval($this->input->post('transfusions')) ?: 0;
+        $rate = ($transfusions > 0) ? ($events / $transfusions) * 100 : 0;
+        $dataset['adverse_event_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f6($id, $data);
+        redirect('quality/patient_feedback_CQI3f6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f6', $data);
+    }
+}
+
+
+// ---------------------------------------------------------------------
+// CQI3f7 - Blood availability rate (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f7() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f7', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f7', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f7_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle Files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: (Units Available / Units Requested) * 100
+        $available_units = intval($this->input->post('available_units')) ?: 0;
+        $requested_units = intval($this->input->post('requested_units')) ?: 0;
+        $rate = ($requested_units > 0) ? ($available_units / $requested_units) * 100 : 0;
+        $dataset['availability_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f7($id, $data);
+        redirect('quality/patient_feedback_CQI3f7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f7', $data);
+    }
+}
+
+
+// ---------------------------------------------------------------------
+// CQI3f8 - CT Ratio (Crossmatch to Transfusion Ratio) (Blood Center)
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f8() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f8', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f8', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f8_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // Handle Files
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: CT Ratio = Total Crossmatches / Total Transfusions
+        $crossmatches = intval($this->input->post('crossmatches')) ?: 0;
+        $transfusions = intval($this->input->post('transfusions')) ?: 0;
+        $ratio = ($transfusions > 0) ? ($crossmatches / $transfusions) : 0;
+        $dataset['ct_ratio'] = round($ratio, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f8($id, $data);
+        redirect('quality/patient_feedback_CQI3f8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f8', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f9() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f9', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f9', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f9_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🔹 Handle File Uploads
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        // Remove unwanted files
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🔹 Update dataset from POST
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🔹 KPI Calculation: TAT = End Time - Start Time (in minutes)
+        $start_time = strtotime($this->input->post('start_time'));
+        $end_time = strtotime($this->input->post('end_time'));
+        $tat = ($end_time > $start_time) ? round(($end_time - $start_time) / 60, 2) : 0;
+        $dataset['turnaround_time'] = $tat;
+
+        // Save record
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f9($id, $data);
+        redirect('quality/patient_feedback_CQI3f9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f9', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3f10() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3f10', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f10', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3f10_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3f10_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🔹 Handle File Uploads
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        // Remove unwanted files
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // 🔹 Update dataset from POST
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // 🔹 KPI Calculation: TAT = End Time - Start Time (in minutes)
+        $start_time = strtotime($this->input->post('donation_start_time'));
+        $end_time = strtotime($this->input->post('donation_end_time'));
+        $tat = ($end_time > $start_time) ? round(($end_time - $start_time) / 60, 2) : 0;
+        $dataset['turnaround_time'] = $tat;
+
+        // Save record
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3f10($id, $data);
+        redirect('quality/patient_feedback_CQI3f10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3f10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3f10', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g1() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g1', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g1', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset from POST
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI: (CAUTI Cases / Catheter Days) × 1000
+        $cauti_cases = intval($this->input->post('cauti_cases')) ?: 0;
+        $catheter_days = intval($this->input->post('catheter_days')) ?: 0;
+        $rate = ($catheter_days > 0) ? ($cauti_cases / $catheter_days) * 1000 : 0;
+        $dataset['cauti_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g1($id, $data);
+        redirect('quality/patient_feedback_CQI3g1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g1', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g2() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g2', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g2', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g2_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (VAP Cases / Ventilator Days) × 1000
+        $vap_cases = intval($this->input->post('vap_cases')) ?: 0;
+        $ventilator_days = intval($this->input->post('ventilator_days')) ?: 0;
+        $rate = ($ventilator_days > 0) ? ($vap_cases / $ventilator_days) * 1000 : 0;
+        $dataset['vap_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g2($id, $data);
+        redirect('quality/patient_feedback_CQI3g2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g2', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g3() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g3', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g3', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g3_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (CLABSI Cases / Central Line Days) × 1000
+        $clabsi_cases = intval($this->input->post('clabsi_cases')) ?: 0;
+        $central_line_days = intval($this->input->post('central_line_days')) ?: 0;
+        $rate = ($central_line_days > 0) ? ($clabsi_cases / $central_line_days) * 1000 : 0;
+        $dataset['clabsi_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g3($id, $data);
+        redirect('quality/patient_feedback_CQI3g3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g3', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g4() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g4', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g4', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g4_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (SSI Cases / Total Surgeries) × 100
+        $ssi_cases = intval($this->input->post('ssi_cases')) ?: 0;
+        $total_surgeries = intval($this->input->post('total_surgeries')) ?: 0;
+        $rate = ($total_surgeries > 0) ? ($ssi_cases / $total_surgeries) * 100 : 0;
+        $dataset['ssi_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g4($id, $data);
+        redirect('quality/patient_feedback_CQI3g4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g4', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g5() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g5', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g5', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g5_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (Sepsis Cases / NICU Admissions) × 100
+        $sepsis_cases = intval($this->input->post('sepsis_cases')) ?: 0;
+        $nicu_admissions = intval($this->input->post('nicu_admissions')) ?: 0;
+        $rate = ($nicu_admissions > 0) ? ($sepsis_cases / $nicu_admissions) * 100 : 0;
+        $dataset['sepsis_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g5($id, $data);
+        redirect('quality/patient_feedback_CQI3g5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g5', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3g6() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true) {
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3g6', $data, true);
+        } else {
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g6', $data, true);
+        }
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3g6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3g6_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // File handling
+        $existingFiles = !empty($dataset['files_name']) ? $dataset['files_name'] : [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $index) {
+                if (isset($existingFiles[$index])) {
+                    $oldFilePath = str_replace(base_url(), '', $existingFiles[$index]['url']);
+                    $absolutePath = FCPATH . $oldFilePath;
+                    if (file_exists($absolutePath)) @unlink($absolutePath);
+                    unset($existingFiles[$index]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000,
+                'encrypt_name'  => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = array_values($existingFiles);
+
+        // Update dataset
+        foreach ($_POST as $key => $value) {
+            if (!in_array($key, ['uploaded_files', 'remove_files_json'])) {
+                $dataset[$key] = $value;
+            }
+        }
+
+        // KPI Formula: (Compliant Checks / Total Checks) × 100
+        $compliant_checks = intval($this->input->post('compliant_checks')) ?: 0;
+        $total_checks = intval($this->input->post('total_checks')) ?: 0;
+        $rate = ($total_checks > 0) ? ($compliant_checks / $total_checks) * 100 : 0;
+        $dataset['cleaning_compliance_rate'] = round($rate, 2);
+
+        $data = ['dataset' => json_encode($dataset)];
+        $this->quality_model->update_feedback_CQI3g6($id, $data);
+        redirect('quality/patient_feedback_CQI3g6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3g6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3g6', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h1() {
+    if (!isset($this->session->userdata['isLogIn']) || ($this->session->userdata('isLogIn') === false)) {
+        $this->session->set_userdata('referred_from', current_url());
+    } else {
+        $this->session->set_userdata('referred_from', NULL);
+    }
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        if (isfeature_active('QUALITY-DASHBOARD') === true)
+            $data['content'] = $this->load->view('qualitymodules/edit_feedback_CQI3h1', $data, true);
+        else
+            $data['content'] = $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h1_byid($id);
+        $dataset = json_decode($existing->dataset, true);
+        if (!is_array($dataset)) $dataset = [];
+
+        // 🗂 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        if (!empty($removeIndexes)) {
+            foreach ($removeIndexes as $i) {
+                if (isset($existingFiles[$i])) {
+                    $path = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                    if (file_exists($path)) @unlink($path);
+                    unset($existingFiles[$i]);
+                }
+            }
+            $existingFiles = array_values($existingFiles);
+        }
+
+        // 📤 Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $count = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'   => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'      => 50000
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI: (Deaths / Discharges) × 100
+        $deaths = intval($this->input->post('deaths')) ?: 0;
+        $discharges = intval($this->input->post('discharges')) ?: 0;
+        $rate = ($discharges > 0) ? ($deaths / $discharges) * 100 : 0;
+        $dataset['mortality_rate'] = round($rate, 2);
+
+        $this->quality_model->update_feedback_CQI3h1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h1', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // File handling + uploads (same as above)
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $readmit = intval($this->input->post('readmit_48hr')) ?: 0;
+        $discharges = intval($this->input->post('icu_discharges')) ?: 0;
+        $dataset['return_rate'] = ($discharges > 0) ? round(($readmit / $discharges) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h2', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // File handling + uploads (same as above)
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $readmit = intval($this->input->post('readmit_48hr')) ?: 0;
+        $discharges = intval($this->input->post('icu_discharges')) ?: 0;
+        $dataset['return_rate'] = ($discharges > 0) ? round(($readmit / $discharges) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h3', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling (same as other functions)
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $readmit = intval($this->input->post('readmit_48hr')) ?: 0;
+        $discharges = intval($this->input->post('icu_discharges')) ?: 0;
+        $dataset['return_rate'] = ($discharges > 0) ? round(($readmit / $discharges) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h4', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $returns = intval($this->input->post('return_cases')) ?: 0;
+        $total = intval($this->input->post('total_emergency_visits')) ?: 0;
+        $dataset['return_rate'] = ($total > 0) ? round(($returns / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h5', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h6() {  // change 3h6 → 3h7 or 3h8 for others
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h6_byid($id) {  // same pattern for 3h7 / 3h8
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $reintubations = intval($this->input->post('reintubation_cases')) ?: 0;
+        $extubations = intval($this->input->post('total_extubated_patients')) ?: 0;
+        $dataset['reintubation_rate'] = ($extubations > 0) ? round(($reintubations / $extubations) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h6', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h7() {  // change 3h6 → 3h7 or 3h8 for others
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h7_byid($id) {  // same pattern for 3h7 / 3h8
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $reintubations = intval($this->input->post('reintubation_cases')) ?: 0;
+        $extubations = intval($this->input->post('total_extubated_patients')) ?: 0;
+        $dataset['reintubation_rate'] = ($extubations > 0) ? round(($reintubations / $extubations) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h7', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h8() {  // change 3h6 → 3h7 or 3h8 for others
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h8_byid($id) {  // same pattern for 3h7 / 3h8
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $reintubations = intval($this->input->post('reintubation_cases')) ?: 0;
+        $extubations = intval($this->input->post('total_extubated_patients')) ?: 0;
+        $dataset['reintubation_rate'] = ($extubations > 0) ? round(($reintubations / $extubations) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h8', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3h9() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3h9', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h9', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3h9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3h9_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // KPI formula
+        $readmit = intval($this->input->post('readmission_cases')) ?: 0;
+        $discharges = intval($this->input->post('total_discharges')) ?: 0;
+        $dataset['readmission_rate'] = ($discharges > 0) ? round(($readmit / $discharges) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3h9($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3h9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3h9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3h9', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File Handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // 🔹 File Upload
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Example: compliance %)
+        $compliant = intval($this->input->post('compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['handover_compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j1', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        // 🔹 File Handling
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // 🔹 Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (handover compliance rate)
+        $compliant = intval($this->input->post('compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['handover_compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j2', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        $compliant = intval($this->input->post('compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['handover_compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j3', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (identification error rate)
+        $errors = intval($this->input->post('identification_errors')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['identification_error_rate'] = ($total > 0) ? round(($errors / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j4', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (hand hygiene compliance rate)
+        $missed = intval($this->input->post('missed_opportunities')) ?: 0;
+        $total = intval($this->input->post('total_opportunities')) ?: 0;
+        $dataset['hand_hygiene_compliance'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j5', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Compliance %)
+        $correct = intval($this->input->post('correct_prescriptions')) ?: 0;
+        $total = intval($this->input->post('total_prescriptions')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($correct / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j6', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (handover compliance rate)
+        $done = intval($this->input->post('handover_completed')) ?: 0;
+        $total = intval($this->input->post('handover_required')) ?: 0;
+        $dataset['handover_compliance'] = ($total > 0) ? round(($done / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j7', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j8() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (handover compliance rate)
+        $done = intval($this->input->post('handover_completed')) ?: 0;
+        $total = intval($this->input->post('handover_required')) ?: 0;
+        $dataset['handover_compliance'] = ($total > 0) ? round(($done / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j8', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j9() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j9', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j9', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j9_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Patient ID compliance rate)
+        $correct = intval($this->input->post('correct_identifications')) ?: 0;
+        $total = intval($this->input->post('total_checks')) ?: 0;
+        $dataset['id_compliance'] = ($total > 0) ? round(($correct / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j9($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j9', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j10() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j10', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j10', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j10_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j10_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Timeliness rate)
+        $timely = intval($this->input->post('reports_within_30min')) ?: 0;
+        $total = intval($this->input->post('total_critical_reports')) ?: 0;
+        $dataset['timeliness_rate'] = ($total > 0) ? round(($timely / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j10($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j10', $data);
+    }
+}
+// ---------------------------------------------------------------------
+// CQI3j11 - IPSG 2.2 - Hand off communication interdepartmental shift (MRD - Emergency Department)
+public function edit_feedback_CQI3j11() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j11', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j11', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j11_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j11_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handoff communication compliance rate)
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j11($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j11', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3j12 - IPSG 2.2 - Hand off communication interdepartmental shift (MRD - ICU)
+public function edit_feedback_CQI3j12() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j12', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j12', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j12_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j12_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handoff communication compliance rate)
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j12($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j12?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j12_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j12', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3j13 - IPSG 2.2 - Hand off communication interdepartmental shift (Nurses)-(Nursing - Emergency Department)
+public function edit_feedback_CQI3j13() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j13', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j13', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j13_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j13_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handoff communication compliance rate)
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j13($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j13?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j13_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j13', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3j14 - IPSG 2.2 - Hand off communication interdepartmental shift (Nurses)-(Nursing - ICU)
+public function edit_feedback_CQI3j14() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j14', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j14', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j14_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j14_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handoff communication compliance rate)
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j14($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j14?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j14_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j14', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// CQI3j15 - IPSG 2.2 - Hand off communication interdepartmental shift (Nurses)-(Nursing - Ward)
+public function edit_feedback_CQI3j15() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j15', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j15', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j15_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j15_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handoff communication compliance rate)
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j15($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j15?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j15_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j15', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j16() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j16', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j16', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j16_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j16_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: Handoff compliance rate among doctors
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j16($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j16?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j16_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j16', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j17() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j17', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j17', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j17_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j17_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j17($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j17?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j17_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j17', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j18() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j18', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j18', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j18_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j18_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j18($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j18?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j18_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j18', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j19() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j19', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j19', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j19_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j19_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: Handoff compliance rate among nurses
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j19($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j19?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j19_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j19', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j20() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j20', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j20', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j20_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j20_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: Handoff compliance rate among nurses
+        $missed = intval($this->input->post('missed_handoffs')) ?: 0;
+        $total = intval($this->input->post('total_handoffs')) ?: 0;
+        $dataset['handoff_compliance_rate'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j20($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j20?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j20_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j20', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j21() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j21', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j21', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j21_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j21_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: Surgical compliance (correct site/procedure/patient)
+        $non_compliant = intval($this->input->post('non_compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['surgical_compliance_rate'] = ($total > 0) ? round((($total - $non_compliant) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j21($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j21?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j21_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j21', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j22() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j22', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j22', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j22_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j22_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        $non_compliant = intval($this->input->post('non_compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['surgical_compliance_rate'] = ($total > 0) ? round((($total - $non_compliant) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j22($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j22?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j22_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j22', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j23() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j23', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j23', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j23_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j23_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Correct Site/Procedure Compliance Rate)
+        $correct = intval($this->input->post('correct_cases')) ?: 0;
+        $total = intval($this->input->post('total_surgeries')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($correct / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j23($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j23?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j23_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j23', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j24() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j24', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j24', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j24_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j24_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Fall Prevention Compliance)
+        $compliant = intval($this->input->post('fall_measures_complied')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j24($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j24?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j24_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j24', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j25() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j25', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j25', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j25_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j25_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Fall Prevention Compliance)
+        $compliant = intval($this->input->post('fall_measures_complied')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j25($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j25?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j25_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j25', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j26() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j26', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j26', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j26_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j26_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Fall Prevention Compliance in Physiotherapy OP)
+        $compliant = intval($this->input->post('fall_measures_complied')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j26($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j26?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j26_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j26', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j27() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j27', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j27', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j27_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j27_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Hand Hygiene Compliance)
+        $missed = intval($this->input->post('missed_opportunities')) ?: 0;
+        $total = intval($this->input->post('total_opportunities')) ?: 0;
+        $dataset['hand_hygiene_compliance'] = ($total > 0) ? round((($total - $missed) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j27($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j27?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j27_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j27', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j28() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j28', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j28', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j28_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j28_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Patient Identification Compliance)
+        $identified = intval($this->input->post('correctly_identified')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($identified / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j28($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j28?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j28_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j28', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j29() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j29', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j29', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j29_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j29_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Handover Compliance Rate)
+        $successful = intval($this->input->post('successful_handovers')) ?: 0;
+        $total = intval($this->input->post('total_handovers')) ?: 0;
+        $dataset['handover_compliance'] = ($total > 0) ? round(($successful / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j29($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j29?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j29_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j29', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j30() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j30', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j30', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j30_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j30_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Adverse Event Rate)
+        $adverse = intval($this->input->post('adverse_events')) ?: 0;
+        $total = intval($this->input->post('total_sessions')) ?: 0;
+        $dataset['adverse_event_rate'] = ($total > 0) ? round(($adverse / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j30($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j30?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j30_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j30', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j31() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j31', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j31', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j31_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j31_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Adverse Event Rate OPD)
+        $adverse = intval($this->input->post('adverse_events')) ?: 0;
+        $total = intval($this->input->post('total_sessions')) ?: 0;
+        $dataset['adverse_event_rate'] = ($total > 0) ? round(($adverse / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j31($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j31?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j31_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j31', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j32() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j32', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j32', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j32_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j32_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Correct Surgery Compliance)
+        $incorrect = intval($this->input->post('incorrect_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases')) ?: 0;
+        $dataset['surgery_compliance_rate'] = ($total > 0) ? round((($total - $incorrect) / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j32($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j32?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j32_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j32', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j33() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j33', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j33', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j33_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j33_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Security Incident Rate)
+        $incidents = intval($this->input->post('security_incidents')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['security_incident_rate'] = ($total > 0) ? round(($incidents / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j33($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j33?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j33_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j33', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI3j34() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI3j34', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j34', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI3j34_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI3j34_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Safety Incident Rate)
+        $incidents = intval($this->input->post('safety_incidents')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['safety_incident_rate'] = ($total > 0) ? round(($incidents / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI3j34($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI3j34?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI3j34_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI3j34', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI4a1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4a1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4a1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4a1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Example)
+        $total = intval($this->input->post('total_items')) ?: 0;
+        $local = intval($this->input->post('local_purchases')) ?: 0;
+        $dataset['percentage_local_procured'] = ($total > 0) ? round(($local / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4a1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4a1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4a1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a1', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI4a2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4a2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4a2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4a2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Outside Formulary Purchase %)
+        $outside = intval($this->input->post('outside_formulary')) ?: 0;
+        $total = intval($this->input->post('total_purchases')) ?: 0;
+        $dataset['outside_formulary_percentage'] = ($total > 0) ? round(($outside / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4a2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4a2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4a2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a2', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI4a3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4a3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4a3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4a3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Stock Out Rate)
+        $stockout_days = intval($this->input->post('stockout_days')) ?: 0;
+        $total_days = intval($this->input->post('total_days')) ?: 0;
+        $dataset['stockout_rate'] = ($total_days > 0) ? round(($stockout_days / $total_days) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4a3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4a3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4a3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a3', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI4a4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4a4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4a4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4a4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Rejection %)
+        $rejected = intval($this->input->post('rejected_items')) ?: 0;
+        $total = intval($this->input->post('total_items_received')) ?: 0;
+        $dataset['rejection_percentage'] = ($total > 0) ? round(($rejected / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4a4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4a4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4a4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a4', $data);
+    }
+}
+// ---------------------------------------------------------------------
+public function edit_feedback_CQI4a5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4a5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4a5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4a5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Variation %)
+        $variations = intval($this->input->post('variation_cases')) ?: 0;
+        $total = intval($this->input->post('total_procurements')) ?: 0;
+        $dataset['variation_percentage'] = ($total > 0) ? round(($variations / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4a5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4a5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4a5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4a5', $data);
+    }
+}
+// ---------------------------------------------------------------------
+// ✅ CQI4b1 - Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days)-(Nursing)
+public function edit_feedback_CQI4b1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Example Placeholder)
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $bedsores = intval($this->input->post('bed_sore_cases')) ?: 0;
+        $dataset['bed_sore_rate'] = ($total > 0) ? round(($bedsores / $total) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4b1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b1', $data);
+    }
+}
+// ---------------------------------------------------------------------
+// ✅ CQI4b2 - Incidence of falls (in 1000 IPD days)-(Office-Quality)
+public function edit_feedback_CQI4b2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Falls rate per 1000 IPD days)
+        $falls = intval($this->input->post('fall_cases')) ?: 0;
+        $ipd_days = intval($this->input->post('ipd_days')) ?: 0;
+        $dataset['fall_rate'] = ($ipd_days > 0) ? round(($falls / $ipd_days) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4b2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b2', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// ✅ CQI4b3 - Number of variations observed in mock drill(Safety & Security)
+public function edit_feedback_CQI4b3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Variation count)
+        $dataset['variation_count'] = intval($this->input->post('variations')) ?: 0;
+
+        $this->quality_model->update_feedback_CQI4b3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b3', $data);
+    }
+}
+
+// ---------------------------------------------------------------------
+// ✅ CQI4b4 - Percentage of staff provided with pre-exposure prophylaxis(Infection Control)
+public function edit_feedback_CQI4b4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Staff prophylaxis %)
+        $given = intval($this->input->post('staff_given')) ?: 0;
+        $total = intval($this->input->post('total_staff')) ?: 0;
+        $dataset['prophylaxis_percentage'] = ($total > 0) ? round(($given / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4b4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b4', $data);
+    }
+}
+// ✅ CQI4b5 - Number of Fire Incidents (Safety & Security)
+public function edit_feedback_CQI4b5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Number of Fire Incidents)
+        $dataset['fire_incidents'] = intval($this->input->post('fire_incidents')) ?: 0;
+
+        $this->quality_model->update_feedback_CQI4b5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b5', $data);
+    }
+}
+// ✅ CQI4b6 
+public function edit_feedback_CQI4b6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Number of Fire Incidents)
+        $dataset['fire_incidents'] = intval($this->input->post('fire_incidents')) ?: 0;
+
+        $this->quality_model->update_feedback_CQI4b6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b6', $data);
+    }
+}
+// ✅ CQI4b7 - Number of Extravasation (Nursing)
+public function edit_feedback_CQI4b7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Number of Extravasation)
+        $dataset['extravasation_cases'] = intval($this->input->post('extravasation_cases')) ?: 0;
+
+        $this->quality_model->update_feedback_CQI4b7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b7', $data);
+    }
+}
+// ✅ CQI4b8 - Monitoring of Clinical Errors (JCI8-PCC 2.3)-(Quality Office)
+public function edit_feedback_CQI4b8() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4b8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4b8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4b8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Total Clinical Errors)
+        $dataset['clinical_errors'] = intval($this->input->post('clinical_errors')) ?: 0;
+
+        $this->quality_model->update_feedback_CQI4b8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4b8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4b8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4b8', $data);
+    }
+}
+// ✅ CQI4c1 - Bed Occupancy Rate (MRD)
+public function edit_feedback_CQI4c1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Bed Occupancy Rate %)
+        $occupied_bed_days = intval($this->input->post('occupied_bed_days')) ?: 0;
+        $available_bed_days = intval($this->input->post('available_bed_days')) ?: 0;
+        $dataset['bed_occupancy_rate'] = ($available_bed_days > 0)
+            ? round(($occupied_bed_days / $available_bed_days) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c1', $data);
+    }
+}
+// ✅ CQI4c2 - Average Length of Stay (MRD)
+public function edit_feedback_CQI4c2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average Length of Stay)
+        $total_patient_days = intval($this->input->post('total_patient_days')) ?: 0;
+        $total_discharges = intval($this->input->post('total_discharges')) ?: 0;
+        $dataset['average_length_of_stay'] = ($total_discharges > 0)
+            ? round($total_patient_days / $total_discharges, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c2', $data);
+    }
+}
+// ✅ CQI4c3 - OT Utilisation Rate (OT)
+public function edit_feedback_CQI4c3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (OT Utilisation %)
+        $actual = intval($this->input->post('actual_ot_hours')) ?: 0;
+        $available = intval($this->input->post('available_ot_hours')) ?: 0;
+        $dataset['ot_utilisation_rate'] = ($available > 0) ? round(($actual / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c3', $data);
+    }
+}
+// ✅ CQI4c4 - ICU equipment utilisation rate (Nursing - ICU1)
+public function edit_feedback_CQI4c4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Equipment Utilisation %)
+        $used = intval($this->input->post('equipment_used_hours')) ?: 0;
+        $available = intval($this->input->post('equipment_available_hours')) ?: 0;
+        $dataset['equipment_utilisation_rate'] = ($available > 0) ? round(($used / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c4', $data);
+    }
+}
+// ✅ CQI4c5 - ICU equipment utilisation rate (Nursing - ICU2)
+public function edit_feedback_CQI4c5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Equipment Utilisation %)
+        $used = intval($this->input->post('equipment_used_hours')) ?: 0;
+        $available = intval($this->input->post('equipment_available_hours')) ?: 0;
+        $dataset['equipment_utilisation_rate'] = ($available > 0) ? round(($used / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c5', $data);
+    }
+}
+// ✅ CQI4c6 - ICU equipment utilisation rate (Nursing - ICU3)
+public function edit_feedback_CQI4c6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Equipment Utilisation %)
+        $used = intval($this->input->post('equipment_used_hours')) ?: 0;
+        $available = intval($this->input->post('equipment_available_hours')) ?: 0;
+        $dataset['equipment_utilisation_rate'] = ($available > 0) ? round(($used / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c6', $data);
+    }
+}
+// ✅ CQI4c7 - ICU Bed utilisation rate (Nursing - ICU)
+public function edit_feedback_CQI4c7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Bed Utilisation %)
+        $occupied = intval($this->input->post('beds_occupied_days')) ?: 0;
+        $available = intval($this->input->post('beds_available_days')) ?: 0;
+        $dataset['bed_utilisation_rate'] = ($available > 0) ? round(($occupied / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c7', $data);
+    }
+}
+// ✅ CQI4c8 - Critical equipment downtime (Biomedical Engineering)
+public function edit_feedback_CQI4c8() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+
+        $existingFiles = $dataset['files_name'] ?? [];
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Downtime %)
+        $downtime = intval($this->input->post('equipment_downtime_hours')) ?: 0;
+        $total = intval($this->input->post('total_equipment_hours')) ?: 0;
+        $dataset['downtime_percentage'] = ($total > 0) ? round(($downtime / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c8', $data);
+    }
+}
+// ✅ CQI4c9 - Cath lab utilization rate (Cath Lab - Nursing)
+public function edit_feedback_CQI4c9() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c9', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c9', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c9_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Cath lab utilization %)
+        $used = intval($this->input->post('hours_used')) ?: 0;
+        $available = intval($this->input->post('hours_available')) ?: 0;
+        $dataset['utilization_percentage'] = ($available > 0) ? round(($used / $available) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c9($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c9', $data);
+    }
+}
+// ✅ CQI4c10 - Nurse patient ratio for ICU Ventilated (Nursing-ICU)
+public function edit_feedback_CQI4c10() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c10', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c10', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c10_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c10_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Nurse-patient ratio ventilated)
+        $nurse = intval($this->input->post('nurse_count')) ?: 0;
+        $patients = intval($this->input->post('ventilated_patients')) ?: 0;
+        $dataset['nurse_patient_ratio'] = ($patients > 0) ? round(($nurse / $patients), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c10($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c10', $data);
+    }
+}
+// ✅ CQI4c11 - Nurse patient ratio for ICU Non Ventilated (Nursing-ICU)
+public function edit_feedback_CQI4c11() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c11', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c11', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c11_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c11_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Nurse-patient ratio non-ventilated)
+        $nurse = intval($this->input->post('nurse_count')) ?: 0;
+        $patients = intval($this->input->post('non_ventilated_patients')) ?: 0;
+        $dataset['nurse_patient_ratio'] = ($patients > 0) ? round(($nurse / $patients), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c11($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c11', $data);
+    }
+}
+// ✅ CQI4c12 - Nurse patient ratio for HDU (Nursing-HDU)
+public function edit_feedback_CQI4c12() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c12', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c12', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c12_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c12_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Nurse-patient ratio HDU)
+        $nurse = intval($this->input->post('nurse_count')) ?: 0;
+        $patients = intval($this->input->post('hdu_patients')) ?: 0;
+        $dataset['nurse_patient_ratio'] = ($patients > 0) ? round(($nurse / $patients), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c12($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c12?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c12_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c12', $data);
+    }
+}
+// ✅ CQI4c13 - Nurse patient ratio for Ward (Nursing-Ward)
+public function edit_feedback_CQI4c13() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c13', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c13', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c13_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c13_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Nurse-patient ratio ward)
+        $nurse = intval($this->input->post('nurse_count')) ?: 0;
+        $patients = intval($this->input->post('ward_patients')) ?: 0;
+        $dataset['nurse_patient_ratio'] = ($patients > 0) ? round(($nurse / $patients), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c13($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c13?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c13_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c13', $data);
+    }
+}
+// ✅ CQI4c14 - Engineering Critical equipment downtime (Engineering & Maintenance)
+public function edit_feedback_CQI4c14() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4c14', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c14', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4c14_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4c14_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Critical equipment downtime %)
+        $downtime = floatval($this->input->post('equipment_downtime_hours')) ?: 0;
+        $total_hours = floatval($this->input->post('total_operating_hours')) ?: 0;
+        $dataset['downtime_percentage'] = ($total_hours > 0) ? round(($downtime / $total_hours) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4c14($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4c14?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4c14_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4c14', $data);
+    }
+}
+// ✅ CQI4d1 - Out patient satisfaction index (Patient Care Services - OPD)
+public function edit_feedback_CQI4d1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Outpatient satisfaction index)
+        $satisfied = intval($this->input->post('satisfied_patients')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['opd_satisfaction_index'] = ($total > 0) ? round(($satisfied / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d1', $data);
+    }
+}
+
+
+// ✅ CQI4d2 - Inpatient satisfaction index (Patient Care Services - IPD)
+public function edit_feedback_CQI4d2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Inpatient satisfaction index)
+        $satisfied = intval($this->input->post('satisfied_inpatients')) ?: 0;
+        $total = intval($this->input->post('total_inpatients')) ?: 0;
+        $dataset['ipd_satisfaction_index'] = ($total > 0) ? round(($satisfied / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d2', $data);
+    }
+}
+// ✅ CQI4d3 - Time taken for discharge - Cash Patients (Patient Care Services - Cash)
+public function edit_feedback_CQI4d3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average time to discharge for cash patients — minutes)
+        $total_minutes = floatval($this->input->post('total_discharge_minutes')) ?: 0;
+        $cash_patients = intval($this->input->post('cash_discharges')) ?: 0;
+        $dataset['avg_discharge_time_cash_min'] = ($cash_patients > 0) ? round($total_minutes / $cash_patients, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d3', $data);
+    }
+}
+
+
+// ✅ CQI4d4 - Time taken for discharge - Cashless Patients (Patient Care Services - Cashless)
+public function edit_feedback_CQI4d4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average time to discharge for cashless patients — minutes)
+        $total_minutes = floatval($this->input->post('total_discharge_minutes')) ?: 0;
+        $cashless_patients = intval($this->input->post('cashless_discharges')) ?: 0;
+        $dataset['avg_discharge_time_cashless_min'] = ($cashless_patients > 0) ? round($total_minutes / $cashless_patients, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d4', $data);
+    }
+}
+
+
+// ✅ CQI4d5 - Waiting time for diagnostic services (Radiology - CT)
+public function edit_feedback_CQI4d5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average waiting time for CT — minutes)
+        $total_wait_min = floatval($this->input->post('total_wait_minutes')) ?: 0;
+        $requests = intval($this->input->post('ct_requests')) ?: 0;
+        $dataset['avg_wait_ct_min'] = ($requests > 0) ? round($total_wait_min / $requests, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d5', $data);
+    }
+}
+
+
+// ✅ CQI4d6 - Waiting time for diagnostic services (Radiology - MRI)
+public function edit_feedback_CQI4d6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average waiting time for MRI — minutes)
+        $total_wait_min = floatval($this->input->post('total_wait_minutes')) ?: 0;
+        $requests = intval($this->input->post('mri_requests')) ?: 0;
+        $dataset['avg_wait_mri_min'] = ($requests > 0) ? round($total_wait_min / $requests, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d6', $data);
+    }
+}
+
+
+// ✅ CQI4d7 - Waiting time for diagnostic services (Radiology - USG)
+public function edit_feedback_CQI4d7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+       // 5️⃣ Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average waiting time for USG — minutes)
+        $total_wait_min = floatval($this->input->post('total_wait_minutes')) ?: 0;
+        $requests = intval($this->input->post('usg_requests')) ?: 0;
+        $dataset['avg_wait_usg_min'] = ($requests > 0) ? round($total_wait_min / $requests, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d7', $data);
+    }
+}
+
+
+// ✅ CQI4d8 - Waiting Time for OPD appointments (Patient Care Services - OPD)
+public function edit_feedback_CQI4d8() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // 5️⃣ Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average waiting time for OPD appointments — minutes)
+        $total_wait_min = floatval($this->input->post('total_wait_minutes')) ?: 0;
+        $appointments = intval($this->input->post('appointments')) ?: 0;
+        $dataset['avg_wait_opd_appointments_min'] = ($appointments > 0) ? round($total_wait_min / $appointments, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d8', $data);
+    }
+}
+
+
+// ✅ CQI4d9 - Waiting Time for OPD Walk-in (Patient Care Services - OPD)
+public function edit_feedback_CQI4d9() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d9', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d9', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d9_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d9_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+       // 5️⃣ Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average waiting time for OPD walk-in — minutes)
+        $total_wait_min = floatval($this->input->post('total_wait_minutes')) ?: 0;
+        $walkins = intval($this->input->post('walkin_patients')) ?: 0;
+        $dataset['avg_wait_opd_walkin_min'] = ($walkins > 0) ? round($total_wait_min / $walkins, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d9($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d9?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d9_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d9', $data);
+    }
+}
+
+
+// ✅ CQI4d10 - Patient Satisfaction Rate (Nursing - OBG)
+public function edit_feedback_CQI4d10() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d10', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d10', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d10_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d10_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+       // 5️⃣ Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $filesCount = count($_FILES['uploaded_files']['name']);
+            $config = [
+                'upload_path'  => './api/file_uploads/',
+                'allowed_types'=> 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx',
+                'max_size'     => 50000,
+                'encrypt_name' => FALSE
+            ];
+            $this->load->library('upload');
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file'] = [
+                    'name'     => $_FILES['uploaded_files']['name'][$i],
+                    'type'     => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error'    => $_FILES['uploaded_files']['error'][$i],
+                    'size'     => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $uploadData = $this->upload->data();
+                    $existingFiles[] = [
+                        'url'  => base_url('api/file_uploads/' . $uploadData['file_name']),
+                        'name' => $uploadData['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (OBG patient satisfaction %)
+        $satisfied = intval($this->input->post('satisfied_patients')) ?: 0;
+        $total = intval($this->input->post('total_patients')) ?: 0;
+        $dataset['obg_satisfaction_rate'] = ($total > 0) ? round(($satisfied / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d10($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d10?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d10_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d10', $data);
+    }
+}
+
+
+// ✅ CQI4d11 - Turn-around Time for Nursing call bell responds (Nursing)
+public function edit_feedback_CQI4d11() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4d11', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d11', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4d11_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4d11_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Average response time to call bell — minutes)
+        $total_response_min = floatval($this->input->post('total_response_minutes')) ?: 0;
+        $total_calls = intval($this->input->post('total_calls')) ?: 0;
+        $dataset['avg_callbell_response_min'] = ($total_calls > 0) ? round($total_response_min / $total_calls, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4d11($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4d11?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4d11_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4d11', $data);
+    }
+}
+// ✅ CQI4e1 - Employee satisfaction index(HR)
+public function edit_feedback_CQI4e1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Employee satisfaction %)
+        $satisfied = intval($this->input->post('satisfied_employees')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $dataset['employee_satisfaction_index'] = ($total > 0) ? round(($satisfied / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e1', $data);
+    }
+}
+// ✅ CQI4e2 - Employee Attrition Rate(HR)
+public function edit_feedback_CQI4e2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Employees Left / Avg Employees) * 100
+        $left = intval($this->input->post('employees_left')) ?: 0;
+        $avg = intval($this->input->post('average_employees')) ?: 0;
+        $dataset['employee_attrition_rate'] = ($avg > 0) ? round(($left / $avg) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e2', $data);
+    }
+}
+// ✅ CQI4e3 - Employee absenteeism rate(HR)
+public function edit_feedback_CQI4e3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            $count = count($_FILES['uploaded_files']['name']);
+            for ($i = 0; $i < $count; $i++) {
+                $_FILES['file'] = [
+                    'name' => $_FILES['uploaded_files']['name'][$i],
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Absent Days / Total Working Days) * 100
+        $absent = intval($this->input->post('absent_days')) ?: 0;
+        $total = intval($this->input->post('total_working_days')) ?: 0;
+        $dataset['employee_absenteeism_rate'] = ($total > 0) ? round(($absent / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e3', $data);
+    }
+}
+// ✅ CQI4e4 - Percentage of employees aware of rights, responsibility and welfare schemes (HR)
+public function edit_feedback_CQI4e4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $fileName) {
+                $_FILES['file'] = [
+                    'name' => $fileName,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Aware Employees / Total Employees) * 100
+        $aware = intval($this->input->post('aware_employees')) ?: 0;
+        $total = intval($this->input->post('total_employees')) ?: 0;
+        $dataset['awareness_percentage'] = ($total > 0) ? round(($aware / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e4', $data);
+    }
+}
+// ✅ CQI4e5 - Average number of training hours (HR)
+public function edit_feedback_CQI4e5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $fileName) {
+                $_FILES['file'] = [
+                    'name' => $fileName,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: Total Training Hours / Number of Employees Trained
+        $hours = intval($this->input->post('total_training_hours')) ?: 0;
+        $trained = intval($this->input->post('employees_trained')) ?: 0;
+        $dataset['average_training_hours'] = ($trained > 0) ? round(($hours / $trained), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e5', $data);
+    }
+}
+// ✅ CQI4e6 - Nurses Attrition Rate (Nursing)
+public function edit_feedback_CQI4e6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $fileName) {
+                $_FILES['file'] = [
+                    'name' => $fileName,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Nurses Left / Avg Nurses) * 100
+        $left = intval($this->input->post('nurses_left')) ?: 0;
+        $avg = intval($this->input->post('average_nurses')) ?: 0;
+        $dataset['nurses_attrition_rate'] = ($avg > 0) ? round(($left / $avg) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e6', $data);
+    }
+}
+// ✅ CQI4e7 - Outsourced employee absenteeism rate (Nursing Assistants - Patient Care Services - OPD)
+public function edit_feedback_CQI4e7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $fileName) {
+                $_FILES['file'] = [
+                    'name' => $fileName,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Absent Days / Total Working Days) * 100
+        $absent = intval($this->input->post('absent_days')) ?: 0;
+        $working = intval($this->input->post('total_working_days')) ?: 0;
+        $dataset['outsourced_absenteeism_rate'] = ($working > 0) ? round(($absent / $working) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e7', $data);
+    }
+}
+// ✅ CQI4e8 - Average number of unpaid leaves per month (HR)
+public function edit_feedback_CQI4e8() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4e8', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e8', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4e8_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4e8_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $fileName) {
+                $_FILES['file'] = [
+                    'name' => $fileName,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula: (Total Unpaid Leaves / Total Employees)
+        $leaves = intval($this->input->post('total_unpaid_leaves')) ?: 0;
+        $employees = intval($this->input->post('total_employees')) ?: 0;
+        $dataset['average_unpaid_leaves'] = ($employees > 0) ? round(($leaves / $employees), 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4e8($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4e8?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4e8_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4e8', $data);
+    }
+}
+// ✅ CQI4f1 - Incidence of needle stick injuries IPD area (Infection Control - IPD)
+public function edit_feedback_CQI4f1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Handle file removals
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Handle new uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|doc|docx|xls|xlsx|csv'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Incidence per 1000 IPD days)
+        $injuries = intval($this->input->post('needle_injuries')) ?: 0;
+        $ipd_days = intval($this->input->post('ipd_days')) ?: 0;
+        $dataset['incidence_rate_ipd'] = ($ipd_days > 0) ? round(($injuries / $ipd_days) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f1', $data);
+    }
+}
+// ✅ CQI4f2 - Incidence of needle stick injuries OPD area (Infection Control - OPD)
+public function edit_feedback_CQI4f2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Incidence per 1000 OPD days)
+        $injuries = intval($this->input->post('needle_injuries_opd')) ?: 0;
+        $opd_days = intval($this->input->post('opd_days')) ?: 0;
+        $dataset['incidence_rate_opd'] = ($opd_days > 0) ? round(($injuries / $opd_days) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f2', $data);
+    }
+}
+// ✅ CQI4f3 - Percentage of sentinel events, reported, collected and analysed within the defined time frame (Quality Office)
+public function edit_feedback_CQI4f3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Handle file removals
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Handle new uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage of sentinel events reported within time)
+        $total_events = intval($this->input->post('total_events')) ?: 0;
+        $reported_events = intval($this->input->post('reported_events')) ?: 0;
+        $dataset['sentinel_percentage'] = ($total_events > 0) ? round(($reported_events / $total_events) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f3', $data);
+    }
+}
+// ✅ CQI4f4 - Percentage of near misses (Quality Office)
+public function edit_feedback_CQI4f4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage of near misses)
+        $total_incidents = intval($this->input->post('total_incidents')) ?: 0;
+        $near_misses = intval($this->input->post('near_misses')) ?: 0;
+        $dataset['near_miss_percentage'] = ($total_incidents > 0) ? round(($near_misses / $total_incidents) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f4', $data);
+    }
+}
+// ✅ CQI4f5 - Incidence of blood body fluid exposure IPD (Infection Control - IPD)
+public function edit_feedback_CQI4f5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Handle file removals
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Handle new uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Incidence per 1000 IPD days)
+        $exposures = intval($this->input->post('blood_fluid_exposures_ipd')) ?: 0;
+        $ipd_days = intval($this->input->post('ipd_days')) ?: 0;
+        $dataset['incidence_rate_ipd'] = ($ipd_days > 0) ? round(($exposures / $ipd_days) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f5', $data);
+    }
+}
+// ✅ CQI4f6 - Incidence of blood body fluid exposure OPD (Infection Control - OPD)
+public function edit_feedback_CQI4f6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Remove old files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Handle uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Incidence per 1000 OPD days)
+        $exposures = intval($this->input->post('blood_fluid_exposures_opd')) ?: 0;
+        $opd_days = intval($this->input->post('opd_days')) ?: 0;
+        $dataset['incidence_rate_opd'] = ($opd_days > 0) ? round(($exposures / $opd_days) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f6', $data);
+    }
+}
+// ✅ CQI4f7 - Adverse events related to SUDs (JCI8-PCI 3.1) (CSSD)
+public function edit_feedback_CQI4f7() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4f7', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f7', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4f7_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4f7_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Remove selected files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Handle file uploads
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Adverse events per 1000 SUDs used)
+        $adverse_events = intval($this->input->post('adverse_events_sud')) ?: 0;
+        $suds_used = intval($this->input->post('suds_used')) ?: 0;
+        $dataset['adverse_event_rate'] = ($suds_used > 0) ? round(($adverse_events / $suds_used) * 1000, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4f7($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4f7?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4f7_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4f7', $data);
+    }
+}
+// ✅ CQI4g1 - Percentage of Medical records not having discharge summary (MRD)
+public function edit_feedback_CQI4g1() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g1', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g1', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g1_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g1_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        // Remove selected files
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        // Upload new files
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage = (Records without discharge summary / Total records) * 100)
+        $missing = intval($this->input->post('records_without_discharge_summary')) ?: 0;
+        $total = intval($this->input->post('total_records_checked')) ?: 0;
+        $dataset['percentage_missing_summary'] = ($total > 0) ? round(($missing / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g1($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g1?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g1_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g1', $data);
+    }
+}
+// ✅ CQI4g2 - Percentage of Medical records not having codification as per ICD (MRD)
+public function edit_feedback_CQI4g2() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g2', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g2', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g2_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g2_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage = Records without ICD codification / Total records * 100)
+        $without_icd = intval($this->input->post('records_without_icd')) ?: 0;
+        $total = intval($this->input->post('total_records_checked')) ?: 0;
+        $dataset['percentage_no_icd'] = ($total > 0) ? round(($without_icd / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g2($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g2?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g2_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g2', $data);
+    }
+}
+// ✅ CQI4g3 - Percentage of Medical records having improper or incomplete consent (MRD)
+public function edit_feedback_CQI4g3() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g3', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g3', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g3_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g3_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage = Improper/incomplete consent / Total records * 100)
+        $improper = intval($this->input->post('improper_consent_records')) ?: 0;
+        $total = intval($this->input->post('total_records_checked')) ?: 0;
+        $dataset['percentage_improper_consent'] = ($total > 0) ? round(($improper / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g3($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g3?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g3_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g3', $data);
+    }
+}
+// ✅ CQI4g4 - Percentage of Missing Medical Records (MRD)
+public function edit_feedback_CQI4g4() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g4', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g4', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g4_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g4_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Percentage = Missing Records / Total Records * 100)
+        $missing = intval($this->input->post('missing_records')) ?: 0;
+        $total = intval($this->input->post('total_records_checked')) ?: 0;
+        $dataset['percentage_missing_records'] = ($total > 0) ? round(($missing / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g4($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g4?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g4_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g4', $data);
+    }
+}
+// ✅ CQI4g5 - Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm (JCI8-COP 5) (MRD)
+public function edit_feedback_CQI4g5() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g5', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g5', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g5_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g5_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Compliance Rate = (Compliant Cases / Total Cases) * 100)
+        $compliant = intval($this->input->post('compliant_cases')) ?: 0;
+        $total = intval($this->input->post('total_cases_checked')) ?: 0;
+        $dataset['compliance_rate'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g5($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g5?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g5_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g5', $data);
+    }
+}
+// ✅ CQI4g6 - Monthly Abbreviation Compliance (MRD)
+public function edit_feedback_CQI4g6() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD') ?
+            $this->load->view('qualitymodules/edit_feedback_CQI4g6', $data, true) :
+            $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g6', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4g6_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4g6_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = ['upload_path' => './api/file_uploads/', 'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = ['url' => base_url('api/file_uploads/' . $up['file_name']), 'name' => $up['file_name']];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json'])) $dataset[$k] = $v;
+
+        // 🔹 KPI Formula (Abbreviation Compliance = (Compliant Records / Total Records Checked) * 100)
+        $compliant = intval($this->input->post('abbreviation_compliant_records')) ?: 0;
+        $total = intval($this->input->post('total_records_checked')) ?: 0;
+        $dataset['abbreviation_compliance'] = ($total > 0) ? round(($compliant / $total) * 100, 2) : 0;
+
+        $this->quality_model->update_feedback_CQI4g6($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4g6?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4g6_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4g6', $data);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

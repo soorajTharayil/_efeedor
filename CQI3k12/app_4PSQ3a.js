@@ -169,7 +169,7 @@ $scope.user_id = ehandor.userid;
 
 		// Validate inputs for medication errors and opportunities for errors
 		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of patients in emergency ");
+			alert("Please enter total number of patients in emergency");
 			return;
 		}
 
@@ -178,27 +178,28 @@ $scope.user_id = ehandor.userid;
 			return;
 		}
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total number of patients in emergency be less than total number of days per month ");
-			return;
-		}
+		// if (medicationErrors < opportunitiesForErrors) {
+		// 	alert("Total number of patients in emergency should be greater than or equal to total number of days per month");
+		// 	return;
+		// }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+		// Calculate the average visiting per day
+		var avgVisitPerDay = medicationErrors / opportunitiesForErrors;
 
 		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
+		if (avgVisitPerDay % 1 === 0) {
+			$scope.calculatedResult = avgVisitPerDay.toString() + " patients/day";
 		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
+			$scope.calculatedResult = avgVisitPerDay.toFixed(2) + " patients/day";
 		}
 
 		// Store the result in the feedback object for further use
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
+		console.log("Calculated Average Visiting per Day", $scope.calculatedResult);
 		$scope.valuesEdited = false;
 	};
+
 
 
 

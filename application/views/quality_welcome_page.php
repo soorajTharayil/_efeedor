@@ -1564,12 +1564,12 @@ require_once 'quality_tables.php';
             ?>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top:0px;"
                 onclick="window.location.href='<?php echo $feedbacks_report_CQI3j1; ?>'"
-                data-title="<?php echo strtolower('Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Emergency Department)'); ?>">
+                data-title="<?php echo strtolower('Shift change handover communication (Nurses) - (Nursing - Emergency Department))'); ?>">
                 <div class="panel panel-bd" style="cursor:pointer;">
                     <div class="panel-body" style="height:100px; padding-top:0px;">
                         <div class="statistic-box" style="padding-top:44px;">
                             <div class="small" style="font-size:20px;">
-                                Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Emergency Department)
+                                Shift change handover communication (Nurses) - (Nursing - Emergency Department)
                                 <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>"><i class="0" aria-hidden="true"></i></a>
                             </div>
                             <a href="<?php echo $feedbacks_report_CQI3j1; ?>" style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px">Explore</a>
@@ -1586,12 +1586,12 @@ require_once 'quality_tables.php';
             ?>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top: 0px;"
                 onclick="window.location.href='<?php echo $feedbacks_report_CQI3j2; ?>'"
-                data-title="<?php echo strtolower('Shift change handover communication (ED, ICU, Ward) (Nursing - ICU)'); ?>">
+                data-title="<?php echo strtolower('Shift change handover communication - (Nursing - ICU)'); ?>">
                 <div class="panel panel-bd" style="cursor: pointer;">
                     <div class="panel-body" style="height: 100px; padding-top:0px;">
                         <div class="statistic-box" style="padding-top: 40px;">
                             <div class="small" style="font-size: 20px;">
-                                Shift change handover communication (ED, ICU, Ward) (Nursing - ICU)
+                                Shift change handover communication - (Nursing - ICU)
                                 <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
                                     <i class="0" aria-hidden="true"></i>
                                 </a>
@@ -1610,12 +1610,12 @@ require_once 'quality_tables.php';
             ?>
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card" style="margin-top:0px;"
                 onclick="window.location.href='<?php echo $feedbacks_report_CQI3j3; ?>'"
-                data-title="<?php echo strtolower('Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Ward)'); ?>">
+                data-title="<?php echo strtolower('Shift change handover communication (Nurses) - (Nursing - Ward)'); ?>">
                 <div class="panel panel-bd" style="cursor:pointer;">
                     <div class="panel-body" style="height:100px; padding-top:0px;">
                         <div class="statistic-box" style="padding-top:44px;">
                             <div class="small" style="font-size:20px;">
-                                Shift change handover communication (Nurses) (ED, ICU, Ward) - (Nursing - Ward)
+                                Shift change handover communication (Nurses) - (Nursing - Ward)
                                 <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>"><i class="0" aria-hidden="true"></i></a>
                             </div>
                             <a href="<?php echo $feedbacks_report_CQI3j3; ?>" style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px">Explore</a>
@@ -2490,31 +2490,7 @@ require_once 'quality_tables.php';
                 </div>
             </div>
         <?php } ?>
-        <?php if (isfeature_active('QUALITY-KPI11') === true) { ?>
-            <?php
-            $table_feedback_CQI3a11 = 'bf_feedback_CQI3a11';
-            $table_patients_CQI3a11 = 'bf_patients';
-            $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_CQI3a11, $sorttime, $setup);
-            ?>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
-                style="margin-top: 0px;"
-                onclick="window.location.href='<?php echo $feedbacks_report_CQI3a11; ?>'"
-                data-title="Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF (Cardiology - Emergency Department)">
-                <div class="panel panel-bd">
-                    <div class="panel-body" style="height: 100px; padding-top:0px;">
-                        <div class="statistic-box" style="padding-top: 40px;">
-                            <div class="small" style="font-size: 20px;">
-                                Beta-blocker use in CHF patients with reduced EF (Cardiology - ED)
-                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
-                                    <i class="0" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                            <a href="<?php echo $feedbacks_report_CQI3a11; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
+        
         <?php if (isfeature_active('QUALITY-KPI12') === true) { ?>
             <?php
             $table_feedback_CQI3a12 = 'bf_feedback_CQI3a12';
@@ -2826,6 +2802,41 @@ require_once 'quality_tables.php';
             </div>
         <?php } ?>
     </div>
+
+    <div class="row">
+        <div class="heading heading-block">
+            <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Cardiology</h2>
+        </div>
+        
+        <?php if (isfeature_active('QUALITY-KPI11') === true) { ?>
+            <?php
+            $table_feedback_CQI3a11 = 'bf_feedback_CQI3a11';
+            $table_patients_CQI3a11 = 'bf_patients';
+            $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_CQI3a11, $sorttime, $setup);
+            ?>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                style="margin-top: 0px;"
+                onclick="window.location.href='<?php echo $feedbacks_report_CQI3a11; ?>'"
+                data-title="Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF (Cardiology - Emergency Department)">
+                <div class="panel panel-bd">
+                    <div class="panel-body" style="height: 100px; padding-top:0px;">
+                        <div class="statistic-box" style="padding-top: 40px;">
+                            <div class="small" style="font-size: 20px;">
+                                Beta-blocker use in CHF patients with reduced EF (Cardiology - ED)
+                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
+                                    <i class="0" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <a href="<?php echo $feedbacks_report_CQI3a11; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        
+    </div>
+
+
     <div class="row">
         <div class="col-12">
             <div class="heading heading-block">
@@ -3334,10 +3345,13 @@ require_once 'quality_tables.php';
             <?php } ?>
         </div>
     </div>
+    <!-- Pulmonary Medicine Section -->
     <div class="row">
         <div class="col-12">
             <div class="heading heading-block">
-                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Pulmonary Medicine</h2>
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">
+                    Pulmonary Medicine
+                </h2>
             </div>
 
             <?php if (isfeature_active('QUALITY-KPI15') === true) { ?>
@@ -3362,46 +3376,50 @@ require_once 'quality_tables.php';
                             </div>
                         </div>
                     </div>
-                <?php } ?>
                 </div>
+            <?php } ?>
         </div>
     </div>
 
 
-
-
-
+    <!-- Pediatrics Section -->
     <div class="row">
         <div class="col-12">
             <div class="heading heading-block">
-                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">Pediatrics</h2>
+                <h2 style="margin-top: 20px;margin-bottom: 20px; font-size: 22px; font-weight: bold;margin-left:15px;background:#f5f5f5; padding: 4px 10px; border: 1px solid #ccc; border-radius: 6px;width:98%;">
+                    Pediatrics
+                </h2>
             </div>
-        </div>
-        <?php if (isfeature_active('QUALITY-KPI16') === true) { ?>
-            <?php
-            $table_feedback_KPI16 = 'bf_feedback_CQI3a16';
-            $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI16, $sorttime, $setup);
-            ?>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
-                style="margin-top: 0px;"
-                onclick="window.location.href='<?php echo $feedbacks_report_CQI3a16; ?>'"
-                data-title="Percentage of bronchiolitis patients treated inappropriately (Pediatrics)">
-                <div class="panel panel-bd">
-                    <div class="panel-body" style="height: 100px; padding-top:0px;">
-                        <div class="statistic-box" style="padding-top: 44px;">
-                            <div class="small" style="font-size: 20px;">
-                                Percentage of bronchiolitis patients treated inappropriately (Pediatrics)
-                                <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
-                                    <i class="0" aria-hidden="true"></i>
-                                </a>
+
+            <?php if (isfeature_active('QUALITY-KPI16') === true) { ?>
+                <?php
+                $table_feedback_KPI16 = 'bf_feedback_CQI3a16';
+                $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI16, $sorttime, $setup);
+                ?>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                    style="margin-top: 0px;"
+                    onclick="window.location.href='<?php echo $feedbacks_report_CQI3a16; ?>'"
+                    data-title="Percentage of bronchiolitis patients treated inappropriately (Pediatrics)">
+                    <div class="panel panel-bd">
+                        <div class="panel-body" style="height: 100px; padding-top:0px;">
+                            <div class="statistic-box" style="padding-top: 44px;">
+                                <div class="small" style="font-size: 20px;">
+                                    Percentage of bronchiolitis patients treated inappropriately (Pediatrics)
+                                    <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
+                                        <i class="0" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <a href="<?php echo $feedbacks_report_CQI3a16; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
                             </div>
-                            <a href="<?php echo $feedbacks_report_CQI3a16; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
-            </div>
+        </div>
     </div>
+
+
+
     <div class="row">
         <div class="col-12">
             <div class="heading heading-block">
@@ -4546,12 +4564,12 @@ require_once 'quality_tables.php';
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                     style="margin-top: 0px;"
                     onclick="window.location.href='<?php echo $feedbacks_report_CQI3c7; ?>'"
-                    data-title="Incidence of Medication Administering errors (As per NABH 4th edition)- (Clinical Pharmacy)">
+                    data-title="Incidence of Medication Administering errors - (Clinical Pharmacy)">
                     <div class="panel panel-bd">
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 44px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Incidence of Medication Administering errors (As per NABH 4th edition)- (Clinical Pharmacy)
+                                    Incidence of Medication Administering errors - (Clinical Pharmacy)
                                 </div>
                                 <a href="<?php echo $feedbacks_report_CQI3c7; ?>"
                                     style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
@@ -4606,7 +4624,7 @@ require_once 'quality_tables.php';
                     </div>
                 </div>
             <?php } ?>
-            <?php if (isfeature_active('QUALITY-KPI45') === true) { ?>
+            <!-- <?php if (isfeature_active('QUALITY-KPI45') === true) { ?>
                 <?php $table_feedback_KPI45 = 'bf_feedback_CQI3c10';
                 $ip_feedbacks_count45 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI45, $sorttime, $setup); ?>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
@@ -4649,7 +4667,7 @@ require_once 'quality_tables.php';
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php } ?> -->
 
 
             <?php if (isfeature_active('QUALITY-KPI47') === true) { ?>
@@ -7206,12 +7224,12 @@ require_once 'quality_tables.php';
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                     style="margin-top: 20px;"
                     onclick="window.location.href='<?php echo $feedbacks_report_CQI4d1; ?>'"
-                    data-title="<?php echo strtolower('Out patient satisfaction index (Patient Care Services - OPD)'); ?>">
+                    data-title="<?php echo strtolower('Out-patient satisfaction index (OPD)'); ?>">
                     <div class="panel panel-bd">
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 40px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Out patient satisfaction index (Patient Care Services - OPD)
+                                    Out-patient satisfaction index (OPD)
                                     <a href="javascript:void()" data-toggle="tooltip" title="">
                                         <i class="0" aria-hidden="true"></i>
                                     </a>
@@ -7242,12 +7260,12 @@ require_once 'quality_tables.php';
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                     style="margin-top: 20px;"
                     onclick="window.location.href='<?php echo $feedbacks_report_CQI4d2; ?>'"
-                    data-title="<?php echo strtolower('Inpatient satisfaction index (Patient Care Services - IPD)'); ?>">
+                    data-title="<?php echo strtolower('Inpatient satisfaction index (IPD)'); ?>">
                     <div class="panel panel-bd">
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 40px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Inpatient satisfaction index (Patient Care Services - IPD)
+                                    Inpatient satisfaction index (IPD)
                                     <a href="javascript:void()" data-toggle="tooltip" title="">
                                         <i class="0" aria-hidden="true"></i>
                                     </a>
@@ -7278,12 +7296,12 @@ require_once 'quality_tables.php';
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                     style="margin-top: 20px;"
                     onclick="window.location.href='<?php echo $feedbacks_report_CQI4d3; ?>'"
-                    data-title="<?php echo strtolower('Time taken for discharge - Cash Patients (Patient Care Services - Cash)'); ?>">
+                    data-title="<?php echo strtolower('Time taken for discharge - Cash Patients)'); ?>">
                     <div class="panel panel-bd">
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 40px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Time taken for discharge - Cash Patients (Patient Care Services - Cash)
+                                    Time taken for discharge - Cash Patients
                                     <a href="javascript:void()" data-toggle="tooltip" title="">
                                         <i class="0" aria-hidden="true"></i>
                                     </a>
@@ -7316,12 +7334,12 @@ require_once 'quality_tables.php';
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                     style="margin-top: 20px;"
                     onclick="window.location.href='<?php echo $feedbacks_report_CQI4d4; ?>'"
-                    data-title="<?php echo strtolower('Time taken for discharge - Cashless Patients (Patient Care Services - Cashless)'); ?>">
+                    data-title="<?php echo strtolower('Time taken for discharge - Insurance Patients)'); ?>">
                     <div class="panel panel-bd">
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 40px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Time taken for discharge - Cashless Patients (Patient Care Services - Cashless)
+                                    Time taken for discharge - Insurance Patients
                                     <a href="javascript:void()" data-toggle="tooltip" title="">
                                         <i class="0" aria-hidden="true"></i>
                                     </a>
