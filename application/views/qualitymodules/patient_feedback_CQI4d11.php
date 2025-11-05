@@ -30,7 +30,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="QUALITY INDICATOR MANAGER <KPI ID>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a> - <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="QUALITY INDICATOR MANAGER <KPI ID>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Turn-around Time for Nursing call bell responds (Nursing) - <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">

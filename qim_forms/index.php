@@ -5188,7 +5188,7 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI44'] == true"
+											<!-- <div class="row" ng-if="profilen['KPI44'] == true"
 												ng-show="matchSearch('Incidence of Medication Administering errors (Clinical Pharmacy)')">
 												<div class="col-12">
 													<div class="card">
@@ -5213,7 +5213,7 @@ header("Expires: 0");
 														</div>
 													</div>
 												</div>
-											</div>
+											</div> -->
 
 											<!-- <div class="row" ng-if="profilen['KPI45'] == true"
 												ng-show="matchSearch('Incidence of medication errors - Dispensing errors (IP) (Clinical Pharmacy)')">
@@ -6883,8 +6883,7 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI293'] == true"
-												ng-show="matchSearch('Patient\\'s Complaints Rate (Housekeeping)')">
+											<div class="row" ng-if="profilen['KPI293'] == true" ng-show="matchSearch('Patients Complaints Rate (Housekeeping)')">
 												<div class="col-12">
 													<div class="card">
 														<div class="row">
@@ -6898,8 +6897,7 @@ header("Expires: 0");
 																			<p class="text" ng-bind-html="q.icon"
 																				style="color:#5c5959;font-size:36px;">
 																			</p>
-																			<p class="text">Patient's Complaints Rate
-																				(Housekeeping)</p>
+																			<p class="text">Patients Complaints Rate (Housekeeping)</p>
 																		</div>
 																	</div>
 																</a>

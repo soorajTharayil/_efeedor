@@ -8,7 +8,11 @@ app.controller(
     $scope.typel = "english";
     $scope.type2 = "English";
     console.log("Clearing localStorage...");
-    $window.localStorage.clear();
+
+    if (window.location.hash !== '#step2') {
+      $window.localStorage.clear();
+    }
+
     var ehandor = JSON.parse($window.localStorage.getItem("ehandor"));
     if (ehandor) {
       // Assign the data to scope variables

@@ -9,8 +9,6 @@ $param = json_decode($row->dataset, true);
 //  print_r($param);
 ?>
 
-
-
 <div class="content">
     <div class="row">
 
@@ -20,7 +18,7 @@ $param = json_decode($row->dataset, true);
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Percentage of missing medical records(MRD) <?php echo $row->id; ?></h3>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;Percentage of missing medical records(MRD)<?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>

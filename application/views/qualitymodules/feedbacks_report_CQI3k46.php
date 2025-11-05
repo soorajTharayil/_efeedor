@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-									// 	echo '<pre>';
-									// 	print_r($param);
-									// 	echo '</pre>';
-									// 	exit;
+										echo '<pre>';
+										print_r($param);
+										echo '</pre>';
+										exit;
 
 
 								?>

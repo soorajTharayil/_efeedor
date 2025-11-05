@@ -154,8 +154,9 @@
 										</td>
 
 
-										<td><?php echo isset($param->department->name) ? $param->department->name : ''; ?></td>
-										<td><?php echo isset($param->attended_doctor->name) ? $param->attended_doctor->name : ''; ?>
+										<td><?php echo $param->department; ?></td>
+
+										<td><?php echo $param->attended_doctor; ?></td>
 										</td>
 
 

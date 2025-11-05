@@ -44,11 +44,12 @@
 
 									<tr>
 										<td><b>Numerator: Total hours of training attended (in Hrs)</b></td>
-										<td><?php echo $param->initial_assessment_total; ?></td>
+										<td><?php echo htmlspecialchars($param->initial_assessment_hr ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec ?? '00'); ?>
+										</td></td>
 									</tr>
 									<tr>
 										<td><b>Denominator:Total hours of training required to attend  (in No.s)</b></td>
-										<td><?php echo $param->total_admission; ?></td>
+										<td><?php echo htmlspecialchars($param->initial_assessment_hr2 ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min2 ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec2 ?? '00'); ?></td>
 									</tr>
 									<tr>
 										<td><b> Average number of training hours(HR) (in Hrs)</b></td>

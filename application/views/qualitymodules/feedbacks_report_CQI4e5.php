@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-									// 	echo '<pre>';
-									// 	print_r($param);
-									// 	echo '</pre>';
-									// 	exit;
+										// echo '<pre>';
+										// print_r($param);
+										// echo '</pre>';
+										// exit;
 
 
 								?>
@@ -148,14 +148,11 @@
 											}
 											?>
 										</td>
-
-
-
 										<td>
-											<?php echo $param->initial_assessment_total; ?>
+											<?php echo htmlspecialchars($param->initial_assessment_hr ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec ?? '00'); ?>
 										</td>
 										<td>
-											<?php echo $param->total_admission; ?>
+											<?php echo htmlspecialchars($param->initial_assessment_hr2 ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min2 ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec2 ?? '00'); ?>
 										</td>
 
 										<td>

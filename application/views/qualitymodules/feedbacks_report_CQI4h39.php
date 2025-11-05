@@ -151,32 +151,11 @@
 
 
 										<td>
-											<?php echo $param->initial_assessment_total; ?>
+											<?php echo htmlspecialchars($param->initial_assessment_hr ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec ?? '00'); ?>
 										</td>
-										<td>
-											<?php echo $param->total_admission; ?>
-										</td>
+										
 
-										<td>
-											<?php
-											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $param->benchmark * 60 * 60;
-
-											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
-											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
-
-											// Check if calculatedResult is less than benchmark
-											$color = ($calculatedTotalSeconds < $benchmarkSeconds) ? 'green' : 'red';
-
-											// Output the calculatedResult with appropriate color
-											?>
-											<span style="color: <?php echo $color; ?>">
-												<?php echo $param->calculatedResult;
-												$calculated_time[round(date("m", strtotime($r->datetime))) - 1] = $param->calculatedResult;
-												?>
-											</span>
-										</td>
+										
 
 
 										<td>

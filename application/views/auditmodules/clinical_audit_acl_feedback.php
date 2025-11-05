@@ -114,8 +114,8 @@
 									<tr>
 										<td>How many days after admission did the patient get discharged?</td>
 										<td>
-											<?php echo ucfirst(htmlspecialchars($param['identification_details'])); ?><br>
-											Remarks: <?php echo htmlspecialchars($param['identification_details_text']); ?>
+											<?php echo ucfirst(htmlspecialchars($param['identification_details'])); ?>
+											
 										</td>
 									</tr>
 

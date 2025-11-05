@@ -843,18 +843,18 @@ class Audit_model extends CI_Model
 		return $query->row();
 	}
 	public function get_biomedical_waste_collection_audit_feedback_byid($id)
-    {
-        $this->db->where('id', $id);
-        $query = $this->db->get('bf_ma_bmw_audit');
-        return $query->row();
-    }
-    
-    public function get_pest_control_audit_feedback_byid($id)
-    {
-        $this->db->where('id', $id);
-        $query = $this->db->get('bf_ma_pest_control_audit');
-        return $query->row();
-    }
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_ma_bmw_audit');
+		return $query->row();
+	}
+
+	public function get_pest_control_audit_feedback_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_ma_pest_control_audit');
+		return $query->row();
+	}
 
 
 
@@ -1404,16 +1404,16 @@ class Audit_model extends CI_Model
 		$this->db->update('bf_ma_clinical_pathway_stemi_audit', $data);
 	}
 	public function update_biomedical_waste_collection_audit_feedback($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('bf_ma_bmw_audit', $data);
-    }
-    
-    public function update_pest_control_audit_feedback($id, $data)
-    {
-        $this->db->where('id', $id);
-        $this->db->update('bf_ma_pest_control_audit', $data);
-    }
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_bmw_audit', $data);
+	}
+
+	public function update_pest_control_audit_feedback($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_ma_pest_control_audit', $data);
+	}
 
 	//End
 
@@ -2460,12 +2460,13 @@ class Audit_model extends CI_Model
 		$allowed = false;
 		if (isset($this->session->userdata['feature']) && is_array($this->session->userdata['feature'])) {
 			foreach ($this->session->userdata['feature'] as $key => $val) {
-				if ($val === true && isset($audit_feature_map[$key]) && $audit_feature_map[$key] === $table_feedback) {
+				if ($val === true) {
 					$allowed = true;
 					break;
 				}
 			}
 		}
+
 
 		if (!$allowed) {
 			return [];
@@ -2483,6 +2484,9 @@ class Audit_model extends CI_Model
 		//Fetch only user-specific permitted audits
 		$this->db->select($table_feedback . '.*');
 		$this->db->from($table_feedback);
+
+		//Hide record when status is deleted
+		$this->db->where("(status IS NULL OR status != 'Deleted')", null, false);
 
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);
@@ -2523,7 +2527,7 @@ class Audit_model extends CI_Model
 	}
 
 
-    public function kpi_feedback($table_patient, $table_feedback, $sorttime)
+	public function kpi_feedback($table_patient, $table_feedback, $sorttime)
 	{
 
 		$fdate = date('Y-m-d', strtotime($_SESSION['from_date']));

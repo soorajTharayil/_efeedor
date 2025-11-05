@@ -281,7 +281,7 @@
 
                       <!-- KPI Name -->
 
-                      <!-- <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> --> -->
+                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
@@ -309,26 +309,12 @@
 
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
-                        <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
-                          <span class="addon" style="font-size: 16px; margin-bottom: 1px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>
-
-                          <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
-                            <span class="has-float-label" style="display: flex; align-items: center; ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.hr_placeholder}}" ng-model="feedback.initial_assessment_hr2" type="number" id="formula_para1_hr2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
-                              <span style="margin-left: 4px; margin-right: 9px;">hr </span>
-                              <label for="para1"></label>
-                            </span>
-                            <span class="has-float-label" style="display: flex; align-items: center;  ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.min_placeholder}}" ng-model="feedback.initial_assessment_min2" type="number" id="formula_para1_min2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
-                              <span style="margin-left: 4px; margin-right: 9px;">min </span>
-                              <label for="para1"></label>
-                            </span>
-                            <span class="has-float-label" style="display: flex; align-items: center; ">
-                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.sec_placeholder}}" ng-model="feedback.initial_assessment_sec2" type="number" id="formula_para1_sec2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
-                              <span style="margin-left: 4px;">sec</span>
-                              <label for="para1"></label>
-                            </span>
-                          </div>
+                        <div class="form-group transparent-placeholder">
+                          <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>
+                          <span class="has-float-label">
+                            <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 52%;" />
+                            <label for="para2"></label>
+                          </span>
                         </div>
                       </div>
 
@@ -347,8 +333,8 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>   Radiology TAT orders for X-ray(Radiology):<span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
-                      <!-- <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> --> -->
+                      <strong> Radiology TAT orders for X-ray: <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
+                      <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> -->
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">

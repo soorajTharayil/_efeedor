@@ -73,23 +73,7 @@ $param = json_decode($row->dataset, true);
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td><b>Total number of in-patients for the month</b></td>
-                            <td>
-                                <input class="form-control" type="number" id="testsPerformed" name="total_admission" value="<?php echo $param['total_admission']; ?>">
-                                <br>
-                                <button type="button" class="btn btn-primary" onclick="calculateErrorRate()">
-                                    <input type="hidden" id="formattedTime" name="formattedTime" value="">
-                                    Compute KPI
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Percentage of Care-plan is documented for inpatients(MRD)</b></td>
-                            <td>
-                                <input class="form-control" type="text" id="calculatedResult" name="calculatedResult" value="<?php echo $param['calculatedResult']; ?>">
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
                             <td><input class="form-control" type="text" name="dataAnalysis" value="<?php echo $param['dataAnalysis']; ?>"></td>

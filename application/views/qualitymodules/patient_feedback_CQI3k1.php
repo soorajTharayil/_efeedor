@@ -30,7 +30,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Percentage of Care-plan is documented for inpatients(MRD)  <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Total number of LAMA cases with Reasons (MRD)  <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
@@ -43,7 +43,7 @@
 								<table class=" table table-striped table-bordered  no-footer dtr-inline " style="font-size: 16px;">
 
 									<tr>
-										<td><b>Number of case sheets where care plan is documented </b></td>
+										<td><b>Total number of LAMA cases with Reasons</b></td>
 											<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
 									<tr>

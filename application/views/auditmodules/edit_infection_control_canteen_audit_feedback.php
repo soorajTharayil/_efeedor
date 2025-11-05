@@ -112,16 +112,21 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
+<script>
+                            var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>';
+                            var csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                        </script>
+
                         <tr>
                             <td><b>Department</b></td>
                             <td>
-                                <select class="form-control" name="department">
+                                <select class="form-control" name="department" id="department">
                                     <option value="">Select Department</option>
                                     <?php
                                     $departments = $this->db->get('bf_audit_department')->result_array();
                                     foreach ($departments as $d) {
-                                        $selected = ($param['department'] == $d['title']) ? 'selected' : '';
-                                        echo "<option value='{$d['title']}' $selected>{$d['title']}</option>";
+                                        $selected = (!empty($param['department']) && $param['department'] == $d['title']) ? 'selected' : '';
+                                        echo "<option value='{$d['title']}' {$selected}>{$d['title']}</option>";
                                     }
                                     ?>
                                 </select>
@@ -131,18 +136,60 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Attended Doctor</b></td>
                             <td>
-                                <select class="form-control" name="attended_doctor">
+                                <select class="form-control" name="attended_doctor" id="attended_doctor">
                                     <option value="">Select Doctor</option>
                                     <?php
-                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
-                                    foreach ($doctors as $doc) {
-                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
-                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    if (!empty($param['department'])) {
+                                        $this->db->where('title', $param['department']);
+                                        $dept = $this->db->get('bf_audit_department')->row_array();
+                                        if (!empty($dept['bed_no'])) {
+                                            $doctors = explode(',', $dept['bed_no']);
+                                            foreach ($doctors as $doc) {
+                                                $doc = trim($doc);
+                                                $selected = ($param['attended_doctor'] == $doc) ? 'selected' : '';
+                                                echo "<option value='{$doc}' {$selected}>{$doc}</option>";
+                                            }
+                                        }
                                     }
                                     ?>
                                 </select>
                             </td>
                         </tr>
+                        <script>
+                            $(document).ready(function () {
+                                $('#department').on('change', function () {
+                                    var dept = $(this).val();
+                                    $('#attended_doctor').html('<option value="">Loading...</option>');
+
+                                    if (dept) {
+                                        $.ajax({
+                                            url: "<?php echo base_url('audit/get_doctors_by_department'); ?>",
+                                            type: "POST",
+                                            dataType: "json", // ✅ Important!
+                                            data: {
+                                                department: dept,
+                                                [csrfName]: csrfHash
+                                            },
+                                            success: function (res) {
+                                                // ✅ Update dropdown with parsed HTML
+                                                $('#attended_doctor').html(res.html);
+
+                                                // ✅ Refresh CSRF for next request
+                                                csrfName = res.csrfName;
+                                                csrfHash = res.csrfHash;
+                                            },
+                                            error: function (xhr) {
+                                                alert('Error fetching doctors: ' + xhr.statusText);
+                                            }
+                                        });
+                                    } else {
+                                        $('#attended_doctor').html('<option value="">Select Doctor</option>');
+                                    }
+                                });
+                            });
+
+
+                        </script>
 
                         <?php
                         // Common max datetime to disable future selection

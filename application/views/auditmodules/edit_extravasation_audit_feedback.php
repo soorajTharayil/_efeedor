@@ -112,16 +112,21 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
+                       <script>
+                            var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>';
+                            var csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                        </script>
+
                         <tr>
                             <td><b>Department</b></td>
                             <td>
-                                <select class="form-control" name="department">
+                                <select class="form-control" name="department" id="department">
                                     <option value="">Select Department</option>
                                     <?php
                                     $departments = $this->db->get('bf_audit_department')->result_array();
                                     foreach ($departments as $d) {
-                                        $selected = ($param['department'] == $d['title']) ? 'selected' : '';
-                                        echo "<option value='{$d['title']}' $selected>{$d['title']}</option>";
+                                        $selected = (!empty($param['department']) && $param['department'] == $d['title']) ? 'selected' : '';
+                                        echo "<option value='{$d['title']}' {$selected}>{$d['title']}</option>";
                                     }
                                     ?>
                                 </select>
@@ -131,18 +136,60 @@ $param = json_decode($row->dataset, true);
                         <tr>
                             <td><b>Attended Doctor</b></td>
                             <td>
-                                <select class="form-control" name="attended_doctor">
+                                <select class="form-control" name="attended_doctor" id="attended_doctor">
                                     <option value="">Select Doctor</option>
                                     <?php
-                                    $doctors = $this->db->get('bf_audit_doctor')->result_array();
-                                    foreach ($doctors as $doc) {
-                                        $selected = ($param['attended_doctor'] == $doc['title']) ? 'selected' : '';
-                                        echo "<option value='{$doc['title']}' $selected>{$doc['title']}</option>";
+                                    if (!empty($param['department'])) {
+                                        $this->db->where('title', $param['department']);
+                                        $dept = $this->db->get('bf_audit_department')->row_array();
+                                        if (!empty($dept['bed_no'])) {
+                                            $doctors = explode(',', $dept['bed_no']);
+                                            foreach ($doctors as $doc) {
+                                                $doc = trim($doc);
+                                                $selected = ($param['attended_doctor'] == $doc) ? 'selected' : '';
+                                                echo "<option value='{$doc}' {$selected}>{$doc}</option>";
+                                            }
+                                        }
                                     }
                                     ?>
                                 </select>
                             </td>
                         </tr>
+                        <script>
+                            $(document).ready(function () {
+                                $('#department').on('change', function () {
+                                    var dept = $(this).val();
+                                    $('#attended_doctor').html('<option value="">Loading...</option>');
+
+                                    if (dept) {
+                                        $.ajax({
+                                            url: "<?php echo base_url('audit/get_doctors_by_department'); ?>",
+                                            type: "POST",
+                                            dataType: "json", // ✅ Important!
+                                            data: {
+                                                department: dept,
+                                                [csrfName]: csrfHash
+                                            },
+                                            success: function (res) {
+                                                // ✅ Update dropdown with parsed HTML
+                                                $('#attended_doctor').html(res.html);
+
+                                                // ✅ Refresh CSRF for next request
+                                                csrfName = res.csrfName;
+                                                csrfHash = res.csrfHash;
+                                            },
+                                            error: function (xhr) {
+                                                alert('Error fetching doctors: ' + xhr.statusText);
+                                            }
+                                        });
+                                    } else {
+                                        $('#attended_doctor').html('<option value="">Select Doctor</option>');
+                                    }
+                                });
+                            });
+
+
+                        </script>
 
                         <?php
                         // Common max datetime to disable future selection
@@ -221,22 +268,10 @@ $param = json_decode($row->dataset, true);
                             <td><b>When was the IV cannula inserted? (Date)</b></td>
                             <td>
                                 <?php $val = isset($param['identification_details_text']) ? strtolower(trim($param['identification_details_text'])) : ''; ?>
-                                <select class="form-control" name="identification_details_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="identification_details_remarks"
-                                        value="<?php echo isset($param['identification_details_remarks']) ? htmlspecialchars($param['identification_details_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                    <input class="form-control" type="text" name="identification_details_text"
+                                        value="<?php echo isset($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
@@ -245,68 +280,37 @@ $param = json_decode($row->dataset, true);
                                     catheter)</b></td>
                             <td>
                                 <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
-                                <select class="form-control" name="vital_signs">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="vital_signs_remarks"
-                                        value="<?php echo isset($param['vital_signs_remarks']) ? htmlspecialchars($param['vital_signs_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                
+                                
+                                
+                                    <input class="form-control" type="text" name="vital_signs"
+                                        value="<?php echo isset($param['vital_signs']) ? htmlspecialchars($param['vital_signs'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>What was the site of insertion?</b></td>
                             <td>
-                                <?php $val = isset($param['surgery_text']) ? strtolower(trim($param['surgery_text'])) : ''; ?>
-                                <select class="form-control" name="surgery_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="surgery_text_remarks"
-                                        value="<?php echo isset($param['surgery_text_remarks']) ? htmlspecialchars($param['surgery_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                               
+                               
+                                    <input class="form-control" type="text" name="surgery_text"
+                                        value="<?php echo isset($param['surgery_text']) ? htmlspecialchars($param['surgery_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>How long was the IV cannula in place before extravasation occurred?</b></td>
                             <td>
-                                <?php $val = isset($param['intake_text']) ? strtolower(trim($param['intake_text'])) : ''; ?>
-                                <select class="form-control" name="intake_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="intake_text_remarks"
-                                        value="<?php echo isset($param['intake_text_remarks']) ? htmlspecialchars($param['intake_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                               
+                                    
+                                    <input class="form-control" type="text" name="intake_text"
+                                        value="<?php echo isset($param['intake_text']) ? htmlspecialchars($param['intake_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
@@ -314,92 +318,44 @@ $param = json_decode($row->dataset, true);
                             <td><b>What is the name and classification of the drug administered? (e.g., vesicant,
                                     irritant)</b></td>
                             <td>
-                                <?php $val = isset($param['output_text']) ? strtolower(trim($param['output_text'])) : ''; ?>
-                                <select class="form-control" name="output_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="output_text_remarks"
-                                        value="<?php echo isset($param['output_text_remarks']) ? htmlspecialchars($param['output_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                
+                                    <input class="form-control" type="text" name="output_text"
+                                        value="<?php echo isset($param['output_text']) ? htmlspecialchars($param['output_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>What was the drug concentration and total volume infused?</b></td>
                             <td>
-                                <?php $val = isset($param['allergies_text']) ? strtolower(trim($param['allergies_text'])) : ''; ?>
-                                <select class="form-control" name="allergies_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="allergies_text_remarks"
-                                        value="<?php echo isset($param['allergies_text_remarks']) ? htmlspecialchars($param['allergies_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                
+                                    <input class="form-control" type="text" name="allergies_text"
+                                        value="<?php echo isset($param['allergies_text']) ? htmlspecialchars($param['allergies_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>What was the duration and rate of infusion?</b></td>
                             <td>
-                                <?php $val = isset($param['medication_text']) ? strtolower(trim($param['medication_text'])) : ''; ?>
-                                <select class="form-control" name="medication_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="medication_text_remarks"
-                                        value="<?php echo isset($param['medication_text_remarks']) ? htmlspecialchars($param['medication_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                
+                                    <input class="form-control" type="text" name="medication_text"
+                                        value="<?php echo isset($param['medication_text']) ? htmlspecialchars($param['medication_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                                
                             </td>
                         </tr>
 
                         <tr>
                             <td><b>What method of infusion was used? (e.g., manual bolus, pump-driven)</b></td>
                             <td>
-                                <?php $val = isset($param['diagnostic_text']) ? strtolower(trim($param['diagnostic_text'])) : ''; ?>
-                                <select class="form-control" name="diagnostic_text">
-                                    <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
-                                    <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
-                                    <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
-                                    <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
-                                </select>
-                                <div>
-                                    Remarks:
-                                    <input class="form-control" type="text" name="diagnostic_text_remarks"
-                                        value="<?php echo isset($param['diagnostic_text_remarks']) ? htmlspecialchars($param['diagnostic_text_remarks'], ENT_QUOTES, 'UTF-8') : ''; ?>"
-                                        placeholder="Remarks">
-                                </div>
+                                
+                                    <input class="form-control" type="text" name="diagnostic_text"
+                                        value="<?php echo isset($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Enter the input">
+                              
                             </td>
                         </tr>
 

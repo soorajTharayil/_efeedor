@@ -53,7 +53,7 @@
 									<td><?php echo $param['total_admission']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Compliance to medical service requests - Heart, Lung transplantation(Liver transplantation) </b></td>
+										<td><b>Compliance to medical service requests - Heart, Lung transplantation(Liver transplantation)</b></td>
 										<td><?php echo $param['calculatedResult']; ?></td>
 										</td>
 									</tr>

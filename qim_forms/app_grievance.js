@@ -9,7 +9,11 @@ app.controller(
     $scope.type2 = "English";
     $scope.step2 = false;
     console.log("Clearing localStorage...");
-    $window.localStorage.clear();
+
+    if (window.location.hash !== '#step2') {
+      $window.localStorage.clear();
+    }
+
     var ehandor = JSON.parse($window.localStorage.getItem("ehandor"));
     if (ehandor) {
       // Assign the data to scope variables
@@ -107,7 +111,7 @@ app.controller(
                     function (value) {
                       if (
                         value.guid.toLowerCase() ==
-                          $scope.loginvar.userid.toLowerCase() &&
+                        $scope.loginvar.userid.toLowerCase() &&
                         value.password == $scope.loginvar.password
                       ) {
                         value.userid = $scope.loginvar.userid;
@@ -239,7 +243,7 @@ app.controller(
       "Medical Administration": [21, 117, 332, 333],
       OT: [31, 55, 56, 57, 59, 60, 62, 63, 138, 190, 216, 231, 232, 233, 369],
       "Clinical Pharmacy": [
-        36, 37, 38, 39, 40, 41, 42, 43, 44, 47, 48, 49, 54, 58, 94, 187,
+        36, 37, 38, 39, 40, 41, 42, 43, 47, 48, 49, 54, 58, 94, 187,
         188,
       ],
       Anesthesia: [50, 51, 52, 53],
@@ -348,12 +352,12 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/esr_mobile_number.php?mobile=" +
-            $scope.feedback.contactnumber +
-            "&email=" +
-            $scope.feedback.contactnumber +
-            "&pin=" +
-            $scope.feedback.pin,
+          "/esr_mobile_number.php?mobile=" +
+          $scope.feedback.contactnumber +
+          "&email=" +
+          $scope.feedback.contactnumber +
+          "&pin=" +
+          $scope.feedback.pin,
           { timeout: 20000 }
         )
         .then(
@@ -408,8 +412,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/mobile_patientfrom_admission.php?mobile=" +
-            $scope.feedback.patient_number,
+          "/mobile_patientfrom_admission.php?mobile=" +
+          $scope.feedback.patient_number,
           { timeout: 20000 }
         )
         .then(
@@ -548,10 +552,10 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/forgotten_pin.php?mobile=" +
-            $scope.feedback.pin_contactnumber +
-            "&email=" +
-            $scope.feedback.pin_contactnumber,
+          "/forgotten_pin.php?mobile=" +
+          $scope.feedback.pin_contactnumber +
+          "&email=" +
+          $scope.feedback.pin_contactnumber,
           { timeout: 20000 }
         )
         .then(
@@ -1137,10 +1141,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-            "/savepatientfeedback_grievance.php?patient_id=" +
-            $scope.feedback.patientid +
-            "&administratorId=" +
-            $rootScope.adminId,
+          "/savepatientfeedback_grievance.php?patient_id=" +
+          $scope.feedback.patientid +
+          "&administratorId=" +
+          $rootScope.adminId,
           $scope.feedback
         )
         .then(

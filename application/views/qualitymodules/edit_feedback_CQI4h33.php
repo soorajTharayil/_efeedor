@@ -54,7 +54,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
 
-                        
+                    
 
 
 
@@ -62,7 +62,7 @@ $param = json_decode($row->dataset, true);
 
                     <table class="table table-striped table-bordered no-footer dtr-inline collapsed">
                         <tr>
-                            <td><b>Total number of rejected Insurance Claims</b></td>
+                            <td><b>Total number of rejected Insurance Claims </b></td>
                             <td>
                                 <div style="display: flex; flex-direction: row; align-items: center;">
                                     <span class="has-float-label" style="display: flex; align-items: center; ">

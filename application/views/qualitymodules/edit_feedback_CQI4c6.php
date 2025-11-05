@@ -54,7 +54,7 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
 
-                        
+                    
 
 
 
@@ -74,7 +74,7 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <tr>
-                            <td><b>ICU equipment days available </b></td>
+                            <td><b>ICU equipment days available</b></td>
                             <td>
                                 <input class="form-control" type="number" id="testsPerformed" name="total_admission" value="<?php echo $param['total_admission']; ?>">
                                 <br>
@@ -85,7 +85,7 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <tr>
-                            <td><b>ICU equipment utilisation rate-(Nursing - ICU3)</b></td>
+                            <td><b>ICU equipment utilisation rate-(Nursing - ICU3) </b></td>
                             <td>
                                 <input class="form-control" type="text" id="calculatedResult" name="calculatedResult" value="<?php echo $param['calculatedResult']; ?>">
                             </td>

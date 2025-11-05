@@ -89,13 +89,13 @@
 											<?php echo $r->name; ?>
 										</td> -->
 										<td style="white-space: nowrap;">
-    <?php if (!empty($r->datetime)) { ?>
-        <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
-        <?php echo date('h:i A', strtotime($r->datetime)); ?>
-    <?php } else { ?>
-        -
-    <?php } ?>
-</td>
+                                        <?php if (!empty($r->datetime)) { ?>
+                                            <?php echo date('d-M-Y', strtotime($r->datetime)); ?><br>
+                                            <?php echo date('h:i A', strtotime($r->datetime)); ?>
+                                        <?php } else { ?>
+                                            -
+                                        <?php } ?>
+                                    </td>
 
 
 										<td style="overflow: clip;">
@@ -128,16 +128,9 @@
 
 
 
-										<td>
-											<?php echo $param->initial_assessment_hr; ?>
-										</td>
+									<td><?php echo htmlspecialchars($param->initial_assessment_hr ?? '00') . ':' . htmlspecialchars($param->initial_assessment_min ?? '00') . ':' . htmlspecialchars($param->initial_assessment_sec ?? '00'); ?></td>
 
-										<td>
-											<?php echo $param->total_admission; ?>
-										</td>
-										<td>
-											<?php echo $param->calculatedResult; ?>
-										</td>
+									
 
 										<td>
 											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"

@@ -1895,7 +1895,739 @@ class Quality_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_feedback_CQI3k64', $data);
 	}
-	
+	public function update_feedback_CQI4h1($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h1', $data);
+	}
+
+	public function update_feedback_CQI4h2($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h2', $data);
+	}
+
+	public function update_feedback_CQI4h3($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h3', $data);
+	}
+
+	public function update_feedback_CQI4h4($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h4', $data);
+	}
+
+	public function update_feedback_CQI4h5($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h5', $data);
+	}
+
+	public function update_feedback_CQI4h6($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h6', $data);
+	}
+
+	public function update_feedback_CQI4h7($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h7', $data);
+	}
+
+	public function update_feedback_CQI4h8($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h8', $data);
+	}
+
+	public function update_feedback_CQI4h9($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h9', $data);
+	}
+
+	public function update_feedback_CQI4h10($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h10', $data);
+	}
+
+	public function update_feedback_CQI4h11($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h11', $data);
+	}
+
+	public function update_feedback_CQI4h12($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h12', $data);
+	}
+
+	public function update_feedback_CQI4h13($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h13', $data);
+	}
+
+	public function update_feedback_CQI4h14($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h14', $data);
+	}
+
+	public function update_feedback_CQI4h15($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h15', $data);
+	}
+
+	public function update_feedback_CQI4h16($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h16', $data);
+	}
+
+	public function update_feedback_CQI4h17($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h17', $data);
+	}
+
+	public function update_feedback_CQI4h18($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h18', $data);
+	}
+
+	public function update_feedback_CQI4h19($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h19', $data);
+	}
+
+	public function update_feedback_CQI4h20($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h20', $data);
+	}
+
+	public function update_feedback_CQI4h21($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h21', $data);
+	}
+
+	public function update_feedback_CQI4h22($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h22', $data);
+	}
+
+	public function update_feedback_CQI4h23($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h23', $data);
+	}
+
+	public function update_feedback_CQI4h24($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h24', $data);
+	}
+
+	public function update_feedback_CQI4h25($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h25', $data);
+	}
+
+	public function update_feedback_CQI4h26($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h26', $data);
+	}
+
+	public function update_feedback_CQI4h27($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h27', $data);
+	}
+
+	public function update_feedback_CQI4h28($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h28', $data);
+	}
+
+	public function update_feedback_CQI4h29($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h29', $data);
+	}
+
+	public function update_feedback_CQI4h30($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h30', $data);
+	}
+
+	public function update_feedback_CQI4h31($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h31', $data);
+	}
+
+	public function update_feedback_CQI4h32($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h32', $data);
+	}
+
+	public function update_feedback_CQI4h33($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h33', $data);
+	}
+
+	public function update_feedback_CQI4h34($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h34', $data);
+	}
+
+	public function update_feedback_CQI4h35($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h35', $data);
+	}
+
+	public function update_feedback_CQI4h36($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h36', $data);
+	}
+
+	public function update_feedback_CQI4h37($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h37', $data);
+	}
+
+	public function update_feedback_CQI4h38($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h38', $data);
+	}
+
+	public function update_feedback_CQI4h39($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h39', $data);
+	}
+
+	public function update_feedback_CQI4h40($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h40', $data);
+	}
+
+	public function update_feedback_CQI4h41($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h41', $data);
+	}
+
+	public function update_feedback_CQI4h42($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h42', $data);
+	}
+
+	public function update_feedback_CQI4h43($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h43', $data);
+	}
+
+	public function update_feedback_CQI4h44($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h44', $data);
+	}
+
+	public function update_feedback_CQI4h45($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h45', $data);
+	}
+
+	public function update_feedback_CQI4h46($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h46', $data);
+	}
+
+	public function update_feedback_CQI4h47($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h47', $data);
+	}
+
+	public function update_feedback_CQI4h48($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h48', $data);
+	}
+
+	public function update_feedback_CQI4h49($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h49', $data);
+	}
+
+	public function update_feedback_CQI4h50($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h50', $data);
+	}
+
+	public function update_feedback_CQI4h51($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h51', $data);
+	}
+
+	public function update_feedback_CQI4h52($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h52', $data);
+	}
+
+	public function update_feedback_CQI4h53($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h53', $data);
+	}
+
+	public function update_feedback_CQI4h54($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h54', $data);
+	}
+
+	public function update_feedback_CQI4h55($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h55', $data);
+	}
+
+	public function update_feedback_CQI4h56($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4h56', $data);
+	}
+	public function update_feedback_CLOTCM1($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM1', $data);
+	}
+
+	public function update_feedback_CLOTCM2($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM2', $data);
+	}
+
+	public function update_feedback_CLOTCM3($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM3', $data);
+	}
+
+	public function update_feedback_CLOTCM4($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM4', $data);
+	}
+
+	public function update_feedback_CLOTCM5($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM5', $data);
+	}
+
+	public function update_feedback_CLOTCM6($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM6', $data);
+	}
+
+	public function update_feedback_CLOTCM7($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM7', $data);
+	}
+
+	public function update_feedback_CLOTCM8($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM8', $data);
+	}
+
+	public function update_feedback_CLOTCM9($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM9', $data);
+	}
+
+	public function update_feedback_CLOTCM10($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM10', $data);
+	}
+
+	public function update_feedback_CLOTCM11($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM11', $data);
+	}
+
+	public function update_feedback_CLOTCM12($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM12', $data);
+	}
+
+	public function update_feedback_CLOTCM13($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM13', $data);
+	}
+
+	public function update_feedback_CLOTCM14($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM14', $data);
+	}
+
+	public function update_feedback_CLOTCM15($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM15', $data);
+	}
+
+	public function update_feedback_CLOTCM16($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM16', $data);
+	}
+
+	public function update_feedback_CLOTCM17($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM17', $data);
+	}
+
+	public function update_feedback_CLOTCM18($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM18', $data);
+	}
+
+	public function update_feedback_CLOTCM19($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM19', $data);
+	}
+
+	public function update_feedback_CLOTCM20($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM20', $data);
+	}
+
+	public function update_feedback_CLOTCM21($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM21', $data);
+	}
+
+	public function update_feedback_CLOTCM22($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM22', $data);
+	}
+
+	public function update_feedback_CLOTCM23($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM23', $data);
+	}
+
+	public function update_feedback_CLOTCM24($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM24', $data);
+	}
+
+	public function update_feedback_CLOTCM25($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM25', $data);
+	}
+
+	public function update_feedback_CLOTCM26($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM26', $data);
+	}
+
+	public function update_feedback_CLOTCM27($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM27', $data);
+	}
+
+	public function update_feedback_CLOTCM28($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM28', $data);
+	}
+
+	public function update_feedback_CLOTCM29($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM29', $data);
+	}
+
+	public function update_feedback_CLOTCM30($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CLOTCM30', $data);
+	}
+	public function update_feedback_CQI4i1($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i1', $data);
+	}
+
+	public function update_feedback_CQI4i2($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i2', $data);
+	}
+
+	public function update_feedback_CQI4i3($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i3', $data);
+	}
+
+	public function update_feedback_CQI4i4($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i4', $data);
+	}
+
+	public function update_feedback_CQI4i5($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i5', $data);
+	}
+
+	public function update_feedback_CQI4i6($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i6', $data);
+	}
+
+	public function update_feedback_CQI4i7($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i7', $data);
+	}
+
+	public function update_feedback_CQI4i8($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i8', $data);
+	}
+
+	public function update_feedback_CQI4i9($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i9', $data);
+	}
+
+	public function update_feedback_CQI4i10($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i10', $data);
+	}
+
+	public function update_feedback_CQI4i11($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i11', $data);
+	}
+
+	public function update_feedback_CQI4i12($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i12', $data);
+	}
+
+	public function update_feedback_CQI4i13($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i13', $data);
+	}
+
+	public function update_feedback_CQI4i14($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4i14', $data);
+	}
+
+	public function update_feedback_CQI4j1($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j1', $data);
+	}
+
+	public function update_feedback_CQI4j2($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j2', $data);
+	}
+
+	public function update_feedback_CQI4j3($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j3', $data);
+	}
+
+	public function update_feedback_CQI4j4($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j4', $data);
+	}
+
+	public function update_feedback_CQI4j5($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j5', $data);
+	}
+
+	public function update_feedback_CQI4j6($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j6', $data);
+	}
+
+	public function update_feedback_CQI4j7($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j7', $data);
+	}
+
+	public function update_feedback_CQI4j8($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j8', $data);
+	}
+
+	public function update_feedback_CQI4j9($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j9', $data);
+	}
+
+	public function update_feedback_CQI4j10($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j10', $data);
+	}
+
+	public function update_feedback_CQI4j11($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j11', $data);
+	}
+
+	public function update_feedback_CQI4j12($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j12', $data);
+	}
+
+	public function update_feedback_CQI4j13($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j13', $data);
+	}
+
+	public function update_feedback_CQI4j14($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j14', $data);
+	}
+
+	public function update_feedback_CQI4j15($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j15', $data);
+	}
+
+	public function update_feedback_CQI4j16($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j16', $data);
+	}
+
+	public function update_feedback_CQI4j17($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j17', $data);
+	}
+
+	public function update_feedback_CQI4j18($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j18', $data);
+	}
+
+	public function update_feedback_CQI4j19($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j19', $data);
+	}
+
+	public function update_feedback_CQI4j20($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j20', $data);
+	}
+
+	public function update_feedback_CQI4j21($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j21', $data);
+	}
+
+	public function update_feedback_CQI4j22($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j22', $data);
+	}
+
+
+
+
 
 
 
@@ -2150,6 +2882,2330 @@ class Quality_model extends CI_Model
 		$query = $this->db->get('bf_feedback_CQI3b13');
 		return $query->row();
 	}
+	public function get_feedback_CQI3c1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3c14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3c14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3d1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3d1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3d2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3d2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3d3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3d3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3d4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3d4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3d5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3d5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3e9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3e9');
+		return $query->row();
+	}
+	public function get_feedback_CQI3f1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3f10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3f10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3g6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3g6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3h9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3h9');
+		return $query->row();
+	}
+	public function get_feedback_CQI3j1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j15_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j15');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j16_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j16');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j17_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j17');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j18_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j18');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j19_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j19');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j20_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j20');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j21_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j21');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j22_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j22');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j23_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j23');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j24_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j24');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j25_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j25');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j26_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j26');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j27_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j27');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j28_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j28');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j29_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j29');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j30_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j30');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j31_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j31');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j32_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j32');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j33_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j33');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3j34_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3j34');
+		return $query->row();
+	}
+	public function get_feedback_CQI4a1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4a1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4a2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4a2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4a3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4a3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4a4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4a4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4a5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4a5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4b8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4b8');
+		return $query->row();
+	}
+	public function get_feedback_CQI4c1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4c14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4c14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4d11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4d11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4e8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4e8');
+		return $query->row();
+	}
+	public function get_feedback_CQI4f1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4f7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4f7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4g6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4g6');
+		return $query->row();
+	}
+	public function get_feedback_CQI3k1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k15_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k15');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k16_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k16');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k17_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k17');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k18_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k18');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k19_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k19');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k20_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k20');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k21_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k21');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k22_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k22');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k23_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k23');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k24_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k24');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k25_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k25');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k26_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k26');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k27_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k27');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k28_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k28');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k29_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k29');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k30_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k30');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k31_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k31');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k32_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k32');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k33_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k33');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k34_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k34');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k35_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k35');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k36_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k36');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k37_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k37');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k38_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k38');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k39_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k39');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k40_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k40');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k41_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k41');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k42_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k42');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k43_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k43');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k44_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k44');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k45_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k45');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k46_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k46');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k47_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k47');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k48_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k48');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k49_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k49');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k50_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k50');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k51_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k51');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k52_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k52');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k53_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k53');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k54_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k54');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k55_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k55');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k56_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k56');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k57_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k57');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k58_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k58');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k59_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k59');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k60_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k60');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k61_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k61');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k62_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k62');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k63_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k63');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI3k64_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI3k64');
+		return $query->row();
+	}
+	public function get_feedback_CQI4h1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h15_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h15');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h16_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h16');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h17_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h17');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h18_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h18');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h19_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h19');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h20_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h20');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h21_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h21');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h22_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h22');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h23_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h23');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h24_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h24');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h25_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h25');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h26_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h26');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h27_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h27');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h28_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h28');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h29_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h29');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h30_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h30');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h31_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h31');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h32_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h32');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h33_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h33');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h34_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h34');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h35_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h35');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h36_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h36');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h37_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h37');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h38_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h38');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h39_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h39');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h40_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h40');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h41_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h41');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h42_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h42');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h43_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h43');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h44_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h44');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h45_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h45');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h46_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h46');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h47_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h47');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h48_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h48');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h49_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h49');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h50_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h50');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h51_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h51');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h52_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h52');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h53_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h53');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h54_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h54');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h55_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h55');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4h56_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4h56');
+		return $query->row();
+	}
+	public function get_feedback_CLOTCM1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM1');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM2');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM3');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM4');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM5');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM6');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM7');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM8');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM9');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM10');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM11');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM12');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM13');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM14');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM15_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM15');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM16_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM16');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM17_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM17');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM18_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM18');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM19_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM19');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM20_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM20');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM21_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM21');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM22_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM22');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM23_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM23');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM24_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM24');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM25_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM25');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM26_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM26');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM27_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM27');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM28_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM28');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM29_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM29');
+		return $query->row();
+	}
+
+	public function get_feedback_CLOTCM30_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CLOTCM30');
+		return $query->row();
+	}
+	public function get_feedback_CQI4i1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4i14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4i14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j1_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j1');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j2_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j2');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j3_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j3');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j4_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j4');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j5_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j5');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j6_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j6');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j7_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j7');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j8_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j8');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j9_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j9');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j10_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j10');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j11_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j11');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j12_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j12');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j13_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j13');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j14_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j14');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j15_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j15');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j16_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j16');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j17_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j17');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j18_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j18');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j19_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j19');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j20_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j20');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j21_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j21');
+		return $query->row();
+	}
+
+	public function get_feedback_CQI4j22_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j22');
+		return $query->row();
+	}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3455,12 +6511,13 @@ class Quality_model extends CI_Model
 		$allowed = false;
 		if (isset($this->session->userdata['feature']) && is_array($this->session->userdata['feature'])) {
 			foreach ($this->session->userdata['feature'] as $key => $val) {
-				if ($val === true && isset($kpi_feature_map[$key]) && $kpi_feature_map[$key] === $table_feedback) {
+				if ($val === true) {
 					$allowed = true;
 					break;
 				}
 			}
 		}
+
 
 		if (!$allowed) {
 			return [];
@@ -3468,6 +6525,9 @@ class Quality_model extends CI_Model
 
 		$this->db->select($table_feedback . '.*');
 		$this->db->from($table_feedback);
+
+		//Hide record when status is deleted
+		$this->db->where("(status IS NULL OR status != 'Deleted')", null, false);
 
 		if (isset($_SESSION['ward']) && $_SESSION['ward'] != 'ALL') {
 			$this->db->where($table_feedback . '.ward', $_SESSION['ward']);

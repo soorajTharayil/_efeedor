@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.formatKPIDate = formatKPIDate;
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-
-	$timeout(function () {
-		if ($scope.kpiDeadline) {
-			angular.element('#deadlineModal').modal('show');
-		}
+	
+	$timeout(function () { 
+		if ($scope.kpiDeadline) { 
+			angular.element('#deadlineModal').modal('show'); 
+		} 
 	}, 500);
 
 
@@ -187,51 +187,60 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para1_hr').addEventListener('input', $scope.onValuesEdited);
 	document.getElementById('formula_para1_min').addEventListener('input', $scope.onValuesEdited);
 	document.getElementById('formula_para1_sec').addEventListener('input', $scope.onValuesEdited);
-
-	document.getElementById('formula_para1_hr2').addEventListener('input', $scope.onValuesEdited);
-	document.getElementById('formula_para1_min2').addEventListener('input', $scope.onValuesEdited);
-	document.getElementById('formula_para1_sec2').addEventListener('input', $scope.onValuesEdited);
-
+	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
 	//Calculate function for initail assessment
 
 	$scope.calculateTimeFormat = function () {
-		// Get Utilization Time inputs
-		var utilHours = parseInt(document.getElementById('formula_para1_hr').value || 0);
-		var utilMinutes = parseInt(document.getElementById('formula_para1_min').value || 0);
-		var utilSeconds = parseInt(document.getElementById('formula_para1_sec').value || 0);
+		// console.log($scope.feedback.initial_assessment_hr)
+		// console.log($scope.feedback.initial_assessment_min)
+		// console.log($scope.feedback.initial_assessment_sec)
+		// Concatenate the values with colons to form the desired format
 
-		// Get Resource Time inputs
-		var resHours = parseInt(document.getElementById('formula_para1_hr2').value || 0);
-		var resMinutes = parseInt(document.getElementById('formula_para1_min2').value || 0);
-		var resSeconds = parseInt(document.getElementById('formula_para1_sec2').value || 0);
+		$scope.feedback.initial_assessment_total =
+			($scope.feedback.initial_assessment_hr || 0) + ":" +
+			($scope.feedback.initial_assessment_min || 0) + ":" +
+			($scope.feedback.initial_assessment_sec || 0);
 
-		// Convert both to total seconds
-		var utilizationSeconds = (utilHours * 3600) + (utilMinutes * 60) + utilSeconds;
-		var resourceSeconds = (resHours * 3600) + (resMinutes * 60) + resSeconds;
 
-		// Validate denominator
-		if (isNaN(resourceSeconds) || resourceSeconds <= 0) {
-			alert("Please enter valid OT Resource Hours (denominator).");
+		console.log($scope.feedback.initial_assessment_total);		// Get values for hours, minutes, and seconds from user input
+		console.log($scope.feedback.total_admission);
+
+		var hoursInput = parseInt(document.getElementById('formula_para1_hr').value || 0);
+		var minutesInput = parseInt(document.getElementById('formula_para1_min').value || 0);
+		var secondsInput = parseInt(document.getElementById('formula_para1_sec').value || 0);
+
+		// Convert into total seconds
+		var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
+
+		// Get total admission
+		var totalAdmissions = parseInt(document.getElementById('formula_para2').value);
+
+		// Validate the total admissions value
+		if (isNaN(totalAdmissions) || totalAdmissions <= 0) {
+			alert("Please enter the above value to calculate");
 			return;
 		}
 
-		// Calculate utilization %
-		var utilizationRate = (utilizationSeconds / resourceSeconds) * 100;
+		var averageSeconds = Math.floor(assessmentSeconds / totalAdmissions);
 
-		// Keep 2 decimal places
-		utilizationRate = utilizationRate.toFixed(2);
+		// Convert the average back to hours, minutes, and seconds
+		var avgHours = Math.floor(averageSeconds / 3600);
+		var remainingSeconds = averageSeconds % 3600;
 
-		// Store result in Angular scope
-		$scope.calculatedResult = utilizationRate + " %";
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+		var avgMinutes = Math.floor(remainingSeconds / 60);
+		var avgSeconds = Math.floor(remainingSeconds % 60);
 
-		console.log("OT Utilization Rate:", $scope.feedback.calculatedResult);
+		// Format the result to "hr:min:sec"
+		$scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
 
+		$scope.feedback.calculatedResult = $scope.calculatedResult
+		console.log($scope.feedback.calculatedResult)
 		$scope.valuesEdited = false;
-	};
 
+
+	};
 
 
 		$scope.encodeFiles = function (element) {
@@ -392,12 +401,12 @@ $scope.currentMonthYear = getCurrentMonthYear();
 		return convertToSeconds(benchmarkStr);
 	};
 
-	// // Compares calculated value against benchmark
-	// $scope.getTextColor = function () {
-	// 	const calculatedSeconds = convertToSeconds($scope.calculatedResult);
-	// 	const benchmark = $scope.getBenchmarkInSeconds();
-	// 	return calculatedSeconds <= benchmark ? 'green' : 'red';
-	// };
+	// Compares calculated value against benchmark
+	$scope.getTextColor = function () {
+		const calculatedSeconds = convertToSeconds($scope.calculatedResult);
+		const benchmark = $scope.getBenchmarkInSeconds();
+		return calculatedSeconds <= benchmark ? 'green' : 'red';
+	};
 
 
 
