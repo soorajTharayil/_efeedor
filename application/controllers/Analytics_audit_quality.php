@@ -121,16 +121,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -178,16 +180,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -235,16 +239,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -291,16 +297,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -348,16 +356,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -404,16 +414,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -461,16 +473,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -517,16 +531,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -574,16 +590,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -631,16 +649,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -688,16 +708,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -745,16 +767,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -802,16 +826,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -859,16 +885,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -916,16 +944,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -974,16 +1004,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1031,16 +1063,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1088,16 +1122,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1145,16 +1181,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1202,16 +1240,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1259,16 +1299,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1316,16 +1358,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1372,16 +1416,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1429,16 +1475,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1487,16 +1535,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1546,16 +1596,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1603,16 +1655,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1660,16 +1714,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1718,16 +1774,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1778,16 +1836,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1834,16 +1894,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1890,16 +1952,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -1946,16 +2010,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2002,16 +2068,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2059,16 +2127,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2115,16 +2185,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2172,16 +2244,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2228,16 +2302,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2285,16 +2361,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2341,16 +2419,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2397,16 +2477,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2454,16 +2536,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2510,16 +2594,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2566,16 +2652,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2623,16 +2711,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2681,16 +2771,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2736,16 +2828,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2791,16 +2885,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2846,16 +2942,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2901,16 +2999,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -2956,16 +3056,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3011,16 +3113,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3066,16 +3170,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3121,16 +3227,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3176,16 +3284,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3231,16 +3341,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3286,16 +3398,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3341,16 +3455,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3396,16 +3512,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3451,16 +3569,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3506,16 +3626,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3561,16 +3683,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3616,16 +3740,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3671,16 +3797,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3726,16 +3854,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3781,16 +3911,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3836,16 +3968,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3891,16 +4025,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -3946,16 +4082,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4001,16 +4139,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4056,16 +4196,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4115,16 +4257,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4170,16 +4314,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4229,16 +4375,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4284,16 +4432,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4339,16 +4489,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4394,16 +4546,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4449,16 +4603,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4504,16 +4660,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4559,16 +4717,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4614,16 +4774,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4669,16 +4831,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4724,16 +4888,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4779,16 +4945,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4834,16 +5002,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4889,16 +5059,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4944,16 +5116,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -4999,16 +5173,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5054,16 +5230,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5109,16 +5287,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5167,16 +5347,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5222,16 +5404,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5277,16 +5461,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5332,16 +5518,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5387,16 +5575,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5442,16 +5632,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5497,16 +5689,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5552,16 +5746,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5607,16 +5803,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5662,16 +5860,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5717,16 +5917,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5773,16 +5975,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5828,16 +6032,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5894,16 +6100,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -5951,16 +6159,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6008,16 +6218,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6065,16 +6277,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6122,16 +6336,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6177,16 +6393,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6232,16 +6450,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6287,16 +6507,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6342,16 +6564,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6397,16 +6621,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6452,16 +6678,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6507,16 +6735,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6562,16 +6792,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6617,16 +6849,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6672,16 +6906,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6727,16 +6963,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6782,16 +7020,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6837,16 +7077,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6892,16 +7134,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -6947,16 +7191,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7002,16 +7248,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7057,16 +7305,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7112,16 +7362,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7167,16 +7419,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7222,16 +7476,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7277,16 +7533,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7332,16 +7590,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7387,16 +7647,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7442,16 +7704,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7497,16 +7761,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7552,16 +7818,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7607,16 +7875,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7662,16 +7932,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7717,16 +7989,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7772,16 +8046,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7827,16 +8103,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7882,16 +8160,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7937,16 +8217,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -7992,16 +8274,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8047,16 +8331,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8102,16 +8388,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8157,16 +8445,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8212,16 +8502,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8267,16 +8559,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8322,16 +8616,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8377,16 +8673,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8432,16 +8730,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8487,16 +8787,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8542,16 +8844,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8597,16 +8901,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8652,16 +8958,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8707,16 +9015,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8762,16 +9072,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8817,16 +9129,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8872,16 +9186,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8927,16 +9243,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -8982,16 +9300,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9037,16 +9357,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9092,16 +9414,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9147,16 +9471,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9202,16 +9528,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9257,16 +9585,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9312,16 +9642,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9367,16 +9699,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9422,16 +9756,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9477,16 +9813,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9532,16 +9870,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9587,16 +9927,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9642,16 +9984,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9697,16 +10041,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9752,16 +10098,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9807,16 +10155,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9862,16 +10212,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9917,16 +10269,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -9972,16 +10326,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10027,16 +10383,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10082,16 +10440,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10137,16 +10497,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10192,16 +10554,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10247,16 +10611,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10302,16 +10668,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10357,16 +10725,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10412,16 +10782,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10467,16 +10839,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10522,16 +10896,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10577,16 +10953,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10632,16 +11010,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10687,16 +11067,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10742,16 +11124,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10797,16 +11181,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10852,16 +11238,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10907,16 +11295,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -10962,16 +11352,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11017,16 +11409,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11072,16 +11466,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11127,16 +11523,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11182,16 +11580,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11237,16 +11637,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11292,16 +11694,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11347,16 +11751,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11402,16 +11808,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11457,16 +11865,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11512,16 +11922,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11567,16 +11979,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11622,16 +12036,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11677,16 +12093,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11732,16 +12150,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11787,16 +12207,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11842,16 +12264,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11897,16 +12321,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -11952,16 +12378,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12007,16 +12435,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12062,16 +12492,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12117,16 +12549,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12172,16 +12606,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12227,16 +12663,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12282,16 +12720,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12337,16 +12777,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12392,16 +12834,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12447,16 +12891,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12502,16 +12948,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12557,16 +13005,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12612,16 +13062,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12667,16 +13119,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12722,16 +13176,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12777,16 +13233,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12832,16 +13290,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12887,16 +13347,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12942,16 +13404,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -12997,16 +13461,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13052,16 +13518,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13107,16 +13575,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13162,16 +13632,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13217,16 +13689,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13272,16 +13746,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13327,16 +13803,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13382,16 +13860,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13437,16 +13917,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13492,16 +13974,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13547,16 +14031,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13602,16 +14088,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13657,16 +14145,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13712,16 +14202,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13767,16 +14259,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13822,16 +14316,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13877,16 +14373,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13932,16 +14430,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -13987,16 +14487,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14042,16 +14544,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14097,16 +14601,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14152,16 +14658,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14207,16 +14715,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14262,16 +14772,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14317,16 +14829,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14372,16 +14886,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14427,16 +14943,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14482,16 +15000,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14537,16 +15057,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14592,16 +15114,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14647,16 +15171,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14702,16 +15228,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14757,16 +15285,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14812,16 +15342,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14867,16 +15399,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14922,16 +15456,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -14977,16 +15513,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15032,16 +15570,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15087,16 +15627,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15142,16 +15684,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15197,16 +15741,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15252,16 +15798,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15307,16 +15855,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15362,16 +15912,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15417,16 +15969,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15472,16 +16026,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15527,16 +16083,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15582,16 +16140,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15637,16 +16197,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15692,16 +16254,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15747,16 +16311,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15802,16 +16368,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15857,16 +16425,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15912,16 +16482,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -15967,16 +16539,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16022,16 +16596,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16077,16 +16653,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16132,16 +16710,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16187,16 +16767,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16242,16 +16824,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16297,16 +16881,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16352,16 +16938,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16407,16 +16995,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16462,16 +17052,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16517,16 +17109,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16572,16 +17166,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16627,16 +17223,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16682,16 +17280,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16737,16 +17337,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16792,16 +17394,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16847,16 +17451,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16902,16 +17508,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -16957,16 +17565,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17012,16 +17622,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17067,16 +17679,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17122,16 +17736,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17177,16 +17793,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17232,16 +17850,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17287,16 +17907,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17342,16 +17964,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17397,16 +18021,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17452,16 +18078,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17507,16 +18135,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17562,16 +18192,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17617,16 +18249,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17672,16 +18306,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17727,16 +18363,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17782,16 +18420,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17837,16 +18477,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17892,16 +18534,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -17947,16 +18591,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18002,16 +18648,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18057,16 +18705,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18112,16 +18762,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18167,16 +18819,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18222,16 +18876,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18277,16 +18933,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18332,16 +18990,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18387,16 +19047,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18442,16 +19104,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18497,16 +19161,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18552,16 +19218,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18607,16 +19275,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18662,16 +19332,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18717,16 +19389,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18772,16 +19446,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18827,16 +19503,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18882,16 +19560,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18937,16 +19617,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -18992,16 +19674,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19047,16 +19731,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19102,16 +19788,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19157,16 +19845,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19212,16 +19902,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19267,16 +19959,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19322,16 +20016,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19377,16 +20073,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19432,16 +20130,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19487,16 +20187,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19542,16 +20244,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19597,16 +20301,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19652,16 +20358,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19707,16 +20415,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19762,16 +20472,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19817,16 +20529,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19872,16 +20586,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19927,16 +20643,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -19982,16 +20700,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20037,16 +20757,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20092,16 +20814,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20147,16 +20871,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20202,16 +20928,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20257,16 +20985,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20312,16 +21042,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20367,16 +21099,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20422,16 +21156,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20477,16 +21213,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20532,16 +21270,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20587,16 +21327,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20642,16 +21384,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20697,16 +21441,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20752,16 +21498,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20807,16 +21555,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20862,16 +21612,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20917,16 +21669,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -20972,16 +21726,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21027,16 +21783,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21082,16 +21840,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21137,16 +21897,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21192,16 +21954,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21247,16 +22011,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21302,16 +22068,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21357,16 +22125,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21412,16 +22182,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21467,16 +22239,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21522,16 +22296,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21577,16 +22353,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21632,16 +22410,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21687,16 +22467,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21742,16 +22524,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21797,16 +22581,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21852,16 +22638,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21907,16 +22695,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -21962,16 +22752,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22017,16 +22809,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22072,16 +22866,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22127,16 +22923,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22182,16 +22980,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22237,16 +23037,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22292,16 +23094,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22347,16 +23151,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22402,16 +23208,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22457,16 +23265,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22512,16 +23322,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22567,16 +23379,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22622,16 +23436,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22677,16 +23493,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22732,16 +23550,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22787,16 +23607,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22842,16 +23664,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22897,16 +23721,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -22952,16 +23778,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23007,16 +23835,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23062,16 +23892,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23117,16 +23949,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23172,16 +24006,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23227,16 +24063,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23282,16 +24120,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23337,16 +24177,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23392,16 +24234,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23447,16 +24291,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23502,16 +24348,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23557,16 +24405,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23612,16 +24462,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23667,16 +24519,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23722,16 +24576,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23777,16 +24633,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23832,16 +24690,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23887,16 +24747,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23942,16 +24804,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -23997,16 +24861,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24052,16 +24918,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24107,16 +24975,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24162,16 +25032,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24217,16 +25089,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24272,16 +25146,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24327,16 +25203,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24382,16 +25260,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24437,16 +25317,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24492,16 +25374,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24547,16 +25431,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24602,16 +25488,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24657,16 +25545,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24712,16 +25602,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24767,16 +25659,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24822,16 +25716,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24877,16 +25773,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24932,16 +25830,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -24987,16 +25887,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25042,16 +25944,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25097,16 +26001,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25152,16 +26058,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25207,16 +26115,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25262,16 +26172,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25317,16 +26229,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25372,16 +26286,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25427,16 +26343,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25482,16 +26400,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25537,16 +26457,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25592,16 +26514,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25647,16 +26571,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25702,16 +26628,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25757,16 +26685,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25812,16 +26742,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25867,16 +26799,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25922,16 +26856,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -25977,16 +26913,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26032,16 +26970,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26115,16 +27055,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26170,16 +27112,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26225,16 +27169,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26280,16 +27226,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26336,16 +27284,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26391,16 +27341,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26446,16 +27398,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26502,16 +27456,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26557,16 +27513,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26612,16 +27570,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26668,16 +27628,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26723,16 +27685,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26778,16 +27742,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26834,16 +27800,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26890,16 +27858,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -26946,16 +27916,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27002,16 +27974,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27058,16 +28032,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27114,16 +28090,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27170,16 +28148,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27226,16 +28206,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27282,16 +28264,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27341,16 +28325,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27396,16 +28382,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27452,16 +28440,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27508,16 +28498,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27564,16 +28556,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27620,16 +28614,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27676,16 +28672,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27732,16 +28730,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27788,16 +28788,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27844,16 +28846,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27900,16 +28904,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -27956,16 +28962,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28012,16 +29020,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28068,16 +29078,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28124,16 +29136,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28180,16 +29194,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28236,16 +29252,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28292,16 +29310,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28348,16 +29368,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28404,16 +29426,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28460,16 +29484,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28516,16 +29542,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28572,16 +29600,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28628,16 +29658,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28684,16 +29716,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28740,16 +29774,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28796,16 +29832,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
@@ -28852,16 +29890,18 @@ class Analytics_audit_quality extends CI_Controller
             //     }
             // }
             $param = json_decode($row->dataset);
-            if (!isset($report[$mon])) {
-                $report[$mon]['count'] = 0;
-            }
-            $avg = count($row);
-            if ($avg > 0) {
-                $report[$mon]['count'] = $report[$mon]['count'] + 1;
-            } else {
-                $report[$mon]['count'] = 0;
-            }
-            $report[$mon]['overall'] = count($feedback_data);
+
+// initialize the report entry if not already
+if (!isset($report[$mon])) {
+    $report[$mon]['count'] = 0;
+}
+
+// each $row is one audit record, so increment by 1
+$report[$mon]['count']++;
+
+// total audits overall
+$report[$mon]['overall'] = count($feedback_data);
+
         }
         $response = array();
         foreach ($report as $key => $row) {
