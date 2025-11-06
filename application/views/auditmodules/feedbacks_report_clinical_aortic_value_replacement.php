@@ -406,7 +406,7 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_clinicaloutcome_aortic_value_replacement"; // Replace with your API endpoint
+		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_clinicaloutcome_aortic_value_replacement"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {

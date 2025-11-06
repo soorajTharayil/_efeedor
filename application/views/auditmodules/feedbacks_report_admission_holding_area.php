@@ -238,7 +238,7 @@
 
 
 										<td><?php echo $param->department->title ?? ''; ?></td>
-		<td><?php echo $param->attended_doctor->name ?? ''; ?></td>
+										<td><?php echo $param->attended_doctor->name ?? ''; ?></td>
 
 
 
@@ -405,7 +405,7 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "https://" + domain + "/analytics_audit_quality/resposnsechart_admissionholding_area_audit"; // Replace with your API endpoint
+		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_admissionholding_area_audit"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
