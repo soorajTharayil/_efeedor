@@ -178,10 +178,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			return;
 		}
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total Non-Recyclable Waste (Kg) should be greater than or equal to total Patient Days");
-			return;
-		}
+		
 
 		// Calculate the average Non-Recyclable Waste per Patient Day (Kg/day)
 		var averageWaste = medicationErrors / opportunitiesForErrors;
@@ -374,10 +371,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total Non-Recyclable Waste (Kg) be less than total Patient Days')
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4i14'
