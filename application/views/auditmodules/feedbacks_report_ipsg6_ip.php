@@ -236,8 +236,8 @@
 										</td>
 
 
-										<td><?php echo $param->department->title ?? ''; ?></td>
-										<td><?php echo $param->attended_doctor->name ?? ''; ?></td>
+										<td><?php echo $param->department ?? ''; ?></td>
+										<td><?php echo $param->attended_doctor ?? ''; ?></td>
 
 
 
