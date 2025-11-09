@@ -161,44 +161,40 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of patients surviving last year
+    var survivingPatients = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of liver transplant surgeries last year
+    var totalSurgeries = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of patients surviving in this month last year");
-			return;
-		}
+    // Block negative inputs
+    if (survivingPatients < 0) {
+        alert("Number of patients surviving cannot be negative.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of Liver transpant surgery in this month last year ");
-			return;
-		}
+    if (totalSurgeries < 0) {
+        alert("Total number of liver transplant surgeries cannot be negative.");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of patients surviving in this month last year be less than total number of Liver transpant surgery in this month last year");
-			return;
-		}
+   
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate survival rate percentage
+    var survivalRatePercentage = totalSurgeries === 0 ? 0 : (survivingPatients / totalSurgeries) * 100;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Format: whole number or 2 decimals
+    $scope.calculatedResult = (survivalRatePercentage % 1 === 0) 
+        ? survivalRatePercentage.toString() 
+        : survivalRatePercentage.toFixed(2);
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,11 +369,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of patients surviving in this month last year be less than total number of Liver transpant surgery in this month last year')
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3k60'
 		)

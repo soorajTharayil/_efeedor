@@ -161,44 +161,45 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get numerator and denominator
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative numbers
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter number of deaths for CAD");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of deaths for CAD");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter number of discharges and deaths in that month (Number)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of discharges and deaths in that month(Number)");
-			return;
-		}
+    var errorRatePercentage = 0;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of deaths for CAD be less than number of discharges and deaths in that month(Number)");
-			return;
-		}
+    // Handle zero cases
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        errorRatePercentage = 0; // both zero → 0%
+    } else if (opportunitiesForErrors === 0) {
+        errorRatePercentage = 100; // denominator zero, numerator > 0 → 100%
+    } else {
+        // Normal calculation
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = errorRatePercentage % 1 === 0 ?
+        errorRatePercentage.toString() :
+        errorRatePercentage.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -311,6 +312,35 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	$scope.prev = function () {
 		window.location.href = '/qim_forms#step2';
 	};
+	
+	$scope.prev1 = function () {
+
+		$scope.step2 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
+
+	$scope.next1 = function () {
+
+		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
+			alert('Please enter data analysis');
+			return false;
+		}
+
+		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
+			alert('Please enter corrective action');
+			return false;
+		}
+
+		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
+			alert('Please enter preventive action');
+			return false;
+		}
+
+		$scope.step1 = false;
+		$scope.step2 = true;
+		$(window).scrollTop(0);
+	}
 
 
 	//color for time based on comparision
@@ -401,7 +431,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');
 							//$location.path('/thankyou');
-							$scope.step1 = false;
+							$scope.step2 = false;
 							$scope.step4 = true;
 							$(window).scrollTop(0);
 						} else {

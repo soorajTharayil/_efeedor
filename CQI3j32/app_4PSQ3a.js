@@ -159,47 +159,53 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get input values (accept decimals too)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // 🚫 Block negative values
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter No of Safety, security incidents related to Work place violence");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter No of safety, security related incidents reported in the month");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter No of Safety, security incidents related to Work place violence  ");
-			return;
-		}
+    // ✅ Allow both zeros — result will be 0%
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter No of safety, security related incidents reported in the month");
-			return;
-		}
+    // 🚫 Block division by zero if denominator = 0 and numerator > 0
+    if (opportunitiesForErrors === 0 && medicationErrors > 0) {
+        alert("No of safety, security related incidents reported in the month cannot be 0 when incidents are reported.");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("No of Safety, security incidents related to Work place violence  less than No of safety, security related incidents reported in the month ");
-			return;
-		}
+    // ✅ Allow numerator > denominator
+    var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // 🧮 Auto-format (whole number or 2 decimals)
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
-
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 		$scope.encodeFiles = function (element) {
@@ -373,10 +379,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('No of Safety, security incidents related to Work place violence  less than No of safety, security related incidents reported in the month');
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3j32')

@@ -161,43 +161,58 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
+    // Get inputs
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0); // nursing staff
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0); // occupied beds
 
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // ✅ Block negative inputs
+    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of nursing staff  ");
-			return;
-		}
+    // ✅ Allow both zero → result = 0:0 (No ratio)
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0:0 — No ratio (no data available).";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of occupied beds  ");
-			return;
-		}
+    
 
+    // ✅ Numerator zero but denominator > 0 → still valid
+    if (medicationErrors === 0 && opportunitiesForErrors > 0) {
+        $scope.calculatedResult = "0:1 — No nurses assigned to patients.";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		// Calculate ratio
-		var ratio, roundedRatio, ratioString;
+    // ✅ Calculate ratio dynamically
+    var ratio, formattedRatio, explanation;
 
-		if (medicationErrors < opportunitiesForErrors) {
-			ratio = opportunitiesForErrors / medicationErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = "1:" + roundedRatio;
-			explanation = " means 1 nurse is assigned to " + roundedRatio + " patients.";
-		} else {
-			ratio = medicationErrors / opportunitiesForErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = roundedRatio + ":1";
-			explanation = " means " + roundedRatio + " nurses are assigned to 1 patient.";
-		}
+    if (medicationErrors < opportunitiesForErrors) {
+        // Example: 5 nurses, 10 beds → 1:2 (1 nurse per 2 beds)
+        ratio = opportunitiesForErrors / medicationErrors;
+        formattedRatio = (ratio % 1 === 0) ? ratio.toString() : ratio.toFixed(2);
+        $scope.calculatedResult = "1:" + formattedRatio + " — means 1 nurse is assigned to " + formattedRatio + " patients.";
+    } else {
+        // Example: 10 nurses, 5 beds → 2:1 (2 nurses per 1 bed)
+        ratio = medicationErrors / opportunitiesForErrors;
+        formattedRatio = (ratio % 1 === 0) ? ratio.toString() : ratio.toFixed(2);
+        $scope.calculatedResult = formattedRatio + ":1 — means " + formattedRatio + " nurses are assigned to 1 patient.";
+    }
 
-		$scope.calculatedResult = ratioString + explanation;
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // ✅ Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,11 +388,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of babies re-admitted less than Total number of babies admitted in NICU');
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4c10')
 			.then(function (response) {

@@ -159,46 +159,56 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get and parse input values (allow decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Validate: input must be numeric
+    if (isNaN(medicationErrors)) {
+        alert("Please enter number of manpower supplied");
+        return;
+    }
+    if (isNaN(opportunitiesForErrors)) {
+        alert("Please enter total number of manpower contracted");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative values
+    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of manpower supplied");
-			return;
-		}
+    var errorRatePercentage = 0;
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of manpower contracted");
-			return;
-		}
+    // ✅ Case 1: Both zero → allowed (result = 0%)
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        errorRatePercentage = 0;
+    }
+    // 🚫 Case 2: Denominator zero but numerator > 0 → blocked
+    else if (opportunitiesForErrors === 0 && medicationErrors > 0) {
+        alert("Total number of manpower contracted cannot be zero when manpower supplied is greater than zero");
+        return;
+    }
+    // ✅ Case 3: Normal calculation (numerator can be > denominator)
+    else {
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of manpower supplied be less than total number of manpower contracted ");
-			return;
-		}
+    // 🧮 Auto-format: whole number or 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store result for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -373,11 +383,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of manpower supplied be less than total number of manpower contracted')
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h26'
 		)

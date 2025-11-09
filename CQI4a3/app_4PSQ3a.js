@@ -160,45 +160,52 @@ $scope.user_id = ehandor.userid;
 
 
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+$scope.calculateMedicationErrorRate = function () {
+    // Get inputs as float to allow decimal entries
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter Number of stock outs of emergency drugs (non-negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of stock outs of emergency drugs ");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter Number of drugs listed as emergency drugs in hospital formulary (non-negative).");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of drugs listed as emergency drugs in hospital formulary");
-			return;
-		}
+    // Allow both zeros but prevent divide-by-zero when numerator > 0
+    var errorRatePercentage = 0;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of stock outs of emergency drugs less than Number of drugs listed as emergency drugs in hospital formulary ");
-			return;
-		}
+    if (opportunitiesForErrors === 0) {
+        if (medicationErrors === 0) {
+            // Both zero → allowed, result = 0%
+            errorRatePercentage = 0;
+        } else {
+            // Denominator 0 but numerator > 0 → invalid
+            alert("Number of drugs listed as emergency drugs in hospital formulary cannot be 0 when stock outs exist.");
+            return;
+        }
+    } else {
+        // Normal calculation — numerator can be greater than denominator
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Auto-format result: whole → no decimals; otherwise → 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -373,10 +380,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of stock outs of emergency drugs less than Number of drugs listed as emergency drugs in hospital formulary');
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4a3')

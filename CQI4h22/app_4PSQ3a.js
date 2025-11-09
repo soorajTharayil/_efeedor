@@ -160,45 +160,47 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+$scope.calculateMedicationErrorRate = function () {
+    // Get the total litres of water consumed
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of days per month
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total litres of water consumed in the month");
-			return;
-		}
+    // ❌ Block negative numbers
+    if (medicationErrors < 0) {
+        alert("Please enter total litres of water consumed in the month");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of days per month");
-			return;
-		}
+    if (opportunitiesForErrors < 0) {
+        alert("Please enter total number of days per month");
+        return;
+    }
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total litres of water consumed in the month should be greater than or equal to total number of days per month");
-			return;
-		}
+    // ✅ Allow 0 / 0 and all valid combinations
+    var averageWater = 0;
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        averageWater = 0; // both zero case
+    } else if (opportunitiesForErrors === 0) {
+        averageWater = medicationErrors; // denominator zero → take numerator as total
+    } else {
+        averageWater = medicationErrors / opportunitiesForErrors; // normal division
+    }
 
-		// Calculate the average water consumption per day
-		var averageWater = medicationErrors / opportunitiesForErrors;
+    // ✅ Format result: whole number → as is; else → 2 decimals
+    if (averageWater % 1 === 0) {
+        $scope.calculatedResult = averageWater.toString() + " litres/day";
+    } else {
+        $scope.calculatedResult = averageWater.toFixed(2) + " litres/day";
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageWater % 1 === 0) {
-			$scope.calculatedResult = averageWater.toString() + " litres/day";
-		} else {
-			$scope.calculatedResult = averageWater.toFixed(2) + " litres/day";
-		}
+    // ✅ Save the result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -374,10 +376,8 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total litres of water consumed month be less than Total number of days per month')
-			return false;
-		}
+
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h22'

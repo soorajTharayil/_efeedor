@@ -158,47 +158,55 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para1').addEventListener('input', $scope.onValuesEdited);
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get and parse user inputs (allow decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
+    // Validate inputs: must be numbers (including 0)
+    if (isNaN(medicationErrors)) {
+        alert("Please enter number of Compliance from the planned schedule");
+        return;
+    }
+    if (isNaN(opportunitiesForErrors)) {
+        alert("Please enter total number of planned schedule");
+        return;
+    }
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Block negative values
+    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Calculate error rate
+    var errorRatePercentage = 0;
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of Compliance from the planned schedule");
-			return;
-		}
+    // Handle special case: both zero (0/0) should return 0%
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        errorRatePercentage = 0;
+    } else if (opportunitiesForErrors === 0) {
+        // Denominator zero → undefined mathematically, handle gracefully
+        alert("Total number of planned schedule cannot be zero when compliance is non-zero");
+        return;
+    } else {
+        // Normal calculation
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of planned schedule");
-			return;
-		}
+    // Auto-format result (whole number or 2 decimals)
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of Compliance from the planned schedule be less than total number of planned schedule ");
-			return;
-		}
+    // Store result for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -373,10 +381,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of Compliance from the planned schedule be less than total number of planned schedule ')
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h24'

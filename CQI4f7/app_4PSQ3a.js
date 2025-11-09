@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -105,26 +105,26 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 	}, 0);
 
-// 	$scope.setupapplication = function () {
-// 		//$rootScope.loader = true;
-// 		var url = window.location.href;
-// 		//console.log(url);
-// 		var id = url.substring(url.lastIndexOf('=') + 1);
-// 		//alert(id);
-// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
-// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
-// 			$scope.feedback.total_admission = responsedata.data.incident_count
-// 			console.log($scope.medication_errors_count);
+	// 	$scope.setupapplication = function () {
+	// 		//$rootScope.loader = true;
+	// 		var url = window.location.href;
+	// 		//console.log(url);
+	// 		var id = url.substring(url.lastIndexOf('=') + 1);
+	// 		//alert(id);
+	// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
+	// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
+	// 			$scope.feedback.total_admission = responsedata.data.incident_count
+	// 			console.log($scope.medication_errors_count);
 
-// 		},
-// 			function myError(response) {
-// 				$rootScope.loader = false;
+	// 		},
+	// 			function myError(response) {
+	// 				$rootScope.loader = false;
 
-// 			}
-// 		);
+	// 			}
+	// 		);
 
-// 	}
-// 	$scope.setupapplication();
+	// 	}
+	// 	$scope.setupapplication();
 
 	var ehandor = JSON.parse($window.localStorage.getItem('ehandor'));
 	if (ehandor) {
@@ -133,7 +133,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -179,7 +179,7 @@ $scope.user_id = ehandor.userid;
 		}
 
 		if (medicationErrors > opportunitiesForErrors) {
-			alert( "enter number of women having cesarean section for first time less than total number of live birth other than cesarean ");
+			alert("enter number of women having cesarean section for first time less than total number of live birth other than cesarean ");
 			return;
 		}
 
@@ -202,7 +202,7 @@ $scope.user_id = ehandor.userid;
 
 
 
-		$scope.encodeFiles = function (element) {
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -241,9 +241,9 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -298,7 +298,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {
@@ -353,10 +353,11 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if ($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined) {
+		if ($scope.feedback.initial_assessment_hr === '' || $scope.feedback.initial_assessment_hr === undefined || $scope.feedback.initial_assessment_hr === null) {
 			alert('Please enter total no. of adverse events reported on use of SUDs.');
 			return false;
 		}
+
 
 
 		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {

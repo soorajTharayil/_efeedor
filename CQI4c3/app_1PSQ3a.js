@@ -197,40 +197,49 @@ $scope.user_id = ehandor.userid;
 	//Calculate function for initail assessment
 
 	$scope.calculateTimeFormat = function () {
-		// Get Utilization Time inputs
-		var utilHours = parseInt(document.getElementById('formula_para1_hr').value || 0);
-		var utilMinutes = parseInt(document.getElementById('formula_para1_min').value || 0);
-		var utilSeconds = parseInt(document.getElementById('formula_para1_sec').value || 0);
+    // Get Utilization Time inputs (allow decimal)
+    var utilHours = parseFloat(document.getElementById('formula_para1_hr').value || 0);
+    var utilMinutes = parseFloat(document.getElementById('formula_para1_min').value || 0);
+    var utilSeconds = parseFloat(document.getElementById('formula_para1_sec').value || 0);
 
-		// Get Resource Time inputs
-		var resHours = parseInt(document.getElementById('formula_para1_hr2').value || 0);
-		var resMinutes = parseInt(document.getElementById('formula_para1_min2').value || 0);
-		var resSeconds = parseInt(document.getElementById('formula_para1_sec2').value || 0);
+    // Get Resource Time inputs (allow decimal)
+    var resHours = parseFloat(document.getElementById('formula_para1_hr2').value || 0);
+    var resMinutes = parseFloat(document.getElementById('formula_para1_min2').value || 0);
+    var resSeconds = parseFloat(document.getElementById('formula_para1_sec2').value || 0);
 
-		// Convert both to total seconds
-		var utilizationSeconds = (utilHours * 3600) + (utilMinutes * 60) + utilSeconds;
-		var resourceSeconds = (resHours * 3600) + (resMinutes * 60) + resSeconds;
+    // Block negative values
+    if (utilHours < 0 || utilMinutes < 0 || utilSeconds < 0) {
+        alert("Please enter non-negative Utilization Time values.");
+        return;
+    }
 
-		// Validate denominator
-		if (isNaN(resourceSeconds) || resourceSeconds <= 0) {
-			alert("Please enter valid OT Resource Hours (denominator).");
-			return;
-		}
+    if (resHours < 0 || resMinutes < 0 || resSeconds < 0) {
+        alert("Please enter non-negative Resource Time values.");
+        return;
+    }
 
-		// Calculate utilization %
-		var utilizationRate = (utilizationSeconds / resourceSeconds) * 100;
+    // Convert both to total seconds
+    var utilizationSeconds = (utilHours * 3600) + (utilMinutes * 60) + utilSeconds;
+    var resourceSeconds = (resHours * 3600) + (resMinutes * 60) + resSeconds;
 
-		// Keep 2 decimal places
-		utilizationRate = utilizationRate.toFixed(2);
+    
 
-		// Store result in Angular scope
-		$scope.calculatedResult = utilizationRate + " %";
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Calculate utilization %
+    var utilizationRate = (utilizationSeconds / resourceSeconds) * 100;
 
-		console.log("OT Utilization Rate:", $scope.feedback.calculatedResult);
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (utilizationRate % 1 === 0) ? 
+                              utilizationRate.toString() + " %" : 
+                              utilizationRate.toFixed(2) + " %";
 
-		$scope.valuesEdited = false;
-	};
+    // Store result in Angular scope
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+
+    console.log("OT Utilization Rate:", $scope.feedback.calculatedResult);
+
+    $scope.valuesEdited = false;
+};
+
 
 
 

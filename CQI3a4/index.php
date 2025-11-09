@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Percentage of Care-plan is documented for inpatients(MRD): <span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Percentage of Nutritional assessment is documented for inpatients (Clinical Nutrition and Dietetics): <span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 
@@ -374,11 +374,84 @@
                   <br><br>
 
                   <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
-                  <!-- submit button -->
-                  <div ng-if="calculatedResult">
 
-                    <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
-                    <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                  <!-- New next button -->
+                  <div ng-if="calculatedResult">
+                    <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
+                  </div>
+
+
+                </fieldset>
+
+                <!-- New Preview Page Section-->
+
+                <fieldset ng-show="step2 == true">
+                  <div class="form-card">
+                    <div class="text-left details-section" style="background: white; margin: 10px 10px 0 10px;">
+                      <label for="comment"><b style="font-size: 18px;">Review your details before submission:</b></label>
+
+                      <table class="details-content" style="border-spacing: 10px; border-collapse: collapse; width: 100%; margin-bottom: 0px; border: 1px solid #dddddd;">
+
+
+                        <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;"><b>KPI Details</b></td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para1}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_hr}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para2}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.total_admission}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Percentage of Nutritional assessment is documented for inpatients (Clinical Nutrition and Dietetics)</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.calculatedResult}}</td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.data_analysis}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.dataAnalysis}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.corrective_action}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.correctiveAction}}</td>
+                        </tr>
+
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.preventive_action}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.preventiveAction}}</td>
+                        </tr>
+
+                        <tr ng-show="feedback.files_name && feedback.files_name.length > 0">
+                          <td class="details-label"
+                            style="border: 1px solid #dddddd; padding: 10px;">Uploaded files
+                          </td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <ul style="padding-left: 15px; margin: 0;">
+                              <li ng-repeat="file in feedback.files_name">
+                                <a ng-href="{{file.url}}"
+                                  download="{{file.name}}">{{file.name}}</a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+
+                      </table>
+
+                      <br>
+
+                      <br><br>
+                      <input type="button" name="previous" style="font-size:small;" class="previous action-button-previous" ng-click="prev1()" value="{{lang.previous}}" />
+
+                      <div>
+                        <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
+                        <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
+                      </div>
+
+                    </div>
                   </div>
                 </fieldset>
                 <fieldset ng-show="step4 == true">

@@ -161,44 +161,39 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+		// Get input values
+		var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+		var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
-
-		// Validate inputs for medication errors and opportunities for errors
+		// Validate inputs
 		if (isNaN(medicationErrors) || medicationErrors < 0) {
 			alert("Please enter number of unpaid leave per month");
 			return;
 		}
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
+		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
 			alert("Please enter number of employees at the beginning of the month plus newly joined");
 			return;
 		}
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Number of unpaid leaves per month should be greater than or equal to number of employees at the beginning of the month plus newly joined");
-			return;
-		}
+		
 
-		// Calculate the average unpaid leave per employee
-		var averageLeave = medicationErrors / opportunitiesForErrors;
+		// Calculate average unpaid leaves per employee
+		var averageLeave = (opportunitiesForErrors > 0)
+			? (medicationErrors / opportunitiesForErrors)
+			: 0;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageLeave % 1 === 0) {
-			$scope.calculatedResult = averageLeave.toString() + " leaves/employee";
-		} else {
-			$scope.calculatedResult = averageLeave.toFixed(2) + " leaves/employee";
-		}
+		// Format output
+		$scope.calculatedResult = (averageLeave % 1 === 0)
+			? averageLeave.toString() + " leaves/employee"
+			: averageLeave.toFixed(2) + " leaves/employee";
 
-		// Store the result in the feedback object for further use
+		// Store result
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
 		console.log("Calculated result", $scope.calculatedResult);
 		$scope.valuesEdited = false;
 	};
+
 
 
 
@@ -374,10 +369,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of unpaid leave per month  be less than number of employee at the beginning of the month plus newly joined ');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4e8'

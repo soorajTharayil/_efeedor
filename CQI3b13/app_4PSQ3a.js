@@ -161,44 +161,40 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of medication errors (default 0 if empty)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of opportunities for medication errors (default 0 if empty)
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter the no of pathology samples, such as biopsy or other tissue specimens related safety events or errors reported in the month");
-			return;
-		}
+    // Validate inputs (negative values blocked)
+    if (medicationErrors < 0) {
+        alert("Please enter the no of pathology samples, such as biopsy or other tissue specimens related safety events or errors reported in the month");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total No of patient safety event reported in the month");
-			return;
-		}
+    if (opportunitiesForErrors < 0) {
+        alert("Please enter total No of patient safety event reported in the month");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("The no. of pathology samples, such as biopsy or other tissue specimens related safety events or errors reported in the month be less than the no.of patient safety event reported in the month.");
-			return;
-		}
+   
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate the medication errors rate as a percentage
+    var errorRatePercentage = opportunitiesForErrors === 0 ? 0 : (medicationErrors / opportunitiesForErrors) * 100;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (errorRatePercentage % 1 === 0) 
+        ? errorRatePercentage.toString() 
+        : errorRatePercentage.toFixed(2);
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store result in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,10 +369,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('The no.of pathology samples, such as biopsy or other tissue specimens related safety events or errors reported in the month be less than the no.of  patient safety event reported in the month.');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3b13')

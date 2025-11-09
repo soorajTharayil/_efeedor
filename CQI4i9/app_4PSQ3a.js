@@ -159,46 +159,51 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get inputs as float to allow decimals
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Validate negative numbers
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter a valid total number of compliance (non-negative).");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter a valid total number of Observations (non-negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of compliance ");
-			return;
-		}
+    // Both zero allowed, but handle division by zero case safely
+    var errorRatePercentage = 0;
+    if (opportunitiesForErrors === 0) {
+        // If both are zero → result should be 0
+        if (medicationErrors === 0) {
+            errorRatePercentage = 0;
+        } else {
+            // If denominator is 0 but numerator > 0 → handle gracefully
+            alert("Cannot divide by zero: Observations cannot be 0 when compliance > 0.");
+            return;
+        }
+    } else {
+        // Normal calculation, even if numerator > denominator
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of Observations ");
-			return;
-		}
+    // Auto-format result (whole → as is; else → 2 decimals)
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total number of compliance be less than total number of Observations");
-			return;
-		}
+    // Store result for use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -371,10 +376,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total number of compliance be less than total number of Observations')
 			return false;
 		}
 

@@ -161,44 +161,40 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values
+    var patientsWithBetaBlocker = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalCHFPatients = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate negative inputs
+    if (patientsWithBetaBlocker < 0) {
+        alert("Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge cannot be negative");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge");
-			return;
-		}
+    if (totalCHFPatients < 0) {
+        alert("Number of patients discharged with a diagnosis of CHF cannot be negative");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of patients discharged with a diagnosis of CHF.");
-			return;
-		}
+    
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge be less than number of patients discharged with a diagnosis of CHF");
-			return;
-		}
+    // Calculate the percentage (allow both zero)
+    var betaBlockerRate = (patientsWithBetaBlocker === 0 && totalCHFPatients === 0)
+        ? 0
+        : (patientsWithBetaBlocker / totalCHFPatients) * 100;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (betaBlockerRate % 1 === 0)
+        ? betaBlockerRate.toString()
+        : betaBlockerRate.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,10 +369,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge be less than number of patients discharged with a diagnosis of CHF.');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3a11')

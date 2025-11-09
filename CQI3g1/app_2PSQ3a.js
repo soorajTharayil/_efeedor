@@ -167,39 +167,39 @@ $scope.user_id = ehandor.userid;
 
 	$scope.calculateErrorRate = function () {
 		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+		var reportingErrors = parseFloat(document.getElementById('formula_para1').value);
 
 		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+		var testsPerformed = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for reporting errors and tests performed
+		// Validate inputs — allow 0 but block negatives
 		if (isNaN(reportingErrors) || reportingErrors < 0) {
 			alert("Please enter Number of Urinary Catheter associated UTIs in a month.");
 			return;
 		}
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
-			alert("Please enter Number of urinary catheter days in the month .");
+		if (isNaN(testsPerformed) || testsPerformed < 0) {
+			alert("Please enter Number of urinary catheter days in the month.");
 			return;
 		}
 
-		if (reportingErrors > testsPerformed) {
-			alert(" Number of Urinary Catheter associated UTIs in a month less than Number of urinary catheter days in the month .");
-			return;
+		// Calculate errors per 1,000 catheter days safely
+		var errorsPerThousand = 0;
+		if (testsPerformed !== 0) {
+			errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
 		}
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+		// Format result and append label
+		$scope.calculatedResult = errorsPerThousand.toFixed(2) + " per 1,000 catheter days";
 
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
-
-		// Store the result in the feedback object for further use
+		// Store the result in the feedback object
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
 		console.log("Calculated result:", $scope.calculatedResult);
 		$scope.valuesEdited = false;
 	};
+
+
 
 
 
@@ -379,10 +379,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return false;
 		}
 
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of Urinary Catheter associated UTIs in a month less than Number of urinary catheter days in the month.');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3g1')

@@ -161,44 +161,45 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of hypotension cases necessitating termination
+    var hypotensionCases = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of dialysis procedures
+    var dialysisProcedures = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of hypotension necessitating termination of dialysis ");
-			return;
-		}
+    // Validate inputs: negative values blocked
+    if (isNaN(hypotensionCases) || hypotensionCases < 0) {
+        alert("Please enter total number of hypotension necessitating termination of dialysis (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of dialysis procedure");
-			return;
-		}
+    if (isNaN(dialysisProcedures) || dialysisProcedures < 0) {
+        alert("Please enter total number of dialysis procedures (cannot be negative)");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total number of hypotension necessitating termination of dialysis be less than total number of dialysis procedure");
-			return;
-		}
+   
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate error rate
+    var errorRate;
+    if (hypotensionCases === 0 && dialysisProcedures === 0) {
+        errorRate = 0; // both zero → 0%
+    } else {
+        errorRate = (hypotensionCases / dialysisProcedures) * 100;
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (errorRate % 1 === 0)
+        ? errorRate.toString()
+        : errorRate.toFixed(2);
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,10 +374,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total number of hypotension necessitating termination of dialysis be less than total number of dialysis procedure')
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3k43'

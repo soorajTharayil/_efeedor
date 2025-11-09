@@ -161,44 +161,58 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get values from input fields
+    var handoversDone = parseInt(document.getElementById('formula_para1').value);
+    var handoverOpportunities = parseInt(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate "handovers done by doctors"
+    if (isNaN(handoversDone) || handoversDone < 0) {
+        alert("Please enter the Number of Handovers Done by Doctors.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of handovers done by doctors ");
-			return;
-		}
+    // Validate "handover opportunities"
+    if (isNaN(handoverOpportunities) || handoverOpportunities < 0) {
+        alert("Please enter the Number of Handover Opportunities for Doctors.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of handover opportunities Doctors");
-			return;
-		}
+    // If both values are zero → treat as 0%
+    if (handoversDone === 0 && handoverOpportunities === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert(  "Please enter Number of handovers done by doctors less than Number of handover opportunities Doctors ");
-			return;
-		}
+    // Avoid division by zero if only opportunities = 0
+    if (handoverOpportunities === 0) {
+        alert("Number of Handover Opportunities cannot be zero unless both are zero.");
+        return;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Calculate handover completion rate (%)
+    var completionRate = (handoversDone / handoverOpportunities) * 100;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Format: whole number or up to 2 decimal places
+    $scope.calculatedResult =
+        completionRate % 1 === 0
+            ? completionRate.toString()
+            : completionRate.toFixed(2);
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    // Store result in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+
+    console.log("Calculated result:", $scope.calculatedResult);
+
+    // Mark values as finalized
+    $scope.valuesEdited = false;
+};
+
+
 
 
 
@@ -311,6 +325,35 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	$scope.prev = function () {
 		window.location.href = '/qim_forms#step2';
 	};
+	
+		$scope.prev1 = function () {
+
+		$scope.step2 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
+
+	$scope.next1 = function () {
+
+		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
+			alert('Please enter data analysis');
+			return false;
+		}
+
+		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
+			alert('Please enter corrective action');
+			return false;
+		}
+
+		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
+			alert('Please enter preventive action');
+			return false;
+		}
+
+		$scope.step1 = false;
+		$scope.step2 = true;
+		$(window).scrollTop(0);
+	}
 
 
 	//color for time based on comparision
@@ -373,11 +416,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter Number of handovers done by doctors less than Number of handover opportunities Doctors');
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3j7')
 			.then(function (response) {
@@ -400,7 +439,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');
 							//$location.path('/thankyou');
-							$scope.step1 = false;
+							$scope.step2 = false;
 							$scope.step4 = true;
 							$(window).scrollTop(0);
 						} else {

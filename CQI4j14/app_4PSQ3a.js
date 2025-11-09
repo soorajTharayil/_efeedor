@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -105,26 +105,26 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 	}, 0);
 
-// 	$scope.setupapplication = function () {
-// 		//$rootScope.loader = true;
-// 		var url = window.location.href;
-// 		//console.log(url);
-// 		var id = url.substring(url.lastIndexOf('=') + 1);
-// 		//alert(id);
-// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
-// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
-// 			$scope.feedback.total_admission = responsedata.data.incident_count
-// 			console.log($scope.medication_errors_count);
+	// 	$scope.setupapplication = function () {
+	// 		//$rootScope.loader = true;
+	// 		var url = window.location.href;
+	// 		//console.log(url);
+	// 		var id = url.substring(url.lastIndexOf('=') + 1);
+	// 		//alert(id);
+	// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
+	// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
+	// 			$scope.feedback.total_admission = responsedata.data.incident_count
+	// 			console.log($scope.medication_errors_count);
 
-// 		},
-// 			function myError(response) {
-// 				$rootScope.loader = false;
+	// 		},
+	// 			function myError(response) {
+	// 				$rootScope.loader = false;
 
-// 			}
-// 		);
+	// 			}
+	// 		);
 
-// 	}
-// 	$scope.setupapplication();
+	// 	}
+	// 	$scope.setupapplication();
 
 	var ehandor = JSON.parse($window.localStorage.getItem('ehandor'));
 	if (ehandor) {
@@ -133,7 +133,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -155,54 +155,45 @@ $scope.user_id = ehandor.userid;
 		$scope.valuesEdited = true;
 	};
 
-	document.getElementById('formula_para1').addEventListener('input', $scope.onValuesEdited);
-	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
+	// document.getElementById('formula_para1').addEventListener('input', $scope.onValuesEdited);
+	// document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
+	$scope.calculateTimeFormat = function () {
+		$scope.feedback.initial_assessment_total =
+			($scope.feedback.initial_assessment_hr || 0) + ":" +
+			($scope.feedback.initial_assessment_min || 0) + ":" +
+			($scope.feedback.initial_assessment_sec || 0);
 
+		var hoursInput = parseFloat(document.getElementById('formula_para1_hr').value || 0);
+		var minutesInput = parseFloat(document.getElementById('formula_para1_min').value || 0);
+		var secondsInput = parseFloat(document.getElementById('formula_para1_sec').value || 0);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+		var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
+		var totalAdmissions = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
-
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total time from arrival to start of imaging (In minutes)");
+		if (isNaN(totalAdmissions) || totalAdmissions < 0) {
+			alert("Please enter the above value to calculate");
 			return;
 		}
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter all patients with stroke symptom within 24 hrs");
-			return;
-		}
+		var averageSeconds = (totalAdmissions > 0) ? Math.floor(assessmentSeconds / totalAdmissions) : 0;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total time from arrival to start of imaging (In minutes)- be less than all patients with stroke symptom within 24 hrs");
-			return;
-		}
+		var avgHours = Math.floor(averageSeconds / 3600);
+		var remainingSeconds = averageSeconds % 3600;
+		var avgMinutes = Math.floor(remainingSeconds / 60);
+		var avgSeconds = Math.floor(remainingSeconds % 60);
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
+		$scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
+		console.log($scope.feedback.calculatedResult);
 		$scope.valuesEdited = false;
 	};
 
 
 
-		$scope.encodeFiles = function (element) {
+
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -241,9 +232,9 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -298,7 +289,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {

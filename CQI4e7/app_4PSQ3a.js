@@ -160,45 +160,46 @@ $scope.user_id = ehandor.userid;
 
 
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+$scope.calculateMedicationErrorRate = function () {
+    // Get numerator and denominator (accept decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // ❌ Block negatives
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter number of employees who are on unauthorised absence");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of employees who are on unauthorised absence  ");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter number of employees at the beginning of the month plus newly joined");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of employee at the beginning of the month plus newly joined");
-			return;
-		}
+    // ✅ Allow zero & both zero safely
+    var errorRatePercentage = 0;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of employees who are on unauthorised absence  be less than number of employee at the beginning of the month plus newly joined ");
-			return;
-		}
+    if (opportunitiesForErrors === 0 && medicationErrors === 0) {
+        errorRatePercentage = 0; // both zero → result = 0
+    } else if (opportunitiesForErrors === 0) {
+        errorRatePercentage = medicationErrors * 100; // avoid divide-by-zero
+    } else {
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // ✅ Auto-format: whole → integer, else → 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -371,10 +372,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of employees who are on unauthorised absence  be less than number of employee at the beginning of the month plus newly joined ');
 			return false;
 		}
 

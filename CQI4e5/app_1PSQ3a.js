@@ -162,7 +162,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -196,6 +196,9 @@ $scope.user_id = ehandor.userid;
 
 	//Calculate function for initail assessment
 
+	$scope.valuesEdited = true;
+
+
 	$scope.calculateTimeFormat = function () {
 		// Get Utilization Time inputs
 		var utilHours = parseInt(document.getElementById('formula_para1_hr').value || 0);
@@ -211,14 +214,16 @@ $scope.user_id = ehandor.userid;
 		var utilizationSeconds = (utilHours * 3600) + (utilMinutes * 60) + utilSeconds;
 		var resourceSeconds = (resHours * 3600) + (resMinutes * 60) + resSeconds;
 
-		// Validate denominator
-		if (isNaN(resourceSeconds) || resourceSeconds <= 0) {
-			alert("Please enter valid OT Resource Hours (denominator).");
+		// ✅ Allow zero, block only NaN or negative
+		if (isNaN(resourceSeconds) || resourceSeconds < 0) {
+			alert("Please enter valid OT Resource Hours.");
 			return;
 		}
 
 		// Calculate utilization %
-		var utilizationRate = (utilizationSeconds / resourceSeconds) * 100;
+		var utilizationRate = (resourceSeconds > 0)
+			? (utilizationSeconds / resourceSeconds) * 100
+			: 0;
 
 		// Keep 2 decimal places
 		utilizationRate = utilizationRate.toFixed(2);
@@ -234,7 +239,8 @@ $scope.user_id = ehandor.userid;
 
 
 
-		$scope.encodeFiles = function (element) {
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -273,7 +279,7 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
 	$scope.months = [
 		"January", "February", "March", "April", "May", "June",
@@ -310,7 +316,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -365,7 +371,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {

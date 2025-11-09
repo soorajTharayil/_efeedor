@@ -161,44 +161,45 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of RRT cases that turned to code blue
+    var rrtToCodeBlue = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of RRT activated in the month
+    var totalRRT = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total No of RRT cases turn to code blue");
-			return;
-		}
+    // Validate inputs: negative values blocked
+    if (isNaN(rrtToCodeBlue) || rrtToCodeBlue < 0) {
+        alert("Please enter total No of RRT cases turn to code blue (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total No of RRT activated in the month");
-			return;
-		}
+    if (isNaN(totalRRT) || totalRRT < 0) {
+        alert("Please enter total No of RRT activated in the month (cannot be negative)");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total No of RRT cases turn to code blue be less than total No of RRT activated in the month ");
-			return;
-		}
+    
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate the percentage
+    var percentage;
+    if (rrtToCodeBlue === 0 && totalRRT === 0) {
+        percentage = 0; // both zero → 0%
+    } else {
+        percentage = (rrtToCodeBlue / totalRRT) * 100;
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (percentage % 1 === 0)
+        ? percentage.toString()
+        : percentage.toFixed(2);
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,10 +374,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total No of RRT cases turn to code blue be less than  total No of RRT activated in the month')
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3k64'

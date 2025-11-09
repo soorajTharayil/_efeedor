@@ -277,7 +277,7 @@
 
                       <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>Submission Deadline: </b> {{ formatKPIDate(kpiDeadline, false) }}</p> -->
 
-                      <!-- <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> --> -->
+                      <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px; margin-top: -20px;">
                         <div class="form-group transparent-placeholder">
@@ -687,8 +687,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '')  // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

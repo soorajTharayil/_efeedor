@@ -161,44 +161,49 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values (supporting decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate negative values
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter Number of ICU equipment utilised days.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of ICU equipment utilised days ");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter ICU equipment days available.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter ICU equipment days available");
-			return;
-		}
+    // Allow both zero values
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = "0";
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of ICU equipment utilised days less than ICU equipment days available");
-			return;
-		}
+    
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate percentage
+    var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Auto-format result
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store result in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 

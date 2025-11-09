@@ -161,44 +161,51 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of medication errors
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of opportunities for medication errors
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of Fall prevention opportunities complied in OPD ");
-			return;
-		}
+    // Validate inputs for medication errors and opportunities for errors
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter Number of Fall prevention opportunities complied in OPD");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Total Number of parameters audited in OPD");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter Total Number of parameters audited in OPD");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of Fall prevention opportunities complied in OPD less than Total Number of parameters audited in OPD ");
-			return;
-		}
+    // Allow both zero case
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = "0";
+        $scope.valuesEdited = false;
+        console.log("Calculated result", $scope.calculatedResult);
+        return;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+   
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Calculate the medication errors rate as a percentage
+    var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Format result: whole or 2 decimal places
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    // Store the result in the feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,10 +380,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of Fall prevention opportunities complied in OPD  less than Total Number of parameters audited in OPD');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3j25')

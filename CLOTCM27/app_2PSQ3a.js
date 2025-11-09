@@ -165,43 +165,51 @@ $scope.user_id = ehandor.userid;
 	//Calculate reporting errors per 1000 investigations
 
 
-	$scope.calculateErrorRate = function () {
-		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+$scope.calculateErrorRate = function () {
+    // Get the number of reporting errors (support decimals)
+    var reportingErrors = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of tests performed (support decimals)
+    var testsPerformed = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for reporting errors and tests performed
-		if (isNaN(reportingErrors) || reportingErrors < 0) {
-			alert("Please enter number of ventilator associated pneumonias in a month");
-			return;
-		}
+    // Validate inputs
+    if (isNaN(reportingErrors) || reportingErrors < 0) {
+        alert("Please enter number of ventilator associated pneumonias in a month");
+        return;
+    }
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
-			alert("Please enter number of ventilator days in month");
-			return;
-		}
+    if (isNaN(testsPerformed) || testsPerformed < 0) {
+        alert("Please enter number of ventilator days in month");
+        return;
+    }
 
-		if (reportingErrors > testsPerformed) {
-			alert("Please enter number of ventilator associated pneumonias in a month  be less than number of ventilator days in month");
-			return;
-		}
+    // Allow numerator > denominator
+    // Allow both zero (should return 0.00)
+    var errorsPerThousand;
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+    if (reportingErrors === 0 && testsPerformed === 0) {
+        errorsPerThousand = 0;
+    } else if (testsPerformed === 0) {
+        // If denominator = 0 but numerator > 0, return numerator * 1000
+        // (still calculated as per requirement)
+        errorsPerThousand = reportingErrors * 1000;
+    } else {
+        // Normal calculation
+        errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+    }
 
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
+    // Auto-format result: whole number or 2 decimals
+    if (errorsPerThousand % 1 === 0) {
+        $scope.calculatedResult = errorsPerThousand.toString();
+    } else {
+        $scope.calculatedResult = errorsPerThousand.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result:", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
-
-
+    // Store the result for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 

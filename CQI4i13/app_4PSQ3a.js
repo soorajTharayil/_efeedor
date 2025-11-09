@@ -161,35 +161,37 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicalWasteAverage = function () {
-		// Get total medical waste disposed (in Kgs)
-		var totalWaste = parseFloat(document.getElementById('formula_para1').value);
+    // Get total medical waste disposed (in Kgs) and total days
+    var totalWaste = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalDays = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get total number of days waste discarded
-		var totalDays = parseFloat(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (totalWaste < 0) {
+        alert("Please enter medical waste disposed in the month in Kgs (cannot be negative)");
+        return;
+    }
 
-		// Validate inputs
-		if (isNaN(totalWaste) || totalWaste < 0) {
-			alert("Please enter medical waste disposed in the month in Kgs");
-			return;
-		}
+    if (totalDays < 0) {
+        alert("Please enter total number of days medical waste discarded (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(totalDays) || totalDays <= 0) {
-			alert("Please enter total number of days medical waste discarded");
-			return;
-		}
+    // Calculate average per day
+    // Zero numerator and zero denominator allowed → result is 0
+    var avgWaste = (totalWaste === 0 && totalDays === 0) ? 0 : totalWaste / totalDays;
 
-		// Calculate average waste per day (in Kgs)
-		var avgWaste = totalWaste / totalDays;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (avgWaste % 1 === 0) 
+        ? avgWaste.toString() + " Kg per day" 
+        : avgWaste.toFixed(2) + " Kg per day";
 
-		// Format to 2 decimal places and append unit
-		$scope.calculatedResult = avgWaste.toFixed(2) + " Kg per day";
+    // Store result for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store result for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result (Avg Waste per Day):", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result (Avg Waste per Day):", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 

@@ -58,7 +58,7 @@
    "kpi_info": "Adverse events related to implant devices (JCI8-ASC 4.4)- (OT) for this month",
    "definition": "Definition:",
    "kpi_def": "A medication error is any preventable event that may cause or lead to inappropriate medication use or patient harm while the medication is in the control of the healthcare professional, patient or consumer.",
-   "formula_para1": "Total No of Adverse events related to implant devices reported in the month",   
+   "formula_para1": "Total No of Adverse events related to implant devices reported in the month(Numerator)",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",

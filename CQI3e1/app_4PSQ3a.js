@@ -161,44 +161,41 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values (allow decimals)
+    var unplannedReturn = parseFloat(document.getElementById('formula_para1').value || 0);
+    var surgeriesPerformed = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (unplannedReturn < 0) {
+        alert("Please enter number of unplanned return to OT (cannot be negative).");
+        return;
+    }
+    if (surgeriesPerformed < 0) {
+        alert("Please enter number of patients who underwent surgeries in the OT (cannot be negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of unplanned return to OT");
-			return;
-		}
+   
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of patients who underwent surgeries in the OT");
-			return;
-		}
+    // Handle zero cases
+    if (unplannedReturn === 0 || surgeriesPerformed === 0) {
+        $scope.calculatedResult = "0";
+    } else {
+        // Calculate percentage
+        var percentage = (unplannedReturn / surgeriesPerformed) * 100;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert( " number of unplanned return to OT less than who underwent surgeries in the OT ");
-			return;
-		}
+        // Format result: whole number or 2 decimals
+        $scope.calculatedResult = (percentage % 1 === 0) 
+            ? percentage.toString() 
+            : percentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store result in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,11 +370,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of unplanned return to OT less than who underwent surgeries in the OT');
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3e1')
 			.then(function (response) {

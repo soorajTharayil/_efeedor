@@ -160,45 +160,50 @@ $scope.user_id = ehandor.userid;
 
 
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+$scope.calculateMedicationErrorRate = function () {
+    // Get numerator (total time taken for resolving of complaint)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get denominator (total Complaint received)
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total time taken for resolving of complaint");
-			return;
-		}
+    // ❌ Block negative inputs
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter total time taken for resolving of complaint");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total Complaint received");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter total Complaint received");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total time taken for resolving of complaint be less than total Complaint received");
-			return;
-		}
+    // ✅ Handle zero & both zero safely
+    let errorRatePercentage = 0;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        errorRatePercentage = 0;
+    } else if (opportunitiesForErrors === 0) {
+        // Denominator zero → keep numerator as 100% reference
+        errorRatePercentage = medicationErrors * 100;
+    } else {
+        // Normal calculation (even if numerator > denominator)
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // ✅ Format result: whole number or 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Save result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -371,10 +376,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total time taken for resolving of complaint be less than total Complaint received')
 			return false;
 		}
 

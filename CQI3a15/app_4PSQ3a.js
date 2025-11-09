@@ -161,45 +161,42 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of COPD patients provided with an action plan
+    var copdActionPlan = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of COPD patients discharged
+    var copdDischarged = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of COPD patients provided with a COPD action plan at the time of discharge");
-			return;
-		}
+    // Block negative inputs
+    if (copdActionPlan < 0) {
+        alert("Number of COPD patients provided with a COPD action plan cannot be negative.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of COPD patients discharged");
-			return;
-		}
+    if (copdDischarged < 0) {
+        alert("Number of COPD patients discharged cannot be negative.");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of COPD patients provided with a COPD action plan at the time of discharge less than Number of COPD patients discharged");
-			return;
-			
-		}
+    
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate the percentage
+    var errorRatePercentage = copdDischarged === 0 ? 0 : (copdActionPlan / copdDischarged) * 100;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Format result: whole number or 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -374,10 +371,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of COPD patients provided with a COPD action plan at the time of discharge less than Number of COPD patients discharged');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3a15')

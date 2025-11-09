@@ -159,46 +159,47 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get the number of compliance
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of total observations
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // ❌ Block negative values
+    if (medicationErrors < 0) {
+        alert("Please enter number of Compliance");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of Compliance");
-			return;
-		}
+    if (opportunitiesForErrors < 0) {
+        alert("Please enter total number of observations");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of observations");
-			return;
-		}
+    // ✅ Allow zero / both zero cases
+    var errorRatePercentage = 0;
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        errorRatePercentage = 0; // both zero
+    } else if (opportunitiesForErrors === 0) {
+        errorRatePercentage = 100; // avoid division by zero — assume full compliance
+    } else {
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of Compliance be less than total number of observations ");
-			return;
-		}
+    // ✅ Auto-format result
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // ✅ Store in scope
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -371,10 +372,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of Compliance be less than total number of observations ')
 			return false;
 		}
 

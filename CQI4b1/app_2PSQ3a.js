@@ -166,40 +166,49 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateErrorRate = function () {
-		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values (support decimals)
+    var reportingErrors = parseFloat(document.getElementById('formula_para1').value);
+    var testsPerformed = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs
+    if (isNaN(reportingErrors) || reportingErrors < 0) {
+        alert("Please enter Number of patients who develop new / worsening of pressure ulcer.");
+        return;
+    }
 
-		// Validate inputs for reporting errors and tests performed
-		if (isNaN(reportingErrors) || reportingErrors < 0) {
-			alert("Please enter Number of patients who develop new / worsening of pressure ulcer.");
-			return;
-		}
+    if (isNaN(testsPerformed) || testsPerformed < 0) {
+        alert("Please enter Total number of patient days for the month.");
+        return;
+    }
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
-			alert("Please enter Total number of patient days for the month.");
-			return;
-		}
+    // Allow both zero (0/0)
+    if (reportingErrors === 0 && testsPerformed === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = "0";
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (reportingErrors > testsPerformed) {
-			alert("Number of patients who develop new / worsening of pressure ulcer less than Total number of patient days for the month");
-			return;
-		}
+    
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+    // Calculate the rate per 1000 patient days
+    var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
 
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
+    // Auto-format: whole number or 2 decimals
+    if (errorsPerThousand % 1 === 0) {
+        $scope.calculatedResult = errorsPerThousand.toString();
+    } else {
+        $scope.calculatedResult = errorsPerThousand.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Save result for UI
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result:", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -379,10 +388,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return false;
 		}
 
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of patients who develop new / worsening of pressure ulcer less than Total number of patient days for the month');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4b1')

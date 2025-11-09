@@ -161,44 +161,41 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of actual deaths in PICU
+    var actualDeaths = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of predicted deaths in PICU
+    var predictedDeaths = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter actual deaths in PICU ");
-			return;
-		}
+    // Validate inputs: negative values blocked
+    if (isNaN(actualDeaths) || actualDeaths < 0) {
+        alert("Please enter actual deaths in PICU (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Predicted deaths in PICU");
-			return;
-		}
+    if (isNaN(predictedDeaths) || predictedDeaths < 0) {
+        alert("Please enter predicted deaths in PICU (cannot be negative)");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter actual deaths in PICU be less than Predicted deaths in PICU");
-			return;
-		}
+    
+    // Calculate the percentage
+    var deathRate = (actualDeaths === 0 && predictedDeaths === 0)
+        ? 0  // both zero → 0%
+        : (actualDeaths / predictedDeaths) * 100;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (deathRate % 1 === 0)
+        ? deathRate.toString()
+        : deathRate.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 

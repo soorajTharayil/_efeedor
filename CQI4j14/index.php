@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -281,12 +281,26 @@
                       <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px; margin-top: -20px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
-                        <div class="form-group transparent-placeholder">
-                          <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
-                          <span class="has-float-label">
-                            <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.formula_para1_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
-                            <label for="para1"></label>
-                          </span>
+                        <div class="form-group transparent-placeholder" style="display: flex; flex-direction: column;">
+                          <span class="addon" style="font-size: 16px; margin-bottom: 1px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
+
+                          <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
+                            <span class="has-float-label" style="display: flex; align-items: center; ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.hr_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1_hr" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px; margin-right: 9px;">hr </span>
+                              <label for="para1"></label>
+                            </span>
+                            <span class="has-float-label" style="display: flex; align-items: center;  ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.min_placeholder}}" ng-model="feedback.initial_assessment_min" type="number" id="formula_para1_min" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px; margin-right: 9px;">min </span>
+                              <label for="para1"></label>
+                            </span>
+                            <span class="has-float-label" style="display: flex; align-items: center; ">
+                              <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.sec_placeholder}}" ng-model="feedback.initial_assessment_sec" type="number" id="formula_para1_sec" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                              <span style="margin-left: 4px;">sec</span>
+                              <label for="para1"></label>
+                            </span>
+                          </div>
                         </div>
                       </div>
 
@@ -304,7 +318,7 @@
 
 
 
-                      <button type="button" class="btn btn-primary" ng-click="calculateMedicationErrorRate()" style="margin-left:20px;">
+                      <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
                         Compute KPI
                       </button>
 
@@ -319,7 +333,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well (In Minutes)-(Stroke Unit): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Time from arrival to the start of initial imaging workup for all patients who arrive within 24 hours of last known well: <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 
@@ -922,8 +936,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

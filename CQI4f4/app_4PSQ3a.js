@@ -161,44 +161,35 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get inputs
+    var nearMisses = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalIncidents = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative values
+    if (nearMisses < 0) {
+        alert("Please enter number of near misses reported (cannot be negative)");
+        return;
+    }
+    if (totalIncidents < 0) {
+        alert("Please enter total number of incidents reported (cannot be negative)");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of near misses reported ");
-			return;
-		}
+   
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of incidents are reported ");
-			return;
-		}
+    // Calculate rate (%), allow 0/0 → returns 0
+    var ratePercentage = (totalIncidents === 0) ? 0 : (nearMisses / totalIncidents) * 100;
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of near misses reported be less than total number of incidents are reported ");
-			return;
-		}
+    // Auto-format: whole if exact, else 2 decimals
+    $scope.calculatedResult = (ratePercentage % 1 === 0) ? ratePercentage.toString() : ratePercentage.toFixed(2);
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,10 +364,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert( 'Please enter number of near misses reported be less than  total number of incidents are reported  ');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4f4'

@@ -353,10 +353,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
-			alert('Please enter number of periprocerural complications in the month');
-			return false;
-		}
+		
 
 
 		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {

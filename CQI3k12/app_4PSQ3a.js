@@ -161,44 +161,43 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values
+    var totalPatients = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalDays = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate negative inputs
+    if (totalPatients < 0) {
+        alert("Total number of patients cannot be negative");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of patients in emergency");
-			return;
-		}
+    if (totalDays < 0) {
+        alert("Total number of days cannot be negative");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of days per month");
-			return;
-		}
+    // Calculate average visits per day
+    // If both are zero, treat it as 0
+    var avgVisitPerDay;
+    if (totalPatients === 0 && totalDays === 0) {
+        avgVisitPerDay = 0;
+    } else {
+        avgVisitPerDay = totalPatients / totalDays;
+    }
 
-		// if (medicationErrors < opportunitiesForErrors) {
-		// 	alert("Total number of patients in emergency should be greater than or equal to total number of days per month");
-		// 	return;
-		// }
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (avgVisitPerDay % 1 === 0)
+        ? avgVisitPerDay.toString() + " patients/day"
+        : avgVisitPerDay.toFixed(2) + " patients/day";
 
-		// Calculate the average visiting per day
-		var avgVisitPerDay = medicationErrors / opportunitiesForErrors;
+    // Store result in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (avgVisitPerDay % 1 === 0) {
-			$scope.calculatedResult = avgVisitPerDay.toString() + " patients/day";
-		} else {
-			$scope.calculatedResult = avgVisitPerDay.toFixed(2) + " patients/day";
-		}
+    console.log("Calculated Average Visiting per Day:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated Average Visiting per Day", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -374,10 +373,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert( 'Please enter total number of patients in emergency be less than total number of days per month');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3k12'

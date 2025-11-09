@@ -193,54 +193,66 @@ $scope.user_id = ehandor.userid;
 	//Calculate function for initail assessment
 
 	$scope.calculateTimeFormat = function () {
-		// console.log($scope.feedback.initial_assessment_hr)
-		// console.log($scope.feedback.initial_assessment_min)
-		// console.log($scope.feedback.initial_assessment_sec)
-		// Concatenate the values with colons to form the desired format
+    // Read input values (allow decimals)
+    var hoursInput = parseFloat(document.getElementById('formula_para1_hr').value || 0);
+    var minutesInput = parseFloat(document.getElementById('formula_para1_min').value || 0);
+    var secondsInput = parseFloat(document.getElementById('formula_para1_sec').value || 0);
 
-		$scope.feedback.initial_assessment_total =
-			($scope.feedback.initial_assessment_hr || 0) + ":" +
-			($scope.feedback.initial_assessment_min || 0) + ":" +
-			($scope.feedback.initial_assessment_sec || 0);
+    // Block negative inputs
+    if (hoursInput < 0 || minutesInput < 0 || secondsInput < 0) {
+        alert("Hours, minutes, and seconds cannot be negative.");
+        return;
+    }
 
+    // Display initial total
+    $scope.feedback.initial_assessment_total = `${hoursInput}:${minutesInput}:${secondsInput}`;
+    console.log("Initial assessment total:", $scope.feedback.initial_assessment_total);
 
-		console.log($scope.feedback.initial_assessment_total);		// Get values for hours, minutes, and seconds from user input
-		console.log($scope.feedback.total_admission);
+    // Convert inputs to total seconds
+    var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
 
-		var hoursInput = parseInt(document.getElementById('formula_para1_hr').value || 0);
-		var minutesInput = parseInt(document.getElementById('formula_para1_min').value || 0);
-		var secondsInput = parseInt(document.getElementById('formula_para1_sec').value || 0);
+    // Read total admissions (allow decimals)
+    var totalAdmissions = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Convert into total seconds
-		var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
+    // Block negative admissions
+    if (totalAdmissions < 0) {
+        alert("Total admissions cannot be negative.");
+        return;
+    }
 
-		// Get total admission
-		var totalAdmissions = parseInt(document.getElementById('formula_para2').value);
+    // Handle zero admissions
+    if (totalAdmissions === 0) {
+        $scope.calculatedResult = "0:00:00";
+    } else {
+        // Calculate average seconds
+        var averageSeconds = assessmentSeconds / totalAdmissions;
 
-		// Validate the total admissions value
-		if (isNaN(totalAdmissions) || totalAdmissions <= 0) {
-			alert("Please enter the above value to calculate");
-			return;
-		}
+        // Convert back to HH:MM:SS
+        var avgHours = Math.floor(averageSeconds / 3600);
+        var remainingSeconds = averageSeconds % 3600;
+        var avgMinutes = Math.floor(remainingSeconds / 60);
+        var avgSeconds = Math.round(remainingSeconds % 60);
 
-		var averageSeconds = Math.floor(assessmentSeconds / totalAdmissions);
+        // Handle rounding overflow
+        if (avgSeconds === 60) {
+            avgSeconds = 0;
+            avgMinutes += 1;
+        }
+        if (avgMinutes === 60) {
+            avgMinutes = 0;
+            avgHours += 1;
+        }
 
-		// Convert the average back to hours, minutes, and seconds
-		var avgHours = Math.floor(averageSeconds / 3600);
-		var remainingSeconds = averageSeconds % 3600;
+        // Format result
+        $scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
+    }
 
-		var avgMinutes = Math.floor(remainingSeconds / 60);
-		var avgSeconds = Math.floor(remainingSeconds % 60);
+    // Store in feedback
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.feedback.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Format the result to "hr:min:sec"
-		$scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
-
-		$scope.feedback.calculatedResult = $scope.calculatedResult
-		console.log($scope.feedback.calculatedResult)
-		$scope.valuesEdited = false;
-
-
-	};
 
 
 		$scope.encodeFiles = function (element) {

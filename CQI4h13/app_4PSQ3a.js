@@ -161,44 +161,40 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+		// Get input values
+		var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+		var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
-
-		// Validate inputs for medication errors and opportunities for errors
+		// Validate inputs
 		if (isNaN(medicationErrors) || medicationErrors < 0) {
 			alert("Please enter total number of Nurses available in the month");
 			return;
 		}
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
+		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
 			alert("Please enter total number of days per month");
 			return;
 		}
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total number of Nurses available in the month should be greater than or equal to total number of days per month");
-			return;
-		}
+		// Calculate average nurses per day
+		var averageNurses = (opportunitiesForErrors > 0)
+			? (medicationErrors / opportunitiesForErrors)
+			: 0;
 
-		// Calculate the average number of nurses per day
-		var averageNurses = medicationErrors / opportunitiesForErrors;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
+		// Format output
 		if (averageNurses % 1 === 0) {
 			$scope.calculatedResult = averageNurses.toString() + " nurses/day";
 		} else {
 			$scope.calculatedResult = averageNurses.toFixed(2) + " nurses/day";
 		}
 
-		// Store the result in the feedback object for further use
+		// Store the result
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
 		console.log("Calculated result", $scope.calculatedResult);
 		$scope.valuesEdited = false;
 	};
+
 
 
 
@@ -374,10 +370,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total number of Nurses available in the month be less than total number of days per month')
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h13'

@@ -921,13 +921,18 @@
   }
 
   function restrictToNumerals(event) {
-    const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
-    if (currentValue !== filteredValue) {
-      inputElement.value = filteredValue;
-    }
-  }
+  const inputElement = event.target;
+  let currentValue = inputElement.value;
+
+  // Allow only numbers and a single decimal point
+  const filteredValue = currentValue
+    .replace(/[^0-9.]/g, '')  // remove non-numeric except '.'
+    .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
+  if (currentValue !== filteredValue) {
+    inputElement.value = filteredValue;
+  }
+}
 </script>
 
 <!-- script code end  -->

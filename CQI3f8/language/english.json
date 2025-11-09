@@ -63,7 +63,7 @@
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": "No of cross matched units in the month(Demonimator)",
+   "formula_para2": "No of cross matched units in the month(Denominator)",
    "formula_para2_placeholder": "Your input",
    "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",

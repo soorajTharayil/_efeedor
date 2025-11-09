@@ -161,44 +161,54 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of in-patient days
+    var inPatientDays = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of discharges and deaths
+    var dischargesAndDeaths = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of in-patient days for the month");
-			return;
-		}
+    // Validate inputs
+    if (isNaN(inPatientDays) || inPatientDays < 0) {
+        alert("Please enter total number of in-patient days for the month");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of discharges and deaths in that month");
-			return;
-		}
+    if (isNaN(dischargesAndDeaths) || dischargesAndDeaths < 0) {
+        alert("Please enter number of discharges and deaths in that month");
+        return;
+    }
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total number of in-patient days for the month should be greater than or equal to number of discharges and deaths in that month");
-			return;
-		}
+    // Allow both zero
+    if (inPatientDays === 0 && dischargesAndDeaths === 0) {
+        $scope.calculatedResult = "0 days";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		// Calculate the average (instead of percentage)
-		var averageValue = medicationErrors / opportunitiesForErrors;
+    // Prevent division by zero (when denominator is zero)
+    if (dischargesAndDeaths === 0) {
+        alert("Number of discharges and deaths cannot be zero unless both are zero");
+        return;
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageValue % 1 === 0) {
-			$scope.calculatedResult = averageValue.toString() + " days";
-		} else {
-			$scope.calculatedResult = averageValue.toFixed(2) + " days";
-		}
+    // Calculate the ALOS (Average Length of Stay)
+    var averageValue = inPatientDays / dischargesAndDeaths;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Format result: whole number or 2 decimal places
+    if (averageValue % 1 === 0) {
+        $scope.calculatedResult = averageValue.toString() + " days";
+    } else {
+        $scope.calculatedResult = averageValue.toFixed(2) + " days";
+    }
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    // Store and display
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -374,10 +384,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total number of in-patient days for the month be less than number of discharges and deaths in that month')
-			return false;
-		}
+	
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CLOTCM7'

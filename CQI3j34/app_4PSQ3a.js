@@ -159,47 +159,54 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+	// Get the number of medication errors (allow decimal)
+	var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+	// Get the number of opportunities for medication errors (allow decimal)
+	var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+	// 🚫 Negative → blocked
+	if (isNaN(medicationErrors) || medicationErrors < 0) {
+		alert("Please enter No of safety incidents analysed and closed in the month");
+		return;
+	}
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+	if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+		alert("Please enter No of safety incidents reported in the month");
+		return;
+	}
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter No of safety incidents analysed and closed in the month ");
-			return;
-		}
-
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter No of safety incidents reported in the month");
-			return;
-		}
-
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("No of safety incidents analysed and closed in the month  less than No of safety incidents reported in the month");
-			return;
-		}
-
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
+	// ✅ Both zero → allowed (result = 0)
+	if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+		$scope.calculatedResult = "0";
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
 		console.log("Calculated result", $scope.calculatedResult);
 		$scope.valuesEdited = false;
-	};
+		return;
+	}
 
+	// 🚫 Denominator zero (numerator > 0) → blocked
+	if (opportunitiesForErrors === 0 && medicationErrors > 0) {
+		alert("No of safety incidents reported in the month cannot be 0 when incidents are analysed and closed.");
+		return;
+	}
+
+	// ✅ Allow numerator > denominator (it will calculate normally)
+	var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+
+	// 🧮 Result auto-format (whole or 2 decimals)
+	if (errorRatePercentage % 1 === 0) {
+		$scope.calculatedResult = errorRatePercentage.toString();
+	} else {
+		$scope.calculatedResult = errorRatePercentage.toFixed(2);
+	}
+
+	// Store the result in the feedback object
+	$scope.feedback.calculatedResult = $scope.calculatedResult;
+
+	console.log("Calculated result", $scope.calculatedResult);
+	$scope.valuesEdited = false;
+};
 
 
 		$scope.encodeFiles = function (element) {
@@ -373,10 +380,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('No of safety incidents analysed and closed in the month  less than No of safety incidents reported in the month');
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3j34')

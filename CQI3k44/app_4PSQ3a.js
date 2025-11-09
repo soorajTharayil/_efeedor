@@ -161,44 +161,44 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of compliant cases in audited sample
+    var complianceCount = parseFloat(document.getElementById('formula_para1').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of opportunities observed
+    var totalOpportunities = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of compliance in audited sample size ");
-			return;
-		}
+    // Validate inputs: negative values blocked
+    if (isNaN(complianceCount) || complianceCount < 0) {
+        alert("Please enter number of compliance in audited sample size (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total no. of opportunities observed ");
-			return;
-		}
+    if (isNaN(totalOpportunities) || totalOpportunities < 0) {
+        alert("Please enter total number of opportunities observed (cannot be negative)");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of compliance in audited sample size be less than total no. of opportunities observed");
-			return;
-		}
+    
+    // Calculate compliance rate
+    var complianceRate;
+    if (complianceCount === 0 && totalOpportunities === 0) {
+        complianceRate = 0; // both zero → 0%
+    } else {
+        complianceRate = (complianceCount / totalOpportunities) * 100;
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (complianceRate % 1 === 0)
+        ? complianceRate.toString()
+        : complianceRate.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 

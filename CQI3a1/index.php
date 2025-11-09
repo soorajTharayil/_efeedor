@@ -473,7 +473,7 @@
                         </tr>
 
                         <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Avg.Time for initial assessment of in-patients (Doctors)- (MRD-ICU)</td>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Percentage of Care-plan is documented for inpatients(MRD)</td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.calculatedResult}}</td>
                         </tr>
                         <tr>

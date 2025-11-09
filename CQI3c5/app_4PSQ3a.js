@@ -161,44 +161,41 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get inputs, default to 0 if empty
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (medicationErrors < 0) {
+        alert("Please enter number of medication charts with error prone abbreviations");
+        return;
+    }
+    if (opportunitiesForErrors < 0) {
+        alert("Please enter number of medication charts reviewed");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of medication charts with error prone abbreviations ");
-			return;
-		}
+   
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of medication charts reviewed");
-			return;
-		}
+    // Calculate percentage safely
+    var errorRatePercentage = 0;
+    if (opportunitiesForErrors === 0) {
+        errorRatePercentage = (medicationErrors === 0 ? 0 : 100); // 0/0=0%, numerator>0 with 0 denom=100%
+    } else {
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("The number of medication charts with error prone abbreviations less than the number of medication charts reviewed.");
-			return;
-		}
+    // Auto-format result: whole number or 2 decimals
+    $scope.calculatedResult = (errorRatePercentage % 1 === 0)
+        ? errorRatePercentage.toString()
+        : errorRatePercentage.toFixed(2);
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store and log
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,10 +370,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('The no.of number of medication charts with error prone abbreviations less than the no.of number of medication charts reviewed');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3c5')

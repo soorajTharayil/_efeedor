@@ -191,56 +191,70 @@ $scope.user_id = ehandor.userid;
 
 
 	//Calculate function for initail assessment
+$scope.calculateTimeFormat = function () {
+    // Combine input values into a readable format
+    $scope.feedback.initial_assessment_total =
+        ($scope.feedback.initial_assessment_hr || 0) + ":" +
+        ($scope.feedback.initial_assessment_min || 0) + ":" +
+        ($scope.feedback.initial_assessment_sec || 0);
 
-	$scope.calculateTimeFormat = function () {
-		// console.log($scope.feedback.initial_assessment_hr)
-		// console.log($scope.feedback.initial_assessment_min)
-		// console.log($scope.feedback.initial_assessment_sec)
-		// Concatenate the values with colons to form the desired format
+    console.log("Initial total:", $scope.feedback.initial_assessment_total);
 
-		$scope.feedback.initial_assessment_total =
-			($scope.feedback.initial_assessment_hr || 0) + ":" +
-			($scope.feedback.initial_assessment_min || 0) + ":" +
-			($scope.feedback.initial_assessment_sec || 0);
+    // Get input values as floats (accept decimals)
+    var hoursInput = parseFloat(document.getElementById('formula_para1_hr').value) || 0;
+    var minutesInput = parseFloat(document.getElementById('formula_para1_min').value) || 0;
+    var secondsInput = parseFloat(document.getElementById('formula_para1_sec').value) || 0;
+    var totalAdmissions = parseFloat(document.getElementById('formula_para2').value);
 
+    // 🚫 Negative value check
+    if (hoursInput < 0 || minutesInput < 0 || secondsInput < 0 || totalAdmissions < 0) {
+        alert("Negative values are not allowed. Please enter positive or zero values.");
+        return;
+    }
 
-		console.log($scope.feedback.initial_assessment_total);		// Get values for hours, minutes, and seconds from user input
-		console.log($scope.feedback.total_admission);
+    // Convert all to seconds
+    var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
 
-		var hoursInput = parseInt(document.getElementById('formula_para1_hr').value || 0);
-		var minutesInput = parseInt(document.getElementById('formula_para1_min').value || 0);
-		var secondsInput = parseInt(document.getElementById('formula_para1_sec').value || 0);
+    // ✅ Handle zero and both-zero cases
+    if (assessmentSeconds === 0 && totalAdmissions === 0) {
+        $scope.calculatedResult = "0:00:00";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		// Convert into total seconds
-		var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
+    // 🚫 Block denominator = 0 when numerator > 0
+    if (totalAdmissions === 0 && assessmentSeconds > 0) {
+        alert("Total admissions cannot be 0 when time is greater than 0.");
+        return;
+    }
 
-		// Get total admission
-		var totalAdmissions = parseInt(document.getElementById('formula_para2').value);
+    // ✅ Normal calculation (allow decimals)
+    var averageSeconds = assessmentSeconds / totalAdmissions;
 
-		// Validate the total admissions value
-		if (isNaN(totalAdmissions) || totalAdmissions <= 0) {
-			alert("Please enter the above value to calculate");
-			return;
-		}
+    // Convert average seconds back to hr:min:sec
+    var avgHours = Math.floor(averageSeconds / 3600);
+    var remainingSeconds = averageSeconds % 3600;
+    var avgMinutes = Math.floor(remainingSeconds / 60);
+    var avgSeconds = (remainingSeconds % 60);
 
-		var averageSeconds = Math.floor(assessmentSeconds / totalAdmissions);
+    // 🕒 Format output properly — include up to 2 decimals if needed
+    avgSeconds = parseFloat(avgSeconds.toFixed(2));
+    if (avgSeconds >= 60) { // Adjust overflow just in case
+        avgSeconds -= 60;
+        avgMinutes++;
+    }
 
-		// Convert the average back to hours, minutes, and seconds
-		var avgHours = Math.floor(averageSeconds / 3600);
-		var remainingSeconds = averageSeconds % 3600;
+    $scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${avgSeconds < 10 ? '0' + avgSeconds : avgSeconds}`;
 
-		var avgMinutes = Math.floor(remainingSeconds / 60);
-		var avgSeconds = Math.floor(remainingSeconds % 60);
+    // Save result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
 
-		// Format the result to "hr:min:sec"
-		$scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
+    $scope.valuesEdited = false;
+};
 
-		$scope.feedback.calculatedResult = $scope.calculatedResult
-		console.log($scope.feedback.calculatedResult)
-		$scope.valuesEdited = false;
-
-
-	};
 
 
 		$scope.encodeFiles = function (element) {

@@ -159,46 +159,47 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get the number of medication errors (allow decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of opportunities for medication errors (allow decimals)
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter number of surgical site infections in a given month");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of surgical site infections in a given month ");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter number of surgeries performed in that month");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter number of surgeries performed in that month");
-			return;
-		}
+    // Allow numerator > denominator and both zero cases
+    var errorRatePercentage = 0;
+    if (opportunitiesForErrors === 0) {
+        // If denominator is zero (or both zero), result is 0
+        errorRatePercentage = 0;
+    } else {
+        // Normal calculation
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter number of surgical site infections in a given month  be less than number of surgeries performed in that month");
-			return;
-		}
+    // Auto-format result: whole → no decimals, decimal → 2 decimals
+    if (Number.isInteger(errorRatePercentage)) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Save result to feedback
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -373,10 +374,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of surgical site infections in a given month  be less than number of surgeries performed in that month')
-			return false;
-		}
+	
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CLOTCM23'

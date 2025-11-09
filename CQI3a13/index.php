@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -284,7 +284,7 @@
                         <div class="form-group transparent-placeholder">
                           <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para1}}</b><sup style="color:red">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.formula_para1_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" id="formula_para1" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
+                            <input class="form-control" oninput="restrictToNumerals(event)" placeholder="{{lang.formula_para1_placeholder}}" ng-model="feedback.initial_assessment_hr" type="number" step="any" id="formula_para1" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
                             <label for="para1"></label>
                           </span>
                         </div>
@@ -296,7 +296,7 @@
                         <div class="form-group transparent-placeholder">
                           <span class="addon" style="font-size: 16px; margin-bottom: 15px;"><b>{{lang.formula_para2}}</b><sup style="color:red">*</sup></span>
                           <span class="has-float-label">
-                            <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
+                            <input class="form-control" oninput="restrictToNumerals(event)" ng-model="feedback.total_admission" placeholder="{{lang.formula_para2_placeholder}}" type="number" step="any" id="formula_para2" ng-required="true" autocomplete="off" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 50%;" />
                             <label for="para2"></label>
                           </span>
                         </div>
@@ -922,8 +922,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

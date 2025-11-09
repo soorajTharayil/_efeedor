@@ -161,49 +161,56 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values as floats (accepts decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // ✅ Validation: check for invalid or negative values
+    if (isNaN(medicationErrors) || isNaN(opportunitiesForErrors)) {
+        alert("Please enter valid numeric values for both fields.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of nursing staff  ");
-			return;
-		}
+    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of occupied beds  ");
-			return;
-		}
+    // ✅ Both zero allowed
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0:0 (No data available)";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of nursing staff less than Number of occupied beds.");
-			return;
-		}
+    // ✅ Handle divide-by-zero situations gracefully
+    
 
-		// Calculate ratio
-		var ratio, roundedRatio, ratioString;
+    
 
-		if (medicationErrors < opportunitiesForErrors) {
-			ratio = opportunitiesForErrors / medicationErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = "1:" + roundedRatio;
-			explanation = " means 1 nurse is assigned to " + roundedRatio + " patients.";
-		} else {
-			ratio = medicationErrors / opportunitiesForErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = roundedRatio + ":1";
-			explanation = " means " + roundedRatio + " nurses are assigned to 1 patient.";
-		}
+    // ✅ Ratio calculation
+    var ratio, formattedRatio, ratioString, explanation;
 
-		$scope.calculatedResult = ratioString + explanation;
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    if (medicationErrors < opportunitiesForErrors) {
+        ratio = opportunitiesForErrors / medicationErrors;
+        formattedRatio = Number.isInteger(ratio) ? ratio : ratio.toFixed(2);
+        ratioString = "1:" + formattedRatio;
+        explanation = " means 1 nurse is assigned to " + formattedRatio + " patients.";
+    } else {
+        ratio = medicationErrors / opportunitiesForErrors;
+        formattedRatio = Number.isInteger(ratio) ? ratio : ratio.toFixed(2);
+        ratioString = formattedRatio + ":1";
+        explanation = " means " + formattedRatio + " nurses are assigned to 1 patient.";
+    }
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    // ✅ Final output
+    $scope.calculatedResult = ratioString + explanation;
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -378,10 +385,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of babies re-admitted less than Total number of babies admitted in NICU');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4c13')

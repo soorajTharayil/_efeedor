@@ -159,46 +159,52 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get inputs as float (to accept decimal values)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Validation: negative values blocked
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter total number of compliance in audited sample size (non-negative).");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter total number of opportunities (non-negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total number of compliance in audited sample size");
-			return;
-		}
+    // Handle zero and both-zero cases safely
+    var errorRatePercentage = 0;
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of opportunities (");
-			return;
-		}
+    if (opportunitiesForErrors === 0) {
+        if (medicationErrors === 0) {
+            // Both zero → allowed (result = 0)
+            errorRatePercentage = 0;
+        } else {
+            // Denominator = 0 but numerator > 0 → invalid
+            alert("Total number of opportunities cannot be 0 when compliance is greater than 0.");
+            return;
+        }
+    } else {
+        // Normal calculation (numerator can be greater)
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total number of compliance in audited sample size be less than total number of opportunities ");
-			return;
-		}
+    // Auto-format: if whole, show integer; otherwise, 2 decimal places
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -371,10 +377,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert( 'Please enter total number of compliance in audited sample size be less than total number of opportunities');
 			return false;
 		}
 

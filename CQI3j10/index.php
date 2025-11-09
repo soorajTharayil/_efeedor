@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -319,9 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>
-
-compliance rate of timeliness of reporting Critical results in Radiology (within 30 min)-(Radiology):</strong><span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>compliance rate of timeliness of reporting Critical results in Radiology (within 30 min): <span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 

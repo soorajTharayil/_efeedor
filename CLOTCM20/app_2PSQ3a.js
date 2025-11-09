@@ -164,43 +164,44 @@ $scope.user_id = ehandor.userid;
 
 	//Calculate reporting errors per 1000 investigations
 
+$scope.calculateErrorRate = function () {
+    // Get values from input fields (accept decimals)
+    var reportingErrors = parseFloat(document.getElementById('formula_para1').value);
+    var testsPerformed = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateErrorRate = function () {
-		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+    // Validate inputs
+    if (isNaN(reportingErrors) || reportingErrors < 0) {
+        alert("Please enter number of central line associated blood stream infections in a month");
+        return;
+    }
 
-		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+    if (isNaN(testsPerformed) || testsPerformed < 0) {
+        alert("Please enter number of central line days in that month");
+        return;
+    }
 
-		// Validate inputs for reporting errors and tests performed
-		if (isNaN(reportingErrors) || reportingErrors < 0) {
-			alert("Please enter number of central line associated blood stream infections in a month");
-			return;
-		}
+    // Allow both zero and numerator > denominator
+    var errorsPerThousand = 0;
+    if (testsPerformed === 0) {
+        // When denominator is 0 (or both zero), define result as 0
+        errorsPerThousand = 0;
+    } else {
+        errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+    }
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
-			alert("Please enter number of central line days in that month");
-			return;
-		}
+    // Auto-format: whole number → no decimals, else → 2 decimals
+    if (Number.isInteger(errorsPerThousand)) {
+        $scope.calculatedResult = errorsPerThousand.toString();
+    } else {
+        $scope.calculatedResult = errorsPerThousand.toFixed(2);
+    }
 
-		if (reportingErrors > testsPerformed) {
-			alert("Please enter number of central line associated blood stream infections in a month  be less than number of central line days in that month");
-			return;
-		}
+    // Save to feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
-
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result:", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
-
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -379,10 +380,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return false;
 		}
 
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of central line associated blood stream infections in a month  be less than number of central line days in that month');
-			return false;
-		}
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CLOTCM20')

@@ -161,44 +161,37 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of patients returning to ED after 72 hours
+    var returnsED = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the total number of patients who came to ED
+    var totalPatients = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of return to emergency department after 72 hours with similar presenting complaints");
-			return;
-		}
+    // Validate negative inputs
+    if (returnsED < 0) {
+        alert("Number of patients returning to ED after 72 hours cannot be negative");
+        return;
+    }
+    if (totalPatients < 0) {
+        alert("Total number of patients who came to ED cannot be negative");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number patients who have come to the emergency ");
-			return;
-		}
+    
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert( "number of return to emergency department after 72 hours with similar presenting complaints less than Number patients who have come to the emergency ");
-			return;
-		}
+    // Calculate percentage (both zero → 0%)
+    var percentage = (returnsED === 0 && totalPatients === 0) ? 0 : (returnsED / totalPatients) * 100;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (percentage % 1 === 0) ? percentage.toString() : percentage.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,10 +366,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of return to emergency department after 72 hours with similar presenting complaints less than Number patients who have come to the emergency ');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3h5')

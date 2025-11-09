@@ -161,44 +161,41 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get inputs, default to 0
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (medicationErrors < 0) {
+        alert("Please enter the total number of prescription errors");
+        return;
+    }
+    if (opportunitiesForErrors < 0) {
+        alert("Please enter the total number of in-patient days for the month");
+        return;
+    }
+   
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter the total number of prescription errors");
-			return;
-		}
+    // Calculate error rate safely
+    var errorRatePercentage = 0;
+    if (opportunitiesForErrors === 0) {
+        // both zero → 0%, numerator >0 → 100%
+        errorRatePercentage = (medicationErrors === 0 ? 0 : 100);
+    } else {
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter the total number of in-patient days for the month");
-			return;
-		}
+    // Auto-format: whole number or 2 decimals
+    $scope.calculatedResult = (errorRatePercentage % 1 === 0) 
+                              ? errorRatePercentage.toString() 
+                              : errorRatePercentage.toFixed(2);
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("The total number of prescription errors less than the total number of in-patient days for the month.");
-			return;
-		}
+    // Store and log result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
-
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -373,10 +370,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('The no. the total number of prescription errors less than the no.of total number of in-patient days for the month');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3c2')

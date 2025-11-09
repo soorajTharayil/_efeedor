@@ -161,41 +161,37 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get total Non-Recyclable Waste (Kg) and total Patient Days
+    var totalWaste = parseFloat(document.getElementById('formula_para1').value || 0);
+    var patientDays = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (totalWaste < 0) {
+        alert("Please enter total Non-Recyclable Waste (Kg) (cannot be negative)");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total Non-Recyclable Waste (Kg)");
-			return;
-		}
+    if (patientDays < 0) {
+        alert("Please enter total Patient Days (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total Patient Days");
-			return;
-		}
+    // Calculate average waste per patient-day
+    // Zero numerator and zero denominator allowed → result is 0
+    var averageWaste = (totalWaste === 0 && patientDays === 0) ? 0 : totalWaste / patientDays;
 
-		
+    // Format result: whole number or 2 decimals with unit
+    $scope.calculatedResult = (averageWaste % 1 === 0) 
+        ? averageWaste.toString() + " kg/patient-day" 
+        : averageWaste.toFixed(2) + " kg/patient-day";
 
-		// Calculate the average Non-Recyclable Waste per Patient Day (Kg/day)
-		var averageWaste = medicationErrors / opportunitiesForErrors;
+    // Store result for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageWaste % 1 === 0) {
-			$scope.calculatedResult = averageWaste.toString() + " kg/patient-day";
-		} else {
-			$scope.calculatedResult = averageWaste.toFixed(2) + " kg/patient-day";
-		}
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 

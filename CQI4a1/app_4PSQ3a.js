@@ -159,46 +159,53 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get the input values (allow decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Validate inputs: negative values not allowed
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter Number of drugs and consumables procured locally from formulary (non-negative).");
+        return;
+    }
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter Number of drugs and consumables in hospital formulary list (non-negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of drugs and consumables procured locally from formulary ");
-			return;
-		}
+    // Handle both zero and zero denominator cases safely
+    var errorRatePercentage = 0;
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of drugs and consumables in hospital formulary list");
-			return;
-		}
+    if (opportunitiesForErrors === 0) {
+        if (medicationErrors === 0) {
+            // both zero → allowed, result = 0%
+            errorRatePercentage = 0;
+        } else {
+            // numerator > 0 but denominator 0 → invalid (cannot divide)
+            alert("Number of drugs and consumables in hospital formulary list cannot be 0 when local procurements are greater than 0.");
+            return;
+        }
+    } else {
+        // Normal calculation (even if numerator > denominator)
+        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Number of drugs and consumables procured locally from formulary less than Number of drugs and consumables in hospital formulary list");
-			return;
-		}
+    // Auto-format result: whole → no decimals; otherwise → 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -371,10 +378,6 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Number of drugs and consumables procured locally from formulary less than Number of drugs and consumables in hospital formulary list');
 			return false;
 		}
 

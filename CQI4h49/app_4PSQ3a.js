@@ -159,46 +159,60 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get the total amount of renewable energy used (allow decimals)
+    var renewableEnergyUsed = parseFloat(document.getElementById('formula_para1').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the total energy used (allow decimals)
+    var totalEnergyUsed = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate: must be numeric
+    if (isNaN(renewableEnergyUsed)) {
+        alert("Please enter total amount of renewable energy used");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total amount of renewable energy used");
-			return;
-		}
+    if (isNaN(totalEnergyUsed)) {
+        alert("Please enter total energy used");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total energy used");
-			return;
-		}
+    // Block negative values
+    if (renewableEnergyUsed < 0 || totalEnergyUsed < 0) {
+        alert("Negative values are not allowed");
+        return;
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total amount of renewable energy used be less than total energy used");
-			return;
-		}
+    // Initialize result
+    var errorRatePercentage = 0;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Case 1: Both zero → allowed (result = 0%)
+    if (renewableEnergyUsed === 0 && totalEnergyUsed === 0) {
+        errorRatePercentage = 0;
+    } 
+    // Case 2: Denominator = 0 but numerator > 0 → blocked
+    else if (totalEnergyUsed === 0 && renewableEnergyUsed > 0) {
+        alert("Total energy used cannot be zero when renewable energy is greater than zero");
+        return;
+    } 
+    // Case 3: Normal calculation (including numerator > denominator)
+    else {
+        errorRatePercentage = (renewableEnergyUsed / totalEnergyUsed) * 100;
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Auto-format: whole number or 2 decimals
+    if (errorRatePercentage % 1 === 0) {
+        $scope.calculatedResult = errorRatePercentage.toString();
+    } else {
+        $scope.calculatedResult = errorRatePercentage.toFixed(2);
+    }
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store the result in the feedback object for further use
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -373,10 +387,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total amount of renewable energy used be less than total energy used')
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h49'

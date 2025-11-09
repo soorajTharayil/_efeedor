@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.formatKPIDate = formatKPIDate;
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -135,7 +135,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -167,34 +167,36 @@ $scope.user_id = ehandor.userid;
 
 	$scope.calculateErrorRate = function () {
 		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+		var reportingErrors = parseFloat(document.getElementById('formula_para1').value);
 
 		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+		var testsPerformed = parseFloat(document.getElementById('formula_para2').value);
 
-		// Validate inputs for reporting errors and tests performed
+		// Validate inputs (allow 0, block negatives)
 		if (isNaN(reportingErrors) || reportingErrors < 0) {
-			alert("Please enter number of parenteral exposures ");
+			alert("Please enter number of parenteral exposures.");
 			return;
 		}
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
+		if (isNaN(testsPerformed) || testsPerformed < 0) {
 			alert("Please enter total number of in-patient days for the month.");
 			return;
 		}
 
-		if (reportingErrors > testsPerformed) {
-			alert("Please enter number of parenteral exposures be less than total number of in-patient days for the month");
-			return;
+		// Calculate safely (handle 0/0)
+		var errorsPerThousand = 0;
+		if (testsPerformed !== 0) {
+			errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
 		}
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+		// Format result
+		if (errorsPerThousand % 1 === 0) {
+			$scope.calculatedResult = errorsPerThousand.toString() + " per 1000 IPD days";
+		} else {
+			$scope.calculatedResult = errorsPerThousand.toFixed(2) + " per 1000 IPD days";
+		}
 
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
-
-		// Store the result in the feedback object for further use
+		// Store result
 		$scope.feedback.calculatedResult = $scope.calculatedResult;
 
 		console.log("Calculated result:", $scope.calculatedResult);
@@ -206,7 +208,8 @@ $scope.user_id = ehandor.userid;
 
 
 
-		$scope.encodeFiles = function (element) {
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -245,9 +248,9 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -302,7 +305,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {
@@ -379,10 +382,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return false;
 		}
 
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter number of parenteral exposures less than total number of in-patient days for the month');
-			return false;
-		}
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4f1')

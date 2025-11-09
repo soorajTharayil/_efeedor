@@ -218,12 +218,12 @@ $scope.user_id = ehandor.userid;
 		var totalAdmissions = parseInt(document.getElementById('formula_para2').value);
 
 		// Validate the total admissions value
-		if (isNaN(totalAdmissions) || totalAdmissions <= 0) {
+		if (isNaN(totalAdmissions) || totalAdmissions < 0) {
 			alert("Please enter the above value to calculate");
 			return;
 		}
 
-		var averageSeconds = Math.floor(assessmentSeconds / totalAdmissions);
+		var averageSeconds = (totalAdmissions > 0) ? Math.floor(assessmentSeconds / totalAdmissions) : 0;
 
 		// Convert the average back to hours, minutes, and seconds
 		var avgHours = Math.floor(averageSeconds / 3600);

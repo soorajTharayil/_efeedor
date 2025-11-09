@@ -347,7 +347,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average number of training hours(HR) <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
+                      <strong>Average number of training hours(HR): <span style="color: blue; font-size:16px;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> -->
                     </div>
 

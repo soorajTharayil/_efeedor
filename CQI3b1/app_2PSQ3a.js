@@ -166,40 +166,38 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateErrorRate = function () {
-		// Get the number of reporting errors from the input field
-		var reportingErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values (allow 0)
+    var reportingErrors = parseFloat(document.getElementById('formula_para1').value || 0);
+    var testsPerformed = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of tests performed from the input field
-		var testsPerformed = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs
+    if (reportingErrors < 0 || isNaN(reportingErrors)) {
+        alert("Please enter the number of reporting errors.");
+        return;
+    }
 
-		// Validate inputs for reporting errors and tests performed
-		if (isNaN(reportingErrors) || reportingErrors < 0) {
-			alert("Please enter the number of reporting errors.");
-			return;
-		}
+    if (testsPerformed < 0 || isNaN(testsPerformed)) {
+        alert("Please enter the number of tests performed.");
+        return;
+    }
 
-		if (isNaN(testsPerformed) || testsPerformed <= 0) {
-			alert("Please enter the number of tests performed.");
-			return;
-		}
+    
 
-		if (reportingErrors > testsPerformed) {
-			alert("The no. of reporting errors must be less than the no. of tests performed.");
-			return;
-		}
+    // Calculate errors per 1000 investigations
+    var errorsPerThousand = testsPerformed === 0 ? 0 : (reportingErrors / testsPerformed) * 1000;
 
-		// Calculate the number of reporting errors per 1000 investigations
-		var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+    // Format result (whole number or 2 decimals)
+    $scope.calculatedResult = (errorsPerThousand % 1 === 0)
+        ? errorsPerThousand.toString()
+        : errorsPerThousand.toFixed(2);
 
-		// Format the result to have two decimal places for better readability
-		$scope.calculatedResult = errorsPerThousand.toFixed(2);
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result:", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -379,11 +377,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return false;
 		}
 
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('The no. of reporting errors must be less than the no. of tests performed.');
-			return false;
-		}
-
+		
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3b1')
 			.then(function (response) {

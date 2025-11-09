@@ -313,6 +313,35 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 
+	$scope.prev1 = function () {
+
+		$scope.step2 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
+
+	$scope.next1 = function () {
+
+		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
+			alert('Please enter data analysis');
+			return false;
+		}
+
+		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
+			alert('Please enter corrective action');
+			return false;
+		}
+
+		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
+			alert('Please enter preventive action');
+			return false;
+		}
+
+		$scope.step1 = false;
+		$scope.step2 = true;
+		$(window).scrollTop(0);
+	}
+
 	//color for time based on comparision
 	const benchmark = (4 * 3600);
 	function convertToSeconds(timeStr) {
@@ -348,15 +377,15 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	var srcValue = params.get('src');
 	$scope.savefeedback = function () {
 
-		if (!$scope.selectedMonths || !$scope.selectedYears) {
-			alert("Please choose the month and year before submitting.");
-			return;
-		}
+// 		if (!$scope.selectedMonths || !$scope.selectedYears) {
+// 			alert("Please choose the month and year before submitting.");
+// 			return;
+// 		}
 
-		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
-			alert('Please enter total number of LAMA cases with Reasons*.');
-			return false;
-		}
+// 		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
+// 			alert('Please enter total number of LAMA cases with Reasons*.');
+// 			return false;
+// 		}
 
 
 		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
@@ -373,10 +402,10 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('enter number of women having cesarean section for first time less than total number of live birth other than cesarean');
-			return false;
-		}
+// 		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
+// 			alert('enter number of women having cesarean section for first time less than total number of live birth other than cesarean');
+// 			return false;
+// 		}
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3k1')
@@ -400,7 +429,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');
 							//$location.path('/thankyou');
-							$scope.step1 = false;
+							$scope.step2 = false;
 							$scope.step4 = true;
 							$(window).scrollTop(0);
 						} else {

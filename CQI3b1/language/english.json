@@ -58,7 +58,7 @@
    "kpi_info": " Number of reporting errors per 1000 investigations (Lab Services) for the month of ",
    "definition": "Definition",
    "kpi_def": "The time shall begin from the time that the patient has arrived at the bed of the ward till the time that the initial assessment has been completed by a doctor",
-   "formula_para1": "Number of reporting errors (numerator)*",   
+   "formula_para1": "Number of reporting errors (Numerator)*",   
    "formula_para1_placeholder": "Your input",
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",

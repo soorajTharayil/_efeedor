@@ -161,44 +161,36 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get input values (allow decimals)
+    var totalUsage = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalDays = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Block negative inputs
+    if (totalUsage < 0) {
+        alert("Please enter total usage of ecofriendly catering supplies (cannot be negative)");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total usage of ecofriendly catering supplies");
-			return;
-		}
+    if (totalDays < 0) {
+        alert("Please enter total number of days per month (cannot be negative)");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of days per month");
-			return;
-		}
+    // Calculate average per day (0/0 allowed → result is 0)
+    var averageUse = (totalUsage === 0 && totalDays === 0) ? 0 : totalUsage / totalDays;
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total usage of ecofriendly catering supplies should be greater than or equal to total number of days per month");
-			return;
-		}
+    // Format result: whole number or 2 decimals
+    $scope.calculatedResult = (averageUse % 1 === 0) 
+        ? averageUse.toString() + " units/day" 
+        : averageUse.toFixed(2) + " units/day";
 
-		// Calculate the average use per day (instead of percentage)
-		var averageUse = medicationErrors / opportunitiesForErrors;
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageUse % 1 === 0) {
-			$scope.calculatedResult = averageUse.toString() + " units/day";
-		} else {
-			$scope.calculatedResult = averageUse.toFixed(2) + " units/day";
-		}
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 
@@ -374,10 +366,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Please enter total usage of ecofriendly catering supplies be less than total number of days per month')
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4i12'

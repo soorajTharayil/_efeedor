@@ -161,44 +161,38 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get values (default 0 if empty)
+    var valuesReported = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalCriticalValues = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate negative inputs
+    if (valuesReported < 0) {
+        alert("Please enter total values reported as per policy.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total values reported as per policy ");
-			return;
-		}
+    if (totalCriticalValues < 0) {
+        alert("Please enter total number of critical values.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of critical values");
-			return;
-		}
+    
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert("Please enter total values reported as per policy be less than total number of critical values");
-			return;
-		}
+    // Calculate percentage (handle zero denominator)
+    var errorRatePercentage = totalCriticalValues === 0 ? 0 : (valuesReported / totalCriticalValues) * 100;
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Format result: whole number or two decimals
+    $scope.calculatedResult = (errorRatePercentage % 1 === 0)
+        ? errorRatePercentage.toString()
+        : errorRatePercentage.toFixed(2);
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Store in feedback object
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
 
 
 

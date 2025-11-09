@@ -161,44 +161,52 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of inpatient days
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of discharges and deaths
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs: block negatives only
+    if (isNaN(medicationErrors) || medicationErrors < 0) {
+        alert("Please enter a valid (non-negative) value for total number of medication errors");
+        return;
+    }
 
-		// Validate inputs
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Total number of in-patient days for the month");
-			return;
-		}
+    if (isNaN(opportunitiesForErrors) || opportunitiesForErrors < 0) {
+        alert("Please enter a valid (non-negative) value for total number of opportunities for medication errors");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of discharges and deaths in that month");
-			return;
-		}
+    // Both zero case → still allowed, result = 0
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated Medication Error Rate", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total number of in-patient days should be greater than or equal to Number of discharges and deaths");
-			return;
-		}
+    // If denominator is zero but numerator > 0
+    if (opportunitiesForErrors === 0) {
+        alert("Denominator cannot be zero when numerator is greater than zero");
+        return;
+    }
 
-		// Calculate average length of stay (ALOS)
-		var averageStay = medicationErrors / opportunitiesForErrors;
+    // Perform calculation
+    var errorRate = medicationErrors / opportunitiesForErrors;
 
-		// Format: show up to 2 decimal places if needed
-		if (averageStay % 1 === 0) {
-			$scope.calculatedResult = averageStay.toString() + " days";
-		} else {
-			$scope.calculatedResult = averageStay.toFixed(2) + " days";
-		}
+    // Format result (whole number or 2 decimals)
+    if (errorRate % 1 === 0) {
+        $scope.calculatedResult = errorRate.toString();
+    } else {
+        $scope.calculatedResult = errorRate.toFixed(2);
+    }
 
-		// Store the result
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		console.log("Calculated Average Length of Stay", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    console.log("Calculated Medication Error Rate", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -312,6 +320,35 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.prev = function () {
 		window.location.href = '/qim_forms#step2';
 	};
+	
+	$scope.prev1 = function () {
+
+		$scope.step2 = false;
+		$scope.step1 = true;
+		$(window).scrollTop(0);
+	}
+
+	$scope.next1 = function () {
+
+		if ($scope.feedback.dataAnalysis == '' || $scope.feedback.dataAnalysis == undefined) {
+			alert('Please enter data analysis');
+			return false;
+		}
+
+		if ($scope.feedback.correctiveAction == '' || $scope.feedback.correctiveAction == undefined) {
+			alert('Please enter corrective action');
+			return false;
+		}
+
+		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
+			alert('Please enter preventive action');
+			return false;
+		}
+
+		$scope.step1 = false;
+		$scope.step2 = true;
+		$(window).scrollTop(0);
+	}
 
 
 	//color for time based on comparision
@@ -374,10 +411,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('Total number of in-patient days for the month less than Number of discharges and deaths in that month');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4c2')
@@ -401,7 +435,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');
 							//$location.path('/thankyou');
-							$scope.step1 = false;
+							$scope.step2 = false;
 							$scope.step4 = true;
 							$(window).scrollTop(0);
 						} else {

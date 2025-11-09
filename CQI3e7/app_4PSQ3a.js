@@ -161,44 +161,52 @@ $scope.user_id = ehandor.userid;
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get user inputs (parseFloat allows decimals)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validation: Negative → blocked
+    if (medicationErrors < 0) {
+        alert("Negative values are not allowed for 'number of women having cesarean section for first time'.");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter number of women having cesarean section for first time");
-			return;
-		}
+    if (opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed for 'total number of live birth other than cesarean'.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of live birth other than cesarean");
-			return;
-		}
+    // Zero / both zero → allowed
+    if (opportunitiesForErrors === 0) {
+        if (medicationErrors === 0) {
+            $scope.calculatedResult = "0";
+            $scope.feedback.calculatedResult = $scope.calculatedResult;
+            $scope.valuesEdited = false;
+            return;
+        } else {
+            alert("Total number of live births cannot be zero unless both values are zero.");
+            return;
+        }
+    }
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert( "enter number of women having cesarean section for first time less than total number of live birth other than cesarean ");
-			return;
-		}
+    
 
-		// Calculate the medication errors rate as a percentage
-		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
+    // Calculate rate (%)
+    var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (errorRatePercentage % 1 === 0) {
-			$scope.calculatedResult = errorRatePercentage.toString();
-		} else {
-			$scope.calculatedResult = errorRatePercentage.toFixed(2);
-		}
+    // Auto-format result: whole → as-is, decimal → up to 2 decimals
+    $scope.calculatedResult = 
+        (errorRatePercentage % 1 === 0) 
+        ? errorRatePercentage.toString() 
+        : errorRatePercentage.toFixed(2);
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    // Store result
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -373,10 +381,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('enter number of women having cesarean section for first time less than total number of live birth other than cesarean');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI3e7')

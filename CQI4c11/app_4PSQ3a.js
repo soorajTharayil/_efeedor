@@ -161,45 +161,59 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of nursing staff (numerator)
+    var medicationErrors = parseFloat(document.getElementById('formula_para1').value || 0);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Get the number of occupied beds (denominator)
+    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value || 0);
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter Number of nursing staff  ");
-			return;
-		}
+    // Validate inputs
+    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
+        alert("Negative values are not allowed.");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter Number of occupied beds  ");
-			return;
-		}
+    // Both zero → allowed
+    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
+        $scope.calculatedResult = "0:0 — No data available.";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
+    
 
-		// Calculate ratio
-		var ratio, roundedRatio, ratioString;
+    // Numerator zero → allowed
+    if (medicationErrors === 0 && opportunitiesForErrors > 0) {
+        $scope.calculatedResult = "0:1 — No nurses assigned to patients.";
+        $scope.feedback.calculatedResult = $scope.calculatedResult;
+        console.log("Calculated result:", $scope.calculatedResult);
+        $scope.valuesEdited = false;
+        return;
+    }
 
-		if (medicationErrors < opportunitiesForErrors) {
-			ratio = opportunitiesForErrors / medicationErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = "1:" + roundedRatio;
-			explanation = " means 1 nurse is assigned to " + roundedRatio + " patients.";
-		} else {
-			ratio = medicationErrors / opportunitiesForErrors;
-			roundedRatio = Math.round(ratio);
-			ratioString = roundedRatio + ":1";
-			explanation = " means " + roundedRatio + " nurses are assigned to 1 patient.";
-		}
+    // Calculate ratio
+    var ratio, formattedRatio, explanation;
 
-		$scope.calculatedResult = ratioString + explanation;
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
+    if (medicationErrors < opportunitiesForErrors) {
+        // Example: 5 nurses, 10 beds → 1:2 (1 nurse per 2 patients)
+        ratio = opportunitiesForErrors / medicationErrors;
+        formattedRatio = (ratio % 1 === 0) ? ratio.toString() : ratio.toFixed(2);
+        $scope.calculatedResult = "1:" + formattedRatio + " — means 1 nurse is assigned to " + formattedRatio + " patients.";
+    } else {
+        // Example: 10 nurses, 5 beds → 2:1 (2 nurses per 1 patient)
+        ratio = medicationErrors / opportunitiesForErrors;
+        formattedRatio = (ratio % 1 === 0) ? ratio.toString() : ratio.toFixed(2);
+        $scope.calculatedResult = formattedRatio + ":1 — means " + formattedRatio + " nurses are assigned to 1 patient.";
+    }
 
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
+    // Store in scope
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
+
 
 
 
@@ -374,10 +388,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('number of babies re-admitted less than Total number of babies admitted in NICU');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4c11')
