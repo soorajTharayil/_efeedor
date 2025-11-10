@@ -26,6 +26,7 @@
 		<?php foreach ($results as $result) {
 
 			// Step 1: Build user_id → firstname map
+			$this->db->reset_query(); // clears previous WHERE, SELECT, etc.
 			$userss = $this->db->select('user_id, firstname')
 				->where('user_id !=', 1)
 				->get('user')
