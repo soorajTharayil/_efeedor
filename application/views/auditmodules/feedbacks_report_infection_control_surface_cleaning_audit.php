@@ -239,8 +239,14 @@
 										</td>
 
 
-										<td><?php echo $param->department ?? ''; ?></td>
-										<td><?php echo $param->attended_doctor ?? ''; ?></td>
+										<?php
+										if (isset($param->department) && is_object($param->department)) {
+											$param->department = $param->department->name ?? '';
+										}
+										if (isset($param->attended_doctor) && is_object($param->attended_doctor)) {
+											$param->attended_doctor = $param->attended_doctor->name ?? '';
+										}
+										?>
 
 
 
