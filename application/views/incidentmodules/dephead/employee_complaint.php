@@ -360,7 +360,7 @@
 													</div>
 
 													<!-- Hidden inputs -->
-													<input type="hidden" name="id" value="<?php echo $id ?>" />
+													<input type="hidden" name="id" value="<?php echo $result->id; ?>" />
 													<input type="hidden" name="pid" value="<?php echo $pid ?>" />
 													<input type="hidden" name="empid" value="<?php echo $param['patientid'] ?>" />
 													<input type="hidden" name="status" value="EditPriority" />
@@ -470,7 +470,7 @@
 													</div>
 
 													<!-- Hidden inputs -->
-													<input type="hidden" name="id" value="<?php echo $id ?>" />
+													<input type="hidden" name="id" value="<?php echo $result->id; ?>" />
 													<input type="hidden" name="pid" value="<?php echo $pid ?>" />
 													<input type="hidden" name="status" value="EditSeverity" />
 													<?php echo form_close(); ?>
@@ -697,7 +697,7 @@
 				<h5 class="modal-title">Edit Risk Matrix</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-			<input type="hidden" name="id" value="<?php echo $id ?>" />
+			<input type="hidden" name="id" value="<?php echo $result->id; ?>" />
 			<input type="hidden" name="pid" value="<?php echo $pid ?>" />
 			<input type="hidden" name="empid" value="<?php echo $param['patientid'] ?>" />
 			<input type="hidden" name="status" value="EditAssignedRisk" />
