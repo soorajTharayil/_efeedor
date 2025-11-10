@@ -347,7 +347,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
+		if (($scope.feedback.initial_assessment_hr === '' || $scope.feedback.initial_assessment_hr === undefined)) {
 			alert('Please enter number Adverse Events Related to patient Identification ');
 			return false;
 		}

@@ -178,10 +178,7 @@ $scope.user_id = ehandor.userid;
 			return;
 		}
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert( "enter number of women having cesarean section for first time less than total number of live birth other than cesarean ");
-			return;
-		}
+		
 
 		// Calculate the medication errors rate as a percentage
 		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
@@ -370,10 +367,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('enter number of women having cesarean section for first time less than total number of live birth other than cesarean');
-			return false;
-		}
+		
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4j9')

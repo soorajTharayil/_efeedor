@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -266,7 +266,7 @@
                 <fieldset ng-show="step1 == true">
 
                   <h4 style="font-size:18px; margin-left: 5px;"><strong>{{lang.kpi_info}} {{selectedMonths}} {{selectedYears}}
-                      
+
                     </strong></h4>
 
                   <!--<p>Fill all form field to go to next step</p>-->

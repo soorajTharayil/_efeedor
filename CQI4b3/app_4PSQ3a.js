@@ -185,11 +185,7 @@ $scope.calculateMedicationErrorRate = function () {
 		return;
 	}
 
-	// 🚫 Denominator zero but numerator > 0 → blocked
-	if (opportunitiesForErrors === 0 && medicationErrors > 0) {
-		alert("Total number of live birth other than cesarean cannot be 0 when there are cesarean cases.");
-		return;
-	}
+	
 
 	// ✅ Allow numerator > denominator — still calculate normally
 	var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
@@ -359,7 +355,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
+		if (($scope.feedback.initial_assessment_hr === '' || $scope.feedback.initial_assessment_hr === undefined)) {
 			alert('Please enter Number of variations observed in mock drill.');
 			return false;
 		}

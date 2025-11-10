@@ -344,7 +344,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			return;
 		}
 
-		if (($scope.feedback.initial_assessment_hr == '' || $scope.feedback.initial_assessment_hr == undefined)) {
+		if (($scope.feedback.initial_assessment_hr === '' || $scope.feedback.initial_assessment_hr === undefined || $scope.feedback.initial_assessment_hr === null)) {
 			alert('Please enter adverse events due to handover *');
 			return false;
 		}

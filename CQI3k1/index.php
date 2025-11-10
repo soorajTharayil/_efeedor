@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -320,7 +320,7 @@
 
                     <!--<div style="margin-left:15px;">-->
                     <!--  <strong>Primary Cesarean Rate(OT)-((Nursing - OBG) <span style="color: blue; font-size:16px;">{{calculatedResult}}%</span></strong><br><br>-->
-                      <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
+                    <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     <!--</div>-->
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: -20px;">
@@ -451,7 +451,7 @@
                     </div>
                   </div>
                 </fieldset>
-                
+
                 <fieldset ng-show="step4 == true">
 
                   <div class="form-card">
@@ -993,8 +993,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

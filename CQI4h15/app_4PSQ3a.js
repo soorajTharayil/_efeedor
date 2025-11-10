@@ -178,10 +178,7 @@ $scope.user_id = ehandor.userid;
 			return;
 		}
 
-		if (medicationErrors > opportunitiesForErrors) {
-			alert( "enter number of women having cesarean section for first time less than total number of live birth other than cesarean ");
-			return;
-		}
+		
 
 		// Calculate the medication errors rate as a percentage
 		var errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
