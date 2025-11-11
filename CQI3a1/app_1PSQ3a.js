@@ -288,6 +288,7 @@ app.controller(
     //Calculate function for initail assessment
 
     $scope.calculateTimeFormat = function () {
+      // Combine time fields
       $scope.feedback.initial_assessment_total =
         ($scope.feedback.initial_assessment_hr || 0) +
         ":" +
@@ -295,50 +296,63 @@ app.controller(
         ":" +
         ($scope.feedback.initial_assessment_sec || 0);
 
-      console.log($scope.feedback.initial_assessment_total);
-      console.log($scope.feedback.total_admission);
+      // Get numerator fields
+      var hrField = document.getElementById("formula_para1_hr").value;
+      var minField = document.getElementById("formula_para1_min").value;
+      var secField = document.getElementById("formula_para1_sec").value;
 
-      var hoursInput = parseInt(
-        document.getElementById("formula_para1_hr").value || 0
-      );
-      var minutesInput = parseInt(
-        document.getElementById("formula_para1_min").value || 0
-      );
-      var secondsInput = parseInt(
-        document.getElementById("formula_para1_sec").value || 0
-      );
+      // Check if all numerator fields are blank (not entered)
+      if (hrField === "" && minField === "" && secField === "") {
+        alert("Please enter Sum of time taken for assessment in patients.");
+        return;
+      }
+
+      // Parse numeric values (0 is valid)
+      var hoursInput = parseInt(hrField || 0);
+      var minutesInput = parseInt(minField || 0);
+      var secondsInput = parseInt(secField || 0);
 
       var assessmentSeconds =
         hoursInput * 3600 + minutesInput * 60 + secondsInput;
 
-      var totalAdmissions = parseInt(
-        document.getElementById("formula_para2").value
-      );
+      // Get denominator field
+      var denominatorField = document.getElementById("formula_para2").value;
 
-      // ✅ Modified validation to allow zero also
-      if (isNaN(totalAdmissions) || totalAdmissions < 0) {
-        alert("Please enter the above value to calculate");
+      // Check if denominator is blank (not entered)
+      if (denominatorField === "") {
+        alert("Please enter Total number of in-patients");
         return;
       }
 
-      // ✅ Handle division safely (including when totalAdmissions = 0)
+      var totalAdmissions = parseInt(denominatorField);
+
+      // Validate denominator numeric and non-negative
+      if (isNaN(totalAdmissions) || totalAdmissions < 0) {
+        alert(
+          "Total number of babies admitted in NICU must be a valid number (0 or more)."
+        );
+        return;
+      }
+
+      // ✅ Safe division (0 is allowed)
       var averageSeconds =
         totalAdmissions === 0
           ? 0
           : Math.floor(assessmentSeconds / totalAdmissions);
 
+      // Convert to hh:mm:ss
       var avgHours = Math.floor(averageSeconds / 3600);
       var remainingSeconds = averageSeconds % 3600;
-
       var avgMinutes = Math.floor(remainingSeconds / 60);
       var avgSeconds = Math.floor(remainingSeconds % 60);
 
+      // Final formatted result
       $scope.calculatedResult = `${avgHours}:${("0" + avgMinutes).slice(-2)}:${(
         "0" + avgSeconds
       ).slice(-2)}`;
 
       $scope.feedback.calculatedResult = $scope.calculatedResult;
-      console.log($scope.feedback.calculatedResult);
+      console.log("Calculated Result:", $scope.feedback.calculatedResult);
       $scope.valuesEdited = false;
     };
 
