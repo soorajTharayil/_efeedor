@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -488,17 +488,18 @@
 <!-- css code start  -->
 
 <style>
-#formula_para1,
-#formula_para2 {
+  #formula_para1,
+  #formula_para2 {
     width: 50% !important;
-}
+  }
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
+
     #formula_para1,
     #formula_para2 {
-        width: 73% !important;
+      width: 73% !important;
     }
-}
+  }
 
 
   .transparent-placeholder input::placeholder {
@@ -687,8 +688,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

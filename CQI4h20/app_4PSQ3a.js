@@ -159,47 +159,49 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
+$scope.calculateMedicationErrorRate = function () {
+    // Get the number of electricity units consumed
+    var unitsConsumed = parseFloat(document.getElementById('formula_para1').value);
 
-	$scope.calculateMedicationErrorRate = function () {
-		// Get the number of medication errors
-		var medicationErrors = parseInt(document.getElementById('formula_para1').value);
+    // Get the number of days
+    var totalDays = parseFloat(document.getElementById('formula_para2').value);
 
-		// Get the number of opportunities for medication errors
-		var opportunitiesForErrors = parseInt(document.getElementById('formula_para2').value);
+    // Validate inputs
+    if (isNaN(unitsConsumed) || unitsConsumed < 0) {
+        alert("Please enter total units of electricity consumed (cannot be negative).");
+        return;
+    }
 
-		// Validate inputs for medication errors and opportunities for errors
-		if (isNaN(medicationErrors) || medicationErrors < 0) {
-			alert("Please enter total units of electricity consumed");
-			return;
-		}
+    if (isNaN(totalDays) || totalDays < 0) {
+        alert("Please enter total number of days per month (cannot be negative).");
+        return;
+    }
 
-		if (isNaN(opportunitiesForErrors) || opportunitiesForErrors <= 0) {
-			alert("Please enter total number of days per month");
-			return;
-		}
+    // Calculate average units per day
+    var averageUnits = 0;
 
-		if (medicationErrors < opportunitiesForErrors) {
-			alert("Total units of electricity consumed should be greater than or equal to total number of days per month");
-			return;
-		}
+    if (unitsConsumed === 0 && totalDays === 0) {
+        averageUnits = 0;
+    } else if (totalDays === 0) {
+        // If denominator is 0 but numerator > 0, handle as Infinity or just numerator value
+        averageUnits = unitsConsumed; 
+    } else {
+        averageUnits = unitsConsumed / totalDays;
+    }
 
-		// Calculate the average electricity units consumed per day
-		var averageUnits = medicationErrors / opportunitiesForErrors;
+    // Format result: whole number as-is, otherwise 2 decimals
+    if (averageUnits % 1 === 0) {
+        $scope.calculatedResult = averageUnits.toString() + " units/day";
+    } else {
+        $scope.calculatedResult = averageUnits.toFixed(2) + " units/day";
+    }
 
-		// Format: if it's a whole number, keep it as is; otherwise, format to two decimal places
-		if (averageUnits % 1 === 0) {
-			$scope.calculatedResult = averageUnits.toString() + " units/day";
-		} else {
-			$scope.calculatedResult = averageUnits.toFixed(2) + " units/day";
-		}
+    // Store in feedback
+    $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-		// Store the result in the feedback object for further use
-		$scope.feedback.calculatedResult = $scope.calculatedResult;
-
-		console.log("Calculated result", $scope.calculatedResult);
-		$scope.valuesEdited = false;
-	};
-
+    console.log("Calculated result:", $scope.calculatedResult);
+    $scope.valuesEdited = false;
+};
 
 
 
@@ -372,10 +374,6 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 		if ($scope.feedback.preventiveAction == '' || $scope.feedback.preventiveAction == undefined) {
 			alert('Please enter preventive action');
-			return false;
-		}
-		if ($scope.feedback.initial_assessment_hr > $scope.feedback.total_admission) {
-			alert('please enter total units of electricity consumed be less than total number of days per month')
 			return false;
 		}
 

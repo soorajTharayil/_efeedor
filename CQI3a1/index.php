@@ -344,35 +344,35 @@
                           </span>
                         </div>
                       </div>
-                      
-                      
 
-                      
-                    <div style="width:100%; display:block;">
-                    
-                      <!-- Result Section -->
-                      <div ng-if="calculatedResult" style="margin-left:22px; margin-top:-10px; display:block; width:auto;">
-                    
-                        <div style="border:1px solid grey; background-color:#f0f7ff; border-radius:8px; width:95%; padding:8px 10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:fit-content; font-size:17px;
+
+
+
+                      <div style="width:100%; display:block;">
+
+                        <!-- Result Section -->
+                        <div ng-if="calculatedResult" style="margin-left:22px; margin-top:-10px; display:block; width:auto;">
+
+                          <div style="border:1px solid grey; background-color:#f0f7ff; border-radius:8px; width:95%; padding:8px 10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:fit-content; font-size:17px;
                           font-weight:600;
                           color:#333;
                           display:inline-block;
                         ">
-                          {{lang.resultee}} 
-                          <span style="font-weight:bold; color:#0056b3; margin-left:5px;">
-                            {{calculatedResult}}
-                          </span>
+                            {{lang.resultee}}
+                            <span style="font-weight:bold; color:#0056b3; margin-left:5px;">
+                              {{calculatedResult}}
+                            </span>
+                          </div>
                         </div>
+
+                        <!-- Button Section -->
+                        <div style="margin-top:20px; margin-left:20px; display:block; width:100%;">
+                          <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()">
+                            Compute KPI
+                          </button>
+                        </div>
+
                       </div>
-                    
-                      <!-- Button Section -->
-                      <div style="margin-top:20px; margin-left:20px; display:block; width:100%;">
-                        <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()">
-                          Compute KPI
-                        </button>
-                      </div>
-                    
-                    </div>
 
 
 
@@ -387,7 +387,7 @@
 
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
-        
+
                     <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
@@ -938,8 +938,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

@@ -602,7 +602,7 @@ app.controller(
                   function (responsedata) {
                     $rootScope.loader = false;
                     if (responsedata.data.status === "success") {
-                      $scope.step2 = false;
+                      $scope.step1 = false;
                       $scope.step4 = true;
                       $(window).scrollTop(0);
                     } else {

@@ -159,58 +159,39 @@ $scope.user_id = ehandor.userid;
 	document.getElementById('formula_para2').addEventListener('input', $scope.onValuesEdited);
 
 
-$scope.calculateMedicationErrorRate = function () {
-    // Get and parse input values (allow decimals)
-    var medicationErrors = parseFloat(document.getElementById('formula_para1').value);
-    var opportunitiesForErrors = parseFloat(document.getElementById('formula_para2').value);
 
-    // Validate: input must be numeric
-    if (isNaN(medicationErrors)) {
-        alert("Please enter number of manpower supplied");
-        return;
-    }
-    if (isNaN(opportunitiesForErrors)) {
-        alert("Please enter total number of manpower contracted");
+	$scope.calculateMedicationErrorRate = function () {
+    // Get values (default 0 if empty)
+    var valuesReported = parseFloat(document.getElementById('formula_para1').value || 0);
+    var totalCriticalValues = parseFloat(document.getElementById('formula_para2').value || 0);
+
+    // Validate negative inputs
+    if (valuesReported < 0) {
+        alert("Please enter number of manpower supplied.");
         return;
     }
 
-    // Block negative values
-    if (medicationErrors < 0 || opportunitiesForErrors < 0) {
-        alert("Negative values are not allowed");
+    if (totalCriticalValues < 0) {
+        alert("Please enter total number of manpower contracted.");
         return;
     }
 
-    var errorRatePercentage = 0;
+    
 
-    // ✅ Case 1: Both zero → allowed (result = 0%)
-    if (medicationErrors === 0 && opportunitiesForErrors === 0) {
-        errorRatePercentage = 0;
-    }
-    // 🚫 Case 2: Denominator zero but numerator > 0 → blocked
-    else if (opportunitiesForErrors === 0 && medicationErrors > 0) {
-        alert("Total number of manpower contracted cannot be zero when manpower supplied is greater than zero");
-        return;
-    }
-    // ✅ Case 3: Normal calculation (numerator can be > denominator)
-    else {
-        errorRatePercentage = (medicationErrors / opportunitiesForErrors) * 100;
-    }
+    // Calculate percentage (handle zero denominator)
+    var errorRatePercentage = totalCriticalValues === 0 ? 0 : (valuesReported / totalCriticalValues) * 100;
 
-    // 🧮 Auto-format: whole number or 2 decimals
-    if (errorRatePercentage % 1 === 0) {
-        $scope.calculatedResult = errorRatePercentage.toString();
-    } else {
-        $scope.calculatedResult = errorRatePercentage.toFixed(2);
-    }
+    // Format result: whole number or two decimals
+    $scope.calculatedResult = (errorRatePercentage % 1 === 0)
+        ? errorRatePercentage.toString()
+        : errorRatePercentage.toFixed(2);
 
-    // Store result for further use
+    // Store in feedback object
     $scope.feedback.calculatedResult = $scope.calculatedResult;
 
-    console.log("Calculated result:", $scope.calculatedResult);
+    console.log("Calculated result", $scope.calculatedResult);
     $scope.valuesEdited = false;
 };
-
-
 
 		$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);

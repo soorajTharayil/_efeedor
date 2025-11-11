@@ -196,17 +196,50 @@ app.controller(
       .addEventListener("input", $scope.onValuesEdited);
 
     $scope.calculateMedicationErrorRate = function () {
-      // Get the number of babies developed late onset sepsis
-      var medicationErrors = parseFloat(
-        document.getElementById("formula_para1").value || 0
-      );
+      // Get raw input values
+      var medicationErrorsInput = document
+        .getElementById("formula_para1")
+        .value.trim();
+      var opportunitiesForErrorsInput = document
+        .getElementById("formula_para2")
+        .value.trim();
 
-      // Get the total number of babies admitted in NICU
-      var opportunitiesForErrors = parseFloat(
-        document.getElementById("formula_para2").value || 0
-      );
+      // Check for empty fields first
+      if (medicationErrorsInput === "" && opportunitiesForErrorsInput === "") {
+        alert("Please enter values for both fields before calculating.");
+        return;
+      } else if (medicationErrorsInput === "") {
+        alert(
+          "Please enter the value for 'Number of babies developed late onset sepsis'."
+        );
+        return;
+      } else if (opportunitiesForErrorsInput === "") {
+        alert(
+          "Please enter the value for 'Total number of babies admitted in NICU'."
+        );
+        return;
+      }
 
-      // Validation: Negative → blocked
+      // Convert inputs to numbers
+      var medicationErrors = parseFloat(medicationErrorsInput);
+      var opportunitiesForErrors = parseFloat(opportunitiesForErrorsInput);
+
+      // Validation: NaN or non-numeric values
+      if (isNaN(medicationErrors)) {
+        alert(
+          "Please enter a valid numeric value for 'Number of babies developed late onset sepsis'."
+        );
+        return;
+      }
+
+      if (isNaN(opportunitiesForErrors)) {
+        alert(
+          "Please enter a valid numeric value for 'Total number of babies admitted in NICU'."
+        );
+        return;
+      }
+
+      // Validation: Negative values
       if (medicationErrors < 0) {
         alert(
           "Negative values are not allowed for 'Number of babies developed late onset sepsis'."
@@ -221,7 +254,7 @@ app.controller(
         return;
       }
 
-      // Zero / both zero → allowed
+      // Zero handling
       if (opportunitiesForErrors === 0) {
         if (medicationErrors === 0) {
           $scope.calculatedResult = "0";
@@ -235,8 +268,6 @@ app.controller(
           return;
         }
       }
-
-     
 
       // Calculate percentage
       var errorRatePercentage =
@@ -425,7 +456,6 @@ app.controller(
         alert("Please enter preventive action");
         return false;
       }
-      
 
       // First check for duplicates
       $http

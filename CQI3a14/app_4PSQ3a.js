@@ -449,14 +449,7 @@ app.controller(
         alert("Please enter preventive action");
         return false;
       }
-      if (
-        $scope.feedback.initial_assessment_hr > $scope.feedback.total_admission
-      ) {
-        alert(
-          "The no. of medication errors must be less than the no. of opportunities for errors."
-        );
-        return false;
-      }
+     
 
       // First check for duplicates
       $http
@@ -504,7 +497,7 @@ app.controller(
                       $rootScope.loader = false;
                       // navigator.showToast('Patient Feedback Submitted Successfully');
                       //$location.path('/thankyou');
-                      $scope.step2 = false;
+                      $scope.step1 = false;
                       $scope.step4 = true;
                       $(window).scrollTop(0);
                     } else {

@@ -435,7 +435,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 							$rootScope.loader = false;
 							// navigator.showToast('Patient Feedback Submitted Successfully');
 							//$location.path('/thankyou');
-							$scope.step2 = false;
+							$scope.step1 = false;
 							$scope.step4 = true;
 							$(window).scrollTop(0);
 						} else {

@@ -51,7 +51,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -274,7 +274,7 @@
                       </select> -->
                     </strong></h4>
 
-                 <!--<p>Fill all form field to go to next step</p>-->
+                  <!--<p>Fill all form field to go to next step</p>-->
                   <br>
                   <div class="form-card">
 
@@ -305,7 +305,7 @@
 
 
 
-                  <!-- KPI Name -->
+                      <!-- KPI Name -->
 
                       <!-- <p style="margin-left:20px;font-size: 16px;margin-right:10px;margin-bottom:30px;"><b>{{lang.definition}}</b> {{lang.kpi_def}}</p> -->
 
@@ -332,8 +332,8 @@
                           </div>
                         </div>
                       </div>
-                      
-                 <!-- <p>&nbsp;</p> -->
+
+                      <!-- <p>&nbsp;</p> -->
 
                       <div class="col-xs-12 col-sm-12 col-md-12" style="margin-left:5px;">
                         <div class="form-group transparent-placeholder">
@@ -346,49 +346,49 @@
                       </div>
 
 
-     
-                    <div style="width:100%; display:block;">
-                    
-                      <!-- Result Section -->
-                      <div ng-if="calculatedResult" style="margin-left:22px; margin-top:-10px; display:block; width:auto;">
-                    
-                        <div style="border:1px solid grey; background-color:#f0f7ff; border-radius:8px; width:95%; padding:8px 10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:fit-content; font-size:17px;
+
+                      <div style="width:100%; display:block;">
+
+                        <!-- Result Section -->
+                        <div ng-if="calculatedResult" style="margin-left:22px; margin-top:-10px; display:block; width:auto;">
+
+                          <div style="border:1px solid grey; background-color:#f0f7ff; border-radius:8px; width:95%; padding:8px 10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:fit-content; font-size:17px;
                           font-weight:600;
                           color:#333;
                           display:inline-block;
                         ">
-                          {{lang.resultee}} 
-                          <span style="font-weight:bold; color:#0056b3; margin-left:5px;">
-                            {{calculatedResult}}
-                          </span>
+                            {{lang.resultee}}
+                            <span style="font-weight:bold; color:#0056b3; margin-left:5px;">
+                              {{calculatedResult}}
+                            </span>
+                          </div>
                         </div>
+
+                        <!-- Button Section -->
+                        <div style="margin-top:20px; margin-left:20px; display:block; width:100%;">
+                          <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
+                            Compute KPI
+                          </button>
+                        </div>
+
                       </div>
-                    
-                      <!-- Button Section -->
-                      <div style="margin-top:20px; margin-left:20px; display:block; width:100%;">
-                      <button type="button" class="btn btn-primary" ng-click="calculateTimeFormat()" style="margin-left:20px;">
-                        Compute KPI
-                      </button>
+
+
+
+
+
+
+
+
+
                     </div>
 
                   </div>
 
-
-
-
-
-
-
-                 
-                 
-                 </div>
-                 
-                 </div>
-
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
-                  
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="padding-right: 0px; padding-left: 12px; margin-left: 5px; margin-top: 20px;">
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.data_analysis}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea1" ng-model="feedback.dataAnalysis" rows="5"></textarea>
                     </div>
@@ -402,9 +402,9 @@
                       <p style="font-size: 16px; margin-bottom: 6px;"><b>{{lang.preventive_action}}<sup style="color:red">*</sup></b></p>
                       <textarea style="border: 1px ridge grey; margin-top: 6px; padding: 10px; width: 85%; height: 85px;" class="form-control" id="textarea3" ng-model="feedback.preventiveAction" rows="5"></textarea>
                     </div>
-                    
 
-                      <!-- Code for Upload files -->
+
+                    <!-- Code for Upload files -->
                     <div style="margin-top: 20px; text-align: left; margin-left:17px;">
                       <label for="fileInput" class="custom-file-upload" style="font-weight: bold;font-size:16px;">
                         Upload Files
@@ -440,13 +440,13 @@
                   <br><br>
 
                   <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
-                 
-              <!-- New next button -->
+
+                  <!-- New next button -->
                   <div ng-if="calculatedResult">
                     <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
                   </div>
-                  
-                  
+
+
                 </fieldset>
 
                 <!-- New Preview Page Section-->
@@ -506,7 +506,7 @@
                         </tr>
 
                       </table>
-                       <br>
+                      <br>
 
                       <br><br>
                       <input type="button" name="previous" style="font-size:small;" class="previous action-button-previous" ng-click="prev1()" value="{{lang.previous}}" />
@@ -592,19 +592,19 @@
     </div>
 
   </div>
-                    </div>
-        
-                  </div>
-        
-                </div>
-        
-              </div>
-        
-            </div>
-        
-          </div>
-        
-          <!-- KPI Deadline Popup -->
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+  <!-- KPI Deadline Popup -->
   <div class="modal fade" id="deadlineModal" tabindex="-1" role="dialog" aria-labelledby="deadlineModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -823,8 +823,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }

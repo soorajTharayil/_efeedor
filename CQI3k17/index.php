@@ -50,7 +50,7 @@
 
   <!-- top navbar start -->
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed">
 
     <!-- Section for Buttons and Language Button -->
     <div class="ml-auto d-flex justify-content-between align-items-center w-100">
@@ -371,81 +371,12 @@
 
 
 
-                  
+
                   <br><br>
 
                   <input type="button" name="previous" style="font-size:small;margin-left:10px;" class="previous action-button-previous" ng-click="prev()" value="{{lang.previous}}" />
 
-                  <!-- New next button -->
-                  <div ng-if="calculatedResult">
-                    <input type="button" name="next" ng-click="next1()" style="background: #4285F4 ; font-size:small;  margin-top: 30px;" class="next action-button" value="{{lang.next}}" />
-                  </div>
-
-
-                </fieldset>
-
-                <!-- New Preview Page Section-->
-
-                <fieldset ng-show="step2 == true">
-                  <div class="form-card">
-                    <div class="text-left details-section" style="background: white; margin: 10px 10px 0 10px;">
-                      <label for="comment"><b style="font-size: 18px;">Review your details before submission:</b></label>
-
-                      <table class="details-content" style="border-spacing: 10px; border-collapse: collapse; width: 100%; margin-bottom: 0px; border: 1px solid #dddddd;">
-
-
-                        <tr>
-                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;"><b>KPI Details</b></td>
-                        </tr>
-
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para1}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_hr}}</td>
-                        </tr>
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para2}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.total_admission}}</td>
-                        </tr>
-
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">Case Fatality 1 - CAD(MRD)</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.calculatedResult}}</td>
-                        </tr>
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.data_analysis}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.dataAnalysis}}</td>
-                        </tr>
-
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.corrective_action}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.correctiveAction}}</td>
-                        </tr>
-
-                        <tr>
-                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.preventive_action}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.preventiveAction}}</td>
-                        </tr>
-
-                        <tr ng-show="feedback.files_name && feedback.files_name.length > 0">
-                          <td class="details-label"
-                            style="border: 1px solid #dddddd; padding: 10px;">Uploaded files
-                          </td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">
-                            <ul style="padding-left: 15px; margin: 0;">
-                              <li ng-repeat="file in feedback.files_name">
-                                <a ng-href="{{file.url}}"
-                                  download="{{file.name}}">{{file.name}}</a>
-                              </li>
-                            </ul>
-                          </td>
-                        </tr>
-
-                      </table>
-
-                      <br>
-
-                      <br><br>
-                      <input type="button" name="previous" style="font-size:small;" class="previous action-button-previous" ng-click="prev1()" value="{{lang.previous}}" />
+                 
 
                       <div>
                         <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
@@ -998,8 +929,13 @@
 
   function restrictToNumerals(event) {
     const inputElement = event.target;
-    const currentValue = inputElement.value;
-    const filteredValue = currentValue.replace(/\D/g, ''); // Remove all non-digit characters
+    let currentValue = inputElement.value;
+
+    // Allow only numbers and a single decimal point
+    const filteredValue = currentValue
+      .replace(/[^0-9.]/g, '') // remove non-numeric except '.'
+      .replace(/(\..*)\./g, '$1'); // allow only one '.'
+
     if (currentValue !== filteredValue) {
       inputElement.value = filteredValue;
     }
