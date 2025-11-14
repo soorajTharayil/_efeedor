@@ -319,7 +319,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Case Fatality 1 - CAD(MRD): <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
+                      <strong>Case Fatality 1 - CAD: <span style="color: blue !important;">{{calculatedResult}}%</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: 04:00:00</strong> -->
                     </div>
 
@@ -378,7 +378,7 @@
 
                  
 
-                      <div>
+                      <div ng-if="calculatedResult">
                         <input type="button" ng-show="loader == false" style="background: #4285F4 ; font-size:small; margin-right:10px;" name="make_payment" class="next action-button" ng-click="savefeedback()" value="{{lang.submit}}" />
                         <img src="https://media.tenor.com/8ZhQShCQe9UAAAAC/loader.gif" ng-show="loader == true">
                       </div>

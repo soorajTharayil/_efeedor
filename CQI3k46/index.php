@@ -334,7 +334,7 @@
                   <div ng-if="calculatedResult" style="margin-top: 15px;text-align:left;"><br>
 
                     <div style="margin-left:15px;">
-                      <strong>Average recovery time(OT-Post OP): <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
+                      <strong>Radiology TAT orders for CT: <span style="color: blue !important;">{{calculatedResult}}</span></strong><br><br>
                       <!-- <strong>Bench Mark Time: {{ feedback.benchmark }}</strong> -->
                     </div>
 

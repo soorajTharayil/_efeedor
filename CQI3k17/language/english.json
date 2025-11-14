@@ -63,7 +63,7 @@
    "hr_placeholder":"Hr",
    "min_placeholder": "Min",
    "sec_placeholder": "Sec",
-   "formula_para2": " Number of discharges and deaths in that month(Number)-(Denominator)",
+   "formula_para2": " Number of discharges and deaths in that month (Denominator)",
    "formula_para2_placeholder": "Your input",
    "data_analysis": "Data analysis (RCA, Reason for Variation etc.)",
    "corrective_action": "Corrective action",

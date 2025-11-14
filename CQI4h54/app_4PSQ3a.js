@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -105,26 +105,26 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$(window).scrollTop(0);
 	}, 0);
 
-// 	$scope.setupapplication = function () {
-// 		//$rootScope.loader = true;
-// 		var url = window.location.href;
-// 		//console.log(url);
-// 		var id = url.substring(url.lastIndexOf('=') + 1);
-// 		//alert(id);
-// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
-// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
-// 			$scope.feedback.total_admission = responsedata.data.incident_count
-// 			console.log($scope.medication_errors_count);
+	// 	$scope.setupapplication = function () {
+	// 		//$rootScope.loader = true;
+	// 		var url = window.location.href;
+	// 		//console.log(url);
+	// 		var id = url.substring(url.lastIndexOf('=') + 1);
+	// 		//alert(id);
+	// 		$http.get($rootScope.baseurl_main + '/api_4PSQ3a.php?patientid=' + id + '&month=' + selectedMonths + '&year=' + selectedYears, { timeout: 20000 }).then(function (responsedata) {
+	// 			$scope.feedback.initial_assessment_hr = responsedata.data.medication_errors_count;
+	// 			$scope.feedback.total_admission = responsedata.data.incident_count
+	// 			console.log($scope.medication_errors_count);
 
-// 		},
-// 			function myError(response) {
-// 				$rootScope.loader = false;
+	// 		},
+	// 			function myError(response) {
+	// 				$rootScope.loader = false;
 
-// 			}
-// 		);
+	// 			}
+	// 		);
 
-// 	}
-// 	$scope.setupapplication();
+	// 	}
+	// 	$scope.setupapplication();
 
 	var ehandor = JSON.parse($window.localStorage.getItem('ehandor'));
 	if (ehandor) {
@@ -133,7 +133,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -160,47 +160,50 @@ $scope.user_id = ehandor.userid;
 
 
 
-	$scope.calculateMedicationErrorRate = function () {
-    // Get the number of actual deaths in ICU-2
-    var actualDeaths = parseFloat(document.getElementById('formula_para1').value);
+	$scope.calculateStandardisedMortalityRatio = function () {
+		var actualDeathsInput = document.getElementById('formula_para1').value.trim();
+		var predictedDeathsInput = document.getElementById('formula_para2').value.trim();
 
-    // Get the number of predicted deaths in ICU-2
-    var predictedDeaths = parseFloat(document.getElementById('formula_para2').value);
+		// ✅ Empty field check
+		if (actualDeathsInput === "" || predictedDeathsInput === "") {
+			alert("Please enter both Actual and Predicted deaths");
+			return;
+		}
 
-    // Validate inputs: negative values blocked
-    if (isNaN(actualDeaths) || actualDeaths < 0) {
-        alert("Please enter actual deaths in ICU-2 (cannot be negative)");
-        return;
-    }
+		var actualDeaths = parseFloat(actualDeathsInput);
+		var predictedDeaths = parseFloat(predictedDeathsInput);
 
-    if (isNaN(predictedDeaths) || predictedDeaths < 0) {
-        alert("Please enter predicted deaths in ICU-2 (cannot be negative)");
-        return;
-    }
+		// ✅ Individual numeric validations
+		if (isNaN(actualDeaths)) {
+			alert("Please enter a valid number for Actual deaths");
+			return;
+		}
 
-    
+		if (isNaN(predictedDeaths)) {
+			alert("Please enter a valid number for Predicted deaths");
+			return;
+		}
 
-    // Calculate the percentage
-    var deathRate = (actualDeaths === 0 && predictedDeaths === 0)
-        ? 0  // both zero → 0%
-        : (actualDeaths / predictedDeaths) * 100;
+		// ✅ Calculation logic
+		if (actualDeaths === 0 && predictedDeaths === 0) {
+			$scope.calculatedResult = "0";
+		} else if (predictedDeaths === 0) {
+			$scope.calculatedResult = "0";
+		} else {
+			var ratio = actualDeaths / predictedDeaths;
+			$scope.calculatedResult = (ratio % 1 === 0) ? ratio.toString() : ratio.toFixed(2);
+		}
 
-    // Format result: whole number or 2 decimals
-    $scope.calculatedResult = (deathRate % 1 === 0)
-        ? deathRate.toString()
-        : deathRate.toFixed(2);
-
-    // Store in feedback object
-    $scope.feedback.calculatedResult = $scope.calculatedResult;
-
-    console.log("Calculated result:", $scope.calculatedResult);
-    $scope.valuesEdited = false;
-};
-
-
+		// ✅ Store and log
+		$scope.feedback.calculatedResult = $scope.calculatedResult;
+		console.log("Calculated SMR:", $scope.calculatedResult);
+		$scope.valuesEdited = false;
+	};
 
 
-		$scope.encodeFiles = function (element) {
+
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -239,9 +242,9 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -296,7 +299,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {
@@ -371,7 +374,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 			alert('Please enter preventive action');
 			return false;
 		}
-		
+
 
 		// First check for duplicates
 		$http.get($rootScope.baseurl_main + '/quality_duplication_submission.php?patient_id=' + $rootScope.patientid + '&month=' + $scope.selectedMonths + '&year=' + $scope.selectedYears + '&table=' + 'bf_feedback_CQI4h54'

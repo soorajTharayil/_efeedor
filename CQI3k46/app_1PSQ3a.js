@@ -60,11 +60,11 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 	$scope.formatKPIDate = formatKPIDate;
 
 	$scope.deadlineMessage = "KPI submission deadline for " + $scope.selectedMonths + " " + $scope.selectedYears + " is " + formatKPIDate($scope.kpiDeadline, false) + ".";
-	
-	$timeout(function () { 
-		if ($scope.kpiDeadline) { 
-			angular.element('#deadlineModal').modal('show'); 
-		} 
+
+	$timeout(function () {
+		if ($scope.kpiDeadline) {
+			angular.element('#deadlineModal').modal('show');
+		}
 	}, 500);
 
 
@@ -162,7 +162,7 @@ app.controller('PatientFeedbackCtrl', function ($rootScope, $scope, $http, $loca
 		$scope.loginid = ehandor.empid;
 		$scope.loginname = ehandor.name;
 		$scope.loginnumber = ehandor.mobile;
-$scope.user_id = ehandor.userid;
+		$scope.user_id = ehandor.userid;
 
 
 
@@ -193,69 +193,87 @@ $scope.user_id = ehandor.userid;
 	//Calculate function for initail assessment
 
 	$scope.calculateTimeFormat = function () {
-    // Read input values (allow decimals)
-    var hoursInput = parseFloat(document.getElementById('formula_para1_hr').value || 0);
-    var minutesInput = parseFloat(document.getElementById('formula_para1_min').value || 0);
-    var secondsInput = parseFloat(document.getElementById('formula_para1_sec').value || 0);
 
-    // Block negative inputs
-    if (hoursInput < 0 || minutesInput < 0 || secondsInput < 0) {
-        alert("Hours, minutes, and seconds cannot be negative.");
-        return;
-    }
+		// Read input values (allow decimals)
+		var hoursInput = parseFloat(document.getElementById('formula_para1_hr').value || 0);
+		var minutesInput = parseFloat(document.getElementById('formula_para1_min').value || 0);
+		var secondsInput = parseFloat(document.getElementById('formula_para1_sec').value || 0);
 
-    // Show initial concatenated time
-    $scope.feedback.initial_assessment_total = `${hoursInput}:${minutesInput}:${secondsInput}`;
-    console.log("Initial assessment total:", $scope.feedback.initial_assessment_total);
+		// Block negative inputs
+		if (hoursInput < 0 || minutesInput < 0 || secondsInput < 0) {
+			alert("Hours, minutes, and seconds cannot be negative.");
+			return;
+		}
 
-    // Convert inputs to total seconds
-    var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
+		// Show initial concatenated time
+		$scope.feedback.initial_assessment_total = `${hoursInput}:${minutesInput}:${secondsInput}`;
+		console.log("Initial assessment total:", $scope.feedback.initial_assessment_total);
 
-    // Read total admissions (allow decimals)
-    var totalAdmissions = parseFloat(document.getElementById('formula_para2').value || 0);
+		// Convert inputs to total seconds
+		var assessmentSeconds = (hoursInput * 3600) + (minutesInput * 60) + secondsInput;
 
-    // Block negative admissions
-    if (totalAdmissions < 0) {
-        alert("Total admissions cannot be negative.");
-        return;
-    }
+		// Read total admissions (allow decimals)
+		var totalAdmissions = parseFloat(document.getElementById('formula_para2').value || 0);
 
-    // Handle zero admissions
-    if (totalAdmissions === 0) {
-        $scope.calculatedResult = "0:00:00";
-    } else {
-        // Calculate average seconds
-        var averageSeconds = assessmentSeconds / totalAdmissions;
+		// ✅ FIX: CHECK EMPTY INPUTS (raw values)
+		var hrRaw = document.getElementById('formula_para1_hr').value.trim();
+		var minRaw = document.getElementById('formula_para1_min').value.trim();
+		var secRaw = document.getElementById('formula_para1_sec').value.trim();
 
-        // Convert back to HH:MM:SS
-        var avgHours = Math.floor(averageSeconds / 3600);
-        var remainingSeconds = averageSeconds % 3600;
-        var avgMinutes = Math.floor(remainingSeconds / 60);
-        var avgSeconds = Math.round(remainingSeconds % 60);
+		if (hrRaw === "" && minRaw === "" && secRaw === "") {
+			alert("Please enter sum of time taken.");
+			return;
+		}
 
-        // Handle rounding overflow
-        if (avgSeconds === 60) {
-            avgSeconds = 0;
-            avgMinutes += 1;
-        }
-        if (avgMinutes === 60) {
-            avgMinutes = 0;
-            avgHours += 1;
-        }
+		// Admissions empty
+		if (document.getElementById('formula_para2').value.trim() === "") {
+			alert("Please enter total admissions.");
+			return;
+		}
 
-        // Format result as HH:MM:SS
-        $scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
-    }
+		// Block negative admissions
+		if (totalAdmissions < 0) {
+			alert("Total admissions cannot be negative.");
+			return;
+		}
 
-    // Store result in feedback object
-    $scope.feedback.calculatedResult = $scope.calculatedResult;
-    console.log("Calculated result:", $scope.feedback.calculatedResult);
-    $scope.valuesEdited = false;
-};
+		// Handle zero admissions
+		if (totalAdmissions === 0) {
+			$scope.calculatedResult = "0:00:00";
+		} else {
+			// Calculate average seconds
+			var averageSeconds = assessmentSeconds / totalAdmissions;
+
+			// Convert back to HH:MM:SS
+			var avgHours = Math.floor(averageSeconds / 3600);
+			var remainingSeconds = averageSeconds % 3600;
+			var avgMinutes = Math.floor(remainingSeconds / 60);
+			var avgSeconds = Math.round(remainingSeconds % 60);
+
+			// Handle rounding overflow
+			if (avgSeconds === 60) {
+				avgSeconds = 0;
+				avgMinutes += 1;
+			}
+			if (avgMinutes === 60) {
+				avgMinutes = 0;
+				avgHours += 1;
+			}
+
+			// Format result as HH:MM:SS
+			$scope.calculatedResult = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
+		}
+
+		// Store result in feedback object
+		$scope.feedback.calculatedResult = $scope.calculatedResult;
+		console.log("Calculated result:", $scope.feedback.calculatedResult);
+		$scope.valuesEdited = false;
+	};
 
 
 
-		$scope.encodeFiles = function (element) {
+
+	$scope.encodeFiles = function (element) {
 		var files_name = Array.from(element.files);
 
 		files_name.forEach(function (file) {
@@ -294,7 +312,7 @@ $scope.user_id = ehandor.userid;
 		$scope.feedback.files_name.splice(index, 1);
 	};
 
-$scope.currentMonthYear = getCurrentMonthYear();
+	$scope.currentMonthYear = getCurrentMonthYear();
 
 	$scope.months = [
 		"January", "February", "March", "April", "May", "June",
@@ -331,7 +349,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 
 
 
-// Menu bar start
+	// Menu bar start
 	$scope.menuVisible = false;
 	$scope.aboutVisible = false;
 
@@ -386,7 +404,7 @@ $scope.currentMonthYear = getCurrentMonthYear();
 	};
 
 	// Attach event listener when step is active
-	$scope.$watchGroup([ 'step1', 'step4'], function (newVals) {
+	$scope.$watchGroup(['step1', 'step4'], function (newVals) {
 		if (newVals.includes(true)) {
 			document.addEventListener('click', $scope.closeMenuOnClickOutside);
 		} else {

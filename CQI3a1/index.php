@@ -465,7 +465,7 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para1}}</td>
-                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.initial_assessment_total}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.time_taken_initial_assessment}}</td>
                         </tr>
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.formula_para2}}</td>

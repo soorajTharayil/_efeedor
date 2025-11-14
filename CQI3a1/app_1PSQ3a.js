@@ -289,7 +289,7 @@ app.controller(
 
     $scope.calculateTimeFormat = function () {
       // Combine time fields
-      $scope.feedback.initial_assessment_total =
+      $scope.feedback.time_taken_initial_assessment =
         ($scope.feedback.initial_assessment_hr || 0) +
         ":" +
         ($scope.feedback.initial_assessment_min || 0) +
