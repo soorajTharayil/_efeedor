@@ -475,6 +475,7 @@ $feedbacks_report_CQI4j19 = base_url('quality/feedbacks_report_CQI4j19');
 $feedbacks_report_CQI4j20 = base_url('quality/feedbacks_report_CQI4j20');
 $feedbacks_report_CQI4j21 = base_url('quality/feedbacks_report_CQI4j21');
 $feedbacks_report_CQI4j22 = base_url('quality/feedbacks_report_CQI4j22');
+$feedbacks_report_CQI4j23 = base_url('quality/feedbacks_report_CQI4j23');
 
 
 

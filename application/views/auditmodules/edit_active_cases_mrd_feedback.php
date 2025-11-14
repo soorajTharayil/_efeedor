@@ -82,14 +82,14 @@ $param = json_decode($row->dataset, true);
                             <td>
                                 <select class="form-control" name="patient_gender">
                                     <option value="" <?php if (empty($param['patient_gender']))
-                                        echo 'selected'; ?>>
+                                                            echo 'selected'; ?>>
                                     </option>
                                     <option value="Male" <?php if ($param['patient_gender'] == 'Male')
-                                        echo 'selected'; ?>>Male</option>
+                                                                echo 'selected'; ?>>Male</option>
                                     <option value="Female" <?php if ($param['patient_gender'] == 'Female')
-                                        echo 'selected'; ?>>Female</option>
+                                                                echo 'selected'; ?>>Female</option>
                                     <option value="Other" <?php if ($param['patient_gender'] == 'Other')
-                                        echo 'selected'; ?>>Other</option>
+                                                                echo 'selected'; ?>>Other</option>
                                 </select>
                             </td>
                         </tr>
@@ -154,8 +154,8 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            $(document).ready(function () {
-                                $('#department').on('change', function () {
+                            $(document).ready(function() {
+                                $('#department').on('change', function() {
                                     var dept = $(this).val();
                                     $('#attended_doctor').html('<option value="">Loading...</option>');
 
@@ -168,7 +168,7 @@ $param = json_decode($row->dataset, true);
                                                 department: dept,
                                                 [csrfName]: csrfHash
                                             },
-                                            success: function (res) {
+                                            success: function(res) {
                                                 // ✅ Update dropdown with parsed HTML
                                                 $('#attended_doctor').html(res.html);
 
@@ -176,7 +176,7 @@ $param = json_decode($row->dataset, true);
                                                 csrfName = res.csrfName;
                                                 csrfHash = res.csrfHash;
                                             },
-                                            error: function (xhr) {
+                                            error: function(xhr) {
                                                 alert('Error fetching doctors: ' + xhr.statusText);
                                             }
                                         });
@@ -185,8 +185,6 @@ $param = json_decode($row->dataset, true);
                                     }
                                 });
                             });
-
-
                         </script>
                         <?php
                         // Common max datetime to disable future selection
@@ -230,16 +228,16 @@ $param = json_decode($row->dataset, true);
                         </tr>
 
                         <script>
-                            document.addEventListener("DOMContentLoaded", function () {
+                            document.addEventListener("DOMContentLoaded", function() {
                                 // Select all datetime pickers
                                 const pickers = document.querySelectorAll(".datetime-picker");
 
-                                pickers.forEach(function (input) {
+                                pickers.forEach(function(input) {
                                     // Dynamically restrict to current date/time as maximum
                                     input.max = new Date().toISOString().slice(0, 16);
 
                                     // Auto-open picker on click (modern browsers)
-                                    input.addEventListener("click", function () {
+                                    input.addEventListener("click", function() {
                                         if (this.showPicker) this.showPicker();
                                     });
                                 });
@@ -250,8 +248,8 @@ $param = json_decode($row->dataset, true);
 
                         <script>
                             // Force open calendar picker when clicking anywhere in the input box
-                            document.querySelectorAll('.datetime-picker').forEach(function (input) {
-                                input.addEventListener('click', function () {
+                            document.querySelectorAll('.datetime-picker').forEach(function(input) {
+                                input.addEventListener('click', function() {
                                     this.showPicker(); // Opens the native calendar/clock popup
                                 });
                             });
@@ -301,20 +299,20 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 1 -->
                         <tr>
-                            <td><b>Is the plan of care documented?</b></td>
+                            <td><b>Is the plan of Care available?</b></td>
                             <td>
                                 <?php
                                 $val = isset($param['identification_details']) ? strtolower(trim($param['identification_details'])) : '';
                                 ?>
                                 <select class="form-control" name="identification_details">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -327,18 +325,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 2 -->
                         <tr>
-                            <td><b>Is the admitting diagnosis documented?</b></td>
+                            <td><b>Is the admitting diagnosis recorded?</b></td>
                             <td>
                                 <?php $val = isset($param['vital_signs']) ? strtolower(trim($param['vital_signs'])) : ''; ?>
                                 <select class="form-control" name="vital_signs">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -351,18 +349,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 3 -->
                         <tr>
-                            <td><b>Are physical examination findings available?</b></td>
+                            <td><b>Are Physical findings available?</b></td>
                             <td>
                                 <?php $val = isset($param['surgery']) ? strtolower(trim($param['surgery'])) : ''; ?>
                                 <select class="form-control" name="surgery">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -375,18 +373,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 4 -->
                         <tr>
-                            <td><b>Are present complaints documented?</b></td>
+                            <td><b>Are Present Complaint details available?</b></td>
                             <td>
                                 <?php $val = isset($param['complaints_communicated']) ? strtolower(trim($param['complaints_communicated'])) : ''; ?>
                                 <select class="form-control" name="complaints_communicated">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -399,18 +397,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 5 -->
                         <tr>
-                            <td><b>Is the patients history recorded?</b></td>
+                            <td><b>Are History details available?</b></td>
                             <td>
                                 <?php $val = isset($param['intake']) ? strtolower(trim($param['intake'])) : ''; ?>
                                 <select class="form-control" name="intake">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -423,18 +421,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 6 -->
                         <tr>
-                            <td><b>Is the discharge plan documented?</b></td>
+                            <td><b>Is the plan For Discharge available?</b></td>
                             <td>
                                 <?php $val = isset($param['output']) ? strtolower(trim($param['output'])) : ''; ?>
                                 <select class="form-control" name="output">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -444,21 +442,24 @@ $param = json_decode($row->dataset, true);
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <th colspan="2">Nurses documentation - Initial Assessment IPD:</th>
+                        </tr>
 
                         <!-- 7 -->
                         <tr>
-                            <td><b>Is patient-focused evaluation completed?</b></td>
+                            <td><b>Are vitals recorded?</b></td>
                             <td>
                                 <?php $val = isset($param['focus']) ? strtolower(trim($param['focus'])) : ''; ?>
                                 <select class="form-control" name="focus">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -471,18 +472,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 8 -->
                         <tr>
-                            <td><b>Is the patients medication history documented?</b></td>
+                            <td><b>Is ABC assessment available?</b></td>
                             <td>
                                 <?php $val = isset($param['meti']) ? strtolower(trim($param['meti'])) : ''; ?>
                                 <select class="form-control" name="meti">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -493,24 +494,22 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
-                        <tr>
-                            <th colspan="2">Nurses documentation - Initial Assessment IPD:</th>
-                        </tr>
+
 
                         <!-- 9 -->
                         <tr>
-                            <td><b>Are the patients needs assessed and documented?</b></td>
+                            <td><b>Is Pain score available?</b></td>
                             <td>
                                 <?php $val = isset($param['diagnostic']) ? strtolower(trim($param['diagnostic'])) : ''; ?>
                                 <select class="form-control" name="diagnostic">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -523,18 +522,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 10 -->
                         <tr>
-                            <td><b>Is pain assessment recorded?</b></td>
+                            <td><b>Is function assessment available?</b></td>
                             <td>
                                 <?php $val = isset($param['lab_results']) ? strtolower(trim($param['lab_results'])) : ''; ?>
                                 <select class="form-control" name="lab_results">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -547,18 +546,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 11 -->
                         <tr>
-                            <td><b>Is vulnerability status assessed and documented?</b></td>
+                            <td><b>Is Psychological status recorded?</b></td>
                             <td>
                                 <?php $val = isset($param['pending_investigation']) ? strtolower(trim($param['pending_investigation'])) : ''; ?>
                                 <select class="form-control" name="pending_investigation">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -571,18 +570,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 12 -->
                         <tr>
-                            <td><b>Is fall-risk assessment completed?</b></td>
+                            <td><b>Is Vulnerability status recorded?</b></td>
                             <td>
                                 <?php $val = isset($param['medicine_order']) ? strtolower(trim($param['medicine_order'])) : ''; ?>
                                 <select class="form-control" name="medicine_order">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -595,18 +594,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 13 -->
                         <tr>
-                            <td><b>Is the nursing care plan available?</b></td>
+                            <td><b>Is Social Status screening available?</b></td>
                             <td>
                                 <?php $val = isset($param['psychological']) ? strtolower(trim($param['psychological'])) : ''; ?>
                                 <select class="form-control" name="psychological">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -619,18 +618,18 @@ $param = json_decode($row->dataset, true);
 
                         <!-- 14 -->
                         <tr>
-                            <td><b>Is the assessment for suicide and self-harm completed?</b></td>
+                            <td><b>Is nutritional screening available?</b></td>
                             <td>
                                 <?php $val = isset($param['vulnerab']) ? strtolower(trim($param['vulnerab'])) : ''; ?>
                                 <select class="form-control" name="vulnerab">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -641,24 +640,24 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
                             <th colspan="2">General dietician documentation:</th>
-                        </tr>
+                        </tr> -->
 
                         <!-- 15 -->
                         <tr>
-                            <td><b>Is nutritional assessment documented?</b></td>
+                            <td><b>Is spiritual needs screening recorded?</b></td>
                             <td>
                                 <?php $val = isset($param['social']) ? strtolower(trim($param['social'])) : ''; ?>
                                 <select class="form-control" name="social">
                                     <option value="" <?php if ($val === '')
-                                        echo 'selected'; ?>></option>
+                                                            echo 'selected'; ?>></option>
                                     <option value="Yes" <?php if ($val === 'yes')
-                                        echo 'selected'; ?>>Yes</option>
+                                                            echo 'selected'; ?>>Yes</option>
                                     <option value="No" <?php if ($val === 'no')
-                                        echo 'selected'; ?>>No</option>
+                                                            echo 'selected'; ?>>No</option>
                                     <option value="N/A" <?php if ($val === 'n/a')
-                                        echo 'selected'; ?>>N/A</option>
+                                                            echo 'selected'; ?>>N/A</option>
                                 </select>
                                 <div>
                                     Remarks:
@@ -668,6 +667,243 @@ $param = json_decode($row->dataset, true);
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td><b>Is suicide risk screening recorded?</b></td>
+                            <td>
+                                <?php $val = isset($param['nutri']) ? strtolower(trim($param['nutri'])) : ''; ?>
+                                <select class="form-control" name="nutri">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="nutri_text"
+                                        value="<?php echo isset($param['nutri_text']) ? htmlspecialchars($param['nutri_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is fall risk assessment recorded?</b></td>
+                            <td>
+                                <?php $val = isset($param['spiritual']) ? strtolower(trim($param['spiritual'])) : ''; ?>
+                                <select class="form-control" name="spiritual">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="spiritual_text"
+                                        value="<?php echo isset($param['spiritual_text']) ? htmlspecialchars($param['spiritual_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is care plan available?</b></td>
+                            <td>
+                                <?php $val = isset($param['suicide']) ? strtolower(trim($param['suicide'])) : ''; ?>
+                                <select class="form-control" name="suicide">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="suicide_text"
+                                        value="<?php echo isset($param['suicide_text']) ? htmlspecialchars($param['suicide_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is PFE available?</b></td>
+                            <td>
+                                <?php $val = isset($param['risk']) ? strtolower(trim($param['risk'])) : ''; ?>
+                                <select class="form-control" name="risk">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="risk_text"
+                                        value="<?php echo isset($param['risk_text']) ? htmlspecialchars($param['risk_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is discharge planning recorded?</b></td>
+                            <td>
+                                <?php $val = isset($param['care']) ? strtolower(trim($param['care'])) : ''; ?>
+                                <select class="form-control" name="care">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="care_text"
+                                        value="<?php echo isset($param['care_text']) ? htmlspecialchars($param['care_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2">General Dietician Documentation</th>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is Nutritional assessment available?</b></td>
+                            <td>
+                                <?php $val = isset($param['pfe']) ? strtolower(trim($param['pfe'])) : ''; ?>
+                                <select class="form-control" name="pfe">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="pfe_text"
+                                        value="<?php echo isset($param['pfe_text']) ? htmlspecialchars($param['pfe_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Is Dietitian assessment done within 30 days for Haemodialysis?</b></td>
+                            <td>
+                                <?php $val = isset($param['disch']) ? strtolower(trim($param['disch'])) : ''; ?>
+                                <select class="form-control" name="disch">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="disch_text"
+                                        value="<?php echo isset($param['disch_text']) ? htmlspecialchars($param['disch_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2">Sepsis Bundle Care</th>
+                        </tr>
+
+                        <tr>
+                            <td><b>Appropriate IV fluids started within an hour?</b></td>
+                            <td>
+                                <?php $val = isset($param['facility_communicated']) ? strtolower(trim($param['facility_communicated'])) : ''; ?>
+                                <select class="form-control" name="facility_communicated">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="facility_communicated_text"
+                                        value="<?php echo isset($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Serum Lactate checked</b></td>
+                            <td>
+                                <?php $val = isset($param['health_education']) ? strtolower(trim($param['health_education'])) : ''; ?>
+                                <select class="form-control" name="health_education">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="health_education_text"
+                                        value="<?php echo isset($param['health_education_text']) ? htmlspecialchars($param['health_education_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Cultures taken before antibiotics</b></td>
+                            <td>
+                                <?php $val = isset($param['remarks1']) ? strtolower(trim($param['remarks1'])) : ''; ?>
+                                <select class="form-control" name="remarks1">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="remarks1_text"
+                                        value="<?php echo isset($param['remarks1_text']) ? htmlspecialchars($param['remarks1_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Broad spectrum antibiotics started within one hour</b></td>
+                            <td>
+                                <?php $val = isset($param['urethral']) ? strtolower(trim($param['urethral'])) : ''; ?>
+                                <select class="form-control" name="urethral">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="urethral_text"
+                                        value="<?php echo isset($param['urethral_text']) ? htmlspecialchars($param['urethral_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Noradrenaline started if required</b></td>
+                            <td>
+                                <?php $val = isset($param['urine_sample']) ? strtolower(trim($param['urine_sample'])) : ''; ?>
+                                <select class="form-control" name="urine_sample">
+                                    <option value="" <?php if ($val === '') echo 'selected'; ?>></option>
+                                    <option value="Yes" <?php if ($val === 'yes') echo 'selected'; ?>>Yes</option>
+                                    <option value="No" <?php if ($val === 'no') echo 'selected'; ?>>No</option>
+                                    <option value="N/A" <?php if ($val === 'n/a') echo 'selected'; ?>>N/A</option>
+                                </select>
+                                <div>
+                                    Remarks:
+                                    <input class="form-control" type="text" name="urine_sample_text"
+                                        value="<?php echo isset($param['urine_sample_text']) ? htmlspecialchars($param['urine_sample_text'], ENT_QUOTES, 'UTF-8') : ''; ?>"
+                                        placeholder="Remarks">
+                                </div>
+                            </td>
+                        </tr>
+
+
 
 
 
@@ -737,14 +973,14 @@ $param = json_decode($row->dataset, true);
                             </td>
                         </tr>
                         <script>
-                            document.addEventListener("DOMContentLoaded", function () {
+                            document.addEventListener("DOMContentLoaded", function() {
 
                                 // 🗑️ Handle removing existing old files
                                 const removeInput = document.getElementById("remove_files_json");
                                 let removedIndexes = [];
 
                                 document.querySelectorAll(".remove-file").forEach(btn => {
-                                    btn.addEventListener("click", function () {
+                                    btn.addEventListener("click", function() {
                                         const li = this.closest("li");
                                         const index = li.getAttribute("data-index");
                                         removedIndexes.push(index);
@@ -760,7 +996,7 @@ $param = json_decode($row->dataset, true);
                                 const addMoreBtn = document.getElementById("add-more-files");
                                 const uploadContainer = document.getElementById("upload-container");
 
-                                addMoreBtn.addEventListener("click", function () {
+                                addMoreBtn.addEventListener("click", function() {
                                     const newRow = document.createElement("div");
                                     newRow.className = "upload-row";
                                     newRow.style.cssText = "display:flex; align-items:center; margin-bottom:6px;";
@@ -775,7 +1011,7 @@ $param = json_decode($row->dataset, true);
                                     removeBtn.type = "button";
                                     removeBtn.className = "btn btn-danger btn-sm remove-upload";
                                     removeBtn.innerHTML = '<i class="fa fa-times"></i>';
-                                    removeBtn.addEventListener("click", function () {
+                                    removeBtn.addEventListener("click", function() {
                                         newRow.remove();
                                     });
                                     removeBtn.style.display = "inline-block";
@@ -848,7 +1084,7 @@ $param = json_decode($row->dataset, true);
 
 
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function () {
+    document.getElementById('saveButton').addEventListener('click', function() {
 
         if (checkValuesBeforeSubmit()) {
             // Proceed with save action

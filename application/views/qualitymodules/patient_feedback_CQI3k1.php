@@ -75,10 +75,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -244,9 +257,9 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Number of case sheets where care plan is documented', 'Total number of in-patients for the month'],
+							labels: ['Upload Files','Review your details before submission:'],
 							datasets: [{
-								label: 'Number of case sheets where care plan is documented compare with Total number of in-patients for the month',
+								label: 'Total number of LAMA cases with Reasons',
 								data: [benchmark, calculated],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -271,7 +284,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Percentage of Care-plan is documented for inpatients  ' + monthyear,
+									text: 'Total number of LAMA cases with Reasons - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},

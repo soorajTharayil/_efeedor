@@ -69,8 +69,7 @@
 
 								<th>Total Number of Fall prevention opportunities in Physiotherapy OP (in Nos.)</th>
 
-								<th>IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients-(Physical
-									therapy and Rehabilitation Department - Physiotherapy </th>
+								<th>IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients </th>
 
 								<th>View</th>
 

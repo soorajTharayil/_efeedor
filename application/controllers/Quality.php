@@ -505,7 +505,8 @@ class Quality extends CI_Controller
             'bf_feedback_CQI4j19',
             'bf_feedback_CQI4j20',
             'bf_feedback_CQI4j21',
-            'bf_feedback_CQI4j22'
+            'bf_feedback_CQI4j22',
+            'bf_feedback_CQI4j23'
         ];
 
         if (!in_array($table, $tables)) {
@@ -14907,6 +14908,44 @@ class Quality extends CI_Controller
             redirect('dashboard/noaccess');
         }
     }
+    public function feedbacks_report_CQI4j23() {
+        $fdate = date('Y-m-d');
+        $tdate = date('Y-m-01');
+        $_SESSION['from_date'] = $fdate;
+        $_SESSION['to_date'] = $tdate;
+    
+        if ($this->session->userdata('isLogIn') == false) redirect('login');
+    
+        if (ismodule_active('QUALITY') === true) {
+            $dateInfo = get_from_to_date();
+            $pagetitle = $dateInfo['pagetitle'];
+            $titleSuffix = "";
+    
+            if ($pagetitle === "Current Month") {
+                $titleSuffix = strtoupper(date('F Y'));
+            } elseif ($pagetitle === "Previous Month") {
+                $titleSuffix = strtoupper(date('F Y', strtotime('-1 month')));
+            } elseif ($pagetitle === "Last 365 Days") {
+                $titleSuffix = "LAST 365 DAYS";
+            } elseif ($pagetitle === "Last 30 Days") {
+                $titleSuffix = "LAST 30 DAYS";
+            } elseif ($pagetitle === "Custom") {
+                $titleSuffix = date('F Y', strtotime($dateInfo['tdate'])) . " - " . date('F Y', strtotime($dateInfo['fdate']));
+            } elseif ($pagetitle === "Last 24 Hours") {
+                $titleSuffix = "LAST 24 HOURS";
+            } elseif ($pagetitle === "Quaterly") {
+                $titleSuffix = "LAST 90 DAYS";
+            } else {
+                $titleSuffix = $pagetitle;
+            }
+    
+            $data['title'] = "Percentage of OP Medication dispensed within less than 15 minutes";
+            $data['content'] = $this->load->view('qualitymodules/feedbacks_report_CQI4j23', $data, true);
+            $this->load->view('layout/main_wrapper', $data);
+        } else {
+            redirect('dashboard/noaccess');
+        }
+    }
 
 
 
@@ -19549,6 +19588,15 @@ class Quality extends CI_Controller
             $this->load->view('layout/main_wrapper',$data);
         } else { redirect('dashboard/noaccess'); }
     }
+    public function patient_feedback_CQI4j23()
+    {
+        if ($this->session->userdata('isLogIn')==false) redirect('login');
+        if (ismodule_active('QUALITY')===true){
+            $data['title']='QUALITY KPI ANALYSIS';
+            $data['content']=$this->load->view('qualitymodules/patient_feedback_CQI4j23',$data,true);
+            $this->load->view('layout/main_wrapper',$data);
+        } else { redirect('dashboard/noaccess'); }
+    }
 
 
 
@@ -19612,14 +19660,10 @@ class Quality extends CI_Controller
 
     public function edit_feedback_CQI3a1_byid($id)
 {
-    // Check if form is submitted
     if ($this->input->post()) {
 
-        // 1️⃣ Handle time formatting
-        $hr = intval($this->input->post('initial_assessment_hr')) ?: 0;
-        $min = intval($this->input->post('initial_assessment_min')) ?: 0;
-        $sec = intval($this->input->post('initial_assessment_sec')) ?: 0;
-        $timeString = sprintf('%02d:%02d:%02d', $hr, $min, $sec);
+        // 1️⃣ Get time from hidden input
+        $timeString = $this->input->post('time_taken_initial_assessment') ?: '00:00:00';
 
         // 2️⃣ Format datetime
         $dataCollected = $this->input->post('dataCollected');
@@ -19627,7 +19671,6 @@ class Quality extends CI_Controller
         $formattedDatet = date('Y-m-d', strtotime($dataCollected));
 
         // 3️⃣ Fetch existing dataset and files
-        
         $existing = $this->quality_model->get_feedback_CQI3a1_byid($id);
         $dataset = json_decode($existing->dataset ?? '{}', true) ?: [];
         $existingFiles = $dataset['files_name'] ?? [];
@@ -19677,7 +19720,7 @@ class Quality extends CI_Controller
 
         $dataset['files_name'] = array_values($existingFiles);
 
-        // 6️⃣ Update other form fields into dataset
+        // 6️⃣ Update dataset with POST fields
         foreach ($_POST as $key => $value) {
             if (!in_array($key, ['uploaded_files','remove_files_json'])) {
                 $dataset[$key] = $value;
@@ -19693,7 +19736,7 @@ class Quality extends CI_Controller
             'data_analysis'                 => $this->input->post('dataAnalysis'),
             'corrective_action'             => $this->input->post('correctiveAction'),
             'preventive_action'             => $this->input->post('preventiveAction'),
-            'datetime'                      => $formattedDatetime,
+            'datetime'                       => $formattedDatetime,
             'datet'                          => $formattedDatet,
             'dataset'                        => json_encode($dataset)
         ];
@@ -19704,11 +19747,12 @@ class Quality extends CI_Controller
         // 9️⃣ Redirect after update
         redirect('quality/patient_feedback_CQI3a1?id=' . $id);
     } else {
-        // Load the view with the form and existing record
+        // Load form
         $data['param'] = $this->quality_model->get_feedback_CQI3a1_byid($id);
         $this->load->view('qualitymodules/dephead/edit_feedback_CQI3a1', $data);
     }
 }
+
 
     public function edit_feedback_CQI3a4()
 {
@@ -48485,6 +48529,81 @@ public function edit_feedback_CQI4j22_byid($id) {
     }
 }
 
+public function edit_feedback_CQI4j23() {
+    if (!isset($this->session->userdata['isLogIn']) || !$this->session->userdata('isLogIn'))
+        $this->session->set_userdata('referred_from', current_url());
+    else
+        $this->session->set_userdata('referred_from', NULL);
+
+    $LOAD = pagetoload($this->module);
+    if ($LOAD == 'inpatient_modules') {
+        $data['title'] = 'EDIT KPI FORM';
+        $data['content'] = isfeature_active('QUALITY-DASHBOARD')
+            ? $this->load->view('qualitymodules/edit_feedback_CQI4j23', $data, true)
+            : $this->load->view('qualitymodules/dephead/edit_feedback_CQI4j23', $data, true);
+        $this->load->view('layout/main_wrapper', $data);
+    }
+}
+
+public function edit_feedback_CQI4j23_byid($id) {
+    if ($this->input->post()) {
+        $existing = $this->quality_model->get_feedback_CQI4j23_byid($id);
+        $dataset = json_decode($existing->dataset, true) ?: [];
+        $existingFiles = $dataset['files_name'] ?? [];
+
+        $removeIndexes = json_decode($this->input->post('remove_files_json') ?? '[]', true);
+        foreach ($removeIndexes as $i) {
+            if (isset($existingFiles[$i])) {
+                $p = FCPATH . str_replace(base_url(), '', $existingFiles[$i]['url']);
+                if (file_exists($p)) @unlink($p);
+                unset($existingFiles[$i]);
+            }
+        }
+        $existingFiles = array_values($existingFiles);
+
+        if (!empty($_FILES['uploaded_files']['name'][0])) {
+            $this->load->library('upload');
+            $config = [
+                'upload_path' => './api/file_uploads/',
+                'allowed_types' => 'jpg|jpeg|png|pdf|csv|doc|docx|xls|xlsx'
+            ];
+            foreach ($_FILES['uploaded_files']['name'] as $i => $name) {
+                $_FILES['file'] = [
+                    'name' => $name,
+                    'type' => $_FILES['uploaded_files']['type'][$i],
+                    'tmp_name' => $_FILES['uploaded_files']['tmp_name'][$i],
+                    'error' => $_FILES['uploaded_files']['error'][$i],
+                    'size' => $_FILES['uploaded_files']['size'][$i]
+                ];
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('file')) {
+                    $up = $this->upload->data();
+                    $existingFiles[] = [
+                        'url' => base_url('api/file_uploads/' . $up['file_name']),
+                        'name' => $up['file_name']
+                    ];
+                }
+            }
+        }
+
+        $dataset['files_name'] = $existingFiles;
+        foreach ($_POST as $k => $v)
+            if (!in_array($k, ['uploaded_files', 'remove_files_json']))
+                $dataset[$k] = $v;
+
+        // ⚙️ KPI Formula: % = (MER procedures achieving TICI ≥2B within 60 min skin puncture / Total MER procedures) × 100
+        $success = floatval($this->input->post('mer_tici2b_within_60')) ?: 0;
+        $total_mer = floatval($this->input->post('total_mer_procedures')) ?: 1;
+        $dataset['mer_60_tici2b_percent'] = round(($success / $total_mer) * 100, 2);
+
+        $this->quality_model->update_feedback_CQI4j23($id, ['dataset' => json_encode($dataset)]);
+        redirect('quality/patient_feedback_CQI4j23?id=' . $id);
+    } else {
+        $data['param'] = $this->quality_model->get_feedback_CQI4j23_byid($id);
+        $this->load->view('qualitymodules/dephead/edit_feedback_CQI4j23', $data);
+    }
+}
+
     //START REPORTS
 
 
@@ -48817,7 +48936,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 //$dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49255,8 +49374,8 @@ public function edit_feedback_CQI4j22_byid($id) {
             $header[0] = 'KPI Recorded by';
             $header[1] = 'KPI Recorded on';
             $header[2] = 'Sum of time taken for assessment in patients (in Hrs)';
-            $header[3] = 'Total number of in-patients  (in No.s)';
-            $header[4] = 'Avg. Time for initial assessment of in-patients (Nurses)-(Nursing-Ward) (in Hrs)';
+            $header[3] = 'Total number of in-patients (in Nos.)';
+            $header[4] = 'Avg. Time for initial assessment of in-patients (Nurses) (in Hrs)';
 
             $j = 5;
 
@@ -49343,9 +49462,9 @@ public function edit_feedback_CQI4j22_byid($id) {
 
             $header[0] = 'KPI Recorded by';
             $header[1] = 'KPI Recorded on';
-            $header[2] = 'Total number of Contaminated blood culture (in No.s)';
-            $header[3] = 'Total number of blood culture test Performed (in No.s)';
-            $header[4] = 'Percentage of Blood culture contamination rate(Lab Service) (in %)';
+            $header[2] = 'Total number of Contaminated blood culture (in Nos.)';
+            $header[3] = 'Total number of blood culture test Performed (in Nos.)';
+            $header[4] = 'Percentage of Blood culture contamination rate(Lab Service)';
             $j = 5;
 
             // $header[$j++] = 'Benchmark time';
@@ -49360,7 +49479,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49428,7 +49547,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
             $header[0] = 'KPI Recorded by';
             $header[1] = 'KPI Recorded on';
-            $header[2] = 'Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge (in No.s)';
+            $header[2] = 'Number of patients discharged with a diagnosis of CHF with reduced EF and prescribed a beta blocker at discharge (in Nos.)';
             $header[3] = 'Number of patients discharged with a diagnosis of CHF (in No.s)';
             $header[4] = 'Percentage of Beta-blocker prescriptions with a diagnosis of CHF with reduced EF (Cardiology - Emergency Department) (in %)';
             $j = 5;
@@ -49445,7 +49564,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49513,9 +49632,9 @@ public function edit_feedback_CQI4j22_byid($id) {
 
             $header[0] = 'KPI Recorded by';
             $header[1] = 'KPI Recorded on';
-            $header[2] = 'Number of patients with hypoglycemic events where the target glucose level was achieved post-treatment (in No.s)';
-            $header[3] = 'Number of patients with Hypoglycemic events (in No.s)';
-            $header[4] = 'Percentage of Hospitalized patients with hypoglycemia who achieved targeted blood glucose level(Endocrinology and Diabetes - Emergency Department) (in %)';
+            $header[2] = 'Number of patients with hypoglycemic events where the target glucose level was achieved post-treatment (in Nos.)';
+            $header[3] = 'Number of patients with Hypoglycemic events (in Nos.)';
+            $header[4] = 'Percentage of Hospitalized patients with hypoglycemia who achieved targeted blood glucose level';
             $j = 5;
 
             // $header[$j++] = 'Benchmark time';
@@ -49530,7 +49649,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49598,9 +49717,9 @@ public function edit_feedback_CQI4j22_byid($id) {
 
             $header[0] = 'KPI Recorded by';
             $header[1] = 'KPI Recorded on';
-            $header[2] = 'Number of cases where a spontaneous perineal tear occurs (in No.s)';
+            $header[2] = 'Number of cases where a spontaneous perineal tear occurs (in Nos.)';
             $header[3] = 'Total number of Vaginal deliveries (in No.s)';
-            $header[4] = 'Percentage of Spontaneous perineal Tear Rate (in %)';
+            $header[4] = 'Percentage of Spontaneous perineal Tear Rate';
             $j = 5;
 
             // $header[$j++] = 'Benchmark time';
@@ -49615,7 +49734,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49699,7 +49818,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49783,7 +49902,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
                 $dataexport[$i]['name'] = $data['name'];
                 $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-                $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+                $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
                 $dataexport[$i]['total_admission'] = $data['total_admission'];
                 $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
                 // $dataexport[$i]['benchmark'] = $data['benchmark'];
@@ -49864,7 +49983,7 @@ public function edit_feedback_CQI4j22_byid($id) {
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -49930,9 +50049,9 @@ public function overall_CQI3a17_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of oncology patients who had treatment initiated after tumour board (in No.s)';
-        $header[3] = 'Total oncology patients discussed (in No.s)';
-        $header[4] = 'Percentage with treatment initiated after tumour board (in %)';
+        $header[2] = 'Number of new oncology patients who had treatment initiated following multidisciplinary meeting tumor board (in Nos.)';
+        $header[3] = 'Number of new oncology cases all disciplines (in Nos.)';
+        $header[4] = 'Percentage of oncology patients who had treatment initiated following multidisciplinary meeting';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -49946,7 +50065,7 @@ public function overall_CQI3a17_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50012,9 +50131,9 @@ public function overall_CQI3a18_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of Intravenous Contrast Media Extravasation events (in No.s)';
-        $header[3] = 'Total contrast administrations (in No.s)';
-        $header[4] = 'Percentage of extravasation events (in %)';
+        $header[2] = 'Number of Contrast extravasation (in Nos.)';
+        $header[3] = 'Number of patients receiving contrast (in Nos.)';
+        $header[4] = 'Percentage of Intravenous Contrast Media Extravasation (Radiology)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -50028,7 +50147,7 @@ public function overall_CQI3a18_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50094,9 +50213,9 @@ public function overall_CQI3a19_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Sum of time taken for triage (in Mins)';
-        $header[3] = 'Total number of triage cases (in No.s)';
-        $header[4] = 'Average time taken for triage (in Mins)';
+        $header[2] = 'Sum of time taken (in minutes) for triage (in Hrs)';
+        $header[3] = 'Total number of patients coming to the emergency (in Nos.)';
+        $header[4] = 'Avg.Time taken for triage(Emergency Department) (in Hrs)';
 
         $j = 5;
         $header[$j++] = 'Benchmark time';
@@ -50111,7 +50230,7 @@ public function overall_CQI3a19_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['benchmark'] = isset($data['benchmark']) ? $data['benchmark'] : '';
@@ -50177,9 +50296,9 @@ public function overall_CQI3a20_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of dialysis patients achieving target hemoglobin (in No.s)';
-        $header[3] = 'Total dialysis patients (in No.s)';
-        $header[4] = 'Percentage achieving target hemoglobin (in %)';
+        $header[2] = 'Number of patients undergoing dialysis who are able to achieve target hemoglobin levels (in Nos.)';
+        $header[3] = 'Total number of patients undergoing dialysis (in Nos.)';
+        $header[4] = 'Percentage of patients undergoing dialysis who are able to achieve target hemoglobin levels(Nephrology)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -50193,7 +50312,7 @@ public function overall_CQI3a20_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50206,7 +50325,7 @@ public function overall_CQI3a20_report()
         $fdate = $_SESSION['from_date'];
         $tdate = $_SESSION['to_date'];
         ob_end_clean();
-        $fileName = 'EF- Percentage of patients undergoing dialysis achieving target hemoglobin levels (Nephrology) - ' . $tdate . ' to ' . $fdate . '.csv';
+        $fileName = 'EF- Percentage of patients undergoing dialysis who are able to achieve target hemoglobin levels(Nephrology) - ' . $tdate . ' to ' . $fdate . '.csv';
         header('Pragma: public');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -50259,9 +50378,9 @@ public function overall_CQI3a21_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of critical results responded by physician within time (in No.s)';
-        $header[3] = 'Total critical results reported (in No.s)';
-        $header[4] = 'Percentage compliance of timely physician response (in %)';
+        $header[2] = 'Total no of critical results the physician acted/ responded with the specified timeframe as per policy (in Nos.)';
+        $header[3] = 'Total No of critical results reported in the month (in Nos.)';
+        $header[4] = 'Percentage of Compliance rate of timeliness of physician responding to the reported critical results';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -50275,7 +50394,7 @@ public function overall_CQI3a21_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50341,9 +50460,9 @@ public function overall_CQI3a22_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number complying with Holding area care (in No.s)';
-        $header[3] = 'Total patients requiring Holding area care (in No.s)';
-        $header[4] = 'Percentage compliance to Holding area care (in %)';
+        $header[2] = 'Number of Compliances in Parameters (in Nos.)';
+        $header[3] = 'Total number of Patients admitted in the Holding area in a month (in Nos.)';
+        $header[4] = 'Percentage of compliance to Holding area care(ACC2-JCI8)-(Nursing)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -50357,7 +50476,7 @@ public function overall_CQI3a22_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50422,9 +50541,9 @@ public function overall_CQI3b1_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of reporting errors (in No.s)';
-        $header[3] = 'Number of investigations (in No.s)';
-        $header[4] = 'Reporting errors per 1000 investigations';
+        $header[2] = 'Number of reporting errors (in Nos.)';
+        $header[3] = 'Number of tests performed (in Nos.)';
+        $header[4] = 'Number of reporting errors per 1000 investigations (Lab Services)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -50438,7 +50557,7 @@ public function overall_CQI3b1_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50520,7 +50639,7 @@ public function overall_CQI3b2_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50602,7 +50721,7 @@ public function overall_CQI3b3_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50684,7 +50803,7 @@ public function overall_CQI3b4_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50766,7 +50885,7 @@ public function overall_CQI3b5_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50848,7 +50967,7 @@ public function overall_CQI3b6_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -50930,7 +51049,7 @@ public function overall_CQI3b7_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51011,7 +51130,7 @@ public function overall_CQI3b8_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51093,7 +51212,7 @@ public function overall_CQI3b9_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51175,7 +51294,7 @@ public function overall_CQI3b10_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51257,7 +51376,7 @@ public function overall_CQI3b11_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51423,7 +51542,7 @@ public function overall_CQI3b13_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = isset($data['initial_assessment_total']) ? $data['initial_assessment_total'] : '';
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = isset($data['total_admission']) ? $data['total_admission'] : '';
             $dataexport[$i]['calculatedResult'] = isset($data['calculatedResult']) ? $data['calculatedResult'] : '';
             $dataexport[$i]['dataAnalysis'] = isset($data['dataAnalysis']) ? $data['dataAnalysis'] : '';
@@ -51505,7 +51624,7 @@ public function overall_CQI3c1_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -51586,7 +51705,7 @@ public function overall_CQI3c2_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -51652,9 +51771,9 @@ public function overall_CQI3c3_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Number of cases';
-        $header[3] = 'Total dispensing';
-        $header[4] = 'Percentage / Rate';
+        $header[2] = 'Total number of dispensing errors (in Nos.)';
+        $header[3] = 'Total number of in-patient days for the month (in Nos.)';
+        $header[4] = 'Incidence of medication errors -Dispensing errors (IP)( As per NABH 4th edition)-(Clinical Pharmacy)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -51668,7 +51787,7 @@ public function overall_CQI3c3_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -51733,9 +51852,9 @@ public function overall_CQI3c4_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Total admissions';
-        $header[3] = 'Number of ADR cases';
-        $header[4] = 'Percentage of admissions with ADR (in %)';
+        $header[2] = 'Number of adverse drug reactions (in Nos.)';
+        $header[3] = 'Number of discharges and deaths in that month (in Nos.)';
+        $header[4] = 'Percentage of admissions with A D R-(Clinical Pharmacy)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -51749,8 +51868,8 @@ public function overall_CQI3c4_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = $data['total_admission'];
-            $dataexport[$i]['adr_cases'] = $data['adr_cases'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -51815,9 +51934,9 @@ public function overall_CQI3c5_report()
 
         $header[0] = 'KPI Recorded by';
         $header[1] = 'KPI Recorded on';
-        $header[2] = 'Total medication charts';
-        $header[3] = 'Number of charts with error-prone abbreviations';
-        $header[4] = 'Percentage of medication charts with error-prone abbreviations (in %)';
+        $header[2] = 'Number of medication charts with error prone abbreviations (in Nos.)';
+        $header[3] = 'Number of medication charts reviewed (in Nos.)';
+        $header[4] = 'Percentage of medication charts with error prone abbreviations(Clinical Pharmacy)';
 
         $j = 5;
         $header[$j++] = 'Data analysis (RCA, Reason for Variation etc.)';
@@ -51831,8 +51950,8 @@ public function overall_CQI3c5_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_charts'] = $data['total_charts'];
-            $dataexport[$i]['error_charts'] = $data['error_charts'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -51883,9 +52002,9 @@ public function overall_CQI3c6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total patients receiving high-risk medications',
-            'Number developing adverse drug events',
-            'Percentage developing adverse drug events (in %)',
+            'Number of patients receiving high risk medications developing adverse drug event (in Nos.)',
+            'Number of patients receiving high risk medication (in Nos.)',
+            'Percentage of patients receiving high risk medication developing adverse drug event(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -51897,8 +52016,8 @@ public function overall_CQI3c6_report()
 
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_patients'] = $data['total_patients'];
-            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -51946,9 +52065,9 @@ public function overall_CQI3c7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total medication administrations',
-            'Number of administering errors',
-            'Percentage of administering errors (in %)',
+            'Total number of medication administration errors (in Nos.)',
+            'Total number of in-patient days for the month (in Nos.)',
+            'Incidence of Medication Administering errors ( As per NABH 4th edition)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -51959,8 +52078,8 @@ public function overall_CQI3c7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_administration'] = $data['total_administration'];
-            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52007,9 +52126,9 @@ public function overall_CQI3c8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total in-patients',
-            'Number developing adverse drug reactions',
-            'Percentage of patients developing ADR (in %)',
+            'Number of patients developing adverse drug reactions (in Nos.)',
+            'Total number of in-patients (in Nos.)',
+            'Percentage of in-patients developing adverse drug reaction (PSQ3a)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52020,8 +52139,8 @@ public function overall_CQI3c8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_inpatients'] = $data['total_inpatients'];
-            $dataexport[$i]['adr_cases'] = $data['adr_cases'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52081,8 +52200,8 @@ public function overall_CQI3c9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_administration'] = $data['total_administration'];
-            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52129,9 +52248,9 @@ public function overall_CQI3c10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total medication dispensed',
-            'Number of dispensing errors',
-            'Percentage of dispensing errors (in %)',
+            'Total number of dispensing errors (in Nos.)',
+            'Total number of opportunities of medication errors (in Nos.)',
+            'Incidence of medication errors -Dispensing errors (IP)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52142,8 +52261,8 @@ public function overall_CQI3c10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_dispensed'] = $data['total_dispensed'];
-            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52190,9 +52309,9 @@ public function overall_CQI3c11_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total prescriptions',
-            'Number of prescription errors',
-            'Percentage of prescription errors (in %)',
+            'Total number of prescription errors (in Nos.)',
+            'Total number of opportunities of medication errors (in Nos.)',
+            'Incidence of medication errors -Prescription errors (IP)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52203,8 +52322,8 @@ public function overall_CQI3c11_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_prescriptions'] = $data['total_prescriptions'];
-            $dataexport[$i]['errors'] = $data['errors'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52251,9 +52370,9 @@ public function overall_CQI3c12_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total high-risk infections',
-            'Number of cases compliant with empirical antibiotics therapy',
-            'Compliance rate (in %)',
+            'No of empirical antibiotics prescribed for the high risk infections as per policy (in Nos.)',
+            'Total No of high risk infections prescribed with antibiotics (in Nos.)',
+            'Emperical Antibiotics therapy compliance rate for high risk infections(JCI8-MMU1.1)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52264,8 +52383,8 @@ public function overall_CQI3c12_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['compliant_cases'] = $data['compliant_cases'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52312,9 +52431,9 @@ public function overall_CQI3c13_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total restricted antibiotics prescribed',
-            'Number of compliant cases',
-            'Compliance rate (in %)',
+            'No of restricted antibiotics prescribed As per hospital policy with proper indications (in Nos.)',
+            'Total no of restricted antibiotics prescribed in the month (in Nos.)',
+            'Restricted antibiotics usage compliance rate(JCI8-MMU1.1)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52325,8 +52444,8 @@ public function overall_CQI3c13_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['compliant_cases'] = $data['compliant_cases'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52373,9 +52492,9 @@ public function overall_CQI3c14_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total new drug prescriptions',
-            'Number with appropriate indication',
-            'Appropriateness rate (in %)',
+            'No of newly added medication prescribed with appropriate indication (in Nos.)',
+            'Total No of newly added medications prescribed in the month (in Nos.)',
+            'Monitor data related to appropriateness of indication for the new drugs(JCI8-MMU2.0)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52386,7 +52505,7 @@ public function overall_CQI3c14_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
@@ -52431,9 +52550,9 @@ public function overall_CQI3d1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total anaesthesia cases',
-            'Number of modifications of anaesthesia plan',
-            'Percentage of modifications (in %)',
+            'Number of patients for whom anaesthesia plan was modified (in Nos.)',
+            'Number of patients who underwent anaesthesia (in Nos.)',
+            'Percentage of Number of patients for whom anaesthesia plan was modified(OT-Anasthesia)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52486,9 +52605,9 @@ public function overall_CQI3d2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total anaesthesia cases',
-            'Number of unplanned ventilations',
-            'Percentage of unplanned ventilations (in %)',
+            'Number of patients requiring unplanned ventilation following anaesthesia (in Nos.)',
+            'Number of patients who underwent anaesthesia (in Nos.)',
+            'Percentage of unplanned ventilation following anaesthesia (OT-Anasthesia)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52499,8 +52618,8 @@ public function overall_CQI3d2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['unplanned_ventilation'] = $data['unplanned_ventilation'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52541,9 +52660,9 @@ public function overall_CQI3d3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total anaesthesia cases',
-            'Number of adverse anaesthesia events',
-            'Percentage of adverse events (in %)',
+            'Number of patients who developed adverse anaesthesia events following anaesthesia (in Nos.)',
+            'Number of patients who underwent anaesthesia (in Nos.)',
+            'Percentage of adverse anaesthesia events following anaesthesia(OT-Anasthesia)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52554,9 +52673,8 @@ public function overall_CQI3d3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
-            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -52596,9 +52714,9 @@ public function overall_CQI3d4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total anaesthesia cases',
-            'Number of anaesthesia-related deaths',
-            'Anaesthesia mortality rate (in %)',
+            'Number of patients who died following anaesthesia (in Nos.)',
+            'Number of patients who underwent anaesthesia (in Nos.)',
+            'Anaesthesia related mortality rate(OT - Anasthesia)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52609,8 +52727,8 @@ public function overall_CQI3d4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['deaths'] = $data['deaths'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52651,9 +52769,9 @@ public function overall_CQI3d5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total prescriptions',
-            'Number of safe and rational prescriptions',
-            'Percentage of safe prescriptions (in %)',
+            'Total number of safe and rational prescriptions (in Nos.)',
+            'Total number of prescription audited (in Nos.)',
+            'Percentage of safe and rational prescriptions(Clinical Pharmacy - IP-Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52664,8 +52782,8 @@ public function overall_CQI3d5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_prescriptions'] = $data['total_prescriptions'];
-            $dataexport[$i]['safe_prescriptions'] = $data['safe_prescriptions'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52705,9 +52823,9 @@ public function overall_CQI3e1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total OT cases',
-            'Number of unplanned returns to OT',
-            'Percentage of unplanned returns (in %)',
+            'Number of unplanned return to OT (in Nos.)',
+            'Number of patients who underwent surgeries in the OT (in Nos.)',
+            'Percentage of unplanned return to OT',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52718,8 +52836,8 @@ public function overall_CQI3e1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['unplanned_return'] = $data['unplanned_return'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52760,9 +52878,9 @@ public function overall_CQI3e2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total OT cases',
-            'Number of rescheduled surgeries',
-            'Percentage of rescheduled surgeries (in %)',
+            'Number of surgeries rescheduled (in Nos.)',
+            'Number of surgeries planned (in Nos.)',
+            'Percentage of rescheduling of surgeries(OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52773,8 +52891,8 @@ public function overall_CQI3e2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['rescheduled_cases'] = $data['rescheduled_cases'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52814,9 +52932,9 @@ public function overall_CQI3e3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total OT cases',
-            'Number of cases with adherence to surgery error prevention procedure',
-            'Percentage adherence (in %)',
+            'Number of surgeries where the procedure was followed (in Nos.)',
+            'Number of surgeries performed in that month( (in Nos.)',
+            'Percentage of cases where organisations procedure to prevent surgery errors (wrong site, wrong procedure, wrong patient) have been adhered(OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52828,8 +52946,8 @@ public function overall_CQI3e3_report()
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
             $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['adherence_cases'] = $data['adherence_cases'];
-            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -52869,9 +52987,9 @@ public function overall_CQI3e4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total cases receiving surgery',
-            'Number of cases receiving prophylactic antibiotics on time',
-            'Percentage compliance (in %)',
+            'Number of patients who did receive appropriate prophylactic antibiotic(s) (in Nos.)',
+            'Number of patients who underwent surgeries in the OT (in Nos.)',
+            'Percentage of cases receiving appropriate prophylactic antibiotics with specified time frame(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52882,8 +53000,8 @@ public function overall_CQI3e4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['on_time_antibiotics'] = $data['on_time_antibiotics'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52924,9 +53042,9 @@ public function overall_CQI3e5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total planned surgeries',
-            'Number of surgeries changed intraoperatively',
-            'Percentage changed (in %)',
+            'Number of cases where the planned surgery was changed intraoperatively (in Nos.)',
+            'Number of surgeries performed in that month (in Nos.)',
+            'Percentage of cases where the planned surgery were changed intraoperatively(OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52937,8 +53055,8 @@ public function overall_CQI3e5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_surgeries'] = $data['total_surgeries'];
-            $dataexport[$i]['changed_surgeries'] = $data['changed_surgeries'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -52979,9 +53097,9 @@ public function overall_CQI3e6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total OT cases',
-            'Number of re-explorations',
-            'Re-exploration rate (in %)',
+            'Number of re-explorations done during same admission (in Nos.)',
+            'Number of surgeries performed in that month (in Nos.)',
+            'Re-exploration rate(OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -52992,8 +53110,8 @@ public function overall_CQI3e6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['reexplorations'] = $data['reexplorations'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53034,9 +53152,9 @@ public function overall_CQI3e7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total deliveries',
-            'Number of primary cesareans',
-            'Primary Cesarean Rate (in %)',
+            'Number of women having cesarean section for first time (in Nos.)',
+            'Total number of live birth other than cesarean (in Nos.)',
+            'Primary Cesarean Rate(OT)-((Nursing - OBG)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53047,8 +53165,8 @@ public function overall_CQI3e7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_deliveries'] = $data['total_deliveries'];
-            $dataexport[$i]['primary_cesareans'] = $data['primary_cesareans'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53089,9 +53207,7 @@ public function overall_CQI3e8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total implant cases',
-            'Number of adverse events related to implant devices',
-            'Adverse event rate (in %)',
+            'Total No of Adverse events related to implant devices reported in the month (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53102,9 +53218,7 @@ public function overall_CQI3e8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
-            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -53144,9 +53258,9 @@ public function overall_CQI3e9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total surgical cases',
-            'Number of major patient safety events',
-            'Event rate (in %)',
+            'No of major patient safety events or errors related to surgical procedures reported in the month (in Nos.)',
+            'Total No of surgeries done in the month (in Nos.)',
+            'All major patient safety events or errors related to surgical procedures(JCI8-QPS 3.04)-(OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53157,8 +53271,8 @@ public function overall_CQI3e9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_cases'] = $data['total_cases'];
-            $dataexport[$i]['major_events'] = $data['major_events'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53198,9 +53312,9 @@ public function overall_CQI3f1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total transfusions',
-            'Number of transfusion reactions',
-            'Percentage of transfusion reactions (in %)',
+            'Number of transfusion reactions occurred (in Nos.)',
+            'Number of units transfused (Number of units includes Whole Blood and components) (in Nos.)',
+            'Percentage of transfusion reactions (PSQ3a)-(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53211,8 +53325,8 @@ public function overall_CQI3f1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_transfusions'] = $data['total_transfusions'];
-            $dataexport[$i]['reactions'] = $data['reactions'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53253,9 +53367,9 @@ public function overall_CQI3f2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total blood units issued',
-            'Number of wasted units among issued',
-            'Percentage waste among issued (in %)',
+            'Number of blood and blood components wasted among those issued (in Nos.)',
+            'Number of blood components issued from the blood bank (in Nos.)',
+            'Percentage of waste of blood and blood components among those issued(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53266,8 +53380,8 @@ public function overall_CQI3f2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_units_issued'] = $data['total_units_issued'];
-            $dataexport[$i]['wasted_units'] = $data['wasted_units'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53306,9 +53420,9 @@ public function overall_CQI3f3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total blood units stored',
-            'Number of wasted units among stored',
-            'Percentage waste among stored (in %)',
+            'Number of blood and blood components wasted among those stored in blood bank (in Nos.)',
+            'Number of blood components stored in the blood bank (in Nos.)',
+            'Percentage of waste of blood and blood components among those stored(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53319,8 +53433,8 @@ public function overall_CQI3f3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_units_stored'] = $data['total_units_stored'];
-            $dataexport[$i]['wasted_units_stored'] = $data['wasted_units_stored'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53360,9 +53474,9 @@ public function overall_CQI3f4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total blood component units used',
-            'Total patients receiving transfusions',
-            'Percentage of blood component units used (in %)',
+            'Number of blood component units used (in Nos.)',
+            'Number of blood and blood products used (in Nos.)',
+            'Percentage of number of blood component units used(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53373,8 +53487,8 @@ public function overall_CQI3f4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['total_units_used'] = $data['total_units_used'];
-            $dataexport[$i]['total_patients'] = $data['total_patients'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53414,9 +53528,9 @@ public function overall_CQI3f5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Sum of turnaround time for cross matched/reserved blood (in Hrs)',
-            'Total number of requests',
-            'Average turnaround time (in Hrs)',
+            'Sum of time taken (in Hrs)',
+            'Total number of blood & blood components cross-matched/reserved (in Nos.)',
+            'Turn-around time for blood and blood components cross matched / reserved(Blood Center) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53427,8 +53541,8 @@ public function overall_CQI3f5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
-            $dataexport[$i]['total_requests'] = $data['total_requests'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53467,9 +53581,9 @@ public function overall_CQI3f6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of adverse/near miss events in blood/transfusion services',
-            'Total transfusions/units',
-            'Percentage of adverse/near miss events (in %)',
+            'Total No of adverse events and near miss events involving blood bank and/or transfusion services reported in the month (in Nos.)',
+            'Total number of Blood and blood Products transfused in the month (in Nos.)',
+            'Adverse events and near miss events involving blood bank and/or transfusion services (Transfusion to the wrong patient, Mislabeled blood product, Contaminated blood product)(JCI8-AOP 4.00)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53480,8 +53594,8 @@ public function overall_CQI3f6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['adverse_events'] = $data['adverse_events'];
-            $dataexport[$i]['total_units'] = $data['total_units'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53521,9 +53635,9 @@ public function overall_CQI3f7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total blood units required',
-            'Total units available',
-            'Blood availability rate (in %)',
+            'No of cross matched units (in Nos.)',
+            'No of requested units in the month (in Nos.)',
+            'Blood availability rate (JCI8-AOP 4.00)-(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53534,8 +53648,8 @@ public function overall_CQI3f7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['units_required'] = $data['units_required'];
-            $dataexport[$i]['units_available'] = $data['units_available'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53575,9 +53689,9 @@ public function overall_CQI3f8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total units cross matched',
-            'Total units transfused',
-            'CT Ratio (cross match to transfusion)',
+            'Total No of transfused blood units (in Nos.)',
+            'No of cross matched units in the month (in Nos.)',
+            'CT Ratio (cross match to transfusion)(JCI8-AOP 4.00)-(Blood Center)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53588,8 +53702,8 @@ public function overall_CQI3f8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['units_cross_matched'] = $data['units_cross_matched'];
-            $dataexport[$i]['units_transfused'] = $data['units_transfused'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53629,9 +53743,9 @@ public function overall_CQI3f9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Sum of turnaround time for Platelet Apheresis (in Hrs)',
-            'Total number of procedures',
-            'Average turnaround time (in Hrs)',
+            'Total time taken for all Platelet Apheresis procedure (in minutes)',
+            'Total number of Platelet Apheresis performed (in Nos.)',
+            'Turnaround time for Platelet Apheresis (Blood Center) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53642,8 +53756,8 @@ public function overall_CQI3f9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
-            $dataexport[$i]['total_procedures'] = $data['total_procedures'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53683,9 +53797,9 @@ public function overall_CQI3f10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Sum of turnaround time for blood donation (in Hrs)',
-            'Total donors',
-            'Average turnaround time (in Hrs)',
+            'Total time taken for all Blood donation (in minutes)',
+            'Total number of Blood donation procedure performed- (in Nos.)',
+            'turnaround time for blood donation(Blood Center) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53696,8 +53810,8 @@ public function overall_CQI3f10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['turnaround_total'] = $data['turnaround_total'];
-            $dataexport[$i]['total_donors'] = $data['total_donors'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53736,9 +53850,9 @@ public function overall_CQI3g1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of catheter-associated UTIs',
-            'Total catheter-days',
-            'CAUTI Rate (per 1000 catheter days)',
+            'Number of Urinary Catheter associated UTIs in a month (in Nos.)',
+            'Number of urinary catheter days in the month (in Nos.)',
+            'Catheter associated urinary tract infection rate (PSQ 3b)-(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53749,8 +53863,8 @@ public function overall_CQI3g1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_infections'] = $data['num_infections'];
-            $dataexport[$i]['total_catheter_days'] = $data['total_catheter_days'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53790,9 +53904,9 @@ public function overall_CQI3g2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of ventilator-associated pneumonias',
-            'Total ventilator days',
-            'VAP Rate (per 1000 ventilator days)',
+            'Number of ventilator associated pneumonias in a month (in Nos.)',
+            'Number of ventilator days in that month (in Nos.)',
+            'Ventilator associated pneumonias (VAP) in 1000 ventilator days(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53803,8 +53917,8 @@ public function overall_CQI3g2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_vap'] = $data['num_vap'];
-            $dataexport[$i]['total_vent_days'] = $data['total_vent_days'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53844,9 +53958,9 @@ public function overall_CQI3g3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of CLABSI events',
-            'Total central line days',
-            'CLABSI Rate (per 1000 central line days)',
+            'Number of IVD associated blood stream infections in a month (in Nos.)',
+            'Number of IVD inserted that month (in Nos.)',
+            'Central Line Associated Blood Stream Infection (CLABSI)-(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53857,8 +53971,8 @@ public function overall_CQI3g3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_clabsi'] = $data['num_clabsi'];
-            $dataexport[$i]['total_central_line_days'] = $data['total_central_line_days'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53898,9 +54012,9 @@ public function overall_CQI3g4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of surgical site infections',
-            'Total number of surgeries',
-            'SSI Rate (in %)',
+            'Number of surgical site infections in a given month( (in Nos.)',
+            'Number of surgeries performed in that month (in Nos.)',
+            'Surgical site infection rate(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53911,8 +54025,8 @@ public function overall_CQI3g4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_ssi'] = $data['num_ssi'];
-            $dataexport[$i]['total_surgeries'] = $data['total_surgeries'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -53952,9 +54066,9 @@ public function overall_CQI3g5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of late onset sepsis cases (>72 hrs)',
-            'Total NICU admissions',
-            'Late Onset Sepsis Rate (in %)',
+            'Number of babies developed late onset sepsis (in Nos.)',
+            'Total number of babies admitted in NICU (in Nos.)',
+            'Late Onset Sepsis Rate After 72 Hours(Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -53965,8 +54079,8 @@ public function overall_CQI3g5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_late_sepsis'] = $data['num_late_sepsis'];
-            $dataexport[$i]['total_nicu'] = $data['total_nicu'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54006,9 +54120,9 @@ public function overall_CQI3g6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of environmental cleaning audits conducted',
-            'Total cleaning audits planned',
-            'Compliance rate (%)',
+            'No of Environmental cleaning & disinfection (terminal cleaning) completed in the month (in Nos.)',
+            'No of Environmental cleaning & disinfection (terminal cleaning) Scheduled in the month (in Nos.)',
+            'Environmental cleaning & disinfection compliance rate(JCI8-PCI 4.0)-(House Keeping)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54019,8 +54133,8 @@ public function overall_CQI3g6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_audits'] = $data['num_audits'];
-            $dataexport[$i]['total_audits'] = $data['total_audits'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54059,9 +54173,9 @@ public function overall_CQI3h1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of deaths',
-            'Total in-patients (MRD)',
-            'Mortality rate (%)',
+            'Number of deaths (in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Mortality rate(MRD) for this month',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54072,8 +54186,8 @@ public function overall_CQI3h1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_deaths'] = $data['num_deaths'];
-            $dataexport[$i]['total_inpatients'] = $data['total_inpatients'];
+            $$dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54113,9 +54227,9 @@ public function overall_CQI3h2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of ICU1 readmissions within 48 hours',
-            'Total ICU1 discharges',
-            'Return to ICU within 48 hours (%)',
+            'Number of returns to ICU within 48 hours (in Nos.)',
+            'Number of discharges / transfers in ICU (in Nos.)',
+            'Return to ICU within 48 hours(Nursing - ICU1)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54126,8 +54240,8 @@ public function overall_CQI3h2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
-            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54167,9 +54281,9 @@ public function overall_CQI3h3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of ICU2 readmissions within 48 hours',
-            'Total ICU2 discharges',
-            'Return to ICU 2 within 48 hours (%)',
+            'Number of returns to ICU within 48 hours (in Nos.)',
+            'Number of discharges / transfers in ICU (in Nos.)',
+            'Return to ICU 2 within 48 hours(Nursing-ICU2)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54180,8 +54294,8 @@ public function overall_CQI3h3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
-            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54221,9 +54335,9 @@ public function overall_CQI3h4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of CICU readmissions within 48 hours',
-            'Total CICU discharges',
-            'Return to ICU 3 within 48 hours (%)',
+            'Number of returns to ICU within 48 hours (in Nos.)',
+            'Number of discharges / transfers in ICU (in Nos.)',
+            'Return to ICU 3 within 48 hours(Nursing - CICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54234,8 +54348,8 @@ public function overall_CQI3h4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
-            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54275,9 +54389,9 @@ public function overall_CQI3h5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of ED returns after 72 hours',
-            'Total ED discharges',
-            'Return to emergency dept. after 72 hours (%)',
+            'Number of return to emergency department after 72 hours with similar presenting complaints (in Nos.)',
+            'Number patients who have come to the emergency (in Nos.)',
+            'Return to the emergency department after 72 hours with similar presenting complaints-(Emergency-Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54288,8 +54402,8 @@ public function overall_CQI3h5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_returns'] = $data['num_returns'];
-            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54329,9 +54443,9 @@ public function overall_CQI3h6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of reintubations ICU1',
-            'Total extubations ICU1',
-            'Reintubation rate (%)',
+            'Number of reintubation within 48 hours of extubating (in Nos.)',
+            'Number of intubations(in Nos.)',
+            'Reintubation rate-(Nursing - ICU1)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54342,8 +54456,8 @@ public function overall_CQI3h6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
-            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54383,9 +54497,9 @@ public function overall_CQI3h7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of reintubations ICU2',
-            'Total extubations ICU2',
-            'Reintubation rate (%)',
+            'Number of reintubation within 48 hours of extubating (in Nos.)',
+            'Number of intubations (in Nos.)',
+            'Reintubation rate-(Nursing - ICU2)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54396,8 +54510,8 @@ public function overall_CQI3h7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
-            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54437,9 +54551,9 @@ public function overall_CQI3h8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of reintubations CICU',
-            'Total extubations CICU',
-            'Reintubation rate (%)',
+            'Number of reintubation within 48 hours of extubating (in Nos.)',
+            'Number of intubations (in Nos.)',
+            'Reintubation rate-(Nursing - CICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54450,8 +54564,8 @@ public function overall_CQI3h8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_reintubations'] = $data['num_reintubations'];
-            $dataexport[$i]['total_extubations'] = $data['total_extubations'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54491,9 +54605,9 @@ public function overall_CQI3h9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of NICU readmissions',
-            'Total NICU discharges',
-            'Re Admission Rate (%)',
+            'Actual deaths in NICU (in Nos.)',
+            'Predicted deaths in NICU (in Nos.)',
+            'Standardised Mortality Ratio for PICU(Nursing - NICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54504,8 +54618,8 @@ public function overall_CQI3h9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['num_readmissions'] = $data['num_readmissions'];
-            $dataexport[$i]['total_discharges'] = $data['total_discharges'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
@@ -54544,7 +54658,9 @@ public function overall_CQI3j1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Nurses) ED/ICU/Ward',
+            'Number of handovers done by nurses (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'Shift change handover communication (Nurses)(ED, ICU, Ward)-(Nursing - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54555,7 +54671,9 @@ public function overall_CQI3j1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54595,7 +54713,9 @@ public function overall_CQI3j2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Nurses) ED/ICU/Ward - ICU',
+            'Number of handovers done by nurses (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'Shift change handover communication (Nurses)(ED, ICU, Ward)-(Nursing - ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54606,7 +54726,9 @@ public function overall_CQI3j2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54646,7 +54768,9 @@ public function overall_CQI3j3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Nurses) ED/ICU/Ward - Ward',
+            'Number of handovers done by nurses (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'Shift change handover communication (Nurses)(ED, ICU, Ward)-(Nursing - Ward)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54657,7 +54781,9 @@ public function overall_CQI3j3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54697,7 +54823,9 @@ public function overall_CQI3j4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of patient identification error (Quality Office)',
+            'Number of patient identification errors (in Nos.)',
+            'Total number of patients (in Nos.)',
+            'Incidence of patient identification error(Quality Office)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54708,7 +54836,9 @@ public function overall_CQI3j4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['error_incidence'] = $data['error_incidence'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54748,7 +54878,9 @@ public function overall_CQI3j5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of missed hand hygiene opportunities (Infection Control - Nursing)',
+            'Number of missed hand hygiene opportunities-(Infection Control - Nursing) (in Nos.)',
+            'Number of hand hygiene opportunities (in Nos.)',
+            'Number of missed hand hygiene opportunities(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54759,7 +54891,9 @@ public function overall_CQI3j5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['missed_hygiene'] = $data['missed_hygiene'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54799,7 +54933,9 @@ public function overall_CQI3j6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance rate to medication prescription in capitals (Clinical Pharmacy)',
+            'Total number of prescriptions in capital letters (in Nos.)',
+            'Total number of prescriptions (in Nos.)',
+            'Compliance rate to medication prescription in capitals(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54810,7 +54946,9 @@ public function overall_CQI3j6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['compliance'] = $data['compliance'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54850,7 +54988,9 @@ public function overall_CQI3j7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Doctors) (MRD - Emergency Department)',
+            'Number of handovers done by doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'Shift change handover communication (Doctors)-(MRD - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54861,7 +55001,9 @@ public function overall_CQI3j7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54901,7 +55043,9 @@ public function overall_CQI3j8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Doctors) - MRD ICU',
+            'Number of handovers done by doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'Shift change handover communication (Doctors)-(MRD - ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54912,7 +55056,9 @@ public function overall_CQI3j8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handover'] = $data['handover'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -54952,7 +55098,9 @@ public function overall_CQI3j9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance to patient identification - IPD (Nursing)',
+            'Number of patient identification compliance in audited sample size (in Nos.)',
+            'Total number of opportunities observed (in Nos.)',
+            'Compliance to patient identification -IPD(Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -54963,7 +55111,9 @@ public function overall_CQI3j9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['compliance'] = $data['compliance'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55003,7 +55153,9 @@ public function overall_CQI3j10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance rate of timeliness of reporting Critical results in Radiology (within 30 min)',
+            'Total No. of critical results reported with the specified timeframe as per policy (in Nos.)',
+            'Total No. of critical results reported in the month (in Nos.)',
+            'compliance rate of timeliness of reporting Critical results in Radiology (within 30 min)-(Radiology)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55014,7 +55166,9 @@ public function overall_CQI3j10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['timeliness'] = $data['timeliness'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55053,7 +55207,9 @@ public function overall_CQI3j11_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication interdepartmental shift (MRD - Emergency Department)',
+            'Number of appropriate handovers by Doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'Hand off communication interdepartmental Shift (Doctors)IP-(MRD - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55064,7 +55220,8 @@ public function overall_CQI3j11_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55104,7 +55261,9 @@ public function overall_CQI3j12_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication interdepartmental shift (MRD - ICU)',
+            'Number of appropriate handovers by Doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'IPSG 2.2 - Hand off communication among doctors (During shift change)-(MRD - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55115,7 +55274,9 @@ public function overall_CQI3j12_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55155,7 +55316,9 @@ public function overall_CQI3j13_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - Emergency Department',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift (Nurses)-(Nursing - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55166,7 +55329,9 @@ public function overall_CQI3j13_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55206,7 +55371,9 @@ public function overall_CQI3j14_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - ICU',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunitieS (in Nos.)',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift (Nurses)-(Nursing -ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55217,7 +55384,9 @@ public function overall_CQI3j14_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55257,7 +55426,9 @@ public function overall_CQI3j15_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication interdepartmental Shift(Nurses) - Nursing - Ward',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'IPSG 2.2 - Hand off communication interdepartmental Shift (Nurses)-(Nursing -Ward)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55268,7 +55439,9 @@ public function overall_CQI3j15_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55308,7 +55481,9 @@ public function overall_CQI3j16_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication among doctors (During shift change) - MRD - Emergency Department',
+            'Number of appropriate handovers by Doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'IPSG 2.2 - Hand off communication among doctors (During shift change)-(MRD - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55319,7 +55494,9 @@ public function overall_CQI3j16_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55359,7 +55536,9 @@ public function overall_CQI3j17_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication among doctors (During shift change) - MRD - ICU',
+            'Number of appropriate handovers by Doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'IPSG 2.2 - Hand off communication among doctors (During shift change)-(MRD - ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55370,7 +55549,9 @@ public function overall_CQI3j17_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55410,7 +55591,9 @@ public function overall_CQI3j18_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - Emergency Department',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing - Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55421,7 +55604,9 @@ public function overall_CQI3j18_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55461,7 +55646,9 @@ public function overall_CQI3j19_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - ICU',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing -ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55472,7 +55659,9 @@ public function overall_CQI3j19_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55512,7 +55701,9 @@ public function overall_CQI3j20_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 2.2 - Hand off communication among nurses (During shift change) - Nursing - Ward',
+            'Number of appropriate handovers (in Nos.)',
+            'Number of handover opportunities (in Nos.)',
+            'IPSG 2.2 - Hand off communication among nurses (During shift change)-(Nursing -Ward)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55523,7 +55714,9 @@ public function overall_CQI3j20_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['handoff'] = $data['handoff'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55562,7 +55755,9 @@ public function overall_CQI3j21_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - Endoscopy',
+            'Adherance to correct site, correct procedure, correct surgery (in Nos.)',
+            'Number of samples audited (in Nos.)',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery-(Quality Office - Endoscopy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55573,7 +55768,9 @@ public function overall_CQI3j21_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55613,7 +55810,9 @@ public function overall_CQI3j22_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - ICU',
+            'Adherance to correct site, correct procedure, correct surgery (in Nos.)',
+            'Number of samples audited (in Nos.)',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery-(Quality Office - ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55624,7 +55823,9 @@ public function overall_CQI3j22_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55664,7 +55865,9 @@ public function overall_CQI3j23_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - OT',
+            'Adherance to correct site, correct procedure, correct surgery (in Nos.)',
+            'Number of samples audited (in Nos.)',
+            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery-(Quality Office - OT)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55675,7 +55878,9 @@ public function overall_CQI3j23_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55715,7 +55920,9 @@ public function overall_CQI3j24_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'PSG 6 - Compliance to Fall prevention measures in IPD - Nursing - IPD',
+            'Number of Fall prevention opportunities complied in IPD (in Nos.)',
+            'Total Number of parameters audited in IPD (in Nos.)',
+            'IPSG 6 - Compliance to Fall prevention measures in IPD-(Nursing - IPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55726,7 +55933,9 @@ public function overall_CQI3j24_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55766,7 +55975,9 @@ public function overall_CQI3j25_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'PSG 6 - Compliance to Fall prevention measures in OPD - Nursing - OPD',
+            'Number of Fall prevention opportunities complied in OPD (in Nos.)',
+            'Total Number of parameters audited in OPD (in Nos.)',
+            'IPSG 6 - Compliance to Fall prevention measures in IPD-(Nursing - OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55777,7 +55988,9 @@ public function overall_CQI3j25_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55816,7 +56029,9 @@ public function overall_CQI3j26_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Number of Fall prevention compliances in Physiotherapy OP (in Nos.)',
+            'Total Number of Fall prevention opportunities in Physiotherapy OP (in Nos.)',
+            'IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients-(Physical therapy and Rehabilitation Department - Physiotherapy',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55827,7 +56042,9 @@ public function overall_CQI3j26_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55867,7 +56084,9 @@ public function overall_CQI3j27_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance to hand hygiene practice (New) - Infection Control - Nursing',
+            'Total number of hand hygiene actions performed (in Nos.)',
+            'Number of hand hygiene opportunities (in Nos.)',
+            'Compliance to hand hygiene practice (New)-(Infection Control - Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55878,7 +56097,9 @@ public function overall_CQI3j27_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55918,7 +56139,9 @@ public function overall_CQI3j28_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance to patient identification OPD - Nursing - OPD',
+            'Number of patient identification compliance in audited sample size (in Nos.)',
+            'Total number of opportunities observed (in Nos.)',
+            'Compliance to patient identification OPD-(Nursing-OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55929,7 +56152,9 @@ public function overall_CQI3j28_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -55969,7 +56194,9 @@ public function overall_CQI3j29_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Shift change handover communication (Doctors - ward) - Medical Administration',
+            'Number of handovers done by doctors (in Nos.)',
+            'Number of handover opportunities Doctors (in Nos.)',
+            'Shift change handover communication(Doctors - ward)-(Medical Administration)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -55980,7 +56207,9 @@ public function overall_CQI3j29_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56020,7 +56249,9 @@ public function overall_CQI3j30_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of Adverse events in Physiotherapy (IPD) - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Number of adverse events reported in the month (in Nos.)',
+            'Number of physiotherapy patients in the month (in Nos.)',
+            'Incidence of Adverse events in Physiotherapy (IPD)-(Physical therapy and Rehabilitation Department - Physiotherapy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56031,7 +56262,9 @@ public function overall_CQI3j30_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56070,7 +56303,9 @@ public function overall_CQI3j31_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of Adverse events in Physiotherapy (OPD) - Physical therapy and Rehabilitation Department - Physiotherapy',
+            'Number of adverse events reported in the month (in Nos.)',
+            'Number of physiotherapy patients in the month (in Nos.)',
+            'Incidence of Adverse events in Physiotherapy (OPD)-(Physical therapy and Rehabilitation Department - Physiotherapy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56081,7 +56316,9 @@ public function overall_CQI3j31_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56121,7 +56358,9 @@ public function overall_CQI3j32_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'IPSG 4 - Ensure correct site, correct procedure, correct patient surgery - Quality Office - OT',
+            'No of Safety, security incidents related to Work place violence (in Nos.)',
+            'No of safety, security related incidents reported in the month (in Nos.)',
+            'Rate of Safety, sceurity incidents related to Work place violence (JCI8-FMS 3.0, 4.0)-(Security and Safety)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56132,7 +56371,9 @@ public function overall_CQI3j32_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56172,7 +56413,9 @@ public function overall_CQI3j33_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Security incidents rate (JCI8-FMS 4.0) - Safety & Security',
+            'No of Security incidents analysed and closed in the month (in Nos.)',
+            'No of Security incidents reported in the month (in Nos.)',
+            'Security incidents rate(JCI8-FMS 4.0)-(Safety & Security)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56183,7 +56426,9 @@ public function overall_CQI3j33_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56223,7 +56468,9 @@ public function overall_CQI3j34_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Safety incidents rate (JCI8-FMS 3.0)',
+            'No of safety incidents analysed and closed in the month (in Nos.)',
+            'No of safety incidents reported in the month (in Nos.)',
+            'Safety incidents rate(JCI8-FMS 3.0)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56234,7 +56481,9 @@ public function overall_CQI3j34_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56274,7 +56523,9 @@ public function overall_CQI4a1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of drugs and consumables procured by local purchases within the formulary (Pharmacy)',
+            'Number of drugs and consumables procured locally from formulary (in Nos.)',
+            'Number of drugs and consumables in hospital formulary list (in Nos.)',
+            'Percentage of drugs and consumables procured by local purchases within the formulary-(Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56285,7 +56536,9 @@ public function overall_CQI4a1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56326,7 +56579,9 @@ public function overall_CQI4a2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of drugs and consumables procured by local purchase outside the formulary (Pharmacy)',
+            'Number of drugs and consumables procured outside the formulary (in Nos.)',
+            'Number of drugs and consumables procured from inside the formulary and outside from local purchases (in Nos.)',
+            'Percentage of of drugs and consumables procured by local purchase outside the formulary-(Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56337,7 +56592,9 @@ public function overall_CQI4a2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56377,7 +56634,9 @@ public function overall_CQI4a3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Stock out rate of emergency medications (Pharmacy)',
+            'Number of stock outs of emergency drugs (in Nos.)',
+            'Number of drugs listed as emergency drugs in hospital formulary (in Nos.)',
+            'Stock out rate of emergency medications-(Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56388,7 +56647,9 @@ public function overall_CQI4a3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56429,7 +56690,9 @@ public function overall_CQI4a4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of drugs and consumables rejected before preparation of Goods Receipt Note (SCM-Store)',
+            'Total quantity rejected (in Nos.)',
+            'Total quantity received before Goods Receipt Note (in Nos.)',
+            'Percentage of drugs and consumables rejected before preparation of Goods Receipt Note(SCM-Store)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56440,7 +56703,9 @@ public function overall_CQI4a4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56481,7 +56746,9 @@ public function overall_CQI4a5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of variations from procurement process (SCM-Purchase)',
+            'Number of variations from the procurement process (in Nos.)',
+            'Total number of items procured (in Nos.)',
+            'Percentage of variations from procurement process(SCM-Purchase)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56492,7 +56759,9 @@ public function overall_CQI4a5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56532,7 +56801,9 @@ public function overall_CQI4b1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days) - Nursing',
+            'Number of patients who develop new / worsening of pressure ulcer (in Nos.)',
+            'Total number of patient days for the month (in Nos.)',
+            'Incidence of bed sores (hospital associated pressure ulcers) after admission (in 1000 patient days)-( Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56543,7 +56814,9 @@ public function overall_CQI4b1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56584,7 +56857,9 @@ public function overall_CQI4b2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of falls (in 1000 IPD days) - Office-Quality',
+            'Number of falls in a given month (in Nos.)',
+            'Total number of patient days for the month (in Nos.)',
+            'Incidence of falls (in 1000 IPD days)-(Office Quality)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56595,7 +56870,9 @@ public function overall_CQI4b2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56636,7 +56913,7 @@ public function overall_CQI4b3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of variations observed in mock drill (Safety & Security)',
+            'Number of variations observed in mock drill (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56647,7 +56924,7 @@ public function overall_CQI4b3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56688,7 +56965,9 @@ public function overall_CQI4b4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of staff provided with pre-exposure prophylaxis (Infection Control)',
+            'Number of employees provided with pre-exposure prophylaxis (in Nos.)',
+            'Number of employees due to be provided with pre-exposure prophylaxis (in Nos.)',
+            'Percentage of staff provided with pre-exposure prophylaxis(Infection Control)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56699,7 +56978,9 @@ public function overall_CQI4b4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56740,7 +57021,7 @@ public function overall_CQI4b5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of Fire Incidents (Safety & Security)',
+            'Total Number of fire incidents (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56751,7 +57032,7 @@ public function overall_CQI4b5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56792,7 +57073,7 @@ public function overall_CQI4b6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of device associated pressure ulcer after admission (Nursing)',
+            'Number of patients who develop device associated pressure ulcer (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56803,7 +57084,7 @@ public function overall_CQI4b6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56844,7 +57125,7 @@ public function overall_CQI4b7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Number of Extravasation (Nursing)',
+            'Total number of Extravasation (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56855,7 +57136,7 @@ public function overall_CQI4b7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56896,7 +57177,9 @@ public function overall_CQI4b8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Monitoring of Clinical Errors (JCI8-PCC 2.3) - Quality Office',
+            'No of clinical errors analyzed and closed within the same month (in Nos.)',
+            'No of clinical errors reporting in the month (in Nos.)',
+            'Monitoring of Clinical Errors (JCI8-PCC 2.3)-(Quality Office)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56907,7 +57190,9 @@ public function overall_CQI4b8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56947,7 +57232,9 @@ public function overall_CQI4c1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Bed occupancy rate (MRD)',
+            'Total number of in-patient days for the month (in Nos.)',
+            'Number of available bed days in that month (in Nos.)',
+            'Bed occupancy rate- (MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -56958,7 +57245,9 @@ public function overall_CQI4c1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -56999,7 +57288,9 @@ public function overall_CQI4c2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Average length of stay (MRD)',
+            'Total number of in-patient days for the month (in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Average length of stay(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57010,7 +57301,9 @@ public function overall_CQI4c2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57051,7 +57344,9 @@ public function overall_CQI4c3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'OT Utilisation Rate (OT)',
+            'OT utilisation time in hours (in Hrs)',
+            'OT resource time in hours',
+            'OT Utilisation Rate is',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57062,7 +57357,9 @@ public function overall_CQI4c3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57102,7 +57399,9 @@ public function overall_CQI4c4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'ICU equipment utilisation rate (Nursing - ICU1)',
+            'Number of ICU equipment utilised days (in Nos.)',
+            'ICU equipment days available(in Nos.)',
+            'ICU equipment utilisation rate-(Nursing - ICU1)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57113,7 +57412,9 @@ public function overall_CQI4c4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57154,7 +57455,9 @@ public function overall_CQI4c5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'ICU equipment utilisation rate (Nursing - ICU2)',
+            'Number of ICU equipment utilised days (in Nos.)',
+            'ICU equipment days available',
+            'ICU equipment utilisation rate-(Nursing - ICU2)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57165,7 +57468,9 @@ public function overall_CQI4c5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57206,7 +57511,9 @@ public function overall_CQI4c6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'ICU equipment utilisation rate (Nursing - ICU3)',
+            'Number of ICU equipment utilised days (in Nos.)',
+            'ICU equipment days available (in Nos.)',
+            'ICU equipment utilisation rate-(Nursing - ICU3)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57217,7 +57524,9 @@ public function overall_CQI4c6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57258,6 +57567,8 @@ public function overall_CQI4c7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of ICU bed utilised days (in Nos.)',
+            'ICU bed days available(in Nos.)',
             'ICU Bed utilisation rate (Nursing - ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57269,7 +57580,9 @@ public function overall_CQI4c7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57309,7 +57622,7 @@ public function overall_CQI4c8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Critical equipment downtime (Biomedical Engineering)',
+            'Sum of down time of all critical equipment in the month (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57320,7 +57633,7 @@ public function overall_CQI4c8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57361,7 +57674,9 @@ public function overall_CQI4c9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Cath lab utilization rate (Cath Lab - Nursing)',
+            'Cath lab utilization time in hours (in Hrs)',
+            'Cath lab resource hours',
+            'Cath Lab Utilisation Rate is',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57372,7 +57687,9 @@ public function overall_CQI4c9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57413,6 +57730,8 @@ public function overall_CQI4c10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of nursing staff (in Nos.)',
+            'Number of occupied beds(in Nos.)',
             'Nurse patient ratio for ICU Ventilated (Nursing-ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57424,7 +57743,9 @@ public function overall_CQI4c10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57465,6 +57786,8 @@ public function overall_CQI4c11_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of nursing staff(in Nos.)',
+            'Number of occupied beds (in Nos.)',
             'Nurse patient ratio for ICU Non Ventilated (Nursing-ICU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57476,7 +57799,9 @@ public function overall_CQI4c11_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57517,6 +57842,8 @@ public function overall_CQI4c12_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of nursing staff(in Nos.)',
+            'Number of occupied beds (in Nos.)',
             'Nurse patient ratio for HDU (Nursing-HDU)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57528,7 +57855,9 @@ public function overall_CQI4c12_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57569,6 +57898,8 @@ public function overall_CQI4c13_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of nursing staff (in Nos.)',
+            'Number of occupied beds (in Nos.)',
             'Nurse patient ratio for Ward (Nursing-Ward)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57580,7 +57911,9 @@ public function overall_CQI4c13_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57621,7 +57954,7 @@ public function overall_CQI4c14_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Engineering Critical equipment downtime',
+            'Sum of down time of all critical equipment (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57632,7 +57965,7 @@ public function overall_CQI4c14_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57672,7 +58005,9 @@ public function overall_CQI4d1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Out patient satisfaction index (Patient Care Services - OPD)',
+            'Average score achieved (in Nos.)',
+            'Maximum score possible (in Nos.)',
+            'Out patient satisfaction index(Patient Care Services - OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57683,7 +58018,9 @@ public function overall_CQI4d1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57724,6 +58061,8 @@ public function overall_CQI4d2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Average score achieved (in Nos.)',
+            'Maximum score possible (in Nos.)',
             'Inpatient satisfaction index (Patient Care Services - IPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -57735,7 +58074,9 @@ public function overall_CQI4d2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57776,7 +58117,9 @@ public function overall_CQI4d3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Time taken for discharge - Cash Patients (Patient Care Services - Cash)',
+            'Sum of time taken for discharge (in Hrs)',
+            'Number of patients discharged (in Nos.)',
+            'Time taken for discharge - Cash Patients-(Patient Care Services - Cash) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57787,7 +58130,9 @@ public function overall_CQI4d3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57828,7 +58173,9 @@ public function overall_CQI4d4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Time taken for discharge Cashless Patients (Patient Care Services - Cashless)',
+            'Sum of time taken for discharge (in Hrs)',
+            'Number of patients discharged (in Nos.)',
+            'Time taken for discharge Cashless Patients-(Patient Care Services - Cashless) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57839,7 +58186,9 @@ public function overall_CQI4d4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57879,7 +58228,9 @@ public function overall_CQI4d5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Waiting time for diagnostic services (Radiology - CT)',
+            'Sum of patient in time for procedure - patient reporting time in diagnostics dept (in Hrs)',
+            'Number of patients reported in diagnostic department (in Nos.)',
+            'Waiting time for diagnostic services(Radiology - CT) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57890,7 +58241,9 @@ public function overall_CQI4d5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57931,7 +58284,9 @@ public function overall_CQI4d6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Waiting time for diagnostic services (Radiology - MRI)',
+            'Sum of patient in time for procedure - patient reporting time in diagnostics dept (in Hrs)',
+            'Number of patients reported in diagnostic department(in Hrs)',
+            'Waiting time for diagnostic services(Radiology - MRI)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57942,7 +58297,9 @@ public function overall_CQI4d6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -57983,7 +58340,9 @@ public function overall_CQI4d7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Waiting time for diagnostic services (Radiology - USG)',
+            'Sum of patient in time for procedure - patient reporting time in diagnostics dept (in Hrs)',
+            'Number of patients reported in diagnostic department(in Hrs)',
+            'Waiting time for diagnostic services(Radiology - USG)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -57994,7 +58353,9 @@ public function overall_CQI4d7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58035,7 +58396,9 @@ public function overall_CQI4d8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Waiting Time for OPD appointments (Patient Care Services - OPD)',
+            'Sum of Patient in time for consultation - Patient reporting time in OPD (in Hrs)',
+            'Number of patients reported in OPD (in Nos.)',
+            'Waiting Time for OPD appointments (Patient Care Services - OPD) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58046,7 +58409,9 @@ public function overall_CQI4d8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58087,7 +58452,9 @@ public function overall_CQI4d9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Waiting Time for OPD Walkin (Patient Care Services - OPD)',
+            'Sum of Patient in time for consultation - Patient reporting time in OPD (in Hrs)',
+            'Number of patients reported in OPD (in Nos.)',
+            'Waiting Time for OPD Walkin (Patient Care Services - OPD) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58098,7 +58465,9 @@ public function overall_CQI4d9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58139,7 +58508,9 @@ public function overall_CQI4d10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Patient Satisfaction Rate (Nursing - OBG)',
+            'Number of satisfied Patients(in Nos.)',
+            'Total number of patient surveyed (in Nos.)',
+            'Patient Satisfaction Rate-(Nursing - OBG)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58150,7 +58521,9 @@ public function overall_CQI4d10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58191,7 +58564,9 @@ public function overall_CQI4d11_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Turn-around Time for Nursing call bell responds (Nursing)',
+            'Total time taken in attending the Patients call bell (in Hrs)',
+            'Total no. of Calls received in the Month(in Nos.)',
+            'Total time taken in attending the Patients call bell (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58202,7 +58577,9 @@ public function overall_CQI4d11_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58242,7 +58619,9 @@ public function overall_CQI4e1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Employee satisfaction index (HR)',
+            'Average score achieved (in Nos.)',
+            'Maximum score possible (in Nos.)',
+            'Employee satisfaction index(HR)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58253,7 +58632,9 @@ public function overall_CQI4e1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58294,7 +58675,9 @@ public function overall_CQI4e2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Employee attrition rate (HR)',
+            'Number of employees who have left during the month (in Nos.)',
+            'Number of employee at the beginning of the month plus newly joined (in Nos.)',
+            'Employee attrition rate(HR)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58305,7 +58688,9 @@ public function overall_CQI4e2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58346,7 +58731,9 @@ public function overall_CQI4e3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Employee absenteeism rate (HR)',
+            'Number of employees who are on unauthorised absence (in Nos.)',
+            'Number of employee at the beginning of the month plus newly joined (in Nos.)',
+            'Employee absenteeism rate(HR)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58357,7 +58744,9 @@ public function overall_CQI4e3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58398,7 +58787,9 @@ public function overall_CQI4e4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of employees aware of rights, responsibility and welfare schemes (HR)',
+            'Number of employees aware of rights, responsibility and welfare schemes (in Nos.)',
+            'Number of employees interviewed (in Nos.)',
+            'Percentage of employees aware of rights,responsibility and welfare schemes(HR)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58409,7 +58800,9 @@ public function overall_CQI4e4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58450,7 +58843,9 @@ public function overall_CQI4e5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Average number of training hours (HR)',
+            'Total hours of training attended (in Hrs)',
+            'Total hours of training required to attend (in Nos.)',
+            'Average number of training hours(HR) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58461,7 +58856,9 @@ public function overall_CQI4e5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58502,7 +58899,9 @@ public function overall_CQI4e6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Nurses Attrition Rate (Nursing)',
+            'Number of employees who have left during the month (in Nos.)',
+            'Number of employee at the beginning of the month plus newly joined (in Nos.)',
+            'Nurses Attrition Rate(Nursing)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58513,7 +58912,9 @@ public function overall_CQI4e6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58554,7 +58955,9 @@ public function overall_CQI4e7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Outsourced employee absenteeism rate (Nursing Assistants) - OPD',
+            'Number of employees who are on unauthorised absence (in Nos.)',
+            'Number of employee at the beginning of the month plus newly joined (in Nos.)',
+            'Outsourced employee absenteeism rate (Nursing Assistants)-(Patient Care Services - OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58565,7 +58968,9 @@ public function overall_CQI4e7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58606,7 +59011,9 @@ public function overall_CQI4e8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Average number of unpaid leave per month (HR)',
+            'Number of unpaid leave per month (in Nos.)',
+            'Number of employee at the beginning of the month plus newly joined (in Nos.)',
+            'Average number of unpaid leave per month(HR)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58617,7 +59024,9 @@ public function overall_CQI4e8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58657,7 +59066,9 @@ public function overall_CQI4f1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of needle stick injuries IPD area (in 1000 IPD days)',
+            'Number of parenteral exposures (in Nos.)',
+            'Total number of in-patient days for the month (in Nos.)',
+            'Incidence of needle stick injuries IPD area (in 1000 IPD days)-(Infection Control - IPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58668,7 +59079,9 @@ public function overall_CQI4f1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58709,7 +59122,9 @@ public function overall_CQI4f2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of needle stick injuries OPD area (in 1000 OPD days)',
+            'Number of parenteral exposures (OPD) (in Nos.)',
+            'Total number of outpatient days for the month (in Nos.)',
+            'Incidence of needle stick injuries OPD area (in 1000 0PD days)-(Infection Control - OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58720,7 +59135,9 @@ public function overall_CQI4f2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58761,7 +59178,9 @@ public function overall_CQI4f3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of sentinel events reported, collected & analysed',
+            'Number of sentinel events, reported, collected and analysed within the defined time frame (in Nos.)',
+            'Number of sentinel events reported and collected (in Nos.)',
+            'Number of sentinel events, reported, collected and analysed within the defined time frame',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58772,7 +59191,9 @@ public function overall_CQI4f3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58813,7 +59234,9 @@ public function overall_CQI4f4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of near misses',
+            'Number of near misses reported (in Nos.)',
+            'Total number of incidents are reported (in Nos.)',
+            'Percentage of near misses(Quality Office)	',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58824,7 +59247,9 @@ public function overall_CQI4f4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58865,7 +59290,9 @@ public function overall_CQI4f5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of blood body fluid exposure IPD',
+            'Number of blood body fluid exposures (in Nos.)',
+            'Total number of in-patient days for the month (in Nos.)',
+            'Incidence of blood body fluid exposure IPD(Infection Control - IPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58876,7 +59303,9 @@ public function overall_CQI4f5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58917,7 +59346,9 @@ public function overall_CQI4f6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Incidence of blood body fluid exposure OPD',
+            'Number of blood body fluid exposures (in Nos.)',
+            'Total number of outpatient days for the month (in Nos.)',
+            'Incidence of blood body fluid exposure OPD(Infection Control - OPD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58928,7 +59359,9 @@ public function overall_CQI4f6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -58969,7 +59402,7 @@ public function overall_CQI4f7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Adverse events related to SUDs (JCI8-PCI 3.1)',
+            'Total No of adverse events reported on use of SUDs (Single value) (in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -58980,7 +59413,7 @@ public function overall_CQI4f7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59020,7 +59453,9 @@ public function overall_CQI4g1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of Medical records not having discharge summary',
+            'Number of medical records not having discharge summary (in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Percentage of Medical records not having discharge summary(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59031,7 +59466,9 @@ public function overall_CQI4g1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59072,7 +59509,9 @@ public function overall_CQI4g2_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of Medical records not having codification as per ICD',
+            'Number of medical records not having codification as per ICD (in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Percentage of Medical records not having codification as per ICD(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59083,7 +59522,9 @@ public function overall_CQI4g2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59124,7 +59565,9 @@ public function overall_CQI4g3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of Medical records having improper or incomplete consent',
+            'Number of medical records having improper or incomplete consent (in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Percentage of Medical records having improper or incomplete consent(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59135,7 +59578,9 @@ public function overall_CQI4g3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59176,7 +59621,9 @@ public function overall_CQI4g4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Percentage of missing medical records',
+            'Number of missing records (not delivered 72 hours after request) (in Nos.)',
+            'Total number of medical records (in Nos.)',
+            'Percentage of missing medical records(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59187,7 +59634,9 @@ public function overall_CQI4g4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59227,7 +59676,9 @@ public function overall_CQI4g5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm',
+            'Total No of patients treated with self harm/suicidal risk adhering with the hospital policies, protocols, & environment safety measures implemented (in Nos.)',
+            'Total No of patients with self harm/suicidal risk treated/admitted in the month (in Nos.)',
+            'Compliance rate of adhering with policies and procedures for care of patients at risk for suicide and self-harm(JCI8-COP 5)-(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59238,7 +59689,9 @@ public function overall_CQI4g5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59278,7 +59731,9 @@ public function overall_CQI4g6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Monthly Abbreviation Compliance',
+            'Number of records compliant with approved abbreviations in the month (in Nos.)',
+            'Total number of records reviewed in the month (in Nos.)',
+            'Monthly Abbreviation Compliance(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59289,7 +59744,9 @@ public function overall_CQI4g6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59330,7 +59787,7 @@ public function overall_CQI3k1_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Total number of LAMA cases with Reasons',
+            'Total number of LAMA cases with Reasons(in Nos.)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59341,7 +59798,7 @@ public function overall_CQI3k1_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59393,7 +59850,7 @@ public function overall_CQI3k2_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59433,7 +59890,9 @@ public function overall_CQI3k3_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Inguinal herniorrhaphy with mesh',
+            'Number of surgical site infections among patients undergone inguinal herniorrhaphy with a mesh in a given period (in Nos.)',
+            'Number of inguinal herniorrhaphies performed in that period (in Nos.)',
+            'Inguinal herniorrhaphy with mesh(Infection Control)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59444,7 +59903,9 @@ public function overall_CQI3k3_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59485,7 +59946,9 @@ public function overall_CQI3k4_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Coronary artery bypass grafting (CABG)',
+            'Number of surgical site infections among coronary artery bypass grafting CABG in a given period (in Nos.)',
+            'Total number of CABG cases in the month (in Nos.)',
+            'Coronary artery bypass grafting (CABG)-(Infection Control)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59496,7 +59959,9 @@ public function overall_CQI3k4_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59537,7 +60002,9 @@ public function overall_CQI3k5_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Laparoscopic cholecystectomy',
+            'Number of surgical site infections among laparoscopic cholecystectomy in a given period (in Nos.)',
+            'Number of laparoscopic cholecystectomies performed in that period (in Nos.)',
+            'Laparoscopic cholecystectomy (Infection Control)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59548,7 +60015,9 @@ public function overall_CQI3k5_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59589,7 +60058,9 @@ public function overall_CQI3k6_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Monitoring the duration of antibiotic usage in surgical prophylaxis (After 48 hours)',
+            'Number of patients receiving Surgical prophylactic Antibiotics more than 48 hrs (IV) (in Nos.)',
+            'No. of patients receiving Surgical prophylactic Antibiotics (in Nos.)',
+            'Monitoring the duration of antibiotic usage in surgical prophylaxis. (After 48hours)-(Clinical Pharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59600,7 +60071,9 @@ public function overall_CQI3k6_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59641,7 +60114,9 @@ public function overall_CQI3k7_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'De-escalation of antibiotics',
+            'Total number of restricted antibiotics de-escalated (in Nos.)',
+            'Total number of restricted antibiotics prescribed (in Nos.)',
+            'De-escalation of antibiotics(ClinicalPharmacy)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59652,7 +60127,9 @@ public function overall_CQI3k7_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59693,7 +60170,9 @@ public function overall_CQI3k8_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'High Alert Medication Segregation, Storage & Labelling Compliance rate',
+            'Total number of compliance in audited sample size (in Nos.)',
+            'Total number of opportunities (in Nos.)',
+            'High Alert Medication Segregation, storage & labelling Compliance rate(Pharmacy - Store)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59704,7 +60183,9 @@ public function overall_CQI3k8_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59744,7 +60225,9 @@ public function overall_CQI3k9_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Average recovery time (OT - Post OP)',
+            'Sum of time taken (Time of recovery face is completed - Time of recovery is started) (in Hrs)',
+            'Total patients recovery (in Nos.)',
+            'Average recovery time(OT-Post OP) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59755,7 +60238,9 @@ public function overall_CQI3k9_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59797,7 +60282,9 @@ public function overall_CQI3k10_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Door to thrombolysis time in ischemic stroke in ER (Emergency Department)',
+            'Difference in time taken from thrombolysis started to patient arrived ED (in Hrs)',
+            'Total number of patients underwent thrombolysis therapy(in Nos.)',
+            'Door to thrombolysis time in ischemic stroke in ER(Emergency Department) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59808,7 +60295,9 @@ public function overall_CQI3k10_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59850,7 +60339,9 @@ public function overall_CQI3k11_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Door to image time in Stroke patients (Emergency Department)',
+            'Sum of total time (CT Start Time – Registration Time) (in Hrs)',
+            'Total sample size (in Nos.)',
+            'Door to image time in Stroke patients(Emergency Department) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59861,7 +60352,9 @@ public function overall_CQI3k11_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59903,7 +60396,9 @@ public function overall_CQI3k12_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Average number of patients visiting Emergency per day (Emergency Department)',
+            'Total number of patients in emergency (in Nos.)',
+            'Total number of days per month (in Nos.)',
+            'Average number of patients visiting Emergency per day(Emergency Department)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59914,7 +60409,9 @@ public function overall_CQI3k12_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -59956,7 +60453,9 @@ public function overall_CQI3k13_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Efficiency of code blue team (Emergency Department)',
+            'Sum of (Time to code blue activated - Code blue team arrival time) (in Hrs)',
+            'Total number of cases (in Nos.)',
+            'Efficiency of code blue team(Emergency Department) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -59967,7 +60466,9 @@ public function overall_CQI3k13_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60009,7 +60510,9 @@ public function overall_CQI3k14_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Time for first defibrillation (Emergency Department)',
+            'Sum of (Time for first defibrillation applied - Time of code blue team reached the patient) (in Hrs)',
+            'Total number of code blue (in Nos.)',
+            'Time for first defibrillation-(Emergency Department) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60020,7 +60523,9 @@ public function overall_CQI3k14_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60062,7 +60567,9 @@ public function overall_CQI3k15_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Door to Balloon time in PTCA (Cath Lab)',
+            'Sum of total time (Door time - Balloon time) (in Hrs)',
+            'Total sample size (in Nos.)',
+            'Door to Balloon time in PTCA(Cath Lab) (in Hrs)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60073,7 +60580,9 @@ public function overall_CQI3k15_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_total'] = $data['initial_assessment_total'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60113,7 +60622,9 @@ public function overall_CQI3k16_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Compliance to diet order (Clinical Nutrition and Dietetics)',
+            'Number of inpatient case records wherein the diet order has been documented (in Nos.)',
+            'Total number of in-patients(in Nos.)',
+            'Compliance to diet order(Clinical Nutrition and Dietetics)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60124,7 +60635,9 @@ public function overall_CQI3k16_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60166,7 +60679,9 @@ public function overall_CQI3k17_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Case Fatality 1 - CAD (MRD)',
+            'Number of deaths for CAD (in Nos.)	',
+            'Number of discharges and deaths in that month(Number)-(in Nos.)',
+            'Case Fatality 1 - CAD(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60177,7 +60692,9 @@ public function overall_CQI3k17_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60219,7 +60736,9 @@ public function overall_CQI3k18_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Case Fatality 2 - Acute coronary syndrome (MRD)',
+            'Number of deaths for Acute coronary syndrome (in Nos.)',
+            'Number of discharges and deaths in that month(in Nos.)',
+            'Case Fatality 2 - Acute coronary syndrome(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60230,7 +60749,9 @@ public function overall_CQI3k18_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60272,7 +60793,9 @@ public function overall_CQI3k19_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
-            'Case Fatality 3 - Cerebral infarction (MRD)',
+            'Number of deaths for Cerebral infarction(in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
+            'Case Fatality 3 - Cerebral infarction(MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
             'Preventive action'
@@ -60283,7 +60806,9 @@ public function overall_CQI3k19_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -60325,6 +60850,8 @@ public function overall_CQI3k20_report()
         $header = [
             'KPI Recorded by',
             'KPI Recorded on',
+            'Number of deaths for MI(in Nos.)',
+            'Number of discharges and deaths in that month (in Nos.)',
             'Case Fatality 4 - MI (MRD)',
             'Data analysis (RCA, Reason for Variation etc.)',
             'Corrective action',
@@ -60336,7 +60863,9 @@ public function overall_CQI3k20_report()
             $data = json_decode($row->dataset, true);
             $dataexport[$i]['name'] = $data['name'];
             $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
-            $dataexport[$i]['value'] = $data['value'];
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
             $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
             $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
             $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
@@ -67727,6 +68256,60 @@ public function overall_CQI4j22_report() {
 
         ob_end_clean();
         $fileName = 'EF- CQI4j22 - Percentage Ischemic stroke patients with large vessel occlusion who receive MER therapy and achieve TICI 2B or higher ≤60 minutes from skin puncture-(Stroke Unit) - ' . $tdate . ' to ' . $fdate . '.csv';
+
+        header('Pragma: public');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Cache-Control: private', false);
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=' . $fileName);
+
+        if (!empty($dataexport)) {
+            $fp = fopen('php://output', 'w');
+            fputcsv($fp, $header, ',');
+            foreach ($dataexport as $values) fputcsv($fp, $values, ',');
+            fclose($fp);
+        }
+
+        ob_flush();
+        exit;
+    } else redirect('dashboard/noaccess');
+}
+public function overall_CQI4j23_report() {
+    if ($this->session->userdata('isLogIn') == false) redirect('login');
+    if (ismodule_active('QUALITY') === true) {
+        $table_feedback = 'bf_feedback_CQI4j23';
+        $table_patients = 'bf_patients';
+        $desc = 'desc';
+        $feedbacktaken = $this->quality_model->patient_and_feedback($table_patients, $table_feedback, $desc);
+        $header = [
+            'KPI Recorded by',
+            'KPI Recorded on',
+            'Number of OP Prescriptions dispensed within <15 mints',
+            'Total number of OP Prescriptions dispensed',
+            'Percentage of OP Medication dispensed within less than 15 mints',
+            'Data analysis (RCA, Reason for Variation etc.)',
+            'Corrective action',
+            'Preventive action'
+        ];
+        $dataexport = [];
+        foreach ($feedbacktaken as $i => $row) {
+            $data = json_decode($row->dataset, true);
+            $dataexport[$i]['name'] = $data['name'];
+            $dataexport[$i]['date'] = date('d-M-Y', strtotime($row->datetime)) . "\n" . date('h:i A', strtotime($row->datetime));
+            $dataexport[$i]['initial_assessment_hr'] = $data['initial_assessment_hr'];
+            $dataexport[$i]['total_admission'] = $data['total_admission'];
+            $dataexport[$i]['calculatedResult'] = $data['calculatedResult'];
+            $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];
+            $dataexport[$i]['correctiveAction'] = $data['correctiveAction'];
+            $dataexport[$i]['preventiveAction'] = $data['preventiveAction'];
+        }
+
+        $fdate = $_SESSION['from_date'];
+        $tdate = $_SESSION['to_date'];
+
+        ob_end_clean();
+        $fileName = 'EF- CQI4j23 - Percentage of OP Medication dispensed within less than 15 minutes - ' . $tdate . ' to ' . $fdate . '.csv';
 
         header('Pragma: public');
         header('Expires: 0');

@@ -2624,6 +2624,11 @@ class Quality_model extends CI_Model
 		$this->db->where('id', $id);
 		$this->db->update('bf_feedback_CQI4j22', $data);
 	}
+	public function update_feedback_CQI4j23($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('bf_feedback_CQI4j23', $data);
+	}
 
 
 
@@ -5196,6 +5201,12 @@ class Quality_model extends CI_Model
 		$query = $this->db->get('bf_feedback_CQI4j22');
 		return $query->row();
 	}
+	public function get_feedback_CQI4j23_byid($id)
+	{
+		$this->db->where('id', $id);
+		$query = $this->db->get('bf_feedback_CQI4j23');
+		return $query->row();
+	}
 
 
 
@@ -6500,7 +6511,8 @@ class Quality_model extends CI_Model
 			'bf_feedback_CQI4j19',
 			'bf_feedback_CQI4j20',
 			'bf_feedback_CQI4j21',
-			'bf_feedback_CQI4j22'
+			'bf_feedback_CQI4j22',
+			'bf_feedback_CQI4j23'
 		];
 
 		$kpi_feature_map = [];

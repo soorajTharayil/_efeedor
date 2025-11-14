@@ -193,26 +193,48 @@ app.controller(
     });
 
     $scope.repeatAudit = function () {
-      // keep the values you don’t want to reset
+      //values that shouldn’t reset
       var keep = {
         audit_by: $scope.feedback.audit_by,
-        initial_assessment_hr2: $scope.feedback.initial_assessment_hr2,
-        audit_type: $scope.feedback.audit_type,
+        audit_type: $scope.feedback.audit_type
       };
 
-      // reset everything else
+
       $scope.feedback = {};
 
-      // restore the kept values
+      //Restore kept values
       $scope.feedback.audit_by = keep.audit_by;
-      $scope.feedback.initial_assessment_hr2 = keep.initial_assessment_hr2;
       $scope.feedback.audit_type = keep.audit_type;
 
-      // reset steps
+    
+      let now = new Date();
+      now.setSeconds(0, 0);
+      $scope.feedback.initial_assessment_hr2 = now;
+
+      
+      let maxDate = new Date();
+      maxDate.setSeconds(59, 999);
+
+      let year = maxDate.getFullYear();
+      let month = ("0" + (maxDate.getMonth() + 1)).slice(-2);
+      let day = ("0" + maxDate.getDate()).slice(-2);
+      let hours = ("0" + maxDate.getHours()).slice(-2);
+      let minutes = ("0" + maxDate.getMinutes()).slice(-2);
+      $scope.todayDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+      //Reset steps
       $scope.step0 = true;
       $scope.step1 = $scope.step2 = $scope.step3 = $scope.step4 = false;
       $scope.step = 0;
+
+      console.log("Repeat Audit — refreshed at:", $scope.feedback.initial_assessment_hr2);
+
+      //Refresh page
+      setTimeout(function () {
+        location.reload();
+      }, 500);
     };
+
 
     $scope.prev1 = function () {
       $scope.step0 = true;
@@ -420,8 +442,8 @@ app.controller(
       $http
         .get(
           $rootScope.baseurl_main +
-            "/audit_load_department.php?patientid=" +
-            id,
+          "/audit_load_department.php?patientid=" +
+          id,
           { timeout: 20000 }
         )
         .then(
@@ -699,10 +721,10 @@ app.controller(
       $http
         .post(
           $rootScope.baseurl_main +
-            "/save_ma_active_cases_mrdip.php?patient_id=" +
-            $rootScope.patientid +
-            "&administratorId=" +
-            $rootScope.adminId,
+          "/save_ma_active_cases_mrdip.php?patient_id=" +
+          $rootScope.patientid +
+          "&administratorId=" +
+          $rootScope.adminId,
           $scope.feedback
         )
         .then(

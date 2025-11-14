@@ -75,12 +75,12 @@ $param = json_decode($row->dataset, true);
                                         <label for="para1"></label>
                                     </span>
                                     <span class="has-float-label" style="display: flex; align-items: center;  ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_min']; ?>" oninput="restrictToNumerals(event); calculateTime();" type="number" id="formula_para1_min" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_min']; ?>" oninput="restrictToNumerals(event);" type="number" id="formula_para1_min" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                                         <span style="margin-left: 4px; margin-right: 9px;">min </span>
                                         <label for="para1"></label>
                                     </span>
                                     <span class="has-float-label" style="display: flex; align-items: center; ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_sec']; ?>" oninput="restrictToNumerals(event); calculateTime();" type="number" id="formula_para1_sec" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_sec']; ?>" oninput="restrictToNumerals(event);" type="number" id="formula_para1_sec" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                                         <span style="margin-left: 4px;">sec</span>
                                         <label for="para1"></label>
                                     </span>
@@ -232,78 +232,33 @@ $param = json_decode($row->dataset, true);
 </div>
 
 <script>
-    // Initialize flags to track if values have been edited and if calculation is done
-    var valuesEdited = false;
     var calculationDone = false;
 
-    // Function to call when values are edited
-    function onValuesEdited() {
-        valuesEdited = true;
-        calculationDone = false; // Reset calculation flag when values are edited
-    }
-
-    // Add event listeners to input elements to call the onValuesEdited function
-    document.getElementById('formula_para1_hr').addEventListener('input', onValuesEdited);
-    document.getElementById('formula_para1_min').addEventListener('input', onValuesEdited);
-    document.getElementById('formula_para1_sec').addEventListener('input', onValuesEdited);
-    document.getElementById('total_admission').addEventListener('input', onValuesEdited);
-
-    // Function to check if values have been edited before form submission
-    function checkValuesBeforeSubmit() {
-        if (valuesEdited && !calculationDone) {
-            alert('Please calculate before saving');
-            event.preventDefault();
-            return false;
-        }
-        return true;
-    }
-
-
-    // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
-
-        if (checkValuesBeforeSubmit()) {
-            // Proceed with save action
-            console.log('Data saved successfully.');
-            // You can use AJAX or form submission here
-        }
-    });
-
-    // Add event listener to the calculate button
-    document.querySelector('button[onclick="calculateTime()"]').addEventListener('click', calculateTime);
-
+    // Auto calculation when any input changes
     function calculateTime() {
         var hr = parseInt(document.getElementById('formula_para1_hr').value) || 0;
         var min = parseInt(document.getElementById('formula_para1_min').value) || 0;
         var sec = parseInt(document.getElementById('formula_para1_sec').value) || 0;
 
-        // Update hidden inputs with the new values
-        document.querySelector('input[name="initial_assessment_hr"]').value = hr;
-        document.querySelector('input[name="initial_assessment_min"]').value = min;
-        document.querySelector('input[name="initial_assessment_sec"]').value = sec;
+        // Update hidden inputs
+        document.getElementsByName('initial_assessment_hr')[0].value = hr;
+        document.getElementsByName('initial_assessment_min')[0].value = min;
+        document.getElementsByName('initial_assessment_sec')[0].value = sec;
 
-
-        // Format hr, min, and sec into the desired string format
-        var timeString = `${hr}:${('0' + min).slice(-2)}:${('0' + sec).slice(-2)}`;
-
-        // Set the formatted time value to the hidden input field
-        document.getElementById('formattedTime').value = timeString;
-
-
-        var totalAdmissions = parseInt(document.getElementById('total_admission').value);
-
-        var totalSeconds = (hr * 3600) + (min * 60) + sec;
-
-        var averageSeconds = totalSeconds / totalAdmissions;
-
-        var avgHours = Math.floor(averageSeconds / 3600);
-        var remainingSeconds = averageSeconds % 3600;
-        var avgMinutes = Math.floor(remainingSeconds / 60);
-        var avgSeconds = Math.floor(remainingSeconds % 60);
-
-        document.getElementById('calculatedResult').value = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
-        calculationDone = true;
-
-
+        calculationDone = true; // mark as completed
     }
+
+    // INPUT listeners
+    document.getElementById('formula_para1_hr').addEventListener('input', calculateTime);
+    document.getElementById('formula_para1_min').addEventListener('input', calculateTime);
+    document.getElementById('formula_para1_sec').addEventListener('input', calculateTime);
+
+    // SAVE button validation
+    document.getElementById('saveButton').addEventListener('click', function(event) {
+        if (!calculationDone) {
+            alert("Please change at least one value (hr/min/sec) before saving.");
+            event.preventDefault();
+            return false;
+        }
+    });
 </script>

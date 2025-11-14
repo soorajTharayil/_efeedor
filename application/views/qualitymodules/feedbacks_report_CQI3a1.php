@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-										// echo '<pre>';
-										// print_r($r);
-										// echo '</pre>';
-										// exit;
+									// echo '<pre>';
+									// print_r($r);
+									// echo '</pre>';
+									// exit;
 
 
 								?>
@@ -407,15 +407,32 @@
 <script>
 	function downloadChartImage() {
 		const canvas = document.getElementById('lineChart');
-		const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+		const padding = 20; // add margin around the chart (in pixels)
 
-		// Create a temporary link element
+		// Create an offscreen canvas larger than the chart
+		const tempCanvas = document.createElement('canvas');
+		tempCanvas.width = canvas.width + padding * 2;
+		tempCanvas.height = canvas.height + padding * 2;
+		const tempContext = tempCanvas.getContext('2d');
+
+		// Fill background with white
+		tempContext.fillStyle = '#FFFFFF';
+		tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+		// Draw original chart with padding offset
+		tempContext.drawImage(canvas, padding, padding);
+
+		// Convert the final image
+		const image = tempCanvas.toDataURL('image/png');
+
+		// Create a temporary link element to trigger download
 		const link = document.createElement('a');
 		link.href = image;
-		link.download = 'Average Time for initial assessment of in-patients in MRD (ICU).png'; // Name of downloaded file
-		link.click(); // Trigger download
+		link.download = 'Average Time for initial assessment of in-patients in MRD (ICU).png';
+		link.click();
 	}
 </script>
+
 
 <style>
 	.panel-body {

@@ -102,7 +102,7 @@ require_once 'quality_tables.php';
                         <div class="panel-body" style="height: 100px; padding-top:0px;">
                             <div class="statistic-box" style="padding-top: 40px;">
                                 <div class="small" style="font-size: 20px;">
-                                    Average Time for initial assessment of in-patients (Doctors)- (MRI WARD)
+                                    Average Time for initial assessment of in-patients (Doctors)- (MRD WARD)
                                     <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
                                         <i class="0" aria-hidden="true"></i>
                                     </a>
@@ -2938,7 +2938,7 @@ require_once 'quality_tables.php';
 
     <?php endif; ?>
 
-    <?php if ($hasLabServiceKPIs = (isfeature_active('QUALITY-KPI10') || isfeature_active('QUALITY-KPI23') || isfeature_active('QUALITY-KPI24') || isfeature_active('QUALITY-KPI25') || isfeature_active('QUALITY-KPI26') || isfeature_active('QUALITY-KPI33') || isfeature_active('QUALITY-KPI34') || isfeature_active('QUALITY-KPI35') || isfeature_active('QUALITY-KPI205') || isfeature_active('QUALITY-KPI209') || isfeature_active('QUALITY-KPI272') || isfeature_active('QUALITY-KPI273') || isfeature_active('QUALITY-KPI274') || isfeature_active('QUALITY-KPI275') || isfeature_active('QUALITY-KPI276') || isfeature_active('QUALITY-KPI277') || isfeature_active('QUALITY-KPI288'))): ?>
+    <?php if ($hasLabServiceKPIs = (isfeature_active('QUALITY-KPI10') || isfeature_active('QUALITY-KPI23') || isfeature_active('QUALITY-KPI24') || isfeature_active('QUALITY-KPI25') || isfeature_active('QUALITY-KPI26') || isfeature_active('QUALITY-KPI33') || isfeature_active('QUALITY-KPI34') || isfeature_active('QUALITY-KPI35') || isfeature_active('QUALITY-KPI205') || isfeature_active('QUALITY-KPI209') || isfeature_active('QUALITY-KPI272') || isfeature_active('QUALITY-KPI273') || isfeature_active('QUALITY-KPI274') || isfeature_active('QUALITY-KPI275') || isfeature_active('QUALITY-KPI276') || isfeature_active('QUALITY-KPI277'))): ?>
 
         <div class="row">
             <div class="col-12">
@@ -3341,31 +3341,7 @@ require_once 'quality_tables.php';
                     </div>
                 <?php } ?>
 
-                <?php if (isfeature_active('QUALITY-KPI288') === true) { ?>
-                    <?php
-                    $table_feedback_KPI289 = 'bf_feedback_CQI4h43';
-                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI289, $sorttime, $setup);
-                    ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
-                        style="margin-top: 0px;"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h43; ?>'"
-                        data-title="Quality of patient transportation by ambulance (Out-sourced) (Lab Service)">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 40px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Quality of patient transportation by ambulance (Out-sourced) (Lab Service)
-                                        <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
-                                            <i class="0" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4h43; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                <?php } ?>
+                
             </div>
         </div>
 
@@ -5275,7 +5251,7 @@ require_once 'quality_tables.php';
 
 
 
-    <?php if ($hasInfectionControlKPIs = (isfeature_active('QUALITY-KPI74') || isfeature_active('QUALITY-KPI75') || isfeature_active('QUALITY-KPI76') || isfeature_active('QUALITY-KPI77') || isfeature_active('QUALITY-KPI93') || isfeature_active('QUALITY-KPI115') || isfeature_active('QUALITY-KPI131') || isfeature_active('QUALITY-KPI169') || isfeature_active('QUALITY-KPI170') || isfeature_active('QUALITY-KPI173') || isfeature_active('QUALITY-KPI174') || isfeature_active('QUALITY-KPI184') || isfeature_active('QUALITY-KPI185') || isfeature_active('QUALITY-KPI186') || isfeature_active('QUALITY-KPI215') || isfeature_active('QUALITY-KPI218') || isfeature_active('QUALITY-KPI219') || isfeature_active('QUALITY-KPI220') || isfeature_active('QUALITY-KPI318') || isfeature_active('QUALITY-KPI319') || isfeature_active('QUALITY-KPI320') || isfeature_active('QUALITY-KPI321') || isfeature_active('QUALITY-KPI322') || isfeature_active('QUALITY-KPI323') || isfeature_active('QUALITY-KPI324') || isfeature_active('QUALITY-KPI325') || isfeature_active('QUALITY-KPI326') || isfeature_active('QUALITY-KPI327') || isfeature_active('QUALITY-KPI328') || isfeature_active('QUALITY-KPI329') || isfeature_active('QUALITY-KPI330'))): ?>
+    <?php if ($hasInfectionControlKPIs = (isfeature_active('QUALITY-KPI74') || isfeature_active('QUALITY-KPI75') || isfeature_active('QUALITY-KPI76') || isfeature_active('QUALITY-KPI77') || isfeature_active('QUALITY-KPI115') || isfeature_active('QUALITY-KPI131') || isfeature_active('QUALITY-KPI169') || isfeature_active('QUALITY-KPI170') || isfeature_active('QUALITY-KPI173') || isfeature_active('QUALITY-KPI174') || isfeature_active('QUALITY-KPI184') || isfeature_active('QUALITY-KPI185') || isfeature_active('QUALITY-KPI186') || isfeature_active('QUALITY-KPI215') || isfeature_active('QUALITY-KPI218') || isfeature_active('QUALITY-KPI219') || isfeature_active('QUALITY-KPI220') || isfeature_active('QUALITY-KPI318') || isfeature_active('QUALITY-KPI319') || isfeature_active('QUALITY-KPI320') || isfeature_active('QUALITY-KPI321') || isfeature_active('QUALITY-KPI322') || isfeature_active('QUALITY-KPI323') || isfeature_active('QUALITY-KPI324') || isfeature_active('QUALITY-KPI325') || isfeature_active('QUALITY-KPI326') || isfeature_active('QUALITY-KPI327') || isfeature_active('QUALITY-KPI328') || isfeature_active('QUALITY-KPI329') || isfeature_active('QUALITY-KPI330'))): ?>
 
         <div class="row">
             <div class="col-12">
@@ -5403,25 +5379,25 @@ require_once 'quality_tables.php';
                         </div>
                     </div>
                 <?php } ?>
-                <?php if (isfeature_active('QUALITY-KPI93') === true) { ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI3j5; ?>'"
-                        data-title="Number of missed hand hygiene opportunities (Infection Control - Nursing)">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 44px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Number of missed hand hygiene opportunities (Infection Control - Nursing)
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI3j5; ?>"
-                                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+                <!--<?php if (isfeature_active('QUALITY-KPI93') === true) { ?>-->
+                <!--    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"-->
+                <!--        onclick="window.location.href='<?php echo $feedbacks_report_CQI3j5; ?>'"-->
+                <!--        data-title="Number of missed hand hygiene opportunities (Infection Control - Nursing)">-->
+                <!--        <div class="panel panel-bd">-->
+                <!--            <div class="panel-body" style="height: 100px; padding-top:0px;">-->
+                <!--                <div class="statistic-box" style="padding-top: 44px;">-->
+                <!--                    <div class="small" style="font-size: 20px;">-->
+                <!--                        Number of missed hand hygiene opportunities (Infection Control - Nursing)-->
+                <!--                    </div>-->
+                <!--                    <a href="<?php echo $feedbacks_report_CQI3j5; ?>"-->
+                <!--                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">-->
+                <!--                        Explore-->
+                <!--                    </a>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </div>-->
+                <!--<?php } ?>-->
                 <?php if (isfeature_active('QUALITY-KPI115') === true) { ?>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
                         onclick="window.location.href='<?php echo $feedbacks_report_CQI3j27; ?>'"
@@ -5994,7 +5970,7 @@ require_once 'quality_tables.php';
     <?php endif; ?>
 
 
-    <?php if ($hasHousekeepingKPIs = (isfeature_active('QUALITY-KPI79') || isfeature_active('QUALITY-KPI280') || isfeature_active('QUALITY-KPI281') || isfeature_active('QUALITY-KPI282') || isfeature_active('QUALITY-KPI283') || isfeature_active('QUALITY-KPI285') || isfeature_active('QUALITY-KPI292') || isfeature_active('QUALITY-KPI293') || isfeature_active('QUALITY-KPI335') || isfeature_active('QUALITY-KPI336') || isfeature_active('QUALITY-KPI337') || isfeature_active('QUALITY-KPI339') || isfeature_active('QUALITY-KPI341') || isfeature_active('QUALITY-KPI342') || isfeature_active('QUALITY-KPI343') || isfeature_active('QUALITY-KPI344') || isfeature_active('QUALITY-KPI345'))): ?>
+    <?php if ($hasHousekeepingKPIs = (isfeature_active('QUALITY-KPI79') || isfeature_active('QUALITY-KPI280') || isfeature_active('QUALITY-KPI281') || isfeature_active('QUALITY-KPI282') || isfeature_active('QUALITY-KPI283') || isfeature_active('QUALITY-KPI285') || isfeature_active('QUALITY-KPI292') || isfeature_active('QUALITY-KPI293') || isfeature_active('QUALITY-KPI335') || isfeature_active('QUALITY-KPI336') || isfeature_active('QUALITY-KPI337') || isfeature_active('QUALITY-KPI339') || isfeature_active('QUALITY-KPI341') || isfeature_active('QUALITY-KPI342') || isfeature_active('QUALITY-KPI344') || isfeature_active('QUALITY-KPI345'))): ?>
 
         <div class="row">
             <div class="col-12">
@@ -6276,25 +6252,7 @@ require_once 'quality_tables.php';
                     </div>
                 <?php } ?>
 
-                <?php if (isfeature_active('QUALITY-KPI343') === true) { ?>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
-                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4i12; ?>'"
-                        data-title="Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) ">
-                        <div class="panel panel-bd">
-                            <div class="panel-body" style="height: 100px; padding-top:0px;">
-                                <div class="statistic-box" style="padding-top: 44px;">
-                                    <div class="small" style="font-size: 20px;">
-                                        Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) 
-                                    </div>
-                                    <a href="<?php echo $feedbacks_report_CQI4i12; ?>"
-                                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
-                                        Explore
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
+                
 
                 <?php if (isfeature_active('QUALITY-KPI344') === true) { ?>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
@@ -6706,7 +6664,7 @@ require_once 'quality_tables.php';
     <?php endif; ?>
 
 
-    <?php if ($hasSecuritySafetyKPIs = (isfeature_active('QUALITY-KPI120') || isfeature_active('QUALITY-KPI121') || isfeature_active('QUALITY-KPI122') || isfeature_active('QUALITY-KPI130') || isfeature_active('QUALITY-KPI132') || isfeature_active('QUALITY-KPI271') || isfeature_active('QUALITY-KPI297'))): ?>
+    <?php if ($hasSecuritySafetyKPIs = (isfeature_active('QUALITY-KPI120') || isfeature_active('QUALITY-KPI121') || isfeature_active('QUALITY-KPI122') || isfeature_active('QUALITY-KPI130') || isfeature_active('QUALITY-KPI132') || isfeature_active('QUALITY-KPI271') || isfeature_active('QUALITY-KPI297') || isfeature_active('QUALITY-KPI288'))): ?>
 
         <div class="row">
             <div class="col-12">
@@ -6848,12 +6806,37 @@ require_once 'quality_tables.php';
                         </div>
                     </div>
                 <?php } ?>
+                <?php if (isfeature_active('QUALITY-KPI288') === true) { ?>
+                    <?php
+                    $table_feedback_KPI289 = 'bf_feedback_CQI4h43';
+                    $ip_feedbacks_count1 = $this->quality_model->patient_and_feedback_quality($table_feedback_KPI289, $sorttime, $setup);
+                    ?>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                        style="margin-top: 0px;"
+                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4h43; ?>'"
+                        data-title="Quality of patient transportation by ambulance (Out-sourced)">
+                        <div class="panel panel-bd">
+                            <div class="panel-body" style="height: 100px; padding-top:0px;">
+                                <div class="statistic-box" style="padding-top: 40px;">
+                                    <div class="small" style="font-size: 20px;">
+                                        Quality of patient transportation by ambulance (Out-sourced)
+                                        <a href="javascript:void()" data-toggle="tooltip" title="<?php echo $initial_assesment_info_tooltip; ?>">
+                                            <i class="0" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <a href="<?php echo $feedbacks_report_CQI4h43; ?>" style="float: right; font-size: 17px; margin-top: 7px; margin-bottom: 10px; margin-right: 12px">Explore</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php } ?>
             </div>
         </div>
 
     <?php endif; ?>
 
-    <?php if ($hasPharmacyKPIs = (isfeature_active('QUALITY-KPI123') || isfeature_active('QUALITY-KPI124') || isfeature_active('QUALITY-KPI125') || isfeature_active('QUALITY-KPI189') || isfeature_active('QUALITY-KPI255') || isfeature_active('QUALITY-KPI256'))): ?>
+    <?php if ($hasPharmacyKPIs = (isfeature_active('QUALITY-KPI123') || isfeature_active('QUALITY-KPI124') || isfeature_active('QUALITY-KPI125') || isfeature_active('QUALITY-KPI189') || isfeature_active('QUALITY-KPI255') || isfeature_active('QUALITY-KPI256') || isfeature_active('QUALITY-KPI370'))): ?>
 
 
         <div class="row">
@@ -6968,6 +6951,25 @@ require_once 'quality_tables.php';
                                         TAT for STAT medicine (Pharmacy)
                                     </div>
                                     <a href="<?php echo $feedbacks_report_CQI4h11; ?>"
+                                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
+                                        Explore
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                <?php if (isfeature_active('QUALITY-KPI370') === true) { ?>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4j23; ?>'"
+                        data-title="Percentage of OP Medication dispensed within less than 15 mints">
+                        <div class="panel panel-bd">
+                            <div class="panel-body" style="height: 100px; padding-top:0px;">
+                                <div class="statistic-box" style="padding-top: 44px;">
+                                    <div class="small" style="font-size: 20px;">
+                                        Percentage of OP Medication dispensed within less than 15 mints
+                                    </div>
+                                    <a href="<?php echo $feedbacks_report_CQI4j23; ?>"
                                         style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
                                         Explore
                                     </a>
@@ -8543,7 +8545,7 @@ require_once 'quality_tables.php';
 
     <?php endif; ?>
 
-    <?php if ($hasFBKPIs = (isfeature_active('QUALITY-KPI289') || isfeature_active('QUALITY-KPI290') || isfeature_active('QUALITY-KPI296'))): ?>
+    <?php if ($hasFBKPIs = (isfeature_active('QUALITY-KPI289') || isfeature_active('QUALITY-KPI290') || isfeature_active('QUALITY-KPI296') || isfeature_active('QUALITY-KPI343'))): ?>
 
         <div class="row">
             <div class="col-12">
@@ -8622,6 +8624,26 @@ require_once 'quality_tables.php';
                         </div>
                     </div>
                 <?php } ?>
+                <?php if (isfeature_active('QUALITY-KPI343') === true) { ?>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12 kpi-card"
+                        onclick="window.location.href='<?php echo $feedbacks_report_CQI4i12; ?>'"
+                        data-title="Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) ">
+                        <div class="panel panel-bd">
+                            <div class="panel-body" style="height: 100px; padding-top:0px;">
+                                <div class="statistic-box" style="padding-top: 44px;">
+                                    <div class="small" style="font-size: 20px;">
+                                        Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) 
+                                    </div>
+                                    <a href="<?php echo $feedbacks_report_CQI4i12; ?>"
+                                        style="float:right; font-size:17px; margin-top:7px; margin-bottom:10px; margin-right:12px;">
+                                        Explore
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+                
 
             </div>
         </div>

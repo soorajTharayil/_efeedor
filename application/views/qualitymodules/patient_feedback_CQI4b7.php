@@ -76,10 +76,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -357,7 +370,24 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
+
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
 
 						// Create a temporary link element
 						const link = document.createElement('a');

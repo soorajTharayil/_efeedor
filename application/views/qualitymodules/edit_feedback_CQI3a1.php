@@ -6,7 +6,12 @@ $results = $query->result();
 // print_r($results);
 $row = $results[0];
 $param = json_decode($row->dataset, true);
+// echo '<pre>';
+// print_r($param);
+// echo '</pre>';
+// exit;
 ?>
+
 
 
 
@@ -62,48 +67,54 @@ $param = json_decode($row->dataset, true);
                             <td><b>Sum of time taken for assessment in patients </b></td>
                             <td>
                                 <div style="display: flex; flex-direction: row; align-items: center; width: 100%;">
-                                    <span class="has-float-label" style="display: flex; align-items: center; ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>" oninput="restrictToNumerals(event); calculateTime();" type="number" id="formula_para1_hr" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                                    <span class="has-float-label" style="display: flex; align-items: center;">
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>"
+                                            oninput="restrictToNumerals(event);"
+                                            type="number" id="formula_para1_hr"
+                                            style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                                         <input class="form-control" style="display:none" name="initial_assessment_hr" value="<?php echo $param['initial_assessment_hr']; ?>" />
                                         <input class="form-control" style="display:none" name="initial_assessment_min" value="<?php echo $param['initial_assessment_min']; ?>" />
                                         <input class="form-control" style="display:none" name="initial_assessment_sec" value="<?php echo $param['initial_assessment_sec']; ?>" />
-                                        <input class="form-control" style="display:none" name="name" value="<?php echo $param['name']; ?>" />
-                                        <input class="form-control" style="display:none" name="patientid" value="<?php echo $param['patientid']; ?>" />
-                                        <input class="form-control" style="display:none" name="contactnumber" value="<?php echo $param['contactnumber']; ?>" />
-                                        <input class="form-control" style="display:none" name="email" value="<?php echo $param['email']; ?>" />
                                         <span style="margin-left: 4px; margin-right: 9px;">hr </span>
-                                        <label for="para1"></label>
                                     </span>
-                                    <span class="has-float-label" style="display: flex; align-items: center;  ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_min']; ?>" oninput="restrictToNumerals(event); calculateTime();" type="number" id="formula_para1_min" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                                    <span class="has-float-label" style="display: flex; align-items: center;">
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_min']; ?>"
+                                            oninput="restrictToNumerals(event);"
+                                            type="number" id="formula_para1_min"
+                                            style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                                         <span style="margin-left: 4px; margin-right: 9px;">min </span>
-                                        <label for="para1"></label>
                                     </span>
-                                    <span class="has-float-label" style="display: flex; align-items: center; ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_sec']; ?>" oninput="restrictToNumerals(event); calculateTime();" type="number" id="formula_para1_sec" style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
+                                    <span class="has-float-label" style="display: flex; align-items: center;">
+                                        <input class="form-control" value="<?php echo $param['initial_assessment_sec']; ?>"
+                                            oninput="restrictToNumerals(event);"
+                                            type="number" id="formula_para1_sec"
+                                            style="padding-top: 2px;padding-left: 6px; border: 1px solid grey;margin-top:9px;width: 90%;" />
                                         <span style="margin-left: 4px;">sec</span>
-                                        <label for="para1"></label>
                                     </span>
                                 </div>
+                                <!-- Hidden input to store formatted time -->
+                                <input type="hidden" name="time_taken_initial_assessment" id="formattedTime" value="<?php echo $param['time_taken_initial_assessment']; ?>" />
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Total number of in-patients</b></td>
                             <td>
                                 <input class="form-control" type="text" id="total_admission" name="total_admission" value="<?php echo $param['total_admission']; ?>">
                                 <br>
                                 <button type="button" class="btn btn-primary" onclick="calculateTime()">
-                                    <input type="hidden" id="formattedTime" name="formattedTime" value="">
                                     Compute KPI
                                 </button>
                             </td>
                         </tr>
+
                         <tr>
                             <td><b>Avg.Time for initial assessment of in-patients (Doctors)- (MRD-ICU) is:</b></td>
                             <td>
                                 <input class="form-control" type="text" id="calculatedResult" name="calculatedResult" value="<?php echo $param['calculatedResult']; ?>">
                             </td>
                         </tr>
+
 
                         <tr>
                             <td><b>Bench Mark Time</b></td>
@@ -256,78 +267,124 @@ $param = json_decode($row->dataset, true);
 </div>
 
 <script>
-    // Initialize flags to track if values have been edited and if calculation is done
+    // Flags to track edits and calculation
     var valuesEdited = false;
     var calculationDone = false;
 
-    // Function to call when values are edited
+    // Called when user edits any input
     function onValuesEdited() {
         valuesEdited = true;
-        calculationDone = false; // Reset calculation flag when values are edited
+        calculationDone = false;
     }
 
-    // Add event listeners to input elements to call the onValuesEdited function
+    // Add event listeners for edits
     document.getElementById('formula_para1_hr').addEventListener('input', onValuesEdited);
     document.getElementById('formula_para1_min').addEventListener('input', onValuesEdited);
     document.getElementById('formula_para1_sec').addEventListener('input', onValuesEdited);
     document.getElementById('total_admission').addEventListener('input', onValuesEdited);
 
-    // Function to check if values have been edited before form submission
-    function checkValuesBeforeSubmit() {
+    // Check before saving
+    function checkValuesBeforeSubmit(event) {
         if (valuesEdited && !calculationDone) {
             alert('Please calculate before saving');
-            event.preventDefault();
+            event.preventDefault(); // stop form submission
             return false;
         }
         return true;
     }
 
-
-    // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
-
-        if (checkValuesBeforeSubmit()) {
-            // Proceed with save action
+    // Save button listener
+    document.getElementById('saveButton').addEventListener('click', function(event) {
+        if (checkValuesBeforeSubmit(event)) {
             console.log('Data saved successfully.');
-            // You can use AJAX or form submission here
+            // Submit form or AJAX here
         }
     });
 
-    // Add event listener to the calculate button
-    document.querySelector('button[onclick="calculateTime()"]').addEventListener('click', calculateTime);
 
+
+
+    // Time related Calculation function
     function calculateTime() {
-        var hr = parseInt(document.getElementById('formula_para1_hr').value) || 0;
-        var min = parseInt(document.getElementById('formula_para1_min').value) || 0;
-        var sec = parseInt(document.getElementById('formula_para1_sec').value) || 0;
 
-        // Update hidden inputs with the new values
+        // Get numerator values
+        var hr = document.getElementById('formula_para1_hr').value.trim();
+        var min = document.getElementById('formula_para1_min').value.trim();
+        var sec = document.getElementById('formula_para1_sec').value.trim();
+
+        // Get denominator value
+        var totalAdmissions = document.getElementById('total_admission').value.trim();
+
+        // ⭐ NUMERATOR VALIDATION (All empty)
+        if ((hr === "" || isNaN(hr)) &&
+            (min === "" || isNaN(min)) &&
+            (sec === "" || isNaN(sec))) {
+
+            alert("Please enter Sum of time taken for initial assessment of in-patients in MRD-ICU");
+            return; // stop calculation
+        }
+
+        // ⭐ DENOMINATOR VALIDATION
+        if (totalAdmissions === "" || isNaN(totalAdmissions)) {
+            alert("Please enter Total number of in-patients");
+            return; // stop calculation
+        }
+
+        // Convert values (empty values become 0)
+        hr = parseInt(hr) || 0;
+        min = parseInt(min) || 0;
+        sec = parseInt(sec) || 0;
+        totalAdmissions = parseInt(totalAdmissions);
+
+        // Update hidden fields
         document.querySelector('input[name="initial_assessment_hr"]').value = hr;
         document.querySelector('input[name="initial_assessment_min"]').value = min;
         document.querySelector('input[name="initial_assessment_sec"]').value = sec;
 
-
-        // Format hr, min, and sec into the desired string format
-        var timeString = `${hr}:${('0' + min).slice(-2)}:${('0' + sec).slice(-2)}`;
-
-        // Set the formatted time value to the hidden input field
+        // Format time
+        var timeString = `${('0'+hr).slice(-2)}:${('0'+min).slice(-2)}:${('0'+sec).slice(-2)}`;
         document.getElementById('formattedTime').value = timeString;
 
-
-        var totalAdmissions = parseInt(document.getElementById('total_admission').value);
-
-        var totalSeconds = (hr * 3600) + (min * 60) + sec;
-
-        var averageSeconds = totalSeconds / totalAdmissions;
+        // Calculate average per admission
+        var totalSeconds = hr * 3600 + min * 60 + sec;
+        var averageSeconds = totalAdmissions === 0 ? 0 : totalSeconds / totalAdmissions;
 
         var avgHours = Math.floor(averageSeconds / 3600);
         var remainingSeconds = averageSeconds % 3600;
         var avgMinutes = Math.floor(remainingSeconds / 60);
         var avgSeconds = Math.floor(remainingSeconds % 60);
 
-        document.getElementById('calculatedResult').value = `${avgHours}:${('0' + avgMinutes).slice(-2)}:${('0' + avgSeconds).slice(-2)}`;
+        document.getElementById('calculatedResult').value =
+            `${('0'+avgHours).slice(-2)}:${('0'+avgMinutes).slice(-2)}:${('0'+avgSeconds).slice(-2)}`;
         calculationDone = true;
+        valuesEdited = false;
+    }
 
 
+
+
+    // Time related Calculation function end
+
+
+
+
+    function restrictToNumerals(event) {
+        const inputElement = event.target;
+        let currentValue = inputElement.value;
+
+        // Allow only digits and a single decimal point
+        let filteredValue = currentValue
+            .replace(/[^0-9.]/g, '') // Remove anything except digits and '.'
+            .replace(/(\..*?)\./g, '$1'); // Keep only the first '.'
+
+        // Prevent leading zeros before decimal (e.g., 00.5 → 0.5)
+        if (filteredValue.startsWith('00')) {
+            filteredValue = filteredValue.replace(/^0+/, '0');
+        }
+
+        // Update only if changed
+        if (currentValue !== filteredValue) {
+            inputElement.value = filteredValue;
+        }
     }
 </script>

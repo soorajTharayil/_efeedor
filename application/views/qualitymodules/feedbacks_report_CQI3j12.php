@@ -13,9 +13,9 @@
 	$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
 	$days = $dates['days'];
 	/* END DATE AND CALENDER */
-	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI3j16?id=');
+	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI3j12?id=');
 
-	$table_feedback_2PSQ3a = 'bf_feedback_CQI3j16';
+	$table_feedback_2PSQ3a = 'bf_feedback_CQI3j12';
 	$table_patients_1PSQ3a = 'bf_patients';
 	$desc_1PSQ3a = 'desc';
 	$sorttime = 'asc';
@@ -52,7 +52,7 @@
 						<div class="btn-group">
 							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
 								title="Download detailed KPI report"
-								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3j16_report' ?>">
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3j12_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>

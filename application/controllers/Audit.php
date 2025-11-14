@@ -16021,21 +16021,34 @@ class Audit extends CI_Controller
             $header[$j++] = 'Attended Doctor';
             $header[$j++] = 'Admission Date & Time';
             $header[$j++] = 'Discharge Date & Time';
-            $header[$j++] = 'Is the plan of care documented?';
-            $header[$j++] = 'Is the admitting diagnosis documented?';
-            $header[$j++] = 'Are physical examination findings available?';
-            $header[$j++] = 'Are present complaints documented?';
-            $header[$j++] = 'Is the patients history recorded?';
-            $header[$j++] = 'Is the discharge plan documented?';
-            $header[$j++] = 'Is patient-focused evaluation completed?';
-            $header[$j++] = 'Is the patients medication history documented?';
-            $header[$j++] = 'Are the patients needs assessed and documented?';
-            $header[$j++] = 'Is pain assessment recorded?';
-            $header[$j++] = 'Is vulnerability status assessed and documented?';
-            $header[$j++] = 'Is fall-risk assessment completed?';
-            $header[$j++] = 'Is the nursing care plan available?';
-            $header[$j++] = 'Is the assessment for suicide and self-harm completed?';
-            $header[$j++] = 'Is nutritional assessment documented?';
+            $header[$j++] = 'Is the plan of care available?';
+            $header[$j++] = 'Is the admitting diagnosis recorded?';
+            $header[$j++] = 'Are physical findings available?';
+            $header[$j++] = 'Are present complaint details available?';
+            $header[$j++] = 'Are history details available?';
+            $header[$j++] = 'Is the plan for discharge available?';
+            $header[$j++] = 'Are vitals recorded?';
+            $header[$j++] = 'Is ABC assessment available?';
+            $header[$j++] = 'Is pain score available?';
+            $header[$j++] = 'Is functional assessment available?';
+            $header[$j++] = 'Is psychological status recorded?';
+            $header[$j++] = 'Is vulnerability status recorded?';
+            $header[$j++] = 'Is social status screening available?';
+            $header[$j++] = 'Is nutritional screening available?';
+            $header[$j++] = 'Is spiritual needs screening recorded?';
+            $header[$j++] = 'Is suicide risk screening recorded?';
+            $header[$j++] = 'Is fall risk assessment recorded?';
+            $header[$j++] = 'Is care plan available?';
+            $header[$j++] = 'Is PFE available?';
+            $header[$j++] = 'Is discharge planning recorded?';
+            $header[$j++] = 'Is nutritional assessment available?';
+            $header[$j++] = 'Is dietitian assessment done within 30 days for haemodialysis?';
+            $header[$j++] = 'Are appropriate IV fluids started within an hour?';
+            $header[$j++] = 'Is serum lactate checked?';
+            $header[$j++] = 'Are cultures taken before antibiotics?';
+            $header[$j++] = 'Are broad spectrum antibiotics started within one hour?';
+            $header[$j++] = 'Is noradrenaline started if required?';
+
 
             $header[$j++] = 'Additional comments';
 
@@ -16071,13 +16084,29 @@ class Audit extends CI_Controller
                 $dataexport[$i]['output'] = ucfirst($data['output']) . "\r\nRemarks: " . $data['output_text'];
                 $dataexport[$i]['focus'] = ucfirst($data['focus']) . "\r\nRemarks: " . $data['focus_text'];
                 $dataexport[$i]['meti'] = ucfirst($data['meti']) . "\r\nRemarks: " . $data['meti_text'];
+
                 $dataexport[$i]['diagnostic'] = ucfirst($data['diagnostic']) . "\r\nRemarks: " . $data['diagnostic_text'];
                 $dataexport[$i]['lab_results'] = ucfirst($data['lab_results']) . "\r\nRemarks: " . $data['lab_results_text'];
                 $dataexport[$i]['pending_investigation'] = ucfirst($data['pending_investigation']) . "\r\nRemarks: " . $data['pending_investigation_text'];
                 $dataexport[$i]['medicine_order'] = ucfirst($data['medicine_order']) . "\r\nRemarks: " . $data['medicine_order_text'];
+
                 $dataexport[$i]['psychological'] = ucfirst($data['psychological']) . "\r\nRemarks: " . $data['psychological_text'];
                 $dataexport[$i]['vulnerab'] = ucfirst($data['vulnerab']) . "\r\nRemarks: " . $data['vulnerab_text'];
                 $dataexport[$i]['social'] = ucfirst($data['social']) . "\r\nRemarks: " . $data['social_text'];
+                $dataexport[$i]['nutri'] = ucfirst($data['nutri']) . "\r\nRemarks: " . $data['nutri_text'];
+                $dataexport[$i]['spiritual'] = ucfirst($data['spiritual']) . "\r\nRemarks: " . $data['spiritual_text'];
+                $dataexport[$i]['suicide'] = ucfirst($data['suicide']) . "\r\nRemarks: " . $data['suicide_text'];
+                $dataexport[$i]['risk'] = ucfirst($data['risk']) . "\r\nRemarks: " . $data['risk_text'];
+                $dataexport[$i]['care'] = ucfirst($data['care']) . "\r\nRemarks: " . $data['care_text'];
+                $dataexport[$i]['pfe'] = ucfirst($data['pfe']) . "\r\nRemarks: " . $data['pfe_text'];
+                $dataexport[$i]['disch'] = ucfirst($data['disch']) . "\r\nRemarks: " . $data['disch_text'];
+
+                $dataexport[$i]['facility_communicated'] = ucfirst($data['facility_communicated']) . "\r\nRemarks: " . $data['facility_communicated_text'];
+                $dataexport[$i]['health_education'] = ucfirst($data['health_education']) . "\r\nRemarks: " . $data['health_education_text'];
+                $dataexport[$i]['remarks1'] = ucfirst($data['remarks1']) . "\r\nRemarks: " . $data['remarks1_text'];
+                $dataexport[$i]['urethral'] = ucfirst($data['urethral']) . "\r\nRemarks: " . $data['urethral_text'];
+                $dataexport[$i]['urine_sample'] = ucfirst($data['urine_sample']) . "\r\nRemarks: " . $data['urine_sample_text'];
+
 
 
                 $dataexport[$i]['dataAnalysis'] = $data['dataAnalysis'];

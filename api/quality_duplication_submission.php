@@ -423,7 +423,8 @@ $allowedTables = [
     'bf_feedback_CQI4j19',
     'bf_feedback_CQI4j20',
     'bf_feedback_CQI4j21',
-    'bf_feedback_CQI4j22'
+    'bf_feedback_CQI4j22',
+    'bf_feedback_CQI4j23'
 ];
 
 

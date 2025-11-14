@@ -13,9 +13,9 @@
 	$fdatet = date('Y-m-d 23:59:59', strtotime($fdate));
 	$days = $dates['days'];
 	/* END DATE AND CALENDER */
-	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI3a4?id=');
+	$patient_feedback_1PSQ3a = base_url($this->uri->segment(1) . '/patient_feedback_CQI4j1?id=');
 
-	$table_feedback_2PSQ3a = 'bf_feedback_CQI3a4';
+	$table_feedback_2PSQ3a = 'bf_feedback_CQI4j1';
 	$table_patients_1PSQ3a = 'bf_patients';
 	$desc_1PSQ3a = 'desc';
 	$sorttime = 'asc';
@@ -52,7 +52,7 @@
 						<div class="btn-group">
 							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
 								title="Download detailed KPI report"
-								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a4_report' ?>">
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI4j1_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -65,11 +65,11 @@
 								<th>KPI Recorded on</th>
 								<th>KPI Recorded by</th>
 
-								<th>Number of case sheets where care plan is documented (in Nos.)</th>
+								<th>Total stroke cases assessed by the physician less than 10mins (in Nos.)</th>
 
-								<th>Total number of in-patients for the month (in Nos.)</th>
+								<th>Total number of stroke patients in ED (in Nos.)</th>
 
-								<th>Percentage of Care-plan is documented for inpatients(MRD)</th>
+								<th>Door to Physician ≤10 min</th>
 
 								<th>View</th>
 

@@ -494,7 +494,8 @@ $tables = [
     'bf_feedback_CQI4j19',
     'bf_feedback_CQI4j20',
     'bf_feedback_CQI4j21',
-    'bf_feedback_CQI4j22'
+    'bf_feedback_CQI4j22',
+    'bf_feedback_CQI4j23'
 ];
 
 
@@ -703,6 +704,10 @@ if (!empty($user)) {
 
 $feature = $this->session->userdata('feature');
 
+// echo '<pre>';
+// print_r($feature);
+// exit;
+
 
 $audit_conducted_count = 0;
 $total_audits = 0;
@@ -735,6 +740,8 @@ foreach ($feature as $key => $value) {
         }
     }
 }
+
+// echo $audit_conducted_count;
 
 // ✅ Step 7: Calculate summary
 $remaining_audit = $total_audits - $audit_conducted_count;

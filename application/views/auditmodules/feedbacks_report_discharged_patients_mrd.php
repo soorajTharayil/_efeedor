@@ -155,27 +155,27 @@
 
 
 										<td>
-											<?php
-											echo isset($param->department)
-												? (is_object($param->department)
-													? ($param->department->name ?? '')
-													: $param->department)
-												: '';
-											?>
-										</td>
+    <?php 
+        echo isset($param->department)
+            ? (is_object($param->department)
+                ? ($param->department->name ?? '')
+                : $param->department)
+            : '';
+    ?>
+</td>
 
-										<td>
-											<?php
-											echo isset($param->attended_doctor)
-												? (is_object($param->attended_doctor)
-													? ($param->attended_doctor->name ?? '')
-													: $param->attended_doctor)
-												: '';
-											?>
-										</td>
+<td>
+    <?php 
+        echo isset($param->attended_doctor)
+            ? (is_object($param->attended_doctor)
+                ? ($param->attended_doctor->name ?? '')
+                : $param->attended_doctor)
+            : '';
+    ?>
+</td>
 
 
-										</td>
+										
 
 
 

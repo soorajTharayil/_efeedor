@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-									// 	echo '<pre>';
-									// 	print_r($param);
-									// 	echo '</pre>';
-									// 	exit;
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
 
 
 								?>
@@ -152,10 +152,24 @@
 
 
 										<td>
-											<?php echo $param->initial_assessment_total; ?>
+											<?php
+											$hr  = isset($param->initial_assessment_hr) ? $param->initial_assessment_hr : 0;
+											$min = isset($param->initial_assessment_min) ? $param->initial_assessment_min : 0;
+											$sec = isset($param->initial_assessment_sec) ? $param->initial_assessment_sec : 0;
+
+											// Display in hh:mm:ss format
+											echo sprintf('%02d:%02d:%02d', $hr, $min, $sec);
+											?>
 										</td>
 										<td>
-											<?php echo $param->total_admission; ?>
+										<?php
+										$hr2  = isset($param->initial_assessment_hr2) ? $param->initial_assessment_hr2 : 0;
+										$min2 = isset($param->initial_assessment_min2) ? $param->initial_assessment_min2 : 0;
+										$sec2 = isset($param->initial_assessment_sec2) ? $param->initial_assessment_sec2 : 0;
+
+										// Display in hh:mm:ss format
+										echo sprintf('%02d:%02d:%02d', $hr2, $min2, $sec2);
+										?>
 										</td>
 
 										<td>
@@ -407,7 +421,23 @@
 <script>
 	function downloadChartImage() {
 		const canvas = document.getElementById('lineChart');
-		const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+		const padding = 20; // add margin around the chart (in pixels)
+
+		// Create an offscreen canvas larger than the chart
+		const tempCanvas = document.createElement('canvas');
+		tempCanvas.width = canvas.width + padding * 2;
+		tempCanvas.height = canvas.height + padding * 2;
+		const tempContext = tempCanvas.getContext('2d');
+
+		// Fill background with white
+		tempContext.fillStyle = '#FFFFFF';
+		tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+		// Draw original chart with padding offset
+		tempContext.drawImage(canvas, padding, padding);
+
+		// Convert the final image
+		const image = tempCanvas.toDataURL('image/png');
 
 		// Create a temporary link element
 		const link = document.createElement('a');

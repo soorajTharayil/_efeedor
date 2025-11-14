@@ -3746,29 +3746,7 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI288'] == true"
-												ng-show="matchSearch('Quality of patient transportation by ambulance (Out-sourced)- (Lab Service)')">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4h43" class="card"
-																	style="text-decoration:none;">
-																	<div class="card product-card"
-																		style="margin-bottom:10px;">
-																		<div class="card-body"
-																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
-																			<p class="text">Quality of patient
-																				transportation by ambulance
-																				(Out-sourced)- (Lab Service)</p>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+
 
 											<div class="row" ng-if="hasKPIInGroup('Pulmonary Medicine')">
 												<div class="col-12">
@@ -6011,32 +5989,32 @@ header("Expires: 0");
 
 
 
-											<div class="row" ng-if="profilen['KPI93'] == true"
-												ng-show="matchSearch('Number of missed hand hygiene opportunities (Infection Control - Nursing)')">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI3j5" class="card"
-																	style="text-decoration:none;">
-																	<div class="card product-card"
-																		style="margin-bottom:10px;">
-																		<div class="card-body"
-																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color:#5c5959;font-size:36px;">
-																			</p>
-																			<p class="text">Number of missed hand
-																				hygiene opportunities (Infection Control
-																				- Nursing)</p>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+											<!--<div class="row" ng-if="profilen['KPI93'] == true"-->
+											<!--	ng-show="matchSearch('Number of missed hand hygiene opportunities (Infection Control - Nursing)')">-->
+											<!--	<div class="col-12">-->
+											<!--		<div class="card">-->
+											<!--			<div class="row">-->
+											<!--				<div class="col-12">-->
+											<!--					<a href="../CQI3j5" class="card"-->
+											<!--						style="text-decoration:none;">-->
+											<!--						<div class="card product-card"-->
+											<!--							style="margin-bottom:10px;">-->
+											<!--							<div class="card-body"-->
+											<!--								style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">-->
+											<!--								<p class="text" ng-bind-html="q.icon"-->
+											<!--									style="color:#5c5959;font-size:36px;">-->
+											<!--								</p>-->
+											<!--								<p class="text">Number of missed hand-->
+											<!--									hygiene opportunities (Infection Control-->
+											<!--									- Nursing)</p>-->
+											<!--							</div>-->
+											<!--						</div>-->
+											<!--					</a>-->
+											<!--				</div>-->
+											<!--			</div>-->
+											<!--		</div>-->
+											<!--	</div>-->
+											<!--</div>-->
 
 											<div class="row" ng-if="profilen['KPI115'] == true"
 												ng-show="matchSearch('Compliance to hand hygiene practice (New) - (Infection Control - Nursing)')">
@@ -7066,33 +7044,7 @@ header("Expires: 0");
 												</div>
 											</div>
 
-											<div class="row" ng-if="profilen['KPI343'] == true"
-												ng-show="matchSearch('Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3) (Housekeeping)')">
-												<div class="col-12">
-													<div class="card">
-														<div class="row">
-															<div class="col-12">
-																<a href="../CQI4i12" class="card"
-																	style="text-decoration:none;">
-																	<div class="card product-card"
-																		style="margin-bottom:10px;">
-																		<div class="card-body"
-																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
-																			<p class="text" ng-bind-html="q.icon"
-																				style="color:#5c5959;font-size:36px;">
-																			</p>
-																			<p class="text">Average use of Ecofriendly
-																				catering supplies in a month (carbon
-																				intensity reduction - JCI8-GHI 3)
-																				(Housekeeping)</p>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+
 
 											<div class="row" ng-if="profilen['KPI344'] == true"
 												ng-show="matchSearch('Average quantity of Medical waste disposed per month in Kgs (Clinical practices to reduce the environmental impact - JCI8-GHI 3) (Housekeeping)')">
@@ -7823,6 +7775,30 @@ header("Expires: 0");
 												</div>
 											</div>
 
+											<div class="row" ng-if="profilen['KPI288'] == true"
+												ng-show="matchSearch('Quality of patient transportation by ambulance (Out-sourced)')">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI4h43" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text">Quality of patient
+																				transportation by ambulance
+																				(Out-sourced)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
 											<div class="row" ng-if="hasKPIInGroup('Pharmacy')">
 												<div class="col-12">
 													<h4 style="margin-top: 20px; font-size: 18px; font-weight: bold;">
@@ -7980,6 +7956,30 @@ header("Expires: 0");
 																			</p>
 																			<p class="text">TAT for STAT medicine
 																				(Pharmacy)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row" ng-if="profilen['KPI370'] == true" ng-show="matchSearch('Percentage of OP Medication dispensed within less than 15 mints.')">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI4j23" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">Percentage of OP Medication dispensed within less than 15 mints.</p>
 																		</div>
 																	</div>
 																</a>
@@ -9551,6 +9551,31 @@ header("Expires: 0");
 																			<p class="text">Percentage of Wrong food
 																				Delivery for Patients &amp; Bystanders
 																				(Food and Beverage Services)</p>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row" ng-if="profilen['KPI343'] == true"
+												ng-show="matchSearch('Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3)')">
+												<div class="col-12">
+													<div class="card">
+														<div class="row">
+															<div class="col-12">
+																<a href="../CQI4i12" class="card"
+																	style="text-decoration:none;">
+																	<div class="card product-card"
+																		style="margin-bottom:10px;">
+																		<div class="card-body"
+																			style="box-shadow:0 2px 4px rgba(0,0,0,0.3);">
+																			<p class="text" ng-bind-html="q.icon"
+																				style="color:#5c5959;font-size:36px;">
+																			</p>
+																			<p class="text">Average use of Ecofriendly catering supplies in a month (carbon intensity reduction - JCI8-GHI 3)</p>
 																		</div>
 																	</div>
 																</a>

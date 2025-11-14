@@ -97,10 +97,10 @@
 
 									$param = json_decode($r->dataset);
 
-									// 	echo '<pre>';
-									// 	print_r($param);
-									// 	echo '</pre>';
-									// 	exit;
+									// echo '<pre>';
+									// print_r($param);
+									// echo '</pre>';
+									// exit;
 
 
 								?>
@@ -151,41 +151,61 @@
 
 
 
-										<td>
-											<?php echo $param->initial_assessment_total; ?>
-										</td>
-										<td>
-											<?php echo $param->total_admission; ?>
-										</td>
-
+									
 										<td>
 											<?php
-											// Benchmark time (4 hours) in seconds
-											$benchmarkSeconds = $param->benchmark * 60 * 60;
+											$hr  = isset($param->initial_assessment_hr) ? $param->initial_assessment_hr : 0;
+											$min = isset($param->initial_assessment_min) ? $param->initial_assessment_min : 0;
+											$sec = isset($param->initial_assessment_sec) ? $param->initial_assessment_sec : 0;
 
-											// Convert the calculatedResult to seconds
-											list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
-											$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
-
-											// Check if calculatedResult is less than benchmark
-											$color = ($calculatedTotalSeconds < $benchmarkSeconds) ? 'green' : 'red';
-
-											// Output the calculatedResult with appropriate color
+											// Display in hh:mm:ss format
+											echo sprintf('%02d:%02d:%02d', $hr, $min, $sec);
 											?>
-											<span style="color: <?php echo $color; ?>">
-												<?php echo $param->calculatedResult;
-												$calculated_time[round(date("m", strtotime($r->datetime))) - 1] = $param->calculatedResult;
-												?>
-											</span>
 										</td>
+									
 
-
+									
 										<td>
-											<?php echo $param->benchmark; ?>
+											<?php
+											$hr2  = isset($param->initial_assessment_hr2) ? $param->initial_assessment_hr2 : 0;
+											$min2 = isset($param->initial_assessment_min2) ? $param->initial_assessment_min2 : 0;
+											$sec2 = isset($param->initial_assessment_sec2) ? $param->initial_assessment_sec2 : 0;
+
+											// Display in hh:mm:ss format
+											echo sprintf('%02d:%02d:%02d', $hr2, $min2, $sec2);
+											?>
 										</td>
+									
 
 
-										<!-- <td>
+									<td>
+										<?php
+										// Benchmark time (4 hours) in seconds
+										$benchmarkSeconds = $param->benchmark * 60 * 60;
+
+										// Convert the calculatedResult to seconds
+										list($calculatedHours, $calculatedMinutes, $calculatedSeconds) = explode(':', $param->calculatedResult);
+										$calculatedTotalSeconds = $calculatedHours * 3600 + $calculatedMinutes * 60 + $calculatedSeconds;
+
+										// Check if calculatedResult is less than benchmark
+										$color = ($calculatedTotalSeconds < $benchmarkSeconds) ? 'green' : 'red';
+
+										// Output the calculatedResult with appropriate color
+										?>
+										<span style="color: <?php echo $color; ?>">
+											<?php echo $param->calculatedResult;
+											$calculated_time[round(date("m", strtotime($r->datetime))) - 1] = $param->calculatedResult;
+											?>
+										</span>
+									</td>
+
+
+									<td>
+										<?php echo $param->benchmark; ?>
+									</td>
+
+
+									<!-- <td>
 											<?php echo $param->dataAnalysis; ?>
 										</td>
 
@@ -197,23 +217,23 @@
 											<?php echo $param->preventiveAction; ?>
 										</td> -->
 
-										<td>
-											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
-												class="btn btn-info btn-sm"
-												style="padding: 6px 14px; font-size: 13px;">
-												View Details
-											</a>
+									<td>
+										<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>"
+											class="btn btn-info btn-sm"
+											style="padding: 6px 14px; font-size: 13px;">
+											View Details
+										</a>
 
-											<?php if (isfeature_active('DELETE-KPI') === true) { ?>
-												<a class="btn btn-sm btn-danger"
-													href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
-													onclick="return confirm('Are you sure you want to delete this KPI record?');"
-													title="Delete the KPI record"
-													style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
-													<i class="fa fa-trash" style="font-size:16px;"></i> Delete
-												</a>
-											<?php } ?>
-										</td>
+										<?php if (isfeature_active('DELETE-KPI') === true) { ?>
+											<a class="btn btn-sm btn-danger"
+												href="<?php echo base_url($this->uri->segment(1) . '/delete_kpi/' . $id . '?table=' . urlencode($table_feedback_2PSQ3a) . '&redirect=' . urlencode(current_url())); ?>"
+												onclick="return confirm('Are you sure you want to delete this KPI record?');"
+												title="Delete the KPI record"
+												style="font-size: 14px; margin-top:10px; padding: 4px 12px; width: 80px; margin-left: 15px;">
+												<i class="fa fa-trash" style="font-size:16px;"></i> Delete
+											</a>
+										<?php } ?>
+									</td>
 
 
 									</tr>
@@ -407,7 +427,23 @@
 <script>
 	function downloadChartImage() {
 		const canvas = document.getElementById('lineChart');
-		const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+		const padding = 20; // add margin around the chart (in pixels)
+
+		// Create an offscreen canvas larger than the chart
+		const tempCanvas = document.createElement('canvas');
+		tempCanvas.width = canvas.width + padding * 2;
+		tempCanvas.height = canvas.height + padding * 2;
+		const tempContext = tempCanvas.getContext('2d');
+
+		// Fill background with white
+		tempContext.fillStyle = '#FFFFFF';
+		tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+		// Draw original chart with padding offset
+		tempContext.drawImage(canvas, padding, padding);
+
+		// Convert the final image
+		const image = tempCanvas.toDataURL('image/png');
 
 		// Create a temporary link element
 		const link = document.createElement('a');

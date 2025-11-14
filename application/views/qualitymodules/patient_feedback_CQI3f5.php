@@ -34,7 +34,7 @@
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
-									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI3a1/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
+									<a class="btn btn-danger" style="margin-top:-40px;margin-right:10px;" href="<?php echo base_url($this->uri->segment(1) . "/edit_feedback_CQI3f5/$id") ?>"> <i class="fa fa-pencil" style="font-size:18px;"></i> Edit </a>
 								</div>
 							<?php } ?>
 							<div class="panel-body" style="background: #fff;">
@@ -109,10 +109,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -302,9 +315,9 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Benchmark Time', 'Avg. time for initial assessment of in-patient in MRD (ICU)'],
+							labels: ['BenchMark Time','Turn-around time for blood and blood components cross'],
 							datasets: [{
-								label: 'Benchmark Time compared with Avg. time for initial assessment of in-patient in MRD (ICU)',
+								label: 'Turn-around time for blood and blood components cross matched / reserved',
 								data: [benchmarkSeconds, calculatedSeconds],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -329,7 +342,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Avg. time for initial assessment of in-patient in MRD (ICU) for ' + monthyear,
+									text: 'Turn-around time for blood and blood components cross matched / reserved - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -425,7 +438,24 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
+
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
 
 						// Create a temporary link element
 						const link = document.createElement('a');

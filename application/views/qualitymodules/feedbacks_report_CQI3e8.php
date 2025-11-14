@@ -65,11 +65,7 @@
 								<th>KPI Recorded on</th>
 								<th>KPI Recorded by</th>
 
-								<th>Number of women having cesarean section for first time (in Nos.)</th>
-
-								<th>Total number of live birth other than cesarean (in Nos.)</th>
-
-								<th>Primary Cesarean Rate(OT)-((Nursing - OBG)</th>
+								<th>Total No of Adverse events related to implant devices reported in the month (in Nos.)</th>
 
 								<th>View</th>
 
@@ -141,12 +137,7 @@
 											<?php echo $param->initial_assessment_hr; ?>
 										</td>
 
-										<td>
-											<?php echo $param->total_admission; ?>
-										</td>
-										<td>
-											<?php echo $param->calculatedResult; ?>
-										</td>
+										
 
 										<td>
 											<a href="<?php echo $patient_feedback_1PSQ3a . $id; ?>" class="btn btn-info btn-sm"
@@ -295,7 +286,7 @@
 	function resposnsechart(callback) {
 
 		var xhr = new XMLHttpRequest();
-		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_CQI3a4"; // Replace with your API endpoint
+		var apiUrl = "http://" + domain + "/analytics_audit_quality/resposnsechart_CQI3e8"; // Replace with your API endpoint
 		xhr.open("GET", apiUrl, true);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {

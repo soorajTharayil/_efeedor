@@ -17,12 +17,12 @@
 		if (count($results) >= 1) {
 			foreach ($results as $result) {
 				$param = json_decode($result->dataset, true);
-					// echo '<pre>';
-					// print_r($param);
-					// echo '</pre>';
-					// exit;
+				// echo '<pre>';
+				// print_r($param);
+				// echo '</pre>';
+				// exit;
 
-										
+
 
 	?>
 
@@ -30,7 +30,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Percentage of Care-plan is documented for inpatients(MRD)  <?php echo $result->id; ?> </h3>
+								<h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_id_tooltip'); ?>"> <i class="fa fa-question-circle" aria-hidden="true"></i></a>Percentage of Care-plan is documented for inpatients(MRD) <?php echo $result->id; ?> </h3>
 							</div>
 							<?php if (ismodule_active('QUALITY') === true  && isfeature_active('QUALITY-EDIT-PERMISSION') === true) { ?>
 								<div class="btn-group no-print" style="float: right;">
@@ -48,9 +48,9 @@
 										<td><?php echo $param['initial_assessment_hr']; ?></td>
 									</tr>
 									<tr>
-										<td><b>Total number of in-patients for the month  </b></td>
+										<td><b>Total number of in-patients for the month </b></td>
 
-									<td><?php echo $param['total_admission']; ?></td>
+										<td><?php echo $param['total_admission']; ?></td>
 									</tr>
 									<tr>
 										<td><b>Percentage of Care-plan is documented for inpatients(MRD)</b></td>
@@ -87,10 +87,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -99,6 +112,8 @@
 											?>
 										</td>
 									</tr>
+
+
 
 
 
@@ -258,7 +273,7 @@
 						data: {
 							labels: ['Number of case sheets where care plan is documented', 'Total number of in-patients for the month'],
 							datasets: [{
-								label: 'Number of case sheets where care plan is documented compare with Total number of in-patients for the month',
+								label: 'Percentage of Care-plan is documented for inpatients',
 								data: [benchmark, calculated],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -283,7 +298,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Percentage of Care-plan is documented for inpatients  ' + monthyear,
+									text: 'Percentage of Care-plan is documented for inpatients - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -368,7 +383,24 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
+
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
 
 						// Create a temporary link element
 						const link = document.createElement('a');

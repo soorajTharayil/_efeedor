@@ -699,6 +699,7 @@
                             style="margin-left:-2px;margin-top:5px;" />
                         </span>
                       </div>
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:15px;"><b>Nurses Documentation- Initial assessment IPD</b></h6>
 
 
 
@@ -755,8 +756,7 @@
 
 
 
-                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>Nurses documentation - Initial
-                          assessment IPD:</b></h6>
+
                       <div style="margin-top: 8px; text-align: left; margin-left:-6px;">
                         <p style="font-size: 18px; margin-bottom: 6px;">{{lang.diagnostic}}</p>
 
@@ -906,8 +906,8 @@
                       </div>
 
 
-                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician
-                          documentation:</b></h6>
+                      <!-- <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician
+                          documentation:</b></h6> -->
                       <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
                         <p style="font-size: 18px; margin-bottom: 6px;">{{lang.social}}</p>
 
@@ -932,6 +932,273 @@
 
 
                       </div>
+                      <!-- nutri -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.nutri}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.nutri" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.nutri_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- spiritual -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.spiritual}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.spiritual" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.spiritual_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- suicide -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.suicide}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.suicide" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.suicide_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- risk -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.risk}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.risk" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.risk" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.risk" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.risk_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- care -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.care}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.care" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.care" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.care" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.care_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>General dietician
+                          documentation</b></h6>
+
+                      <!-- pfe -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.pfe}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pfe" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pfe" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.pfe" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.pfe_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- disch -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.disch}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.disch" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.disch" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.disch" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.disch_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- facility_communicated -->
+                      <h6 style="font-size: 18px;margin-left:-6px;margin-top:13px;"><b>Sepsis Bundle Care</b></h6>
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.facility_communicated}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.facility_communicated" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.facility_communicated" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.facility_communicated" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.facility_communicated_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- health_education -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.health_education}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.health_education" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.health_education" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.health_education" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.health_education_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- remarks1 -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.remarks1}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.remarks1" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.remarks1" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.remarks1" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.remarks1_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- urethral -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.urethral}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urethral" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urethral" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urethral" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.urethral_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
+                      <!-- urine_sample -->
+                      <div style="margin-top: 8px; text-align: left;margin-left:-6px;">
+                        <p style="font-size: 18px; margin-bottom: 6px;">{{lang.urine_sample}}</p>
+                        <div style="display: flex; gap: 20px; align-items: center; font-size: 18px;">
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urine_sample" value="yes" />
+                            <span style="margin-left: 5px;">Yes</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urine_sample" value="no" />
+                            <span style="margin-left: 5px;">No</span>
+                          </label>
+                          <label style="display: flex; align-items: center;">
+                            <input type="radio" ng-model="feedback.urine_sample" value="N/A" />
+                            <span style="margin-left: 5px;">N/A</span>
+                          </label>
+                        </div>
+                        <span class="has-float-label" style="margin-top: 5px;">
+                          <input type="text" class="form-cont" ng-model="feedback.urine_sample_text" placeholder="Remarks" style="margin-left:-2px;margin-top:5px;" />
+                        </span>
+                      </div>
+
                     </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-12"
@@ -1004,7 +1271,8 @@
 
                         <tr>
                           <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            <b>Audit Details</b></td>
+                            <b>Audit Details</b>
+                          </td>
                         </tr>
 
                         <tr>
@@ -1026,7 +1294,8 @@
 
                         <tr>
                           <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            <b>Patient Information</b></td>
+                            <b>Patient Information</b>
+                          </td>
                         </tr>
 
                         <tr>
@@ -1086,12 +1355,14 @@
 
                         <tr>
                           <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            <b>Doctors documentation - Admission note</b></td>
+                            <b>Doctors documentation - Admission note</b>
+                          </td>
                         </tr>
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.identification_details}}</td>
+                            {{lang.identification_details}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.identification_details}}</div>
                             <div style="margin-top: 5px; color: #555;">
@@ -1102,7 +1373,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.vital_signs}}</td>
+                            {{lang.vital_signs}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.vital_signs}}</div>
                             <div style="margin-top: 5px; color: #555;">
@@ -1124,7 +1396,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.complaints_communicated}}</td>
+                            {{lang.complaints_communicated}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.complaints_communicated}}</div>
                             <div style="margin-top: 5px; color: #555;">
@@ -1154,6 +1427,11 @@
                             </div>
                           </td>
                         </tr>
+                         <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Nurses documentation - Initial assessment IPD</b>
+                          </td>
+                        </tr>
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.focus}}
@@ -1176,14 +1454,12 @@
                           </td>
                         </tr>
 
-                        <tr>
-                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            <b>Nurses documentation - Initial assessment IPD</b></td>
-                        </tr>
+                       
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.diagnostic}}</td>
+                            {{lang.diagnostic}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.diagnostic}}</div>
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.diagnostic_text}}</div>
@@ -1192,7 +1468,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.lab_results}}</td>
+                            {{lang.lab_results}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.lab_results}}</div>
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.lab_results_text}}</div>
@@ -1201,7 +1478,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.pending_investigation}}</td>
+                            {{lang.pending_investigation}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.pending_investigation}}</div>
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.pending_investigation_text}}
@@ -1211,7 +1489,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.medicine_order}}</td>
+                            {{lang.medicine_order}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.medicine_order}}</div>
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.medicine_order_text}}</div>
@@ -1220,7 +1499,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.psychological}}</td>
+                            {{lang.psychological}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">
                             <div>{{feedback.psychological}}</div>
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.psychological_text}}</div>
@@ -1236,10 +1516,7 @@
                           </td>
                         </tr>
 
-                        <tr>
-                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            <b>General dietician documentation</b></td>
-                        </tr>
+                        
 
 
                         <tr>
@@ -1250,6 +1527,124 @@
                             <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.social_text}}</div>
                           </td>
                         </tr>
+                        <!-- nutri -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.nutri}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.nutri}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.nutri_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- spiritual -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.spiritual}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.spiritual}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.spiritual_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- suicide -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.suicide}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.suicide}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.suicide_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- risk -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.risk}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.risk}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.risk_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- care -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.care}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.care}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.care_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- pfe -->
+                         <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>General dietician documentation</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.pfe}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.pfe}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.pfe_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- disch -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.disch}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.disch}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.disch_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- facility_communicated -->
+                         <tr>
+                          <td colspan="2" class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
+                            <b>Sepsis Bundle Care</b>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.facility_communicated}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.facility_communicated}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.facility_communicated_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- health_education -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.health_education}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.health_education}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.health_education_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- remarks1 -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.remarks1}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.remarks1}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.remarks1_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- urethral -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.urethral}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.urethral}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.urethral_text}}</div>
+                          </td>
+                        </tr>
+
+                        <!-- urine_sample -->
+                        <tr>
+                          <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">{{lang.urine_sample}}</td>
+                          <td style="border: 1px solid #dddddd; padding: 10px;">
+                            <div>{{feedback.urine_sample}}</div>
+                            <div style="margin-top: 5px; color: #555;">Remarks: {{feedback.urine_sample_text}}</div>
+                          </td>
+                        </tr>
+
 
                         <!-- Common section for all START-->
 
@@ -1259,7 +1654,8 @@
 
                         <tr>
                           <td class="details-label" style="border: 1px solid #dddddd; padding: 10px;">
-                            {{lang.data_analysis}}</td>
+                            {{lang.data_analysis}}
+                          </td>
                           <td style="border: 1px solid #dddddd; padding: 10px;">{{feedback.dataAnalysis}}</td>
                         </tr>
 
@@ -1635,7 +2031,7 @@
     return `${currentMonth} ${currentYear}`;
   }
 
-  setTimeout(function () {
+  setTimeout(function() {
 
 
 

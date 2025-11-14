@@ -115,7 +115,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the plan of care documented?</td>
+										<td>Is the plan of Care available?</td>
 										<td>
 											<?php echo !empty($param['identification_details']) ? ucfirst(htmlspecialchars($param['identification_details'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['identification_details_text']) ? htmlspecialchars($param['identification_details_text']) : '-'; ?>
@@ -123,7 +123,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the admitting diagnosis documented?</td>
+										<td>Is the admitting diagnosis recorded?</td>
 										<td>
 											<?php echo !empty($param['vital_signs']) ? ucfirst(htmlspecialchars($param['vital_signs'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['vital_signs_text']) ? htmlspecialchars($param['vital_signs_text']) : '-'; ?>
@@ -131,7 +131,7 @@
 									</tr>
 
 									<tr>
-										<td>Are physical examination findings available?</td>
+										<td>Are Physical findings available?</td>
 										<td>
 											<?php echo !empty($param['surgery']) ? ucfirst(htmlspecialchars($param['surgery'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['surgery_text']) ? htmlspecialchars($param['surgery_text']) : '-'; ?>
@@ -139,7 +139,7 @@
 									</tr>
 
 									<tr>
-										<td>Are present complaints documented?</td>
+										<td>Are Present Complaint details available?</td>
 										<td>
 											<?php echo !empty($param['complaints_communicated']) ? ucfirst(htmlspecialchars($param['complaints_communicated'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['complaints_communicated_text']) ? htmlspecialchars($param['complaints_communicated_text']) : '-'; ?>
@@ -147,7 +147,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the patients history recorded?</td>
+										<td>Are History details available?</td>
 										<td>
 											<?php echo !empty($param['intake']) ? ucfirst(htmlspecialchars($param['intake'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['intake_text']) ? htmlspecialchars($param['intake_text']) : '-'; ?>
@@ -155,15 +155,19 @@
 									</tr>
 
 									<tr>
-										<td>Is the discharge plan documented?</td>
+										<td>Is the plan For Discharge available?</td>
 										<td>
 											<?php echo !empty($param['output']) ? ucfirst(htmlspecialchars($param['output'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['output_text']) ? htmlspecialchars($param['output_text']) : '-'; ?>
 										</td>
 									</tr>
+									<tr>
+										<th colspan="2">Nurses documentation - Initial Assessment IPD</th>
+									</tr>
+
 
 									<tr>
-										<td>Is patient-focused evaluation completed?</td>
+										<td>Are vitals recorded?</td>
 										<td>
 											<?php echo !empty($param['focus']) ? ucfirst(htmlspecialchars($param['focus'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['focus_text']) ? htmlspecialchars($param['focus_text']) : '-'; ?>
@@ -171,19 +175,16 @@
 									</tr>
 
 									<tr>
-										<td>Is the patients medication history documented?</td>
+										<td>Is ABC assessment available?</td>
 										<td>
 											<?php echo !empty($param['meti']) ? ucfirst(htmlspecialchars($param['meti'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['meti_text']) ? htmlspecialchars($param['meti_text']) : '-'; ?>
 										</td>
 									</tr>
 
-									<tr>
-										<th colspan="2">Nurses documentation - Initial Assessment IPD:</th>
-									</tr>
 
 									<tr>
-										<td>Are the patients needs assessed and documented?</td>
+										<td>Is Pain score available?</td>
 										<td>
 											<?php echo !empty($param['diagnostic']) ? ucfirst(htmlspecialchars($param['diagnostic'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['diagnostic_text']) ? htmlspecialchars($param['diagnostic_text']) : '-'; ?>
@@ -191,7 +192,7 @@
 									</tr>
 
 									<tr>
-										<td>Is pain assessment recorded?</td>
+										<td>Is function assessment available?</td>
 										<td>
 											<?php echo !empty($param['lab_results']) ? ucfirst(htmlspecialchars($param['lab_results'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['lab_results_text']) ? htmlspecialchars($param['lab_results_text']) : '-'; ?>
@@ -199,7 +200,7 @@
 									</tr>
 
 									<tr>
-										<td>Is vulnerability status assessed and documented?</td>
+										<td>Is Psychological status recorded?</td>
 										<td>
 											<?php echo !empty($param['pending_investigation']) ? ucfirst(htmlspecialchars($param['pending_investigation'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['pending_investigation_text']) ? htmlspecialchars($param['pending_investigation_text']) : '-'; ?>
@@ -207,7 +208,7 @@
 									</tr>
 
 									<tr>
-										<td>Is fall-risk assessment completed?</td>
+										<td>Is Vulnerability status recorded?</td>
 										<td>
 											<?php echo !empty($param['medicine_order']) ? ucfirst(htmlspecialchars($param['medicine_order'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['medicine_order_text']) ? htmlspecialchars($param['medicine_order_text']) : '-'; ?>
@@ -215,7 +216,7 @@
 									</tr>
 
 									<tr>
-										<td>Is the nursing care plan available?</td>
+										<td>Is Social Status screening available?</td>
 										<td>
 											<?php echo !empty($param['psychological']) ? ucfirst(htmlspecialchars($param['psychological'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['psychological_text']) ? htmlspecialchars($param['psychological_text']) : '-'; ?>
@@ -223,24 +224,115 @@
 									</tr>
 
 									<tr>
-										<td>Is the assessment for suicide and self-harm completed?</td>
+										<td>Is nutritional screening available?</td>
 										<td>
 											<?php echo !empty($param['vulnerab']) ? ucfirst(htmlspecialchars($param['vulnerab'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['vulnerab_text']) ? htmlspecialchars($param['vulnerab_text']) : '-'; ?>
 										</td>
 									</tr>
 
-									<tr>
+									<!-- <tr>
 										<th colspan="2">General dietician documentation:</th>
-									</tr>
+									</tr> -->
 
 									<tr>
-										<td>Is nutritional assessment documented?</td>
+										<td>Is spiritual needs screening recorded?</td>
 										<td>
 											<?php echo !empty($param['social']) ? ucfirst(htmlspecialchars($param['social'])) : '-'; ?><br>
 											Remarks: <?php echo !empty($param['social_text']) ? htmlspecialchars($param['social_text']) : '-'; ?>
 										</td>
 									</tr>
+									<tr>
+										<td>Is suicide risk screening recorded?</td>
+										<td>
+											<?php echo !empty($param['nutri']) ? ucfirst(htmlspecialchars($param['nutri'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['nutri_text']) ? htmlspecialchars($param['nutri_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Is fall risk assessment recorded?</td>
+										<td>
+											<?php echo !empty($param['spiritual']) ? ucfirst(htmlspecialchars($param['spiritual'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['spiritual_text']) ? htmlspecialchars($param['spiritual_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Is care plan available?</td>
+										<td>
+											<?php echo !empty($param['suicide']) ? ucfirst(htmlspecialchars($param['suicide'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['suicide_text']) ? htmlspecialchars($param['suicide_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Is PFE available?</td>
+										<td>
+											<?php echo !empty($param['risk']) ? ucfirst(htmlspecialchars($param['risk'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['risk_text']) ? htmlspecialchars($param['risk_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Is discharge planning recorded?</td>
+										<td>
+											<?php echo !empty($param['care']) ? ucfirst(htmlspecialchars($param['care'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['care_text']) ? htmlspecialchars($param['care_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">General dietician documentation</th>
+									</tr>
+									<tr>
+										<td>Is Nutritional assessment available?</td>
+										<td>
+											<?php echo !empty($param['pfe']) ? ucfirst(htmlspecialchars($param['pfe'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['pfe_text']) ? htmlspecialchars($param['pfe_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Is Dietitian assessment done within 30 days for Haemodialysis?</td>
+										<td>
+											<?php echo !empty($param['disch']) ? ucfirst(htmlspecialchars($param['disch'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['disch_text']) ? htmlspecialchars($param['disch_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<th colspan="2">Sepsis Bundle Care</th>
+									</tr>
+									<tr>
+										<td>Appropriate IV fluids started within an hour?</td>
+										<td>
+											<?php echo !empty($param['facility_communicated']) ? ucfirst(htmlspecialchars($param['facility_communicated'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['facility_communicated_text']) ? htmlspecialchars($param['facility_communicated_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Serum Lactate checked</td>
+										<td>
+											<?php echo !empty($param['health_education']) ? ucfirst(htmlspecialchars($param['health_education'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['health_education_text']) ? htmlspecialchars($param['health_education_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Cultures taken before antibiotics</td>
+										<td>
+											<?php echo !empty($param['remarks1']) ? ucfirst(htmlspecialchars($param['remarks1'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['remarks1_text']) ? htmlspecialchars($param['remarks1_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Broad spectrum antibiotics started within one hour</td>
+										<td>
+											<?php echo !empty($param['urethral']) ? ucfirst(htmlspecialchars($param['urethral'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urethral_text']) ? htmlspecialchars($param['urethral_text']) : '-'; ?>
+										</td>
+									</tr>
+									<tr>
+										<td>Noradrenaline started if required</td>
+										<td>
+											<?php echo !empty($param['urine_sample']) ? ucfirst(htmlspecialchars($param['urine_sample'])) : '-'; ?><br>
+											Remarks: <?php echo !empty($param['urine_sample_text']) ? htmlspecialchars($param['urine_sample_text']) : '-'; ?>
+										</td>
+									</tr>
+
 
 
 

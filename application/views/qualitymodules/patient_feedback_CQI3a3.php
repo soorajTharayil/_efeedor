@@ -106,10 +106,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -299,9 +312,9 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Benchmark Time', 'Avg. time for initial assessment of in-patient in MRD (WARD)'],
+							labels: ['BenchMark Time','Avg.Time for initial assessment of in-patients'],
 							datasets: [{
-								label: 'Benchmark Time compared with Avg. time for initial assessment of in-patient in MRD (WARD)',
+								label: 'Average Time for initial assessment of in-patients',
 								data: [benchmarkSeconds, calculatedSeconds],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -326,7 +339,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Avg. time for initial assessment of in-patient in MRD (WARD) for ' + monthyear,
+									text: 'Average Time for initial assessment of in-patients - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -401,7 +414,7 @@
 			</style>
 		</head>
 		<body>
-			<h3>Avg. time for initial assessment of in-patient in MRD (WARD)</h3>
+			<h3>Average Time for initial assessment of emergency patients (Doctors)</h3>
 			<img src="${dataUrl}" alt="Chart">
 		</body>
 		</html>
@@ -422,7 +435,24 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
+
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
 
 						// Create a temporary link element
 						const link = document.createElement('a');

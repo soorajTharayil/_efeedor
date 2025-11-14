@@ -52,7 +52,7 @@
 						<div class="btn-group">
 							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
 								title="Download detailed KPI report"
-								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a4_report' ?>">
+								href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3b7_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>

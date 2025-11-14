@@ -44,14 +44,32 @@
 
 									<tr>
 										<td><b>Numerator:OT utilisation time in hours(in Hrs)</b></td>
-										<td><?php echo $param->initial_assessment_total; ?></td>
+										<td>
+											<?php
+											$hr  = isset($param->initial_assessment_hr) ? $param->initial_assessment_hr : 0;
+											$min = isset($param->initial_assessment_min) ? $param->initial_assessment_min : 0;
+											$sec = isset($param->initial_assessment_sec) ? $param->initial_assessment_sec : 0;
+
+											// Display in hh:mm:ss format
+											echo sprintf('%02d:%02d:%02d', $hr, $min, $sec);
+											?>
+										</td>
 									</tr>
 									<tr>
 										<td><b>Denominator: OT resource time in hours (in No.s)</b></td>
-										<td><?php echo $param->total_admission; ?></td>
+										<td>
+											<?php
+											$hr2  = isset($param->initial_assessment_hr2) ? $param->initial_assessment_hr2 : 0;
+											$min2 = isset($param->initial_assessment_min2) ? $param->initial_assessment_min2 : 0;
+											$sec2 = isset($param->initial_assessment_sec2) ? $param->initial_assessment_sec2 : 0;
+
+											// Display in hh:mm:ss format
+											echo sprintf('%02d:%02d:%02d', $hr2, $min2, $sec2);
+											?>
+										</td>
 									</tr>
 									<tr>
-										<td><b>OT Utilisation Rate (OT)  (in Hrs)</b></td>
+										<td><b>OT Utilisation Rate (OT) (in Hrs)</b></td>
 										<td>
 											<?php
 											// Benchmark time (4 hours) in seconds
@@ -73,32 +91,32 @@
 										</td>
 									</tr>
 									<tr>
-                                        <td><b>Benchmark Time</b></td>
-                                        <td><?php echo $param->benchmark; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
-                                        <td><?php echo $param->dataAnalysis; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Corrective action</b></td>
-                                        <td><?php echo $param->correctiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>Preventive action</b></td>
-                                        <td><?php echo $param->preventiveAction; ?></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td><b>KPI recorded by</b></td>
-                                        <td>
-                                            <?php echo $param->name; ?> ,
-                                            <?php echo $param->patientid; ?>
-                                        </td>
-                                    </tr>
+										<td><b>Benchmark Time</b></td>
+										<td><?php echo $param->benchmark; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Data analysis (RCA, Reason for Variation etc.)</b></td>
+										<td><?php echo $param->dataAnalysis; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Corrective action</b></td>
+										<td><?php echo $param->correctiveAction; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>Preventive action</b></td>
+										<td><?php echo $param->preventiveAction; ?></td>
+									</tr>
+
+									<tr>
+										<td><b>KPI recorded by</b></td>
+										<td>
+											<?php echo $param->name; ?> ,
+											<?php echo $param->patientid; ?>
+										</td>
+									</tr>
 
 									<tr>
 										<td><b>KPI Recorded on</b></td>
@@ -109,10 +127,23 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+											// Convert files_name to array of arrays
+											$files = [];
+
+											if (!empty($param['files_name']) && is_array($param['files_name'])) {
+												foreach ($param['files_name'] as $file) {
+													$files[] = [
+														'url'  => $file['url'],
+														'name' => $file['name']
+													];
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -302,9 +333,9 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Benchmark Time', 'Avg. time for initial assessment of in-patient in MRD (ICU)'],
+							labels: ['OT utilisation time in hours', 'OT resource time in hours'],
 							datasets: [{
-								label: 'Benchmark Time compared with Avg. time for initial assessment of in-patient in MRD (ICU)',
+								label: 'OT Utilisation Rate',
 								data: [benchmarkSeconds, calculatedSeconds],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -329,7 +360,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Avg. time for initial assessment of in-patient in MRD (ICU) for ' + monthyear,
+									text: 'OT Utilisation Rate - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -425,7 +456,24 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
+
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
 
 						// Create a temporary link element
 						const link = document.createElement('a');

@@ -56,7 +56,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" style="text-align: right;">
 						<div class="btn-group">
-							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a7_report' ?>">
+							<a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip" title="Download detailed KPI report" href="<?php echo base_url($this->uri->segment(1)) . '/overall_CQI3a9_report' ?>">
 								<i class="fa fa-download"></i>
 							</a>
 						</div>
@@ -406,7 +406,23 @@
 <script>
 	function downloadChartImage() {
 		const canvas = document.getElementById('lineChart');
-		const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+		const padding = 20; // add margin around the chart (in pixels)
+
+		// Create an offscreen canvas larger than the chart
+		const tempCanvas = document.createElement('canvas');
+		tempCanvas.width = canvas.width + padding * 2;
+		tempCanvas.height = canvas.height + padding * 2;
+		const tempContext = tempCanvas.getContext('2d');
+
+		// Fill background with white
+		tempContext.fillStyle = '#FFFFFF';
+		tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+		// Draw original chart with padding offset
+		tempContext.drawImage(canvas, padding, padding);
+
+		// Convert the final image
+		const image = tempCanvas.toDataURL('image/png');
 
 		// Create a temporary link element
 		const link = document.createElement('a');

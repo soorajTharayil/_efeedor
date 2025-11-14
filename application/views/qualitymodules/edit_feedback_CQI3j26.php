@@ -20,7 +20,7 @@ $param = json_decode($row->dataset, true);
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3><a href="javascript:void()" data-toggle="tooltip" title="<?php echo lang_loader('ip', 'ip_discharge_feedback_tooltip'); ?>">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients-(Physical therapy and Rehabilitation Department - Physiotherapy) - <?php echo $row->id; ?></h3>
+                            <i class="fa fa-question-circle" aria-hidden="true"></i></a>&nbsp;IPSG 6 - Compliance to Fall prevention measures in Physiotherapy OP patients-(Physical therapy and Rehabilitation Department - Physiotherapy)- <?php echo $row->id; ?></h3>
                     <!-- <a class="btn btn-primary" style="background-color: #45c203;float: right;    margin-top: -30px;" href="<?php echo base_url("tickets") ?>">
                         <i class="fa fa-list"></i> Tickets Details </a> -->
                 </div>

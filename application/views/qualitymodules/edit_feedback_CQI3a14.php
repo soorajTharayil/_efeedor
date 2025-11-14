@@ -63,26 +63,41 @@ $param = json_decode($row->dataset, true);
                     <table class="table table-striped table-bordered no-footer dtr-inline collapsed">
                         <tr>
                             <td><b>Number of sepsis patients who receive care as per the hour-1 sepsis bundle</b></td>
-                            <td>
-                                <div style="display: flex; flex-direction: row; align-items: center;">
+                              <td>
+                              <div style="display: flex; flex-direction: row; align-items: center;">
                                     <span class="has-float-label" style="display: flex; align-items: center; ">
-                                        <input class="form-control" value="<?php echo $param['initial_assessment_hr']; ?>" name="initial_assessment_hr" oninput="restrictToNumerals(event); calculateErrorRate();" type="number" id="reportingErrors" style="padding-top: 2px; padding-left: 6px; margin-top:9px;" />
+                                        <input class="form-control"
+                                            value="<?php echo $param['initial_assessment_hr']; ?>"
+                                            name="initial_assessment_hr"
+                                            oninput="restrictToNumerals(event);"
+                                            type="text"
+                                            id="reportingErrors"
+                                            style="padding-top: 2px; padding-left: 6px; margin-top:9px;" />
+
                                         <span style="margin-left: 4px; margin-right: 9px;"></span>
                                         <label for="reportingErrors"></label>
                                     </span>
                                 </div>
                             </td>
+
+
                         </tr>
                         <tr>
                             <td><b>Total number of sepsis cases</b></td>
-                            <td>
-                                <input class="form-control" type="number" id="testsPerformed" name="total_admission" value="<?php echo $param['total_admission']; ?>">
+                            
+                             <td>
+                                <input class="form-control" type="number" id="testsPerformed" name="total_admission"                 oninput="restrictToNumerals(event);" value="<?php echo $param['total_admission']; ?>">
                                 <br>
-                                <button type="button" class="btn btn-primary" onclick="calculateErrorRate()">
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    onclick="calculateErrorRate(event)">
                                     <input type="hidden" id="formattedTime" name="formattedTime" value="">
                                     Compute KPI
                                 </button>
                             </td>
+
+
                         </tr>
                         <tr>
                             <td><b>Percentage of sepsis patients who receive care as per the HOUR-1 sepsis bundle(Critical Care Medicine - Medical records)</b></td>
@@ -242,8 +257,8 @@ $param = json_decode($row->dataset, true);
 
     // Function to call when values are edited
     function onValuesEdited() {
-        valuesEdited = true;
-        calculationDone = false; // Reset calculation flag when values are edited
+        valuesEdited = true; // ✅ Set true when user changes numerator or denominator
+        calculationDone = false; // ✅ Reset when user edits values
     }
 
     // Add event listeners to input elements to call the onValuesEdited function
@@ -251,7 +266,7 @@ $param = json_decode($row->dataset, true);
     document.getElementById('testsPerformed').addEventListener('input', onValuesEdited);
 
     // Function to check if values have been edited before form submission
-    function checkValuesBeforeSubmit() {
+    function checkValuesBeforeSubmit(event) {
         if (valuesEdited && !calculationDone) {
             alert('Please calculate before saving');
             event.preventDefault();
@@ -260,56 +275,96 @@ $param = json_decode($row->dataset, true);
         return true;
     }
 
-
     // Add an event listener to the save button
-    document.getElementById('saveButton').addEventListener('click', function() {
-
-        if (checkValuesBeforeSubmit()) {
-            // Proceed with save action
+    document.getElementById('saveButton').addEventListener('click', function(event) {
+        if (checkValuesBeforeSubmit(event)) {
             console.log('Data saved successfully.');
             // You can use AJAX or form submission here
         }
     });
 
     // Add event listener to the calculate button
-    document.querySelector('button[onclick="calculateErrorRate()"]').addEventListener('click', calculateErrorRate);
-
-    function calculateErrorRate() {
-        var reportingErrors = parseInt(document.getElementById('reportingErrors').value);
-
-        // Get the number of tests performed from the input field
-        var testsPerformed = parseInt(document.getElementById('testsPerformed').value);
-
-        document.querySelector('input[name="initial_assessment_hr"]').value = reportingErrors;
-        document.querySelector('input[name="total_admission"]').value = testsPerformed;
+    document.querySelector('button[onclick="calculateErrorRate()"]').addEventListener('click', function() {
+        calculateErrorRate();
+        calculationDone = true; // ✅ Mark calculation done after Compute is clicked
+        valuesEdited = false; // ✅ Reset edited flag once calculation is done
+    });
 
 
-        // Validate inputs for reporting errors and tests performed
-        if (isNaN(reportingErrors) || reportingErrors < 0) {
-            alert("Please enter the number of reporting errors.");
+    function calculateErrorRate(event) {
+        // ✅ Prevent the button click from submitting the form
+        if (event) event.preventDefault();
+
+        const numeratorField = document.getElementById('reportingErrors');
+        const denominatorField = document.getElementById('testsPerformed');
+
+        const numeratorValue = numeratorField.value.trim();
+        const denominatorValue = denominatorField.value.trim();
+
+        // ✅ If user clicked Compute and left any field empty, show alert once
+        if (numeratorValue === "") {
+            alert("Please enter Number of sepsis patients who receive care as per the hour-1 sepsis bundle");
+            numeratorField.focus();
             return;
         }
 
-        if (isNaN(testsPerformed) || testsPerformed <= 0) {
-            alert("Please enter the number of tests performed.");
+        if (denominatorValue === "") {
+            alert("Please enter Total number of sepsis cases");
+            denominatorField.focus();
             return;
         }
 
-        if (reportingErrors > testsPerformed) {
-            alert("The no. of reporting errors must be less than the no. of tests performed.");
+        const numerator = parseFloat(numeratorValue);
+        const denominator = parseFloat(denominatorValue);
+
+        if (isNaN(numerator) || numerator < 0) {
+            alert("Please enter Number of sepsis patients who receive care as per the hour-1 sepsis bundle");
+            numeratorField.focus();
             return;
         }
 
-        // Calculate the number of reporting errors per 1000 investigations
-        var errorsPerThousand = (reportingErrors / testsPerformed) * 1000;
+        if (isNaN(denominator) || denominator < 0) {
+            alert("Please enter Total number of sepsis cases");
+            denominatorField.focus();
+            return;
+        }
 
-        // Format the result to have two decimal places for better readability
-        var formattedResult = errorsPerThousand.toFixed(2);
+        // ✅ Perform calculation even if both are zero
+        const result = denominator === 0 ? 0 : (numerator / denominator) * 100;
 
-        document.getElementById('calculatedResult').value = formattedResult;
+        document.getElementById('calculatedResult').value = result.toFixed(2) + "%";
 
-        console.log("Calculated result:", formattedResult);
+        // ✅ Mark that calculation is done
         calculationDone = true;
+        valuesEdited = false;
+    }
 
+
+
+
+
+    // ✅ Restrict input to numerals with decimals
+    function restrictToNumerals(event) {
+        const inputElement = event.target;
+        const cursorPos = inputElement.selectionStart;
+        const currentValue = inputElement.value;
+
+        // Allow only digits and a single decimal point
+        let filteredValue = currentValue
+            .replace(/[^0-9.]/g, '') // Remove non-numeric except '.'
+            .replace(/(\..*?)\./g, '$1'); // Keep only first '.'
+
+        // Prevent multiple leading zeros unless it's "0." pattern
+        filteredValue = filteredValue.replace(/^0{2,}/, '0');
+        if (filteredValue.startsWith('0') && !filteredValue.startsWith('0.')) {
+            filteredValue = filteredValue.replace(/^0+/, '0');
+        }
+
+        // Update the field without moving cursor
+        if (filteredValue !== currentValue) {
+            const diff = currentValue.length - filteredValue.length;
+            inputElement.value = filteredValue;
+            inputElement.setSelectionRange(cursorPos - diff, cursorPos - diff);
+        }
     }
 </script>

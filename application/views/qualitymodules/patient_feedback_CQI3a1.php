@@ -44,7 +44,7 @@
 
 									<tr>
 										<td><b>Numerator: Sum of time taken for initial assessment of in-patients in MRD-ICU (in Hrs)</b></td>
-										<td><?php echo $param->formattedTime; ?></td>
+										<td><?php echo $param->time_taken_initial_assessment; ?></td>
 									</tr>
 									<tr>
 										<td><b>Denominator: Total number of in-patients (in No.s)</b></td>
@@ -110,10 +110,34 @@
 										<td><b>Uploaded files</b></td>
 										<td>
 											<?php
-											if (!empty($param->files_name) && is_array($param->files_name)) {
-												foreach ($param->files_name as $file) {
-													echo '<a href="' . htmlspecialchars($file->url) . '" target="_blank">'
-														. htmlspecialchars($file->name)
+
+											$files = [];
+
+											// Convert anything (object/array) into an array
+											if (!empty($param->files_name)) {
+												// Normalize to array
+												$filesArray = is_array($param->files_name)
+													? $param->files_name
+													: (array)$param->files_name;
+
+												foreach ($filesArray as $file) {
+													// Convert inner object to array
+													$file = (array)$file;
+
+													if (isset($file['url']) && isset($file['name'])) {
+														$files[] = [
+															'url'  => $file['url'],
+															'name' => $file['name']
+														];
+													}
+												}
+											}
+
+											// Display files
+											if (!empty($files)) {
+												foreach ($files as $file) {
+													echo '<a href="' . htmlspecialchars($file['url']) . '" target="_blank">'
+														. htmlspecialchars($file['name'])
 														. '</a><br>';
 												}
 											} else {
@@ -121,6 +145,7 @@
 											}
 											?>
 										</td>
+
 									</tr>
 
 
@@ -302,9 +327,9 @@
 						type: 'bar',
 						responsive: true,
 						data: {
-							labels: ['Benchmark Time', 'Avg. time for initial assessment of in-patient in MRD (ICU)'],
+							labels: ['Benchmark Time', 'Avg. time taken for initial assessment of in-patients'],
 							datasets: [{
-								label: 'Benchmark Time compared with Avg. time for initial assessment of in-patient in MRD (ICU)',
+								label: 'Average Time for initial assessment of in-patients',
 								data: [benchmarkSeconds, calculatedSeconds],
 								backgroundColor: ['rgba(56, 133, 244, 1)', calculatedColor], // Blue color for benchmark
 							}]
@@ -329,7 +354,7 @@
 								},
 								title: {
 									display: true,
-									text: 'Avg. time for initial assessment of in-patient in MRD (ICU) for ' + monthyear,
+									text: 'Average Time for initial assessment of in-patients - ' + monthyear,
 									font: {
 										size: 24 // Increase this value to adjust the title font size
 									},
@@ -425,12 +450,29 @@
 				<script>
 					function downloadChartImage() {
 						const canvas = document.getElementById('barChart');
-						const image = canvas.toDataURL('image/png'); // Convert canvas to image data
+						const context = canvas.getContext('2d');
+						const padding = 20; // margin around the chart in pixels
 
-						// Create a temporary link element
+						// Create an offscreen canvas with padding on all sides
+						const tempCanvas = document.createElement('canvas');
+						tempCanvas.width = canvas.width + padding * 2;
+						tempCanvas.height = canvas.height + padding * 2;
+						const tempContext = tempCanvas.getContext('2d');
+
+						// Fill background with white
+						tempContext.fillStyle = '#FFFFFF';
+						tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+						// Draw the original chart centered with padding offset
+						tempContext.drawImage(canvas, padding, padding);
+
+						// Convert the final image to PNG
+						const image = tempCanvas.toDataURL('image/png');
+
+						// Create a temporary link element to trigger download
 						const link = document.createElement('a');
 						link.href = image;
-						link.download = 'Avg. time for initial assessment of in-patient in MRD (ICU).png'; // Name of downloaded file
-						link.click(); // Trigger download
+						link.download = 'Avg. time for initial assessment of in-patient in MRD (ICU).png';
+						link.click();
 					}
 				</script>
