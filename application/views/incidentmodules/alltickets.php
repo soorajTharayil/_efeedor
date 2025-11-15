@@ -34,13 +34,30 @@
                             </a>
 
                         </div>
-                        <div class="btn-group">
+                        <!-- <div class="btn-group">
                             <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
                                 title="<?php echo lang_loader('inc', 'inc_download_all_incident_report'); ?>"
                                 href="<?php echo base_url($this->uri->segment(1)) . '/download_' . ($this->uri->segment(2)) ?>">
                                 <i class="fa fa-file-text"></i>
                             </a>
+                        </div> -->
+                        <?php
+                        // Build the base download URL
+                        $download_url = base_url($this->uri->segment(1)) . '/download_' . ($this->uri->segment(2));
+
+                        // Append GET parameters if available
+                        if (!empty($_GET)) {
+                            $download_url .= '?' . http_build_query($_GET);
+                        }
+                        ?>
+                        <div class="btn-group">
+                            <a class="btn btn-success" target="_blank" data-placement="bottom" data-toggle="tooltip"
+                                title="<?php echo lang_loader('inc', 'inc_download_all_incident_report'); ?>"
+                                href="<?php echo $download_url; ?>">
+                                <i class="fa fa-file-text"></i>
+                            </a>
                         </div>
+
                     </div>
                     <div class="panel-body">
                         <?php if (isfeature_active('INC-INCIDENTS-DASHBOARD') === true) { ?>
@@ -139,6 +156,43 @@
 
                                         <?php } ?>
                                     </select>
+                                      <select name="dep" class="form-control" id="subsecid" onchange="gotonextdepartment_incident_assigned_status(this.value)" style="width:200px; margin:0px 0px 20px 20px;">
+                                        <option value="1" selected>Assigned Status</option>
+                                        <?php
+
+                                        $query = $this->db->get('incident_assigned_status');
+                                        $result = $query->result();
+
+                                        foreach ($result as $row) {
+                                        ?>
+                                            <?php if ($this->input->get('depsec_incident_assigned_status') == $row->title) { ?>
+                                                <option value="<?php echo str_replace('&', '%26', $row->smallname); ?>" selected><?php echo $row->title; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo str_replace('&', '%26', $row->smallname); ?>"><?php echo $row->title; ?></option>
+                                            <?php } ?>
+
+                                        <?php } ?>
+                                    </select>
+                                    <div style="margin-left:77px;">
+                                      <select name="dep" class="form-control" id="subsecid" onchange="gotonextdepartment_incident_status(this.value)" style="width:200px; margin-left:80px;margin-top:20px;">
+                                        <option value="1" selected>Incident Status</option>
+                                        <?php
+                                        $this->db->order_by('title');
+
+                                        $query = $this->db->get('incident_status');
+                                        $result = $query->result();
+
+                                        foreach ($result as $row) {
+                                        ?>
+                                            <?php if ($this->input->get('depsec_incident_status') == $row->title) { ?>
+                                                <option value="<?php echo str_replace('&', '%26', $row->title); ?>" selected><?php echo $row->title; ?></option>
+                                            <?php } else { ?>
+                                                <option value="<?php echo str_replace('&', '%26', $row->title); ?>"><?php echo $row->title; ?></option>
+                                            <?php } ?>
+
+                                        <?php } ?>
+                                    </select>
+                                    </div>
                                 </p>
                             </form>
                             <br />
@@ -288,7 +342,7 @@
 
                                                 <?php if (!empty($department->feed->patientid)) : ?>
                                                     <?php echo $department->feed->name; ?>
-                                                    &nbsp;(<a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>">
+                                                    &nbsp;(<a href="<?php echo $ip_link_patient_feedback . $department->id; ?>">
                                                         <?php echo $department->feed->patientid; ?>
                                                     </a>)
                                                 <?php else : ?>
@@ -426,7 +480,7 @@
                                                                 && ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS')
                                                                 && $department->verified_status != 1
                                                             ): ?>
-                                                                <a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>" title="Edit">
+                                                                <a href="<?php echo $ip_link_patient_feedback . $department->id; ?>" title="Edit">
                                                                     <i class="fa fa-edit" style="font-size:16px; color:green;"></i>
                                                                 </a>
                                                             <?php endif; ?>
@@ -855,6 +909,14 @@
 
     function gotonextdepartment_assigned_risk(type) {
         var url = "<?php echo base_url($this->uri->segment(1) . "/alltickets?depsec_assigned_risk=") ?>" + type;
+        window.location.href = url;
+    }
+      function gotonextdepartment_incident_status(type) {
+        var url = "<?php echo base_url($this->uri->segment(1) . "/alltickets?depsec_incident_status=") ?>" + type;
+        window.location.href = url;
+    }
+       function gotonextdepartment_incident_assigned_status(type) {
+        var url = "<?php echo base_url($this->uri->segment(1) . "/alltickets?depsec_incident_assigned_status=") ?>" + type;
         window.location.href = url;
     }
 </script>

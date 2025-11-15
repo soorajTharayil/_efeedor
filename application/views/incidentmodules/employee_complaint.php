@@ -17,7 +17,7 @@
 		$this->db->select('bf_feedback_incident.*, tickets_incident.*');
 		$this->db->from('bf_feedback_incident');
 		$this->db->join('tickets_incident', 'tickets_incident.feedbackid = bf_feedback_incident.id', 'inner');
-		$this->db->where('bf_feedback_incident.patientid', $pid);
+		$this->db->where('tickets_incident.id', $pid);
 		$this->db->order_by('bf_feedback_incident.id', 'desc');
 		$query = $this->db->get();
 		$results = $query->result();

@@ -806,10 +806,14 @@ class Ticketsincidents_model extends CI_Model
 		$datasetnew_severity = array();
 		$datasetnew_priority = array();
 		$datasetnew_assigned_risk = array();
+		$datasetnew_incident_status = array();
+		$datasetnew_incident_assigned_status = array();
 		$i = 0;
 		$j = 0;
 		$k = 0;
 		$m = 0;
+		$n = 0;
+		$o = 0;
 		if ($this->input->get('depsec') != 1 && $this->input->get('depsec') != '') {
 			$this->db->where('type', 'incident');
 			$this->db->where('description', $this->input->get('depsec'));
@@ -844,6 +848,24 @@ class Ticketsincidents_model extends CI_Model
 			$result = $query->result();
 			foreach ($result as $t) {
 				$datasetnew_assigned_risk[$m++] = $t->title;
+			}
+		}
+		if ($this->input->get('depsec_incident_status') != 1 && $this->input->get('depsec_incident_status') != '') {
+			$this->db->order_by('title');
+			$this->db->where('title', $this->input->get('depsec_incident_status'));
+			$query = $this->db->get('incident_status');
+			$result = $query->result();
+			foreach ($result as $t) {
+				$datasetnew_incident_status[$n++] = $t->title;
+			}
+		}
+		if ($this->input->get('depsec_incident_assigned_status') != 1 && $this->input->get('depsec_incident_assigned_status') != '') {
+			$this->db->order_by('title');
+			$this->db->where('smallname', $this->input->get('depsec_incident_assigned_status'));
+			$query = $this->db->get('incident_assigned_status');
+			$result = $query->result();
+			foreach ($result as $t) {
+				$datasetnew_incident_assigned_status[$o++] = $t->smallname;
 			}
 		}
 
@@ -900,6 +922,12 @@ class Ticketsincidents_model extends CI_Model
 			}
 			if (count($datasetnew_assigned_risk ?? []) > 0) {
 				$this->db->where_in('assigned_risk', $datasetnew_assigned_risk);
+			}
+				if (count($datasetnew_incident_status ?? []) > 0) {
+				$this->db->where_in('status', $datasetnew_incident_status);
+			}
+			if (count($datasetnew_incident_assigned_status ?? []) > 0) {
+				$this->db->where_in('status', $datasetnew_incident_assigned_status);
 			}
 		}
 		$this->db->order_by('id', 'desc');

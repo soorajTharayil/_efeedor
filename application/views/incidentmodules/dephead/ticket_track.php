@@ -186,7 +186,7 @@ foreach ($users as $user) {
 
                                 <?php echo $param['name']; ?>
                                 (<a
-                                    href="<?php echo $ip_link_patient_feedback . $param['patientid']; ?>"><?php echo $param['patientid']; ?></a>)
+                                    href="<?php echo $ip_link_patient_feedback . $this->uri->segment(3); ?>"><?php echo $param['patientid']; ?></a>)
 
                                 <!-- <br>
                                 <?php echo $param['role']; ?> -->
@@ -1257,7 +1257,10 @@ foreach ($users as $user) {
                 <?php echo form_hidden('feedbackid', $department->feedbackid) ?>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Select Team Leader to input RCA/ CAPA</label>
+                    <label for="name" class="col-xs-3 col-form-label">Select Team Leader to input RCA/ CAPA <a
+                            href="javascript:void()" data-toggle="tooltip"
+                            title="Users responsible for documenting the root cause, corrective action, and preventive action for the incident"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList">
@@ -1280,7 +1283,10 @@ foreach ($users as $user) {
 
                 <!-- 🟩 NEW TEAM MEMBER SECTION -->
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Select Team Members to monitor incident</label>
+                    <label for="name" class="col-xs-3 col-form-label">Select Team Members to monitor incident <a
+                            href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_tm" class="form-control"
                             placeholder="Search for team members..">
@@ -1305,7 +1311,9 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident</label>
+                        incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="Users assigned to monitor the incident and add notes or comments as required"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_pm" class="form-control" placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_pm">
@@ -1328,7 +1336,7 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes </label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
                             placeholder="Your inputs here"></textarea>
@@ -1336,6 +1344,53 @@ foreach ($users as $user) {
 
                     </div>
                 </div> <!--Radio-->
+                <div class="form-group row" style="margin-top: 15px;">
+                    <label for="due_date" class="col-xs-3">TAT Due Date </label>
+                    <div class="col-xs-9">
+                        <input type="datetime-local" class="form-control" id="assign_due_date" name="assign_due_date"
+                            value="" required onclick="this.showPicker && this.showPicker();">
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Get current date/time
+                        const now = new Date();
+
+                        // Add 48 hours (2 days)
+                        const futureDate = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+                        // Format as "YYYY-MM-DDTHH:MM" for datetime-local input
+                        function formatDateTime(date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const hours = String(date.getHours()).padStart(2, '0');
+                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                            return `${year}-${month}-${day}T${hours}:${minutes}`;
+                        }
+
+                        const formattedFuture = formatDateTime(futureDate);
+                        const formattedNow = formatDateTime(now);
+
+                        // Get input field
+                        const field = document.getElementById('assign_due_date');
+
+                        if (field) {
+                            // Set default value to +48 hours
+                            field.value = formattedFuture;
+
+                            // Disable past dates
+                            field.min = formattedNow;
+                        }
+                    });
+                </script>
+
+
+
+
+                <!-- Include Font Awesome for calendar icon -->
+
                 <div class="form-group row">
                     <div class="col-sm-offset-3 col-sm-6">
                         <div class="ui buttons"> <button
@@ -1364,20 +1419,22 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">
-                        Select Team Leader(s) for RCA/ CAPA
+                        Select Team Leader(s) for RCA/ CAPA <a href="javascript:void()" data-toggle="tooltip"
+                            title="Users responsible for documenting the root cause, corrective action, and preventive action for the incident"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a>
                     </label>
                     <div class="col-xs-9" style="position: relative;">
                         <input type="text" id="userSearch_reassign" class="form-control"
                             placeholder="Search for names..">
 
                         <?php
-
-                        $preselected_users_assign_to = explode(',', $department->assign_to); // IDs of users to pre-select
+                        $assign_source = !empty($department->reassign_to) ? $department->reassign_to : $department->assign_to;
+                        $preselected_users_assign_to = explode(',', $assign_source); // IDs of users to pre-select
             
                         ?>
                         <?php foreach ($preselected_users_assign_to as $oldUserId): ?>
-                        <input type="hidden" name="users_reassign[]"
-                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="hidden" checked="true" name="users_reassign[]"
+                            value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>" id="rem_user_reassign_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                         <?php endforeach; ?>
                         <div class="checkbox-container" id="userList_reassign">
                             <?php foreach ($users as $user): ?>
@@ -1387,7 +1444,7 @@ foreach ($users as $user) {
                                     name="users_reassign[]"
                                     value="<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>"
                                     data-email="<?php echo htmlspecialchars($user->email, ENT_QUOTES, 'UTF-8'); ?>"
-                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked' : ''; ?>>
+                                    <?php echo in_array($user->user_id, $preselected_users_assign_to) ? 'checked="true"' : ''; ?>>
 
                                 <label
                                     for="user_reassign_<?php echo htmlspecialchars($user->user_id, ENT_QUOTES, 'UTF-8'); ?>">
@@ -1400,7 +1457,9 @@ foreach ($users as $user) {
                 </div>
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">
-                        Select Team Member to monitor incident
+                        Select Team Member to monitor incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="<?php echo $totaltickect_tooltip; ?>"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a>
                     </label>
                     <div class="col-xs-9" style="position: relative;">
                         <input type="text" id="userSearch_reassign_tm" class="form-control"
@@ -1408,12 +1467,12 @@ foreach ($users as $user) {
 
                         <div class="checkbox-container" id="userList_reassign_tm">
                             <?php
-
-                            $preselected_users_assign_for_team_member = explode(',', $department->assign_for_team_member);
+                            $assign_source = !empty($department->reassign_for_team_member) ? $department->reassign_for_team_member : $department->assign_for_team_member;
+                            $preselected_users_assign_for_team_member = explode(',', $assign_source);
                             ?>
                             <?php foreach ($preselected_users_assign_for_team_member as $oldUserId): ?>
                             <input type="hidden" name="users_reassign_for_team_member[]"
-                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>" id="rem_users_reassign_for_team_member_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -1435,17 +1494,20 @@ foreach ($users as $user) {
 
                 <div class="form-group row">
                     <label for="name" class="col-xs-3 col-form-label">Select Process monitors to monitor
-                        incident</label>
+                        incident <a href="javascript:void()" data-toggle="tooltip"
+                            title="Users assigned to monitor the incident and add notes or comments as required"><i class="fa fa-info-circle"
+                                aria-hidden="true"></i></i></a></label>
                     <div class="col-xs-9">
                         <input type="text" id="userSearch_reassign_pm" class="form-control"
                             placeholder="Search for names..">
                         <div class="checkbox-container" id="userList_reassign_pm">
                             <?php
-                            $preselected_users_assign_for_process_monitor = explode(',', $department->assign_for_process_monitor); // IDs of users to pre-select
+                            $assign_source = !empty($department->reassign_for_process_monitor) ? $department->reassign_for_process_monitor : $department->assign_for_process_monitor;
+                            $preselected_users_assign_for_process_monitor = explode(',', $assign_source); // IDs of users to pre-select
                             ?>
                             <?php foreach ($preselected_users_assign_for_process_monitor as $oldUserId): ?>
                             <input type="hidden" name="users_reassign_for_process_monitor[]"
-                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
+                                value="<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>"  id="rem_users_reassign_for_process_monitor_<?php echo htmlspecialchars($oldUserId, ENT_QUOTES, 'UTF-8'); ?>">
                             <?php endforeach; ?>
                             <?php foreach ($users as $user): ?>
                             <div class="checkbox">
@@ -1466,7 +1528,7 @@ foreach ($users as $user) {
                 </div>
 
                 <div class="form-group row">
-                    <label for="name" class="col-xs-3 col-form-label">Additional Notes</label>
+                    <label for="name" class="col-xs-3 col-form-label">Additional Notes </label>
                     <div class="col-xs-9">
                         <textarea class="form-control" rows="5" id="comment" name="reply"
                             placeholder="Your inputs here"><?php echo $department->replymessage[0]->reply; ?></textarea>
@@ -1474,6 +1536,48 @@ foreach ($users as $user) {
 
                     </div>
                 </div> <!--Radio-->
+                <div class="form-group row" style="margin-top: 15px;">
+                    <label for="due_date" class="col-xs-3">TAT Due Date </label>
+                    <div class="col-xs-9">
+                        <input type="datetime-local" class="form-control" id="reassign_due_date"
+                            name="reassign_due_date" value="" required onclick="this.showPicker && this.showPicker();">
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        // Get current date/time
+                        const now = new Date();
+
+                        // Add 48 hours (2 days)
+                        const futureDate = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+
+                        // Format as "YYYY-MM-DDTHH:MM" for datetime-local input
+                        function formatDateTime(date) {
+                            const year = date.getFullYear();
+                            const month = String(date.getMonth() + 1).padStart(2, '0');
+                            const day = String(date.getDate()).padStart(2, '0');
+                            const hours = String(date.getHours()).padStart(2, '0');
+                            const minutes = String(date.getMinutes()).padStart(2, '0');
+                            return `${year}-${month}-${day}T${hours}:${minutes}`;
+                        }
+
+                        const formattedFuture = formatDateTime(futureDate);
+                        const formattedNow = formatDateTime(now);
+
+                        // Get input field
+                        const field = document.getElementById('reassign_due_date');
+
+                        if (field) {
+                            // Set default value to +48 hours
+                            field.value = formattedFuture;
+
+                            // Disable past dates
+                            field.min = formattedNow;
+                        }
+                    });
+                </script>
+
                 <div class="form-group row">
                     <div class="col-sm-offset-3 col-sm-6">
                         <div class="ui buttons"> <button
@@ -2102,6 +2206,7 @@ foreach ($users as $user) {
             const checkbox = checkboxes[i].getElementsByTagName('input')[0];
             if (checkbox.checked) {
                 createTag(checkbox, selectedContainer);
+                
             }
         }
 
@@ -2128,7 +2233,9 @@ foreach ($users as $user) {
 
         // Handle selecting/unselecting users
         container.addEventListener('change', function (e) {
+            console.log(e.target.type)
             if (e.target && e.target.type === "checkbox") {
+               
                 if (e.target.checked) {
                     createTag(e.target, selectedContainer);
                 } else {
@@ -2156,11 +2263,25 @@ foreach ($users as $user) {
         tag.dataset.userId = checkbox.value;
         tag.innerHTML = label + " <span>&times;</span>";
         container.appendChild(tag);
-
+       
         tag.querySelector("span").addEventListener("click", () => {
             tag.remove();
             checkbox.checked = false;
+            // Remove corresponding hidden input if exists
+            const hiddenInputId = "rem_user_reassign_" + checkbox.value;
+            const hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
+            hiddenInputId = "rem_users_reassign_for_team_member_" + checkbox.value;
+            hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
+            hiddenInputId = "rem_users_reassign_for_process_monitor_" + checkbox.value;
+            hiddenInput = document.getElementById(hiddenInputId);
+            if (hiddenInput) hiddenInput.remove();
+            
         });
+        
     }
 
     // Initialize

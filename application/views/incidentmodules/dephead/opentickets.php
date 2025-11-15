@@ -267,7 +267,7 @@
 												<?php if (!empty($department->feed->patientid)): ?>
 													<?php echo $department->feed->name; ?>
 													&nbsp;(<a
-														href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>">
+														href="<?php echo $ip_link_patient_feedback . $department->id; ?>">
 														<?php echo $department->feed->patientid; ?>
 													</a>)
 												<?php else: ?>
@@ -403,7 +403,7 @@
 																&& ismodule_active('INCIDENT') && isfeature_active('EDIT-SEVERITY-INCIDENTS')
 																&& $department->verified_status != 1
 															): ?>
-																<a href="<?php echo $ip_link_patient_feedback . $department->feed->patientid; ?>"
+																<a href="<?php echo $ip_link_patient_feedback . $department->id; ?>"
 																	title="Edit">
 																	<i class="fa fa-edit" style="font-size:16px; color:green;"></i>
 																</a>

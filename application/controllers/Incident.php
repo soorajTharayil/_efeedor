@@ -1487,6 +1487,7 @@ class Incident extends CI_Controller
             $dataexport[$i]['row20'] = 'CLOSED ON';
 
             $dataexport[$i]['row21'] = 'TURN AROUND TIME';
+            $dataexport[$i]['row22'] = 'TAT DUE DATE';
 
             // $dataexport[$i]['row13'] = 'TAT STATUS';
 
@@ -1822,6 +1823,9 @@ class Incident extends CI_Controller
                     $dataexport[$i]['row20'] = date('g:i a, d-m-y', strtotime($department->last_modified));
 
                     $dataexport[$i]['row21'] = $timetaken;
+                    $dataexport[$i]['row22'] = !empty($department->assign_tat_due_date)
+                        ? date('d M, Y - g:i A', strtotime($department->assign_tat_due_date))
+                        : 'NA';
 
                     // $dataexport[$i]['row13'] = $close;
 
@@ -1889,6 +1893,7 @@ class Incident extends CI_Controller
 
             $fdate = $_SESSION['from_date'];
             $tdate = $_SESSION['to_date'];
+            // print_r($_GET);exit;
             $this->db->select("*");
             $this->db->from('setup_incident');
             $query = $this->db->get();
@@ -1928,12 +1933,14 @@ class Incident extends CI_Controller
             $dataexport[$i]['row18'] = 'ASSIGNEE TO';
             $dataexport[$i]['row19'] = 'TAT DUE DATE';
             $dataexport[$i]['row20'] = 'TAT DESCRIBED STATUS';
-            $dataexport[$i]['row21'] = 'ROOT CAUSE ANALYSIS';
-            $dataexport[$i]['row22'] = 'CORRECTIVE ACTION';
-            $dataexport[$i]['row23'] = 'PREVENTIVE ACTION';
-            $dataexport[$i]['row24'] = 'CLOSURE VERIFICATION REMARK';
+            $dataexport[$i]['row21'] = 'RCA TOOL APPLIED';
+            $dataexport[$i]['row22'] = 'RCA IN BRIEF';
+            $dataexport[$i]['row23'] = 'ROOT CAUSE ANALYSIS';
+            $dataexport[$i]['row24'] = 'CORRECTIVE ACTION';
+            $dataexport[$i]['row25'] = 'PREVENTIVE ACTION';
+            $dataexport[$i]['row26'] = 'CLOSURE VERIFICATION REMARK';
 
-            $dataexport[$i]['row25'] = 'STATUS';
+            $dataexport[$i]['row27'] = 'STATUS';
 
             $i++;
             if (!empty($departments)) {
@@ -2064,15 +2071,17 @@ class Incident extends CI_Controller
                         if (!empty($result)) {
                             $corrective_describe = $result->corrective_describe;
                             $preventive_describe = $result->preventive_describe;
+                            $rca_tool_describe = $result->rca_tool_describe;
+                            $rootcause_describe = $result->rootcause_describe;
 
                             // Tool applied
-                            if (!empty($result->rca_tool_describe)) {
-                                $rca_details .= "Tool Applied: " . $result->rca_tool_describe . "\n";
-                            }
-                            // RCA in brief
-                            if (!empty($result->rootcause_describe)) {
-                                $rca_details .= "RCA in brief: " . $result->rootcause_describe . "\n";
-                            }
+                            // if (!empty($result->rca_tool_describe)) {
+                            //     $rca_details .= "Tool Applied: " . $result->rca_tool_describe . "\n";
+                            // }
+                            // // RCA in brief
+                            // if (!empty($result->rootcause_describe)) {
+                            //     $rca_details .= "RCA in brief: " . $result->rootcause_describe . "\n";
+                            // }
 
                             // 5 WHY format
                             if ($result->rca_tool_describe == '5WHY') {
@@ -2191,27 +2200,38 @@ class Incident extends CI_Controller
                             } else {
                                 $dataexport[$i]['row20'] = 'NA';
                             }
-                            if ($rca_details != '') {
-                                $dataexport[$i]['row21'] = $rca_details;
+
+                            if ($rca_tool_describe != '') {
+                                $dataexport[$i]['row21'] = $rca_tool_describe;
                             } else {
                                 $dataexport[$i]['row21'] = 'NA';
                             }
-                            if ($corrective_describe != '' && $corrective_describe != NULL) {
-                                $dataexport[$i]['row22'] = $corrective_describe;
+                              if ($rootcause_describe != '') {
+                                $dataexport[$i]['row22'] = $rootcause_describe;
                             } else {
                                 $dataexport[$i]['row22'] = 'NA';
                             }
-                            if ($preventive_describe != '' && $preventive_describe != NULL) {
-                                $dataexport[$i]['row23'] = $preventive_describe;
+                              if ($rca_details != '') {
+                                $dataexport[$i]['row23'] = $rca_details;
                             } else {
                                 $dataexport[$i]['row23'] = 'NA';
                             }
-                            if ($closedverifycomment != '' && $closedverifycomment != NULL) {
-                                $dataexport[$i]['row24'] = $closedverifycomment;
+                            if ($corrective_describe != '' && $corrective_describe != NULL) {
+                                $dataexport[$i]['row24'] = $corrective_describe;
                             } else {
                                 $dataexport[$i]['row24'] = 'NA';
                             }
-                            $dataexport[$i]['row25'] = ($department->status == 'Re-assigned') ? 'Assigned' : $department->status;
+                            if ($preventive_describe != '' && $preventive_describe != NULL) {
+                                $dataexport[$i]['row25'] = $preventive_describe;
+                            } else {
+                                $dataexport[$i]['row25'] = 'NA';
+                            }
+                            if ($closedverifycomment != '' && $closedverifycomment != NULL) {
+                                $dataexport[$i]['row26'] = $closedverifycomment;
+                            } else {
+                                $dataexport[$i]['row26'] = 'NA';
+                            }
+                          $dataexport[$i]['row27'] = ($department->status == 'Re-assigned') ? 'Assigned' : $department->status;
 
 
 
