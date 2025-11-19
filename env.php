@@ -5,7 +5,6 @@ $config_set = array(
   "DOMAIN" => "",
   "DBUSER" => "",
   "DBPASSWORD" => "",
-  //  "DBNAME" => "efeedor_usermanagement_speedissue",
   "DBNAME" => "",
 
 );
