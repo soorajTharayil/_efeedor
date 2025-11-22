@@ -2,12 +2,15 @@
 
 A comprehensive Quality Management System for healthcare institutions built with CodeIgniter 3 framework. This system helps hospitals and healthcare facilities manage quality audits, patient feedback, incidents, grievances, assets, and clinical pathways.
 
+<<<<<<< HEAD
 # Live Demo Details
 
 Link : [https://demo.efeedor.com/]
 username : demo@efeedor.com
 password : Demo@123
 
+=======
+>>>>>>> 8992eb4c (changed)
 ## 🏥 Project Overview
 
 Efeedor is a robust web-based Quality Management System designed specifically for healthcare organizations to streamline their quality assurance processes, manage patient feedback, track incidents, conduct audits, and maintain compliance with healthcare standards.
@@ -204,6 +207,7 @@ This is a private/public repository. Please follow standard contribution guideli
 3. Make your changes
 4. Submit a pull request
 
+<<<<<<< HEAD
 
 ## 👥 Authors
 
@@ -212,6 +216,19 @@ SOORAJ TS
 ## 📞 Support
 
 For support and queries, please contact [ sooraj114ts@gmail.com , 9562812784 ]
+=======
+## 📄 License
+
+[Specify your license here - MIT, Proprietary, etc.]
+
+## 👥 Authors
+
+[Add author information]
+
+## 📞 Support
+
+For support and queries, please contact [your contact information]
+>>>>>>> 8992eb4c (changed)
 
 ## 🔄 Version History
 
