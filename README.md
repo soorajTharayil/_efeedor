@@ -9,8 +9,7 @@ Link : [https://demo.efeedor.com/]
 username : demo@efeedor.com
 password : Demo@123
 
-=======
->>>>>>> 8992eb4c (changed)
+
 ## 🏥 Project Overview
 
 Efeedor is a robust web-based Quality Management System designed specifically for healthcare organizations to streamline their quality assurance processes, manage patient feedback, track incidents, conduct audits, and maintain compliance with healthcare standards.
